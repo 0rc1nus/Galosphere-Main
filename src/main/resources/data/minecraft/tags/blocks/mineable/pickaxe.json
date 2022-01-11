@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "cavesandtrenches:silver_ore",
+    "cavesandtrenches:deepslate_silver_ore",
+    "cavesandtrenches:aura_listener",
+    "cavesandtrenches:warped_anchor",
+    "cavesandtrenches:lumiere_lamp",
+    "cavesandtrenches:raw_silver_block",
+    "cavesandtrenches:silver_block",
+    "cavesandtrenches:allurite_block",
+    "cavesandtrenches:lumiere_block",
+    "cavesandtrenches:allurite_cluster",
+    "cavesandtrenches:lumiere_cluster",
+    "cavesandtrenches:polished_amethyst",
+    "cavesandtrenches:polished_amethyst_stairs",
+    "cavesandtrenches:polished_amethyst_slab",
+    "cavesandtrenches:amethyst_bricks",
+    "cavesandtrenches:amethyst_bricks_stairs",
+    "cavesandtrenches:amethyst_bricks_slab",
+    "cavesandtrenches:chiseled_amethyst",
+    "cavesandtrenches:mysteria_cinders",
+    "cavesandtrenches:mysteria_log"
+  ]
+}

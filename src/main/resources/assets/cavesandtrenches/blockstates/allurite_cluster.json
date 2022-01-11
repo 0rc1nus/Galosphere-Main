@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "cavesandtrenches:block/allurite_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "cavesandtrenches:block/allurite_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "cavesandtrenches:block/allurite_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "cavesandtrenches:block/allurite_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "cavesandtrenches:block/allurite_cluster"
+    },
+    "facing=west": {
+      "model": "cavesandtrenches:block/allurite_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

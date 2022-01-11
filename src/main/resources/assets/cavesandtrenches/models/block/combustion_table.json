@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "cavesandtrenches:block/combustion_table_top",
+    "bottom": "cavesandtrenches:block/aura_listener_bottom",
+    "side": "cavesandtrenches:block/combustion_table_side"
+  }
+}

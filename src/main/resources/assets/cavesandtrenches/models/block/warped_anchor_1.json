@@ -1,0 +1,6 @@
+{
+  "parent": "cavesandtrenches:block/warped_anchor",
+  "textures": {
+    "0": "cavesandtrenches:block/warped_anchor_1"
+  }
+}

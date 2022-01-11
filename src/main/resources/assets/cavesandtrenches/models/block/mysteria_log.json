@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "cavesandtrenches:block/mysteria_log",
+    "end": "cavesandtrenches:block/mysteria_log_top"
+  }
+}

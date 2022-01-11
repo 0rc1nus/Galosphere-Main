@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[32,)"
+license="All rights reserved"
+[[mods]]
+modId="cavesandtrenches"
+version="1.0.0"
+displayName="Caves And Trenches"
+logoFile="cavesandtrenches.png"
+credits="You the player!"
+authors="Orcinus"
+description='''
+This mod enhances the underground even more by adding new content to the base game
+'''
+[[dependencies.cavesandtrenches]]
+    modId="forge"
+    mandatory=true
+    versionRange="[39.0.0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.cavesandtrenches]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.1,)"
+    ordering="NONE"
+    side="BOTH"

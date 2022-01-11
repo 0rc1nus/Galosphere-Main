@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "side": "cavesandtrenches:block/polished_amethyst",
+    "bottom": "cavesandtrenches:block/polished_amethyst",
+    "top": "cavesandtrenches:block/polished_amethyst"
+  }
+}

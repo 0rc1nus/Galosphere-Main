@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "cavesandtrenches:block/lumiere_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "cavesandtrenches:block/lumiere_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "cavesandtrenches:block/lumiere_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "cavesandtrenches:block/lumiere_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "cavesandtrenches:block/lumiere_cluster"
+    },
+    "facing=west": {
+      "model": "cavesandtrenches:block/lumiere_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

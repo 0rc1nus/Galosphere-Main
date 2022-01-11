@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "net.orcinus.cavesandtrenches.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "minVersion": "0.8",
+  "refmap": "cavesandtrenches.refmap.json",
+  "mixins": [
+    "LivingEntityMixin",
+    "PowderSnowBlockMixin"
+  ],
+  "client": [
+    "client.PlayerRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

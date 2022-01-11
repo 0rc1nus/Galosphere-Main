@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "cavesandtrenches:silver_ore",
+    "cavesandtrenches:deepslate_silver_ore",
+    "cavesandtrenches:raw_silver_block",
+    "cavesandtrenches:silver_block",
+    "cavesandtrenches:mysteria_cinders",
+    "cavesandtrenches:mysteria_log"
+  ]
+}

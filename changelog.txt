@@ -1,0 +1,23 @@
+Build: 1.18-38.0.4 - Wed Dec 01 01:29:57 GMT 2021
+	curle:
+		Fix custom loot serializers using wrong registry names
+
+=========
+Build: 1.18-38.0.3 - Wed Dec 01 01:15:13 GMT 2021
+	lexmanos:
+		Fix DungeonHooks not returning correct values. Fixes dungeons in world spawning pigs.
+
+=========
+Build: 1.18-38.0.2 - Wed Dec 01 00:23:23 GMT 2021
+	lexmanos:
+		Fix dedicated server install. Closes #8226
+		Fix example mod
+		Fix obf issue with records. Closes #8228
+		Fix dependencies beingg out of sync from vanilla. Closes #8227
+		Disable mixin due to module incompatibility.
+
+=========
+Build: 1.18-38.0.1 - Tue Nov 30 20:56:52 GMT 2021
+	gigaherz:
+		Fix mod resources not loading.
+		Add BreakingItemParticle.java.patch which I forgot to commit during the porting.

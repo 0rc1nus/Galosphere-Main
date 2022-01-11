@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "cavesandtrenches:polished_amethyst"
+    }
+  },
+  "result": {
+    "item": "cavesandtrenches:amethyst_bricks_slab"
+  }
+}
