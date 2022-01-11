@@ -17,6 +17,7 @@ import net.orcinus.cavesandtrenches.init.CTFeatures;
 import net.orcinus.cavesandtrenches.init.CTItems;
 import net.orcinus.cavesandtrenches.init.CTMenuTypes;
 import net.orcinus.cavesandtrenches.init.CTParticleTypes;
+import net.orcinus.cavesandtrenches.util.CavesAndTrenchesTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,12 +25,7 @@ import org.apache.logging.log4j.Logger;
 public class CavesAndTrenches {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "cavesandtrenches";
-    public static final CreativeModeTab CAVESANDTRENCHES = new CreativeModeTab(MODID) {
-        @Override
-        public ItemStack makeIcon() {
-            return CTItems.SILVER_BOMB.get().getDefaultInstance();
-        }
-    };
+    public static final CreativeModeTab CAVESANDTRENCHES = new CavesAndTrenchesTab(MODID);
 
     public CavesAndTrenches() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
