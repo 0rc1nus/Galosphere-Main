@@ -5,26 +5,25 @@ import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
-import net.orcinus.cavesandtrenches.util.RegistryHandler;
 
 import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CTBiomes {
 
-    public static final RegistryHandler REGISTRY = CavesAndTrenches.REGISTRY;
+    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, CavesAndTrenches.MODID);
 
-    public static final RegistryObject<Biome> CRYSTAL_CANYONS = REGISTRY.registerBiome("crystal_canyons", CTBiomes::crystalCanyons);
+    public static final RegistryObject<Biome> CRYSTAL_CANYONS = BIOMES.register("crystal_canyons", CTBiomes::crystalCanyons);
 
     public static Biome crystalCanyons() {
         MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();

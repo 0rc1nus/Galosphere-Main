@@ -11,8 +11,8 @@ import net.orcinus.cavesandtrenches.client.gui.CombustionTableMenu;
 @Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CTMenuTypes {
 
-    public static final DeferredRegister<MenuType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.CONTAINERS, CavesAndTrenches.MODID);
+    public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, CavesAndTrenches.MODID);
 
-    public static final RegistryObject<MenuType<CombustionTableMenu>> COMBUSTION_TABLE = REGISTRY.register("combustion_table", () -> new MenuType<>(CombustionTableMenu::new));
+    public static final RegistryObject<MenuType<CombustionTableMenu>> COMBUSTION_TABLE = MENU_TYPES.register("combustion_table", () -> new MenuType<>(CombustionTableMenu::new));
 
 }

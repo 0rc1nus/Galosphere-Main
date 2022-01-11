@@ -2,6 +2,7 @@ package net.orcinus.cavesandtrenches.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -26,6 +27,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
 
 public class WarpedAnchorBlock extends Block {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -74,6 +77,22 @@ public class WarpedAnchorBlock extends Block {
             return InteractionResult.SUCCESS;
         }
         return super.use(state, world, pos, player, hand, hit);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+        super.animateTick(state, world, pos, random);
+        if (state.getValue(WARPED_CHARGE) > 0) {
+            for (int i = 0; i < random.nextInt(35) + 10; ++i) {
+                world.addParticle(ParticleTypes.WITCH,
+                        pos.getX() + 0.5D + random.nextGaussian() * (double) 0.13F,
+                        pos.getY() + 0.5D + random.nextGaussian() * (double) 0.13F,
+                        pos.getZ() + 0.5D + random.nextGaussian() * (double) 0.13F,
+                        0.0D,
+                        0.0D,
+                        0.0D);
+            }
+        }
     }
 
     @Override

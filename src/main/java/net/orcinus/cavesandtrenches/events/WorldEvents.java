@@ -2,6 +2,7 @@ package net.orcinus.cavesandtrenches.events;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -21,22 +22,27 @@ public class WorldEvents {
 
     @SubscribeEvent
     public void onBiomeLoad(BiomeLoadingEvent event) {
-        Biome biome = ForgeRegistries.BIOMES.getValue(event.getName());
-        Biome.BiomeCategory category = event.getCategory();
-        ResourceKey<Biome> biomes = ResourceKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(event.getName()));
-        BiomeGenerationSettingsBuilder builder = event.getGeneration();
-        if (category != Biome.BiomeCategory.NETHER && category != Biome.BiomeCategory.THEEND && category != Biome.BiomeCategory.NONE) {
+        ResourceLocation biomeRegistryName = event.getName();
+        if (biomeRegistryName != null) {
+            ResourceKey<Biome> biomes = ResourceKey.create(Registry.BIOME_REGISTRY, biomeRegistryName);
+            Biome biome = ForgeRegistries.BIOMES.getValue(biomeRegistryName);
+            Biome.BiomeCategory category = event.getCategory();
+            BiomeGenerationSettingsBuilder builder = event.getGeneration();
+
+            if (category == Biome.BiomeCategory.NETHER || category == Biome.BiomeCategory.THEEND || category == Biome.BiomeCategory.NONE)
+                return;
+
             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.ORE_SILVER_UPPER);
             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.ORE_SILVER_SMALL);
             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.ORE_SILVER_MIDDLE);
-        }
-        if (biome == CTBiomes.CRYSTAL_CANYONS.get()) {
-            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LARGE_ALLURITE_CRYSTAL_CEILING);
-            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LARGE_ALLURITE_CRYSTAL_FLOOR);
-            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LARGE_LUMIERE_CRYSTAL_CEILING);
-            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LARGE_LUMIERE_CRYSTAL_FLOOR);
-            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.MYSTERIA_TREE);
-//            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LICHEN_PATCH_CEILING);
+
+            if (biome == CTBiomes.CRYSTAL_CANYONS.get()) {
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LARGE_ALLURITE_CRYSTAL_CEILING);
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LARGE_ALLURITE_CRYSTAL_FLOOR);
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LARGE_LUMIERE_CRYSTAL_CEILING);
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.LARGE_LUMIERE_CRYSTAL_FLOOR);
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.MYSTERIA_TREE);
+            }
         }
     }
 }

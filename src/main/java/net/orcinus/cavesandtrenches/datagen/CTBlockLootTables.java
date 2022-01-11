@@ -1,26 +1,20 @@
 package net.orcinus.cavesandtrenches.datagen;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CaveVines;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTItems;
-import net.orcinus.cavesandtrenches.util.RegistryHandler;
 
 import java.util.stream.Collectors;
 
@@ -62,6 +56,6 @@ public class CTBlockLootTables extends BlockLoot {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return RegistryHandler.BLOCKS.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList());
+        return CTBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList());
     }
 }

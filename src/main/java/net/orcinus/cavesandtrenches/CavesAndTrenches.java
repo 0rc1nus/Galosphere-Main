@@ -10,9 +10,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.orcinus.cavesandtrenches.events.MiscEvents;
 import net.orcinus.cavesandtrenches.events.MobEvents;
 import net.orcinus.cavesandtrenches.events.WorldEvents;
+import net.orcinus.cavesandtrenches.init.CTBiomes;
+import net.orcinus.cavesandtrenches.init.CTBlocks;
+import net.orcinus.cavesandtrenches.init.CTEntityTypes;
+import net.orcinus.cavesandtrenches.init.CTFeatures;
 import net.orcinus.cavesandtrenches.init.CTItems;
 import net.orcinus.cavesandtrenches.init.CTMenuTypes;
-import net.orcinus.cavesandtrenches.util.RegistryHandler;
+import net.orcinus.cavesandtrenches.init.CTParticleTypes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,14 +30,18 @@ public class CavesAndTrenches {
             return CTItems.SILVER_BOMB.get().getDefaultInstance();
         }
     };
-    public static final RegistryHandler REGISTRY = new RegistryHandler();
 
     public CavesAndTrenches() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
 
-        RegistryHandler.init(modEventBus);
-        CTMenuTypes.REGISTRY.register(modEventBus);
+        CTBlocks.BLOCKS.register(modEventBus);
+        CTBiomes.BIOMES.register(modEventBus);
+        CTEntityTypes.ENTITY_TYPES.register(modEventBus);
+        CTFeatures.FEATURES.register(modEventBus);
+        CTItems.ITEMS.register(modEventBus);
+        CTMenuTypes.MENU_TYPES.register(modEventBus);
+        CTParticleTypes.PARTICLES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new WorldEvents());
         MinecraftForge.EVENT_BUS.register(new MobEvents());

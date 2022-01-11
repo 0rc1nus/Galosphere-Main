@@ -1,17 +1,23 @@
 package net.orcinus.cavesandtrenches.init;
 
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
-import net.orcinus.cavesandtrenches.util.RegistryHandler;
 
 @Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CTParticleTypes {
 
-    public static final RegistryHandler REGISTRY = CavesAndTrenches.REGISTRY;
+    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, CavesAndTrenches.MODID);
 
-    public static final RegistryObject<SimpleParticleType> AURA_LISTENER = REGISTRY.registerParticle("aura_listener", false);
-    public static final RegistryObject<SimpleParticleType> SILVER_BOMB = REGISTRY.registerParticle("item_silverbomb", false);
+    public static final RegistryObject<SimpleParticleType> AURA_LISTENER = registerParticle("aura_listener", false);
+    public static final RegistryObject<SimpleParticleType> SILVER_BOMB = registerParticle("item_silverbomb", false);
+
+    public static RegistryObject<SimpleParticleType> registerParticle(String key, boolean alwaysShow) {
+        return PARTICLES.register(key, () -> new SimpleParticleType(alwaysShow));
+    }
 
 }
