@@ -17,6 +17,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.function.Consumer;
 
+/**
+ * @Author Vazkii
+ */
 @OnlyIn(Dist.CLIENT)
 public class QuarkArmorModel extends HumanoidModel<LivingEntity> {
 	
