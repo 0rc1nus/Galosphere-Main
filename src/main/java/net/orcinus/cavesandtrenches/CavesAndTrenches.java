@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(CavesAndTrenches.MODID)
 public class CavesAndTrenches {
-    //sd
+    
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "cavesandtrenches";
     public static final CreativeModeTab CAVESANDTRENCHES = new CavesAndTrenchesTab(MODID);
