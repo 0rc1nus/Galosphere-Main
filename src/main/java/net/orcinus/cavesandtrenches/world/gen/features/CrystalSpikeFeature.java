@@ -34,6 +34,7 @@ public class CrystalSpikeFeature extends Feature<LargeCrystalConfig> {
         BlockState oppositeState = world.getBlockState(blockPos.relative(config.crystal_direction.getOpposite()));
         List<BlockPos> trigList = Lists.newArrayList();
         List<BlockPos> clusterPos = Lists.newArrayList();
+        //TODO: MAKE A RADIUS CHECK AND RELATIVE DIRECTION  CHECK
         //-346814623854640707
         //-4103 -5 165
         //-1330 35 18572
@@ -48,14 +49,21 @@ public class CrystalSpikeFeature extends Feature<LargeCrystalConfig> {
                 int radius = randomValue - y / 2;
                 for (int x = -radius; x <= radius; x++) {
                     for (int z = -radius; z <= radius; z++) {
+                        BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
                         if (x * x + z * z <= radius * radius) {
-                            BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
-                            if (world.isStateAtPosition(pos.relative(config.crystal_direction.getOpposite()), DripstoneUtils::isEmptyOrWater)) {
-                                pos = pos.relative(config.crystal_direction.getOpposite());
-                            }
-                            if (world.isStateAtPosition(pos.relative(config.crystal_direction.getOpposite(), 2), DripstoneUtils::isEmptyOrWater)) {
-                                pos = pos.relative(config.crystal_direction.getOpposite(), 2);
-                            }
+//                            if (world.isStateAtPosition(pos.relative(config.crystal_direction.getOpposite()), DripstoneUtils::isEmptyOrWater)) {
+//                                pos = pos.relative(config.crystal_direction.getOpposite());
+//                            }
+//                            if (world.isStateAtPosition(pos.relative(config.crystal_direction.getOpposite(), 2), DripstoneUtils::isEmptyOrWater)) {
+//                                pos = pos.relative(config.crystal_direction.getOpposite(), 2);
+//                            }
+//                            for (int i = 0; i < 10; i++) {
+//                                if (world.isStateAtPosition(pos.relative(config.crystal_direction.getOpposite(), i), DripstoneUtils::isEmptyOrWaterOrLava)) {
+//                                    pos = pos.relative(config.crystal_direction.getOpposite(), i);
+//                                } else {
+//                                    break;
+//                                }
+//                            }
                             float floatvalue = switch (randomChance) {
                                 case 1 -> 11 * Mth.PI / 6;
                                 case 2 -> Mth.PI / 6;
@@ -80,7 +88,7 @@ public class CrystalSpikeFeature extends Feature<LargeCrystalConfig> {
                 }
             }
             for (BlockPos pos : trigList) {
-                if (world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
+                if (world.getBlockState(pos).is(BlockTags.BASE_STONE_OVERWORLD) || world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
                     this.setBlock(world, pos, config.crystal_state);
                     clusterPos.add(pos);
                     flag = true;
