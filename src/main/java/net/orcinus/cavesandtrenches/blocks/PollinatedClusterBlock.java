@@ -16,14 +16,19 @@ public class PollinatedClusterBlock extends AmethystClusterBlock {
     }
 
     @Override
-    public void animateTick(BlockState p_53094_, Level p_53095_, BlockPos p_53096_, Random p_53097_) {
-        Direction direction = p_53094_.getValue(FACING);
-        double d0 = (double) p_53096_.getX() + 0.55D - (double) (p_53097_.nextFloat() * 0.4F);
-        double d1 = (double) p_53096_.getY() + 0.55D - (double) (p_53097_.nextFloat() * 0.4F);
-        double d2 = (double) p_53096_.getZ() + 0.55D - (double) (p_53097_.nextFloat() * 0.4F);
-        double d3 = 0.4F - (p_53097_.nextFloat() + p_53097_.nextFloat()) * 0.4F;
-        if (p_53097_.nextInt(5) == 0) {
-            p_53095_.addParticle(ParticleTypes.END_ROD, d0 + (double) direction.getStepX() * d3, d1 + (double) direction.getStepY() * d3, d2 + (double) direction.getStepZ() * d3, p_53097_.nextGaussian() * 0.005D, p_53097_.nextGaussian() * 0.005D, p_53097_.nextGaussian() * 0.005D);
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+        Direction direction = state.getValue(FACING);
+//        if (random.nextInt(5) == 0) {
+//            world.addParticle(ParticleTyapes.END_ROD, d0 + (double) direction.getStepX() * d3, d1 + (double) direction.getStepY() * d3, d2 + (double) direction.getStepZ() * d3, random.nextGaussian() * 0.005D, random.nextGaussian() * 0.005D, random.nextGaussian() * 0.005D);
+//        }
+        double velX = random.nextBoolean() ? -(random.nextFloat() / 10.0F) : random.nextFloat() / 10.0F;
+        double velY = random.nextBoolean() ? -(random.nextFloat() / 10.0F) : random.nextFloat() / 10.0F;
+        double velZ = random.nextBoolean() ? -(random.nextFloat() / 10.0F) : random.nextFloat() / 10.0F;
+        double x = pos.getX() + 0.5D ;
+        double y = pos.getY() + 0.9D ;
+        double z = pos.getZ() + 0.5D ;
+        if (random.nextInt(5) == 0) {
+            world.addParticle(ParticleTypes.END_ROD, x + direction.getStepX(), y + direction.getStepY(), z + direction.getStepZ(), velX, velY, velZ);
         }
     }
 }

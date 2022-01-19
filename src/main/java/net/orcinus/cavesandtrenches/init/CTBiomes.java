@@ -28,26 +28,25 @@ public class CTBiomes {
     public static Biome crystalCanyons() {
         MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobBuilder);
-        BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder();
-        BiomeDefaultFeatures.addPlainGrass(builder);
-        BiomeDefaultFeatures.addDefaultOres(builder);
-        BiomeDefaultFeatures.addDefaultSoftDisks(builder);
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(builder);
-        BiomeDefaultFeatures.addDefaultCrystalFormations(builder);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(builder);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(builder);
-        BiomeDefaultFeatures.addDefaultSprings(builder);
-        BiomeDefaultFeatures.addSurfaceFreezing(builder);
-        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_LUSH_CAVES);
-        return biome(Biome.Precipitation.RAIN, Biome.BiomeCategory.UNDERGROUND, 0.5F, 0.5F, mobBuilder, builder, music);
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder();
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
+        BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
+        BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DRIPSTONE_CAVES);
+        return biome(Biome.Precipitation.RAIN, Biome.BiomeCategory.UNDERGROUND, 0.5F, 0.5F, mobBuilder, biomeBuilder, music);
     }
 
     private static Biome biome(Biome.Precipitation precipitation, Biome.BiomeCategory category, float temperature, float p_194865_, MobSpawnSettings.Builder mobBuilder, BiomeGenerationSettings.Builder generationBuilder, @Nullable Music music) {
         return biome(precipitation, category, temperature, p_194865_, 4159204, 329011, mobBuilder, generationBuilder, music);
     }
 
-    private static Biome biome(Biome.Precipitation precipitation, Biome.BiomeCategory category, float temperature, float p_194855_, int p_194856_, int p_194857_, MobSpawnSettings.Builder mobBuilder, BiomeGenerationSettings.Builder generationBuilder, @Nullable Music music) {
-        return (new Biome.BiomeBuilder()).precipitation(precipitation).biomeCategory(category).temperature(temperature).downfall(p_194855_).specialEffects((new BiomeSpecialEffects.Builder()).waterColor(p_194856_).waterFogColor(p_194857_).fogColor(12638463).skyColor(calculateSkyColor(temperature)).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).backgroundMusic(music).build()).mobSpawnSettings(mobBuilder.build()).generationSettings(generationBuilder.build()).build();
+    private static Biome biome(Biome.Precipitation precipitation, Biome.BiomeCategory category, float temperature, float p_194855_, int waterColor, int p_194857_, MobSpawnSettings.Builder mobBuilder, BiomeGenerationSettings.Builder generationBuilder, @Nullable Music music) {
+        return (new Biome.BiomeBuilder()).precipitation(precipitation).biomeCategory(category).temperature(temperature).downfall(p_194855_).specialEffects((new BiomeSpecialEffects.Builder()).waterColor(waterColor).waterFogColor(p_194857_).fogColor(12638463).skyColor(calculateSkyColor(temperature)).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).backgroundMusic(music).build()).mobSpawnSettings(mobBuilder.build()).generationSettings(generationBuilder.build()).build();
     }
 
     protected static int calculateSkyColor(float temperature) {

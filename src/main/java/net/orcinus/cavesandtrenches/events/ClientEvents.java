@@ -2,32 +2,23 @@ package net.orcinus.cavesandtrenches.events;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.HeadedModel;
-import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.client.entity.model.SparkleModel;
-import net.orcinus.cavesandtrenches.client.entity.model.SterlingHelmetModel;
+import net.orcinus.cavesandtrenches.client.entity.model.SterlingArmorModel;
 import net.orcinus.cavesandtrenches.client.entity.renderer.SparkleRenderer;
-import net.orcinus.cavesandtrenches.client.entity.renderer.layer.BannerLayer;
 import net.orcinus.cavesandtrenches.client.gui.CombustionTableScreen;
 import net.orcinus.cavesandtrenches.client.particles.AuraParticle;
 import net.orcinus.cavesandtrenches.client.particles.providers.SilverBombProvider;
@@ -39,8 +30,6 @@ import net.orcinus.cavesandtrenches.init.CTParticleTypes;
 
 @Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
-
-    public static ModelLayerLocation STERLING_HELMET;
 
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
@@ -58,8 +47,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        STERLING_HELMET = new ModelLayerLocation(new ResourceLocation(CavesAndTrenches.MODID, "sterling_helmet"), "main");
-        event.registerLayerDefinition(STERLING_HELMET, SterlingHelmetModel::createBodyLayer);
+        event.registerLayerDefinition(CTModelLayers.STERLING_HELMET, SterlingArmorModel::createArmorLayer);
         event.registerLayerDefinition(CTModelLayers.SPARKLE, SparkleModel::createBodyLayer);
     }
 

@@ -85,7 +85,7 @@ public class AuraListenerBlock extends Block {
                             mutableBlockPos.set(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
                             if (!world.isEmptyBlock(mutableBlockPos.below()) && world.isEmptyBlock(mutableBlockPos)) {
                                 EntityType<?> entitytype = EntityType.ZOMBIE;
-                                if (world.getBrightness(LightLayer.BLOCK, mutableBlockPos) < 8 && NaturalSpawner.isSpawnPositionOk(SpawnPlacements.Type.ON_GROUND, world, mutableBlockPos, entitytype)) {
+                                if (world.getBrightness(LightLayer.BLOCK, mutableBlockPos) == 0 && NaturalSpawner.isSpawnPositionOk(SpawnPlacements.Type.ON_GROUND, world, mutableBlockPos, entitytype)) {
                                     double posX = mutableBlockPos.getX() + 0.5D;
                                     double posY = mutableBlockPos.getY() + 1.0D;
                                     double posZ = mutableBlockPos.getZ() + 0.5D;

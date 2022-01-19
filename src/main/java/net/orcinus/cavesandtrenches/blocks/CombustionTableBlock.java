@@ -40,13 +40,11 @@ public class CombustionTableBlock extends Block {
     @Nullable
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
-        return new SimpleMenuProvider((id, inventory, player) -> {
-            return new CombustionTableMenu(id, inventory, ContainerLevelAccess.create(world, pos));
-        }, CONTAINER_TITLE);
+        return new SimpleMenuProvider((id, inventory, player) -> new CombustionTableMenu(id, inventory, ContainerLevelAccess.create(world, pos)), CONTAINER_TITLE);
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState p_49232_) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 }

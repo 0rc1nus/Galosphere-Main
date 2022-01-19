@@ -7,5 +7,6 @@ import net.orcinus.cavesandtrenches.CavesAndTrenches;
 public class CTModelLayers {
 
     public static final ModelLayerLocation SPARKLE = new ModelLayerLocation(new ResourceLocation(CavesAndTrenches.MODID, "sparkle"), "main");
+    public static final ModelLayerLocation STERLING_HELMET = new ModelLayerLocation(new ResourceLocation(CavesAndTrenches.MODID, "sterling_helmet"), "main");
 
 }

@@ -83,15 +83,9 @@ public class WarpedAnchorBlock extends Block {
     public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
         super.animateTick(state, world, pos, random);
         if (state.getValue(WARPED_CHARGE) > 0) {
-            int value = random.nextInt(10) + state.getValue(WARPED_CHARGE) + 2;
+            int value = random.nextInt(3) + state.getValue(WARPED_CHARGE);
             for (int i = 0; i < value; ++i) {
-                world.addParticle(ParticleTypes.WITCH,
-                        pos.getX() + 0.5D + random.nextGaussian() * (double) 0.13F,
-                        pos.getY() + 0.5D + random.nextGaussian() * (double) 0.13F,
-                        pos.getZ() + 0.5D + random.nextGaussian() * (double) 0.13F,
-                        0.0D,
-                        0.0D,
-                        0.0D);
+                world.addParticle(ParticleTypes.WITCH, pos.getX() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getY() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getZ() + 0.5D + random.nextGaussian() * (double) 0.13F, 0.0D, 0.0D, 0.0D);
             }
         }
     }

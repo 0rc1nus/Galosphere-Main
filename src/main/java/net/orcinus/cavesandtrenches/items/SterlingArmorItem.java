@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
-import net.orcinus.cavesandtrenches.client.entity.model.QuarkArmorModel;
+import net.orcinus.cavesandtrenches.client.entity.model.SterlingArmorModel;
 import net.orcinus.cavesandtrenches.events.ClientEvents;
 import net.orcinus.cavesandtrenches.init.CTItems;
 import org.jetbrains.annotations.Nullable;
@@ -52,7 +52,7 @@ public class SterlingArmorItem extends ArmorItem {
             @Override
             @SuppressWarnings("unchecked")
             public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-                return (A) new QuarkArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(ClientEvents.STERLING_HELMET), EquipmentSlot.HEAD);
+                return (A) new SterlingArmorModel<>(SterlingArmorModel.createArmorLayer().bakeRoot());
             }
 
         });

@@ -6,6 +6,7 @@
   "refmap": "cavesandtrenches.refmap.json",
   "mixins": [
     "LivingEntityMixin",
+    "OverworldBiomeBuilderMixin",
     "PowderSnowBlockMixin"
   ],
   "client": [

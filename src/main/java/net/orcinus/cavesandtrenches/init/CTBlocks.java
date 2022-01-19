@@ -20,6 +20,7 @@ import net.orcinus.cavesandtrenches.blocks.AmethystSlabBlock;
 import net.orcinus.cavesandtrenches.blocks.AmethystStairsBlock;
 import net.orcinus.cavesandtrenches.blocks.AuraListenerBlock;
 import net.orcinus.cavesandtrenches.blocks.CombustionTableBlock;
+import net.orcinus.cavesandtrenches.blocks.FlowLichenBlock;
 import net.orcinus.cavesandtrenches.blocks.LumenBlossomBlock;
 import net.orcinus.cavesandtrenches.blocks.LumiereComposterBlock;
 import net.orcinus.cavesandtrenches.blocks.LumiereLampBlock;
@@ -64,6 +65,8 @@ public class CTBlocks {
     public static final RegistryObject<Block> LUMIERE_LAMP                      = registerBlock("lumiere_lamp", () -> new LumiereLampBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.3F).sound(SoundType.SHROOMLIGHT)));
     public static final RegistryObject<Block> LUMIERE_COMPOSTER                 = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> COMBUSTION_TABLE                  = registerBlock("combustion_table", () -> new CombustionTableBlock(BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.COLOR_CYAN).requiresCorrectToolForDrops().strength(2.5F).sound(SoundType.NETHERITE_BLOCK)));
+//    public static final RegistryObject<Block> FLOW_LICHEN                       = registerNoTabBlock("flow_lichen", () -> new FlowLichenBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission().noOcclusion().instabreak().requiresCorrectToolForDrops()));
+//    public static final RegistryObject<Block> LICHEN_ROOT                       = registerNoTabBlock("root_lichen", () -> new FlowLichenBlock(BlockBehaviour.Properties.copy(FLOW_LICHEN.get())));
 
     /**
      * Debugger
