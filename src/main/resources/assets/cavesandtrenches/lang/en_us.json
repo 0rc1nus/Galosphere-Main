@@ -15,18 +15,14 @@
   "block.cavesandtrenches.silver_block": "Block of Silver",
   "block.cavesandtrenches.raw_silver_block": "Raw Silver Block",
   "block.cavesandtrenches.silver_ore": "Silver Ore",
-  "block.cavesandtrenches.lumen_blossom": "Lumen Blossom",
+  "block.cavesandtrenches.deepslate_silver_ore": "Deepslate Silver Ore",
   "block.cavesandtrenches.aura_listener": "Aura Listener",
   "block.cavesandtrenches.warped_anchor": "Warped Anchor",
   "block.cavesandtrenches.lumiere_lamp": "Lumiere Lamp",
-  "block.cavesandtrenches.combustion_table": "Combustion Table",
   "block.cavesandtrenches.mysteria_log": "Mysteria Log",
   "block.cavesandtrenches:mysteria_cinders": "Mysteria Cinders",
   "block.cavesandtrenches:mysteria_vines": "Mysteria Vines",
   "block.cavesandtrenches:mysteria_vines_plant": "Mysteria Vines",
-  "item.cavesandtrenches.silver_bomb.duration": "Duration:",
-  "item.cavesandtrenches.silver_bomb.explosion": "Explosion:",
-  "item.cavesandtrenches.silver_bomb.bouncy": "Bouncy:",
   "item.cavesandtrenches.sterling_helmet": "Sterling Helmet",
   "item.cavesandtrenches.sterling_chestplate": "Sterling Chestplate",
   "item.cavesandtrenches.sterling_leggings": "Sterling Leggings",
@@ -36,6 +32,5 @@
   "item.cavesandtrenches.raw_silver": "Raw Silver",
   "item.cavesandtrenches.silver_ingot": "Silver Ingot",
   "item.cavesandtrenches.silver_bomb": "Silver Bomb",
-  "item.cavesandtrenches.silver_nugget": "Silver Nugget",
-  "container.cavesandtrenches.combustion_table": "I will bust that nut"
+  "item.cavesandtrenches.silver_nugget": "Silver Nugget"
 }

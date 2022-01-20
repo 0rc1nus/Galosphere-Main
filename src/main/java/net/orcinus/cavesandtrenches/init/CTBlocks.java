@@ -19,8 +19,6 @@ import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.blocks.AmethystSlabBlock;
 import net.orcinus.cavesandtrenches.blocks.AmethystStairsBlock;
 import net.orcinus.cavesandtrenches.blocks.AuraListenerBlock;
-import net.orcinus.cavesandtrenches.blocks.CombustionTableBlock;
-import net.orcinus.cavesandtrenches.blocks.FlowLichenBlock;
 import net.orcinus.cavesandtrenches.blocks.LumenBlossomBlock;
 import net.orcinus.cavesandtrenches.blocks.LumiereComposterBlock;
 import net.orcinus.cavesandtrenches.blocks.LumiereLampBlock;
@@ -57,14 +55,13 @@ public class CTBlocks {
     public static final RegistryObject<Block> SILVER_ORE                        = registerBlock("silver_ore", () -> new OreBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_SILVER_ORE              = registerBlock("deepslate_silver_ore", () -> new OreBlock(BlockBehaviour.Properties.copy(SILVER_ORE.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE)));
     public static final RegistryObject<Block> GLOW_LICHEN_BLOCK                 = registerBlock("glow_lichen_block", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(0.3F).sound(SoundType.MOSS).lightLevel(state -> 7)));
-    public static final RegistryObject<Block> LUMEN_BLOSSOM                     = registerBlock("lumen_blossom", () -> new LumenBlossomBlock(BlockBehaviour.Properties.of(Material.PLANT).strength(0.2F).sound(SoundType.GLOW_LICHEN).lightLevel(state -> 7).noCollission()));
+//    public static final RegistryObject<Block> LUMEN_BLOSSOM                     = registerBlock("lumen_blossom", () -> new LumenBlossomBlock(BlockBehaviour.Properties.of(Material.PLANT).strength(0.2F).sound(SoundType.GLOW_LICHEN).lightLevel(state -> 7).noCollission()));
 //    public static final RegistryObject<Block> GLOW_LICHEN_VINES                 = registerBlock("glow_lichen_vines", () -> new GlowLichenVinesBlock(BlockBehaviour.Properties.of(Material.PLANT).randomTicks().noCollission().lightLevel(CaveVines.emission(14)).instabreak().sound(SoundType.CAVE_VINES)));
 //    public static final RegistryObject<Block> GLOW_LICHEN_VINES_PLANT           = registerBlock("glow_lichen_vines_plant", () -> new GlowLichenVinesPlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission().lightLevel(state -> 7).instabreak().sound(SoundType.CAVE_VINES)));
     public static final RegistryObject<Block> AURA_LISTENER                     = registerBlock("aura_listener", () -> new AuraListenerBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> WARPED_ANCHOR                     = registerBlock("warped_anchor", () -> new WarpedAnchorBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).lightLevel(state -> state.getValue(WarpedAnchorBlock.WARPED_CHARGE) + 4).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> LUMIERE_LAMP                      = registerBlock("lumiere_lamp", () -> new LumiereLampBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.3F).sound(SoundType.SHROOMLIGHT)));
     public static final RegistryObject<Block> LUMIERE_COMPOSTER                 = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER).dropsLike(Blocks.COMPOSTER)));
-    public static final RegistryObject<Block> COMBUSTION_TABLE                  = registerBlock("combustion_table", () -> new CombustionTableBlock(BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.COLOR_CYAN).requiresCorrectToolForDrops().strength(2.5F).sound(SoundType.NETHERITE_BLOCK)));
 //    public static final RegistryObject<Block> FLOW_LICHEN                       = registerNoTabBlock("flow_lichen", () -> new FlowLichenBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission().noOcclusion().instabreak().requiresCorrectToolForDrops()));
 //    public static final RegistryObject<Block> LICHEN_ROOT                       = registerNoTabBlock("root_lichen", () -> new FlowLichenBlock(BlockBehaviour.Properties.copy(FLOW_LICHEN.get())));
 

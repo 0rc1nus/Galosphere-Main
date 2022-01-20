@@ -1,7 +1,6 @@
 package net.orcinus.cavesandtrenches;
 
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -15,7 +14,6 @@ import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
 import net.orcinus.cavesandtrenches.init.CTFeatures;
 import net.orcinus.cavesandtrenches.init.CTItems;
-import net.orcinus.cavesandtrenches.init.CTMenuTypes;
 import net.orcinus.cavesandtrenches.init.CTParticleTypes;
 import net.orcinus.cavesandtrenches.util.CavesAndTrenchesTab;
 import org.apache.logging.log4j.LogManager;
@@ -37,7 +35,6 @@ public class CavesAndTrenches {
         CTEntityTypes.ENTITY_TYPES.register(modEventBus);
         CTFeatures.FEATURES.register(modEventBus);
         CTItems.ITEMS.register(modEventBus);
-        CTMenuTypes.MENU_TYPES.register(modEventBus);
         CTParticleTypes.PARTICLES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new WorldEvents());

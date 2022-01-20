@@ -18,7 +18,7 @@ public class CTBlockstateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         this.simpleBlock(CTBlocks.DEEPSLATE_SILVER_ORE.get());
-        this.simpleBlock(CTBlocks.GLOW_LICHEN_BLOCK.get());
+//        this.simpleBlock(CTBlocks.GLOW_LICHEN_BLOCK.get());
         this.simpleBlock(CTBlocks.LUMIERE_BLOCK.get());
         this.simpleBlock(CTBlocks.ALLURITE_BLOCK.get());
         this.simpleBlock(CTBlocks.SILVER_ORE.get());

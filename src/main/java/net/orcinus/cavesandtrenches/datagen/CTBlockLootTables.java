@@ -24,8 +24,8 @@ public class CTBlockLootTables extends BlockLoot {
     protected void addTables() {
         this.add(CTBlocks.SILVER_ORE.get(), (block) -> createOreDrop(block, CTItems.RAW_SILVER.get()));
         this.add(CTBlocks.DEEPSLATE_SILVER_ORE.get(), (block) -> createOreDrop(block, CTItems.RAW_SILVER.get()));
-        dropSelf(CTBlocks.LUMEN_BLOSSOM.get());
-        dropSelf(CTBlocks.GLOW_LICHEN_BLOCK.get());
+//        dropSelf(CTBlocks.LUMEN_BLOSSOM.get());
+//        dropSelf(CTBlocks.GLOW_LICHEN_BLOCK.get());
         dropSelf(CTBlocks.LUMIERE_BLOCK.get());
         dropSelf(CTBlocks.ALLURITE_BLOCK.get());
         dropSelf(CTBlocks.RAW_SILVER_BLOCK.get());
@@ -43,7 +43,6 @@ public class CTBlockLootTables extends BlockLoot {
         dropSelf(CTBlocks.LUMIERE_LAMP.get());
         dropSelf(CTBlocks.WARPED_ANCHOR.get());
         dropSelf(CTBlocks.LUMIERE_COMPOSTER.get());
-        dropSelf(CTBlocks.COMBUSTION_TABLE.get());
         dropSelf(CTBlocks.MYSTERIA_CINDERS.get());
         dropSelf(CTBlocks.MYSTERIA_LOG.get());
         this.add(CTBlocks.MYSTERIA_VINES.get(), CTBlockLootTables::createMysteriaVinesDrop);
