@@ -52,7 +52,7 @@ public class SterlingArmorItem extends ArmorItem {
             @Override
             @SuppressWarnings("unchecked")
             public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-                return (A) new SterlingArmorModel<>(SterlingArmorModel.createArmorLayer().bakeRoot());
+                return armorSlot == EquipmentSlot.HEAD ? (A) new SterlingArmorModel<>(SterlingArmorModel.createArmorLayer().bakeRoot()) : IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
             }
 
         });

@@ -105,6 +105,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                         if (currentTag.getInt("Bouncy") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
+                            this.broadcastChanges();
                         }
                     }
                     bouncy++;
@@ -114,6 +115,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                         if (currentTag.getInt("Duration") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
+                            this.broadcastChanges();
                         }
                     }
                     duration++;
@@ -123,6 +125,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                         if (currentTag.getInt("Explosion") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
+                            this.broadcastChanges();
                         }
                     }
                     explosion++;
@@ -132,6 +135,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                         if (currentTag.getInt("Bouncy") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
+                            this.broadcastChanges();
                         }
                     }
                     bouncy++;
@@ -141,6 +145,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                         if (currentTag.getInt("Duration") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
+                            this.broadcastChanges();
                         }
                     }
                     duration++;
@@ -150,15 +155,16 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                         if (currentTag.getInt("Explosion") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
+                            this.broadcastChanges();
                         }
                     }
                     explosion++;
                 }
                 ItemStack resultCopy = bombStack.copy();
+                resultCopy.setCount(1);
                 resultCopy.getOrCreateTag().putInt("Explosion", explosion);
                 resultCopy.getOrCreateTag().putInt("Bouncy", bouncy);
                 resultCopy.getOrCreateTag().putInt("Duration", duration);
-                resultCopy.setCount(1);
                 if (initFlag) {
                     this.resultContainer.setItem(3, resultCopy);
                 }
@@ -173,6 +179,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
     @Override
     public void removed(Player player) {
         super.removed(player);
+        this.resultContainer.removeItemNoUpdate(3);
         this.access.execute((world, pos) -> {
             this.clearContainer(player, this.container);
         });
@@ -180,82 +187,52 @@ public class CombustionTableMenu extends AbstractContainerMenu {
 
     @Override
     public ItemStack quickMoveStack(Player player, int id) {
-        ItemStack itemStack = ItemStack.EMPTY;
+        ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(id);
         if (slot.hasItem()) {
-            ItemStack slotItem = slot.getItem();
-            if (this.container.getItem(0).isEmpty() && slotItem.is(CTItems.SILVER_BOMB.get())) {
-                if (this.moveItemStackTo(slotItem, 0, 1, true)) return ItemStack.EMPTY;
+            ItemStack slotStack = slot.getItem();
+            itemstack = slotStack.copy();
+            ItemStack itemstack2 = this.container.getItem(0);
+            ItemStack itemstack3 = this.container.getItem(1);
+            ItemStack itemstack4 = this.container.getItem(2);
+            if (id == 3) {
+                slotStack.getItem().onCraftedBy(slotStack, player.level, player);
+                if (!this.moveItemStackTo(slotStack, 3, 40, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onQuickCraft(slotStack, itemstack);
+            } else if (id != 0 && id != 1 && id != 2) {
+                if (!itemstack2.isEmpty() && !itemstack3.isEmpty() && !itemstack4.isEmpty()) {
+                    if (id >= 3 && id < 30) {
+                        if (!this.moveItemStackTo(slotStack, 30, 39, false)) {
+                            return ItemStack.EMPTY;
+                        }
+                    } else if (id >= 30 && id < 39 && !this.moveItemStackTo(slotStack, 3, 30, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (!this.moveItemStackTo(slotStack, 0, 3, false)) {
+                    return ItemStack.EMPTY;
+                }
             }
-            else if (this.container.getItem(1).isEmpty() && (slotItem.is(Items.GUNPOWDER) || slotItem.is(Items.STRING) || slotItem.is(Items.SLIME_BALL))) {
-                if (this.moveItemStackTo(slotItem, 1, 2, true)) return ItemStack.EMPTY;
+            else if (!this.moveItemStackTo(slotStack, 3, 39, false)) {
+                return ItemStack.EMPTY;
             }
-            else if (this.container.getItem(2).isEmpty() && (slotItem.is(Items.GUNPOWDER) || slotItem.is(Items.STRING) || slotItem.is(Items.SLIME_BALL))) {
-                if (this.moveItemStackTo(slotItem, 2, 3, true)) return ItemStack.EMPTY;
+
+            if (slotStack.isEmpty()) {
+                slot.set(ItemStack.EMPTY);
             }
-            else if (id == 3 && !this.container.getItem(3).isEmpty()) {
-                if (!this.moveItemStackTo(slotItem, 3, 40, true)) return ItemStack.EMPTY;
+
+            slot.setChanged();
+            if (slotStack.getCount() == itemstack.getCount()) {
+                return ItemStack.EMPTY;
             }
-            else if (id == 0 && !this.container.getItem(0).isEmpty()) {
-                if (!this.moveItemStackTo(slotItem, 3, 40, true)) return ItemStack.EMPTY;
-            }
-            else if (id == 1 && !this.container.getItem(1).isEmpty()) {
-                if (!this.moveItemStackTo(slotItem, 3, 40, true)) return ItemStack.EMPTY;
-            }
-            else if (id == 2 && !this.container.getItem(2).isEmpty()) {
-                if (!this.moveItemStackTo(slotItem, 3, 40, true)) return ItemStack.EMPTY;
-            }
+
+            slot.onTake(player, slotStack);
+            this.broadcastChanges();
         }
-//        ItemStack itemstack = ItemStack.EMPTY;
-//        Slot slot = this.slots.get(id);
-//        if (slot.hasItem()) {
-//            ItemStack itemstack1 = slot.getItem();
-//            itemstack = itemstack1.copy();
-//            ItemStack itemstack2 = this.container.getItem(0);
-//            ItemStack itemstack3 = this.container.getItem(1);
-//            ItemStack itemstack4 = this.container.getItem(2);
-//            if (id == 3) {
-//                if (!this.moveItemStackTo(itemstack1, 3, 40, true)) {
-//                    return ItemStack.EMPTY;
-//                }
-//
-//                if (!this.moveItemStackTo(itemstack1, 3, 40, true)) return ItemStack.EMPTY;
-//
-//                slot.onQuickCraft(itemstack1, itemstack);
-//            }
-//            else if (id != 0 && id != 1 && id != 2) {
-//                if (!itemstack2.isEmpty() && !itemstack3.isEmpty() && !itemstack4.isEmpty()) {
-//                    if (id >= 3 && id < 30) {
-//                        if (!this.moveItemStackTo(itemstack1, 30, 39, false)) {
-//                            return ItemStack.EMPTY;
-//                        }
-//                    } else if (id >= 30 && id < 39 && !this.moveItemStackTo(itemstack1, 3, 30, false)) {
-//                        return ItemStack.EMPTY;
-//                    }
-//                }
-//                else if (!this.moveItemStackTo(itemstack1, 0, 3, false)) {
-//                    return ItemStack.EMPTY;
-//                }
-//            }
-//            else if (!this.moveItemStackTo(itemstack1, 3, 39, false)) {
-//                return ItemStack.EMPTY;
-//            }
-//
-//            if (itemstack1.isEmpty()) {
-//                slot.set(ItemStack.EMPTY);
-//            }
-//            else {
-//                slot.setChanged();
-//            }
-//            if (itemstack1.getCount() == itemstack.getCount()) {
-//                return ItemStack.EMPTY;
-//            }
-//
-//            slot.onTake(player, itemstack1);
-//            this.broadcastChanges();
-//        }
-//
-//        return itemstack;
-        return itemStack;
+
+        return itemstack;
     }
 }

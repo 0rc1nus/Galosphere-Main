@@ -43,7 +43,7 @@ public class MobEvents {
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
         if (state.getBlock() == Blocks.COMPOSTER) {
-            if (player.getItemInHand(hand).getItem() == CTItems.LUMIERE_SHARD.get()) {
+            if (player.getItemInHand(hand).getItem() == CTBlocks.LUMIERE_BLOCK.get().asItem()) {
                 if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8) {
                     world.setBlock(pos, CTBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
                     world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);

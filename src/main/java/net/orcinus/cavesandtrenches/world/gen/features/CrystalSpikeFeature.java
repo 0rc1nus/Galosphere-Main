@@ -38,19 +38,19 @@ public class CrystalSpikeFeature extends Feature<LargeCrystalConfig> {
         //-346814623854640707
         //-4103 -5 165
         //-1330 35 18572
-        if (!(world.isStateAtPosition(blockPos, DripstoneUtils::isEmptyOrWaterOrLava) && oppositeState.is(BlockTags.BASE_STONE_OVERWORLD))) {
-            return false;
-        } else {
-            boolean flag = false;
-            final int randomChance = random.nextInt(4);
-            final int randomValue = UniformInt.of(4, 6).sample(random) + 1;
-            int stepHeight = randomValue + 14 + Mth.nextInt(random, 10, 14);
-            for (int y = 0; y < stepHeight; y++) {
-                int radius = randomValue - y / 2;
-                for (int x = -radius; x <= radius; x++) {
-                    for (int z = -radius; z <= radius; z++) {
-                        BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
-                        if (x * x + z * z <= radius * radius) {
+        int radiusCheck = UniformInt.of(4, 6).sample(random) + 1;
+        boolean flag = false;
+        final int randomChance = random.nextInt(4);
+        final int randomValue = radiusCheck;
+        int stepHeight = randomValue + 14 + Mth.nextInt(random, 10, 14);
+        if (oppositeState.is(BlockTags.BASE_STONE_OVERWORLD) && world.isStateAtPosition(blockPos, DripstoneUtils::isEmptyOrWaterOrLava) && isSurroundedWithStones(world, blockPos, radiusCheck, config)){
+            if (isSurroundedWithStones(world, blockPos, radiusCheck, config)) {
+                for (int y = 0; y < stepHeight; y++) {
+                    int radius = randomValue - y / 2;
+                    for (int x = -radius; x <= radius; x++) {
+                        for (int z = -radius; z <= radius; z++) {
+                            BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
+                            if (x * x + z * z <= radius * radius) {
 //                            if (world.isStateAtPosition(pos.relative(config.crystal_direction.getOpposite()), DripstoneUtils::isEmptyOrWater)) {
 //                                pos = pos.relative(config.crystal_direction.getOpposite());
 //                            }
@@ -64,28 +64,31 @@ public class CrystalSpikeFeature extends Feature<LargeCrystalConfig> {
 //                                    break;
 //                                }
 //                            }
-                            float floatvalue = switch (randomChance) {
-                                case 1 -> 11 * Mth.PI / 6;
-                                case 2 -> Mth.PI / 6;
-                                case 3 -> 7 * Mth.PI / 6;
-                                case 0 -> 5 * Mth.PI / 6;
-                                default -> throw new IllegalStateException("Unexpected value: " + randomChance);
-                            };
-                            float q = Mth.cos(floatvalue) * y;
-                            float k = Mth.sin(Mth.PI / 2) * y;
-                            float l = Mth.sin(floatvalue) * y;
-                            if (config.crystal_direction == Direction.DOWN) {
-                                q = -q;
-                                k = -k;
-                                l = -l;
-                            }
-                            BlockPos trigPos = pos.offset(q, k, l);
-                            if (world.isStateAtPosition(trigPos, DripstoneUtils::isEmptyOrWaterOrLava)) {
-                                trigList.add(trigPos);
+                                float floatvalue = switch (randomChance) {
+                                    case 1 -> 11 * Mth.PI / 6;
+                                    case 2 -> Mth.PI / 6;
+                                    case 3 -> 7 * Mth.PI / 6;
+                                    case 0 -> 5 * Mth.PI / 6;
+                                    default -> throw new IllegalStateException("Unexpected value: " + randomChance);
+                                };
+                                float q = Mth.cos(floatvalue) * y;
+                                float k = Mth.sin(Mth.PI / 2) * y;
+                                float l = Mth.sin(floatvalue) * y;
+                                if (config.crystal_direction == Direction.DOWN) {
+                                    q = -q;
+                                    k = -k;
+                                    l = -l;
+                                }
+                                BlockPos trigPos = pos.offset(q, k, l);
+                                if (world.isStateAtPosition(trigPos, DripstoneUtils::isEmptyOrWaterOrLava)) {
+                                    trigList.add(trigPos);
+                                }
                             }
                         }
                     }
                 }
+            } else {
+                return false;
             }
             for (BlockPos pos : trigList) {
                 if (world.getBlockState(pos).is(BlockTags.BASE_STONE_OVERWORLD) || world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
@@ -104,8 +107,30 @@ public class CrystalSpikeFeature extends Feature<LargeCrystalConfig> {
                     }
                 }
             }
-            return flag;
         }
+        return flag;
+    }
+
+    public boolean isSurroundedWithStones(WorldGenLevel world, BlockPos blockPos, int radiusCheck, LargeCrystalConfig config) {
+        List<BlockPos> list = Lists.newArrayList();
+        boolean flag = false;
+        for (int x = -radiusCheck; x <= radiusCheck; x++) {
+            for (int z = -radiusCheck; z <= radiusCheck; z++) {
+                for (int y = 0; y <= 12; y++) {
+                    BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
+                    if (world.isStateAtPosition(pos.relative(config.crystal_direction.getOpposite(), y), DripstoneUtils::isEmptyOrWaterOrLava)) {
+                        list.add(blockPos.relative(config.crystal_direction.getOpposite(), y));
+                    }
+                }
+            }
+        }
+
+        if (list.isEmpty()) return false;
+
+        for (BlockPos pos : list) {
+            flag = world.getBlockState(pos.relative(config.crystal_direction.getOpposite())).is(BlockTags.BASE_STONE_OVERWORLD);
+        }
+        return flag;
     }
 
 }
