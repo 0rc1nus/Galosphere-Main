@@ -1,0 +1,14 @@
+{
+  "textures": {
+    "particle": "cavesandtrenches:block/lumiere_composter_compost",
+    "inside": "cavesandtrenches:block/lumiere_composter_compost"
+  },
+  "elements": [
+    {   "from": [ 2, 0, 2 ],
+      "to": [ 14, 5, 14 ],
+      "faces": {
+        "up": { "texture": "#inside" }
+      }
+    }
+  ]
+}

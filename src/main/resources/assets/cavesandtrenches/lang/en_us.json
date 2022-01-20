@@ -19,6 +19,7 @@
   "block.cavesandtrenches.aura_listener": "Aura Listener",
   "block.cavesandtrenches.warped_anchor": "Warped Anchor",
   "block.cavesandtrenches.lumiere_lamp": "Lumiere Lamp",
+  "block.cavesandtrenches.lumiere_composter": "Composter",
   "block.cavesandtrenches.mysteria_log": "Mysteria Log",
   "block.cavesandtrenches:mysteria_cinders": "Mysteria Cinders",
   "block.cavesandtrenches:mysteria_vines": "Mysteria Vines",
@@ -32,5 +33,6 @@
   "item.cavesandtrenches.raw_silver": "Raw Silver",
   "item.cavesandtrenches.silver_ingot": "Silver Ingot",
   "item.cavesandtrenches.silver_bomb": "Silver Bomb",
-  "item.cavesandtrenches.silver_nugget": "Silver Nugget"
+  "item.cavesandtrenches.silver_nugget": "Silver Nugget",
+  "item.cavesandtrenches.sparkle_spawn_egg": "Sparkle Spawn Egg"
 }
