@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "cavesandtrenches:block/polished_moonstone_slab_top"
+    },
+    "type=bottom": {
+      "model": "cavesandtrenches:block/polished_moonstone_slab"
+    },
+    "type=double": {
+      "model": "cavesandtrenches:block/polished_moonstone"
+    }
+  }
+}

@@ -47,6 +47,14 @@ public class CTBlockLootTables extends BlockLoot {
         dropSelf(CTBlocks.MYSTERIA_LOG.get());
         this.add(CTBlocks.MYSTERIA_VINES.get(), CTBlockLootTables::createMysteriaVinesDrop);
         this.add(CTBlocks.MYSTERIA_VINES_PLANTS.get(), CTBlockLootTables::createMysteriaVinesDrop);
+        dropSelf(CTBlocks.MOONSTONE.get());
+        dropSelf(CTBlocks.POLISHED_MOONSTONE.get());
+        dropSelf(CTBlocks.MOONSTONE_STAIRS.get());
+        dropSelf(CTBlocks.MOONSTONE_SLAB.get());
+        dropSelf(CTBlocks.POLISHED_MOONSTONE_STAIRS.get());
+        dropSelf(CTBlocks.POLISHED_MOONSTONE_SLAB.get());
+        dropSelf(CTBlocks.MOONSTONE_WALL.get());
+        dropSelf(CTBlocks.DEBUGGER.get());
     }
 
     protected static LootTable.Builder createMysteriaVinesDrop(Block block) {

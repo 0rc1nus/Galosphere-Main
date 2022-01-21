@@ -7,7 +7,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -19,6 +22,7 @@ import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.blocks.AmethystSlabBlock;
 import net.orcinus.cavesandtrenches.blocks.AmethystStairsBlock;
 import net.orcinus.cavesandtrenches.blocks.AuraListenerBlock;
+import net.orcinus.cavesandtrenches.blocks.DebuggerBlock;
 import net.orcinus.cavesandtrenches.blocks.LumenBlossomBlock;
 import net.orcinus.cavesandtrenches.blocks.LumiereComposterBlock;
 import net.orcinus.cavesandtrenches.blocks.LumiereLampBlock;
@@ -63,7 +67,15 @@ public class CTBlocks {
     public static final RegistryObject<Block> LUMIERE_COMPOSTER                 = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER).dropsLike(Blocks.COMPOSTER)));
 //    public static final RegistryObject<Block> FLOW_LICHEN                       = registerNoTabBlock("flow_lichen", () -> new FlowLichenBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission().noOcclusion().instabreak().requiresCorrectToolForDrops()));
 //    public static final RegistryObject<Block> LICHEN_ROOT                       = registerNoTabBlock("root_lichen", () -> new FlowLichenBlock(BlockBehaviour.Properties.copy(FLOW_LICHEN.get())));
+    public static final RegistryObject<Block> MOONSTONE                         = registerBlock("moonstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
+    public static final RegistryObject<Block> MOONSTONE_STAIRS                  = registerBlock("moonstone_stairs", () -> new StairBlock(MOONSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
+    public static final RegistryObject<Block> MOONSTONE_SLAB                    = registerBlock("moonstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
+    public static final RegistryObject<Block> POLISHED_MOONSTONE                = registerBlock("polished_moonstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
+    public static final RegistryObject<Block> POLISHED_MOONSTONE_STAIRS         = registerBlock("polished_moonstone_stairs", () -> new StairBlock(POLISHED_MOONSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
+    public static final RegistryObject<Block> POLISHED_MOONSTONE_SLAB           = registerBlock("polished_moonstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
+    public static final RegistryObject<Block> MOONSTONE_WALL                    = registerBlock("moonstone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
 
+    public static final RegistryObject<Block> DEBUGGER = registerBlock("debugger", () -> new DebuggerBlock(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)));
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier) {
         RegistryObject<B> block = BLOCKS.register(name, supplier);
         CTItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES)));
