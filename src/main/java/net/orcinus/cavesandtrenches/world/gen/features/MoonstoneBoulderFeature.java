@@ -43,6 +43,7 @@ public class MoonstoneBoulderFeature extends Feature<NoneFeatureConfiguration> {
                                         flag = false;
                                     } else {
                                         world.setBlock(blockPos, CTBlocks.MOONSTONE.get().defaultBlockState(), 2);
+                                        world.setBlock(blockPos.below(), CTBlocks.MOONSTONE.get().defaultBlockState(), 2);
                                         flag = true;
                                     }
                                 }

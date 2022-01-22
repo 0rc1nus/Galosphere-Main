@@ -8,7 +8,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.orcinus.cavesandtrenches.world.gen.features.TowerFeature;
+import net.orcinus.cavesandtrenches.world.gen.features.CrystalSpikeFeature;
+
+import java.util.Random;
 
 public class DebuggerBlock extends Block {
 
@@ -18,7 +20,10 @@ public class DebuggerBlock extends Block {
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        TowerFeature.buildTower(world, pos);
-        return InteractionResult.SUCCESS;
+        Random random = world.getRandom();
+        if (CrystalSpikeFeature.placeSpike(world, pos, random)) {
+            return InteractionResult.SUCCESS;
+        }
+        return super.use(state, world, pos, player, hand, hit);
     }
 }
