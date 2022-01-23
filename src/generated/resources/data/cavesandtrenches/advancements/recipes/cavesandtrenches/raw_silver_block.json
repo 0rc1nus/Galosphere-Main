@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "cavesandtrenches:raw_silver_block"
+    ]
+  },
+  "criteria": {
+    "hasraw_silver": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cavesandtrenches:raw_silver"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "cavesandtrenches:raw_silver_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hasraw_silver",
+      "has_the_recipe"
+    ]
+  ]
+}

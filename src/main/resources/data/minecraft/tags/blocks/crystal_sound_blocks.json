@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "cavesandtrenches:polished_amethyst",
+    "cavesandtrenches:polished_amethyst_slab",
+    "cavesandtrenches:polished_amethyst_stairs",
+    "cavesandtrenches:amethyst_bricks",
+    "cavesandtrenches:amethyst_bricks_slab",
+    "cavesandtrenches:amethyst_bricks_stairs",
+    "cavesandtrenches:allurite_block",
+    "cavesandtrenches:lumiere_block"
+  ]
+}

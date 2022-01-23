@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "cavesandtrenches:silver_block"
+    }
+  ],
+  "result": {
+    "item": "cavesandtrenches:silver_ingot"
+  }
+}

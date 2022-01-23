@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "S  ",
-    "SS ",
+    "SSS",
+    "SSS",
     "SSS"
   ],
   "key": {
     "S": {
-      "item": "minecraft:amethyst_block"
+      "item": "cavesandtrenches:silver_ingot"
     }
   },
   "result": {
-    "item": "cavesandtrenches:polished_amethyst_stairs"
+    "item": "cavesandtrenches:silver_block"
   }
 }

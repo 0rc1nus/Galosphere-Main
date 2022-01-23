@@ -21,7 +21,7 @@ public class DebuggerBlock extends Block {
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         Random random = world.getRandom();
-        if (CrystalSpikeFeature.placeSpike(world, pos, random)) {
+        if (CrystalSpikeFeature.debugSpike(world, pos, random)) {
             return InteractionResult.SUCCESS;
         }
         return super.use(state, world, pos, player, hand, hit);

@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
@@ -63,7 +64,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
 //                    flag = placeCrystals(world, random, config, trigList, clusterPos, flag);
 //                }
 //            }
-            if (this.placeSpike(world, blockPos, radiusCheck, stepHeight, randomChance, trigList, config.crystal_direction.getDirection())) {
+            if (this.placeSpike(world, blockPos, radiusCheck, stepHeight, randomChance, trigList, config.crystal_direction.getDirection(), random)) {
                 flag = placeCrystals(world, random, config, trigList, clusterPos, flag);
             }
             //            else if (config.crystal_direction == CaveSurface.CEILING) {
@@ -96,7 +97,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         return flag;
     }
 
-    public boolean placeSpike(LevelAccessor world, BlockPos blockPos, int startRadius, int height, int randomChance, List<BlockPos> crystalPos, Direction direction) {
+    public boolean placeSpike(LevelAccessor world, BlockPos blockPos, int startRadius, int height, int randomChance, List<BlockPos> crystalPos, Direction direction, Random random) {
         boolean flag = false;
         for (int y = 0; y < height; y++) {
             int radius = startRadius - y / 2;
@@ -109,7 +110,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
 //                        }
                         if (direction == Direction.DOWN) {
                             if (world.isStateAtPosition(pos.below(), DripstoneUtils::isEmptyOrWaterOrLava)) {
-                                return placeSpike(world, blockPos.below(), startRadius, height, randomChance, crystalPos, direction);
+                                return placeSpike(world, blockPos.below(), startRadius, height, randomChance, crystalPos, direction, random);
                             }
                         }
                         else if (direction == Direction.UP) {
@@ -124,6 +125,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                                 return false;
                             }
                         }
+                        this.calciteBloom(world, pos.relative(direction), random, radius);
                         float delta = switch (randomChance) {
                             case 1 -> 11 * Mth.PI / 6;
                             case 2 -> Mth.PI / 6;
@@ -149,7 +151,27 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         return flag;
     }
 
-    public static boolean placeSpike(LevelAccessor world, BlockPos blockPos, Random random) {
+    private boolean calciteBloom(LevelAccessor world, BlockPos blockPos, Random random, int crystalRadius) {
+        int radius = crystalRadius / 4;
+        int height = ConstantInt.of(2).sample(random);
+        boolean flag = false;
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                for (int y = -height; y <= height; y++) {
+                    BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z);
+                    for (Direction direction : Direction.values()) {
+                        if (world.getBlockState(pos).is(BlockTags.BASE_STONE_OVERWORLD) && world.isStateAtPosition(pos.relative(direction), DripstoneUtils::isEmptyOrWaterOrLava)) {
+                            world.setBlock(pos, Blocks.CALCITE.defaultBlockState(), 2);
+                            flag = true;
+                        }
+                    }
+                }
+            }
+        }
+        return flag;
+    }
+
+    public static boolean debugSpike(LevelAccessor world, BlockPos blockPos, Random random) {
         boolean flag = false;
         final int initRadius = UniformInt.of(4, 7).sample(random);
         final int height = initRadius + 14 + Mth.nextInt(random, 10, 14);
@@ -163,7 +185,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                     BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
                     if (x * x + z * z <= radius * radius) {
                         if (world.isStateAtPosition(pos.below(), DripstoneUtils::isEmptyOrWaterOrLava)) {
-                            return placeSpike(world, blockPos.below(), random);
+                            return debugSpike(world, blockPos.below(), random);
                         } else {
                             float delta = switch (randomChance) {
                                 case 1 -> 11 * Mth.PI / 6;
