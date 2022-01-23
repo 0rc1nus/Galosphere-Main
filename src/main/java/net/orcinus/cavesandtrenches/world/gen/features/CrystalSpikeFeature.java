@@ -35,7 +35,6 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         BlockPos blockPos = context.origin();
         Random random = context.random();
         CrystalSpikeConfig config = context.config();
-        BlockState oppositeState = world.getBlockState(blockPos.relative(config.crystal_direction.getDirection()));
         List<BlockPos> trigList = Lists.newArrayList();
         List<BlockPos> clusterPos = Lists.newArrayList();
         //-2808380414920390921
