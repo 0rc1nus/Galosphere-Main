@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "cavesandtrenches:chiseled_amethyst"
+    ]
+  },
+  "criteria": {
+    "has_amethyst_bricks_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cavesandtrenches:amethyst_bricks_slab"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "cavesandtrenches:chiseled_amethyst"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_amethyst_bricks_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

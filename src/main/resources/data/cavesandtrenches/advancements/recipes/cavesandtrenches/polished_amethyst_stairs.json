@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "cavesandtrenches:polished_amethyst_stairs"
+    ]
+  },
+  "criteria": {
+    "haspolished_amethyst": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cavesandtrenches:polished_amethyst"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "cavesandtrenches:polished_amethyst_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "haspolished_amethyst",
+      "has_the_recipe"
+    ]
+  ]
+}

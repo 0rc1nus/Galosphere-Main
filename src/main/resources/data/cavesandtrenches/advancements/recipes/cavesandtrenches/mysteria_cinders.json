@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "cavesandtrenches:mysteria_cinders"
+    ]
+  },
+  "criteria": {
+    "has_mysteria_vines": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cavesandtrenches:mysteria_vines"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "cavesandtrenches:mysteria_cinders"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mysteria_vines",
+      "has_the_recipe"
+    ]
+  ]
+}

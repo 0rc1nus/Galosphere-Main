@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:amethyst_block"
+  },
+  "result": "cavesandtrenches:polished_amethyst",
+  "count": 1
+}

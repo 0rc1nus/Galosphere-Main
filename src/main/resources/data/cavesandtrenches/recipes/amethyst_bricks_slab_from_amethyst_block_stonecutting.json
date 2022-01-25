@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:amethyst_block"
+  },
+  "result": "cavesandtrenches:amethyst_bricks_slab",
+  "count": 2
+}
