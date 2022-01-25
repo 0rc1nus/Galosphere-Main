@@ -20,7 +20,7 @@ mixin {
     add sourceSets.main, "cavesandtrenches.refmap.json"
 }
 
-version = '1.0'
+version = '1.0.0'
 group = 'net.orcinus.cavesandtrenches'
 archivesBaseName = 'cavesandtrenches'
 
