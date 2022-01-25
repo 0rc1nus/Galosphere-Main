@@ -62,13 +62,6 @@ public class CTBlocks {
     public static final RegistryObject<Block> WARPED_ANCHOR                     = registerBlock("warped_anchor", () -> new WarpedAnchorBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).lightLevel(state -> state.getValue(WarpedAnchorBlock.WARPED_CHARGE) * 4).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> LUMIERE_LAMP                      = registerBlock("lumiere_lamp", () -> new LumiereLampBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.3F).sound(SoundType.SHROOMLIGHT)));
     public static final RegistryObject<Block> LUMIERE_COMPOSTER                 = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER).dropsLike(Blocks.COMPOSTER)));
-    public static final RegistryObject<Block> MOONSTONE                         = registerBlock("moonstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
-    public static final RegistryObject<Block> MOONSTONE_STAIRS                  = registerBlock("moonstone_stairs", () -> new StairBlock(MOONSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
-    public static final RegistryObject<Block> MOONSTONE_SLAB                    = registerBlock("moonstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
-    public static final RegistryObject<Block> POLISHED_MOONSTONE                = registerBlock("polished_moonstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
-    public static final RegistryObject<Block> POLISHED_MOONSTONE_STAIRS         = registerBlock("polished_moonstone_stairs", () -> new StairBlock(POLISHED_MOONSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
-    public static final RegistryObject<Block> POLISHED_MOONSTONE_SLAB           = registerBlock("polished_moonstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
-    public static final RegistryObject<Block> MOONSTONE_WALL                    = registerBlock("moonstone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.ANDESITE)));
 
     public static final RegistryObject<Block> DEBUGGER = registerBlock("debugger", () -> new DebuggerBlock(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)));
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier) {

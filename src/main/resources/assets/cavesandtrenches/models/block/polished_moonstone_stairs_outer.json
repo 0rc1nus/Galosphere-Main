@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "side": "cavesandtrenches:block/polished_moonstone",
-    "bottom": "cavesandtrenches:block/polished_moonstone",
-    "top": "cavesandtrenches:block/polished_moonstone"
-  }
-}

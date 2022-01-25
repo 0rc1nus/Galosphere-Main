@@ -28,7 +28,6 @@ public class WorldEvents {
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CTPlacedFeatures.ORE_SILVER_MIDDLE);
 
         if (biome == CTBiomes.CRYSTAL_CANYONS.get()) {
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.MOONSTONE_BOULDER);
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_ALLURITE_CRYSTALS);
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_LUMIERE_CRYSTALS);
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.ALLURITE_CRYSTALS);

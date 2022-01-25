@@ -24,13 +24,6 @@
   "block.cavesandtrenches.mysteria_cinders": "Mysteria Cinders",
   "block.cavesandtrenches.mysteria_vines": "Mysteria Vines",
   "block.cavesandtrenches.mysteria_vines_plant": "Mysteria Vines Plant",
-  "block.cavesandtrenches.moonstone": "Moonstone",
-  "block.cavesandtrenches.moonstone_stairs": "Moonstone Stairs",
-  "block.cavesandtrenches.moonstone_slab": "Moonstone Slab",
-  "block.cavesandtrenches.polished_moonstone": "Polished Moonstone",
-  "block.cavesandtrenches.polished_moonstone_stairs": "Polished Moonstone Stairs",
-  "block.cavesandtrenches.polished_moonstone_slab": "Polished Moonstone Slab",
-  "block.cavesandtrenches.moonstone_wall": "Moonstone Wall",
   "item.cavesandtrenches.sterling_helmet": "Sterling Helmet",
   "item.cavesandtrenches.sterling_chestplate": "Sterling Chestplate",
   "item.cavesandtrenches.sterling_leggings": "Sterling Leggings",
@@ -41,5 +34,6 @@
   "item.cavesandtrenches.silver_ingot": "Silver Ingot",
   "item.cavesandtrenches.silver_bomb": "Silver Bomb",
   "item.cavesandtrenches.silver_nugget": "Silver Nugget",
-  "item.cavesandtrenches.sparkle_spawn_egg": "Sparkle Spawn Egg"
+  "item.cavesandtrenches.sparkle_spawn_egg": "Sparkle Spawn Egg",
+  "entity.cavesandtrenches.silver_bomb": "Silver Bomb"
 }

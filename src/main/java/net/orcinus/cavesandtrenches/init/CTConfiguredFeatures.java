@@ -36,7 +36,6 @@ public class CTConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> MYSTERIA_TREE = registerConfiguredFeature("mysteria_tree", CTFeatures.MYSTERIA_TREE.get().configured(FeatureConfiguration.NONE));
     public static final ConfiguredFeature<?, ?> ORE_SILVER = registerConfiguredFeature("ore_silver", Feature.ORE.configured(new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), CTBlocks.SILVER_ORE.get().defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), CTBlocks.DEEPSLATE_SILVER_ORE.get().defaultBlockState())), 9)));
     public static final ConfiguredFeature<?, ?> ORE_SILVER_SMALL = registerConfiguredFeature("ore_silver_small", Feature.ORE.configured(new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), CTBlocks.SILVER_ORE.get().defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), CTBlocks.DEEPSLATE_SILVER_ORE.get().defaultBlockState())), 4)));
-    public static final ConfiguredFeature<?, ?> MOONSTONE_BOULDER = registerConfiguredFeature("moonstone_boulder", CTFeatures.MOONSTONE_BOULDER.get().configured(FeatureConfiguration.NONE));
 
     public static <C extends FeatureConfiguration, F extends Feature<C>, CF extends ConfiguredFeature<C, F>> CF registerConfiguredFeature(String key, CF configuredFeature) {
         ResourceLocation ID = new ResourceLocation(CavesAndTrenches.MODID, key);

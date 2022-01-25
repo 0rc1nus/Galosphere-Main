@@ -28,7 +28,6 @@ public class CTPlacedFeatures {
     public static final PlacedFeature ORE_SILVER_UPPER = registerPlacedFeature("ore_silver_upper", CTConfiguredFeatures.ORE_SILVER.placed(commonOrePlacement(90, HeightRangePlacement.triangle(VerticalAnchor.absolute(80), VerticalAnchor.absolute(384)))));
     public static final PlacedFeature ORE_SILVER_MIDDLE = registerPlacedFeature("ore_silver_middle", CTConfiguredFeatures.ORE_SILVER.placed(commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56)))));
     public static final PlacedFeature ORE_SILVER_SMALL = registerPlacedFeature("ore_silver_small", CTConfiguredFeatures.ORE_SILVER_SMALL.placed(commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(72)))));
-    public static final PlacedFeature MOONSTONE_BOULDER = registerPlacedFeature("moonstone_boulder", CTConfiguredFeatures.MOONSTONE_BOULDER.placed(CountPlacement.of(UniformInt.of(80, 160)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome()));
 
     public static <P extends PlacedFeature> P registerPlacedFeature(String key, P configuredFeature) {
         ResourceLocation ID = new ResourceLocation(CavesAndTrenches.MODID, key);

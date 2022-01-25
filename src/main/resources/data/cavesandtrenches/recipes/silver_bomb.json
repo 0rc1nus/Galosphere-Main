@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "S#S",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "cavesandtrenches:silver_ingot"
+    },
+    "#": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "cavesandtrenches:silver_block"
+  }
+}

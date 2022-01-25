@@ -32,12 +32,5 @@ public class CTBlockstateProvider extends BlockStateProvider {
 //        this.slabBlock((SlabBlock) CTBlocks.AMETHYST_BRICKS_SLAB.get(), new ResourceLocation(CavesAndTrenches.MODID, "block/amethyst_bricks"), new ResourceLocation(CavesAndTrenches.MODID, "block/polished_amethyst"));
 //        this.simpleBlock(CTBlocks.LUMIERE_LAMP.get());
 //        this.simpleBlock(CTBlocks.CHISELED_AMETHYST.get());
-        this.simpleBlock(CTBlocks.MOONSTONE.get());
-        this.simpleBlock(CTBlocks.POLISHED_MOONSTONE.get());
-        this.stairsBlock((StairBlock) CTBlocks.MOONSTONE_STAIRS.get(), new ResourceLocation(CavesAndTrenches.MODID, "block/moonstone"));
-        this.stairsBlock((StairBlock) CTBlocks.POLISHED_MOONSTONE_STAIRS.get(), new ResourceLocation(CavesAndTrenches.MODID, "block/polished_moonstone"));
-        this.slabBlock((SlabBlock) CTBlocks.MOONSTONE_SLAB.get(), new ResourceLocation(CavesAndTrenches.MODID, "block/moonstone"), new ResourceLocation(CavesAndTrenches.MODID, "block/moonstone"));
-        this.slabBlock((SlabBlock) CTBlocks.POLISHED_MOONSTONE_SLAB.get(), new ResourceLocation(CavesAndTrenches.MODID, "block/polished_moonstone"), new ResourceLocation(CavesAndTrenches.MODID, "block/polished_moonstone"));
-        this.wallBlock((WallBlock) CTBlocks.MOONSTONE_WALL.get(), new ResourceLocation(CavesAndTrenches.MODID, "block/moonstone"));
     }
 }
