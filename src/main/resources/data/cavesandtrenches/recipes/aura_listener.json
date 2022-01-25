@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "###",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "cavesandtrenches:silver_block"
+    },
+    "#": {
+      "item": "cavesandtrenches:allurite_block"
+    }
+  },
+  "result": {
+    "item": "cavesandtrenches:aura_listener"
+  }
+}
