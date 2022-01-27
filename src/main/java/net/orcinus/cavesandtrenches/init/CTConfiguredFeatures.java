@@ -1,6 +1,5 @@
 package net.orcinus.cavesandtrenches.init;
 
-import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.world.gen.features.config.CrystalSpikeConfig;
-import net.orcinus.cavesandtrenches.world.gen.features.config.LargeCrystalConfig;
 
 import java.util.List;
 
