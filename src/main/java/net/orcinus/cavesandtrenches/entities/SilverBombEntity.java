@@ -65,7 +65,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
                     BlockState blockstate = world.getBlockState(pos);
                     return blockstate.getBlock().defaultDestroyTime() < 3.0D;
                 }
-            }, this.getX(), this.getY(), this.getZ(), 3.0F, false, Explosion.BlockInteraction.BREAK);
+            }, this.getX(), this.getY(), this.getZ(), 2.0F, false, Explosion.BlockInteraction.BREAK);
             this.discard();
         }
     }

@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -21,20 +20,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.blocks.LumiereComposterBlock;
 import net.orcinus.cavesandtrenches.blocks.WarpedAnchorBlock;
-import net.orcinus.cavesandtrenches.entities.SparkleEntity;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
-import net.orcinus.cavesandtrenches.init.CTItems;
 
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MobEvents {
-
-    @SubscribeEvent
-    public static void attributeModifyEvent(EntityAttributeCreationEvent event) {
-        event.put(CTEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
-    }
 
     @SubscribeEvent
     public void onInteractEvent(PlayerInteractEvent.RightClickBlock event) {

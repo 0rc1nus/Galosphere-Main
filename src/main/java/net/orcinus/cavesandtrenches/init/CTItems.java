@@ -27,7 +27,6 @@ public class CTItems {
     public static final RegistryObject<Item> STERLING_CHESTPLATE = ITEMS.register("sterling_chestplate", () -> new SterlingArmorItem(EquipmentSlot.CHEST, new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES).stacksTo(1)));
     public static final RegistryObject<Item> STERLING_LEGGINGS = ITEMS.register("sterling_leggings", () -> new SterlingArmorItem(EquipmentSlot.LEGS, new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES).stacksTo(1)));
     public static final RegistryObject<Item> STERLING_BOOTS = ITEMS.register("sterling_boots", () -> new SterlingArmorItem(EquipmentSlot.FEET, new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES).stacksTo(1)));
-    public static final RegistryObject<Item> SPARKLE_SPAWN_EGG = ITEMS.register("sparkle_spawn_egg", () -> new ForgeSpawnEggItem(CTEntityTypes.SPARKLE, 0xFFFFF, 0xFFFFF, new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES)));
 //    public static final RegistryObject<Item> FLOW_LICHEN = ITEMS.register("flow_lichen", () -> new WaterLilyBlockItem(CTBlocks.FLOW_LICHEN.get(), new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES)));
 //    public static final RegistryObject<Item> ROOT_LICHEN = ITEMS.register("root_lichen", () -> new WaterLilyBlockItem(CTBlocks.LICHEN_ROOT.get(), new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES)));
 

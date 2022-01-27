@@ -13,9 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
-import net.orcinus.cavesandtrenches.client.entity.model.SparkleModel;
 import net.orcinus.cavesandtrenches.client.entity.model.SterlingArmorModel;
-import net.orcinus.cavesandtrenches.client.entity.renderer.SparkleRenderer;
 import net.orcinus.cavesandtrenches.client.particles.AuraParticle;
 import net.orcinus.cavesandtrenches.client.particles.providers.SilverBombProvider;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
@@ -42,13 +40,11 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(CTModelLayers.STERLING_HELMET, SterlingArmorModel::createArmorLayer);
-        event.registerLayerDefinition(CTModelLayers.SPARKLE, SparkleModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(CTEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
-        event.registerEntityRenderer(CTEntityTypes.SPARKLE.get(), SparkleRenderer::new);
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

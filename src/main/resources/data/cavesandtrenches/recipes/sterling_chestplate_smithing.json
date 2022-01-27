@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:leather_chestplate"
+  },
+  "addition": {
+    "item": "cavesandtrenches:silver_ingot"
+  },
+  "result": {
+    "item": "cavesandtrenches:sterling_chestplate"
+  }
+}

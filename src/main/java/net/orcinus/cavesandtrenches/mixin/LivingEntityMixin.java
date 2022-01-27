@@ -49,21 +49,6 @@ public class LivingEntityMixin implements IBanner {
             $this.spawnAtLocation(copy);
             this.setBanner(ItemStack.EMPTY);
         }
-//        for (int i = 0; i < 11; i++) {
-//            for (Direction direction : Direction.values()) {
-//                if ($this.level.getBlockState($this.blockPosition().relative(direction.getOpposite(), i)) == CTBlocks.LUMEN_BLOSSOM.get().defaultBlockState().setValue(LumenBlossomBlock.FACING, direction)) {
-//                    if ($this.isSpectator()) return;
-//                    this.lumenTicks = 300;
-//                }
-//            }
-//        }
-//        if (this.lumenTicks > 0) {
-//            this.lumenTicks--;
-//            int i = UniformInt.of(5, 7).sample($this.getRandom());
-//            for(int j = 0; j < i; ++j) {
-//                $this.level.addParticle(ParticleTypes.GLOW, $this.getRandomX(0.6D), $this.getRandomY(), $this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
-//            }
-//        }
     }
 
     @Override
