@@ -99,7 +99,7 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "CavesAndTrenches",
-                "Specification-Vendor"    : "Orcinus",
+                "Specification-Vendor"    : "Orcinus, Ninni",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : "CavesAndTrenches",
                 "Implementation-Version"  : "1.0.0",
