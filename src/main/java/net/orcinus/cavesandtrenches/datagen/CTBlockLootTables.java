@@ -24,8 +24,6 @@ public class CTBlockLootTables extends BlockLoot {
     protected void addTables() {
         this.add(CTBlocks.SILVER_ORE.get(), (block) -> createOreDrop(block, CTItems.RAW_SILVER.get()));
         this.add(CTBlocks.DEEPSLATE_SILVER_ORE.get(), (block) -> createOreDrop(block, CTItems.RAW_SILVER.get()));
-//        dropSelf(CTBlocks.LUMEN_BLOSSOM.get());
-//        dropSelf(CTBlocks.GLOW_LICHEN_BLOCK.get());
         dropSelf(CTBlocks.LUMIERE_BLOCK.get());
         dropSelf(CTBlocks.ALLURITE_BLOCK.get());
         dropSelf(CTBlocks.RAW_SILVER_BLOCK.get());
@@ -41,13 +39,13 @@ public class CTBlockLootTables extends BlockLoot {
         this.add(CTBlocks.LUMIERE_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(CTItems.LUMIERE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(CTItems.LUMIERE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
         dropSelf(CTBlocks.AURA_LISTENER.get());
         dropSelf(CTBlocks.LUMIERE_LAMP.get());
+        dropSelf(CTBlocks.ALLURITE_LAMP.get());
         dropSelf(CTBlocks.WARPED_ANCHOR.get());
         dropSelf(CTBlocks.LUMIERE_COMPOSTER.get());
         dropSelf(CTBlocks.MYSTERIA_CINDERS.get());
         dropSelf(CTBlocks.MYSTERIA_LOG.get());
         this.add(CTBlocks.MYSTERIA_VINES.get(), CTBlockLootTables::createMysteriaVinesDrop);
         this.add(CTBlocks.MYSTERIA_VINES_PLANTS.get(), CTBlockLootTables::createMysteriaVinesDrop);
-        dropSelf(CTBlocks.DEBUGGER.get());
     }
 
     protected static LootTable.Builder createMysteriaVinesDrop(Block block) {

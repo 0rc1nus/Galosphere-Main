@@ -45,6 +45,8 @@ public class CTRecipeProvider extends RecipeProvider {
         threeXthree(consumer, CTBlocks.RAW_SILVER_BLOCK.get(), CTItems.RAW_SILVER.get());
         oreSmelting(consumer, SILVER_SMELTABLES, CTItems.SILVER_INGOT.get(), 0.7F, 200, "silver_ingot");
         oreBlasting(consumer, SILVER_SMELTABLES, CTItems.SILVER_INGOT.get(), 0.7F, 100, "silver_ingot");
+        surroundWithFour(consumer, CTBlocks.ALLURITE_BLOCK.get().asItem(), Blocks.REDSTONE_LAMP.asItem(), CTBlocks.ALLURITE_LAMP.get().asItem(), 1);
+        surroundWithFour(consumer, CTBlocks.LUMIERE_BLOCK.get().asItem(), Blocks.REDSTONE_LAMP.asItem(), CTBlocks.LUMIERE_LAMP.get().asItem(), 1);
         stonecutterResultFromBase(consumer, CTBlocks.POLISHED_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
         stonecutterResultFromBase(consumer, CTBlocks.POLISHED_AMETHYST_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
         stonecutterResultFromBase(consumer, CTBlocks.POLISHED_AMETHYST_STAIRS.get(), Blocks.AMETHYST_BLOCK);
@@ -71,6 +73,18 @@ public class CTRecipeProvider extends RecipeProvider {
 
     private static String getConversionRecipeName(ItemLike result, ItemLike ingredient) {
         return getItemName(result) + "_from_" + getItemName(ingredient);
+    }
+
+    private void surroundWithFour(Consumer<FinishedRecipe> consumer, Item surroundings, Item midItem, Item result, int count) {
+        ShapedRecipeBuilder.shaped(result, count)
+                .define('#', surroundings)
+                .define('*', midItem)
+                .pattern(" # ")
+                .pattern("#*#")
+                .pattern(" # ")
+                .unlockedBy("has_" + surroundings.getRegistryName().getPath(), has(surroundings))
+                .unlockedBy("has_" + midItem.getRegistryName().getPath(), has(midItem))
+                .save(consumer);
     }
 
     private void shaplessOne(Consumer<FinishedRecipe> consumer, Item result, Item item, int count) {
