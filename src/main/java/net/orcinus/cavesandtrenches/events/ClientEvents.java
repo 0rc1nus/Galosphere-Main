@@ -1,6 +1,7 @@
 package net.orcinus.cavesandtrenches.events;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -14,10 +15,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.client.entity.model.SterlingArmorModel;
+import net.orcinus.cavesandtrenches.client.gui.CombustionTableScreen;
 import net.orcinus.cavesandtrenches.client.particles.AuraParticle;
 import net.orcinus.cavesandtrenches.client.particles.providers.SilverBombProvider;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
+import net.orcinus.cavesandtrenches.init.CTMenuTypes;
 import net.orcinus.cavesandtrenches.init.CTModelLayers;
 import net.orcinus.cavesandtrenches.init.CTParticleTypes;
 
@@ -35,6 +38,7 @@ public class ClientEvents {
 //        ItemBlockRenderTypes.setRenderLayer(CTBlocks.GLOW_LICHEN_VINES.get(), RenderType.cutout());
 //        ItemBlockRenderTypes.setRenderLayer(CTBlocks.GLOW_LICHEN_VINES_PLANT.get(), RenderType.cutout());
 
+        MenuScreens.register(CTMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
     }
 
     @SubscribeEvent

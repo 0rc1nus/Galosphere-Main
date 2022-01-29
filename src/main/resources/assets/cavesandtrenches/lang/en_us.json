@@ -36,5 +36,9 @@
   "item.cavesandtrenches.silver_bomb": "Silver Bomb",
   "item.cavesandtrenches.silver_nugget": "Silver Nugget",
   "item.cavesandtrenches.sparkle_spawn_egg": "Sparkle Spawn Egg",
-  "entity.cavesandtrenches.silver_bomb": "Silver Bomb"
+  "entity.cavesandtrenches.silver_bomb": "Silver Bomb",
+  "container.cavesandtrenches.combustion_table": "Combustion Table",
+  "item.cavesandtrenches.silver_bomb.duration": "Duration:",
+  "item.cavesandtrenches.silver_bomb.explosion": "Explosion:",
+  "item.cavesandtrenches.silver_bomb.bouncy": "Bouncy:"
 }
