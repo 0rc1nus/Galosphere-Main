@@ -151,11 +151,17 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     protected void onHitBlock(BlockHitResult hit) {
         super.onHitBlock(hit);
         Vec3 vec3 = this.getDeltaMovement();
-        double booster = 0.6D + (bouncy / 10.0F);
-        double x = vec3.x < 0.5D ? vec3.x * booster : 0.0D;
-        double y = vec3.y < 0.5D ? -vec3.y * booster : 0.0D;
-        double z = vec3.z < 0.5D ? vec3.z * booster : 0.0D;
-        this.setDeltaMovement(x, y * y, z);
+        Direction direction = hit.getDirection();
+        double booster = 0.4D + (bouncy / 10.0F);
+        if (direction == Direction.UP || direction == Direction.DOWN) {
+            this.setDeltaMovement(vec3.x, vec3.y < 0.5D ? -vec3.y * booster : 0.0D, vec3.z);
+        }
+        if (direction == Direction.WEST || direction == Direction.EAST) {
+            this.setDeltaMovement(vec3.x < 0.5D ? -vec3.x * booster * Mth.sin(Mth.PI / 2): 0.0D, vec3.y, vec3.z);
+        }
+        if (direction == Direction.NORTH || direction == Direction.SOUTH) {
+            this.setDeltaMovement(vec3.x, vec3.y, vec3.z < 0.5D ? -vec3.z * booster * Mth.sin(3 * Mth.PI / 4) : 0.0D);
+        }
         if (!this.level.isClientSide() && this.isInWater()) {
             this.level.broadcastEntityEvent(this, (byte)3);
             this.discard();
