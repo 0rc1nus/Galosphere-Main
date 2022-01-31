@@ -113,7 +113,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     public void tick() {
         super.tick();
         if (!this.isRemoved()) {
-            if (this.level.isClientSide()) {
+            if (this.level.isClientSide() && !this.isInWater()) {
                 this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.3D, this.getZ(), 0.0D, 0.0D, 0.0D);
             }
             int i = this.getTime();
@@ -150,11 +150,12 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult hit) {
         super.onHitBlock(hit);
-        Vec3 vec3 = this.getDeltaMovement();
+        Vec3 deltaMovement = this.getDeltaMovement();
+        Vec3 vec3 = deltaMovement.subtract(deltaMovement.x / 5, 0.0D, deltaMovement.z / 5);
         Direction direction = hit.getDirection();
-        double booster = 0.4D + (bouncy / 10.0F);
+        double booster = 0.3D + (bouncy / 10.0F);
         if (direction == Direction.UP || direction == Direction.DOWN) {
-            this.setDeltaMovement(vec3.x, vec3.y < 0.5D ? -vec3.y * booster : 0.0D, vec3.z);
+            this.setDeltaMovement(vec3.x, vec3.y < 0.0D ? -vec3.y * booster : 0.0D, vec3.z);
         }
         if (direction == Direction.WEST || direction == Direction.EAST) {
             this.setDeltaMovement(vec3.x < 0.5D ? -vec3.x * booster * Mth.sin(Mth.PI / 2): 0.0D, vec3.y, vec3.z);

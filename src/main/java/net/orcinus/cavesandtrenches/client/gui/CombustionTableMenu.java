@@ -101,7 +101,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 CompoundTag currentTag = bombStack.getTag();
                 if (exploStat1.is(Items.SLIME_BALL)) {
                     if (currentTag != null) {
-                        if (currentTag.getInt("Bouncy") == 3) {
+                        if ((currentTag.getInt("Bouncy") == 2 && exploStat2.is(Items.SLIME_BALL)) || currentTag.getInt("Bouncy") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
                             this.broadcastChanges();
@@ -111,7 +111,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat1.is(Items.STRING)) {
                     if (currentTag != null) {
-                        if (currentTag.getInt("Duration") == 3) {
+                        if ((currentTag.getInt("Duration") == 2 && exploStat2.is(Items.STRING)) || currentTag.getInt("Duration") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
                             this.broadcastChanges();
@@ -121,7 +121,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat1.is(Items.GUNPOWDER)) {
                     if (currentTag != null) {
-                        if (currentTag.getInt("Explosion") == 3) {
+                        if ((currentTag.getInt("Explosion") == 2 && exploStat2.is(Items.GUNPOWDER)) || currentTag.getInt("Explosion") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
                             this.broadcastChanges();
@@ -131,7 +131,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat2.is(Items.SLIME_BALL)) {
                     if (currentTag != null) {
-                        if (currentTag.getInt("Bouncy") == 3) {
+                        if ((currentTag.getInt("Bouncy") == 2 && exploStat1.is(Items.SLIME_BALL)) || currentTag.getInt("Bouncy") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
                             this.broadcastChanges();
@@ -141,7 +141,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat2.is(Items.STRING)) {
                     if (currentTag != null) {
-                        if (currentTag.getInt("Duration") == 3) {
+                        if ((currentTag.getInt("Duration") == 2 && exploStat1.is(Items.STRING)) || currentTag.getInt("Duration") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
                             this.broadcastChanges();
@@ -151,7 +151,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat2.is(Items.GUNPOWDER)) {
                     if (currentTag != null) {
-                        if (currentTag.getInt("Explosion") == 3) {
+                        if ((currentTag.getInt("Explosion") == 2 && exploStat1.is(Items.GUNPOWDER)) || currentTag.getInt("Explosion") == 3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(3);
                             this.broadcastChanges();

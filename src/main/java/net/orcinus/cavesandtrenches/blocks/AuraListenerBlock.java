@@ -108,7 +108,7 @@ public class AuraListenerBlock extends Block {
         builder.add(TYPE);
     }
 
-    enum AuraSignalType implements StringRepresentable {
+    public enum AuraSignalType implements StringRepresentable {
         ACTIVE("active"),
         INACTIVE("inactive"),
         COOLDOWN("cooldown");
