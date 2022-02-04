@@ -1,4 +1,4 @@
-package net.orcinus.cavesandtrenches.client.entity.renderer.layer;
+package net.orcinus.cavesandtrenches.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -27,8 +27,6 @@ public class BannerLayer<T extends LivingEntity, M extends EntityModel<T> & Head
 
     @Override
     public void render(PoseStack stack, MultiBufferSource source, int packedLight, T entity, float p_117353_, float p_117354_, float p_117355_, float p_117356_, float p_117357_, float p_117358_) {
-        Item headItem = entity.getItemBySlot(EquipmentSlot.HEAD).getItem();
-        Item chestItem = entity.getItemBySlot(EquipmentSlot.CHEST).getItem();
         if (!((IBanner)entity).getBanner().isEmpty()) {
             ItemStack itemstack = ((IBanner)entity).getBanner();
             if (itemstack != null) {

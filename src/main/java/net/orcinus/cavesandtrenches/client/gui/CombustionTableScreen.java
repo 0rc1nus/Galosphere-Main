@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
@@ -23,7 +24,7 @@ public class CombustionTableScreen extends AbstractContainerScreen<CombustionTab
         this.imageWidth = 175;
         this.imageHeight = 201;
     }
-
+    
     public void render(PoseStack source, int mouseX, int mouseY, float delta) {
         this.renderBackground(source);
         super.render(source, mouseX, mouseY, delta);
@@ -37,7 +38,11 @@ public class CombustionTableScreen extends AbstractContainerScreen<CombustionTab
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         this.blit(stack, x, y, 0, 0, this.imageWidth, this.imageHeight);
-        ItemStack itemStack = this.menu.getSlot(0).getItem();
-        ItemStack itemStack1 = this.menu.getSlot(1).getItem();
+//        ItemStack itemStack = this.menu.getSlot(0).getItem();
+//        ItemStack itemStack1 = this.menu.getSlot(1).getItem();
+//        ItemStack itemStack2 = this.menu.getSlot(2).getItem();
+//        this.itemRenderer.renderAndDecorateItem(itemStack1, x + 83, y + 35);
+//        this.itemRenderer.renderAndDecorateItem(itemStack2, x + 93, y + 35);
+//        this.itemRenderer.renderAndDecorateItem(itemStack, x + 88, y + 31);
     }
 }

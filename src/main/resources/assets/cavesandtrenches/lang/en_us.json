@@ -25,6 +25,8 @@
   "block.cavesandtrenches.mysteria_cinders": "Mysteria Cinders",
   "block.cavesandtrenches.mysteria_vines": "Mysteria Vines",
   "block.cavesandtrenches.mysteria_vines_plant": "Mysteria Vines Plant",
+  "block.cavesandtrenches.combustion_table": "Combustion Table",
+  "block.cavesandtrenches.glow_lichen_block": "Lichen Moss",
   "item.cavesandtrenches.sterling_helmet": "Sterling Helmet",
   "item.cavesandtrenches.sterling_chestplate": "Sterling Chestplate",
   "item.cavesandtrenches.sterling_leggings": "Sterling Leggings",
@@ -36,9 +38,9 @@
   "item.cavesandtrenches.silver_bomb": "Silver Bomb",
   "item.cavesandtrenches.silver_nugget": "Silver Nugget",
   "item.cavesandtrenches.sparkle_spawn_egg": "Sparkle Spawn Egg",
-  "entity.cavesandtrenches.silver_bomb": "Silver Bomb",
-  "container.cavesandtrenches.combustion_table": "Combustion Table",
   "item.cavesandtrenches.silver_bomb.duration": "Duration:",
   "item.cavesandtrenches.silver_bomb.explosion": "Explosion:",
-  "item.cavesandtrenches.silver_bomb.bouncy": "Bouncy:"
+  "item.cavesandtrenches.silver_bomb.bouncy": "Bouncy:",
+  "entity.cavesandtrenches.silver_bomb": "Silver Bomb",
+  "container.cavesandtrenches.combustion_table": "Combustion Table"
 }

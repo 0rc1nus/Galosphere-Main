@@ -26,6 +26,10 @@ public class CavesAndTrenches {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "cavesandtrenches";
     public static final CreativeModeTab CAVESANDTRENCHES = new CavesAndTrenchesTab(MODID);
+    //seed -7714140795261595653
+    //seed coords -145 95 77
+    //seed 7856658500923416262
+    //seed coords -73 69 150
 
     public CavesAndTrenches() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

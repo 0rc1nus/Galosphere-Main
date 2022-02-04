@@ -1,5 +1,6 @@
 package net.orcinus.cavesandtrenches.init;
 
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.features.FeatureUtils;
@@ -8,6 +9,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GlowLichenBlock;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -41,6 +43,8 @@ public class CTConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> MYSTERIA_TREE = registerConfiguredFeature("mysteria_tree", CTFeatures.MYSTERIA_TREE.get().configured(FeatureConfiguration.NONE));
     public static final ConfiguredFeature<?, ?> ORE_SILVER = registerConfiguredFeature("ore_silver", Feature.ORE.configured(new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), CTBlocks.SILVER_ORE.get().defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), CTBlocks.DEEPSLATE_SILVER_ORE.get().defaultBlockState())), 9)));
     public static final ConfiguredFeature<?, ?> ORE_SILVER_SMALL = registerConfiguredFeature("ore_silver_small", Feature.ORE.configured(new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), CTBlocks.SILVER_ORE.get().defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), CTBlocks.DEEPSLATE_SILVER_ORE.get().defaultBlockState())), 4)));
+    public static final ConfiguredFeature<?, ?> SIMPLE_LICHEN = registerConfiguredFeature("simple_lichen", Feature.SIMPLE_BLOCK.configured(new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GLOW_LICHEN.defaultBlockState().setValue(GlowLichenBlock.getFaceProperty(Direction.UP), true)))));
+    public static final ConfiguredFeature<VegetationPatchConfiguration, ?> LICHEN_POOL = registerConfiguredFeature("lichen_pool", Feature.WATERLOGGED_VEGETATION_PATCH.configured(new VegetationPatchConfiguration(BlockTags.LUSH_GROUND_REPLACEABLE.getName(), BlockStateProvider.simple(CTBlocks.LICHEN_BLOCK.get()), SIMPLE_LICHEN::placed, CaveSurface.FLOOR, ConstantInt.of(3), 0.8F, 5, 0.1F, UniformInt.of(4, 7), 0.7F)));
 
     public static <C extends FeatureConfiguration, F extends Feature<C>, CF extends ConfiguredFeature<C, F>> CF registerConfiguredFeature(String key, CF configuredFeature) {
         ResourceLocation ID = new ResourceLocation(CavesAndTrenches.MODID, key);

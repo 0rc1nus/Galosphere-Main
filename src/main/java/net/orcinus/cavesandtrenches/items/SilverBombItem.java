@@ -19,9 +19,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DefaultBombItem extends Item {
+public class SilverBombItem extends Item {
 
-    public DefaultBombItem(Properties properties) {
+    public SilverBombItem(Properties properties) {
         super(properties);
     }
 
@@ -57,4 +57,9 @@ public class DefaultBombItem extends Item {
             list.add((new TranslatableComponent("item.cavesandtrenches.silver_bomb.bouncy")).append(" ").append(String.valueOf(tag.getInt("Bouncy"))).withStyle(ChatFormatting.GRAY));
         }
     }
+
+    public boolean hasExplosion(ItemStack stack) {
+        return stack.getTag() != null && stack.getTag().getInt("Explosion") > 0;
+    }
+
 }

@@ -1,6 +1,5 @@
 package net.orcinus.cavesandtrenches.items;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -15,8 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
-import net.orcinus.cavesandtrenches.client.entity.model.SterlingArmorModel;
-import net.orcinus.cavesandtrenches.events.ClientEvents;
+import net.orcinus.cavesandtrenches.client.model.SterlingArmorModel;
 import net.orcinus.cavesandtrenches.init.CTItems;
 import org.jetbrains.annotations.Nullable;
 

@@ -24,6 +24,7 @@ public class CTBiomes {
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, CavesAndTrenches.MODID);
 
     public static final RegistryObject<Biome> CRYSTAL_CANYONS = BIOMES.register("crystal_canyons", CTBiomes::crystalCanyons);
+    public static final RegistryObject<Biome> LICHEN_CAVES = BIOMES.register("lichen_caves", CTBiomes::lichenCaves);
 
     public static Biome crystalCanyons() {
         MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();
@@ -38,6 +39,22 @@ public class CTBiomes {
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DRIPSTONE_CAVES);
+        return biome(Biome.Precipitation.RAIN, Biome.BiomeCategory.UNDERGROUND, 0.5F, 0.5F, mobBuilder, biomeBuilder, music);
+    }
+
+    public static Biome lichenCaves() {
+        MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mobBuilder);
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder();
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
+        BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
+        BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_LUSH_CAVES);
         return biome(Biome.Precipitation.RAIN, Biome.BiomeCategory.UNDERGROUND, 0.5F, 0.5F, mobBuilder, biomeBuilder, music);
     }
 

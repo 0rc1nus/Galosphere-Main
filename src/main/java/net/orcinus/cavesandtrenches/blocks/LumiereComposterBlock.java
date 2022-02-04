@@ -52,11 +52,11 @@ public class LumiereComposterBlock extends ComposterBlock {
     }
 
     public static BlockState extractGlowstoneDust(BlockState state, Level world, BlockPos pos) {
-        double d0 = (double)(world.random.nextFloat() * 0.7F) + (double)0.15F;
-        double d1 = (double)(world.random.nextFloat() * 0.7F) + (double)0.060000002F + 0.6D;
-        double d2 = (double)(world.random.nextFloat() * 0.7F) + (double)0.15F;
-        for (int i = 0; i <= Mth.nextInt(world.random, 1, 4); i++) {
-            ItemEntity itementity = new ItemEntity(world, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, new ItemStack(Items.GLOWSTONE_DUST));
+        if (!world.isClientSide) {
+            double d0 = (double)(world.random.nextFloat() * 0.7F) + (double)0.15F;
+            double d1 = (double)(world.random.nextFloat() * 0.7F) + (double)0.060000002F + 0.6D;
+            double d2 = (double)(world.random.nextFloat() * 0.7F) + (double)0.15F;
+            ItemEntity itementity = new ItemEntity(world, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, new ItemStack(Items.GLOWSTONE_DUST));
             itementity.setDefaultPickUpDelay();
             world.addFreshEntity(itementity);
         }
@@ -72,17 +72,17 @@ public class LumiereComposterBlock extends ComposterBlock {
         return blockstate;
     }
 
-    public static BlockState addItem(BlockState p_51984_, LevelAccessor p_51985_, BlockPos p_51986_, ItemStack p_51987_) {
-        int i = p_51984_.getValue(LEVEL);
-        float f = COMPOSTABLES.getFloat(p_51987_.getItem());
-        if ((i != 0 || !(f > 0.0F)) && !(p_51985_.getRandom().nextDouble() < (double)f)) {
-            return p_51984_;
+    public static BlockState addItem(BlockState state, LevelAccessor world, BlockPos pos, ItemStack stack) {
+        int i = state.getValue(LEVEL);
+        float f = COMPOSTABLES.getFloat(stack.getItem());
+        if ((i != 0 || !(f > 0.0F)) && !(world.getRandom().nextDouble() < (double)f)) {
+            return state;
         } else {
             int j = i + 1;
-            BlockState blockstate = p_51984_.setValue(LEVEL, j);
-            p_51985_.setBlock(p_51986_, blockstate, 3);
+            BlockState blockstate = state.setValue(LEVEL, j);
+            world.setBlock(pos, blockstate, 3);
             if (j == 7) {
-                p_51985_.scheduleTick(p_51986_, p_51984_.getBlock(), 20);
+                world.scheduleTick(pos, state.getBlock(), 20);
             }
 
             return blockstate;
@@ -90,12 +90,12 @@ public class LumiereComposterBlock extends ComposterBlock {
     }
 
     @Override
-    public WorldlyContainer getContainer(BlockState p_51956_, LevelAccessor p_51957_, BlockPos p_51958_) {
-        int i = p_51956_.getValue(LEVEL);
+    public WorldlyContainer getContainer(BlockState state, LevelAccessor world, BlockPos pos) {
+        int i = state.getValue(LEVEL);
         if (i == 8) {
-            return new LumiereComposterBlock.OutputContainer(p_51956_, p_51957_, p_51958_, new ItemStack(Items.BONE_MEAL));
+            return new LumiereComposterBlock.OutputContainer(state, world, pos, new ItemStack(Items.GLOWSTONE_DUST));
         } else {
-            return (i < 7 ? new LumiereComposterBlock.InputContainer(p_51956_, p_51957_, p_51958_) : new LumiereComposterBlock.EmptyContainer());
+            return (i < 7 ? new LumiereComposterBlock.InputContainer(state, world, pos) : new LumiereComposterBlock.EmptyContainer());
         }
     }
 
@@ -104,15 +104,18 @@ public class LumiereComposterBlock extends ComposterBlock {
             super(0);
         }
 
-        public int[] getSlotsForFace(Direction p_52012_) {
+        @Override
+        public int[] getSlotsForFace(Direction direction) {
             return new int[0];
         }
 
-        public boolean canPlaceItemThroughFace(int p_52008_, ItemStack p_52009_, @Nullable Direction p_52010_) {
+        @Override
+        public boolean canPlaceItemThroughFace(int p_52008_, ItemStack stack, @Nullable Direction direction) {
             return false;
         }
 
-        public boolean canTakeItemThroughFace(int p_52014_, ItemStack p_52015_, Direction p_52016_) {
+        @Override
+        public boolean canTakeItemThroughFace(int p_52014_, ItemStack stack, Direction direction) {
             return false;
         }
     }
@@ -130,22 +133,27 @@ public class LumiereComposterBlock extends ComposterBlock {
             this.pos = p_52024_;
         }
 
+        @Override
         public int getMaxStackSize() {
             return 1;
         }
 
+        @Override
         public int[] getSlotsForFace(Direction p_52032_) {
             return p_52032_ == Direction.UP ? new int[]{0} : new int[0];
         }
 
+        @Override
         public boolean canPlaceItemThroughFace(int p_52028_, ItemStack p_52029_, @Nullable Direction p_52030_) {
             return !this.changed && p_52030_ == Direction.UP && ComposterBlock.COMPOSTABLES.containsKey(p_52029_.getItem());
         }
 
+        @Override
         public boolean canTakeItemThroughFace(int p_52034_, ItemStack p_52035_, Direction p_52036_) {
             return false;
         }
 
+        @Override
         public void setChanged() {
             ItemStack itemstack = this.getItem(0);
             if (!itemstack.isEmpty()) {
@@ -164,29 +172,34 @@ public class LumiereComposterBlock extends ComposterBlock {
         private final BlockPos pos;
         private boolean changed;
 
-        public OutputContainer(BlockState p_52042_, LevelAccessor p_52043_, BlockPos p_52044_, ItemStack p_52045_) {
-            super(p_52045_);
-            this.state = p_52042_;
-            this.level = p_52043_;
-            this.pos = p_52044_;
+        public OutputContainer(BlockState state, LevelAccessor world, BlockPos pos, ItemStack stack) {
+            super(stack);
+            this.state = state;
+            this.level = world;
+            this.pos = pos;
         }
 
+        @Override
         public int getMaxStackSize() {
             return 1;
         }
 
-        public int[] getSlotsForFace(Direction p_52053_) {
-            return p_52053_ == Direction.DOWN ? new int[]{0} : new int[0];
+        @Override
+        public int[] getSlotsForFace(Direction direction) {
+            return direction == Direction.DOWN ? new int[]{0} : new int[0];
         }
 
+        @Override
         public boolean canPlaceItemThroughFace(int p_52049_, ItemStack p_52050_, @Nullable Direction p_52051_) {
             return false;
         }
 
-        public boolean canTakeItemThroughFace(int p_52055_, ItemStack p_52056_, Direction p_52057_) {
-            return !this.changed && p_52057_ == Direction.DOWN && p_52056_.is(Items.GLOWSTONE_DUST);
+        @Override
+        public boolean canTakeItemThroughFace(int p_52055_, ItemStack p_52056_, Direction direection) {
+            return !this.changed && direection == Direction.DOWN && p_52056_.is(Items.GLOWSTONE_DUST);
         }
 
+        @Override
         public void setChanged() {
             LumiereComposterBlock.empty(this.state, this.level, this.pos);
             this.changed = true;

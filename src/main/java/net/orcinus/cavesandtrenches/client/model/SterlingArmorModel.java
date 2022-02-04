@@ -1,4 +1,4 @@
-package net.orcinus.cavesandtrenches.client.entity.model;
+package net.orcinus.cavesandtrenches.client.model;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
