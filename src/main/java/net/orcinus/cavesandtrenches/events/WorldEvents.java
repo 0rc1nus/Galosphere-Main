@@ -35,8 +35,5 @@ public class WorldEvents {
             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.MYSTERIA_TREE);
         }
 
-        if (biome == CTBiomes.LICHEN_CAVES.get()) {
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LICHEN_POOL);
-        }
     }
 }

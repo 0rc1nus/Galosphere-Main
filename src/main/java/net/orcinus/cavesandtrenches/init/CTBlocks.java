@@ -62,7 +62,6 @@ public class CTBlocks {
     /*
     Lichen Caves
      */
-    public static final RegistryObject<Block> LICHEN_BLOCK = registerBlock("glow_lichen_block", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_CYAN).sound(SoundType.MOSS).strength(0.1F)));
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier) {
         RegistryObject<B> block = BLOCKS.register(name, supplier);

@@ -28,7 +28,8 @@ public class AuraParticle extends RisingParticle {
         this.yd = 0;
         this.zd = 0;
         this.lifetime = 30;
-        this.scale(2.9F);
+        this.quadSize = 0.45F;
+//        this.scale(2.4F);
         this.setSpriteFromAge(set);
     }
 

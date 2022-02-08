@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTParticleTypes;
@@ -40,6 +41,7 @@ public class AuraListenerBlock extends Block {
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
+            world.gameEvent(GameEvent.BLOCK_CHANGE, pos);
             world.setBlock(pos, state.setValue(TYPE, AuraSignalType.ACTIVE), 2);
             world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
             return InteractionResult.SUCCESS;

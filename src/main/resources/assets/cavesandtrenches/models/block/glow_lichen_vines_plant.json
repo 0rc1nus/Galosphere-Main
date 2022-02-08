@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "cavesandtrenches:block/glow_lichen_vines_plant"
-  }
-}
