@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "cavesandtrenches:polished_amethyst"
-  },
-  "result": "cavesandtrenches:chiseled_amethyst",
-  "count": 1
-}

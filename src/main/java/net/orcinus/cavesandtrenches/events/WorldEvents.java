@@ -1,6 +1,5 @@
 package net.orcinus.cavesandtrenches.events;
 
-import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;

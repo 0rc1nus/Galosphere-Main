@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:amethyst_block"
-  },
-  "result": "cavesandtrenches:amethyst_bricks_stairs",
-  "count": 1
-}

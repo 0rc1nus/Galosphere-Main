@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "side": "cavesandtrenches:block/polished_amethyst",
-    "bottom": "cavesandtrenches:block/polished_amethyst",
-    "top": "cavesandtrenches:block/polished_amethyst"
-  }
-}

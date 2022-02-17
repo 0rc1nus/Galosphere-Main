@@ -18,6 +18,8 @@ public class CTBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        this.stairsBlock((StairBlock) CTBlocks.AMETHYST_STAIRS.get(), mcLoc("block/amethyst_block"));
+        this.slabBlock((SlabBlock) CTBlocks.AMETHYST_SLAB.get(), mcLoc("block/amethyst_block"), mcLoc("block/amethyst_block"));
 //        this.simpleBlock(CTBlocks.DEEPSLATE_SILVER_ORE.get());
 ////        this.simpleBlock(CTBlocks.GLOW_LICHEN_BLOCK.get());
 //        this.simpleBlock(CTBlocks.LUMIERE_BLOCK.get());

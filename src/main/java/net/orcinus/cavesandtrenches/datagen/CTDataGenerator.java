@@ -20,8 +20,8 @@ public class CTDataGenerator {
 
 //        dataGenerator.addProvider(new CTBlockstateProvider(dataGenerator, helper));
 //        dataGenerator.addProvider(new CTItemModelProvider(dataGenerator, helper));
-        dataGenerator.addProvider(new CTRecipeProvider(dataGenerator));
-//        dataGenerator.addProvider(new CTLootTableProvider(dataGenerator));
+//        dataGenerator.addProvider(new CTRecipeProvider(dataGenerator));
+        dataGenerator.addProvider(new CTLootTableProvider(dataGenerator));
     }
 
 }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "cavesandtrenches:smooth_amethyst"
+    }
+  },
+  "result": {
+    "item": "cavesandtrenches:smooth_amethyst_stairs",
+    "count": 4
+  }
+}

@@ -33,13 +33,11 @@ public class CTRecipeProvider extends RecipeProvider {
         shaplessOne(consumer, CTItems.SILVER_INGOT.get(), CTBlocks.SILVER_BLOCK.get().asItem(), 9);
         twoXtwo(consumer, CTBlocks.ALLURITE_BLOCK.get(), CTItems.ALLURITE_SHARD.get(), 1);
         twoXtwo(consumer, CTBlocks.LUMIERE_BLOCK.get(), CTItems.LUMIERE_SHARD.get(), 1);
-        twoXtwo(consumer, CTBlocks.POLISHED_AMETHYST.get(), Blocks.AMETHYST_BLOCK.asItem(), 4);
-        stairsBlock(consumer, CTBlocks.POLISHED_AMETHYST_STAIRS.get(), CTBlocks.POLISHED_AMETHYST.get().asItem());
-        stairsBlock(consumer, CTBlocks.AMETHYST_BRICKS_STAIRS.get(), CTBlocks.AMETHYST_BRICKS.get().asItem());
-        slabBlock(consumer, CTBlocks.POLISHED_AMETHYST_SLAB.get(), CTBlocks.POLISHED_AMETHYST.get().asItem());
-        slabBlock(consumer, CTBlocks.AMETHYST_BRICKS_SLAB.get(), CTBlocks.AMETHYST_BRICKS.get().asItem());
-        oneXTwo(consumer, CTBlocks.CHISELED_AMETHYST.get(), CTBlocks.AMETHYST_BRICKS_SLAB.get().asItem(), 1);
-        twoXtwo(consumer, CTBlocks.AMETHYST_BRICKS.get(), CTBlocks.POLISHED_AMETHYST.get().asItem(), 4);
+        twoXtwo(consumer, CTBlocks.SMOOTH_AMETHYST.get(), Blocks.AMETHYST_BLOCK.asItem(), 4);
+        stairsBlock(consumer, CTBlocks.SMOOTH_AMETHYST_STAIRS.get(), CTBlocks.SMOOTH_AMETHYST.get().asItem());
+        slabBlock(consumer, CTBlocks.SMOOTH_AMETHYST_SLAB.get(), CTBlocks.SMOOTH_AMETHYST.get().asItem());
+        stairsBlock(consumer, CTBlocks.AMETHYST_STAIRS.get(), Blocks.AMETHYST_BLOCK.asItem());
+        slabBlock(consumer, CTBlocks.AMETHYST_SLAB.get(), Blocks.AMETHYST_BLOCK.asItem());
         twoXtwo(consumer, CTBlocks.MYSTERIA_CINDERS.get(), CTBlocks.MYSTERIA_VINES.get().asItem(), 1);
         threeXthree(consumer, CTBlocks.SILVER_BLOCK.get(), CTItems.SILVER_INGOT.get());
         threeXthree(consumer, CTBlocks.RAW_SILVER_BLOCK.get(), CTItems.RAW_SILVER.get());
@@ -47,20 +45,13 @@ public class CTRecipeProvider extends RecipeProvider {
         oreBlasting(consumer, SILVER_SMELTABLES, CTItems.SILVER_INGOT.get(), 0.7F, 100, "silver_ingot");
         surroundWithFour(consumer, CTBlocks.ALLURITE_BLOCK.get().asItem(), Blocks.REDSTONE_LAMP.asItem(), CTBlocks.ALLURITE_LAMP.get().asItem(), 1);
         surroundWithFour(consumer, CTBlocks.LUMIERE_BLOCK.get().asItem(), Blocks.REDSTONE_LAMP.asItem(), CTBlocks.LUMIERE_LAMP.get().asItem(), 1);
-        stonecutterResultFromBase(consumer, CTBlocks.POLISHED_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
-        stonecutterResultFromBase(consumer, CTBlocks.POLISHED_AMETHYST_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
-        stonecutterResultFromBase(consumer, CTBlocks.POLISHED_AMETHYST_STAIRS.get(), Blocks.AMETHYST_BLOCK);
-        stonecutterResultFromBase(consumer, CTBlocks.AMETHYST_BRICKS.get(), Blocks.AMETHYST_BLOCK);
-        stonecutterResultFromBase(consumer, CTBlocks.AMETHYST_BRICKS_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
-        stonecutterResultFromBase(consumer, CTBlocks.AMETHYST_BRICKS_STAIRS.get(), Blocks.AMETHYST_BLOCK);
-        stonecutterResultFromBase(consumer, CTBlocks.POLISHED_AMETHYST_SLAB.get(), CTBlocks.POLISHED_AMETHYST.get(), 2);
-        stonecutterResultFromBase(consumer, CTBlocks.POLISHED_AMETHYST_STAIRS.get(), CTBlocks.POLISHED_AMETHYST.get());
-        stonecutterResultFromBase(consumer, CTBlocks.AMETHYST_BRICKS.get(), CTBlocks.POLISHED_AMETHYST.get());
-        stonecutterResultFromBase(consumer, CTBlocks.AMETHYST_BRICKS_SLAB.get(), CTBlocks.POLISHED_AMETHYST.get(), 2);
-        stonecutterResultFromBase(consumer, CTBlocks.AMETHYST_BRICKS_STAIRS.get(), CTBlocks.POLISHED_AMETHYST.get());
+        stonecutterResultFromBase(consumer, CTBlocks.SMOOTH_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
+        stonecutterResultFromBase(consumer, CTBlocks.SMOOTH_AMETHYST_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
+        stonecutterResultFromBase(consumer, CTBlocks.SMOOTH_AMETHYST_STAIRS.get(), Blocks.AMETHYST_BLOCK);
+        stonecutterResultFromBase(consumer, CTBlocks.SMOOTH_AMETHYST_SLAB.get(), CTBlocks.SMOOTH_AMETHYST.get(), 2);
+        stonecutterResultFromBase(consumer, CTBlocks.SMOOTH_AMETHYST_STAIRS.get(), CTBlocks.SMOOTH_AMETHYST.get());
         stonecutterResultFromBase(consumer, CTBlocks.CHISELED_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
-        stonecutterResultFromBase(consumer, CTBlocks.CHISELED_AMETHYST.get(), CTBlocks.POLISHED_AMETHYST.get());
-        stonecutterResultFromBase(consumer, CTBlocks.CHISELED_AMETHYST.get(), CTBlocks.AMETHYST_BRICKS.get());
+        stonecutterResultFromBase(consumer, CTBlocks.CHISELED_AMETHYST.get(), CTBlocks.SMOOTH_AMETHYST.get());
     }
 
     private static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike ingredient) {

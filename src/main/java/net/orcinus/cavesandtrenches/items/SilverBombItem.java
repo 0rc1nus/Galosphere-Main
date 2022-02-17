@@ -58,8 +58,4 @@ public class SilverBombItem extends Item {
         }
     }
 
-    public boolean hasExplosion(ItemStack stack) {
-        return stack.getTag() != null && stack.getTag().getInt("Explosion") > 0;
-    }
-
 }

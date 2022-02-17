@@ -14,4 +14,5 @@ public class CavesAndTrenchesTab extends CreativeModeTab {
     public ItemStack makeIcon() {
         return CTItems.SILVER_BOMB.get().getDefaultInstance();
     }
+
 }

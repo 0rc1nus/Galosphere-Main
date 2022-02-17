@@ -28,12 +28,12 @@ public class CTBlockLootTables extends BlockLoot {
         dropSelf(CTBlocks.ALLURITE_BLOCK.get());
         dropSelf(CTBlocks.RAW_SILVER_BLOCK.get());
         dropSelf(CTBlocks.SILVER_BLOCK.get());
-        dropSelf(CTBlocks.POLISHED_AMETHYST.get());
-        dropSelf(CTBlocks.POLISHED_AMETHYST_STAIRS.get());
-        dropSelf(CTBlocks.POLISHED_AMETHYST_SLAB.get());
+        dropSelf(CTBlocks.AMETHYST_STAIRS.get());
+        dropSelf(CTBlocks.AMETHYST_SLAB.get());
+        dropSelf(CTBlocks.SMOOTH_AMETHYST.get());
+        dropSelf(CTBlocks.SMOOTH_AMETHYST_STAIRS.get());
+        dropSelf(CTBlocks.SMOOTH_AMETHYST_SLAB.get());
         dropSelf(CTBlocks.AMETHYST_BRICKS.get());
-        dropSelf(CTBlocks.AMETHYST_BRICKS_STAIRS.get());
-        dropSelf(CTBlocks.AMETHYST_BRICKS_SLAB.get());
         dropSelf(CTBlocks.CHISELED_AMETHYST.get());
         this.add(CTBlocks.ALLURITE_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(CTItems.ALLURITE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(CTItems.ALLURITE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
         this.add(CTBlocks.LUMIERE_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(CTItems.LUMIERE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(CTItems.LUMIERE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
@@ -44,6 +44,7 @@ public class CTBlockLootTables extends BlockLoot {
         dropSelf(CTBlocks.LUMIERE_COMPOSTER.get());
         dropSelf(CTBlocks.MYSTERIA_CINDERS.get());
         dropSelf(CTBlocks.MYSTERIA_LOG.get());
+        dropSelf(CTBlocks.COMBUSTION_TABLE.get());
         this.add(CTBlocks.MYSTERIA_VINES.get(), CTBlockLootTables::createMysteriaVinesDrop);
         this.add(CTBlocks.MYSTERIA_VINES_PLANTS.get(), CTBlockLootTables::createMysteriaVinesDrop);
     }

@@ -7,7 +7,11 @@ import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.animal.horse.SkeletonHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +22,7 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
@@ -32,12 +37,43 @@ import static net.orcinus.cavesandtrenches.blocks.AuraListenerBlock.TYPE;
 public class MiscEvents {
 
     @SubscribeEvent
+    public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
+        ItemStack stack = event.getItemStack();
+        Player player = event.getPlayer();
+        InteractionHand hand = event.getHand();
+        Entity target = event.getTarget();
+        if (target instanceof Horse horse) {
+            if (horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
+                if (((IBanner) horse).getBanner().isEmpty()) {
+                    if (stack.getItem() instanceof BannerItem) {
+                        ItemStack copy = stack.copy();
+                        if (!player.getAbilities().instabuild) {
+                            stack.shrink(1);
+                        }
+                        copy.setCount(1);
+                        ((IBanner) horse).setBanner(copy);
+                        player.playSound(SoundEvents.HORSE_ARMOR, 1.0F, 1.0F);
+                        player.swing(hand);
+                    }
+                } else {
+                    if (player.isShiftKeyDown() && stack.isEmpty()) {
+                        ItemStack copy = ((IBanner) horse).getBanner();
+                        player.setItemInHand(hand, copy);
+                        ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void onRightClickBlockEvent(PlayerInteractEvent.RightClickBlock event) {
         ItemStack stack = event.getItemStack();
         Player player = event.getPlayer();
+        InteractionHand hand = event.getHand();
         if (player.isShiftKeyDown() && !((IBanner)player).getBanner().isEmpty() && stack.isEmpty()) {
             ItemStack copy = ((IBanner) player).getBanner();
-            player.setItemInHand(InteractionHand.MAIN_HAND, copy);
+            player.setItemInHand(hand, copy);
             ((IBanner) player).setBanner(ItemStack.EMPTY);
         }
     }
