@@ -4,13 +4,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ItemStack;
 import net.orcinus.cavesandtrenches.api.IBanner;
-import net.orcinus.cavesandtrenches.init.CTItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,16 +30,6 @@ public class LivingEntityMixin implements IBanner {
     public void readAdditionalSavaData(CompoundTag tag, CallbackInfo ci) {
         this.setBanner(ItemStack.of(tag.getCompound("BannerStack")));
     }
-
-//    @Inject(at = @At("HEAD"), method = "aiStep")
-//    public void aiStep(CallbackInfo ci) {
-//        LivingEntity $this = (LivingEntity)(Object)this;
-//        if (!this.getBanner().isEmpty() && !$this.getItemBySlot(EquipmentSlot.HEAD).is(CTItems.STERLING_HELMET.get())) {
-//            ItemStack copy = this.getBanner();
-//            $this.spawnAtLocation(copy);
-//            this.setBanner(ItemStack.EMPTY);
-//        }
-//    }
 
     @Override
     public void setBanner(ItemStack stack) {

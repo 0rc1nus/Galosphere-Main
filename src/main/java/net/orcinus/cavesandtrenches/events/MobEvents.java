@@ -8,15 +8,15 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -27,7 +27,6 @@ import net.orcinus.cavesandtrenches.api.IBanner;
 import net.orcinus.cavesandtrenches.blocks.LumiereComposterBlock;
 import net.orcinus.cavesandtrenches.blocks.WarpedAnchorBlock;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
-import net.orcinus.cavesandtrenches.init.CTEntityTypes;
 import net.orcinus.cavesandtrenches.init.CTItems;
 
 import java.util.List;
@@ -36,14 +35,52 @@ import java.util.List;
 public class MobEvents {
 
     @SubscribeEvent
+    public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
+        ItemStack stack = event.getItemStack();
+        Player player = event.getPlayer();
+        InteractionHand hand = event.getHand();
+        Entity target = event.getTarget();
+        if (target instanceof Horse horse) {
+            if (horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
+                if (((IBanner) horse).getBanner().isEmpty()) {
+                    if (stack.getItem() instanceof BannerItem) {
+                        ItemStack copy = stack.copy();
+                        if (!player.getAbilities().instabuild) {
+                            stack.shrink(1);
+                        }
+                        copy.setCount(1);
+                        ((IBanner) horse).setBanner(copy);
+                        player.playSound(SoundEvents.HORSE_ARMOR, 1.0F, 1.0F);
+                        player.swing(hand);
+                    }
+                } else {
+                    if (player.isShiftKeyDown() && stack.isEmpty()) {
+                        ItemStack copy = ((IBanner) horse).getBanner();
+                        player.setItemInHand(hand, copy);
+                        ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
         if (entity instanceof IBanner bannerEntity) {
-            if (!bannerEntity.getBanner().isEmpty() && !entity.getItemBySlot(EquipmentSlot.HEAD).is(CTItems.STERLING_HELMET.get())) {
-                if (!(entity instanceof AbstractHorse)) {
-                    ItemStack copy = bannerEntity.getBanner();
-                    entity.spawnAtLocation(copy);
-                    bannerEntity.setBanner(ItemStack.EMPTY);
+            if (!bannerEntity.getBanner().isEmpty()) {
+                if (entity instanceof Horse horse) {
+                    if (!((IBanner)horse).getBanner().isEmpty() && !horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
+                        ItemStack copy = ((IBanner) horse).getBanner();
+                        horse.spawnAtLocation(copy);
+                        ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                    }
+                } else {
+                    if (!entity.getItemBySlot(EquipmentSlot.HEAD).is(CTItems.STERLING_HELMET.get())) {
+                        ItemStack copy = bannerEntity.getBanner();
+                        entity.spawnAtLocation(copy);
+                        bannerEntity.setBanner(ItemStack.EMPTY);
+                    }
                 }
             }
         }

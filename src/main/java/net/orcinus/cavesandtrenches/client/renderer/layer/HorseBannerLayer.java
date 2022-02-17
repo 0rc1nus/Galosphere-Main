@@ -11,14 +11,12 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.cavesandtrenches.api.IBanner;
 import net.orcinus.cavesandtrenches.init.CTItems;
-import net.orcinus.cavesandtrenches.items.CTHorseArmorItem;
 
 @OnlyIn(Dist.CLIENT)
 public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {

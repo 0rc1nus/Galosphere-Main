@@ -37,36 +37,6 @@ import static net.orcinus.cavesandtrenches.blocks.AuraListenerBlock.TYPE;
 public class MiscEvents {
 
     @SubscribeEvent
-    public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
-        ItemStack stack = event.getItemStack();
-        Player player = event.getPlayer();
-        InteractionHand hand = event.getHand();
-        Entity target = event.getTarget();
-        if (target instanceof Horse horse) {
-            if (horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
-                if (((IBanner) horse).getBanner().isEmpty()) {
-                    if (stack.getItem() instanceof BannerItem) {
-                        ItemStack copy = stack.copy();
-                        if (!player.getAbilities().instabuild) {
-                            stack.shrink(1);
-                        }
-                        copy.setCount(1);
-                        ((IBanner) horse).setBanner(copy);
-                        player.playSound(SoundEvents.HORSE_ARMOR, 1.0F, 1.0F);
-                        player.swing(hand);
-                    }
-                } else {
-                    if (player.isShiftKeyDown() && stack.isEmpty()) {
-                        ItemStack copy = ((IBanner) horse).getBanner();
-                        player.setItemInHand(hand, copy);
-                        ((IBanner) horse).setBanner(ItemStack.EMPTY);
-                    }
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
     public void onRightClickBlockEvent(PlayerInteractEvent.RightClickBlock event) {
         ItemStack stack = event.getItemStack();
         Player player = event.getPlayer();
