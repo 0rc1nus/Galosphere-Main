@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "cavesandtrenches:amethyst_slab",
+    "cavesandtrenches:amethyst_stairs",
     "cavesandtrenches:smooth_amethyst",
     "cavesandtrenches:smooth_amethyst_slab",
     "cavesandtrenches:smooth_amethyst_stairs",

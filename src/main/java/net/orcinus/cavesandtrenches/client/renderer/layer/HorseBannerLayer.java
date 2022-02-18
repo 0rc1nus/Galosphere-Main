@@ -17,6 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.cavesandtrenches.api.IBanner;
 import net.orcinus.cavesandtrenches.init.CTItems;
+import org.lwjgl.system.CallbackI;
 
 @OnlyIn(Dist.CLIENT)
 public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
@@ -33,16 +34,38 @@ public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
                 if (itemstack != null) {
                     if (!itemstack.isEmpty()) {
                         Item item = itemstack.getItem();
+//                        poseStack.pushPose();
+//                        poseStack.scale(1.0F, 1.0F, 1.0F);
+//                        this.getParentModel().headParts().forEach(modelPart -> modelPart.translateAndRotate(poseStack));
+//                        if (!(item instanceof ArmorItem) || ((ArmorItem) item).getSlot() != EquipmentSlot.HEAD) {
+//                            poseStack.translate(0.0D, -0.5D, 0.0D);
+//                            poseStack.mulPose(Vector3f.XP.rotationDegrees(-30.0F));
+//                            poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+//                            poseStack.scale(0.625F, -0.625F, -0.625F);
+//                            Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, packedLight);
+//                        }
                         poseStack.pushPose();
                         poseStack.scale(1.0F, 1.0F, 1.0F);
-                        this.getParentModel().headParts().forEach(modelPart -> modelPart.translateAndRotate(poseStack));
-                        if (!(item instanceof ArmorItem) || ((ArmorItem) item).getSlot() != EquipmentSlot.HEAD) {
-                            poseStack.translate(0.0D, -0.5D, 0.0D);
-                            poseStack.mulPose(Vector3f.XP.rotationDegrees(-30.0F));
-                            poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
-                            poseStack.scale(0.625F, -0.625F, -0.625F);
-                            Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, packedLight);
-                        }
+                        poseStack.translate(0.6D, 2.0D, 0.1D);
+                        poseStack.scale(0.625F, -0.625F, -0.625F);
+
+                        poseStack.mulPose(Vector3f.YN.rotationDegrees(90.0F));
+
+//                        poseStack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
+//                        poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+                        Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, packedLight);
+
+                        poseStack.popPose();
+
+                        poseStack.pushPose();
+
+                        poseStack.scale(1.0F, 1.0F, 1.0F);
+                        poseStack.translate(-0.6D, 2.0D, 0.1D);
+                        poseStack.scale(0.625F, -0.625F, -0.625F);
+
+                        poseStack.mulPose(Vector3f.YN.rotationDegrees(-90.0F));
+
+                        Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, packedLight);
                         poseStack.popPose();
                     }
                 }

@@ -3,6 +3,7 @@ package net.orcinus.cavesandtrenches.items;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,6 +57,10 @@ public class SterlingArmorItem extends ArmorItem {
         });
     }
 
+    public float getExplosionResistance(EquipmentSlot slot) {
+        return material.getDefenseForSlot(slot) * 7.0F;
+    }
+
     private static class SterlingArmorMaterial implements ArmorMaterial {
         private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
 
@@ -99,5 +104,6 @@ public class SterlingArmorItem extends ArmorItem {
         public float getKnockbackResistance() {
             return 0.0F;
         }
+
     }
 }
