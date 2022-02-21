@@ -4,6 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,7 +29,9 @@ public class LivingEntityMixin implements IBanner {
             if ($this.getItemBySlot(equipmentSlot).getItem() instanceof SterlingArmorItem sterlingArmorItem) {
                 float explosionValue = sterlingArmorItem.getExplosionResistance(equipmentSlot);
                 if (explosionValue > 0) {
-                    cir.setReturnValue(explosionValue);
+                    //Prevent it from being negative
+                    float finalValue = Math.max(Mth.abs(value * (49 - ((explosionValue + 1) * 7)) / 12.0F), 0.0F);
+                    cir.setReturnValue(finalValue);
                 }
             }
         }

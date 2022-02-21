@@ -3,6 +3,7 @@ package net.orcinus.cavesandtrenches.world.gen.features;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.LevelAccessor;
@@ -27,7 +28,7 @@ public class MysteriaTreeFeature extends Feature<NoneFeatureConfiguration> {
         BlockPos blockPos = context.origin();
         Random random = context.random();
         if (checkPosition(world, blockPos)) return false;
-        if (!world.isEmptyBlock(blockPos) || world.isEmptyBlock(blockPos.below())) {
+        if (!(world.isEmptyBlock(blockPos) || world.getBlockState(blockPos.below()).is(BlockTags.BASE_STONE_OVERWORLD))) {
             return false;
         } else {
             buildTree(world, blockPos, random);

@@ -16,8 +16,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.client.gui.CombustionTableScreen;
 import net.orcinus.cavesandtrenches.client.model.SterlingArmorModel;
+import net.orcinus.cavesandtrenches.client.particles.AuraEmissionParticle;
 import net.orcinus.cavesandtrenches.client.particles.AuraParticle;
 import net.orcinus.cavesandtrenches.client.particles.providers.SilverBombProvider;
+import net.orcinus.cavesandtrenches.client.particles.providers.WarpedProvider;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
 import net.orcinus.cavesandtrenches.init.CTMenuTypes;
@@ -53,7 +55,9 @@ public class ClientEvents {
     public static void init(ParticleFactoryRegisterEvent event) {
         ParticleEngine engine = Minecraft.getInstance().particleEngine;
         engine.register(CTParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
+        engine.register(CTParticleTypes.AURA_EMISSION.get(), AuraEmissionParticle.Provider::new);
         engine.register(CTParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
+        engine.register(CTParticleTypes.WARPED.get(), WarpedProvider::new);
     }
 
 }

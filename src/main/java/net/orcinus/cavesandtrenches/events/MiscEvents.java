@@ -1,37 +1,40 @@
 package net.orcinus.cavesandtrenches.events;
 
+import com.google.common.collect.Lists;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.horse.Horse;
-import net.minecraft.world.entity.animal.horse.SkeletonHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.api.IBanner;
 import net.orcinus.cavesandtrenches.blocks.AuraListenerBlock;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTItems;
+import net.orcinus.cavesandtrenches.util.BannerRendererUtil;
 
-import static net.orcinus.cavesandtrenches.blocks.AuraListenerBlock.TYPE;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MiscEvents {
@@ -41,7 +44,7 @@ public class MiscEvents {
         ItemStack stack = event.getItemStack();
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
-        if (player.isShiftKeyDown() && !((IBanner)player).getBanner().isEmpty() && stack.isEmpty()) {
+        if (player.isShiftKeyDown() && !((IBanner) player).getBanner().isEmpty() && stack.isEmpty()) {
             ItemStack copy = ((IBanner) player).getBanner();
             player.setItemInHand(hand, copy);
             ((IBanner) player).setBanner(ItemStack.EMPTY);
@@ -53,8 +56,9 @@ public class MiscEvents {
         ItemStack stack = event.getItemStack();
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
-        if (((IBanner)player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(CTItems.STERLING_HELMET.get())) {
-            if (stack.getItem() instanceof BannerItem) {
+        BannerRendererUtil util = new BannerRendererUtil();
+        if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(CTItems.STERLING_HELMET.get())) {
+            if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                 ItemStack copy = stack.copy();
                 if (!player.getAbilities().instabuild) {
                     stack.shrink(1);
@@ -75,11 +79,11 @@ public class MiscEvents {
                 BlockPos blockpos = source.getPos().relative(direction);
                 Level world = source.getLevel();
                 BlockState state = world.getBlockState(blockpos);
+                AuraListenerBlock block = (AuraListenerBlock) CTBlocks.AURA_LISTENER.get();
                 this.setSuccess(true);
-                if (state.is(CTBlocks.AURA_LISTENER.get())) {
-                    if (state.getValue(TYPE) == AuraListenerBlock.AuraSignalType.INACTIVE) {
-                        world.playSound(null, blockpos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                        world.setBlock(blockpos, state.setValue(TYPE, AuraListenerBlock.AuraSignalType.ACTIVE), 2);
+                if (state.getBlock() == block) {
+                    if (!state.getValue(AuraListenerBlock.LISTENING)) {
+                        block.activate(state, blockpos, world);
                         stack.shrink(1);
                     } else {
                         this.setSuccess(false);

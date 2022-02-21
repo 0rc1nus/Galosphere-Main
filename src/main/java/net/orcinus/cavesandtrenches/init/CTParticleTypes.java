@@ -15,6 +15,8 @@ public class CTParticleTypes {
 
     public static final RegistryObject<SimpleParticleType> AURA_LISTENER = registerParticle("aura_listener", false);
     public static final RegistryObject<SimpleParticleType> SILVER_BOMB = registerParticle("item_silverbomb", false);
+    public static final RegistryObject<SimpleParticleType> AURA_EMISSION = registerParticle("aura_emission", false);
+    public static final RegistryObject<SimpleParticleType> WARPED = registerParticle("warped", false);
 
     public static RegistryObject<SimpleParticleType> registerParticle(String key, boolean alwaysShow) {
         return PARTICLES.register(key, () -> new SimpleParticleType(alwaysShow));

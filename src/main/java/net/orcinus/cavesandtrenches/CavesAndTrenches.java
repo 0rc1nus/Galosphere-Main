@@ -10,6 +10,7 @@ import net.orcinus.cavesandtrenches.events.MiscEvents;
 import net.orcinus.cavesandtrenches.events.MobEvents;
 import net.orcinus.cavesandtrenches.events.WorldEvents;
 import net.orcinus.cavesandtrenches.init.CTBiomes;
+import net.orcinus.cavesandtrenches.init.CTBlockEntities;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
 import net.orcinus.cavesandtrenches.init.CTFeatures;
@@ -37,6 +38,7 @@ public class CavesAndTrenches {
         modEventBus.addListener(this::commonSetup);
 
         CTBlocks.BLOCKS.register(modEventBus);
+        CTBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         CTBiomes.BIOMES.register(modEventBus);
         CTEntityTypes.ENTITY_TYPES.register(modEventBus);
         CTFeatures.FEATURES.register(modEventBus);

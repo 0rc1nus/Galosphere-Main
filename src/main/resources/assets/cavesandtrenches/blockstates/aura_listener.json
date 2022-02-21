@@ -1,12 +1,9 @@
 {
   "variants": {
-    "aura_type=active": {
+    "listening=true": {
       "model": "cavesandtrenches:block/aura_listener_active"
     },
-    "aura_type=inactive": {
-      "model": "cavesandtrenches:block/aura_listener_inactive"
-    },
-    "aura_type=cooldown": {
+    "listening=false": {
       "model": "cavesandtrenches:block/aura_listener_inactive"
     }
   }

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "cavesandtrenches:sterling_helmet",
+    "cavesandtrenches:sterling_chestplate",
+    "cavesandtrenches:sterling_leggings",
+    "cavesandtrenches:sterling_boots",
+    "cavesandtrenches:sterling_horse_armor"
+  ]
+}

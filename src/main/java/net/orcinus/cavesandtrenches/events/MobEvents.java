@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,6 +29,7 @@ import net.orcinus.cavesandtrenches.blocks.LumiereComposterBlock;
 import net.orcinus.cavesandtrenches.blocks.WarpedAnchorBlock;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTItems;
+import net.orcinus.cavesandtrenches.util.BannerRendererUtil;
 
 import java.util.List;
 
@@ -35,15 +37,28 @@ import java.util.List;
 public class MobEvents {
 
     @SubscribeEvent
+    public void onLivingDeath(LivingDeathEvent event) {
+        LivingEntity livingEntity = event.getEntityLiving();
+        if (livingEntity instanceof Horse horse) {
+            if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
+                ItemStack copy = ((IBanner) horse).getBanner();
+                horse.spawnAtLocation(copy);
+                ((IBanner) horse).setBanner(ItemStack.EMPTY);
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
         ItemStack stack = event.getItemStack();
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
         Entity target = event.getTarget();
+        BannerRendererUtil util = new BannerRendererUtil();
         if (target instanceof Horse horse) {
             if (horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
                 if (((IBanner) horse).getBanner().isEmpty()) {
-                    if (stack.getItem() instanceof BannerItem) {
+                    if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                         ItemStack copy = stack.copy();
                         if (!player.getAbilities().instabuild) {
                             stack.shrink(1);

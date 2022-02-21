@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class AuraParticle extends RisingParticle {
     private final SpriteSet sprites;
 
-    AuraParticle(ClientLevel world, double x, double y, double z, double velX, double velY, double velZ, SpriteSet set) {
+    public AuraParticle(ClientLevel world, double x, double y, double z, double velX, double velY, double velZ, SpriteSet set) {
         super(world, x, y, z, velX, velY, velZ);
         this.sprites = set;
         this.friction = 0.96F;
@@ -29,7 +29,6 @@ public class AuraParticle extends RisingParticle {
         this.zd = 0;
         this.lifetime = 30;
         this.quadSize = 0.45F;
-//        this.scale(2.4F);
         this.setSpriteFromAge(set);
     }
 
@@ -87,8 +86,8 @@ public class AuraParticle extends RisingParticle {
             this.sprite = set;
         }
 
-        public Particle createParticle(SimpleParticleType p_107750_, ClientLevel world, double x, double y, double z, double p_107755_, double p_107756_, double p_107757_) {
-            AuraParticle aura = new AuraParticle(world, x, y, z, p_107755_, p_107756_, p_107757_, this.sprite);
+        public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double velX, double velY, double velZ) {
+            AuraParticle aura = new AuraParticle(world, x, y, z, velX, velY, velZ, this.sprite);
             aura.setAlpha(1.0F);
             return aura;
         }

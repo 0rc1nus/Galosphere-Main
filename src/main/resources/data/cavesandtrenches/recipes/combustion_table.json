@@ -10,7 +10,7 @@
       "tag": "minecraft:planks"
     },
     "@": {
-      "item": "cavesandtrenches:silver_ingot"
+      "tag": "forge:ingots/silver"
     }
   },
   "result": {
