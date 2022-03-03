@@ -1,12 +1,20 @@
 package net.orcinus.cavesandtrenches.util;
 
-import com.google.common.collect.Lists;
 import net.minecraft.Util;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.compress.utils.Lists;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class BannerRendererUtil {
     public static final List<String> BM_TAPESTRIES = Util.make(Lists.newArrayList(), strings -> {
@@ -35,6 +43,14 @@ public class BannerRendererUtil {
             }
         }
         return flag;
+    }
+
+    public String getName() {
+        String name = null;
+        for (String names : BM_TAPESTRIES) {
+            name = names;
+        }
+        return name;
     }
 
 }

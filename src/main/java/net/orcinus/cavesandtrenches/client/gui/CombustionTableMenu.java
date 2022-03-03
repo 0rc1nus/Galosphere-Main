@@ -9,15 +9,18 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.fml.ModList;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTItems;
 import net.orcinus.cavesandtrenches.init.CTMenuTypes;
+import net.orcinus.cavesandtrenches.util.CompatUtil;
 
 public class CombustionTableMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
-    public final Container container = new SimpleContainer(3) {
+    public final Container container = new SimpleContainer(4) {
         public void setChanged() {
             CombustionTableMenu.this.slotsChanged(this);
             super.setChanged();
@@ -33,25 +36,31 @@ public class CombustionTableMenu extends AbstractContainerMenu {
     public CombustionTableMenu(int id, Inventory inventory, final ContainerLevelAccess access) {
         super(CTMenuTypes.COMBUSTION_TABLE.get(), id);
         this.access = access;
-        this.addSlot(new Slot(this.container, 0, 18, 17) {
+        this.addSlot(new Slot(this.container, 0, 44, 29) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(CTItems.SILVER_BOMB.get());
             }
         });
-        this.addSlot(new Slot(this.container, 1, 7, 54) {
+        this.addSlot(new Slot(this.container, 1, 44, 50) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL);
+                return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL) || stack.is(getLeadIngot());
             }
         });
-        this.addSlot(new Slot(this.container, 2, 28, 54) {
+        this.addSlot(new Slot(this.container, 2, 80 , 50) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL);
+                return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL) || stack.is(getLeadIngot());
             }
         });
-        this.addSlot(new Slot(this.resultContainer, 3, 143, 37) {
+        this.addSlot(new Slot(this.container, 3, 116 , 50) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL) || stack.is(getLeadIngot());
+            }
+        });
+        this.addSlot(new Slot(this.resultContainer, 4, 79, 21) {
 
             public boolean mayPlace(ItemStack stack) {
                 return false;
@@ -61,6 +70,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 CombustionTableMenu.this.slots.get(0).remove(1);
                 CombustionTableMenu.this.slots.get(1).remove(1);
                 CombustionTableMenu.this.slots.get(2).remove(1);
+                CombustionTableMenu.this.slots.get(3).remove(1);
                 super.onTake(player, stack);
             }
         });
@@ -91,19 +101,22 @@ public class CombustionTableMenu extends AbstractContainerMenu {
         ItemStack bombStack = this.container.getItem(0);
         ItemStack exploStat1 = this.container.getItem(1);
         ItemStack exploStat2 = this.container.getItem(2);
+        ItemStack exploStat3 = this.container.getItem(3);
         CompoundTag tag = bombStack.getOrCreateTag();
         int bouncy = tag.getInt("Bouncy");
         int explosion = tag.getInt("Explosion");
         int duration = tag.getInt("Duration");
+        boolean shrapnel = tag.getBoolean("Shrapnel");
         boolean initFlag = true;
         if (bombStack.is(CTItems.SILVER_BOMB.get())) {
-            if (!exploStat1.isEmpty() || !exploStat2.isEmpty()) {
+            if (!exploStat1.isEmpty() || !exploStat2.isEmpty() || !exploStat3.isEmpty()) {
                 CompoundTag currentTag = bombStack.getTag();
+                Item leadIngot = this.getLeadIngot();
                 if (exploStat1.is(Items.SLIME_BALL)) {
                     if (currentTag != null) {
-                        if ((currentTag.getInt("Bouncy") == 2 && exploStat2.is(Items.SLIME_BALL)) || currentTag.getInt("Bouncy") == 3) {
+                        if ((currentTag.getInt("Bouncy") == 2 && (exploStat3.is(Items.SLIME_BALL) || exploStat2.is(Items.SLIME_BALL))) || currentTag.getInt("Bouncy") == 3) {
                             initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(3);
+                            this.resultContainer.removeItemNoUpdate(4);
                             this.broadcastChanges();
                         }
                     }
@@ -111,9 +124,9 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat1.is(Items.STRING)) {
                     if (currentTag != null) {
-                        if ((currentTag.getInt("Duration") == 2 && exploStat2.is(Items.STRING)) || currentTag.getInt("Duration") == 3) {
+                        if ((currentTag.getInt("Duration") == 2 && (exploStat3.is(Items.STRING) || exploStat2.is(Items.STRING))) || currentTag.getInt("Duration") == 3) {
                             initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(3);
+                            this.resultContainer.removeItemNoUpdate(4);
                             this.broadcastChanges();
                         }
                     }
@@ -121,19 +134,29 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat1.is(Items.GUNPOWDER)) {
                     if (currentTag != null) {
-                        if ((currentTag.getInt("Explosion") == 2 && exploStat2.is(Items.GUNPOWDER)) || currentTag.getInt("Explosion") == 3) {
+                        if ((currentTag.getInt("Explosion") == 2 && (exploStat3.is(Items.GUNPOWDER) || exploStat2.is(Items.GUNPOWDER))) || currentTag.getInt("Explosion") == 3) {
                             initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(3);
+                            this.resultContainer.removeItemNoUpdate(4);
                             this.broadcastChanges();
                         }
                     }
                     explosion++;
                 }
+                if (exploStat1.is(leadIngot)) {
+                    if (currentTag != null) {
+                        if ((!currentTag.getBoolean("Shrapnel") && (exploStat3.is(leadIngot) || exploStat2.is(leadIngot))) || currentTag.getBoolean("Shrapnel")) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                            this.broadcastChanges();
+                        }
+                    }
+                    shrapnel = true;
+                }
                 if (exploStat2.is(Items.SLIME_BALL)) {
                     if (currentTag != null) {
-                        if ((currentTag.getInt("Bouncy") == 2 && exploStat1.is(Items.SLIME_BALL)) || currentTag.getInt("Bouncy") == 3) {
+                        if ((currentTag.getInt("Bouncy") == 2 && (exploStat3.is(Items.SLIME_BALL) || exploStat1.is(Items.SLIME_BALL))) || currentTag.getInt("Bouncy") == 3) {
                             initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(3);
+                            this.resultContainer.removeItemNoUpdate(4);
                             this.broadcastChanges();
                         }
                     }
@@ -141,9 +164,9 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat2.is(Items.STRING)) {
                     if (currentTag != null) {
-                        if ((currentTag.getInt("Duration") == 2 && exploStat1.is(Items.STRING)) || currentTag.getInt("Duration") == 3) {
+                        if ((currentTag.getInt("Duration") == 2 && (exploStat3.is(Items.STRING) || exploStat1.is(Items.STRING))) || currentTag.getInt("Duration") == 3) {
                             initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(3);
+                            this.resultContainer.removeItemNoUpdate(4);
                             this.broadcastChanges();
                         }
                     }
@@ -151,34 +174,93 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat2.is(Items.GUNPOWDER)) {
                     if (currentTag != null) {
-                        if ((currentTag.getInt("Explosion") == 2 && exploStat1.is(Items.GUNPOWDER)) || currentTag.getInt("Explosion") == 3) {
+                        if ((currentTag.getInt("Explosion") == 2 && (exploStat3.is(Items.GUNPOWDER) || exploStat1.is(Items.GUNPOWDER))) || currentTag.getInt("Explosion") == 3) {
                             initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(3);
+                            this.resultContainer.removeItemNoUpdate(4);
                             this.broadcastChanges();
                         }
                     }
                     explosion++;
+                }
+                if (exploStat2.is(leadIngot)) {
+                    if (currentTag != null) {
+                        if ((!currentTag.getBoolean("Shrapnel")&& (exploStat3.is(leadIngot) || exploStat1.is(leadIngot))) || currentTag.getBoolean("Shrapnel")) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                            this.broadcastChanges();
+                        }
+                    }
+                    shrapnel = true;
+                }
+                if (exploStat3.is(Items.SLIME_BALL)) {
+                    if (currentTag != null) {
+                        if ((currentTag.getInt("Bouncy") == 2 && (exploStat2.is(Items.SLIME_BALL) || exploStat1.is(Items.SLIME_BALL))) || currentTag.getInt("Bouncy") == 3) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                            this.broadcastChanges();
+                        }
+                    }
+                    bouncy++;
+                }
+                if (exploStat3.is(Items.STRING)) {
+                    if (currentTag != null) {
+                        if ((currentTag.getInt("Duration") == 2 && (exploStat2.is(Items.STRING) || exploStat1.is(Items.STRING))) || currentTag.getInt("Duration") == 3) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                            this.broadcastChanges();
+                        }
+                    }
+                    duration++;
+                }
+                if (exploStat3.is(Items.GUNPOWDER)) {
+                    if (currentTag != null) {
+                        if ((currentTag.getInt("Explosion") == 2 && (exploStat2.is(Items.GUNPOWDER) || exploStat1.is(Items.GUNPOWDER))) || currentTag.getInt("Explosion") == 3) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                            this.broadcastChanges();
+                        }
+                    }
+                    explosion++;
+                }
+                if (exploStat3.is(leadIngot)) {
+                    if (currentTag != null) {
+                        if ((!currentTag.getBoolean("Shrapnel") && (exploStat2.is(leadIngot) || exploStat1.is(leadIngot))) || currentTag.getBoolean("Shrapnel")) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                            this.broadcastChanges();
+                        }
+                    }
+                    shrapnel = true;
                 }
                 ItemStack resultCopy = bombStack.copy();
                 resultCopy.setCount(1);
                 resultCopy.getOrCreateTag().putInt("Explosion", explosion);
                 resultCopy.getOrCreateTag().putInt("Bouncy", bouncy);
                 resultCopy.getOrCreateTag().putInt("Duration", duration);
+                resultCopy.getOrCreateTag().putBoolean("Shrapnel", shrapnel);
                 if (initFlag) {
-                    this.resultContainer.setItem(3, resultCopy);
+                    this.resultContainer.setItem(4, resultCopy);
                 }
             } else {
-                this.resultContainer.removeItemNoUpdate(3);
+                this.resultContainer.removeItemNoUpdate(4);
             }
         } else {
-            this.resultContainer.removeItemNoUpdate(3);
+            this.resultContainer.removeItemNoUpdate(4);
         }
+    }
+
+    public Item getLeadIngot() {
+        CompatUtil compatUtil = new CompatUtil();
+        String modid = "oreganized";
+        Item item = null;
+        if (compatUtil.isModInstalled(modid)) item = compatUtil.getCompatItem(modid, "lead_ingot");
+        return item;
     }
 
     @Override
     public void removed(Player player) {
         super.removed(player);
-        this.resultContainer.removeItemNoUpdate(3);
+        this.resultContainer.removeItemNoUpdate(4);
         this.access.execute((world, pos) -> {
             this.clearContainer(player, this.container);
         });
@@ -194,26 +276,27 @@ public class CombustionTableMenu extends AbstractContainerMenu {
             ItemStack itemstack2 = this.container.getItem(0);
             ItemStack itemstack3 = this.container.getItem(1);
             ItemStack itemstack4 = this.container.getItem(2);
-            if (id == 3) {
+            ItemStack itemstack5 = this.container.getItem(3);
+            if (id == 4) {
                 slotStack.getItem().onCraftedBy(slotStack, player.level, player);
-                if (!this.moveItemStackTo(slotStack, 4, 40, true)) {
+                if (!this.moveItemStackTo(slotStack, 5, 41, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(slotStack, itemstack);
-            } else if (id != 0 && id != 1 && id != 2) {
-                if (!itemstack2.isEmpty() && !itemstack3.isEmpty() && !itemstack4.isEmpty()) {
-                    if (id >= 3 && id < 30) {
+            } else if (id != 0 && id != 1 && id != 2 && id != 3) {
+                if (!itemstack2.isEmpty() && !itemstack3.isEmpty() && !itemstack4.isEmpty() && !itemstack5.isEmpty()) {
+                    if (id >= 4 && id < 30) {
                         if (!this.moveItemStackTo(slotStack, 30, 39, false)) {
                             return ItemStack.EMPTY;
                         }
-                    } else if (id >= 30 && id < 39 && !this.moveItemStackTo(slotStack, 3, 30, false)) {
+                    } else if (id >= 30 && id < 39 && !this.moveItemStackTo(slotStack, 4, 30, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (!this.moveItemStackTo(slotStack, 0, 3, false)) {
+                } else if (!this.moveItemStackTo(slotStack, 0, 4, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(slotStack, 4, 40, false)) {
+            } else if (!this.moveItemStackTo(slotStack, 5, 40, false)) {
                 return ItemStack.EMPTY;
             }
 

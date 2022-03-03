@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -21,10 +20,13 @@ import net.orcinus.cavesandtrenches.blocks.AmethystSlabBlock;
 import net.orcinus.cavesandtrenches.blocks.AmethystStairsBlock;
 import net.orcinus.cavesandtrenches.blocks.AuraListenerBlock;
 import net.orcinus.cavesandtrenches.blocks.CombustionTableBlock;
+import net.orcinus.cavesandtrenches.blocks.FlutterFondBlock;
 import net.orcinus.cavesandtrenches.blocks.LumiereComposterBlock;
 import net.orcinus.cavesandtrenches.blocks.MysteriaVinesBlock;
 import net.orcinus.cavesandtrenches.blocks.MysteriaVinesPlantBlock;
 import net.orcinus.cavesandtrenches.blocks.PollinatedClusterBlock;
+import net.orcinus.cavesandtrenches.blocks.StiffenedRootsBlock;
+import net.orcinus.cavesandtrenches.blocks.StiffenedRootsPlantBlock;
 import net.orcinus.cavesandtrenches.blocks.WarpedAnchorBlock;
 
 import java.util.function.Supplier;
@@ -36,8 +38,8 @@ public class CTBlocks {
 
     public static final RegistryObject<Block> ALLURITE_BLOCK = registerBlock("allurite_block", () -> new AmethystBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> LUMIERE_BLOCK = registerBlock("lumiere_block", () -> new AmethystBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> ALLURITE_CLUSTER = registerBlock("allurite_cluster", () -> new PollinatedClusterBlock(BlockBehaviour.Properties.of(CTMaterials.ALLURITE).noOcclusion().randomTicks().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).lightLevel((state) -> 10)));
-    public static final RegistryObject<Block> LUMIERE_CLUSTER = registerBlock("lumiere_cluster", () -> new PollinatedClusterBlock(BlockBehaviour.Properties.of(CTMaterials.LUMIERE).noOcclusion().randomTicks().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).lightLevel((state) -> 10)));
+    public static final RegistryObject<Block> ALLURITE_CLUSTER = registerBlock("allurite_cluster", () -> new PollinatedClusterBlock(BlockBehaviour.Properties.of(CTMaterials.ALLURITE).noOcclusion().randomTicks().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
+    public static final RegistryObject<Block> LUMIERE_CLUSTER = registerBlock("lumiere_cluster", () -> new PollinatedClusterBlock(BlockBehaviour.Properties.of(CTMaterials.LUMIERE).noOcclusion().randomTicks().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
     public static final RegistryObject<Block> AMETHYST_STAIRS = registerBlock("amethyst_stairs", () -> new AmethystStairsBlock(Blocks.AMETHYST_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
     public static final RegistryObject<Block> AMETHYST_SLAB = registerBlock("amethyst_slab", () -> new AmethystSlabBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
     public static final RegistryObject<Block> SMOOTH_AMETHYST = registerBlock("smooth_amethyst", () -> new AmethystBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
@@ -49,6 +51,8 @@ public class CTBlocks {
     public static final RegistryObject<Block> MYSTERIA_LOG = registerBlock("mysteria_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.AMETHYST, MaterialColor.TERRACOTTA_WHITE).strength(2.0F).sound(SoundType.AMETHYST).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MYSTERIA_VINES = registerBlock("mysteria_vines", () -> new MysteriaVinesBlock(BlockBehaviour.Properties.of(Material.PLANT).lightLevel((state) -> 8).instabreak().noCollission().randomTicks().sound(SoundType.CAVE_VINES)));
     public static final RegistryObject<Block> MYSTERIA_VINES_PLANTS = registerNoTabBlock("mysteria_vines_plant", () -> new MysteriaVinesPlantBlock(BlockBehaviour.Properties.copy(MYSTERIA_VINES.get())));
+    public static final RegistryObject<Block> STIFFENED_ROOTS = registerBlock("stiffened_roots", () -> new StiffenedRootsBlock(BlockBehaviour.Properties.of(Material.PLANT).lightLevel((state) -> 5).instabreak().noCollission().randomTicks().sound(SoundType.CAVE_VINES)));
+    public static final RegistryObject<Block> STIFFENED_ROOTS_PLANTS = registerNoTabBlock("stiffened_roots_plant", () -> new StiffenedRootsPlantBlock(BlockBehaviour.Properties.copy(MYSTERIA_VINES.get())));
     public static final RegistryObject<Block> SILVER_BLOCK = registerBlock("silver_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> RAW_SILVER_BLOCK = registerBlock("raw_silver_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_CYAN).requiresCorrectToolForDrops().strength(5.0F, 6.0F)));
     public static final RegistryObject<Block> SILVER_ORE = registerBlock("silver_ore", () -> new OreBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
@@ -59,6 +63,7 @@ public class CTBlocks {
     public static final RegistryObject<Block> LUMIERE_LAMP = registerBlock("lumiere_lamp", () -> new Block(BlockBehaviour.Properties.of(CTMaterials.LUMIERE, MaterialColor.COLOR_LIGHT_BLUE).lightLevel(state -> 15).strength(0.3F).sound(SoundType.SHROOMLIGHT)));
     public static final RegistryObject<Block> LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER).dropsLike(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> COMBUSTION_TABLE = registerBlock("combustion_table", () -> new CombustionTableBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2.5F).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> FLUTTER_FOND = registerBlock("flutter_fond", () -> new FlutterFondBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission().sound(SoundType.SMALL_DRIPLEAF).instabreak()));
 
     /*
     Lichen Caves

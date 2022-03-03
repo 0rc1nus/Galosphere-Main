@@ -56,6 +56,25 @@ public class SilverBombItem extends Item {
         if (tag.getInt("Bouncy") > 0) {
             list.add((new TranslatableComponent("item.cavesandtrenches.silver_bomb.bouncy")).append(" ").append(String.valueOf(tag.getInt("Bouncy"))).withStyle(ChatFormatting.GRAY));
         }
+        if (tag.getBoolean("Shrapnel")) {
+            list.add((new TranslatableComponent("item.cavesandtrenches.silver_bomb.shrapnel")).withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    public boolean hasDuration(ItemStack stack) {
+        return stack.getTag() != null && stack.getTag().getInt("Duration") > 0;
+    }
+
+    public boolean hasExplosion(ItemStack stack) {
+        return stack.getTag() != null && stack.getTag().getInt("Duration") > 0;
+    }
+
+    public boolean hasBouncy(ItemStack stack) {
+        return stack.getTag() != null && stack.getTag().getInt("Duration") > 0;
+    }
+
+    public boolean hasShrapnel(ItemStack stack) {
+        return stack.getTag() != null && stack.getTag().getInt("Duration") > 0;
     }
 
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "cavesandtrenches:block/stiffened_roots"
+  }
+}

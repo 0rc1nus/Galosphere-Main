@@ -3,6 +3,7 @@ package net.orcinus.cavesandtrenches.init;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,6 +29,7 @@ public class CTItems {
     public static final RegistryObject<Item> STERLING_LEGGINGS = ITEMS.register("sterling_leggings", () -> new SterlingArmorItem(EquipmentSlot.LEGS, new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES).stacksTo(1)));
     public static final RegistryObject<Item> STERLING_BOOTS = ITEMS.register("sterling_boots", () -> new SterlingArmorItem(EquipmentSlot.FEET, new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES).stacksTo(1)));
     public static final RegistryObject<Item> STERLING_HORSE_ARMOR = ITEMS.register("sterling_horse_armor", () -> new CTHorseArmorItem(4, "sterling"));
+    public static final RegistryObject<Item> SPARKLE_SPAWN_EGG = ITEMS.register("sparkle_spawn_egg", () -> new ForgeSpawnEggItem(CTEntityTypes.SPARKLE, 16777215, 2422488, new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES)));
 
     public static RegistryObject<Item> registerBaseItem(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES)));

@@ -28,11 +28,11 @@ public class MysteriaTreeFeature extends Feature<NoneFeatureConfiguration> {
         BlockPos blockPos = context.origin();
         Random random = context.random();
         if (checkPosition(world, blockPos)) return false;
-        if (!(world.isEmptyBlock(blockPos) || world.getBlockState(blockPos.below()).is(BlockTags.BASE_STONE_OVERWORLD))) {
-            return false;
-        } else {
+        if (world.isEmptyBlock(blockPos) && world.getBlockState(blockPos.below()).is(BlockTags.BASE_STONE_OVERWORLD)) {
             buildTree(world, blockPos, random);
             return true;
+        } else {
+            return false;
         }
     }
 

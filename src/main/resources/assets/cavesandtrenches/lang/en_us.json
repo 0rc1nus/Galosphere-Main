@@ -41,6 +41,7 @@
   "item.cavesandtrenches.silver_bomb.duration": "Duration:",
   "item.cavesandtrenches.silver_bomb.explosion": "Explosion:",
   "item.cavesandtrenches.silver_bomb.bouncy": "Bouncy:",
+  "item.cavesandtrenches.silver_bomb.shrapnel": "Shrapnel",
   "entity.cavesandtrenches.silver_bomb": "Silver Bomb",
   "container.cavesandtrenches.combustion_table": "Combustion Table"
 }

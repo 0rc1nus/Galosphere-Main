@@ -26,8 +26,10 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.orcinus.cavesandtrenches.blocks.blockentities.AuraListenerBlockEntity;
@@ -52,19 +54,18 @@ public class AuraListenerBlock extends BaseEntityBlock {
     @Override
     public void animateTick(BlockState state, Level world, BlockPos blockPos, Random random) {
         EntityType<?> dummy = EntityType.ZOMBIE;
-        int radius = 8;
+        int range = getRange() / 2;
         int height = 3;
         if (state.getValue(LISTENING)) {
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
+            for (int x = -range; x <= range; x++) {
+                for (int z = -range; z <= range; z++) {
                     for (int y = -height; y <= height; y++) {
                         BlockPos position = new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z);
-                        if (x * x + z * z <= radius * radius) {
+                        if (x * x + z * z <= range * range) {
                             if (world.getBrightness(LightLayer.BLOCK, position) == 0 && NaturalSpawner.isSpawnPositionOk(SpawnPlacements.Type.ON_GROUND, world, position, dummy)) {
                                 double posX = position.getX() + 0.5D;
                                 double posY = position.getY();
                                 double posZ = position.getZ() + 0.5D;
-//                                world.addParticle(ParticleTypes.SOUL, posX, posY + 1.0D, posZ, 0.0D, 0.0D, 0.0D);
                                 world.addParticle(CTParticleTypes.AURA_LISTENER.get(), posX, posY + 0.01D, posZ, 0.0D, 0.0D, 0.0D);
                             }
                         }
@@ -78,6 +79,9 @@ public class AuraListenerBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
         if (!state.getValue(LISTENING) && stack.is(CTBlocks.ALLURITE_BLOCK.get().asItem())) {
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
             this.activate(state, pos, world);
             return InteractionResult.SUCCESS;
         }
@@ -95,13 +99,17 @@ public class AuraListenerBlock extends BaseEntityBlock {
     public void activate(BlockState state, BlockPos pos, Level world) {
         world.setBlock(pos, state.setValue(LISTENING, true), 2);
         world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
-        world.scheduleTick(pos, this, 100);
+        world.scheduleTick(pos, this, 200);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
         return !world.isClientSide ? createTickerHelper(type, CTBlockEntities.AURA_LISTENER.get(), AuraListenerBlockEntity::listenTick) : null;
+    }
+
+    public static int getRange() {
+        return 16;
     }
 
     @Override

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "fond_shape=top,vertical_direction=up": {
+      "model": "cavesandtrenches:block/flutter_fond_top"
+    },
+    "fond_shape=middle,vertical_direction=up": {
+      "model": "cavesandtrenches:block/flutter_fond_middle"
+    },
+    "fond_shape=bottom,vertical_direction=up": {
+      "model": "cavesandtrenches:block/flutter_fond_bottom"
+    },
+    "fond_shape=top,vertical_direction=down": {
+      "model": "cavesandtrenches:block/flutter_fond_top_down"
+    },
+    "fond_shape=middle,vertical_direction=down": {
+      "model": "cavesandtrenches:block/flutter_fond_middle_down"
+    },
+    "fond_shape=bottom,vertical_direction=down": {
+      "model": "cavesandtrenches:block/flutter_fond_bottom_down"
+    }
+  }
+}

@@ -44,6 +44,11 @@ public class AuraParticle extends RisingParticle {
 
     @Override
     public void render(VertexConsumer consumer, Camera camera, float partialTicks) {
+        renderAura(consumer, camera, partialTicks, Vector3f.XP.rotationDegrees(90));
+        renderAura(consumer, camera, partialTicks, Vector3f.XP.rotationDegrees(270));
+    }
+
+    private void renderAura(VertexConsumer consumer, Camera camera, float partialTicks, Quaternion rotationDegrees) {
         Vec3 vec3 = camera.getPosition();
         float originX = (float) (Mth.lerp(partialTicks, xo, x) - vec3.x());
         float originY = (float) (Mth.lerp(partialTicks, yo, y) - vec3.y());
@@ -52,7 +57,7 @@ public class AuraParticle extends RisingParticle {
         Vector3f[] avector3f = new Vector3f[] {new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float size = getQuadSize(partialTicks);
 
-        Quaternion quaternion = Vector3f.XP.rotationDegrees(90);
+        Quaternion quaternion = rotationDegrees;
 
         for(int i = 0; i < 4; ++i) {
             Vector3f vertex = avector3f[i];
