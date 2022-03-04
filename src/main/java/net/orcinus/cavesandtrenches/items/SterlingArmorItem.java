@@ -17,6 +17,7 @@ import net.minecraftforge.client.IItemRenderProperties;
 import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.client.model.SterlingArmorModel;
 import net.orcinus.cavesandtrenches.init.CTItems;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -48,12 +49,11 @@ public class SterlingArmorItem extends ArmorItem {
     public void initializeClient(Consumer<IItemRenderProperties> consumer) {
         consumer.accept(new IItemRenderProperties() {
 
+            @Nullable
             @Override
-            @SuppressWarnings("unchecked")
-            public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-                return armorSlot == EquipmentSlot.HEAD ? (A) new SterlingArmorModel<>(SterlingArmorModel.createArmorLayer().bakeRoot()) : IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
+            public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
+                return armorSlot == EquipmentSlot.HEAD ? new SterlingArmorModel<>(SterlingArmorModel.createArmorLayer().bakeRoot()) : IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
             }
-
         });
     }
 

@@ -27,22 +27,22 @@ public class WorldEvents {
 
         if (category == Biome.BiomeCategory.NETHER || category == Biome.BiomeCategory.THEEND || category == Biome.BiomeCategory.NONE) return;
 
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CTPlacedFeatures.ORE_SILVER_UPPER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CTPlacedFeatures.ORE_SILVER_SMALL);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CTPlacedFeatures.ORE_SILVER_MIDDLE);
+        builder.m_204201_(GenerationStep.Decoration.UNDERGROUND_ORES, CTPlacedFeatures.ORE_SILVER_UPPER);
+        builder.m_204201_(GenerationStep.Decoration.UNDERGROUND_ORES, CTPlacedFeatures.ORE_SILVER_SMALL);
+        builder.m_204201_(GenerationStep.Decoration.UNDERGROUND_ORES, CTPlacedFeatures.ORE_SILVER_MIDDLE);
 
         if (biome == CTBiomes.CRYSTAL_CANYONS.get()) {
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_CEILING_ALLURITE_CRYSTALS);
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_FLOOR_ALLURITE_CRYSTALS);
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_CEILING_LUMIERE_CRYSTALS);
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_FLOOR_LUMIERE_CRYSTALS);
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.ALLURITE_CEILING_CRYSTALS);
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.ALLURITE_FLOOR_CRYSTALS);
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LUMIERE_CEILING_CRYSTALS);
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LUMIERE_FLOOR_CRYSTALS);
-            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.MYSTERIA_TREE);
-            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.STIFFENED_VINES);
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.FLUTTERED_LEAF);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_CEILING_ALLURITE_CRYSTALS);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_FLOOR_ALLURITE_CRYSTALS);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_CEILING_LUMIERE_CRYSTALS);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LARGE_FLOOR_LUMIERE_CRYSTALS);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.ALLURITE_CEILING_CRYSTALS);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.ALLURITE_FLOOR_CRYSTALS);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LUMIERE_CEILING_CRYSTALS);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.LUMIERE_FLOOR_CRYSTALS);
+            builder.m_204201_(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.MYSTERIA_TREE);
+            builder.m_204201_(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.STIFFENED_VINES);
+            builder.m_204201_(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.FLUTTERED_LEAF);
             mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 10, 4, 6));
         }
 
