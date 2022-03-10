@@ -1,5 +1,7 @@
 package net.orcinus.cavesandtrenches.items;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -7,6 +9,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +22,7 @@ import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import net.orcinus.cavesandtrenches.client.model.SterlingArmorModel;
 import net.orcinus.cavesandtrenches.init.CTItems;
 import org.checkerframework.checker.units.qual.A;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -58,7 +63,7 @@ public class SterlingArmorItem extends ArmorItem {
     }
 
     public float getExplosionResistance(EquipmentSlot slot) {
-        return material.getDefenseForSlot(slot) * 7.0F;
+        return material.getDefenseForSlot(slot);
     }
 
     private static class SterlingArmorMaterial implements ArmorMaterial {

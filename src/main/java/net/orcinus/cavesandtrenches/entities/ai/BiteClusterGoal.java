@@ -19,7 +19,7 @@ public class BiteClusterGoal extends MoveToBlockGoal {
 
     @Override
     public double acceptedDistance() {
-        return 2.0D;
+        return 4.0D;
     }
 
     @Override

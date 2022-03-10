@@ -10,8 +10,6 @@
     "PowderSnowBlockMixin"
   ],
   "client": [
-    "client.HorseRendererMixin",
-    "client.PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

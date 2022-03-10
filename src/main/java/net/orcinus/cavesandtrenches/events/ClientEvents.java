@@ -5,11 +5,15 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.HorseRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +27,8 @@ import net.orcinus.cavesandtrenches.client.particles.AuraParticle;
 import net.orcinus.cavesandtrenches.client.particles.providers.SilverBombProvider;
 import net.orcinus.cavesandtrenches.client.particles.providers.WarpedProvider;
 import net.orcinus.cavesandtrenches.client.renderer.SparkleRenderer;
+import net.orcinus.cavesandtrenches.client.renderer.layer.BannerLayer;
+import net.orcinus.cavesandtrenches.client.renderer.layer.HorseBannerLayer;
 import net.orcinus.cavesandtrenches.entities.SilverBombEntity;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
@@ -48,6 +54,16 @@ public class ClientEvents {
 
         MenuScreens.register(CTMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
 
+    }
+
+    @SubscribeEvent
+    public static void addLayers(EntityRenderersEvent.AddLayers event) {
+        HorseRenderer horseRenderer = event.getRenderer(EntityType.HORSE);
+        horseRenderer.addLayer(new HorseBannerLayer(horseRenderer));
+        event.getSkins().forEach(skin -> {
+            PlayerRenderer playerRenderer = event.getSkin(skin);
+            playerRenderer.addLayer(new BannerLayer<>(playerRenderer));
+        });
     }
 
     @SubscribeEvent

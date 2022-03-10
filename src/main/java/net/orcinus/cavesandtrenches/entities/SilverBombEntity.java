@@ -27,6 +27,8 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.BlockPositionSource;
+import net.minecraft.world.level.gameevent.vibrations.VibrationListener;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -141,12 +143,13 @@ public class SilverBombEntity extends ThrowableItemProjectile {
                         if (this.shrapnel && compatUtil.isModInstalled("oreganized")) {
                             this.shrapnelExplode(compatUtil, "oreganized");
                         } else {
+                            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
                             this.level.explode(this, null, new ExplosionDamageCalculator() {
                                 @Override
                                 public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
                                     return world.getBlockState(pos).getBlock().defaultDestroyTime() < 3.0D;
                                 }
-                            }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, Explosion.BlockInteraction.BREAK);
+                            }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
                         }
                     }
                     this.remove(RemovalReason.DISCARDED);

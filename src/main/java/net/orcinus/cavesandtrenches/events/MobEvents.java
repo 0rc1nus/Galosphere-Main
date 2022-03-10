@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -23,8 +25,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -37,6 +41,7 @@ import net.orcinus.cavesandtrenches.entities.SparkleEntity;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
 import net.orcinus.cavesandtrenches.init.CTItems;
+import net.orcinus.cavesandtrenches.items.SterlingArmorItem;
 import net.orcinus.cavesandtrenches.util.BannerRendererUtil;
 
 import java.util.List;
@@ -81,6 +86,30 @@ public class MobEvents {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingDamage(LivingHurtEvent event) {
+        LivingEntity entity = event.getEntityLiving();
+        boolean flag = event.getSource().isExplosion();
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (flag) {
+                float reductionAmount = 0.0F;
+                Item item = entity.getItemBySlot(slot).getItem();
+                if (entity instanceof Horse horse) {
+                    Item horseItem = horse.getArmor().getItem();
+                    if (horseItem == CTItems.STERLING_HORSE_ARMOR.get()) {
+                        float damageReduction = 3.0F;
+                        reductionAmount = event.getAmount() - damageReduction;
+                    }
+                }
+                if (item instanceof SterlingArmorItem sterlingArmorItem) {
+                    float damageReduction = sterlingArmorItem.getExplosionResistance(slot);
+                    reductionAmount = event.getAmount() - damageReduction;
+                }
+                event.setAmount(reductionAmount);
             }
         }
     }

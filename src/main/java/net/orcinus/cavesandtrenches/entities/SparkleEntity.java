@@ -2,6 +2,7 @@ package net.orcinus.cavesandtrenches.entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -20,19 +21,15 @@ import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -44,31 +41,80 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.cavesandtrenches.entities.ai.BiteClusterGoal;
-import net.orcinus.cavesandtrenches.entities.ai.control.SparkleSwimmingControl;
+import net.orcinus.cavesandtrenches.entities.ai.LeaveWaterGoal;
+import net.orcinus.cavesandtrenches.entities.ai.SparkleRandomSwimmingGoal;
+import net.orcinus.cavesandtrenches.entities.ai.EnterAndSwimGoal;
+import net.orcinus.cavesandtrenches.entities.ai.control.SmoothSwimmingLandControl;
+import net.orcinus.cavesandtrenches.entities.ai.navigation.LandSwimmingPathNavigation;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
 import net.orcinus.cavesandtrenches.init.CTItems;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class SparkleEntity extends Animal {
     public static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(SparkleEntity.class, EntityDataSerializers.INT);
+    private boolean groundNavigationInuse;
     private int growthTicks;
+    public float prevInWaterProgress;
+    public float inWaterProgress;
+    private int swimTimer = -1000;
+    @Nullable
+    BlockPos clusterPos;
 
     public SparkleEntity(EntityType<? extends SparkleEntity> type, Level world) {
         super(type, world);
-        this.moveControl = new SparkleSwimmingControl(this);
-        this.lookControl = new SmoothSwimmingLookControl(this, 20);
+        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
+        switchNavigator(false);
+    }
+
+    private void switchNavigator(boolean onLand) {
+        if (onLand) {
+            this.moveControl = new MoveControl(this);
+            this.navigation = new GroundPathNavigation(this, level);
+            this.groundNavigationInuse = true;
+        } else {
+            this.moveControl = new SmoothSwimmingLandControl(this, 1.2F, 1.6F);
+            this.navigation = new LandSwimmingPathNavigation(this, level);
+            this.groundNavigationInuse = false;
+        }
     }
 
     @Override
-    public PathNavigation getNavigation() {
-        return new SparklePathNavigation(this, this.level);
+    public void tick() {
+        super.tick();
+        prevInWaterProgress = inWaterProgress;
+        if (this.isInWaterOrBubble() && inWaterProgress < 5.0F) {
+            inWaterProgress++;
+        }
+        if (!this.isInWaterOrBubble() && inWaterProgress > 0.0F) {
+            inWaterProgress--;
+        }
+        if (this.isInWaterOrBubble() && this.groundNavigationInuse) {
+            switchNavigator(false);
+        }
+        if (!this.isInWaterOrBubble() && !this.groundNavigationInuse) {
+            switchNavigator(true);
+        }
+        if (inWaterProgress > 0) {
+            this.maxUpStep = 1;
+        } else {
+            this.maxUpStep = 0.6F;
+        }
+        if (!level.isClientSide) {
+            if (isInWater()) {
+                swimTimer++;
+            } else {
+                swimTimer--;
+            }
+        }
     }
 
     @Override
@@ -93,7 +139,7 @@ public class SparkleEntity extends Animal {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.2F).add(Attributes.ATTACK_DAMAGE, 2.0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.2F).add(Attributes.FOLLOW_RANGE, 16.0D);
     }
 
     @Override
@@ -112,6 +158,10 @@ public class SparkleEntity extends Animal {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+        this.setClusterPos(null);
+        if (tag.contains("ClusterPos")) {
+            this.setClusterPos(NbtUtils.readBlockPos(tag.getCompound("ClusterPos")));
+        }
         this.setCrystalType(CrystalType.BY_ID[tag.getInt("CrystalType")]);
         this.setGrowthTicks(tag.getInt("GrowthTicks"));
     }
@@ -119,8 +169,23 @@ public class SparkleEntity extends Animal {
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
+        if (this.hasCluster()) {
+            tag.put("ClusterPos", NbtUtils.writeBlockPos(this.getClusterPos()));
+        }
         tag.putInt("CrystalType", this.getCrystaltype().getId());
         tag.putInt("GrowthTicks", this.getGrowthTicks());
+    }
+
+    public boolean hasCluster() {
+        return this.getClusterPos() != null;
+    }
+
+    public BlockPos getClusterPos() {
+        return this.clusterPos;
+    }
+
+    public void setClusterPos(BlockPos blockPos) {
+        this.clusterPos = blockPos;
     }
 
     public void setGrowthTicks(int growthTicks) {
@@ -141,14 +206,16 @@ public class SparkleEntity extends Animal {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(CTBlocks.MYSTERIA_VINES.get().asItem()), false));
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0D, 10));
-        this.goalSelector.addGoal(6, new BiteClusterGoal(this));
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(1, new BiteClusterGoal(this));
+        this.goalSelector.addGoal(2, new EnterAndSwimGoal(this));
+        this.goalSelector.addGoal(2, new LeaveWaterGoal(this));
+        this.goalSelector.addGoal(3, new PanicGoal(this, 1.4D));
+        this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(CTBlocks.MYSTERIA_VINES.get().asItem()), false));
+        this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.addGoal(7, new SparkleRandomSwimmingGoal(this, 1.0D, 10));
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -169,6 +236,7 @@ public class SparkleEntity extends Animal {
     @Override
     public void aiStep() {
         super.aiStep();
+        System.out.println("The Cluster Pos is at " + this.getClusterPos());
         if (!this.level.isClientSide()) {
             if (this.getGrowthTicks() > 0) {
                 this.setGrowthTicks(this.getGrowthTicks() - 1);
@@ -215,6 +283,14 @@ public class SparkleEntity extends Animal {
         for (int i = 0; i < rolls; i++) {
             this.spawnAtLocation(item);
         }
+    }
+
+    public boolean shouldEnterWater() {
+        return swimTimer <= -1000;
+    }
+
+    public boolean shouldLeaveWater() {
+        return swimTimer > 600;
     }
 
     public enum CrystalType {
