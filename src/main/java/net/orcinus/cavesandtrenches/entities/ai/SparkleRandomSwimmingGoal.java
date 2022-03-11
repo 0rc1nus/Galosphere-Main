@@ -63,12 +63,12 @@ public class SparkleRandomSwimmingGoal extends RandomStrollGoal {
 
     private boolean surffaceClear(BlockPos pos, int dx, int dz, int scale) {
         BlockPos blockpos = pos.offset(dx * scale, 0, dz * scale);
-        return this.mob.level.getFluidState(blockpos).m_205070_(FluidTags.LAVA) || this.mob.level.getFluidState(blockpos).m_205070_(FluidTags.WATER) && !this.mob.level.getBlockState(blockpos).getMaterial().blocksMotion();
+        return this.mob.level.getFluidState(blockpos).is(FluidTags.LAVA) || this.mob.level.getFluidState(blockpos).is(FluidTags.WATER) && !this.mob.level.getBlockState(blockpos).getMaterial().blocksMotion();
     }
 
     public Vec3 findSurfaceTarget(PathfinderMob sparkleEntity) {
         BlockPos abovePos = sparkleEntity.blockPosition();
-        while (sparkleEntity.level.getFluidState(abovePos).m_205070_(FluidTags.WATER) || sparkleEntity.level.getFluidState(abovePos).m_205070_(FluidTags.LAVA)){
+        while (sparkleEntity.level.getFluidState(abovePos).is(FluidTags.WATER) || sparkleEntity.level.getFluidState(abovePos).is(FluidTags.LAVA)){
             abovePos = abovePos.above();
         }
         if(waterIsClear(abovePos.below(), 0, 0, 0) && surffaceClear(abovePos.below(), 0, 0, 0)){

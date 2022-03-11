@@ -32,7 +32,7 @@ public class StiffenedVinesFeature extends Feature<NoneFeatureConfiguration> {
         Random random = context.random();
         int radius = UniformInt.of(5, 7).sample(random) + 1;
         List<BlockPos> placeList = Lists.newArrayList();
-        if (!world.getBlockState(blockPos.above()).m_204336_(BlockTags.BASE_STONE_OVERWORLD)) {
+        if (!world.getBlockState(blockPos.above()).is(BlockTags.BASE_STONE_OVERWORLD)) {
             return false;
         } else {
             for (int x = -radius; x <= radius; x++) {
@@ -48,7 +48,7 @@ public class StiffenedVinesFeature extends Feature<NoneFeatureConfiguration> {
             for (BlockPos placePos : placeList) {
                 int length = Mth.nextInt(random, 1, 3);
                 for (int i = 0; i <= length; i++) {
-                    if (world.getBlockState(placePos.above()).m_204336_(BlockTags.BASE_STONE_OVERWORLD)) {
+                    if (world.getBlockState(placePos.above()).is(BlockTags.BASE_STONE_OVERWORLD)) {
                         if (world.isStateAtPosition(placePos.below(i), DripstoneUtils::isEmptyOrWater)) {
                             world.setBlock(placePos.below(i), CTBlocks.STIFFENED_ROOTS_PLANTS.get().defaultBlockState().setValue(StiffenedRootsPlantBlock.WATERLOGGED, world.getFluidState(placePos.below(i)).getType() == Fluids.WATER), 2);
                             if (i == length) {

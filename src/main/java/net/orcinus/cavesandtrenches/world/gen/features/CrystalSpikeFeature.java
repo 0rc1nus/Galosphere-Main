@@ -51,7 +51,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         int radiusCheck = config.xzRadius.sample(random) + 1;
         final int randomChance = random.nextInt(4);
         final int stepHeight = radiusCheck + 14 + Mth.nextInt(random, 10, 14);
-        if (world.isStateAtPosition(blockPos.relative(config.crystal_direction.getDirection().getOpposite()), DripstoneUtils::isEmptyOrWaterOrLava) && world.getBlockState(blockPos).m_204336_(BlockTags.BASE_STONE_OVERWORLD)) {
+        if (world.isStateAtPosition(blockPos.relative(config.crystal_direction.getDirection().getOpposite()), DripstoneUtils::isEmptyOrWaterOrLava) && world.getBlockState(blockPos).is(BlockTags.BASE_STONE_OVERWORLD)) {
             if (this.placeSpike(world, blockPos, radiusCheck, stepHeight, randomChance, trigList, config.crystal_direction.getDirection(), random)) {
                 flag = placeCrystals(world, random, config, trigList, clusterPos, flag);
             }
@@ -140,7 +140,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                 for (int y = -height; y <= height; y++) {
                     BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z);
                     for (Direction direction : Direction.values()) {
-                        if (world.getBlockState(pos).m_204336_(BlockTags.BASE_STONE_OVERWORLD) && world.isStateAtPosition(pos.relative(direction), DripstoneUtils::isEmptyOrWaterOrLava)) {
+                        if (world.getBlockState(pos).is(BlockTags.BASE_STONE_OVERWORLD) && world.isStateAtPosition(pos.relative(direction), DripstoneUtils::isEmptyOrWaterOrLava)) {
                             world.setBlock(pos, Blocks.CALCITE.defaultBlockState(), 2);
                             flag = true;
                         }
