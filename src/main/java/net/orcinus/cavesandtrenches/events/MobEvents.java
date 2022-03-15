@@ -29,6 +29,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -52,6 +53,14 @@ public class MobEvents {
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
         event.put(CTEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
+    }
+
+    @SubscribeEvent
+    public void onBreakSpeedChanged(PlayerEvent.BreakSpeed event) {
+        BlockState state = event.getState();
+        if (state.getBlock() == Blocks.BUDDING_AMETHYST) {
+            event.setNewSpeed(2.0F);
+        }
     }
 
     @SubscribeEvent
@@ -109,7 +118,9 @@ public class MobEvents {
                     float damageReduction = sterlingArmorItem.getExplosionResistance(slot);
                     reductionAmount = event.getAmount() - damageReduction;
                 }
-                event.setAmount(reductionAmount);
+                if (item instanceof SterlingArmorItem || (entity instanceof Horse && ((Horse)entity).getArmor().getItem() == CTItems.STERLING_HORSE_ARMOR.get())){
+                    event.setAmount(reductionAmount);
+                }
             }
         }
     }

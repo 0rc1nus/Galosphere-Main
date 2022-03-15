@@ -317,5 +317,9 @@ public class CombustionTableMenu extends AbstractContainerMenu {
         return itemstack;
     }
 
+    public Slot getBombSlot() {
+        return this.slots.get(1);
+    }
+
 
 }

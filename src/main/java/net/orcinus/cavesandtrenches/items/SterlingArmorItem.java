@@ -76,7 +76,7 @@ public class SterlingArmorItem extends ArmorItem {
 
         @Override
         public int getDefenseForSlot(EquipmentSlot slot) {
-            int[] slots = new int[]{1, 4, 5, 1};
+            int[] slots = new int[]{1, 3, 4, 1};
             return slots[slot.getIndex()];
         }
 
