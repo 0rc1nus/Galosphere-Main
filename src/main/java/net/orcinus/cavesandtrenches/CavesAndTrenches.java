@@ -12,11 +12,13 @@ import net.orcinus.cavesandtrenches.events.WorldEvents;
 import net.orcinus.cavesandtrenches.init.CTBiomes;
 import net.orcinus.cavesandtrenches.init.CTBlockEntities;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
+import net.orcinus.cavesandtrenches.init.CTConfiguredFeatures;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
 import net.orcinus.cavesandtrenches.init.CTFeatures;
 import net.orcinus.cavesandtrenches.init.CTItems;
 import net.orcinus.cavesandtrenches.init.CTMenuTypes;
 import net.orcinus.cavesandtrenches.init.CTParticleTypes;
+import net.orcinus.cavesandtrenches.init.CTPlacedFeatures;
 import net.orcinus.cavesandtrenches.util.CavesAndTrenchesTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,10 +29,6 @@ public class CavesAndTrenches {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "cavesandtrenches";
     public static final CreativeModeTab CAVESANDTRENCHES = new CavesAndTrenchesTab(MODID);
-    //seed -7714140795261595653
-    //seed coords -145 95 77
-    //seed 7856658500923416262
-    //seed coords -73 69 150
 
     public CavesAndTrenches() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -54,6 +52,10 @@ public class CavesAndTrenches {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            CTConfiguredFeatures.init();
+            CTPlacedFeatures.init();
+        });
     }
 
 }

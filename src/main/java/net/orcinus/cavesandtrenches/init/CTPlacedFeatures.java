@@ -2,13 +2,16 @@ package net.orcinus.cavesandtrenches.init;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.EnvironmentScanPlacement;
@@ -22,6 +25,9 @@ import net.orcinus.cavesandtrenches.CavesAndTrenches;
 import java.util.List;
 
 public class CTPlacedFeatures {
+
+    public static void init() {
+    }
 
     //Large Spike 180 212
     //Normal Spike 256 324
@@ -40,12 +46,18 @@ public class CTPlacedFeatures {
     public static final Holder<PlacedFeature> STIFFENED_VINES = registerPlacedFeature("stiffened_vines", CTConfiguredFeatures.STIFFINED_ROOF, CountPlacement.of(188), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(-1)), BiomeFilter.biome());
     public static final Holder<PlacedFeature> FLUTTERED_LEAF = registerPlacedFeature("fluttered_leaf", CTConfiguredFeatures.FLUTTERED_LEAF, CountPlacement.of(160), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
 
-    public static Holder<PlacedFeature> registerPlacedFeature(String string, Holder<? extends ConfiguredFeature<?, ?>> holder, List<PlacementModifier> list) {
-        return BuiltinRegistries.m_206380_(BuiltinRegistries.PLACED_FEATURE, CavesAndTrenches.MODID + ":" + string, new PlacedFeature(Holder.m_205706_(holder), List.copyOf(list)));
+    public static <FC extends FeatureConfiguration> Holder<PlacedFeature> registerPlacedFeature(String id, Holder<ConfiguredFeature<FC, ?>> feature, PlacementModifier... placementModifiers) {
+        return registerPlacedFeature(id, feature, List.of(placementModifiers));
     }
 
-    public static Holder<PlacedFeature> registerPlacedFeature(String string, Holder<? extends ConfiguredFeature<?, ?>> holder, PlacementModifier ... placementModifiers) {
-        return registerPlacedFeature(string, holder, List.of(placementModifiers));
+    public static <FC extends FeatureConfiguration> Holder<PlacedFeature> registerPlacedFeature(String id, Holder<ConfiguredFeature<FC, ?>> feature, List<PlacementModifier> placementModifiers) {
+        ResourceLocation resourceLocation = new ResourceLocation(CavesAndTrenches.MODID, id);
+        if (BuiltinRegistries.PLACED_FEATURE.keySet().contains(resourceLocation))
+            throw new IllegalStateException("Placed Feature ID: \"" + resourceLocation + "\" already exists in the Placed Features registry!");
+
+        PlacedFeature placedFeature = new PlacedFeature(Holder.hackyErase(feature), List.copyOf(placementModifiers));
+
+        return BuiltinRegistries.register(BuiltinRegistries.PLACED_FEATURE, resourceLocation, placedFeature);
     }
 
     private static List<PlacementModifier> orePlacement(PlacementModifier modifier, PlacementModifier modifier2) {

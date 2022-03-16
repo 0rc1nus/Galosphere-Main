@@ -96,6 +96,12 @@ public class CombustionTableMenu extends AbstractContainerMenu {
         return stillValid(this.access, player, CTBlocks.COMBUSTION_TABLE.get());
     }
 
+    //(currentTag.getInt("Bouncy") == 2 && (exploStat3.is(Items.SLIME_BALL) || exploStat2.is(Items.SLIME_BALL)))
+
+    public boolean integerAllowanceTag(CompoundTag tag, String nbtName, Item item, ItemStack otherSlotStack, ItemStack otherSlotStack2) {
+        return tag.getInt(nbtName) == 2 && (otherSlotStack.is(item) || otherSlotStack2.is(item));
+    }
+
     @Override
     public void slotsChanged(Container container) {
         ItemStack bombStack = this.container.getItem(0);
@@ -184,7 +190,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 }
                 if (exploStat2.is(leadIngot)) {
                     if (currentTag != null) {
-                        if ((!currentTag.getBoolean("Shrapnel")&& (exploStat3.is(leadIngot) || exploStat1.is(leadIngot))) || currentTag.getBoolean("Shrapnel")) {
+                        if ((!currentTag.getBoolean("Shrapnel") && (exploStat3.is(leadIngot) || exploStat1.is(leadIngot))) || currentTag.getBoolean("Shrapnel")) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
                             this.broadcastChanges();

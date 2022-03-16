@@ -21,8 +21,8 @@ public class LeaveWaterGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (this.creature.level.getFluidState(this.creature.blockPosition()).m_205070_(FluidTags.WATER) && (this.creature.getTarget() != null || this.creature.getRandom().nextInt(30) == 0)){
-            if(this.creature.shouldLeaveWater()) {
+        if (this.creature.level.getFluidState(this.creature.blockPosition()).is(FluidTags.WATER) && (this.creature.getTarget() != null || this.creature.getRandom().nextInt(30) == 0)){
+            if (this.creature.shouldLeaveWater()) {
                 targetPos = generateTarget();
                 return targetPos != null;
             }
@@ -32,7 +32,7 @@ public class LeaveWaterGoal extends Goal {
 
     @Override
     public void start() {
-        if(targetPos != null){
+        if (targetPos != null) {
             this.creature.getNavigation().moveTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), 1D);
         }
     }
@@ -55,7 +55,7 @@ public class LeaveWaterGoal extends Goal {
             this.creature.getNavigation().stop();
             return false;
         }
-        return !this.creature.getNavigation().isDone() && targetPos != null && !this.creature.level.getFluidState(targetPos).m_205070_(FluidTags.WATER);
+        return !this.creature.getNavigation().isDone() && targetPos != null && !this.creature.level.getFluidState(targetPos).is(FluidTags.WATER);
     }
 
     public BlockPos generateTarget() {
@@ -64,7 +64,7 @@ public class LeaveWaterGoal extends Goal {
         while (vector3d != null && tries < 8){
             boolean waterDetected = false;
             for(BlockPos blockpos1 : BlockPos.betweenClosed(Mth.floor(vector3d.x - 2.0D), Mth.floor(vector3d.y - 1.0D), Mth.floor(vector3d.z - 2.0D), Mth.floor(vector3d.x + 2.0D), Mth.floor(vector3d.y), Mth.floor(vector3d.z + 2.0D))) {
-                if (this.creature.level.getFluidState(blockpos1).m_205070_(FluidTags.WATER)) {
+                if (this.creature.level.getFluidState(blockpos1).is(FluidTags.WATER)) {
                     waterDetected = true;
                     break;
                 }

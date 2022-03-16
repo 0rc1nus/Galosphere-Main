@@ -51,6 +51,7 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(CTBlocks.STIFFENED_ROOTS_PLANTS.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CTBlocks.WARPED_ANCHOR.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CTBlocks.FLUTTER_FOND.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(CTBlocks.FLUTTERLEAF.get(), RenderType.cutout());
 
         MenuScreens.register(CTMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
 

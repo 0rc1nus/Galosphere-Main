@@ -19,7 +19,7 @@ public class EnterAndSwimGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (this.sparkle.isOnGround() && !this.sparkle.level.getFluidState(this.sparkle.blockPosition()).m_205070_(FluidTags.WATER)){
+        if (this.sparkle.isOnGround() && !this.sparkle.level.getFluidState(this.sparkle.blockPosition()).is(FluidTags.WATER)){
             if (this.sparkle.shouldEnterWater() && this.sparkle.getRandom().nextInt(30) == 0){
                 this.waterPos = this.getWaterPos();
                 return this.waterPos != null;
@@ -30,7 +30,7 @@ public class EnterAndSwimGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.sparkle.shouldEnterWater() && !this.sparkle.getNavigation().isDone() && this.waterPos != null && !this.sparkle.level.getFluidState(this.sparkle.blockPosition()).m_205070_(FluidTags.WATER);
+        return this.sparkle.shouldEnterWater() && !this.sparkle.getNavigation().isDone() && this.waterPos != null && !this.sparkle.level.getFluidState(this.sparkle.blockPosition()).is(FluidTags.WATER);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class EnterAndSwimGoal extends Goal {
             while (this.sparkle.level.isEmptyBlock(blockpos1) && blockpos1.getY() > 1){
                 blockpos1 = blockpos1.below();
             }
-            if (this.sparkle.level.getFluidState(blockpos1).m_205070_(FluidTags.WATER)){
+            if (this.sparkle.level.getFluidState(blockpos1).is(FluidTags.WATER)){
                 blockpos = blockpos1;
             }
         }

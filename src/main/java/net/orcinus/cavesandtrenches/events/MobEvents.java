@@ -50,7 +50,7 @@ import java.util.List;
 public class MobEvents {
 
     @SubscribeEvent
-    public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
+    public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(CTEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
     }
 
@@ -109,7 +109,9 @@ public class MobEvents {
                     float damageReduction = sterlingArmorItem.getExplosionResistance(slot);
                     reductionAmount = event.getAmount() - damageReduction;
                 }
-                event.setAmount(reductionAmount);
+                if (entity.getItemBySlot(slot).getItem() instanceof SterlingArmorItem || (entity instanceof Horse && ((Horse)entity).getArmor().is(CTItems.STERLING_HORSE_ARMOR.get()))){
+                    event.setAmount(reductionAmount);
+                }
             }
         }
     }

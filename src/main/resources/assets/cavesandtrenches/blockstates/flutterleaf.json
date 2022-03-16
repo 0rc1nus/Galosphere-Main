@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "shape=top": {
+      "model": "cavesandtrenches:block/flutterleaf_top"
+    },
+    "shape=middle": {
+      "model": "cavesandtrenches:block/flutterleaf_middle"
+    },
+    "shape=bottom": {
+      "model": "cavesandtrenches:block/flutterleaf_bottom"
+    }
+  }
+}

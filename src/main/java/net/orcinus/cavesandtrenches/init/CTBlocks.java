@@ -21,6 +21,7 @@ import net.orcinus.cavesandtrenches.blocks.AmethystStairsBlock;
 import net.orcinus.cavesandtrenches.blocks.AuraListenerBlock;
 import net.orcinus.cavesandtrenches.blocks.CombustionTableBlock;
 import net.orcinus.cavesandtrenches.blocks.FlutterFondBlock;
+import net.orcinus.cavesandtrenches.blocks.FlutterFrondBlock;
 import net.orcinus.cavesandtrenches.blocks.LumiereComposterBlock;
 import net.orcinus.cavesandtrenches.blocks.MysteriaVinesBlock;
 import net.orcinus.cavesandtrenches.blocks.MysteriaVinesPlantBlock;
@@ -64,6 +65,7 @@ public class CTBlocks {
     public static final RegistryObject<Block> LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER).dropsLike(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> COMBUSTION_TABLE = registerBlock("combustion_table", () -> new CombustionTableBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2.5F).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> FLUTTER_FOND = registerBlock("flutter_fond", () -> new FlutterFondBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission().sound(SoundType.SMALL_DRIPLEAF).instabreak()));
+    public static final RegistryObject<Block> FLUTTERLEAF = registerBlock("flutterleaf", () -> new FlutterFrondBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak()));
 
     /*
     Lichen Caves
