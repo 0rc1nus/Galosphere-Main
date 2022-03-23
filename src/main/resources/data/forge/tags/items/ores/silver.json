@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "cavesandtrenches:silver_ore",
-    "cavesandtrenches:deepslate_silver_ores"
+    "galosphere:silver_ore",
+    "galosphere:deepslate_silver_ores"
   ]
 }

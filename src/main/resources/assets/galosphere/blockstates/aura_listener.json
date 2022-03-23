@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "listening=true": {
+      "model": "galosphere:block/aura_listener_active"
+    },
+    "listening=false": {
+      "model": "galosphere:block/aura_listener_inactive"
+    }
+  }
+}

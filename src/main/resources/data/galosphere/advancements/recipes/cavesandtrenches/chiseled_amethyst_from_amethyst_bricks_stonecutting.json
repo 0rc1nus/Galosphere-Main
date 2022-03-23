@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:chiseled_amethyst_from_amethyst_bricks_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_amethyst_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:amethyst_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:chiseled_amethyst_from_amethyst_bricks_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_amethyst_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

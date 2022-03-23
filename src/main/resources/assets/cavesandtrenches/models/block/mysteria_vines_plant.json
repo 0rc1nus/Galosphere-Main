@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "cavesandtrenches:block/mysteria_vines_plant"
-  }
-}

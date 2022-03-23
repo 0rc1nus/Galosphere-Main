@@ -1,14 +1,14 @@
 {
   "replace": false,
   "values": [
-    "cavesandtrenches:silver_ore",
-    "cavesandtrenches:deepslate_silver_ore",
-    "cavesandtrenches:raw_silver_block",
-    "cavesandtrenches:silver_block",
-    "cavesandtrenches:mysteria_cinders",
-    "cavesandtrenches:mysteria_log",
-    "cavesandtrenches:warped_anchor",
-    "cavesandtrenches:aura_listener",
-    "cavesandtrenches:combustion_table"
+    "galosphere:silver_ore",
+    "galosphere:deepslate_silver_ore",
+    "galosphere:raw_silver_block",
+    "galosphere:silver_block",
+    "galosphere:mysteria_cinders",
+    "galosphere:mysteria_log",
+    "galosphere:warped_anchor",
+    "galosphere:aura_listener",
+    "galosphere:combustion_table"
   ]
 }

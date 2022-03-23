@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "galosphere:block/mysteria_log",
+    "end": "galosphere:block/mysteria_log_top"
+  }
+}

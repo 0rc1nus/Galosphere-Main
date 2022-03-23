@@ -1,0 +1,7 @@
+{
+  "parent": "galosphere:block/warped_anchor",
+  "textures": {
+    "0": "galosphere:block/warped_anchor_4",
+    "2": "galosphere:block/warped_anchor_top_powered"
+  }
+}

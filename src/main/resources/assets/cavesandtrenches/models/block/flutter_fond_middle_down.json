@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "cavesandtrenches:block/flutter_fond_middle_down"
-  }
-}

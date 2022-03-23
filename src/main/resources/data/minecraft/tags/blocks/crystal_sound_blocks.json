@@ -1,13 +1,13 @@
 {
   "replace": false,
   "values": [
-    "cavesandtrenches:amethyst_slab",
-    "cavesandtrenches:amethyst_stairs",
-    "cavesandtrenches:smooth_amethyst",
-    "cavesandtrenches:smooth_amethyst_slab",
-    "cavesandtrenches:smooth_amethyst_stairs",
-    "cavesandtrenches:amethyst_bricks",
-    "cavesandtrenches:allurite_block",
-    "cavesandtrenches:lumiere_block"
+    "galosphere:amethyst_slab",
+    "galosphere:amethyst_stairs",
+    "galosphere:smooth_amethyst",
+    "galosphere:smooth_amethyst_slab",
+    "galosphere:smooth_amethyst_stairs",
+    "galosphere:amethyst_bricks",
+    "galosphere:allurite_block",
+    "galosphere:lumiere_block"
   ]
 }

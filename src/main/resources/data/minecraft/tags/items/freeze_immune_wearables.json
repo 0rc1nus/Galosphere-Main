@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "cavesandtrenches:sterling_helmet",
-    "cavesandtrenches:sterling_chestplate",
-    "cavesandtrenches:sterling_leggings",
-    "cavesandtrenches:sterling_boots",
-    "cavesandtrenches:sterling_horse_armor"
+    "galosphere:sterling_helmet",
+    "galosphere:sterling_chestplate",
+    "galosphere:sterling_leggings",
+    "galosphere:sterling_boots",
+    "galosphere:sterling_horse_armor"
   ]
 }

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:amethyst_slab"
+    ]
+  },
+  "criteria": {
+    "hasamethyst_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:amethyst_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:amethyst_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hasamethyst_block",
+      "has_the_recipe"
+    ]
+  ]
+}

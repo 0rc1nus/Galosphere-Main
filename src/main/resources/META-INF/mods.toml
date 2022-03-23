@@ -2,22 +2,22 @@ modLoader="javafml"
 loaderVersion="[32,)"
 license="All rights reserved"
 [[mods]]
-modId="cavesandtrenches"
+modId="galosphere"
 version="1.0.0"
-displayName="Caves And Trenches"
-logoFile="cavesandtrenches.png"
+displayName="Galosphere"
+logoFile="galosphere.png"
 credits="You the player!"
 authors="Orcinus, Ninni"
 description='''
 This mod enhances the underground even more by adding new content to the base game
 '''
-[[dependencies.cavesandtrenches]]
+[[dependencies.galosphere]]
     modId="forge"
     mandatory=true
     versionRange="[39.0.0,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.cavesandtrenches]]
+[[dependencies.galosphere]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.18.1,)"

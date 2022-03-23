@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "warped_charge=0": {
+      "model": "galosphere:block/warped_anchor_0"
+    },
+    "warped_charge=1": {
+      "model": "galosphere:block/warped_anchor_1"
+    },
+    "warped_charge=2": {
+      "model": "galosphere:block/warped_anchor_2"
+    },
+    "warped_charge=3": {
+      "model": "galosphere:block/warped_anchor_3"
+    },
+    "warped_charge=4": {
+      "model": "galosphere:block/warped_anchor_4"
+    }
+  }
+}

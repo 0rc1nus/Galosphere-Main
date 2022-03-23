@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "galosphere:block/allurite_cluster"
+  }
+}

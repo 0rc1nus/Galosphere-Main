@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:amethyst_bricks_stairs"
+    ]
+  },
+  "criteria": {
+    "hasamethyst_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:amethyst_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:amethyst_bricks_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hasamethyst_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

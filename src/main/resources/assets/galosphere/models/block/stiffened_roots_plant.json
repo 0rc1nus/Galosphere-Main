@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "galosphere:block/stiffened_roots_plant"
+  }
+}
