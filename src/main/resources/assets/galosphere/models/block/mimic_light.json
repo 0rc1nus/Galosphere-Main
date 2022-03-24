@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "galosphere:block/mimic_light"
+    "all": "galosphere:block/lumiere_lamp"
   }
 }
