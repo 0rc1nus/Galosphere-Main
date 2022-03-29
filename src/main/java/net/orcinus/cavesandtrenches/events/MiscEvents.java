@@ -12,7 +12,7 @@ import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 import net.orcinus.cavesandtrenches.api.IBanner;
 import net.orcinus.cavesandtrenches.crafting.AuraListenerDispenseItemBehavior;
 import net.orcinus.cavesandtrenches.crafting.LumiereComposterDispenseItemBehavior;
@@ -21,7 +21,7 @@ import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTItems;
 import net.orcinus.cavesandtrenches.util.BannerRendererUtil;
 
-@Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MiscEvents {
 
     @SubscribeEvent

@@ -10,15 +10,13 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 import net.orcinus.cavesandtrenches.client.gui.CombustionTableScreen;
 import net.orcinus.cavesandtrenches.client.model.SparkleModel;
 import net.orcinus.cavesandtrenches.client.model.SterlingArmorModel;
@@ -29,16 +27,13 @@ import net.orcinus.cavesandtrenches.client.particles.providers.WarpedProvider;
 import net.orcinus.cavesandtrenches.client.renderer.SparkleRenderer;
 import net.orcinus.cavesandtrenches.client.renderer.layer.BannerLayer;
 import net.orcinus.cavesandtrenches.client.renderer.layer.HorseBannerLayer;
-import net.orcinus.cavesandtrenches.entities.SilverBombEntity;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 import net.orcinus.cavesandtrenches.init.CTEntityTypes;
-import net.orcinus.cavesandtrenches.init.CTItems;
 import net.orcinus.cavesandtrenches.init.CTMenuTypes;
 import net.orcinus.cavesandtrenches.init.CTModelLayers;
 import net.orcinus.cavesandtrenches.init.CTParticleTypes;
-import net.orcinus.cavesandtrenches.items.SilverBombItem;
 
-@Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
 
     @SubscribeEvent

@@ -1,16 +1,11 @@
 package net.orcinus.cavesandtrenches.items;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
@@ -18,20 +13,18 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 import net.orcinus.cavesandtrenches.client.model.SterlingArmorModel;
 import net.orcinus.cavesandtrenches.init.CTItems;
-import org.checkerframework.checker.units.qual.A;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
 public class SterlingArmorItem extends ArmorItem {
     private static final SterlingArmorMaterial material = new SterlingArmorMaterial();
-    private static final String HELMET_TEXTURE = CavesAndTrenches.MODID + ":textures/entity/sterling_helmet.png";
-    private static final String LEGS_TEXTURE = CavesAndTrenches.MODID + ":textures/entity/sterling_armor_2.png";
-    private static final String TEXTURE = CavesAndTrenches.MODID + ":textures/entity/sterling_armor.png";
+    private static final String HELMET_TEXTURE = Galosphere.MODID + ":textures/entity/sterling_helmet.png";
+    private static final String LEGS_TEXTURE = Galosphere.MODID + ":textures/entity/sterling_armor_2.png";
+    private static final String TEXTURE = Galosphere.MODID + ":textures/entity/sterling_armor.png";
 
     public SterlingArmorItem(EquipmentSlot slot, Properties properties) {
         super(material, slot, properties);

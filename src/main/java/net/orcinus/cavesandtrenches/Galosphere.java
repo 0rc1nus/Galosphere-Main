@@ -23,15 +23,15 @@ import net.orcinus.cavesandtrenches.util.CavesAndTrenchesTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(CavesAndTrenches.MODID)
-public class CavesAndTrenches {
+@Mod(Galosphere.MODID)
+public class Galosphere {
     //-7189274751734808686
     
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "cavesandtrenches";
     public static final CreativeModeTab CAVESANDTRENCHES = new CavesAndTrenchesTab(MODID);
 
-    public CavesAndTrenches() {
+    public Galosphere() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         modEventBus.addListener(this::commonSetup);

@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 
 import java.util.function.Consumer;
 
@@ -28,7 +28,7 @@ public class BiomeReagentHandler {
     }
 
     private static ResourceKey<Biome> registerResourceKey(String name) {
-        return ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(CavesAndTrenches.MODID, name));
+        return ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Galosphere.MODID, name));
     }
 
 }

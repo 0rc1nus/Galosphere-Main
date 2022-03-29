@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 import net.orcinus.cavesandtrenches.blocks.AmethystSlabBlock;
 import net.orcinus.cavesandtrenches.blocks.AmethystStairsBlock;
 import net.orcinus.cavesandtrenches.blocks.AuraListenerBlock;
@@ -32,10 +32,10 @@ import net.orcinus.cavesandtrenches.blocks.WarpedAnchorBlock;
 
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = CavesAndTrenches.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CTBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CavesAndTrenches.MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Galosphere.MODID);
 
     public static final RegistryObject<Block> ALLURITE_BLOCK = registerBlock("allurite_block", () -> new AmethystBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> LUMIERE_BLOCK = registerBlock("lumiere_block", () -> new AmethystBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).requiresCorrectToolForDrops()));
@@ -73,7 +73,7 @@ public class CTBlocks {
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier) {
         RegistryObject<B> block = BLOCKS.register(name, supplier);
-        CTItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(CavesAndTrenches.CAVESANDTRENCHES)));
+        CTItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(Galosphere.CAVESANDTRENCHES)));
         return block;
     }
 

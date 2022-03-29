@@ -1,19 +1,17 @@
 package net.orcinus.cavesandtrenches.datagen;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 import net.orcinus.cavesandtrenches.init.CTBlocks;
 
 public class CTBlockstateProvider extends BlockStateProvider {
 
     public CTBlockstateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, CavesAndTrenches.MODID, exFileHelper);
+        super(gen, Galosphere.MODID, exFileHelper);
     }
 
     @Override

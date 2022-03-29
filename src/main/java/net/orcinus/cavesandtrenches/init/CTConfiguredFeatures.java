@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 import net.orcinus.cavesandtrenches.world.gen.features.config.CrystalSpikeConfig;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class CTConfiguredFeatures {
 //    }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<FC, ?>> registerConfiguredFeature(String id, F feature, FC featureConfiguration) {
-        ResourceLocation resourceLocation = new ResourceLocation(CavesAndTrenches.MODID, id);
+        ResourceLocation resourceLocation = new ResourceLocation(Galosphere.MODID, id);
 
         if (BuiltinRegistries.CONFIGURED_FEATURE.keySet().contains(resourceLocation))
             throw new IllegalStateException("Placed Feature ID: \"" + resourceLocation + "\" already exists in the Placed Features registry!");

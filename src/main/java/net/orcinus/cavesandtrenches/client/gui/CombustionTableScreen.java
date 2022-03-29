@@ -7,15 +7,13 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 
 @OnlyIn(Dist.CLIENT)
 public class CombustionTableScreen extends AbstractContainerScreen<CombustionTableMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CavesAndTrenches.MODID, "textures/misc/gui/container/combustion_table.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/misc/gui/container/combustion_table.png");
 
     public CombustionTableScreen(CombustionTableMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);

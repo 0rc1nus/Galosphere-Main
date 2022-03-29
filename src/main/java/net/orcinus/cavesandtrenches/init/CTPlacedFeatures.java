@@ -2,7 +2,6 @@ package net.orcinus.cavesandtrenches.init;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +19,7 @@ import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
-import net.orcinus.cavesandtrenches.CavesAndTrenches;
+import net.orcinus.cavesandtrenches.Galosphere;
 
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class CTPlacedFeatures {
     }
 
     public static <FC extends FeatureConfiguration> Holder<PlacedFeature> registerPlacedFeature(String id, Holder<ConfiguredFeature<FC, ?>> feature, List<PlacementModifier> placementModifiers) {
-        ResourceLocation resourceLocation = new ResourceLocation(CavesAndTrenches.MODID, id);
+        ResourceLocation resourceLocation = new ResourceLocation(Galosphere.MODID, id);
         if (BuiltinRegistries.PLACED_FEATURE.keySet().contains(resourceLocation))
             throw new IllegalStateException("Placed Feature ID: \"" + resourceLocation + "\" already exists in the Placed Features registry!");
 
