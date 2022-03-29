@@ -3,9 +3,12 @@ package net.orcinus.galosphere;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.events.WorldEvents;
@@ -52,6 +55,8 @@ public class Galosphere {
         eventBus.register(new WorldEvents());
         eventBus.register(new MobEvents());
         eventBus.register(new MiscEvents());
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GConfig.COMMON);
 
     }
 

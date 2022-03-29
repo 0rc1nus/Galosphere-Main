@@ -30,6 +30,10 @@ public class CTBlockLootTables extends BlockLoot {
         dropSelf(CTBlocks.SILVER_BLOCK.get());
         dropSelf(CTBlocks.AMETHYST_STAIRS.get());
         dropSelf(CTBlocks.AMETHYST_SLAB.get());
+        dropSelf(CTBlocks.ALLURITE_STAIRS.get());
+        dropSelf(CTBlocks.ALLURITE_SLAB.get());
+        dropSelf(CTBlocks.LUMIERE_STAIRS.get());
+        dropSelf(CTBlocks.LUMIERE_SLAB.get());
         dropSelf(CTBlocks.SMOOTH_AMETHYST.get());
         dropSelf(CTBlocks.SMOOTH_AMETHYST_STAIRS.get());
         dropSelf(CTBlocks.SMOOTH_AMETHYST_SLAB.get());
@@ -47,6 +51,8 @@ public class CTBlockLootTables extends BlockLoot {
         dropSelf(CTBlocks.COMBUSTION_TABLE.get());
         this.add(CTBlocks.MYSTERIA_VINES.get(), CTBlockLootTables::createMysteriaVinesDrop);
         this.add(CTBlocks.MYSTERIA_VINES_PLANTS.get(), CTBlockLootTables::createMysteriaVinesDrop);
+        this.add(CTBlocks.STIFFENED_ROOTS.get(), block -> createMysteriaVinesDrop(CTBlocks.STIFFENED_ROOTS.get()));
+        this.add(CTBlocks.STIFFENED_ROOTS_PLANTS.get(), CTBlockLootTables::createMysteriaVinesDrop);
     }
 
     protected static LootTable.Builder createMysteriaVinesDrop(Block block) {

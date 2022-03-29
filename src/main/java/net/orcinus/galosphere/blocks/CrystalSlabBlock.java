@@ -10,9 +10,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class AmethystSlabBlock extends SlabBlock {
+public class CrystalSlabBlock extends SlabBlock {
 
-    public AmethystSlabBlock(BlockBehaviour.Properties properties) {
+    public CrystalSlabBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 

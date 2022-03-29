@@ -177,11 +177,23 @@ public class MobEvents {
                 }
             }
         }
+        if (entity instanceof Player player) {
+            List<Monster> monsters = player.getLevel().getEntitiesOfClass(Monster.class, player.getBoundingBox().inflate(64.0D));
+            for (Monster monster : monsters) {
+                if (monster.isAlive())  {
+                    boolean flag = player.getUseItem().is(CTItems.INFRASCOPE.get());
+                    boolean usingItem = player.isUsingItem();
+                    monster.setGlowingTag(usingItem && flag);
+                }
+            }
+        }
         if (entity instanceof GlowSquid glowSquid) {
             Level world = glowSquid.level;
-            for (int x = -5; x <= 5; x++) {
-                for (int z = -5; z <= 5; z++) {
-                    for (int y = -3; y <= 3; y++) {
+            int radius = 5;
+            int height = 3;
+            for (int x = -radius; x <= radius; x++) {
+                for (int z = -radius; z <= radius; z++) {
+                    for (int y = -height; y <= height; y++) {
                         BlockPos glowSquidPos = glowSquid.blockPosition();
                         BlockPos pos = new BlockPos(glowSquidPos.getX() + x, glowSquidPos.getY() + y, glowSquidPos.getZ() + z);
                         if (world.getBlockState(pos).is(CTBlocks.MIMIC_LIGHT.get())){

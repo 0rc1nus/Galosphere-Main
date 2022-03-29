@@ -30,8 +30,14 @@ public class CTRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-        stonecutterResultFromBase(consumer, CTBlocks.AMETHYST_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
-        stonecutterResultFromBase(consumer, CTBlocks.AMETHYST_STAIRS.get(), Blocks.AMETHYST_BLOCK, 1);
+        stairsBlock(consumer, CTBlocks.ALLURITE_STAIRS.get(), CTBlocks.ALLURITE_BLOCK.get().asItem());
+        slabBlock(consumer, CTBlocks.ALLURITE_SLAB.get(), CTBlocks.ALLURITE_BLOCK.get().asItem());
+        stairsBlock(consumer, CTBlocks.LUMIERE_STAIRS.get(), CTBlocks.LUMIERE_BLOCK.get().asItem());
+        slabBlock(consumer, CTBlocks.LUMIERE_SLAB.get(), CTBlocks.LUMIERE_BLOCK.get().asItem());
+        stonecutterResultFromBase(consumer, CTBlocks.ALLURITE_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
+        stonecutterResultFromBase(consumer, CTBlocks.ALLURITE_STAIRS.get(), Blocks.AMETHYST_BLOCK, 1);
+        stonecutterResultFromBase(consumer, CTBlocks.LUMIERE_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
+        stonecutterResultFromBase(consumer, CTBlocks.LUMIERE_STAIRS.get(), Blocks.AMETHYST_BLOCK, 1);
 //        shaplessOne(consumer, CTItems.SILVER_INGOT.get(), CTBlocks.SILVER_BLOCK.get().asItem(), 9);
 //        twoXtwo(consumer, CTBlocks.ALLURITE_BLOCK.get(), CTItems.ALLURITE_SHARD.get(), 1);
 //        twoXtwo(consumer, CTBlocks.LUMIERE_BLOCK.get(), CTItems.LUMIERE_SHARD.get(), 1);

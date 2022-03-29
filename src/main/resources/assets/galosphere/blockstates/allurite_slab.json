@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "galosphere:block/allurite_slab_top"
+    },
+    "type=bottom": {
+      "model": "galosphere:block/allurite_slab"
+    },
+    "type=double": {
+      "model": "galosphere:block/allurite_block"
+    }
+  }
+}

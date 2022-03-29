@@ -14,7 +14,9 @@ public class CTItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent("amethyst_stairs", new ResourceLocation(Galosphere.MODID, "amethyst_stairs"));
-        withExistingParent("amethyst_slab", new ResourceLocation(Galosphere.MODID, "amethyst_slab"));
+        withExistingParent("allurite_stairs", new ResourceLocation(Galosphere.MODID, "allurite_stairs"));
+        withExistingParent("allurite_slab", new ResourceLocation(Galosphere.MODID, "allurite_slab"));
+        withExistingParent("lumiere_stairs", new ResourceLocation(Galosphere.MODID, "lumiere_stairs"));
+        withExistingParent("lumiere_slab", new ResourceLocation(Galosphere.MODID, "lumiere_slab"));
     }
 }

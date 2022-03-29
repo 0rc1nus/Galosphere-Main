@@ -98,10 +98,10 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "CavesAndTrenches",
+                "Specification-Title"     : "Galosphere",
                 "Specification-Vendor"    : "Orcinus, Ninni",
                 "Specification-Version"   : "1",
-                "Implementation-Title"    : "CavesAndTrenches",
+                "Implementation-Title"    : "Galosphere",
                 "Implementation-Version"  : "1.0.0",
                 "Implementation-Vendor"   : "Orcinus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),

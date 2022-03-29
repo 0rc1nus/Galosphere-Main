@@ -9,9 +9,9 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class AmethystStairsBlock extends StairBlock {
+public class CrystalStairsBlock extends StairBlock {
 
-    public AmethystStairsBlock(BlockState state, Properties properties) {
+    public CrystalStairsBlock(BlockState state, Properties properties) {
         super(state, properties);
     }
 

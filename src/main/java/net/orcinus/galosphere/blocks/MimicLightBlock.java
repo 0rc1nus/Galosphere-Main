@@ -38,8 +38,4 @@ public class MimicLightBlock extends Block {
         world.scheduleTick(new BlockPos(blockPos), state.getBlock(), 20);
     }
 
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
 }
