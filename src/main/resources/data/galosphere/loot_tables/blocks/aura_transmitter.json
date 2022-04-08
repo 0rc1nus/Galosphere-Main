@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "galosphere:aura_listener"
+          "name": "galosphere:aura_transmitter"
         }
       ],
       "conditions": [

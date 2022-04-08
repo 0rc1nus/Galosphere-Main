@@ -1,6 +1,8 @@
 package net.orcinus.galosphere.events;
 
+import net.minecraft.core.Registry;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -62,12 +64,16 @@ public class MiscEvents {
 
         DispenserBlock.registerBehavior(CTItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
 
-        DispenserBlock.registerBehavior(Items.WOODEN_PICKAXE, new PickaxeDispenseItemBehavior());
-        DispenserBlock.registerBehavior(Items.STONE_PICKAXE, new PickaxeDispenseItemBehavior());
-        DispenserBlock.registerBehavior(Items.IRON_PICKAXE, new PickaxeDispenseItemBehavior());
-        DispenserBlock.registerBehavior(Items.GOLDEN_PICKAXE, new PickaxeDispenseItemBehavior());
-        DispenserBlock.registerBehavior(Items.DIAMOND_PICKAXE, new PickaxeDispenseItemBehavior());
-        DispenserBlock.registerBehavior(Items.NETHERITE_PICKAXE, new PickaxeDispenseItemBehavior());
+//        DispenserBlock.registerBehavior(Items.WOODEN_PICKAXE, new PickaxeDispenseItemBehavior());
+//        DispenserBlock.registerBehavior(Items.STONE_PICKAXE, new PickaxeDispenseItemBehavior());
+//        DispenserBlock.registerBehavior(Items.IRON_PICKAXE, new PickaxeDispenseItemBehavior());
+//        DispenserBlock.registerBehavior(Items.GOLDEN_PICKAXE, new PickaxeDispenseItemBehavior());
+//        DispenserBlock.registerBehavior(Items.DIAMOND_PICKAXE, new PickaxeDispenseItemBehavior());
+//        DispenserBlock.registerBehavior(Items.NETHERITE_PICKAXE, new PickaxeDispenseItemBehavior());
+
+        Registry.ITEM.getTagOrEmpty(ItemTags.CLUSTER_MAX_HARVESTABLES).iterator().forEachRemaining(holder -> {
+            DispenserBlock.registerBehavior(holder.value(), new PickaxeDispenseItemBehavior());
+        });
 
     }
 

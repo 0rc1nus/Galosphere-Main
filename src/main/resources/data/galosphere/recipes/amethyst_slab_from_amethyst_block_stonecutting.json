@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "minecraft:amethyst_block"
   },
-  "result": "cavesandtrenches:amethyst_slab",
+  "result": "galosphere:amethyst_slab",
   "count": 2
 }

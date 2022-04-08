@@ -20,7 +20,7 @@ mixin {
     add sourceSets.main, "galosphere.refmap.json"
 }
 
-version = '1.0.0'
+version = '1.18.2-1.0.0'
 group = 'net.orcinus.galosphere'
 archivesBaseName = 'galosphere'
 
@@ -28,7 +28,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18'
+    mappings channel: 'official', version: '1.18.2'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
@@ -89,9 +89,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.1.2'
-    implementation fg.deobf("curse.maven:jei-238222:3599262")
-    implementation fg.deobf("curse.maven:jade-324717:3681458")
+    minecraft 'net.minecraftforge:forge:1.18.2-40.0.2'
+    implementation fg.deobf("curse.maven:jei-238222:3670531")
+    implementation fg.deobf("curse.maven:jade-324717:3671210")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 
@@ -99,7 +99,7 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "Galosphere",
-                "Specification-Vendor"    : "Orcinus, Ninni",
+                "Specification-Vendor"    : "Orcinus, Ninni, Binome",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : "Galosphere",
                 "Implementation-Version"  : "1.0.0",

@@ -1,6 +1,7 @@
 package net.orcinus.galosphere.init;
 
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpyglassItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -24,7 +25,6 @@ public class CTItems {
     public static final RegistryObject<Item> RAW_SILVER = registerBaseItem("raw_silver");
     public static final RegistryObject<Item> SILVER_NUGGET = registerBaseItem("silver_nugget");
     public static final RegistryObject<Item> SILVER_BOMB = ITEMS.register("silver_bomb", () -> new SilverBombItem(new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(16)));
-    public static final RegistryObject<Item> INFRASCOPE = ITEMS.register("infrascope", () -> new SpyglassItem(new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(1)));
     public static final RegistryObject<Item> STERLING_HELMET = ITEMS.register("sterling_helmet", () -> new SterlingArmorItem(EquipmentSlot.HEAD, new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(1)));
     public static final RegistryObject<Item> STERLING_CHESTPLATE = ITEMS.register("sterling_chestplate", () -> new SterlingArmorItem(EquipmentSlot.CHEST, new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(1)));
     public static final RegistryObject<Item> STERLING_LEGGINGS = ITEMS.register("sterling_leggings", () -> new SterlingArmorItem(EquipmentSlot.LEGS, new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(1)));

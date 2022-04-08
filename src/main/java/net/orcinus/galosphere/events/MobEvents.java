@@ -34,10 +34,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
+import net.orcinus.galosphere.api.ISoulWince;
 import net.orcinus.galosphere.blocks.AuraListenerBlock;
+import net.orcinus.galosphere.blocks.AuraTransmitterBlock;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.blocks.MimicLightBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
+import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.entities.SparkleEntity;
 import net.orcinus.galosphere.init.CTBlocks;
 import net.orcinus.galosphere.init.CTEntityTypes;
@@ -46,6 +49,7 @@ import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
 import java.util.List;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MobEvents {
@@ -58,7 +62,7 @@ public class MobEvents {
     @SubscribeEvent
     public void onBreakSpeedChanged(PlayerEvent.BreakSpeed event) {
         BlockState state = event.getState();
-        if (state.getBlock() == Blocks.BUDDING_AMETHYST) {
+        if (GConfig.speedReductionOnBuddingAmethyst.get() && state.getBlock() == Blocks.BUDDING_AMETHYST) {
             event.setNewSpeed(2.0F);
         }
     }
@@ -67,7 +71,6 @@ public class MobEvents {
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
         Entity attacker = event.getSource().getEntity();
-        int range = AuraListenerBlock.getRange();
         if (livingEntity instanceof Horse horse) {
             if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
                 ItemStack copy = ((IBanner) horse).getBanner();
@@ -75,27 +78,8 @@ public class MobEvents {
                 ((IBanner) horse).setBanner(ItemStack.EMPTY);
             }
         }
-        if (livingEntity instanceof Monster monster) {
-            BlockPos blockPos = monster.blockPosition();
-            Level world = monster.level;
-            int healRange = range / 2;
-            for (int x = -healRange; x <= healRange; x++) {
-                for (int z = -healRange; z <= healRange; z++) {
-                    for (int y = -healRange; y <= healRange; y++) {
-                        BlockPos rangePos = new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z);
-                        BlockState state = world.getBlockState(rangePos);
-                        if (state.is(CTBlocks.AURA_LISTENER.get())) {
-                            float monsterHealth = monster.getMaxHealth() / 8.0F;
-                            if (attacker instanceof Player player && state.getValue(AuraListenerBlock.LISTENING)) {
-                                float value = Math.max(1.0F, monsterHealth);
-                                player.heal(value);
-                                world.playSound(null, player.blockPosition(), SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 0.4F, 1.4F);
-                                ((ServerLevel) world).sendParticles(ParticleTypes.HEART, monster.getX(), monster.getY(), monster.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.15D);
-                            }
-                        }
-                    }
-                }
-            }
+        if (attacker instanceof LivingEntity && livingEntity instanceof ISoulWince) {
+            ((LivingEntity)attacker).heal(livingEntity.getMaxHealth() / 4);
         }
     }
 
@@ -177,36 +161,28 @@ public class MobEvents {
                 }
             }
         }
-        if (entity instanceof Player player) {
-            List<Monster> monsters = player.getLevel().getEntitiesOfClass(Monster.class, player.getBoundingBox().inflate(64.0D));
-            for (Monster monster : monsters) {
-                if (monster.isAlive())  {
-                    boolean flag = player.getUseItem().is(CTItems.INFRASCOPE.get());
-                    boolean usingItem = player.isUsingItem();
-                    monster.setGlowingTag(usingItem && flag);
-                }
-            }
-        }
         if (entity instanceof GlowSquid glowSquid) {
             Level world = glowSquid.level;
-            int radius = 5;
-            int height = 3;
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
-                    for (int y = -height; y <= height; y++) {
-                        BlockPos glowSquidPos = glowSquid.blockPosition();
-                        BlockPos pos = new BlockPos(glowSquidPos.getX() + x, glowSquidPos.getY() + y, glowSquidPos.getZ() + z);
-                        if (world.getBlockState(pos).is(CTBlocks.MIMIC_LIGHT.get())){
-                            list.add(pos);
+            if (!world.isClientSide()) {
+                int radius = 5;
+                int height = 3;
+                for (int x = -radius; x <= radius; x++) {
+                    for (int z = -radius; z <= radius; z++) {
+                        for (int y = -height; y <= height; y++) {
+                            BlockPos glowSquidPos = glowSquid.blockPosition();
+                            BlockPos pos = new BlockPos(glowSquidPos.getX() + x, glowSquidPos.getY() + y, glowSquidPos.getZ() + z);
+                            if (world.getBlockState(pos).is(CTBlocks.MIMIC_LIGHT.get())) {
+                                list.add(pos);
+                            }
                         }
                     }
                 }
-            }
-            if (!list.isEmpty()) {
-                BlockPos possibles = list.get(glowSquid.getRandom().nextInt(list.size()));
-                if (glowSquid.isAlive()) {
-                    if (world.getBlockState(possibles).hasProperty(MimicLightBlock.LEVEL)) {
-                        world.setBlock(possibles, CTBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
+                if (!list.isEmpty()) {
+                    BlockPos possibles = list.get(glowSquid.getRandom().nextInt(list.size()));
+                    if (glowSquid.isAlive()) {
+                        if (world.getBlockState(possibles).hasProperty(MimicLightBlock.LEVEL)) {
+                            world.setBlock(possibles, CTBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
+                        }
                     }
                 }
             }

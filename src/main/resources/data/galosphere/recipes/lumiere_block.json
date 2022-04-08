@@ -6,10 +6,10 @@
   ],
   "key": {
     "S": {
-      "item": "cavesandtrenches:lumiere_shard"
+      "item": "galosphere:lumiere_shard"
     }
   },
   "result": {
-    "item": "cavesandtrenches:lumiere_block"
+    "item": "galosphere:lumiere_block"
   }
 }

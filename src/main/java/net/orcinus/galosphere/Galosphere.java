@@ -13,7 +13,6 @@ import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.events.WorldEvents;
 import net.orcinus.galosphere.init.CTBiomes;
-import net.orcinus.galosphere.init.CTBlockEntities;
 import net.orcinus.galosphere.init.CTBlocks;
 import net.orcinus.galosphere.init.CTEntityTypes;
 import net.orcinus.galosphere.init.CTFeatures;
@@ -43,7 +42,6 @@ public class Galosphere {
         modEventBus.addListener(this::commonSetup);
 
         CTBlocks.BLOCKS.register(modEventBus);
-        CTBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         CTBiomes.BIOMES.register(modEventBus);
         CTEntityTypes.ENTITY_TYPES.register(modEventBus);
         CTFeatures.FEATURES.register(modEventBus);

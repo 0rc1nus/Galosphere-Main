@@ -6,10 +6,10 @@
   ],
   "key": {
     "#": {
-      "item": "cavesandtrenches:amethyst_bricks_slab"
+      "item": "galosphere:amethyst_bricks_slab"
     }
   },
   "result": {
-    "item": "cavesandtrenches:chiseled_amethyst"
+    "item": "galosphere:chiseled_amethyst"
   }
 }

@@ -8,10 +8,10 @@
   ],
   "key": {
     "#": {
-      "item": "cavesandtrenches:silver_nugget"
+      "item": "galosphere:silver_nugget"
     }
   },
   "result": {
-    "item": "cavesandtrenches:silver_ingot"
+    "item": "galosphere:silver_ingot"
   }
 }

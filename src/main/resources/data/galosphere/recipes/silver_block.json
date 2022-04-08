@@ -7,10 +7,10 @@
   ],
   "key": {
     "S": {
-      "item": "cavesandtrenches:silver_ingot"
+      "item": "galosphere:silver_ingot"
     }
   },
   "result": {
-    "item": "cavesandtrenches:silver_block"
+    "item": "galosphere:silver_block"
   }
 }

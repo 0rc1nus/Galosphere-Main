@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -29,13 +28,14 @@ public class MimicLightBlock extends Block {
     public void tick(BlockState state, ServerLevel world, BlockPos blockPos, Random random) {
         int level = state.getValue(LEVEL);
         if (level > 0) {
-            world.setBlock(blockPos, state.setValue(LEVEL, level - 1), 3);
+            world.setBlock(blockPos, state.setValue(LEVEL, level - 1), 2);
         }
     }
 
     @Override
     public void onPlace(BlockState state, Level world, BlockPos blockPos, BlockState p_60569_, boolean p_60570_) {
-        world.scheduleTick(new BlockPos(blockPos), state.getBlock(), 20);
+        if (!world.isClientSide()) {
+            world.scheduleTick(new BlockPos(blockPos), state.getBlock(), 20);
+        }
     }
-
 }

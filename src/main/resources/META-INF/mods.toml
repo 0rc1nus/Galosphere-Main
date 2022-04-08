@@ -3,23 +3,23 @@ loaderVersion="[32,)"
 license="All rights reserved"
 [[mods]]
 modId="galosphere"
-version="1.0.0"
+version="1.18.2-1.0.0"
 displayName="Galosphere"
 logoFile="galosphere.png"
 credits="You the player!"
-authors="Orcinus, Ninni"
+authors="Orcinus, Ninni, Binome"
 description='''
 This mod enhances the underground even more by adding new content to the base game
 '''
 [[dependencies.galosphere]]
     modId="forge"
     mandatory=true
-    versionRange="[39.0.0,)"
+    versionRange="[39,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.galosphere]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.1,)"
+    versionRange="[1.18.1,1.19)"
     ordering="NONE"
     side="BOTH"

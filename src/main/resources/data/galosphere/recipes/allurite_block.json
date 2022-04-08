@@ -6,10 +6,10 @@
   ],
   "key": {
     "S": {
-      "item": "cavesandtrenches:allurite_shard"
+      "item": "galosphere:allurite_shard"
     }
   },
   "result": {
-    "item": "cavesandtrenches:allurite_block"
+    "item": "galosphere:allurite_block"
   }
 }

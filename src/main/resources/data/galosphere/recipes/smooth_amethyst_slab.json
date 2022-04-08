@@ -5,11 +5,11 @@
   ],
   "key": {
     "#": {
-      "item": "cavesandtrenches:smooth_amethyst"
+      "item": "galosphere:smooth_amethyst"
     }
   },
   "result": {
-    "item": "cavesandtrenches:smooth_amethyst_slab",
+    "item": "galosphere:smooth_amethyst_slab",
     "count": 6
   }
 }

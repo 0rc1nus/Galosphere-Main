@@ -4,9 +4,9 @@
     "item": "minecraft:leather_boots"
   },
   "addition": {
-    "item": "cavesandtrenches:silver_ingot"
+    "item": "galosphere:silver_ingot"
   },
   "result": {
-    "item": "cavesandtrenches:sterling_boots"
+    "item": "galosphere:sterling_boots"
   }
 }

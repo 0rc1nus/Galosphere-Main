@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "cavesandtrenches:smooth_amethyst"
+    "item": "galosphere:smooth_amethyst"
   },
-  "result": "cavesandtrenches:smooth_amethyst_stairs",
+  "result": "galosphere:smooth_amethyst_stairs",
   "count": 1
 }

@@ -7,13 +7,13 @@
   ],
   "key": {
     "S": {
-      "item": "cavesandtrenches:silver_block"
+      "item": "galosphere:silver_block"
     },
     "#": {
-      "item": "cavesandtrenches:allurite_block"
+      "item": "galosphere:allurite_block"
     }
   },
   "result": {
-    "item": "cavesandtrenches:aura_listener"
+    "item": "galosphere:aura_transmitter"
   }
 }

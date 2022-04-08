@@ -3,19 +3,20 @@ package net.orcinus.galosphere.events;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.HorseRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -47,10 +48,7 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(CTBlocks.LUMIERE_CLUSTER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CTBlocks.MYSTERIA_VINES.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CTBlocks.MYSTERIA_VINES_PLANTS.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CTBlocks.STIFFENED_ROOTS.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CTBlocks.STIFFENED_ROOTS_PLANTS.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CTBlocks.WARPED_ANCHOR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CTBlocks.FLUTTER_FROND.get(), RenderType.cutout());
 
         MenuScreens.register(CTMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
 
@@ -79,12 +77,24 @@ public class ClientEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void init(ParticleFactoryRegisterEvent event) {
+    public static void registerParticles(ParticleFactoryRegisterEvent event) {
         ParticleEngine engine = Minecraft.getInstance().particleEngine;
         engine.register(CTParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
         engine.register(CTParticleTypes.AURA_EMISSION.get(), AuraEmissionParticle.Provider::new);
         engine.register(CTParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
         engine.register(CTParticleTypes.WARPED.get(), WarpedProvider::new);
     }
+
+//    @SubscribeEvent
+//    public void onClientTick(TickEvent.ClientTickEvent event) {
+//        Minecraft minecraft = Minecraft.getInstance();
+//        LocalPlayer player = minecraft.player;
+//        if (player == null) return;
+//        for (Animal animal : player.level.getEntitiesOfClass(Animal.class, player.getBoundingBox().inflate(8.0D))) {
+//            if (animal.isAlive()) {
+//                animal.setGlowingTag(player.isUsingItem() && player.getUseItem().is(CTItems.INFRASCOPE.get()));
+//            }
+//        }
+//    }
 
 }

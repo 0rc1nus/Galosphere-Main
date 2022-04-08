@@ -7,13 +7,13 @@
   ],
   "key": {
     "#": {
-      "item": "cavesandtrenches:allurite_block"
+      "item": "galosphere:allurite_block"
     },
     "*": {
       "item": "minecraft:redstone_lamp"
     }
   },
   "result": {
-    "item": "cavesandtrenches:allurite_lamp"
+    "item": "galosphere:allurite_lamp"
   }
 }

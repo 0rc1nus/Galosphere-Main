@@ -6,13 +6,13 @@
   ],
   "key": {
     "S": {
-      "item": "cavesandtrenches:silver_block"
+      "item": "galosphere:silver_block"
     },
     "$": {
-      "item": "cavesandtrenches:allurite_block"
+      "item": "galosphere:allurite_block"
     }
   },
   "result": {
-    "item": "cavesandtrenches:warped_anchor"
+    "item": "galosphere:warped_anchor"
   }
 }

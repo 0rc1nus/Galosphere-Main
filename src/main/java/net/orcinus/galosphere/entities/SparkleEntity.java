@@ -236,7 +236,6 @@ public class SparkleEntity extends Animal {
     @Override
     public void aiStep() {
         super.aiStep();
-        System.out.println("The Cluster Pos is at " + this.getClusterPos());
         if (!this.level.isClientSide()) {
             if (this.getGrowthTicks() > 0) {
                 this.setGrowthTicks(this.getGrowthTicks() - 1);

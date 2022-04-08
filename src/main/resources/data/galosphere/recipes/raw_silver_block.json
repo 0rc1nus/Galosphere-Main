@@ -7,10 +7,10 @@
   ],
   "key": {
     "S": {
-      "item": "cavesandtrenches:raw_silver"
+      "item": "galosphere:raw_silver"
     }
   },
   "result": {
-    "item": "cavesandtrenches:raw_silver_block"
+    "item": "galosphere:raw_silver_block"
   }
 }

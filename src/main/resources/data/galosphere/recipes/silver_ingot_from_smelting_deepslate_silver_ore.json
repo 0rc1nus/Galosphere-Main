@@ -2,9 +2,9 @@
   "type": "minecraft:smelting",
   "group": "silver_ingot",
   "ingredient": {
-    "item": "cavesandtrenches:deepslate_silver_ore"
+    "item": "galosphere:deepslate_silver_ore"
   },
-  "result": "cavesandtrenches:silver_ingot",
+  "result": "galosphere:silver_ingot",
   "experience": 0.7,
   "cookingtime": 200
 }

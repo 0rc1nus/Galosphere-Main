@@ -6,10 +6,10 @@
   ],
   "key": {
     "S": {
-      "item": "cavesandtrenches:mysteria_vines"
+      "item": "galosphere:mysteria_vines"
     }
   },
   "result": {
-    "item": "cavesandtrenches:mysteria_cinders"
+    "item": "galosphere:mysteria_cinders"
   }
 }
