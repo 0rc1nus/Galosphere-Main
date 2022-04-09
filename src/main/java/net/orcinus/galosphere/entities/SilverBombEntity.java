@@ -139,7 +139,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
                 if (i == k) {
                     if (!this.level.isClientSide()) {
                         if (this.shrapnel && compatUtil.isModInstalled("oreganized")) {
-                            this.shrapnelExplode(compatUtil, "oreganized");
+                            this.shrapnelExplode(compatUtil);
                         } else {
                             boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
                             this.level.explode(this, null, new ExplosionDamageCalculator() {
@@ -156,7 +156,8 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         }
     }
 
-    public void shrapnelExplode(CompatUtil compatUtil, String modid) {
+    public void shrapnelExplode(CompatUtil compatUtil) {
+        String modid = "oreganized";
         SimpleParticleType LEAD_SHRAPNEL = compatUtil.getCompatParticle(modid, "lead_shrapnel");
         this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 6.0F, Explosion.BlockInteraction.NONE);
         if (!this.level.isClientSide())
@@ -164,10 +165,8 @@ public class SilverBombEntity extends ThrowableItemProjectile {
                     this.getZ(), 100, 0.0D, 0.0D, 0.0D, 5);
 
             int primedShrapnelBombRadius = 30;
-            //Alleviate the overpowering
             int radius = primedShrapnelBombRadius / 4;
-        for (Entity entity : this.level.getEntities(this, new AABB(this.getX() - radius, this.getY() - 4, this.getZ() - radius,
-                this.getX() + radius, this.getY() + 4, this.getZ() + radius))) {
+        for (Entity entity : this.level.getEntities(this, new AABB(this.getX() - radius, this.getY() - 4, this.getZ() - radius, this.getX() + radius, this.getY() + 4, this.getZ() + radius))) {
             int random = (int) (Math.random() * 100);
             boolean shouldPoison = false;
             if (entity.distanceToSqr(this) <= 4 * 4) {
