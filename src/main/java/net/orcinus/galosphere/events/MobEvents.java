@@ -164,37 +164,37 @@ public class MobEvents {
                 }
             }
         }
-        if (entity instanceof GlowSquid glowSquid) {
-            Level world = glowSquid.level;
-            if (!world.isClientSide()) {
-                int radius = 5;
-                int height = 3;
-                for (int x = -radius; x <= radius; x++) {
-                    for (int z = -radius; z <= radius; z++) {
-                        for (int y = -height; y <= height; y++) {
-                            BlockPos glowSquidPos = glowSquid.blockPosition();
-                            BlockPos pos = new BlockPos(glowSquidPos.getX() + x, glowSquidPos.getY() + y, glowSquidPos.getZ() + z);
-                            if (world.getBlockState(pos).is(GBlocks.MIMIC_LIGHT.get())) {
-//                                list.add(pos);
-                                if (glowSquid.isAlive()) {
-                                    if (world.getBlockState(pos).hasProperty(MimicLightBlock.LEVEL)) {
-                                        world.setBlock(pos, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(pos))))) - 1) * -1), 3);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-//                if (!list.isEmpty()) {
-//                    BlockPos possibles = list.get(glowSquid.getRandom().nextInt(list.size()));
-//                    if (glowSquid.isAlive()) {
-//                        if (world.getBlockState(possibles).hasProperty(MimicLightBlock.LEVEL)) {
-//                            world.setBlock(possibles, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
+//        if (entity instanceof GlowSquid glowSquid) {
+//            Level world = glowSquid.level;
+//            if (!world.isClientSide()) {
+//                int radius = 5;
+//                int height = 3;
+//                for (int x = -radius; x <= radius; x++) {
+//                    for (int z = -radius; z <= radius; z++) {
+//                        for (int y = -height; y <= height; y++) {
+//                            BlockPos glowSquidPos = glowSquid.blockPosition();
+//                            BlockPos pos = new BlockPos(glowSquidPos.getX() + x, glowSquidPos.getY() + y, glowSquidPos.getZ() + z);
+//                            if (world.getBlockState(pos).is(GBlocks.MIMIC_LIGHT.get())) {
+////                                list.add(pos);
+//                                if (glowSquid.isAlive()) {
+//                                    if (world.getBlockState(pos).hasProperty(MimicLightBlock.LEVEL)) {
+//                                        world.setBlock(pos, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(pos))))) - 1) * -1), 3);
+//                                    }
+//                                }
+//                            }
 //                        }
 //                    }
 //                }
-            }
-        }
+////                if (!list.isEmpty()) {
+////                    BlockPos possibles = list.get(glowSquid.getRandom().nextInt(list.size()));
+////                    if (glowSquid.isAlive()) {
+////                        if (world.getBlockState(possibles).hasProperty(MimicLightBlock.LEVEL)) {
+////                            world.setBlock(possibles, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
+////                        }
+////                    }
+////                }
+//            }
+//        }
         if (entity instanceof ISoulWince) {
             if (((ISoulWince)entity).isWinced() && entity.level.isClientSide()) {
                 entity.level.addParticle(ParticleTypes.SOUL, entity.getX(), entity.getY(), entity.getZ(), 0.0D, 0.0D, 0.0D);

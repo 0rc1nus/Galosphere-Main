@@ -73,7 +73,7 @@ public class GBlocks {
     public static final RegistryObject<Block> LUMIERE_LAMP = registerBlock("lumiere_lamp", () -> new Block(BlockBehaviour.Properties.of(GMaterials.LUMIERE, MaterialColor.COLOR_LIGHT_BLUE).lightLevel(state -> 15).strength(0.3F).sound(SoundType.SHROOMLIGHT)));
     public static final RegistryObject<Block> LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER).dropsLike(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> COMBUSTION_TABLE = registerBlock("combustion_table", () -> new CombustionTableBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2.5F).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> MIMIC_LIGHT = registerBlock("mimic_light", () -> new MimicLightBlock(BlockBehaviour.Properties.of(Material.DECORATION).lightLevel(state -> state.getValue(MimicLightBlock.LEVEL)).strength(0.2F).sound(SoundType.WOOD)));
+//    public static final RegistryObject<Block> MIMIC_LIGHT = registerBlock("mimic_light", () -> new MimicLightBlock(BlockBehaviour.Properties.of(Material.DECORATION).lightLevel(state -> state.getValue(MimicLightBlock.LEVEL)).strength(0.2F).sound(SoundType.WOOD)));
 
     /*
     Lichen Caves
