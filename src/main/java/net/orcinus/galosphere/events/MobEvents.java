@@ -13,7 +13,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.GlowSquid;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.Horse;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.Item;
@@ -35,21 +34,18 @@ import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.api.ISoulWince;
-import net.orcinus.galosphere.blocks.AuraListenerBlock;
-import net.orcinus.galosphere.blocks.AuraTransmitterBlock;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.blocks.MimicLightBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.entities.SparkleEntity;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.CTEntityTypes;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
 import java.util.List;
-import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MobEvents {
@@ -72,14 +68,18 @@ public class MobEvents {
         LivingEntity livingEntity = event.getEntityLiving();
         Entity attacker = event.getSource().getEntity();
         if (livingEntity instanceof Horse horse) {
-            if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
+            if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
                 ItemStack copy = ((IBanner) horse).getBanner();
                 horse.spawnAtLocation(copy);
                 ((IBanner) horse).setBanner(ItemStack.EMPTY);
             }
         }
         if (attacker instanceof LivingEntity && livingEntity instanceof ISoulWince) {
-            ((LivingEntity)attacker).heal(livingEntity.getMaxHealth() / 4);
+            for (int t = 0; t < 32; t++) {
+                ((ServerLevel) livingEntity.level).sendParticles(ParticleTypes.SOUL, livingEntity.getX(), livingEntity.getY() + 0.5D, livingEntity.getZ(), 0, livingEntity.getRandomX(0.5F), 0.6F, livingEntity.getRandomZ(0.5F), 0.1F);
+                livingEntity.level.addParticle(ParticleTypes.SOUL, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0.0D, 0.0D, 0.0D);
+            }
+            ((LivingEntity)attacker).heal(livingEntity.getMaxHealth() / 10);
         }
     }
 
@@ -93,7 +93,7 @@ public class MobEvents {
                 Item item = entity.getItemBySlot(slot).getItem();
                 if (entity instanceof Horse horse) {
                     Item horseItem = horse.getArmor().getItem();
-                    if (horseItem == CTItems.STERLING_HORSE_ARMOR.get()) {
+                    if (horseItem == GItems.STERLING_HORSE_ARMOR.get()) {
                         float damageReduction = 3.0F;
                         reductionAmount = event.getAmount() - damageReduction;
                     }
@@ -102,7 +102,7 @@ public class MobEvents {
                     float damageReduction = sterlingArmorItem.getExplosionResistance(slot);
                     reductionAmount = event.getAmount() - damageReduction;
                 }
-                if (item instanceof SterlingArmorItem || (entity instanceof Horse && ((Horse)entity).getArmor().getItem() == CTItems.STERLING_HORSE_ARMOR.get())){
+                if (item instanceof SterlingArmorItem || (entity instanceof Horse && ((Horse)entity).getArmor().getItem() == GItems.STERLING_HORSE_ARMOR.get())){
                     event.setAmount(reductionAmount);
                 }
             }
@@ -117,7 +117,7 @@ public class MobEvents {
         Entity target = event.getTarget();
         BannerRendererUtil util = new BannerRendererUtil();
         if (target instanceof Horse horse) {
-            if (horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
+            if (horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
                 if (((IBanner) horse).getBanner().isEmpty()) {
                     if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                         ItemStack copy = stack.copy();
@@ -147,13 +147,13 @@ public class MobEvents {
         if (entity instanceof IBanner bannerEntity) {
             if (!bannerEntity.getBanner().isEmpty()) {
                 if (entity instanceof Horse horse) {
-                    if (!((IBanner)horse).getBanner().isEmpty() && !horse.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
+                    if (!((IBanner)horse).getBanner().isEmpty() && !horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
                         ItemStack copy = ((IBanner) horse).getBanner();
                         horse.spawnAtLocation(copy);
                         ((IBanner) horse).setBanner(ItemStack.EMPTY);
                     }
                 } else {
-                    if (!entity.getItemBySlot(EquipmentSlot.HEAD).is(CTItems.STERLING_HELMET.get())) {
+                    if (!entity.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
                         ItemStack copy = bannerEntity.getBanner();
                         entity.spawnAtLocation(copy);
                         bannerEntity.setBanner(ItemStack.EMPTY);
@@ -171,7 +171,7 @@ public class MobEvents {
                         for (int y = -height; y <= height; y++) {
                             BlockPos glowSquidPos = glowSquid.blockPosition();
                             BlockPos pos = new BlockPos(glowSquidPos.getX() + x, glowSquidPos.getY() + y, glowSquidPos.getZ() + z);
-                            if (world.getBlockState(pos).is(CTBlocks.MIMIC_LIGHT.get())) {
+                            if (world.getBlockState(pos).is(GBlocks.MIMIC_LIGHT.get())) {
                                 list.add(pos);
                             }
                         }
@@ -181,7 +181,7 @@ public class MobEvents {
                     BlockPos possibles = list.get(glowSquid.getRandom().nextInt(list.size()));
                     if (glowSquid.isAlive()) {
                         if (world.getBlockState(possibles).hasProperty(MimicLightBlock.LEVEL)) {
-                            world.setBlock(possibles, CTBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
+                            world.setBlock(possibles, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
                         }
                     }
                 }
@@ -197,10 +197,10 @@ public class MobEvents {
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
         if (state.getBlock() == Blocks.COMPOSTER) {
-            if (player.getItemInHand(hand).getItem() == CTBlocks.LUMIERE_BLOCK.get().asItem()) {
+            if (player.getItemInHand(hand).getItem() == GBlocks.LUMIERE_BLOCK.get().asItem()) {
                 if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8) {
                     event.setCanceled(true);
-                    world.setBlock(pos, CTBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
+                    world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
                     world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     player.swing(hand);
                 }
@@ -222,7 +222,7 @@ public class MobEvents {
                     for (int y = -height; y <= height; y++) {
                         BlockPos checkPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
                         BlockState state = world.getBlockState(checkPos);
-                        if (state.getBlock() == CTBlocks.WARPED_ANCHOR.get()) {
+                        if (state.getBlock() == GBlocks.WARPED_ANCHOR.get()) {
                             if (state.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
                                 possibles.add(checkPos);
                             }
@@ -233,7 +233,7 @@ public class MobEvents {
             if (!possibles.isEmpty()) {
                 BlockPos lockPosition = possibles.get(((Player) entity).getRandom().nextInt(possibles.size()));
                 BlockState state = world.getBlockState(lockPosition);
-                if (state.getBlock() == CTBlocks.WARPED_ANCHOR.get()) {
+                if (state.getBlock() == GBlocks.WARPED_ANCHOR.get()) {
                     world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                     player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
                     event.setTargetX(lockPosition.getX() + 0.5D);

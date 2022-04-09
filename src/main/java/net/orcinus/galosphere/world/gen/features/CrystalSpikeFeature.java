@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.material.Fluids;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 import org.apache.commons.compress.utils.Lists;
 
@@ -179,7 +179,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                             float l = Mth.sin(delta) * y;
                             BlockPos trigPos = pos.offset(q, k, l);
                             if (world.isStateAtPosition(trigPos, DripstoneUtils::isEmptyOrWaterOrLava)) {
-                                world.setBlock(trigPos, CTBlocks.ALLURITE_BLOCK.get().defaultBlockState(), 2);
+                                world.setBlock(trigPos, GBlocks.ALLURITE_BLOCK.get().defaultBlockState(), 2);
                                 crystalPos.add(trigPos);
                             }
                         }
@@ -189,7 +189,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         }
         for (BlockPos pos : crystalPos) {
             if (world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
-                world.setBlock(pos, CTBlocks.ALLURITE_BLOCK.get().defaultBlockState(), 2);
+                world.setBlock(pos, GBlocks.ALLURITE_BLOCK.get().defaultBlockState(), 2);
                 clusterPos.add(pos);
                 flag = true;
             }
@@ -199,7 +199,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                 for (Direction direction : Direction.values()) {
                     BlockPos relative = pos.relative(direction);
                     if (random.nextBoolean() && world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater)) {
-                        world.setBlock(relative, CTBlocks.ALLURITE_CLUSTER.get().defaultBlockState().setValue(PollinatedClusterBlock.FACING, direction).setValue(PollinatedClusterBlock.WATERLOGGED, world.getFluidState(relative).getType() == Fluids.WATER), 2);
+                        world.setBlock(relative, GBlocks.ALLURITE_CLUSTER.get().defaultBlockState().setValue(PollinatedClusterBlock.FACING, direction).setValue(PollinatedClusterBlock.WATERLOGGED, world.getFluidState(relative).getType() == Fluids.WATER), 2);
                     }
                 }
             }

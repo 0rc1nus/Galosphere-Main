@@ -8,7 +8,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -19,8 +18,8 @@ import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.crafting.AuraListenerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
-import net.orcinus.galosphere.init.CTBlocks;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -44,7 +43,7 @@ public class MiscEvents {
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
         BannerRendererUtil util = new BannerRendererUtil();
-        if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(CTItems.STERLING_HELMET.get())) {
+        if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
             if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                 ItemStack copy = stack.copy();
                 if (!player.getAbilities().instabuild) {
@@ -60,16 +59,9 @@ public class MiscEvents {
 
     @SubscribeEvent
     public void onTagsUpdated(TagsUpdatedEvent event) {
-        DispenserBlock.registerBehavior(CTBlocks.ALLURITE_BLOCK.get().asItem(), new AuraListenerDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new AuraListenerDispenseItemBehavior());
 
-        DispenserBlock.registerBehavior(CTItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
-
-//        DispenserBlock.registerBehavior(Items.WOODEN_PICKAXE, new PickaxeDispenseItemBehavior());
-//        DispenserBlock.registerBehavior(Items.STONE_PICKAXE, new PickaxeDispenseItemBehavior());
-//        DispenserBlock.registerBehavior(Items.IRON_PICKAXE, new PickaxeDispenseItemBehavior());
-//        DispenserBlock.registerBehavior(Items.GOLDEN_PICKAXE, new PickaxeDispenseItemBehavior());
-//        DispenserBlock.registerBehavior(Items.DIAMOND_PICKAXE, new PickaxeDispenseItemBehavior());
-//        DispenserBlock.registerBehavior(Items.NETHERITE_PICKAXE, new PickaxeDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
 
         Registry.ITEM.getTagOrEmpty(ItemTags.CLUSTER_MAX_HARVESTABLES).iterator().forEachRemaining(holder -> {
             DispenserBlock.registerBehavior(holder.value(), new PickaxeDispenseItemBehavior());

@@ -2,7 +2,7 @@ package net.orcinus.galosphere.util;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GItems;
 
 public class GalosphereTab extends CreativeModeTab {
 
@@ -12,7 +12,7 @@ public class GalosphereTab extends CreativeModeTab {
 
     @Override
     public ItemStack makeIcon() {
-        return CTItems.SILVER_BOMB.get().getDefaultInstance();
+        return GItems.SILVER_BOMB.get().getDefaultInstance();
     }
 
 }

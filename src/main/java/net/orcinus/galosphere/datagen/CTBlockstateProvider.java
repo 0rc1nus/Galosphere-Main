@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 
 public class CTBlockstateProvider extends BlockStateProvider {
 
@@ -17,10 +17,10 @@ public class CTBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        this.stairsBlock((StairBlock) CTBlocks.ALLURITE_STAIRS.get(), new ResourceLocation(Galosphere.MODID, "block/allurite_block"));
-        this.stairsBlock((StairBlock) CTBlocks.LUMIERE_STAIRS.get(), new ResourceLocation(Galosphere.MODID, "block/lumiere_block"));
-        this.slabBlock((SlabBlock) CTBlocks.ALLURITE_SLAB.get(), new ResourceLocation(Galosphere.MODID, "block/allurite_block"), new ResourceLocation(Galosphere.MODID, "block/allurite_block"));
-        this.slabBlock((SlabBlock) CTBlocks.LUMIERE_SLAB.get(), new ResourceLocation(Galosphere.MODID, "block/lumiere_block"), new ResourceLocation(Galosphere.MODID, "block/lumiere_block"));
+        this.stairsBlock((StairBlock) GBlocks.ALLURITE_STAIRS.get(), new ResourceLocation(Galosphere.MODID, "block/allurite_block"));
+        this.stairsBlock((StairBlock) GBlocks.LUMIERE_STAIRS.get(), new ResourceLocation(Galosphere.MODID, "block/lumiere_block"));
+        this.slabBlock((SlabBlock) GBlocks.ALLURITE_SLAB.get(), new ResourceLocation(Galosphere.MODID, "block/allurite_block"), new ResourceLocation(Galosphere.MODID, "block/allurite_block"));
+        this.slabBlock((SlabBlock) GBlocks.LUMIERE_SLAB.get(), new ResourceLocation(Galosphere.MODID, "block/lumiere_block"), new ResourceLocation(Galosphere.MODID, "block/lumiere_block"));
 //        this.stairsBlock((StairBlock) CTBlocks.AMETHYST_STAIRS.get(), mcLoc("block/amethyst_block"));
 //        this.slabBlock((SlabBlock) CTBlocks.AMETHYST_SLAB.get(), mcLoc("block/amethyst_block"), mcLoc("block/amethyst_block"));
 //        this.simpleBlock(CTBlocks.DEEPSLATE_SILVER_ORE.get());

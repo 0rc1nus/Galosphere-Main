@@ -32,7 +32,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import net.orcinus.galosphere.init.CTEntityTypes;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.CTParticleTypes;
 import net.orcinus.galosphere.util.CompatUtil;
 
@@ -114,7 +114,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return CTItems.SILVER_BOMB.get();
+        return GItems.SILVER_BOMB.get();
     }
 
     @Override

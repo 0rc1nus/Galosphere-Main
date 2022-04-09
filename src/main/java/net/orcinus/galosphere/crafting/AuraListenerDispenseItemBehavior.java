@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.blocks.AuraListenerBlock;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 
 public class AuraListenerDispenseItemBehavior extends OptionalDispenseItemBehavior {
 
@@ -19,7 +19,7 @@ public class AuraListenerDispenseItemBehavior extends OptionalDispenseItemBehavi
         BlockPos blockpos = source.getPos().relative(direction);
         Level world = source.getLevel();
         BlockState state = world.getBlockState(blockpos);
-        AuraListenerBlock block = (AuraListenerBlock) CTBlocks.AURA_LISTENER.get();
+        AuraListenerBlock block = (AuraListenerBlock) GBlocks.AURA_TRANSMITTER.get();
         this.setSuccess(true);
         if (state.getBlock() == block) {
             if (!state.getValue(AuraListenerBlock.LISTENING)) {

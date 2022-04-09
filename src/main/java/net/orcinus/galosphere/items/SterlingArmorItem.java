@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GItems;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -85,7 +85,7 @@ public class SterlingArmorItem extends ArmorItem {
 
         @Override
         public Ingredient getRepairIngredient() {
-            return Ingredient.of(CTItems.SILVER_INGOT.get());
+            return Ingredient.of(GItems.SILVER_INGOT.get());
         }
 
         @Override

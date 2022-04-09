@@ -12,8 +12,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.orcinus.galosphere.init.CTBlocks;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.CTMenuTypes;
 import net.orcinus.galosphere.util.CompatUtil;
 
@@ -38,7 +38,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, 0, 44, 29) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(CTItems.SILVER_BOMB.get());
+                return stack.is(GItems.SILVER_BOMB.get());
             }
         });
         this.addSlot(new Slot(this.container, 1, 44, 50) {
@@ -92,7 +92,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, CTBlocks.COMBUSTION_TABLE.get());
+        return stillValid(this.access, player, GBlocks.COMBUSTION_TABLE.get());
     }
 
     @Override
@@ -107,7 +107,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
         int duration = tag.getInt("Duration");
         boolean shrapnel = tag.getBoolean("Shrapnel");
         boolean initFlag = true;
-        if (bombStack.is(CTItems.SILVER_BOMB.get())) {
+        if (bombStack.is(GItems.SILVER_BOMB.get())) {
             if (!exploStat1.isEmpty() || !exploStat2.isEmpty() || !exploStat3.isEmpty()) {
                 CompoundTag currentTag = bombStack.getTag();
                 Item leadIngot = this.getLeadIngot();

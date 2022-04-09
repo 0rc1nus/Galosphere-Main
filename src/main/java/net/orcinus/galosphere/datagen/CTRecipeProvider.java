@@ -15,14 +15,14 @@ import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.orcinus.galosphere.init.CTBlocks;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GItems;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 public class CTRecipeProvider extends RecipeProvider {
-    private static final ImmutableList<ItemLike> SILVER_SMELTABLES = ImmutableList.of(CTBlocks.SILVER_ORE.get().asItem(), CTBlocks.DEEPSLATE_SILVER_ORE.get().asItem(), CTItems.RAW_SILVER.get());
+    private static final ImmutableList<ItemLike> SILVER_SMELTABLES = ImmutableList.of(GBlocks.SILVER_ORE.get().asItem(), GBlocks.DEEPSLATE_SILVER_ORE.get().asItem(), GItems.RAW_SILVER.get());
 
     public CTRecipeProvider(DataGenerator dataGenerator) {
         super(dataGenerator);
@@ -30,14 +30,14 @@ public class CTRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-        stairsBlock(consumer, CTBlocks.ALLURITE_STAIRS.get(), CTBlocks.ALLURITE_BLOCK.get().asItem());
-        slabBlock(consumer, CTBlocks.ALLURITE_SLAB.get(), CTBlocks.ALLURITE_BLOCK.get().asItem());
-        stairsBlock(consumer, CTBlocks.LUMIERE_STAIRS.get(), CTBlocks.LUMIERE_BLOCK.get().asItem());
-        slabBlock(consumer, CTBlocks.LUMIERE_SLAB.get(), CTBlocks.LUMIERE_BLOCK.get().asItem());
-        stonecutterResultFromBase(consumer, CTBlocks.ALLURITE_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
-        stonecutterResultFromBase(consumer, CTBlocks.ALLURITE_STAIRS.get(), Blocks.AMETHYST_BLOCK, 1);
-        stonecutterResultFromBase(consumer, CTBlocks.LUMIERE_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
-        stonecutterResultFromBase(consumer, CTBlocks.LUMIERE_STAIRS.get(), Blocks.AMETHYST_BLOCK, 1);
+        stairsBlock(consumer, GBlocks.ALLURITE_STAIRS.get(), GBlocks.ALLURITE_BLOCK.get().asItem());
+        slabBlock(consumer, GBlocks.ALLURITE_SLAB.get(), GBlocks.ALLURITE_BLOCK.get().asItem());
+        stairsBlock(consumer, GBlocks.LUMIERE_STAIRS.get(), GBlocks.LUMIERE_BLOCK.get().asItem());
+        slabBlock(consumer, GBlocks.LUMIERE_SLAB.get(), GBlocks.LUMIERE_BLOCK.get().asItem());
+        stonecutterResultFromBase(consumer, GBlocks.ALLURITE_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
+        stonecutterResultFromBase(consumer, GBlocks.ALLURITE_STAIRS.get(), Blocks.AMETHYST_BLOCK, 1);
+        stonecutterResultFromBase(consumer, GBlocks.LUMIERE_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
+        stonecutterResultFromBase(consumer, GBlocks.LUMIERE_STAIRS.get(), Blocks.AMETHYST_BLOCK, 1);
 //        shaplessOne(consumer, CTItems.SILVER_INGOT.get(), CTBlocks.SILVER_BLOCK.get().asItem(), 9);
 //        twoXtwo(consumer, CTBlocks.ALLURITE_BLOCK.get(), CTItems.ALLURITE_SHARD.get(), 1);
 //        twoXtwo(consumer, CTBlocks.LUMIERE_BLOCK.get(), CTItems.LUMIERE_SHARD.get(), 1);

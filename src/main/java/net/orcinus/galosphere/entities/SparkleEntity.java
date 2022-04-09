@@ -50,9 +50,9 @@ import net.orcinus.galosphere.entities.ai.SparkleRandomSwimmingGoal;
 import net.orcinus.galosphere.entities.ai.EnterAndSwimGoal;
 import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingLandControl;
 import net.orcinus.galosphere.entities.ai.navigation.LandSwimmingPathNavigation;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.CTEntityTypes;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GItems;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -211,7 +211,7 @@ public class SparkleEntity extends Animal {
         this.goalSelector.addGoal(2, new LeaveWaterGoal(this));
         this.goalSelector.addGoal(3, new PanicGoal(this, 1.4D));
         this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(CTBlocks.MYSTERIA_VINES.get().asItem()), false));
+        this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(GBlocks.MYSTERIA_VINES.get().asItem()), false));
         this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new SparkleRandomSwimmingGoal(this, 1.0D, 10));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -220,7 +220,7 @@ public class SparkleEntity extends Animal {
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.is(CTBlocks.MYSTERIA_VINES.get().asItem());
+        return stack.is(GBlocks.MYSTERIA_VINES.get().asItem());
     }
 
     @Nullable
@@ -262,7 +262,7 @@ public class SparkleEntity extends Animal {
             this.gameEvent(GameEvent.SHEAR, player);
             return InteractionResult.SUCCESS;
         }
-        else if (this.getCrystaltype() == CrystalType.NONE && stack.is(CTBlocks.MYSTERIA_CINDERS.get().asItem())) {
+        else if (this.getCrystaltype() == CrystalType.NONE && stack.is(GBlocks.MYSTERIA_CINDERS.get().asItem())) {
             this.setGrowthTicks(this.getGrowthTicks() - Mth.nextInt(random, 20, 40));
             return InteractionResult.SUCCESS;
         }
@@ -294,8 +294,8 @@ public class SparkleEntity extends Animal {
 
     public enum CrystalType {
         NONE(0, "none", null, null),
-        ALLURITE(1, "allurite", CTItems.ALLURITE_SHARD.get(), CTBlocks.ALLURITE_CLUSTER.get().asItem()),
-        LUMIERE(2, "lumiere", CTItems.LUMIERE_SHARD.get(), CTBlocks.LUMIERE_CLUSTER.get().asItem());
+        ALLURITE(1, "allurite", GItems.ALLURITE_SHARD.get(), GBlocks.ALLURITE_CLUSTER.get().asItem()),
+        LUMIERE(2, "lumiere", GItems.LUMIERE_SHARD.get(), GBlocks.LUMIERE_CLUSTER.get().asItem());
 
         public static final SparkleEntity.CrystalType[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(SparkleEntity.CrystalType::getId)).toArray(CrystalType[]::new);
         private final int id;

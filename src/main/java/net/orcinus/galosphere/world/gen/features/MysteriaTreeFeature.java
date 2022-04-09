@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 
 import java.util.Random;
 
@@ -54,13 +54,13 @@ public class MysteriaTreeFeature extends Feature<NoneFeatureConfiguration> {
                 for (int nubY = 0; nubY <= i; nubY++) {
                     BlockPos nubPos = new BlockPos(pos.getX() + nubX, pos.getY(), pos.getZ() + nubZ);
                     if (nubX * nubX + nubZ * nubZ <= 1) {
-                        world.setBlock(nubPos.above(nubY), CTBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
+                        world.setBlock(nubPos.above(nubY), GBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
                     } else {
                         if (random.nextInt(5) == 0) {
-                            world.setBlock(nubPos, CTBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
+                            world.setBlock(nubPos, GBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
                             for (int t = 0; t < random.nextInt(4) + 2; t++) {
                                 if (world.getBlockState(nubPos.below(t)).getMaterial().isReplaceable()) {
-                                    world.setBlock(nubPos.below(t), CTBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
+                                    world.setBlock(nubPos.below(t), GBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
                                 }
                             }
                         }
@@ -70,7 +70,7 @@ public class MysteriaTreeFeature extends Feature<NoneFeatureConfiguration> {
         }
         for (int y = 0; y <= height; y++) {
             mut.move(Direction.UP);
-            world.setBlock(mut, CTBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
+            world.setBlock(mut, GBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
         }
         int branchLength = UniformInt.of(3, 5).sample(random);
         for (Direction direction : Direction.values()) {
@@ -79,7 +79,7 @@ public class MysteriaTreeFeature extends Feature<NoneFeatureConfiguration> {
                     BlockPos branchPos = new BlockPos(pos.getX(), pos.getY() + height, pos.getZ());
                     BlockPos.MutableBlockPos mutable = branchPos.mutable().move(Direction.UP, w).move(direction, w);
                     if (direction != Direction.UP) {
-                        world.setBlock(mutable, CTBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
+                        world.setBlock(mutable, GBlocks.MYSTERIA_LOG.get().defaultBlockState(), 2);
                     }
                 }
                 int radius = Mth.nextInt(random, 2, 3);
@@ -90,7 +90,7 @@ public class MysteriaTreeFeature extends Feature<NoneFeatureConfiguration> {
                             if (direction == Direction.UP) {
                                 if (leaveX * leaveX * leaveY * leaveY * leaveZ * leaveZ <= radius * radius) {
                                     BlockPos.MutableBlockPos topMut = leavePos.mutable().move(Direction.UP, branchLength);
-                                    world.setBlock(topMut, CTBlocks.MYSTERIA_CINDERS.get().defaultBlockState(), 2);
+                                    world.setBlock(topMut, GBlocks.MYSTERIA_CINDERS.get().defaultBlockState(), 2);
                                 }
                             } else {
                                 if (leaveX * leaveX + leaveY * leaveY + leaveZ * leaveZ <= radius * radius) {
@@ -99,7 +99,7 @@ public class MysteriaTreeFeature extends Feature<NoneFeatureConfiguration> {
                                     for (int p = 0; p <= uniform; p++) {
                                         BlockPos below = move.below(p);
                                         if (Feature.isAir(world, below)) {
-                                            world.setBlock(below, CTBlocks.MYSTERIA_CINDERS.get().defaultBlockState(), 2);
+                                            world.setBlock(below, GBlocks.MYSTERIA_CINDERS.get().defaultBlockState(), 2);
                                         }
                                     }
                                     int length = UniformInt.of(4, 6).sample(random);
@@ -109,10 +109,10 @@ public class MysteriaTreeFeature extends Feature<NoneFeatureConfiguration> {
                                             for (int t = 0; t <= length; t++) {
                                                 if (world.isEmptyBlock(vinePos)) {
                                                     if (t == length || !world.isEmptyBlock(vinePos.below())) {
-                                                        world.setBlock(vinePos, CTBlocks.MYSTERIA_VINES.get().defaultBlockState().setValue(GrowingPlantHeadBlock.AGE, Mth.nextInt(random, 17, 25)), 2);
+                                                        world.setBlock(vinePos, GBlocks.MYSTERIA_VINES.get().defaultBlockState().setValue(GrowingPlantHeadBlock.AGE, Mth.nextInt(random, 17, 25)), 2);
                                                         break;
                                                     }
-                                                    world.setBlock(vinePos, CTBlocks.MYSTERIA_VINES_PLANTS.get().defaultBlockState(), 2);
+                                                    world.setBlock(vinePos, GBlocks.MYSTERIA_VINES_PLANTS.get().defaultBlockState(), 2);
                                                 }
                                                 vinePos.move(Direction.DOWN);
                                             }

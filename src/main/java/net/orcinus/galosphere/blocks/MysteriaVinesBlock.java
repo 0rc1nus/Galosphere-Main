@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.NetherVines;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 
 import java.util.Random;
 
@@ -38,6 +38,6 @@ public class MysteriaVinesBlock extends GrowingPlantHeadBlock {
 
     @Override
     protected Block getBodyBlock() {
-        return CTBlocks.MYSTERIA_VINES_PLANTS.get();
+        return GBlocks.MYSTERIA_VINES_PLANTS.get();
     }
 }

@@ -13,10 +13,10 @@ import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.events.WorldEvents;
 import net.orcinus.galosphere.init.CTBiomes;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.CTEntityTypes;
 import net.orcinus.galosphere.init.CTFeatures;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.CTMenuTypes;
 import net.orcinus.galosphere.init.CTParticleTypes;
 import net.orcinus.galosphere.util.GalosphereTab;
@@ -41,11 +41,11 @@ public class Galosphere {
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         modEventBus.addListener(this::commonSetup);
 
-        CTBlocks.BLOCKS.register(modEventBus);
+        GBlocks.BLOCKS.register(modEventBus);
         CTBiomes.BIOMES.register(modEventBus);
         CTEntityTypes.ENTITY_TYPES.register(modEventBus);
         CTFeatures.FEATURES.register(modEventBus);
-        CTItems.ITEMS.register(modEventBus);
+        GItems.ITEMS.register(modEventBus);
         CTMenuTypes.MENU_TYPES.register(modEventBus);
         CTParticleTypes.PARTICLES.register(modEventBus);
 

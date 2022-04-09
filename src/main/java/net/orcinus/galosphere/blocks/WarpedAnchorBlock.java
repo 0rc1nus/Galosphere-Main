@@ -24,7 +24,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.CTParticleTypes;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,7 +71,7 @@ public class WarpedAnchorBlock extends Block {
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
         int i = state.getValue(WARPED_CHARGE);
-        if (stack.getItem() == CTBlocks.ALLURITE_BLOCK.get().asItem() && i < 4) {
+        if (stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem() && i < 4) {
             world.setBlock(pos, state.setValue(WARPED_CHARGE, i + 1), 2);
             world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
             return InteractionResult.SUCCESS;

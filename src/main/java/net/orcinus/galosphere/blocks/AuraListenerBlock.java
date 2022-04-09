@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.orcinus.galosphere.init.CTBlocks;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.CTParticleTypes;
 import org.apache.commons.compress.utils.Lists;
 
@@ -76,14 +76,14 @@ public class AuraListenerBlock extends Block {
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
         if (!state.getValue(LISTENING)) {
-            if (stack.is(CTBlocks.ALLURITE_BLOCK.get().asItem())) {
+            if (stack.is(GBlocks.ALLURITE_BLOCK.get().asItem())) {
                 if (!player.getAbilities().instabuild) {
                     stack.shrink(1);
                 }
                 this.activate(state, pos, world);
                 return InteractionResult.SUCCESS;
             }
-            else if (stack.is(CTBlocks.LUMIERE_BLOCK.get().asItem())) {
+            else if (stack.is(GBlocks.LUMIERE_BLOCK.get().asItem())) {
                 if (!player.getAbilities().instabuild) {
                     stack.shrink(1);
                 }

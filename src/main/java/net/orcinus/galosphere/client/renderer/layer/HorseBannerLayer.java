@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.api.IBanner;
-import net.orcinus.galosphere.init.CTItems;
+import net.orcinus.galosphere.init.GItems;
 
 @OnlyIn(Dist.CLIENT)
 public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
@@ -27,7 +27,7 @@ public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource source, int packedLight, Horse entity, float p_117353_, float p_117354_, float p_117355_, float p_117356_, float p_117357_, float p_117358_) {
-        if (entity.getArmor().is(CTItems.STERLING_HORSE_ARMOR.get())) {
+        if (entity.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
             if (!((IBanner) entity).getBanner().isEmpty()) {
                 ItemStack itemstack = ((IBanner) entity).getBanner();
                 if (itemstack != null) {
