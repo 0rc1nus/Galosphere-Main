@@ -11,7 +11,7 @@ import net.orcinus.galosphere.entities.SilverBombEntity;
 import net.orcinus.galosphere.entities.SparkleEntity;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CTEntityTypes {
+public class GEntityTypes {
 
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, Galosphere.MODID);
 

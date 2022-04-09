@@ -12,7 +12,7 @@ import net.orcinus.galosphere.world.gen.features.MysteriaTreeFeature;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CTFeatures {
+public class GFeatures {
 
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Galosphere.MODID);
 

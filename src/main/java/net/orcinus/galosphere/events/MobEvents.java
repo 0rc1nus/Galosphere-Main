@@ -40,7 +40,7 @@ import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.entities.SparkleEntity;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.CTEntityTypes;
+import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
@@ -52,7 +52,7 @@ public class MobEvents {
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
-        event.put(CTEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
+        event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
     }
 
     @SubscribeEvent

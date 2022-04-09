@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.CTParticleTypes;
+import net.orcinus.galosphere.init.GParticleTypes;
 import org.apache.commons.compress.utils.Lists;
 
 import java.util.List;
@@ -47,7 +47,7 @@ public class AuraListenerBlock extends Block {
                     double posX = radiusPos.getX() + 0.5D;
                     double posY = radiusPos.getY();
                     double posZ = radiusPos.getZ() + 0.5D;
-                    world.addParticle(CTParticleTypes.AURA_LISTENER.get(), posX, posY + 0.01D, posZ, 0.0D, 0.0D, 0.0D);
+                    world.addParticle(GParticleTypes.AURA_LISTENER.get(), posX, posY + 0.01D, posZ, 0.0D, 0.0D, 0.0D);
                 }
             }
         }

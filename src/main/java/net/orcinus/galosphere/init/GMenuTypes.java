@@ -9,7 +9,7 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.gui.CombustionTableMenu;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CTMenuTypes {
+public class GMenuTypes {
 
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Galosphere.MODID);
 

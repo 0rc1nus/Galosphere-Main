@@ -12,13 +12,13 @@ import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.events.WorldEvents;
-import net.orcinus.galosphere.init.CTBiomes;
+import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.CTEntityTypes;
-import net.orcinus.galosphere.init.CTFeatures;
+import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GFeatures;
 import net.orcinus.galosphere.init.GItems;
-import net.orcinus.galosphere.init.CTMenuTypes;
-import net.orcinus.galosphere.init.CTParticleTypes;
+import net.orcinus.galosphere.init.GMenuTypes;
+import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.util.GalosphereTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,12 +42,12 @@ public class Galosphere {
         modEventBus.addListener(this::commonSetup);
 
         GBlocks.BLOCKS.register(modEventBus);
-        CTBiomes.BIOMES.register(modEventBus);
-        CTEntityTypes.ENTITY_TYPES.register(modEventBus);
-        CTFeatures.FEATURES.register(modEventBus);
+        GBiomes.BIOMES.register(modEventBus);
+        GEntityTypes.ENTITY_TYPES.register(modEventBus);
+        GFeatures.FEATURES.register(modEventBus);
         GItems.ITEMS.register(modEventBus);
-        CTMenuTypes.MENU_TYPES.register(modEventBus);
-        CTParticleTypes.PARTICLES.register(modEventBus);
+        GMenuTypes.MENU_TYPES.register(modEventBus);
+        GParticleTypes.PARTICLES.register(modEventBus);
 
         eventBus.register(this);
         eventBus.register(new WorldEvents());

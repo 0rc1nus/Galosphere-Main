@@ -51,7 +51,7 @@ import net.orcinus.galosphere.entities.ai.EnterAndSwimGoal;
 import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingLandControl;
 import net.orcinus.galosphere.entities.ai.navigation.LandSwimmingPathNavigation;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.CTEntityTypes;
+import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 
 import javax.annotation.Nullable;
@@ -226,7 +226,7 @@ public class SparkleEntity extends Animal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mob) {
-        SparkleEntity sparkleEntity = CTEntityTypes.SPARKLE.get().create(world);
+        SparkleEntity sparkleEntity = GEntityTypes.SPARKLE.get().create(world);
         if (sparkleEntity != null) {
             sparkleEntity.setCrystalType(CrystalType.NONE);
         }

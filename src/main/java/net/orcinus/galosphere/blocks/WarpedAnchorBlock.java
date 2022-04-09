@@ -25,7 +25,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.CTParticleTypes;
+import net.orcinus.galosphere.init.GParticleTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -85,7 +85,7 @@ public class WarpedAnchorBlock extends Block {
         if (state.getValue(WARPED_CHARGE) > 0) {
             int value = random.nextInt(3) + state.getValue(WARPED_CHARGE);
             for (int i = 0; i < value; ++i) {
-                world.addParticle(CTParticleTypes.WARPED.get(), pos.getX() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getY() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getZ() + 0.5D + random.nextGaussian() * (double) 0.13F, 0.0D, 0.0D, 0.0D);
+                world.addParticle(GParticleTypes.WARPED.get(), pos.getX() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getY() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getZ() + 0.5D + random.nextGaussian() * (double) 0.13F, 0.0D, 0.0D, 0.0D);
             }
         }
     }

@@ -28,10 +28,10 @@ import net.orcinus.galosphere.client.renderer.SparkleRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.CTEntityTypes;
-import net.orcinus.galosphere.init.CTMenuTypes;
-import net.orcinus.galosphere.init.CTModelLayers;
-import net.orcinus.galosphere.init.CTParticleTypes;
+import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GMenuTypes;
+import net.orcinus.galosphere.init.GModelLayers;
+import net.orcinus.galosphere.init.GParticleTypes;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
@@ -44,7 +44,7 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(GBlocks.MYSTERIA_VINES_PLANTS.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(GBlocks.WARPED_ANCHOR.get(), RenderType.cutout());
 
-        MenuScreens.register(CTMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
+        MenuScreens.register(GMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
 
     }
 
@@ -60,23 +60,23 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(CTModelLayers.SPARKLE, SparkleModel::createBodyLayer);
-        event.registerLayerDefinition(CTModelLayers.STERLING_HELMET, SterlingArmorModel::createArmorLayer);
+        event.registerLayerDefinition(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
+        event.registerLayerDefinition(GModelLayers.STERLING_HELMET, SterlingArmorModel::createArmorLayer);
     }
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(CTEntityTypes.SPARKLE.get(), SparkleRenderer::new);
-        event.registerEntityRenderer(CTEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
+        event.registerEntityRenderer(GEntityTypes.SPARKLE.get(), SparkleRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerParticles(ParticleFactoryRegisterEvent event) {
         ParticleEngine engine = Minecraft.getInstance().particleEngine;
-        engine.register(CTParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
-        engine.register(CTParticleTypes.AURA_EMISSION.get(), AuraEmissionParticle.Provider::new);
-        engine.register(CTParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
-        engine.register(CTParticleTypes.WARPED.get(), WarpedProvider::new);
+        engine.register(GParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
+        engine.register(GParticleTypes.AURA_EMISSION.get(), AuraEmissionParticle.Provider::new);
+        engine.register(GParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
+        engine.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
     }
 
 //    @SubscribeEvent

@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
-import net.orcinus.galosphere.init.CTMenuTypes;
+import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.util.CompatUtil;
 
 public class CombustionTableMenu extends AbstractContainerMenu {
@@ -33,7 +33,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
     };
 
     public CombustionTableMenu(int id, Inventory inventory, final ContainerLevelAccess access) {
-        super(CTMenuTypes.COMBUSTION_TABLE.get(), id);
+        super(GMenuTypes.COMBUSTION_TABLE.get(), id);
         this.access = access;
         this.addSlot(new Slot(this.container, 0, 44, 29) {
             @Override

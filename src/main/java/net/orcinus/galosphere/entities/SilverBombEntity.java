@@ -31,9 +31,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
-import net.orcinus.galosphere.init.CTEntityTypes;
+import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
-import net.orcinus.galosphere.init.CTParticleTypes;
+import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.util.CompatUtil;
 
 public class SilverBombEntity extends ThrowableItemProjectile {
@@ -49,7 +49,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     }
 
     public SilverBombEntity(Level world, LivingEntity entity, ItemStack stack) {
-        super(CTEntityTypes.SIVLER_BOMB.get(), entity, world);
+        super(GEntityTypes.SIVLER_BOMB.get(), entity, world);
         if (!stack.isEmpty() && stack.hasTag()) {
             CompoundTag tag = stack.getTag();
             if (tag != null) {
@@ -195,7 +195,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         if (id == 3) {
             ItemStack itemstack = this.getItemRaw();
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle((itemstack.isEmpty() ? CTParticleTypes.SILVER_BOMB.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack)), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle((itemstack.isEmpty() ? GParticleTypes.SILVER_BOMB.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack)), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }

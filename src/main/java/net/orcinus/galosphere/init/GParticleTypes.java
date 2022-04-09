@@ -9,7 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CTParticleTypes {
+public class GParticleTypes {
 
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Galosphere.MODID);
 

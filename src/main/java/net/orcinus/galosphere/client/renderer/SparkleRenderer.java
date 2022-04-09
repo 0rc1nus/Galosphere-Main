@@ -11,7 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.entities.SparkleEntity;
-import net.orcinus.galosphere.init.CTModelLayers;
+import net.orcinus.galosphere.init.GModelLayers;
 
 import java.util.Map;
 
@@ -24,7 +24,7 @@ public class SparkleRenderer extends MobRenderer<SparkleEntity, EntityModel<Spar
     });
 
     public SparkleRenderer(EntityRendererProvider.Context context) {
-        super(context, new SparkleModel<>(context.bakeLayer(CTModelLayers.SPARKLE)), 0.6F);
+        super(context, new SparkleModel<>(context.bakeLayer(GModelLayers.SPARKLE)), 0.6F);
     }
 
     @Override

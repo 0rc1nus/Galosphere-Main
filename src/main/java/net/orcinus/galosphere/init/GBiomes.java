@@ -19,11 +19,11 @@ import net.orcinus.galosphere.Galosphere;
 import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CTBiomes {
+public class GBiomes {
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Galosphere.MODID);
 
-    public static final RegistryObject<Biome> CRYSTAL_CANYONS = BIOMES.register("crystal_canyons", CTBiomes::crystalCanyons);
+    public static final RegistryObject<Biome> CRYSTAL_CANYONS = BIOMES.register("crystal_canyons", GBiomes::crystalCanyons);
 
     public static Biome crystalCanyons() {
         MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();
