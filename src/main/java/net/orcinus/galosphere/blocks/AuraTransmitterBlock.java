@@ -126,8 +126,10 @@ public class AuraTransmitterBlock extends Block {
             List<LivingEntity> entities = getNearbyEntities(world, pos, 8.0D);
             for (LivingEntity entity : entities) {
                 if (entity instanceof ISoulWince winced) {
-                    if (!winced.isWinced() && entity.isInvertedHealAndHarm()) {
-                        winced.setWinced(true);
+                    if (entity.isInvertedHealAndHarm()) {
+                        if (!winced.isWinced()) {
+                            winced.setWinced(true);
+                        }
                     }
                 }
             }

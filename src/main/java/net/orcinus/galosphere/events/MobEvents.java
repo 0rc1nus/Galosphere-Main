@@ -76,6 +76,9 @@ public class MobEvents {
         }
         if (attacker instanceof LivingEntity && livingEntity instanceof ISoulWince) {
             for (int t = 0; t < 32; t++) {
+                /*
+                 * Why the fuck is this not working???
+                 */
                 ((ServerLevel) livingEntity.level).sendParticles(ParticleTypes.SOUL, livingEntity.getX(), livingEntity.getY() + 0.5D, livingEntity.getZ(), 0, livingEntity.getRandomX(0.5F), 0.6F, livingEntity.getRandomZ(0.5F), 0.1F);
                 livingEntity.level.addParticle(ParticleTypes.SOUL, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0.0D, 0.0D, 0.0D);
             }
@@ -172,19 +175,29 @@ public class MobEvents {
                             BlockPos glowSquidPos = glowSquid.blockPosition();
                             BlockPos pos = new BlockPos(glowSquidPos.getX() + x, glowSquidPos.getY() + y, glowSquidPos.getZ() + z);
                             if (world.getBlockState(pos).is(GBlocks.MIMIC_LIGHT.get())) {
-                                list.add(pos);
+//                                list.add(pos);
+                                if (glowSquid.isAlive()) {
+                                    if (world.getBlockState(pos).hasProperty(MimicLightBlock.LEVEL)) {
+                                        world.setBlock(pos, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(pos))))) - 1) * -1), 3);
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                if (!list.isEmpty()) {
-                    BlockPos possibles = list.get(glowSquid.getRandom().nextInt(list.size()));
-                    if (glowSquid.isAlive()) {
-                        if (world.getBlockState(possibles).hasProperty(MimicLightBlock.LEVEL)) {
-                            world.setBlock(possibles, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
-                        }
-                    }
-                }
+//                if (!list.isEmpty()) {
+//                    BlockPos possibles = list.get(glowSquid.getRandom().nextInt(list.size()));
+//                    if (glowSquid.isAlive()) {
+//                        if (world.getBlockState(possibles).hasProperty(MimicLightBlock.LEVEL)) {
+//                            world.setBlock(possibles, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
+//                        }
+//                    }
+//                }
+            }
+        }
+        if (entity instanceof ISoulWince) {
+            if (((ISoulWince)entity).isWinced() && entity.level.isClientSide()) {
+                entity.level.addParticle(ParticleTypes.SOUL, entity.getX(), entity.getY(), entity.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
