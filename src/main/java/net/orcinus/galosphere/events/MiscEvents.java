@@ -61,7 +61,7 @@ public class MiscEvents {
     public void onTagsUpdated(TagsUpdatedEvent event) {
         DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new AuraListenerDispenseItemBehavior());
 
-        DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GBlocks.LUMIERE_BLOCK.get(), new LumiereComposterDispenseItemBehavior());
 
         Registry.ITEM.getTagOrEmpty(ItemTags.CLUSTER_MAX_HARVESTABLES).iterator().forEachRemaining(holder -> {
             DispenserBlock.registerBehavior(holder.value(), new PickaxeDispenseItemBehavior());

@@ -20,7 +20,7 @@ import net.orcinus.galosphere.client.gui.CombustionTableMenu;
 import javax.annotation.Nullable;
 
 public class CombustionTableBlock extends Block {
-    private static final Component CONTAINER_TITLE = new TranslatableComponent("container.cavesandtrenches.combustion_table");
+    private static final Component CONTAINER_TITLE = new TranslatableComponent("container.galosphere.combustion_table");
 
     public CombustionTableBlock(Properties properties) {
         super(properties);

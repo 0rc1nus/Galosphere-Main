@@ -30,7 +30,7 @@
   "block.galosphere.raw_silver_block": "Raw Silver Block",
   "block.galosphere.silver_ore": "Silver Ore",
   "block.galosphere.deepslate_silver_ore": "Deepslate Silver Ore",
-  "block.galosphere.aura_listener": "Aura Listener",
+  "block.galosphere.aura_transmitter": "Aura Transmitter",
   "block.galosphere.warped_anchor": "Warped Anchor",
   "block.galosphere.allurite_lamp": "Allurite Lamp",
   "block.galosphere.lumiere_lamp": "Lumiere Lamp",
@@ -57,5 +57,6 @@
   "item.galosphere.silver_bomb.bouncy": "Bouncy:",
   "item.galosphere.silver_bomb.shrapnel": "Shrapnel",
   "entity.galosphere.silver_bomb": "Silver Bomb",
+  "entity.galosphere.sparkle": "Sparkle",
   "container.galosphere.combustion_table": "Combustion Table"
 }
