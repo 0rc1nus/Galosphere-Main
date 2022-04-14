@@ -6,11 +6,9 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.GlowSquid;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
@@ -35,7 +33,6 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.api.ISoulWince;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
-import net.orcinus.galosphere.blocks.MimicLightBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.entities.SparkleEntity;
@@ -75,14 +72,15 @@ public class MobEvents {
             }
         }
         if (attacker instanceof LivingEntity && livingEntity instanceof ISoulWince) {
-            for (int t = 0; t < 32; t++) {
-                /*
-                 * Why the fuck is this not working???
-                 */
-                ((ServerLevel) livingEntity.level).sendParticles(ParticleTypes.SOUL, livingEntity.getX(), livingEntity.getY() + 0.5D, livingEntity.getZ(), 0, livingEntity.getRandomX(0.5F), 0.6F, livingEntity.getRandomZ(0.5F), 0.1F);
-                livingEntity.level.addParticle(ParticleTypes.SOUL, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0.0D, 0.0D, 0.0D);
+            if (((ISoulWince)livingEntity).isWinced()) {
+                for (int t = 0; t < 32; t++) {
+                    /*
+                     * Why the fuck is this not working???
+                     */
+                    ((ServerLevel) livingEntity.level).sendParticles(ParticleTypes.SOUL, livingEntity.getX(), livingEntity.getY() + 0.5D, livingEntity.getZ(), 0, livingEntity.getRandomX(0.5F), 0.6F, livingEntity.getRandomZ(0.5F), 0.1F);
+                }
+                ((LivingEntity) attacker).heal(livingEntity.getMaxHealth() / 10);
             }
-            ((LivingEntity)attacker).heal(livingEntity.getMaxHealth() / 10);
         }
     }
 
@@ -146,7 +144,6 @@ public class MobEvents {
     @SubscribeEvent
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        List<BlockPos> list = Lists.newArrayList();
         if (entity instanceof IBanner bannerEntity) {
             if (!bannerEntity.getBanner().isEmpty()) {
                 if (entity instanceof Horse horse) {
@@ -161,61 +158,6 @@ public class MobEvents {
                         entity.spawnAtLocation(copy);
                         bannerEntity.setBanner(ItemStack.EMPTY);
                     }
-                }
-            }
-        }
-//        if (entity instanceof GlowSquid glowSquid) {
-//            Level world = glowSquid.level;
-//            if (!world.isClientSide()) {
-//                int radius = 5;
-//                int height = 3;
-//                for (int x = -radius; x <= radius; x++) {
-//                    for (int z = -radius; z <= radius; z++) {
-//                        for (int y = -height; y <= height; y++) {
-//                            BlockPos glowSquidPos = glowSquid.blockPosition();
-//                            BlockPos pos = new BlockPos(glowSquidPos.getX() + x, glowSquidPos.getY() + y, glowSquidPos.getZ() + z);
-//                            if (world.getBlockState(pos).is(GBlocks.MIMIC_LIGHT.get())) {
-////                                list.add(pos);
-//                                if (glowSquid.isAlive()) {
-//                                    if (world.getBlockState(pos).hasProperty(MimicLightBlock.LEVEL)) {
-//                                        world.setBlock(pos, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(pos))))) - 1) * -1), 3);
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-////                if (!list.isEmpty()) {
-////                    BlockPos possibles = list.get(glowSquid.getRandom().nextInt(list.size()));
-////                    if (glowSquid.isAlive()) {
-////                        if (world.getBlockState(possibles).hasProperty(MimicLightBlock.LEVEL)) {
-////                            world.setBlock(possibles, GBlocks.MIMIC_LIGHT.get().defaultBlockState().setValue(MimicLightBlock.LEVEL, 15 + (Math.min(15, Math.max(0, Mth.floor(Mth.sqrt((float) glowSquid.blockPosition().distSqr(possibles))))) - 1) * -1), 3);
-////                        }
-////                    }
-////                }
-//            }
-//        }
-        if (entity instanceof ISoulWince) {
-            if (((ISoulWince)entity).isWinced() && entity.level.isClientSide()) {
-                entity.level.addParticle(ParticleTypes.SOUL, entity.getX(), entity.getY(), entity.getZ(), 0.0D, 0.0D, 0.0D);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void onInteractEvent(PlayerInteractEvent.RightClickBlock event) {
-        BlockPos pos = event.getPos();
-        Level world = event.getWorld();
-        BlockState state = world.getBlockState(pos);
-        Player player = event.getPlayer();
-        InteractionHand hand = event.getHand();
-        if (state.getBlock() == Blocks.COMPOSTER) {
-            if (player.getItemInHand(hand).getItem() == GBlocks.LUMIERE_BLOCK.get().asItem()) {
-                if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8) {
-                    event.setCanceled(true);
-                    world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
-                    world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    player.swing(hand);
                 }
             }
         }

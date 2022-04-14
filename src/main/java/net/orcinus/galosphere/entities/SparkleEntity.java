@@ -28,7 +28,6 @@ import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -40,16 +39,14 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BiteClusterGoal;
 import net.orcinus.galosphere.entities.ai.LeaveWaterGoal;
 import net.orcinus.galosphere.entities.ai.SparkleRandomSwimmingGoal;
 import net.orcinus.galosphere.entities.ai.EnterAndSwimGoal;
-import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingLandControl;
-import net.orcinus.galosphere.entities.ai.navigation.LandSwimmingPathNavigation;
+import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingGroundControl;
+import net.orcinus.galosphere.entities.ai.navigation.SwimWalkPathNavigation;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
@@ -62,9 +59,9 @@ public class SparkleEntity extends Animal {
     public static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(SparkleEntity.class, EntityDataSerializers.INT);
     private boolean groundNavigationInuse;
     private int growthTicks;
-    public float prevInWaterProgress;
-    public float inWaterProgress;
-    private int swimTimer = -1000;
+    public float prevWaterTicks;
+    public float waterTicks;
+    private int swimTicks = -1000;
     @Nullable
     BlockPos clusterPos;
 
@@ -72,7 +69,7 @@ public class SparkleEntity extends Animal {
         super(type, world);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
-        switchNavigator(false);
+        this.switchNavigator(false);
     }
 
     private void switchNavigator(boolean onLand) {
@@ -81,8 +78,8 @@ public class SparkleEntity extends Animal {
             this.navigation = new GroundPathNavigation(this, level);
             this.groundNavigationInuse = true;
         } else {
-            this.moveControl = new SmoothSwimmingLandControl(this, 1.2F, 1.6F);
-            this.navigation = new LandSwimmingPathNavigation(this, level);
+            this.moveControl = new SmoothSwimmingGroundControl(this, 1.2F, 1.6F);
+            this.navigation = new SwimWalkPathNavigation(this, level);
             this.groundNavigationInuse = false;
         }
     }
@@ -90,12 +87,12 @@ public class SparkleEntity extends Animal {
     @Override
     public void tick() {
         super.tick();
-        prevInWaterProgress = inWaterProgress;
-        if (this.isInWaterOrBubble() && inWaterProgress < 5.0F) {
-            inWaterProgress++;
+        prevWaterTicks = waterTicks;
+        if (this.isInWaterOrBubble() && waterTicks < 5.0F) {
+            waterTicks++;
         }
-        if (!this.isInWaterOrBubble() && inWaterProgress > 0.0F) {
-            inWaterProgress--;
+        if (!this.isInWaterOrBubble() && waterTicks > 0.0F) {
+            waterTicks--;
         }
         if (this.isInWaterOrBubble() && this.groundNavigationInuse) {
             switchNavigator(false);
@@ -103,16 +100,16 @@ public class SparkleEntity extends Animal {
         if (!this.isInWaterOrBubble() && !this.groundNavigationInuse) {
             switchNavigator(true);
         }
-        if (inWaterProgress > 0) {
+        if (waterTicks > 0) {
             this.maxUpStep = 1;
         } else {
             this.maxUpStep = 0.6F;
         }
         if (!level.isClientSide) {
             if (isInWater()) {
-                swimTimer++;
+                swimTicks++;
             } else {
-                swimTimer--;
+                swimTicks--;
             }
         }
     }
@@ -180,6 +177,7 @@ public class SparkleEntity extends Animal {
         return this.getClusterPos() != null;
     }
 
+    @Nullable
     public BlockPos getClusterPos() {
         return this.clusterPos;
     }
@@ -285,11 +283,11 @@ public class SparkleEntity extends Animal {
     }
 
     public boolean shouldEnterWater() {
-        return swimTimer <= -1000;
+        return swimTicks <= -1000;
     }
 
     public boolean shouldLeaveWater() {
-        return swimTimer > 600;
+        return swimTicks > 600;
     }
 
     public enum CrystalType {
@@ -327,25 +325,4 @@ public class SparkleEntity extends Animal {
         }
     }
 
-    static class SparklePathNavigation extends WaterBoundPathNavigation {
-        SparklePathNavigation(SparkleEntity mob, Level world) {
-            super(mob, world);
-        }
-
-        @Override
-        protected boolean canUpdatePath() {
-            return true;
-        }
-
-        @Override
-        protected PathFinder createPathFinder(int p_149222_) {
-            this.nodeEvaluator = new AmphibiousNodeEvaluator(false);
-            return new PathFinder(this.nodeEvaluator, p_149222_);
-        }
-
-        @Override
-        public boolean isStableDestination(BlockPos blockPos) {
-            return !this.level.getBlockState(blockPos.below()).isAir();
-        }
-    }
 }

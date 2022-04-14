@@ -5,6 +5,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.entities.SparkleEntity;
 
@@ -50,7 +51,7 @@ public class BiteClusterGoal extends MoveToBlockGoal {
     }
 
     protected void onReachedTarget() {
-        if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.sparkle.level, this.sparkle)) {
+        if (ForgeEventFactory.getMobGriefingEvent(this.sparkle.level, this.sparkle)) {
             BlockState state = this.sparkle.level.getBlockState(this.blockPos);
             if (state.getBlock() instanceof PollinatedClusterBlock) {
                 this.sparkle.playSound(SoundEvents.SMALL_AMETHYST_BUD_BREAK, 1.0F, 1.0F);

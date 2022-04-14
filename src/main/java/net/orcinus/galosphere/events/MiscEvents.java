@@ -1,20 +1,27 @@
 package net.orcinus.galosphere.events;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
+import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.crafting.AuraListenerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
@@ -30,10 +37,26 @@ public class MiscEvents {
         ItemStack stack = event.getItemStack();
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
+        BlockPos pos = event.getPos();
+        Level world = event.getWorld();
+        BlockState state = world.getBlockState(pos);
         if (player.isShiftKeyDown() && !((IBanner) player).getBanner().isEmpty() && stack.isEmpty()) {
             ItemStack copy = ((IBanner) player).getBanner();
             player.setItemInHand(hand, copy);
             ((IBanner) player).setBanner(ItemStack.EMPTY);
+        }
+        if (state.getBlock() == Blocks.COMPOSTER) {
+            if (stack.getItem() == GItems.LUMIERE_SHARD.get()) {
+                if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8) {
+                    event.setCanceled(true);
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                    world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
+                    world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    player.swing(hand);
+                }
+            }
         }
     }
 

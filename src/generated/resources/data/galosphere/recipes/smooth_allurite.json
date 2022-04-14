@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "galosphere:allurite_block"
+    }
+  },
+  "result": {
+    "item": "galosphere:smooth_allurite",
+    "count": 4
+  }
+}

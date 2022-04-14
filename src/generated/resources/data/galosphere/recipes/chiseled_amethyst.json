@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "galosphere:amethyst_slab"
+    }
+  },
+  "result": {
+    "item": "galosphere:chiseled_amethyst"
+  }
+}

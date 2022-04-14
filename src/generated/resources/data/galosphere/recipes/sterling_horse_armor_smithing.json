@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:leather_horse_armor"
+  },
+  "addition": {
+    "item": "galosphere:silver_ingot"
+  },
+  "result": {
+    "item": "galosphere:sterling_horse_armor"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:smooth_lumiere_slab_from_smooth_lumiere_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_smooth_lumiere": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:smooth_lumiere"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:smooth_lumiere_slab_from_smooth_lumiere_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_smooth_lumiere",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:chiseled_allurite"
+    ]
+  },
+  "criteria": {
+    "has_allurite_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:allurite_slab"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:chiseled_allurite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_allurite_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

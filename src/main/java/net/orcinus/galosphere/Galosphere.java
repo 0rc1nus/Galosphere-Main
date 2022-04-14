@@ -13,6 +13,7 @@ import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.events.WorldEvents;
 import net.orcinus.galosphere.init.GBiomes;
+import net.orcinus.galosphere.init.GBlockEntities;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GFeatures;
@@ -42,6 +43,7 @@ public class Galosphere {
         modEventBus.addListener(this::commonSetup);
 
         GBlocks.BLOCKS.register(modEventBus);
+        GBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         GBiomes.BIOMES.register(modEventBus);
         GEntityTypes.ENTITY_TYPES.register(modEventBus);
         GFeatures.FEATURES.register(modEventBus);
