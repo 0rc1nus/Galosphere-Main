@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -47,17 +46,17 @@ public class AuraTransmitterBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
-        if (stack.is(Items.AMETHYST_BLOCK)) {
-            setTypeAndUpdate(state, world, pos, TransmissionType.AMETHYST, 200);
-            return InteractionResult.SUCCESS;
-        }
-        else if (stack.is(GBlocks.ALLURITE_BLOCK.get().asItem())) {
-            setTypeAndUpdate(state, world, pos, TransmissionType.ALLURITE, 200);
-            return InteractionResult.SUCCESS;
-        }
-        else if (stack.is(GBlocks.LUMIERE_BLOCK.get().asItem())) {
-            setTypeAndUpdate(state, world, pos, TransmissionType.LUMIERE, 200);
-            return InteractionResult.SUCCESS;
+        if (state.getValue(TYPE) == TransmissionType.NONE) {
+            if (stack.is(Items.AMETHYST_BLOCK)) {
+                setTypeAndUpdate(state, world, pos, TransmissionType.AMETHYST, 200);
+                return InteractionResult.SUCCESS;
+            } else if (stack.is(GBlocks.ALLURITE_BLOCK.get().asItem())) {
+                setTypeAndUpdate(state, world, pos, TransmissionType.ALLURITE, 200);
+                return InteractionResult.SUCCESS;
+            } else if (stack.is(GBlocks.LUMIERE_BLOCK.get().asItem())) {
+                setTypeAndUpdate(state, world, pos, TransmissionType.LUMIERE, 200);
+                return InteractionResult.SUCCESS;
+            }
         }
         return super.use(state, world, pos, player, hand, hit);
     }

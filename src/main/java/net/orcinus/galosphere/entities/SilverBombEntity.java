@@ -35,6 +35,9 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.util.CompatUtil;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 public class SilverBombEntity extends ThrowableItemProjectile {
     private static final EntityDataAccessor<Integer> TIME = SynchedEntityData.defineId(SilverBombEntity.class, EntityDataSerializers.INT);
@@ -163,7 +166,6 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         if (!this.level.isClientSide())
             ((ServerLevel) this.level).sendParticles(LEAD_SHRAPNEL, this.getX(), this.getY(0.0625D),
                     this.getZ(), 100, 0.0D, 0.0D, 0.0D, 5);
-
             int primedShrapnelBombRadius = 30;
             int radius = primedShrapnelBombRadius / 4;
         for (Entity entity : this.level.getEntities(this, new AABB(this.getX() - radius, this.getY() - 4, this.getZ() - radius, this.getX() + radius, this.getY() + 4, this.getZ() + radius))) {

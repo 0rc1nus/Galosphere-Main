@@ -21,7 +21,6 @@ import net.orcinus.galosphere.blocks.CrystalSlabBlock;
 import net.orcinus.galosphere.blocks.CrystalStairsBlock;
 import net.orcinus.galosphere.blocks.CombustionTableBlock;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
-import net.orcinus.galosphere.blocks.MimicLightBlock;
 import net.orcinus.galosphere.blocks.MysteriaVinesBlock;
 import net.orcinus.galosphere.blocks.MysteriaVinesPlantBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
