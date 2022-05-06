@@ -182,24 +182,24 @@ public class GRecipeProvider extends RecipeProvider {
 
     }
 
-    private static void nineBlockStorageRecipesWithCustomPacking(Consumer<FinishedRecipe> p_176563_, ItemLike p_176564_, ItemLike p_176565_, String p_176566_, String p_176567_) {
+    protected static void nineBlockStorageRecipesWithCustomPacking(Consumer<FinishedRecipe> p_176563_, ItemLike p_176564_, ItemLike p_176565_, String p_176566_, String p_176567_) {
         nineBlockStorageRecipes(p_176563_, p_176564_, p_176565_, p_176566_, p_176567_, getItemName(p_176564_), null);
     }
 
-    private static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, ItemLike p_176570_, ItemLike p_176571_, String p_176572_, @Nullable String p_176573_, String name, @Nullable String p_176575_) {
+    protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, ItemLike p_176570_, ItemLike p_176571_, String p_176572_, @Nullable String p_176573_, String name, @Nullable String p_176575_) {
         ShapelessRecipeBuilder.shapeless(p_176570_, 9).requires(p_176571_).group(p_176575_).unlockedBy(getHasName(p_176571_), has(p_176571_)).save(consumer, new ResourceLocation(Galosphere.MODID, name));
         ShapedRecipeBuilder.shaped(p_176571_).define('#', p_176570_).pattern("###").pattern("###").pattern("###").group(p_176573_).unlockedBy(getHasName(p_176570_), has(p_176570_)).save(consumer, new ResourceLocation(Galosphere.MODID, p_176572_));
     }
 
-    private static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike ingredient) {
+    protected static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike ingredient) {
         stonecutterResultFromBase(consumer, result, ingredient, 1);
     }
 
-    private static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike ingredient, int count) {
+    protected static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike ingredient, int count) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), result, count).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, new ResourceLocation(Galosphere.MODID, getConversionRecipeName(result, ingredient) + "_stonecutting"));
     }
 
-    private static String getConversionRecipeName(ItemLike result, ItemLike ingredient) {
+    protected static String getConversionRecipeName(ItemLike result, ItemLike ingredient) {
         return getItemName(result) + "_from_" + getItemName(ingredient);
     }
 
@@ -256,15 +256,15 @@ public class GRecipeProvider extends RecipeProvider {
                 .unlockedBy("has" + item.getRegistryName().getPath(), has(item)).save(consumer);
     }
 
-    private static void oreSmelting(Consumer<FinishedRecipe> consumer, List<ItemLike> items, ItemLike p_176594_, float p_176595_, int p_176596_, String p_176597_) {
+    protected static void oreSmelting(Consumer<FinishedRecipe> consumer, List<ItemLike> items, ItemLike p_176594_, float p_176595_, int p_176596_, String p_176597_) {
         oreCooking(consumer, RecipeSerializer.SMELTING_RECIPE, items, p_176594_, p_176595_, p_176596_, p_176597_, "_from_smelting");
     }
 
-    private static void oreBlasting(Consumer<FinishedRecipe> consumer, List<ItemLike> items, ItemLike p_176628_, float p_176629_, int p_176630_, String p_176631_) {
+    protected static void oreBlasting(Consumer<FinishedRecipe> consumer, List<ItemLike> items, ItemLike p_176628_, float p_176629_, int p_176630_, String p_176631_) {
         oreCooking(consumer, RecipeSerializer.BLASTING_RECIPE, items, p_176628_, p_176629_, p_176630_, p_176631_, "_from_blasting");
     }
 
-    private static void oreCooking(Consumer<FinishedRecipe> consumer, SimpleCookingSerializer<?> serializer, List<ItemLike> itemLike, ItemLike item, float experience, int time, String group, String name) {
+    protected static void oreCooking(Consumer<FinishedRecipe> consumer, SimpleCookingSerializer<?> serializer, List<ItemLike> itemLike, ItemLike item, float experience, int time, String group, String name) {
         for (ItemLike itemlike : itemLike) {
             SimpleCookingRecipeBuilder.cooking(Ingredient.of(itemlike), item, experience, time, serializer).group(group).unlockedBy(getHasName(itemlike), has(itemlike)).save(consumer, new ResourceLocation(Galosphere.MODID, getItemName(item) + name + "_" + getItemName(itemlike)));
         }
@@ -274,11 +274,11 @@ public class GRecipeProvider extends RecipeProvider {
         UpgradeRecipeBuilder.smithing(Ingredient.of(firstItem), Ingredient.of(combinationItem), secondItem).unlocks("has_netherite_ingot", has(combinationItem)).save(consumer, new ResourceLocation(Galosphere.MODID, getItemName(secondItem) + "_smithing"));
     }
 
-    private static String getHasName(ItemLike p_176603_) {
+    protected static String getHasName(ItemLike p_176603_) {
         return "has_" + getItemName(p_176603_);
     }
 
-    private static String getItemName(ItemLike item) {
+    protected static String getItemName(ItemLike item) {
         return ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
     }
 }

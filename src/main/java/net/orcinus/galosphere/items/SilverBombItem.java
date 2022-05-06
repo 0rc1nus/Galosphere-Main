@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.entities.SilverBombEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,17 +48,18 @@ public class SilverBombItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag tip) {
         CompoundTag tag = stack.getOrCreateTag();
+        String nameText = "item." + Galosphere.MODID + ".silver_bomb.";
         if (tag.getInt("Duration") > 0) {
-            list.add((new TranslatableComponent("item.cavesandtrenches.silver_bomb.duration")).append(" ").append(String.valueOf(tag.getInt("Duration"))).withStyle(ChatFormatting.GRAY));
+            list.add((new TranslatableComponent(nameText + "duration")).append(" ").append(String.valueOf(tag.getInt("Duration"))).withStyle(ChatFormatting.GRAY));
         }
         if (tag.getInt("Explosion") > 0) {
-            list.add((new TranslatableComponent("item.cavesandtrenches.silver_bomb.explosion")).append(" ").append(String.valueOf(tag.getInt("Explosion"))).withStyle(ChatFormatting.GRAY));
+            list.add((new TranslatableComponent(nameText + "explosion")).append(" ").append(String.valueOf(tag.getInt("Explosion"))).withStyle(ChatFormatting.GRAY));
         }
         if (tag.getInt("Bouncy") > 0) {
-            list.add((new TranslatableComponent("item.cavesandtrenches.silver_bomb.bouncy")).append(" ").append(String.valueOf(tag.getInt("Bouncy"))).withStyle(ChatFormatting.GRAY));
+            list.add((new TranslatableComponent(nameText + "bouncy")).append(" ").append(String.valueOf(tag.getInt("Bouncy"))).withStyle(ChatFormatting.GRAY));
         }
         if (tag.getBoolean("Shrapnel")) {
-            list.add((new TranslatableComponent("item.cavesandtrenches.silver_bomb.shrapnel")).withStyle(ChatFormatting.GRAY));
+            list.add((new TranslatableComponent(nameText + "shrapnel")).withStyle(ChatFormatting.GRAY));
         }
     }
 
