@@ -79,16 +79,4 @@ public class ClientEvents {
         engine.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
     }
 
-//    @SubscribeEvent
-//    public void onClientTick(TickEvent.ClientTickEvent event) {
-//        Minecraft minecraft = Minecraft.getInstance();
-//        LocalPlayer player = minecraft.player;
-//        if (player == null) return;
-//        for (Animal animal : player.level.getEntitiesOfClass(Animal.class, player.getBoundingBox().inflate(8.0D))) {
-//            if (animal.isAlive()) {
-//                animal.setGlowingTag(player.isUsingItem() && player.getUseItem().is(CTItems.INFRASCOPE.get()));
-//            }
-//        }
-//    }
-
 }
