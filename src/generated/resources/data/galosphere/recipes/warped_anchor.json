@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "galosphere:silver_block"
+    },
+    "C": {
+      "item": "galosphere:allurite_block"
+    }
+  },
+  "result": {
+    "item": "galosphere:warped_anchor"
+  }
+}

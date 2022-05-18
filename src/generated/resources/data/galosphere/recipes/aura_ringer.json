@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "CCC",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "galosphere:silver_block"
+    },
+    "C": {
+      "item": "galosphere:allurite_block"
+    }
+  },
+  "result": {
+    "item": "galosphere:aura_ringer"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:lumiere_block"
+    ]
+  },
+  "criteria": {
+    "has_lumiere_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:lumiere_shard"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:lumiere_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lumiere_shard",
+      "has_the_recipe"
+    ]
+  ]
+}

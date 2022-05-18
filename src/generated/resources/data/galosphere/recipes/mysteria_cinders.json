@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "galosphere:mysteria_vines"
+    }
+  },
+  "result": {
+    "item": "galosphere:mysteria_cinders"
+  }
+}

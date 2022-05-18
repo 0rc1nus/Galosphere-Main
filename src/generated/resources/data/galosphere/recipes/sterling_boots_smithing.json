@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:leather_boots"
+  },
+  "addition": {
+    "item": "galosphere:silver_ingot"
+  },
+  "result": {
+    "item": "galosphere:sterling_boots"
+  }
+}
