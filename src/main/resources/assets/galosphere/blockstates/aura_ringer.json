@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "ringing=false": {
+      "model": "galosphere:block/aura_ringer"
+    },
+    "ringing=true": {
+      "model": "galosphere:block/aura_ringer_ringing"
+    }
+  }
+}

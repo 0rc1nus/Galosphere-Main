@@ -12,7 +12,17 @@ import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.events.WorldEvents;
-import net.orcinus.galosphere.init.*;
+import net.orcinus.galosphere.init.GBiomes;
+import net.orcinus.galosphere.init.GBlockEntities;
+import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GConfiguredFeatures;
+import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GFeatures;
+import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GMenuTypes;
+import net.orcinus.galosphere.init.GMobEffects;
+import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.init.GPlacedFeatures;
 import net.orcinus.galosphere.util.GalosphereTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,6 +65,10 @@ public class Galosphere {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            GConfiguredFeatures.init();
+            GPlacedFeatures.init();
+        });
     }
 
 }

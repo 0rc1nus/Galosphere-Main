@@ -33,7 +33,7 @@ import net.orcinus.galosphere.util.BannerRendererUtil;
 public class MiscEvents {
 
     @SubscribeEvent
-    public void onRightClickBlockEvent(PlayerInteractEvent.RightClickBlock event) {
+    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         ItemStack stack = event.getItemStack();
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
@@ -61,7 +61,7 @@ public class MiscEvents {
     }
 
     @SubscribeEvent
-    public void onRightClickEvent(PlayerInteractEvent.RightClickItem event) {
+    public void onRightClick(PlayerInteractEvent.RightClickItem event) {
         ItemStack stack = event.getItemStack();
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();

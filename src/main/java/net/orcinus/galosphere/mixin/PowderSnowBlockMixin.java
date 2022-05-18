@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PowderSnowBlockMixin {
 
     @Inject(at = @At("RETURN"), method = "canEntityWalkOnPowderSnow", cancellable = true)
-    private static void canEntityWalkOnPowderSnow(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+    private static void G$canEntityWalkOnPowderSnow(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (entity instanceof LivingEntity) {
             if (((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(GItems.STERLING_BOOTS.get())) {
                 cir.setReturnValue(true);

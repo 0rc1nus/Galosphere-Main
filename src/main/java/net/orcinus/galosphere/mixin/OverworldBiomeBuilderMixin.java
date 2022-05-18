@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 public class OverworldBiomeBuilderMixin {
     
     @Inject(at = @At("RETURN"), method = "addUndergroundBiomes")
-    public void addUndergroundBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer, CallbackInfo ci) {
+    public void G$addUndergroundBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer, CallbackInfo ci) {
         BiomeReagentHandler.init(consumer);
     }
     

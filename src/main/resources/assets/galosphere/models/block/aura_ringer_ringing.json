@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "galosphere:block/aura_ringer_top_ringing",
+    "bottom": "galosphere:block/aura_ringer_bottom",
+    "side": "galosphere:block/aura_ringer_ringing"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:amethyst_block"
-  },
-  "result": "galosphere:amethyst_bricks",
-  "count": 1
-}

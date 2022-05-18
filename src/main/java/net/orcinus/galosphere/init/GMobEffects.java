@@ -14,6 +14,6 @@ public class GMobEffects {
 
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Galosphere.MODID);
 
-    public static final RegistryObject<MobEffect> MESMERIZING = MOB_EFFECTS.register("mesmerizing", () -> new GMobEffect(MobEffectCategory.HARMFUL, 0xFFFFFFF));
+    public static final RegistryObject<MobEffect> MESMERIZING = MOB_EFFECTS.register("mesmerizing", () -> new GMobEffect(MobEffectCategory.HARMFUL, 623007));
 
 }

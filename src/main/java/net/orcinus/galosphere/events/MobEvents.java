@@ -2,8 +2,6 @@ package net.orcinus.galosphere.events;
 
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -17,7 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -31,8 +28,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
-import net.orcinus.galosphere.api.ISoulWince;
-import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.entities.SparkleEntity;
@@ -69,17 +64,6 @@ public class MobEvents {
                 ItemStack copy = ((IBanner) horse).getBanner();
                 horse.spawnAtLocation(copy);
                 ((IBanner) horse).setBanner(ItemStack.EMPTY);
-            }
-        }
-        if (attacker instanceof LivingEntity && livingEntity instanceof ISoulWince) {
-            if (((ISoulWince)livingEntity).isWinced()) {
-                for (int t = 0; t < 32; t++) {
-                    /*
-                     * Why the fuck is this not working???
-                     */
-                    ((ServerLevel) livingEntity.level).sendParticles(ParticleTypes.SOUL, livingEntity.getX(), livingEntity.getY() + 0.5D, livingEntity.getZ(), 0, livingEntity.getRandomX(0.5F), 0.6F, livingEntity.getRandomZ(0.5F), 0.1F);
-                }
-                ((LivingEntity) attacker).heal(livingEntity.getMaxHealth() / 10);
             }
         }
     }

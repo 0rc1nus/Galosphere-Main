@@ -45,6 +45,7 @@
   "block.galosphere.mysteria_vines": "Mysteria Vines",
   "block.galosphere.mysteria_vines_plant": "Mysteria Vines Plant",
   "block.galosphere.combustion_table": "Combustion Table",
+  "block.galosphere.aura_ringer": "Aura Ringer",
   "item.galosphere.sterling_helmet": "Sterling Helmet",
   "item.galosphere.sterling_chestplate": "Sterling Chestplate",
   "item.galosphere.sterling_leggings": "Sterling Leggings",
@@ -63,5 +64,6 @@
   "item.galosphere.silver_bomb.shrapnel": "Shrapnel",
   "entity.galosphere.silver_bomb": "Silver Bomb",
   "entity.galosphere.sparkle": "Sparkle",
+  "effect.galosphere.mesmerizing": "Mesmerizing",
   "container.galosphere.combustion_table": "Combustion Table"
 }

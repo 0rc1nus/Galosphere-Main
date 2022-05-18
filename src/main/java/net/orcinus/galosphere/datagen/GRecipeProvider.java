@@ -18,6 +18,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.init.GBlocks;
@@ -107,7 +108,6 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern(" R ")
                 .unlockedBy("has_glowstone", has(Blocks.GLOWSTONE)).save(consumer);
 
-
         ShapedRecipeBuilder
                 .shaped(GItems.SILVER_BOMB.get())
                 .define('R', GItems.SILVER_INGOT.get())
@@ -118,7 +118,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_gunpowder", has(Items.GUNPOWDER)).save(consumer);
 
         ShapedRecipeBuilder
-                .shaped(GBlocks.AURA_TRANSMITTER.get())
+                .shaped(GBlocks.AURA_RINGER.get())
                 .define('S', GBlocks.SILVER_BLOCK.get())
                 .define('C', GBlocks.ALLURITE_BLOCK.get())
                 .pattern("SSS")
