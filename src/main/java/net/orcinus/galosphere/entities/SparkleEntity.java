@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -49,6 +50,7 @@ import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingGroundControl;
 import net.orcinus.galosphere.entities.ai.navigation.SwimWalkPathNavigation;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GItemTags;
 import net.orcinus.galosphere.init.GItems;
 
 import javax.annotation.Nullable;
@@ -64,6 +66,8 @@ public class SparkleEntity extends Animal {
     private int swimTicks = -1000;
     @Nullable
     BlockPos clusterPos;
+        private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
+    private static final UniformInt LONG_REGROWTH_TICKS = UniformInt.of(12000, 24000);
 
     public SparkleEntity(EntityType<? extends SparkleEntity> type, Level world) {
         super(type, world);
@@ -204,21 +208,21 @@ public class SparkleEntity extends Animal {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new BiteClusterGoal(this));
         this.goalSelector.addGoal(2, new EnterAndSwimGoal(this));
         this.goalSelector.addGoal(2, new LeaveWaterGoal(this));
         this.goalSelector.addGoal(3, new PanicGoal(this, 1.4D));
         this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(GBlocks.MYSTERIA_VINES.get().asItem()), false));
         this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(7, new SparkleRandomSwimmingGoal(this, 1.0D, 10));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(7, new BiteClusterGoal(this));
+        this.goalSelector.addGoal(8, new SparkleRandomSwimmingGoal(this, 1.0D, 10));
+        this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
     }
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.is(GBlocks.MYSTERIA_VINES.get().asItem());
+        return stack.is(GItemTags.SPARKLE_TEMPT_ITEMS);
     }
 
     @Nullable
@@ -271,9 +275,8 @@ public class SparkleEntity extends Animal {
         this.spawnShard(stack);
         this.playSound(SoundEvents.CALCITE_HIT, 1.0F, 1.0F);
         this.setCrystalType(CrystalType.NONE);
-        int bound = 900 - 600;
-        int regrowthTicks = -(random.nextInt(bound)) + random.nextInt(bound);
-        this.setGrowthTicks(regrowthTicks);
+        UniformInt growthTicks = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0 ? LONG_REGROWTH_TICKS : REGROWTH_TICKS;
+        this.setGrowthTicks(growthTicks.sample(this.getRandom()));
     }
 
     private void spawnShard(ItemStack stack) {
