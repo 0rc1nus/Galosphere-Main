@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
-import net.orcinus.galosphere.client.gui.MesmerizingOverlay;
+import net.orcinus.galosphere.client.gui.IllusiveOverlay;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraEmissionParticle;
@@ -47,7 +47,7 @@ public class ClientEvents {
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
 
-        MinecraftForge.EVENT_BUS.register(new MesmerizingOverlay());
+        MinecraftForge.EVENT_BUS.register(new IllusiveOverlay());
 
     }
 

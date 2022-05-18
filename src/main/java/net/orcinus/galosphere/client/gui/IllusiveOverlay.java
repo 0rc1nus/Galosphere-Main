@@ -20,7 +20,7 @@ import net.orcinus.galosphere.mixin.GuiAccessor;
 import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
-public class MesmerizingOverlay {
+public class IllusiveOverlay {
     private static final ResourceLocation GALOSPHERE_ICONS = new ResourceLocation(Galosphere.MODID, "textures/gui/galosphere_icons.png");
 
     @SubscribeEvent(priority = EventPriority.LOW)
@@ -47,7 +47,6 @@ public class MesmerizingOverlay {
 
             float absorb = Mth.ceil(player.getAbsorptionAmount());
             boolean highlight = ((GuiAccessor)mc.gui).getHealthBlinkTime() > (long) ticks && (((GuiAccessor)mc.gui).getHealthBlinkTime() - (long) ticks) / 3L % 2L == 1L;
-
 
             int healthRows = (int) player.getMaxHealth();
             int rowHeight = Math.max(10 - (healthRows - 2), 3);

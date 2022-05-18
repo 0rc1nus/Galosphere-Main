@@ -271,7 +271,9 @@ public class SparkleEntity extends Animal {
         this.spawnShard(stack);
         this.playSound(SoundEvents.CALCITE_HIT, 1.0F, 1.0F);
         this.setCrystalType(CrystalType.NONE);
-        this.setGrowthTicks(6000);
+        int bound = 900 - 600;
+        int regrowthTicks = -(random.nextInt(bound)) + random.nextInt(bound);
+        this.setGrowthTicks(regrowthTicks);
     }
 
     private void spawnShard(ItemStack stack) {
