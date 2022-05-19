@@ -8,6 +8,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -44,6 +47,7 @@ public class MobEvents {
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
+        SpawnPlacements.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
         event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
     }
 
@@ -58,7 +62,6 @@ public class MobEvents {
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
-        Entity attacker = event.getSource().getEntity();
         if (livingEntity instanceof Horse horse) {
             if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
                 ItemStack copy = ((IBanner) horse).getBanner();

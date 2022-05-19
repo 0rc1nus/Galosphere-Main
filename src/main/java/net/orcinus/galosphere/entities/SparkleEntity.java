@@ -66,7 +66,7 @@ public class SparkleEntity extends Animal {
     private int swimTicks = -1000;
     @Nullable
     BlockPos clusterPos;
-        private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
+    private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
     private static final UniformInt LONG_REGROWTH_TICKS = UniformInt.of(12000, 24000);
 
     public SparkleEntity(EntityType<? extends SparkleEntity> type, Level world) {

@@ -40,8 +40,6 @@ public class WorldEvents {
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.ALLURITE_FLOOR_CRYSTALS);
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_CEILING_CRYSTALS);
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_FLOOR_CRYSTALS);
-//            builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CTPlacedFeatures.STIFFENED_VINES);
-//            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CTPlacedFeatures.FLUTTERED_LEAF);
             mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 10, 4, 6));
             mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(GEntityTypes.SPARKLE.get(), 10, 4, 6));
         }
