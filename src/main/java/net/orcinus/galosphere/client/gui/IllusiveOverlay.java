@@ -78,6 +78,7 @@ public class IllusiveOverlay {
                         absorbRemaining -= 2.0F;
                     }
                 } else {
+                    //Starts from the pixel
                     if (i * 2 + 1 < currentHealth) {
                         mc.gui.blit(matrixStack, x, y, 36, TOP, 9, 12);
                     }

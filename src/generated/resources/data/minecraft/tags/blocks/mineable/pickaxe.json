@@ -31,6 +31,7 @@
     "galosphere:warped_anchor",
     "galosphere:allurite_cluster",
     "galosphere:lumiere_cluster",
-    "galosphere:raw_silver_block"
+    "galosphere:raw_silver_block",
+    "galosphere:combustion_table"
   ]
 }
