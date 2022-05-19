@@ -111,125 +111,103 @@ public class CombustionTableMenu extends AbstractContainerMenu {
             if (!exploStat1.isEmpty() || !exploStat2.isEmpty() || !exploStat3.isEmpty()) {
                 CompoundTag currentTag = bombStack.getTag();
                 Item leadIngot = this.getLeadIngot();
-                if (exploStat1.is(Items.SLIME_BALL)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Bouncy") == 2 && (exploStat3.is(Items.SLIME_BALL) || exploStat2.is(Items.SLIME_BALL))) || currentTag.getInt("Bouncy") == 3) {
+                Item slimeball = Items.SLIME_BALL;
+                Item gunpowder = Items.GUNPOWDER;
+                Item string = Items.STRING;
+                if (currentTag != null) {
+                    int bouncyTag = currentTag.getInt("Bouncy");
+                    int durationTag = currentTag.getInt("Duration");
+                    int explosionTag = currentTag.getInt("Explosion");
+                    if (exploStat1.is(slimeball)) {
+                        if (bouncyTag < 3) bouncy++;
+                        boolean flag1 = bouncyTag == 1 && (exploStat2.is(slimeball) && exploStat3.is(slimeball));
+                        boolean flag2 = bouncyTag == 2 && (exploStat2.is(slimeball) || exploStat3.is(slimeball));
+                        boolean flag3 = bouncyTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    bouncy++;
-                }
-                if (exploStat1.is(Items.STRING)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Duration") == 2 && (exploStat3.is(Items.STRING) || exploStat2.is(Items.STRING))) || currentTag.getInt("Duration") == 3) {
+                    if (exploStat2.is(slimeball)) {
+                        if (bouncyTag < 3) bouncy++;
+                        boolean flag1 = bouncyTag == 1 && (exploStat1.is(slimeball) && exploStat3.is(slimeball));
+                        boolean flag2 = bouncyTag == 2 && (exploStat1.is(slimeball) || exploStat3.is(slimeball));
+                        boolean flag3 = bouncyTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    duration++;
-                }
-                if (exploStat1.is(Items.GUNPOWDER)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Explosion") == 2 && (exploStat3.is(Items.GUNPOWDER) || exploStat2.is(Items.GUNPOWDER))) || currentTag.getInt("Explosion") == 3) {
+                    if (exploStat3.is(slimeball)) {
+                        if (bouncyTag < 3) bouncy++;
+                        boolean flag1 = bouncyTag == 1 && (exploStat2.is(slimeball) && exploStat1.is(slimeball));
+                        boolean flag2 = bouncyTag == 2 && (exploStat2.is(slimeball) || exploStat1.is(slimeball));
+                        boolean flag3 = bouncyTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    explosion++;
-                }
-                if (exploStat1.is(leadIngot)) {
-                    if (currentTag != null) {
-                        if ((!currentTag.getBoolean("Shrapnel") && (exploStat3.is(leadIngot) || exploStat2.is(leadIngot))) || currentTag.getBoolean("Shrapnel")) {
+                    if (exploStat1.is(string)) {
+                        if (durationTag < 3) duration++;
+                        boolean flag1 = durationTag == 1 && (exploStat2.is(string) && exploStat3.is(string));
+                        boolean flag2 = durationTag == 2 && (exploStat2.is(string) || exploStat3.is(string));
+                        boolean flag3 = durationTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    shrapnel = true;
-                }
-                if (exploStat2.is(Items.SLIME_BALL)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Bouncy") == 2 && (exploStat3.is(Items.SLIME_BALL) || exploStat1.is(Items.SLIME_BALL))) || currentTag.getInt("Bouncy") == 3) {
+                    if (exploStat2.is(string)) {
+                        if (durationTag < 3) duration++;
+                        boolean flag1 = durationTag == 1 && (exploStat1.is(string) && exploStat3.is(string));
+                        boolean flag2 = durationTag == 2 && (exploStat1.is(string) || exploStat3.is(string));
+                        boolean flag3 = durationTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    bouncy++;
-                }
-                if (exploStat2.is(Items.STRING)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Duration") == 2 && (exploStat3.is(Items.STRING) || exploStat1.is(Items.STRING))) || currentTag.getInt("Duration") == 3) {
+                    if (exploStat3.is(string)) {
+                        if (durationTag < 3) duration++;
+                        boolean flag1 = durationTag == 1 && (exploStat2.is(string) && exploStat1.is(string));
+                        boolean flag2 = durationTag == 2 && (exploStat2.is(string) || exploStat1.is(string));
+                        boolean flag3 = durationTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    duration++;
-                }
-                if (exploStat2.is(Items.GUNPOWDER)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Explosion") == 2 && (exploStat3.is(Items.GUNPOWDER) || exploStat1.is(Items.GUNPOWDER))) || currentTag.getInt("Explosion") == 3) {
+                    if (exploStat1.is(gunpowder)) {
+                        if (explosionTag < 3) explosion++;
+                        boolean flag1 = explosionTag == 1 && (exploStat2.is(gunpowder) && exploStat3.is(gunpowder));
+                        boolean flag2 = explosionTag == 2 && (exploStat2.is(gunpowder) || exploStat3.is(gunpowder));
+                        boolean flag3 = explosionTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    explosion++;
-                }
-                if (exploStat2.is(leadIngot)) {
-                    if (currentTag != null) {
-                        if ((!currentTag.getBoolean("Shrapnel")&& (exploStat3.is(leadIngot) || exploStat1.is(leadIngot))) || currentTag.getBoolean("Shrapnel")) {
+                    if (exploStat2.is(gunpowder)) {
+                        if (explosionTag < 3) explosion++;
+                        boolean flag1 = explosionTag == 1 && (exploStat1.is(gunpowder) && exploStat3.is(gunpowder));
+                        boolean flag2 = explosionTag == 2 && (exploStat1.is(gunpowder) || exploStat3.is(gunpowder));
+                        boolean flag3 = explosionTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    shrapnel = true;
-                }
-                if (exploStat3.is(Items.SLIME_BALL)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Bouncy") == 2 && (exploStat2.is(Items.SLIME_BALL) || exploStat1.is(Items.SLIME_BALL))) || currentTag.getInt("Bouncy") == 3) {
+                    if (exploStat3.is(gunpowder)) {
+                        if (explosionTag < 3) explosion++;
+                        boolean flag1 = explosionTag == 1 && (exploStat2.is(gunpowder) && exploStat1.is(gunpowder));
+                        boolean flag2 = explosionTag == 2 && (exploStat2.is(gunpowder) || exploStat1.is(gunpowder));
+                        boolean flag3 = explosionTag == 3;
+                        if (flag1 || flag2 || flag3) {
                             initFlag = false;
                             this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
                         }
                     }
-                    bouncy++;
-                }
-                if (exploStat3.is(Items.STRING)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Duration") == 2 && (exploStat2.is(Items.STRING) || exploStat1.is(Items.STRING))) || currentTag.getInt("Duration") == 3) {
-                            initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
-                        }
-                    }
-                    duration++;
-                }
-                if (exploStat3.is(Items.GUNPOWDER)) {
-                    if (currentTag != null) {
-                        if ((currentTag.getInt("Explosion") == 2 && (exploStat2.is(Items.GUNPOWDER) || exploStat1.is(Items.GUNPOWDER))) || currentTag.getInt("Explosion") == 3) {
-                            initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
-                        }
-                    }
-                    explosion++;
-                }
-                if (exploStat3.is(leadIngot)) {
-                    if (currentTag != null) {
-                        if ((!currentTag.getBoolean("Shrapnel") && (exploStat2.is(leadIngot) || exploStat1.is(leadIngot))) || currentTag.getBoolean("Shrapnel")) {
-                            initFlag = false;
-                            this.resultContainer.removeItemNoUpdate(4);
-                            this.broadcastChanges();
-                        }
-                    }
-                    shrapnel = true;
                 }
                 ItemStack resultCopy = bombStack.copy();
                 resultCopy.setCount(1);
@@ -315,10 +293,5 @@ public class CombustionTableMenu extends AbstractContainerMenu {
 
         return itemstack;
     }
-
-    public Slot getBombSlot() {
-        return this.slots.get(1);
-    }
-
 
 }
