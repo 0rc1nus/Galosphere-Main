@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Random;
 
 public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
+    //-53648423032165391
+    //-2978 22 -2718
 
     public CrystalSpikeFeature(Codec<CrystalSpikeConfig> codec) {
         super(codec);
@@ -36,17 +38,6 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         CrystalSpikeConfig config = context.config();
         List<BlockPos> trigList = Lists.newArrayList();
         List<BlockPos> clusterPos = Lists.newArrayList();
-        //-2808380414920390921
-        //300 -36 60742
-        //499 20 7181
-        //TODO: MAKE A TRAILER WITH AS THE WORLD CAVES IN
-        //TODO: SEED COORDS = 260 8 2160
-        //1/21
-        //-2286246326674673194
-        //TODO: MAKE A RADIUS CHECK AND RELATIVE DIRECTION  CHECK
-        //-346814623854640707
-        //-4103 -5 165
-        //-1330 35 18572
         boolean flag = false;
         int radiusCheck = config.xzRadius.sample(random) + 1;
         final int randomChance = random.nextInt(4);
@@ -90,7 +81,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                     if (x * x + z * z <= radius * radius) {
                         if (direction == Direction.DOWN) {
                             if (world.isStateAtPosition(pos.below(), DripstoneUtils::isEmptyOrWaterOrLava)) {
-                                return placeSpike(world, blockPos.below(), startRadius, height, randomChance, crystalPos, direction, random);
+                                return placeSpike(world, blockPos.below(), startRadius / 2, height, randomChance, crystalPos, direction, random);
                             }
                         }
                         else if (direction == Direction.UP) {
@@ -144,62 +135,6 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                             world.setBlock(pos, Blocks.CALCITE.defaultBlockState(), 2);
                             flag = true;
                         }
-                    }
-                }
-            }
-        }
-        return flag;
-    }
-
-    public static boolean debugSpike(LevelAccessor world, BlockPos blockPos, Random random) {
-        boolean flag = false;
-        final int initRadius = UniformInt.of(4, 7).sample(random);
-        final int height = initRadius + 14 + Mth.nextInt(random, 10, 14);
-        List<BlockPos> crystalPos = Lists.newArrayList();
-        List<BlockPos> clusterPos = Lists.newArrayList();
-        final int randomChance = random.nextInt(4);
-        for (int y = 0; y < height; y++) {
-            int radius = initRadius - y / 2;
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
-                    BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
-                    if (x * x + z * z <= radius * radius) {
-                        if (world.isStateAtPosition(pos.below(), DripstoneUtils::isEmptyOrWaterOrLava)) {
-                            return debugSpike(world, blockPos.below(), random);
-                        } else {
-                            float delta = switch (randomChance) {
-                                case 1 -> 11 * Mth.PI / 6;
-                                case 2 -> Mth.PI / 6;
-                                case 3 -> 7 * Mth.PI / 6;
-                                case 0 -> 5 * Mth.PI / 6;
-                                default -> throw new IllegalStateException("Unexpected value: " + randomChance);
-                            };
-                            float q = Mth.cos(delta) * y;
-                            float k = Mth.sin(Mth.PI / 2) * y;
-                            float l = Mth.sin(delta) * y;
-                            BlockPos trigPos = pos.offset(q, k, l);
-                            if (world.isStateAtPosition(trigPos, DripstoneUtils::isEmptyOrWaterOrLava)) {
-                                world.setBlock(trigPos, GBlocks.ALLURITE_BLOCK.get().defaultBlockState(), 2);
-                                crystalPos.add(trigPos);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        for (BlockPos pos : crystalPos) {
-            if (world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
-                world.setBlock(pos, GBlocks.ALLURITE_BLOCK.get().defaultBlockState(), 2);
-                clusterPos.add(pos);
-                flag = true;
-            }
-        }
-        for (BlockPos pos : clusterPos) {
-            if (random.nextInt(15) == 0) {
-                for (Direction direction : Direction.values()) {
-                    BlockPos relative = pos.relative(direction);
-                    if (random.nextBoolean() && world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater)) {
-                        world.setBlock(relative, GBlocks.ALLURITE_CLUSTER.get().defaultBlockState().setValue(PollinatedClusterBlock.FACING, direction).setValue(PollinatedClusterBlock.WATERLOGGED, world.getFluidState(relative).getType() == Fluids.WATER), 2);
                     }
                 }
             }

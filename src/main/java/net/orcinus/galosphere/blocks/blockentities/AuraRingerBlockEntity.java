@@ -31,7 +31,7 @@ public class AuraRingerBlockEntity extends BlockEntity {
             if (block.isRinging(state)) {
                 for (LivingEntity livingEntity : list) {
                     if (livingEntity instanceof Mob mob) {
-                        if (mob instanceof Villager || (mob.isInvertedHealAndHarm() && mob.getTarget() == null)) {
+                        if (mob.isInvertedHealAndHarm() && mob.getTarget() == null) {
                             Vec3 vec3 = Vec3.atBottomCenterOf(pos).add(0.0D, 0.6F, 0.0D);
                             mob.getNavigation().moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.5D);
                             if (mob.blockPosition().closerThan(pos, 3)) {

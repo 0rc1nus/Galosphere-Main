@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.blocks.AuraRingerBlock;
 import net.orcinus.galosphere.init.GBlocks;
 
-public class AuraListenerDispenseItemBehavior extends OptionalDispenseItemBehavior {
+public class AuraRingerDispenseItemBehavior extends OptionalDispenseItemBehavior {
 
     @Override
     public ItemStack execute(BlockSource source, ItemStack stack) {

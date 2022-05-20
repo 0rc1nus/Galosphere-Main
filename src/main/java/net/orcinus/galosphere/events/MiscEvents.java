@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
-import net.orcinus.galosphere.crafting.AuraListenerDispenseItemBehavior;
+import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
 import net.orcinus.galosphere.init.GBlocks;
@@ -82,7 +82,7 @@ public class MiscEvents {
 
     @SubscribeEvent
     public void onTagsUpdated(TagsUpdatedEvent event) {
-        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new AuraListenerDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new AuraRingerDispenseItemBehavior());
 
         DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
 

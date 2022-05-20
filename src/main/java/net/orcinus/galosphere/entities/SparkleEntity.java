@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
@@ -38,6 +39,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -48,6 +50,7 @@ import net.orcinus.galosphere.entities.ai.SparkleRandomSwimmingGoal;
 import net.orcinus.galosphere.entities.ai.EnterAndSwimGoal;
 import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingGroundControl;
 import net.orcinus.galosphere.entities.ai.navigation.SwimWalkPathNavigation;
+import net.orcinus.galosphere.init.GBlockTags;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItemTags;
@@ -56,6 +59,7 @@ import net.orcinus.galosphere.init.GItems;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 
 public class SparkleEntity extends Animal {
     public static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(SparkleEntity.class, EntityDataSerializers.INT);
@@ -147,6 +151,10 @@ public class SparkleEntity extends Animal {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(CRYSTAL_TYPE, 0);
+    }
+
+    public static boolean checkSparkleSpawnRules(EntityType<? extends SparkleEntity> sparkle, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.below()).is(GBlockTags.SPARKLES_SPAWNABLE_ON);
     }
 
     @Override
