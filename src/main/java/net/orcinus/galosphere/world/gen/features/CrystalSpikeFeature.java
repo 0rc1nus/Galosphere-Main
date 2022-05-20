@@ -1,5 +1,6 @@
 package net.orcinus.galosphere.world.gen.features;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,6 +20,7 @@ import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 import org.apache.commons.compress.utils.Lists;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -36,8 +38,8 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         BlockPos blockPos = context.origin();
         Random random = context.random();
         CrystalSpikeConfig config = context.config();
-        List<BlockPos> trigList = Lists.newArrayList();
-        List<BlockPos> clusterPos = Lists.newArrayList();
+        HashSet<BlockPos> trigList = Sets.newHashSet();
+        HashSet<BlockPos> clusterPos = Sets.newHashSet();
         boolean flag = false;
         int radiusCheck = config.xzRadius.sample(random) + 1;
         final int randomChance = random.nextInt(4);
@@ -50,7 +52,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         return flag;
     }
 
-    private boolean placeCrystals(WorldGenLevel world, Random random, CrystalSpikeConfig config, List<BlockPos> trigList, List<BlockPos> clusterPos, boolean flag) {
+    private boolean placeCrystals(WorldGenLevel world, Random random, CrystalSpikeConfig config, HashSet<BlockPos> trigList, HashSet<BlockPos> clusterPos, boolean flag) {
         for (BlockPos pos : trigList) {
             if (world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
                 this.setBlock(world, pos, config.crystal_state);
@@ -71,7 +73,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         return flag;
     }
 
-    public boolean placeSpike(LevelAccessor world, BlockPos blockPos, int startRadius, int height, int randomChance, List<BlockPos> crystalPos, Direction direction, Random random) {
+    public boolean placeSpike(LevelAccessor world, BlockPos blockPos, int startRadius, int height, int randomChance, HashSet<BlockPos> crystalPos, Direction direction, Random random) {
         boolean flag = false;
         for (int y = 0; y < height; y++) {
             int radius = startRadius - y / 2;
