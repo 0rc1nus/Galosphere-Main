@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -27,15 +28,13 @@ public class AuraRingerBlockEntity extends BlockEntity {
         if (state.getBlock() instanceof AuraRingerBlock block) {
             if (block.isRinging(state)) {
                 for (LivingEntity livingEntity : list) {
-                    if (livingEntity instanceof Mob mob) {
-                        if (mob.isInvertedHealAndHarm() && mob.getTarget() == null) {
-                            Vec3 vec3 = Vec3.atBottomCenterOf(pos).add(0.0D, 0.6F, 0.0D);
-                            mob.getNavigation().moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.5D);
-                            if (mob.blockPosition().closerThan(pos, 3)) {
-                                mob.getLookControl().setLookAt(vec3.x(), vec3.y(), vec3.z());
-                            }
-                            mob.addEffect(new MobEffectInstance(GMobEffects.ILLUSIVE.get(), 200));
+                    if (livingEntity instanceof Villager villager) {
+                        Vec3 vec3 = Vec3.atBottomCenterOf(pos).add(0.0D, 0.6F, 0.0D);
+                        villager.getNavigation().moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.5D);
+                        if (villager.blockPosition().closerThan(pos, 3)) {
+                            villager.getLookControl().setLookAt(vec3.x(), vec3.y(), vec3.z());
                         }
+                        villager.addEffect(new MobEffectInstance(GMobEffects.ILLUSIVE.get(), 200));
                     }
                     if (livingEntity instanceof Player player) {
                         if (player.getAbilities().instabuild) return;
