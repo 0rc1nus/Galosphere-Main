@@ -27,12 +27,12 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
-import net.orcinus.galosphere.config.GConfig;
 import net.orcinus.galosphere.entities.SparkleEntity;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
@@ -55,7 +55,7 @@ public class MobEvents {
     @SubscribeEvent
     public void onBreakSpeedChanged(PlayerEvent.BreakSpeed event) {
         BlockState state = event.getState();
-        if (GConfig.speedReductionOnBuddingAmethyst.get() && state.getBlock() == Blocks.BUDDING_AMETHYST) {
+        if (state.getBlock() == Blocks.BUDDING_AMETHYST) {
             event.setNewSpeed(2.0F);
         }
     }

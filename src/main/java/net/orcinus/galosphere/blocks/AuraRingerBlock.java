@@ -24,10 +24,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.minecraft.world.phys.BlockHitResult;
 import net.orcinus.galosphere.blocks.blockentities.AuraRingerBlockEntity;
-import net.orcinus.galosphere.init.GBlockEntities;
+import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GParticleTypes;
 import org.jetbrains.annotations.Nullable;
@@ -80,7 +79,7 @@ public class AuraRingerBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return !pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, GBlockEntities.AURA_RINGER.get(), AuraRingerBlockEntity::ringingTick) : super.getTicker(pLevel, pState, pBlockEntityType);
+        return !pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, GBlockEntityTypes.AURA_RINGER.get(), AuraRingerBlockEntity::ringingTick) : super.getTicker(pLevel, pState, pBlockEntityType);
     }
 
     @Override

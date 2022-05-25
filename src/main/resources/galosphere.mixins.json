@@ -6,6 +6,8 @@
   "refmap": "galosphere.refmap.json",
   "mixins": [
     "GuiAccessor",
+    "LightningBoltAccessor",
+    "LightningBoltMixin",
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
     "PowderSnowBlockMixin"

@@ -1,11 +1,9 @@
 package net.orcinus.galosphere.blocks.blockentities;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -13,8 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.blocks.AuraRingerBlock;
-import net.orcinus.galosphere.effects.GMobEffect;
-import net.orcinus.galosphere.init.GBlockEntities;
+import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GMobEffects;
 
 import java.util.List;
@@ -22,7 +19,7 @@ import java.util.List;
 public class AuraRingerBlockEntity extends BlockEntity {
 
     public AuraRingerBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(GBlockEntities.AURA_RINGER.get(), pWorldPosition, pBlockState);
+        super(GBlockEntityTypes.AURA_RINGER.get(), pWorldPosition, pBlockState);
     }
 
     public static void ringingTick(Level world, BlockPos pos, BlockState state, AuraRingerBlockEntity type) {

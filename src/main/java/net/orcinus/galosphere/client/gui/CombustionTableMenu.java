@@ -118,6 +118,33 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                     int bouncyTag = currentTag.getInt("Bouncy");
                     int durationTag = currentTag.getInt("Duration");
                     int explosionTag = currentTag.getInt("Explosion");
+                    boolean leadTag = currentTag.getBoolean("Shrapnel");
+
+                    if (exploStat1.is(leadIngot)) {
+                        boolean flag1 = exploStat2.is(leadIngot) || exploStat3.is(leadIngot);
+                        if (leadTag || flag1) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                        }
+                        shrapnel = true;
+                    }
+                    if (exploStat2.is(leadIngot)) {
+                        boolean flag1 = exploStat1.is(leadIngot) || exploStat3.is(leadIngot);
+                        if (leadTag || flag1) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                        }
+                        shrapnel = true;
+                    }
+                    if (exploStat3.is(leadIngot)) {
+                        boolean flag1 = exploStat2.is(leadIngot) || exploStat1.is(leadIngot);
+                        if (leadTag || flag1) {
+                            initFlag = false;
+                            this.resultContainer.removeItemNoUpdate(4);
+                        }
+                        shrapnel = true;
+                    }
+
                     if (exploStat1.is(slimeball)) {
                         if (bouncyTag < 3) bouncy++;
                         boolean flag1 = bouncyTag == 1 && (exploStat2.is(slimeball) && exploStat3.is(slimeball));

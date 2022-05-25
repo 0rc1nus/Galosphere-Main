@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "galosphere:block/charged_lumiere_block"
+    }
+  }
+}

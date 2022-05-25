@@ -29,6 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import net.orcinus.galosphere.init.GEntityTypes;
@@ -141,22 +142,34 @@ public class SilverBombEntity extends ThrowableItemProjectile {
             if (!this.isInWater()) {
                 if (i == k) {
                     if (!this.level.isClientSide()) {
-                        if (this.shrapnel && compatUtil.isModInstalled("oreganized")) {
-                            this.shrapnelExplode(compatUtil);
-                        } else {
-                            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
-                            this.level.explode(this, null, new ExplosionDamageCalculator() {
-                                @Override
-                                public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
-                                    return world.getBlockState(pos).getBlock().defaultDestroyTime() < 3.0D;
-                                }
-                            }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
-                        }
+                        bombExplode(compatUtil);
                     }
-                    this.remove(RemovalReason.DISCARDED);
                 }
             }
         }
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult pResult) {
+        CompatUtil compatUtil = new CompatUtil();
+        if (!this.level.isClientSide()) {
+            this.bombExplode(compatUtil);
+        }
+    }
+
+    private void bombExplode(CompatUtil compatUtil) {
+        if (this.shrapnel && compatUtil.isModInstalled("oreganized")) {
+            this.shrapnelExplode(compatUtil);
+        } else {
+            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+            this.level.explode(this, null, new ExplosionDamageCalculator() {
+                @Override
+                public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
+                    return world.getBlockState(pos).getBlock().defaultDestroyTime() < 3.0D;
+                }
+            }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
+        }
+        this.remove(RemovalReason.DISCARDED);
     }
 
     public void shrapnelExplode(CompatUtil compatUtil) {
@@ -167,7 +180,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
             ((ServerLevel) this.level).sendParticles(LEAD_SHRAPNEL, this.getX(), this.getY(0.0625D),
                     this.getZ(), 100, 0.0D, 0.0D, 0.0D, 5);
             int primedShrapnelBombRadius = 30;
-            int radius = primedShrapnelBombRadius / 4;
+            int radius = (primedShrapnelBombRadius / 4) + explosion;
         for (Entity entity : this.level.getEntities(this, new AABB(this.getX() - radius, this.getY() - 4, this.getZ() - radius, this.getX() + radius, this.getY() + 4, this.getZ() + radius))) {
             int random = (int) (Math.random() * 100);
             boolean shouldPoison = false;
