@@ -25,8 +25,8 @@ public class AuraRingerBlockEntity extends BlockEntity {
 
     public static void ringingTick(Level world, BlockPos pos, BlockState state, AuraRingerBlockEntity type) {
         List<LivingEntity> list = world.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(16.0D));
-        if (state.getBlock() instanceof AuraRingerBlock block) {
-            if (block.isRinging(state)) {
+        if (state.getBlock() instanceof AuraRingerBlock) {
+            if (state.getValue(AuraRingerBlock.RINGING)) {
                 for (LivingEntity livingEntity : list) {
                     if (livingEntity instanceof Villager villager) {
                         Vec3 vec3 = Vec3.atBottomCenterOf(pos).add(0.0D, 0.6F, 0.0D);

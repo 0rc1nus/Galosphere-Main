@@ -78,52 +78,48 @@ public class AuraRingerBlock extends BaseEntityBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return !pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, GBlockEntityTypes.AURA_RINGER.get(), AuraRingerBlockEntity::ringingTick) : super.getTicker(pLevel, pState, pBlockEntityType);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> pBlockEntityType) {
+        return !world.isClientSide() ? createTickerHelper(pBlockEntityType, GBlockEntityTypes.AURA_RINGER.get(), AuraRingerBlockEntity::ringingTick) : super.getTicker(world, state, pBlockEntityType);
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         ItemStack stack = pPlayer.getItemInHand(pHand);
-        if (!pState.getValue(RINGING) && stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem()) {
-            this.activate(pState, pLevel, pos);
-            return InteractionResult.sidedSuccess(pLevel.isClientSide());
+        if (!state.getValue(RINGING) && stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem()) {
+            this.activate(state, world, pos);
+            return InteractionResult.sidedSuccess(world.isClientSide());
         }
         else {
-            return super.use(pState, pLevel, pos, pPlayer, pHand, pHit);
+            return super.use(state, world, pos, pPlayer, pHand, pHit);
         }
     }
 
-    public void activate(BlockState pState, Level pLevel, BlockPos pos) {
-        pLevel.scheduleTick(pos, this, 400);
-        pLevel.setBlock(pos, pState.setValue(RINGING, true), 2);
+    public void activate(BlockState state, Level world, BlockPos pos) {
+        world.scheduleTick(pos, this, 400);
+        world.setBlock(pos, state.setValue(RINGING, true), 2);
         for (int i = 0; i < 20; i++) {
-            pLevel.addParticle(ParticleTypes.REVERSE_PORTAL, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, 0.0, 0.0, 0.0);
+            world.addParticle(ParticleTypes.REVERSE_PORTAL, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, 0.0, 0.0, 0.0);
         }
-        pLevel.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.5F);
+        world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.5F);
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pos, Random pRandom) {
-        if (pState.getValue(RINGING)) {
-            pLevel.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_DEPLETE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            pLevel.setBlock(pos, pState.setValue(RINGING, false), 3);
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random pRandom) {
+        if (state.getValue(RINGING)) {
+            world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_DEPLETE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            world.setBlock(pos, state.setValue(RINGING, false), 3);
         }
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState pState) {
-        return new AuraRingerBlockEntity(pos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new AuraRingerBlockEntity(pos, state);
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
-    }
-
-    public boolean isRinging(BlockState state) {
-        return state.hasProperty(RINGING) && state.getValue(RINGING);
     }
 
     @Override

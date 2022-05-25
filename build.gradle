@@ -97,7 +97,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
     implementation fg.deobf("curse.maven:jei-238222:3670531")
     implementation fg.deobf("curse.maven:jade-324717:3671210")
-    implementation fg.deobf("curse.maven:oreganized-mod-439153:3741598")
+//    implementation fg.deobf("curse.maven:oreganized-mod-439153:3741598")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 

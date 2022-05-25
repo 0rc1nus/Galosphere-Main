@@ -38,12 +38,12 @@ public class LightningBoltMixin {
 
         if (blockstate1.getBlock() instanceof LumiereBlock) {
             world.setBlockAndUpdate(blockpos, GBlocks.CHARGED_LUMIERE_BLOCK.get().defaultBlockState());
-            BlockPos.MutableBlockPos blockpos$mutableblockpos = pos.mutable();
+            BlockPos.MutableBlockPos mut = pos.mutable();
             int i = world.random.nextInt(3) + 3;
 
             for(int j = 0; j < i; ++j) {
                 int k = world.random.nextInt(8) + 1;
-                chargeLumiereBlocks(world, blockpos, blockpos$mutableblockpos, k);
+                chargeLumiereBlocks(world, blockpos, mut, k);
             }
 
         }
