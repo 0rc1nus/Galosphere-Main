@@ -25,6 +25,7 @@ public class GBlockLootTables extends BlockLoot {
     protected void addTables() {
         this.add(GBlocks.SILVER_ORE.get(), (block) -> createOreDrop(block, GItems.RAW_SILVER.get()));
         this.add(GBlocks.DEEPSLATE_SILVER_ORE.get(), (block) -> createOreDrop(block, GItems.RAW_SILVER.get()));
+        dropSelf(GBlocks.CHARGED_LUMIERE_BLOCK.get());
         dropSelf(GBlocks.LUMIERE_BLOCK.get());
         dropSelf(GBlocks.ALLURITE_BLOCK.get());
         dropSelf(GBlocks.RAW_SILVER_BLOCK.get());
