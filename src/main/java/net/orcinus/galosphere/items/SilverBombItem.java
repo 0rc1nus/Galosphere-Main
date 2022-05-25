@@ -63,20 +63,4 @@ public class SilverBombItem extends Item {
         }
     }
 
-    public boolean hasDuration(ItemStack stack) {
-        return stack.getTag() != null && stack.getTag().getInt("Duration") > 0;
-    }
-
-    public boolean hasExplosion(ItemStack stack) {
-        return stack.getTag() != null && stack.getTag().getInt("Duration") > 0;
-    }
-
-    public boolean hasBouncy(ItemStack stack) {
-        return stack.getTag() != null && stack.getTag().getInt("Duration") > 0;
-    }
-
-    public boolean hasShrapnel(ItemStack stack) {
-        return stack.getTag() != null && stack.getTag().getInt("Duration") > 0;
-    }
-
 }
