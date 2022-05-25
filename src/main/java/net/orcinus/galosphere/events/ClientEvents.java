@@ -54,9 +54,11 @@ public class ClientEvents {
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
         HorseRenderer horseRenderer = event.getRenderer(EntityType.HORSE);
+        if (horseRenderer == null) return;
         horseRenderer.addLayer(new HorseBannerLayer(horseRenderer));
         event.getSkins().forEach(skin -> {
             PlayerRenderer playerRenderer = event.getSkin(skin);
+            if (playerRenderer == null) return;
             playerRenderer.addLayer(new BannerLayer<>(playerRenderer));
         });
     }

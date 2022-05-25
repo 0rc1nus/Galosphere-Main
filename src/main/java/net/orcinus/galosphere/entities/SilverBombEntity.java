@@ -36,9 +36,6 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.util.CompatUtil;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
 
 public class SilverBombEntity extends ThrowableItemProjectile {
     private static final EntityDataAccessor<Integer> TIME = SynchedEntityData.defineId(SilverBombEntity.class, EntityDataSerializers.INT);
