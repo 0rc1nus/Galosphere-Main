@@ -15,7 +15,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.init.GMobEffects;
-import net.orcinus.galosphere.mixin.GuiAccessor;
 
 import java.util.Random;
 
@@ -46,7 +45,7 @@ public class IllusiveOverlay {
             rand.setSeed(ticks * 312871L);
 
             float absorb = Mth.ceil(player.getAbsorptionAmount());
-            boolean highlight = ((GuiAccessor)mc.gui).getHealthBlinkTime() > (long) ticks && (((GuiAccessor)mc.gui).getHealthBlinkTime() - (long) ticks) / 3L % 2L == 1L;
+            boolean highlight = mc.gui.healthBlinkTime > (long) ticks && (mc.gui.healthBlinkTime - (long) ticks) / 3L % 2L == 1L;
 
             int healthRows = (int) player.getMaxHealth();
             int rowHeight = Math.max(10 - (healthRows - 2), 3);
@@ -63,9 +62,9 @@ public class IllusiveOverlay {
 
                 if (currentHealth <= 4) y += rand.nextInt(2);
                 if (highlight) {
-                    if (i * 2 + 1 < ((GuiAccessor)mc.gui).getDisplayHealth()) {
+                    if (i * 2 + 1 < mc.gui.displayHealth) {
                         mc.gui.blit(matrixStack, x, y, 54, TOP, 9, 9);
-                    } else if (i * 2 + 1 == ((GuiAccessor)mc.gui).getDisplayHealth()) {
+                    } else if (i * 2 + 1 == mc.gui.displayHealth) {
                         mc.gui.blit(matrixStack, x, y, 63, TOP, 9, 9);
                     }
                 }

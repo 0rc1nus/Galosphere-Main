@@ -18,14 +18,13 @@ import java.util.Optional;
 @Mixin(LightningBolt.class)
 public class LightningBoltMixin {
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LightningBolt;clearCopperOnLightningStrike(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"), method = "tick", cancellable = true)
-    private void tick(CallbackInfo ci) {
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LightningBolt;clearCopperOnLightningStrike(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"), method = "tick")
+    private void G$tick(CallbackInfo ci) {
         LightningBolt $this = (LightningBolt)(Object)this;
-        LightningBoltAccessor accessor = (LightningBoltAccessor) $this;
-        clearCopperOnLightningStrike(((LightningBolt)(Object)this).level, accessor.callGetStrikePosition());
+        chargeLumiereOnLightningStrike(((LightningBolt)(Object)this).level, $this.getStrikePosition());
     }
 
-    private static void clearCopperOnLightningStrike(Level world, BlockPos pos) {
+    private static void chargeLumiereOnLightningStrike(Level world, BlockPos pos) {
         BlockState blockstate = world.getBlockState(pos);
         BlockPos blockpos;
         BlockState blockstate1;
@@ -44,17 +43,17 @@ public class LightningBoltMixin {
 
             for(int j = 0; j < i; ++j) {
                 int k = world.random.nextInt(8) + 1;
-                randomWalkCleaningCopper(world, blockpos, blockpos$mutableblockpos, k);
+                chargeLumiereBlocks(world, blockpos, blockpos$mutableblockpos, k);
             }
 
         }
     }
 
-    private static void randomWalkCleaningCopper(Level world, BlockPos pos, BlockPos.MutableBlockPos mut, int tries) {
+    private static void chargeLumiereBlocks(Level world, BlockPos pos, BlockPos.MutableBlockPos mut, int tries) {
         mut.set(pos);
 
         for(int i = 0; i < tries; ++i) {
-            Optional<BlockPos> optional = randomStepCleaningCopper(world, mut);
+            Optional<BlockPos> optional = chargeLumiereBlocks(world, mut);
             if (optional.isEmpty()) {
                 break;
             }
@@ -63,7 +62,7 @@ public class LightningBoltMixin {
         }
     }
 
-    private static Optional<BlockPos> randomStepCleaningCopper(Level world, BlockPos pos) {
+    private static Optional<BlockPos> chargeLumiereBlocks(Level world, BlockPos pos) {
         for(BlockPos blockpos : BlockPos.randomInCube(world.random, 10, pos, 1)) {
             BlockState blockstate = world.getBlockState(blockpos);
             if (blockstate.getBlock() instanceof LumiereBlock) {
