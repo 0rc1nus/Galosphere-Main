@@ -72,5 +72,6 @@
   "entity.galosphere.silver_bomb": "Silver Bomb",
   "entity.galosphere.sparkle": "Sparkle",
   "effect.galosphere.illusive": "Illusive",
-  "container.galosphere.combustion_table": "Combustion Table"
+  "container.galosphere.combustion_table": "Combustion Table",
+  "subtitles.entity.sparkle.bite": "Sparkle bites"
 }

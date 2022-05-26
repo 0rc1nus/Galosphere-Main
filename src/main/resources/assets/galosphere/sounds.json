@@ -1,0 +1,8 @@
+{
+  "entity.sparkle.bite": {
+    "sounds": [
+      "galosphere:sparkle/sparkle_bite"
+    ],
+    "subtitle": "subtitles.entity.sparkle.bite"
+  }
+}

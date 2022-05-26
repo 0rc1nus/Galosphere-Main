@@ -39,7 +39,6 @@ public class GRecipeProvider extends RecipeProvider {
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
         twoXtwo(consumer, GBlocks.ALLURITE_BLOCK.get(), GItems.ALLURITE_SHARD.get(), 1);
         twoXtwo(consumer, GBlocks.LUMIERE_BLOCK.get(), GItems.LUMIERE_SHARD.get(), 1);
-        twoXtwo(consumer, GBlocks.MYSTERIA_CINDERS.get(), GBlocks.MYSTERIA_VINES.get().asItem(), 1);
         twoXtwo(consumer, GBlocks.SMOOTH_AMETHYST.get(), Items.AMETHYST_BLOCK, 4);
         twoXtwo(consumer, GBlocks.SMOOTH_ALLURITE.get(), GBlocks.ALLURITE_BLOCK.get().asItem(), 4);
         twoXtwo(consumer, GBlocks.SMOOTH_LUMIERE.get(), GBlocks.LUMIERE_BLOCK.get().asItem(), 4);

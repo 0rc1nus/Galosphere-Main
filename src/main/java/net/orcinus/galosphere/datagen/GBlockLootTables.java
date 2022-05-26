@@ -50,11 +50,7 @@ public class GBlockLootTables extends BlockLoot {
         dropSelf(GBlocks.AURA_RINGER.get());
         dropSelf(GBlocks.WARPED_ANCHOR.get());
         this.add(GBlocks.LUMIERE_COMPOSTER.get(), LootTable.lootTable().withPool(applyExplosionCondition(Blocks.COMPOSTER, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Blocks.COMPOSTER)))));
-        dropSelf(GBlocks.MYSTERIA_CINDERS.get());
-        dropSelf(GBlocks.MYSTERIA_LOG.get());
         dropSelf(GBlocks.COMBUSTION_TABLE.get());
-        this.add(GBlocks.MYSTERIA_VINES.get(), GBlockLootTables::createMysteriaVinesDrop);
-        this.add(GBlocks.MYSTERIA_VINES_PLANTS.get(), GBlockLootTables::createMysteriaVinesDrop);
         dropSelf(GBlocks.SMOOTH_ALLURITE.get());
         dropSelf(GBlocks.SMOOTH_ALLURITE_SLAB.get());
         dropSelf(GBlocks.SMOOTH_ALLURITE_STAIRS.get());
@@ -65,10 +61,6 @@ public class GBlockLootTables extends BlockLoot {
         dropSelf(GBlocks.SMOOTH_LUMIERE_STAIRS.get());
         dropSelf(GBlocks.LUMIERE_BRICKS.get());
         dropSelf(GBlocks.CHISELED_LUMIERE.get());
-    }
-
-    protected static LootTable.Builder createMysteriaVinesDrop(Block block) {
-        return LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(GBlocks.MYSTERIA_VINES.get())));
     }
 
     @Override

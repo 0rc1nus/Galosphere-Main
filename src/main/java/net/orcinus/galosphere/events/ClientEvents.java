@@ -41,8 +41,6 @@ public class ClientEvents {
     public static void onClientSetup(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(GBlocks.ALLURITE_CLUSTER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(GBlocks.LUMIERE_CLUSTER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(GBlocks.MYSTERIA_VINES.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(GBlocks.MYSTERIA_VINES_PLANTS.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(GBlocks.WARPED_ANCHOR.get(), RenderType.cutout());
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
