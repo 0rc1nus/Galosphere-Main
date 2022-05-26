@@ -115,6 +115,7 @@ public class MobEvents {
                             }
                             copy.setCount(1);
                             horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            horse.gameEvent(GameEvent.MOB_INTERACT, player);
                             ((IBanner) horse).setBanner(copy);
                             player.swing(hand);
                         }
@@ -126,6 +127,7 @@ public class MobEvents {
                             ItemStack copy = ((IBanner) horse).getBanner();
                             player.setItemInHand(hand, copy);
                             horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            horse.gameEvent(GameEvent.MOB_INTERACT, player);
                             ((IBanner) horse).setBanner(ItemStack.EMPTY);
                         }
                     }

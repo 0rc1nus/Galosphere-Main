@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -43,6 +44,7 @@ public class MiscEvents {
         if (player.isShiftKeyDown() && !((IBanner) player).getBanner().isEmpty() && stack.isEmpty()) {
             ItemStack copy = ((IBanner) player).getBanner();
             player.setItemInHand(hand, copy);
+            player.gameEvent(GameEvent.EQUIP, player);
             ((IBanner) player).setBanner(ItemStack.EMPTY);
         }
         if (state.getBlock() == Blocks.COMPOSTER) {
@@ -54,6 +56,7 @@ public class MiscEvents {
                     }
                     world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
                     world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                     player.swing(hand);
                 }
             }
@@ -68,6 +71,7 @@ public class MiscEvents {
         BannerRendererUtil util = new BannerRendererUtil();
         if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
             if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
+                player.gameEvent(GameEvent.EQUIP, player);
                 ItemStack copy = stack.copy();
                 if (!player.getAbilities().instabuild) {
                     stack.shrink(1);
