@@ -31,12 +31,6 @@ public class Galosphere {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "galosphere";
     public static final CreativeModeTab GALOSPHERE = new GalosphereTab(MODID);
-    //seed -7714140795261595653
-    //seed coords -145 95 77
-    //seed 7856658500923416262
-    //seed coords -73 69 150
-
-    //-7189274751734808686
 
     public Galosphere() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

@@ -24,6 +24,7 @@ public class GDataGenerator {
         dataGenerator.addProvider(new GLootTableProvider(dataGenerator));
         dataGenerator.addProvider(new GBlockTagsProvider(dataGenerator, helper));
         dataGenerator.addProvider(new GItemTagsProvider(dataGenerator, helper));
+        dataGenerator.addProvider(new GEntityTypeTagsProvider(dataGenerator, helper));
     }
 
 }
