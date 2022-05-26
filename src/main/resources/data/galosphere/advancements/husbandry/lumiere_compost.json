@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:story/root",
+  "display": {
+    "icon": {
+      "item": "galosphere:lumiere_shard"
+    },
+    "title": {
+      "translate": "advancements.story.lumiere_compost.title"
+    },
+    "description": {
+      "translate": "advancements.story.lumiere_compost.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "lumiere_compost": {
+      "trigger": "galosphere:lumiere_compost",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "lumiere_compost"
+    ]
+  ]
+}

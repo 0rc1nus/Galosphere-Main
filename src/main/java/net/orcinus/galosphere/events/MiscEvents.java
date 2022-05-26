@@ -2,6 +2,7 @@ package net.orcinus.galosphere.events;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -27,6 +28,7 @@ import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
@@ -53,6 +55,9 @@ public class MiscEvents {
                     event.setCanceled(true);
                     if (!player.getAbilities().instabuild) {
                         stack.shrink(1);
+                    }
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        GCriteriaTriggers.LUMIERE_COMPOST.trigger(serverPlayer);
                     }
                     world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
                     world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);

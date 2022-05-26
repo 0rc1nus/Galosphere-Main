@@ -2,6 +2,7 @@ package net.orcinus.galosphere.events;
 
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -33,6 +34,7 @@ import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.entities.SparkleEntity;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
@@ -184,6 +186,9 @@ public class MobEvents {
                 BlockPos lockPosition = possibles.get(((Player) entity).getRandom().nextInt(possibles.size()));
                 BlockState state = world.getBlockState(lockPosition);
                 if (state.getBlock() == GBlocks.WARPED_ANCHOR.get()) {
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        GCriteriaTriggers.WARPED_TELEPORT.trigger(serverPlayer);
+                    }
                     world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                     player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
                     event.setTargetX(lockPosition.getX() + 0.5D);
