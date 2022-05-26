@@ -363,5 +363,5 @@ a4b1251d8651888eecdba026afd939341d64b2a7 data/minecraft/tags/blocks/mineable/axe
 559b20c3ee5ffdcbd92556b48995b113165a87cd data/minecraft/tags/blocks/mineable/hoe.json
 462c19043681e26feecfb84b8250e103dff79676 data/minecraft/tags/blocks/mineable/pickaxe.json
 5041d6cebbaafd90cd010eabe50667b6173654d3 data/minecraft/tags/blocks/needs_stone_tool.json
-de13401fd3b50e22ffc858c47f1833c9fc53641f data/minecraft/tags/entity_types/impact_projectiles.json
+a8686d573c52b313192657cbf00f6c34307635ba data/minecraft/tags/entity_types/impact_projectiles.json
 7620616698d0a25590ed39725ed03d9301fb55d3 data/minecraft/tags/items/freeze_immune_wearables.json

@@ -16,7 +16,7 @@ public class GEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags() {
-        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(GEntityTypes.SPARKLE.get());
+        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(GEntityTypes.SIVLER_BOMB.get());
     }
 
 }
