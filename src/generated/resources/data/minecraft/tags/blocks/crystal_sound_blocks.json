@@ -6,7 +6,15 @@
     "galosphere:smooth_amethyst",
     "galosphere:smooth_amethyst_slab",
     "galosphere:smooth_amethyst_stairs",
+    "galosphere:smooth_allurite",
+    "galosphere:smooth_allurite_slab",
+    "galosphere:smooth_allurite_stairs",
+    "galosphere:smooth_lumiere",
+    "galosphere:smooth_lumiere_slab",
+    "galosphere:smooth_lumiere_stairs",
     "galosphere:amethyst_bricks",
+    "galosphere:allurite_bricks",
+    "galosphere:lumiere_bricks",
     "galosphere:allurite_block",
     "galosphere:lumiere_block"
   ]
