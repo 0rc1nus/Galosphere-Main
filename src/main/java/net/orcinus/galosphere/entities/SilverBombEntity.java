@@ -222,10 +222,10 @@ public class SilverBombEntity extends ThrowableItemProjectile {
             this.setDeltaMovement(vec3.x, vec3.y < 0.0D ? -vec3.y * booster : 0.0D, vec3.z);
         }
         if (direction == Direction.WEST || direction == Direction.EAST) {
-            this.setDeltaMovement(vec3.x < 0.5D ? -vec3.x * booster * Mth.sin(Mth.PI / 2): 0.0D, vec3.y, vec3.z);
+            this.setDeltaMovement(vec3.x < 0.65D ? -vec3.x * booster * Mth.sin(Mth.PI / 2): 0.0D, vec3.y, vec3.z);
         }
         if (direction == Direction.NORTH || direction == Direction.SOUTH) {
-            this.setDeltaMovement(vec3.x, vec3.y, vec3.z < 0.5D ? -vec3.z * booster * Mth.sin(3 * Mth.PI / 4) : 0.0D);
+            this.setDeltaMovement(vec3.x, vec3.y, vec3.z < 0.65D ? -vec3.z * booster * Mth.sin(3 * Mth.PI / 4) : 0.0D);
         }
         if (!this.level.isClientSide() && this.isInWater()) {
             this.level.broadcastEntityEvent(this, (byte)3);

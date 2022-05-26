@@ -41,24 +41,9 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 return stack.is(GItems.SILVER_BOMB.get());
             }
         });
-        this.addSlot(new Slot(this.container, 1, 44, 50) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL) || stack.is(getLeadIngot());
-            }
-        });
-        this.addSlot(new Slot(this.container, 2, 80 , 50) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL) || stack.is(getLeadIngot());
-            }
-        });
-        this.addSlot(new Slot(this.container, 3, 116 , 50) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL) || stack.is(getLeadIngot());
-            }
-        });
+        this.addSlot(new CombustionSlot(this.container, 1, 44, 50));
+        this.addSlot(new CombustionSlot(this.container, 2, 80 , 50));
+        this.addSlot(new CombustionSlot(this.container, 3, 116 , 50));
         this.addSlot(new Slot(this.resultContainer, 4, 79, 21) {
 
             public boolean mayPlace(ItemStack stack) {
@@ -74,13 +59,13 @@ public class CombustionTableMenu extends AbstractContainerMenu {
             }
         });
 
-        for(int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 9; ++j) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
                 this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        for(int k = 0; k < 9; ++k) {
+        for (int k = 0; k < 9; k++) {
             this.addSlot(new Slot(inventory, k, 8 + k * 18, 142));
         }
 
@@ -253,7 +238,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
         }
     }
 
-    public Item getLeadIngot() {
+    public static Item getLeadIngot() {
         CompatUtil compatUtil = new CompatUtil();
         String modid = "oreganized";
         Item item = null;
@@ -319,6 +304,19 @@ public class CombustionTableMenu extends AbstractContainerMenu {
         }
 
         return itemstack;
+    }
+
+    public static class CombustionSlot extends Slot {
+
+        public CombustionSlot(Container container, int index, int x, int y) {
+            super(container, index, x, y);
+        }
+
+        @Override
+        public boolean mayPlace(ItemStack stack) {
+            return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL) || stack.is(getLeadIngot());
+        }
+
     }
 
 }
