@@ -39,7 +39,8 @@ public class SmoothSwimmingGroundControl extends MoveControl {
                         this.entity.setDeltaMovement(this.entity.getDeltaMovement().add(0.0D, (double) this.entity.getSpeed() * distanceY * 0.6D * ySpeedModifier, 0.0D));
                     }
                     this.entity.setSpeed(speed * 0.02F);
-                    float f2 = -((float) (Mth.atan2(distanceY, Mth.sqrt((float) (distanceX * distanceX + distanceZ * distanceZ))) * 57.2957763671875D));
+                    double d4 = Math.sqrt(distanceX * distanceX + distanceZ * distanceZ);
+                    float f2 = -((float)(Mth.atan2(distanceY, d4) * (double)(180F / (float)Math.PI)));
                     f2 = Mth.clamp(Mth.wrapDegrees(f2), -85.0F, 85.0F);
                     this.entity.setXRot(this.rotlerp(this.entity.getXRot(), f2, 5.0F));
                     float f4 = Mth.cos(this.entity.getXRot() * 0.017453292F);

@@ -19,8 +19,7 @@ public class WarpedProvider implements ParticleProvider<SimpleParticleType> {
     @Override
     public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double velX, double velY, double velZ) {
         SpellParticle spellparticle = new SpellParticle(world, x, y, z, velX, velY, velZ, this.sprite);
-        float f = world.random.nextFloat() * 0.5F + 0.35F;
-        spellparticle.setColor(2, 2, 40);
+        spellparticle.setColor(0.67F,0.98F,1);
         return spellparticle;
     }
 }

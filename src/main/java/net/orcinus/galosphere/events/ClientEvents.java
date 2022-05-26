@@ -21,7 +21,6 @@ import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.IllusiveOverlay;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
-import net.orcinus.galosphere.client.particles.AuraEmissionParticle;
 import net.orcinus.galosphere.client.particles.AuraParticle;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
@@ -77,7 +76,6 @@ public class ClientEvents {
     public static void registerParticles(ParticleFactoryRegisterEvent event) {
         ParticleEngine engine = Minecraft.getInstance().particleEngine;
         engine.register(GParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
-        engine.register(GParticleTypes.AURA_EMISSION.get(), AuraEmissionParticle.Provider::new);
         engine.register(GParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
         engine.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
     }

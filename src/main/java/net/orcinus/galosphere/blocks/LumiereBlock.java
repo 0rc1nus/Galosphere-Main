@@ -47,11 +47,12 @@ public class LumiereBlock extends AmethystBlock {
             for (Block block : BLOCK_REFORMING_MAP.keySet()) {
                 if (world.getBlockState(abovePos).is(block)) {
                     world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.75F, 1.4F);
-                    world.setBlockAndUpdate(abovePos, BLOCK_REFORMING_MAP.get(block).defaultBlockState());
+                    world.setBlockAndUpdate(pos, GBlocks.LUMIERE_BLOCK.get().defaultBlockState());
                     if (world.getBlockState(abovePos).isCollisionShapeFullBlock(world, abovePos)) {
                         world.levelEvent(2009, abovePos, 0);
                     }
-                    world.setBlockAndUpdate(pos, GBlocks.LUMIERE_BLOCK.get().defaultBlockState());
+                    BlockState pState = BLOCK_REFORMING_MAP.get(block).defaultBlockState();
+                    world.setBlockAndUpdate(abovePos, pState);
                     for (Direction direction : Direction.Plane.HORIZONTAL) {
                         BlockPos dirPos = pos.below().relative(direction);
                         if (world.getBlockState(dirPos).isCollisionShapeFullBlock(world, dirPos)) {

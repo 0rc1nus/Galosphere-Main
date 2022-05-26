@@ -58,7 +58,7 @@ public class AuraRingerBlock extends BaseEntityBlock {
     }
 
     public List<BlockPos> getRadius(BlockPos blockPos) {
-        int radius = 16;
+        int radius = 10;
         int height = 3;
         List<BlockPos> position = Lists.newArrayList();
         for (int x = -radius; x <= radius; x++) {

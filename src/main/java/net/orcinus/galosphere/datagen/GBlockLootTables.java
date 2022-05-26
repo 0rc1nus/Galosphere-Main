@@ -31,15 +31,17 @@ public class GBlockLootTables extends BlockLoot {
         dropSelf(GBlocks.RAW_SILVER_BLOCK.get());
         dropSelf(GBlocks.SILVER_BLOCK.get());
         dropSelf(GBlocks.AMETHYST_STAIRS.get());
-        dropSelf(GBlocks.AMETHYST_SLAB.get());
+        dropSlab(GBlocks.AMETHYST_SLAB);
         dropSelf(GBlocks.ALLURITE_STAIRS.get());
-        dropSelf(GBlocks.ALLURITE_SLAB.get());
+        dropSlab(GBlocks.ALLURITE_SLAB);
         dropSelf(GBlocks.LUMIERE_STAIRS.get());
-        dropSelf(GBlocks.LUMIERE_SLAB.get());
+        dropSlab(GBlocks.LUMIERE_SLAB);
         dropSelf(GBlocks.SMOOTH_AMETHYST.get());
         dropSelf(GBlocks.SMOOTH_AMETHYST_STAIRS.get());
-        dropSelf(GBlocks.SMOOTH_AMETHYST_SLAB.get());
+        dropSlab(GBlocks.SMOOTH_AMETHYST_SLAB);
         dropSelf(GBlocks.AMETHYST_BRICKS.get());
+        dropSelf(GBlocks.AMETHYST_BRICK_STAIRS.get());
+        dropSlab(GBlocks.AMETHYST_BRICK_SLAB);
         dropSelf(GBlocks.CHISELED_AMETHYST.get());
         this.add(GBlocks.ALLURITE_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(GItems.ALLURITE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(GItems.ALLURITE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
         this.add(GBlocks.LUMIERE_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(GItems.LUMIERE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(GItems.LUMIERE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
@@ -47,20 +49,27 @@ public class GBlockLootTables extends BlockLoot {
         dropSelf(GBlocks.LUMIERE_LAMP.get());
         dropSelf(GBlocks.ALLURITE_LAMP.get());
         dropSelf(GBlocks.AMETHYST_LAMP.get());
-        dropSelf(GBlocks.AURA_RINGER.get());
         dropSelf(GBlocks.WARPED_ANCHOR.get());
         this.add(GBlocks.LUMIERE_COMPOSTER.get(), LootTable.lootTable().withPool(applyExplosionCondition(Blocks.COMPOSTER, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Blocks.COMPOSTER)))));
         dropSelf(GBlocks.COMBUSTION_TABLE.get());
         dropSelf(GBlocks.SMOOTH_ALLURITE.get());
-        dropSelf(GBlocks.SMOOTH_ALLURITE_SLAB.get());
+        dropSlab(GBlocks.SMOOTH_ALLURITE_SLAB);
         dropSelf(GBlocks.SMOOTH_ALLURITE_STAIRS.get());
         dropSelf(GBlocks.ALLURITE_BRICKS.get());
         dropSelf(GBlocks.CHISELED_ALLURITE.get());
         dropSelf(GBlocks.SMOOTH_LUMIERE.get());
-        dropSelf(GBlocks.SMOOTH_LUMIERE_SLAB.get());
+        dropSlab(GBlocks.SMOOTH_LUMIERE_SLAB);
         dropSelf(GBlocks.SMOOTH_LUMIERE_STAIRS.get());
         dropSelf(GBlocks.LUMIERE_BRICKS.get());
         dropSelf(GBlocks.CHISELED_LUMIERE.get());
+        dropSelf(GBlocks.ALLURITE_BRICK_STAIRS.get());
+        dropSlab(GBlocks.ALLURITE_BRICK_SLAB);
+        dropSelf(GBlocks.LUMIERE_BRICK_STAIRS.get());
+        dropSlab(GBlocks.LUMIERE_BRICK_SLAB);
+    }
+
+    private void dropSlab(RegistryObject<Block> slab) {
+        this.add(slab.get(), BlockLoot::createSlabItemTable);
     }
 
     @Override

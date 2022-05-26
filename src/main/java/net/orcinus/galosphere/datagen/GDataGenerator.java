@@ -18,9 +18,8 @@ public class GDataGenerator {
         DataGenerator dataGenerator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-
-//        dataGenerator.addProvider(new GBlockstateProvider(dataGenerator, helper));
-//        dataGenerator.addProvider(new GItemModelProvider(dataGenerator, helper));
+        dataGenerator.addProvider(new GBlockstateProvider(dataGenerator, helper));
+        dataGenerator.addProvider(new GItemModelProvider(dataGenerator, helper));
         dataGenerator.addProvider(new GRecipeProvider(dataGenerator));
         dataGenerator.addProvider(new GLootTableProvider(dataGenerator));
         dataGenerator.addProvider(new GBlockTagsProvider(dataGenerator, helper));

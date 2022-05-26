@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "galosphere:block/flutter_frond_middle"
-  }
-}

@@ -20,7 +20,7 @@ public class EnterAndSwimGoal extends Goal {
     @Override
     public boolean canUse() {
         if (this.sparkle.isOnGround() && !this.sparkle.level.getFluidState(this.sparkle.blockPosition()).is(FluidTags.WATER)){
-            if (this.sparkle.shouldEnterWater() && this.sparkle.getRandom().nextInt(30) == 0){
+            if (this.sparkle.shouldEnterWater() && this.sparkle.getRandom().nextInt(30) == 0) {
                 this.waterPos = this.getWaterPos();
                 return this.waterPos != null;
             }

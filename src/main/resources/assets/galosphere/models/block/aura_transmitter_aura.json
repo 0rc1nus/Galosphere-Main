@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "galosphere:block/aura_transmitter_top_aura",
-    "bottom": "galosphere:block/aura_transmitter_bottom",
-    "side": "galosphere:block/aura_transmitter_aura"
-  }
-}

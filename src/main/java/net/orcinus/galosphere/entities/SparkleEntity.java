@@ -95,12 +95,12 @@ public class SparkleEntity extends Animal {
     @Override
     public void tick() {
         super.tick();
-        prevWaterTicks = waterTicks;
-        if (this.isInWaterOrBubble() && waterTicks < 5.0F) {
-            waterTicks++;
+        this.prevWaterTicks = this.waterTicks;
+        if (this.isInWaterOrBubble() && this.waterTicks < 5.0F) {
+            this.waterTicks++;
         }
-        if (!this.isInWaterOrBubble() && waterTicks > 0.0F) {
-            waterTicks--;
+        if (!this.isInWaterOrBubble() && this.waterTicks > 0.0F) {
+            this.waterTicks--;
         }
         if (this.isInWaterOrBubble() && this.groundNavigationInuse) {
             switchNavigator(false);

@@ -13,7 +13,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "galosphere:smooth_lumiere_slab",
+                  "block": "galosphere:lumiere_brick_slab",
                   "properties": {
                     "type": "double"
                   }
@@ -26,7 +26,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "galosphere:smooth_lumiere_slab"
+          "name": "galosphere:lumiere_brick_slab"
         }
       ]
     }

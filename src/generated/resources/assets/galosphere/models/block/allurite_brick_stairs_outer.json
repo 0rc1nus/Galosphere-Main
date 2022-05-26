@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "side": "galosphere:block/allurite_bricks",
+    "bottom": "galosphere:block/allurite_bricks",
+    "top": "galosphere:block/allurite_bricks"
+  }
+}
