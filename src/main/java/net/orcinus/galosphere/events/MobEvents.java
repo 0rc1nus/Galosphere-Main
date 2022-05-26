@@ -107,20 +107,27 @@ public class MobEvents {
             if (horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
                 if (((IBanner) horse).getBanner().isEmpty()) {
                     if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
-                        ItemStack copy = stack.copy();
-                        if (!player.getAbilities().instabuild) {
-                            stack.shrink(1);
+                        if (!horse.level.isClientSide()) {
+                            event.setCanceled(true);
+                            ItemStack copy = stack.copy();
+                            if (!player.getAbilities().instabuild) {
+                                stack.shrink(1);
+                            }
+                            copy.setCount(1);
+                            horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            ((IBanner) horse).setBanner(copy);
+                            player.swing(hand);
                         }
-                        copy.setCount(1);
-                        ((IBanner) horse).setBanner(copy);
-                        player.playSound(SoundEvents.HORSE_ARMOR, 1.0F, 1.0F);
-                        player.swing(hand);
                     }
                 } else {
                     if (player.isShiftKeyDown() && stack.isEmpty()) {
-                        ItemStack copy = ((IBanner) horse).getBanner();
-                        player.setItemInHand(hand, copy);
-                        ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                        if (!horse.level.isClientSide()) {
+                            event.setCanceled(true);
+                            ItemStack copy = ((IBanner) horse).getBanner();
+                            player.setItemInHand(hand, copy);
+                            horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                        }
                     }
                 }
             }
