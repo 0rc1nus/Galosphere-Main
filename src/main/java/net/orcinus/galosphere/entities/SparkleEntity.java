@@ -220,7 +220,7 @@ public class SparkleEntity extends Animal {
         this.goalSelector.addGoal(2, new LeaveWaterGoal(this));
         this.goalSelector.addGoal(3, new PanicGoal(this, 1.4D));
         this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(GBlocks.MYSTERIA_VINES.get().asItem()), false));
+        this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(GItemTags.SPARKLE_TEMPT_ITEMS), false));
         this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new BiteClusterGoal(this));
         this.goalSelector.addGoal(8, new SparkleRandomSwimmingGoal(this, 1.0D, 10));
@@ -272,7 +272,7 @@ public class SparkleEntity extends Animal {
             this.gameEvent(GameEvent.SHEAR, player);
             return InteractionResult.SUCCESS;
         }
-        else if (this.getCrystaltype() == CrystalType.NONE && stack.is(GBlocks.MYSTERIA_CINDERS.get().asItem())) {
+        else if (this.getCrystaltype() == CrystalType.NONE && stack.is(GItemTags.SPARKLE_TEMPT_ITEMS)) {
             this.setGrowthTicks(this.getGrowthTicks() - Mth.nextInt(random, 20, 40));
             return InteractionResult.SUCCESS;
         }
