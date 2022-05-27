@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "galosphere:lumiere_bricks"
+  },
+  "result": "galosphere:lumiere_brick_stairs",
+  "count": 1
+}

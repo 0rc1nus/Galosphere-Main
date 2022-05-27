@@ -152,6 +152,26 @@ public class GRecipeProvider extends RecipeProvider {
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_ALLURITE_SLAB.get(), GBlocks.SMOOTH_ALLURITE.get(), 2);
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_LUMIERE_SLAB.get(), GBlocks.SMOOTH_LUMIERE.get(), 2);
 
+        stonecutterResultFromBase(consumer, GBlocks.AMETHYST_BRICK_SLAB.get(), Blocks.AMETHYST_BLOCK, 2);
+        stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.ALLURITE_BLOCK.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.LUMIERE_BRICK_SLAB.get(), GBlocks.LUMIERE_BLOCK.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.SMOOTH_AMETHYST.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.SMOOTH_ALLURITE.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.LUMIERE_BRICK_SLAB.get(), GBlocks.SMOOTH_LUMIERE.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.AMETHYST_BRICKS.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.ALLURITE_BRICKS.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.LUMIERE_BRICK_SLAB.get(), GBlocks.LUMIERE_BRICKS.get(), 2);
+
+        stonecutterResultFromBase(consumer, GBlocks.AMETHYST_BRICK_STAIRS.get(), Blocks.AMETHYST_BLOCK);
+        stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.ALLURITE_BLOCK.get());
+        stonecutterResultFromBase(consumer, GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.LUMIERE_BLOCK.get());
+        stonecutterResultFromBase(consumer, GBlocks.AMETHYST_BRICK_STAIRS.get(), GBlocks.SMOOTH_AMETHYST.get());
+        stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.SMOOTH_ALLURITE.get());
+        stonecutterResultFromBase(consumer, GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.SMOOTH_LUMIERE.get());
+        stonecutterResultFromBase(consumer, GBlocks.AMETHYST_BRICK_STAIRS.get(), GBlocks.AMETHYST_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.ALLURITE_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.LUMIERE_BRICKS.get());
+
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_AMETHYST_STAIRS.get(), Blocks.AMETHYST_BLOCK);
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_ALLURITE_STAIRS.get(), GBlocks.ALLURITE_BLOCK.get());
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_LUMIERE_STAIRS.get(), GBlocks.LUMIERE_BLOCK.get());
@@ -165,6 +185,9 @@ public class GRecipeProvider extends RecipeProvider {
         stonecutterResultFromBase(consumer, GBlocks.CHISELED_AMETHYST.get(), GBlocks.SMOOTH_AMETHYST.get());
         stonecutterResultFromBase(consumer, GBlocks.CHISELED_ALLURITE.get(), GBlocks.SMOOTH_ALLURITE.get());
         stonecutterResultFromBase(consumer, GBlocks.CHISELED_LUMIERE.get(), GBlocks.SMOOTH_LUMIERE.get());
+        stonecutterResultFromBase(consumer, GBlocks.CHISELED_AMETHYST.get(), GBlocks.AMETHYST_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.CHISELED_ALLURITE.get(), GBlocks.ALLURITE_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.CHISELED_LUMIERE.get(), GBlocks.LUMIERE_BRICKS.get());
 
         stonecutterResultFromBase(consumer, GBlocks.AMETHYST_BRICKS.get(), Blocks.AMETHYST_BLOCK);
         stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICKS.get(), GBlocks.ALLURITE_BLOCK.get());

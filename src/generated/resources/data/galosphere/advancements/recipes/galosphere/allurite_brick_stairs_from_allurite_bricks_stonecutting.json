@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:allurite_brick_stairs_from_allurite_bricks_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_allurite_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:allurite_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:allurite_brick_stairs_from_allurite_bricks_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_allurite_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}
