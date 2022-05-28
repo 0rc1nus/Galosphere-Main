@@ -31,7 +31,7 @@ public class LumiereBlock extends AmethystBlock {
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState pState) {
+    public boolean isRandomlyTicking(BlockState state) {
         return this.charged;
     }
 
@@ -47,25 +47,26 @@ public class LumiereBlock extends AmethystBlock {
             for (Block block : BLOCK_REFORMING_MAP.keySet()) {
                 if (world.getBlockState(abovePos).is(block)) {
                     world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.75F, 1.4F);
-                    world.setBlockAndUpdate(pos, GBlocks.LUMIERE_BLOCK.get().defaultBlockState());
+                    world.setBlock(pos, GBlocks.LUMIERE_BLOCK.get().defaultBlockState(), 2);
                     if (world.getBlockState(abovePos).isCollisionShapeFullBlock(world, abovePos)) {
                         world.levelEvent(2009, abovePos, 0);
                     }
-                    BlockState pState = BLOCK_REFORMING_MAP.get(block).defaultBlockState();
-                    world.setBlockAndUpdate(abovePos, pState);
+                    BlockState convertedState = BLOCK_REFORMING_MAP.get(block).defaultBlockState();
                     for (Direction direction : Direction.Plane.HORIZONTAL) {
                         BlockPos dirPos = pos.below().relative(direction);
                         if (world.getBlockState(dirPos).isCollisionShapeFullBlock(world, dirPos)) {
                             world.levelEvent(2009, dirPos, 0);
                         }
                     }
+                    world.setBlock(abovePos, convertedState, 2);
+                    break;
                 }
             }
         }
     }
 
     @Override
-    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
+    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (this.charged) {
             world.scheduleTick(pos, this, 120);
         }

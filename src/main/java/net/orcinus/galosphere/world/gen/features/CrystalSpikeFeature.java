@@ -116,6 +116,8 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                         if (world.isStateAtPosition(trigPos, DripstoneUtils::isEmptyOrWaterOrLava)) {
                             crystalPos.add(trigPos);
                             flag = true;
+                        } else {
+                            crystalPos.remove(trigPos);
                         }
                     }
                 }
