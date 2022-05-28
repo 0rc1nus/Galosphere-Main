@@ -7,7 +7,7 @@
       "model": "galosphere:block/amethyst_brick_slab"
     },
     "type=double": {
-      "model": "galosphere:block/smooth_amethyst"
+      "model": "galosphere:block/amethyst_bricks"
     }
   }
 }

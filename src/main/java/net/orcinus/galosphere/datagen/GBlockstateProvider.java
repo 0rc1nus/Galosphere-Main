@@ -46,7 +46,7 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.slabBlock(GBlocks.SMOOTH_AMETHYST_SLAB.get(), "smooth_amethyst");
         this.slabBlock(GBlocks.SMOOTH_ALLURITE_SLAB.get(), "smooth_allurite");
         this.slabBlock(GBlocks.SMOOTH_LUMIERE_SLAB.get(), "smooth_lumiere");
-        this.slabBlock(GBlocks.AMETHYST_BRICK_SLAB.get(), "smooth_amethyst");
+        this.slabBlock(GBlocks.AMETHYST_BRICK_SLAB.get(), "amethyst_bricks");
         this.slabBlock(GBlocks.ALLURITE_BRICK_SLAB.get(), "allurite_bricks");
         this.slabBlock(GBlocks.LUMIERE_BRICK_SLAB.get(), "lumiere_bricks");
 

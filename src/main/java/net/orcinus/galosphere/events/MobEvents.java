@@ -1,6 +1,5 @@
 package net.orcinus.galosphere.events;
 
-import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -39,8 +38,6 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
-
-import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MobEvents {
@@ -162,40 +159,23 @@ public class MobEvents {
 
     @SubscribeEvent
     public void onTeleportEvent(EntityTeleportEvent.EnderPearl event) {
-        Entity entity = event.getEntity();
-        if (entity instanceof Player player) {
-            BlockPos pos = new BlockPos(event.getTarget());
-            List<BlockPos> possibles = Lists.newArrayList();
-            Level world = entity.level;
-            int radius = 8;
-            int height = 6;
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
-                    for (int y = -height; y <= height; y++) {
-                        BlockPos checkPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-                        BlockState state = world.getBlockState(checkPos);
-                        if (state.getBlock() == GBlocks.WARPED_ANCHOR.get()) {
-                            if (state.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
-                                possibles.add(checkPos);
-                            }
-                        }
+        ServerPlayer player = event.getPlayer();
+        BlockPos pos = new BlockPos(event.getTarget());
+        Level world = player.getLevel();
+        int radius = 16;
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                for (int y = -radius; y <= radius; y++) {
+                    BlockPos blockPos = new BlockPos(event.getTargetX() + x, event.getTargetY() + y, event.getTargetZ() + z);
+                    BlockState blockState = world.getBlockState(blockPos);
+                    if (pos.closerThan(blockPos, radius / 2.0D) && blockState.is(GBlocks.WARPED_ANCHOR.get())) {
+                        GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
+                        world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+                        player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                        event.setTargetX(blockPos.getX() + 0.5D);
+                        event.setTargetY(blockPos.getY() + 0.5D);
+                        event.setTargetZ(blockPos.getZ() + 0.5D);
                     }
-                }
-            }
-            if (!possibles.isEmpty()) {
-                BlockPos lockPosition = possibles.get(((Player) entity).getRandom().nextInt(possibles.size()));
-                BlockState state = world.getBlockState(lockPosition);
-                if (state.getBlock() == GBlocks.WARPED_ANCHOR.get()) {
-                    if (player instanceof ServerPlayer serverPlayer) {
-                        GCriteriaTriggers.WARPED_TELEPORT.trigger(serverPlayer);
-                    }
-                    world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                    player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
-                    event.setTargetX(lockPosition.getX() + 0.5D);
-                    event.setTargetY(lockPosition.getY() + 0.5D);
-                    event.setTargetZ(lockPosition.getZ() + 0.5D);
-                    world.playSound(null, lockPosition, SoundEvents.RESPAWN_ANCHOR_DEPLETE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    world.setBlock(lockPosition, state.setValue(WarpedAnchorBlock.WARPED_CHARGE, state.getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1), 2);
                 }
             }
         }
