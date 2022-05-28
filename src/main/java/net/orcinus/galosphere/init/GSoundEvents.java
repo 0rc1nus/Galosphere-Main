@@ -16,7 +16,7 @@ public class GSoundEvents {
     public static final RegistryObject<SoundEvent> SPARKLE_BITE = registerSoundEvent("entity.sparkle.bite");
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String path) {
-        return SOUND_EVENTS.register("sparkle_bite", () -> new SoundEvent(new ResourceLocation(Galosphere.MODID, path)));
+        return SOUND_EVENTS.register(path, () -> new SoundEvent(new ResourceLocation(Galosphere.MODID, path)));
     }
 
 }
