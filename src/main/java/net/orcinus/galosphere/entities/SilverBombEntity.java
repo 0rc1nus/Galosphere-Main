@@ -173,9 +173,10 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         String modid = "oreganized";
         SimpleParticleType LEAD_SHRAPNEL = compatUtil.getCompatParticle(modid, "lead_shrapnel");
         this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 6.0F, Explosion.BlockInteraction.NONE);
-        if (!this.level.isClientSide())
-            ((ServerLevel) this.level).sendParticles(LEAD_SHRAPNEL, this.getX(), this.getY(0.0625D),
-                    this.getZ(), 100, 0.0D, 0.0D, 0.0D, 5);
+
+        //Source: https://github.com/GL33P-0R4NG3/oreganized/blob/1.0.0-release-1.18.x/src/main/java/me/gleep/oreganized/entities/PrimedShrapnelBomb.java
+
+        if (!this.level.isClientSide()) ((ServerLevel) this.level).sendParticles(LEAD_SHRAPNEL, this.getX(), this.getY(0.0625D),                 this.getZ(), 100, 0.0D, 0.0D, 0.0D, 5);
             int primedShrapnelBombRadius = 30;
             int radius = (primedShrapnelBombRadius / 4) + explosion;
         for (Entity entity : this.level.getEntities(this, new AABB(this.getX() - radius, this.getY() - 4, this.getZ() - radius, this.getX() + radius, this.getY() + 4, this.getZ() + radius))) {
