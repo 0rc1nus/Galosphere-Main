@@ -2,13 +2,11 @@ package net.orcinus.galosphere.entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
@@ -45,9 +43,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BiteClusterGoal;
-import net.orcinus.galosphere.entities.ai.LeaveWaterGoal;
+import net.orcinus.galosphere.entities.ai.WalkAndSwimGoal;
+import net.orcinus.galosphere.entities.ai.WalkToGroundGoal;
 import net.orcinus.galosphere.entities.ai.SparkleRandomSwimmingGoal;
-import net.orcinus.galosphere.entities.ai.EnterAndSwimGoal;
 import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingGroundControl;
 import net.orcinus.galosphere.entities.ai.navigation.SwimWalkPathNavigation;
 import net.orcinus.galosphere.init.GBlockTags;
@@ -68,8 +66,6 @@ public class SparkleEntity extends Animal {
     public float prevWaterTicks;
     public float waterTicks;
     private int swimTicks = -1000;
-    @Nullable
-    BlockPos clusterPos;
     private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
     private static final UniformInt LONG_REGROWTH_TICKS = UniformInt.of(12000, 24000);
 
@@ -78,6 +74,7 @@ public class SparkleEntity extends Animal {
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
         this.switchNavigator(false);
+        this.maxUpStep = 1.0F;
     }
 
     private void switchNavigator(boolean onLand) {
@@ -107,11 +104,6 @@ public class SparkleEntity extends Animal {
         }
         if (!this.isInWaterOrBubble() && !this.groundNavigationInuse) {
             switchNavigator(true);
-        }
-        if (waterTicks > 0) {
-            this.maxUpStep = 1;
-        } else {
-            this.maxUpStep = 0.6F;
         }
         if (!level.isClientSide) {
             if (isInWater()) {
@@ -167,10 +159,6 @@ public class SparkleEntity extends Animal {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        this.setClusterPos(null);
-        if (tag.contains("ClusterPos")) {
-            this.setClusterPos(NbtUtils.readBlockPos(tag.getCompound("ClusterPos")));
-        }
         this.setCrystalType(CrystalType.BY_ID[tag.getInt("CrystalType")]);
         this.setGrowthTicks(tag.getInt("GrowthTicks"));
     }
@@ -178,24 +166,8 @@ public class SparkleEntity extends Animal {
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        if (this.hasCluster()) {
-            tag.put("ClusterPos", NbtUtils.writeBlockPos(this.getClusterPos()));
-        }
         tag.putInt("CrystalType", this.getCrystaltype().getId());
         tag.putInt("GrowthTicks", this.getGrowthTicks());
-    }
-
-    public boolean hasCluster() {
-        return this.getClusterPos() != null;
-    }
-
-    @Nullable
-    public BlockPos getClusterPos() {
-        return this.clusterPos;
-    }
-
-    public void setClusterPos(BlockPos blockPos) {
-        this.clusterPos = blockPos;
     }
 
     public void setGrowthTicks(int growthTicks) {
@@ -216,8 +188,8 @@ public class SparkleEntity extends Animal {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new EnterAndSwimGoal(this));
-        this.goalSelector.addGoal(2, new LeaveWaterGoal(this));
+        this.goalSelector.addGoal(2, new WalkAndSwimGoal(this));
+        this.goalSelector.addGoal(2, new WalkToGroundGoal(this));
         this.goalSelector.addGoal(3, new PanicGoal(this, 1.4D));
         this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(GItemTags.SPARKLE_TEMPT_ITEMS), false));

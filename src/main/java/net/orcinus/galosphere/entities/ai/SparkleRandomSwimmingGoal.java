@@ -57,12 +57,12 @@ public class SparkleRandomSwimmingGoal extends RandomStrollGoal {
         return DefaultRandomPos.getPos(this.mob, 7, 3);
     }
 
-    private boolean waterIsClear(BlockPos pos, int dx, int dz, int scale) {
-        return this.mob.level.getBlockState(pos.offset(dx * scale, 1, dz * scale)).isAir() && this.mob.level.getBlockState(pos.offset(dx * scale, 2, dz * scale)).isAir();
+    private boolean waterIsClear(BlockPos pos, int x, int z, int scale) {
+        return this.mob.level.getBlockState(pos.offset(x * scale, 1, z * scale)).isAir() && this.mob.level.getBlockState(pos.offset(x * scale, 2, z * scale)).isAir();
     }
 
-    private boolean surffaceClear(BlockPos pos, int dx, int dz, int scale) {
-        BlockPos blockpos = pos.offset(dx * scale, 0, dz * scale);
+    private boolean surfaceClear(BlockPos pos, int x, int z, int scale) {
+        BlockPos blockpos = pos.offset(x * scale, 0, z * scale);
         return this.mob.level.getFluidState(blockpos).is(FluidTags.LAVA) || this.mob.level.getFluidState(blockpos).is(FluidTags.WATER) && !this.mob.level.getBlockState(blockpos).getMaterial().blocksMotion();
     }
 
@@ -71,7 +71,7 @@ public class SparkleRandomSwimmingGoal extends RandomStrollGoal {
         while (sparkleEntity.level.getFluidState(abovePos).is(FluidTags.WATER) || sparkleEntity.level.getFluidState(abovePos).is(FluidTags.LAVA)){
             abovePos = abovePos.above();
         }
-        if(waterIsClear(abovePos.below(), 0, 0, 0) && surffaceClear(abovePos.below(), 0, 0, 0)){
+        if (this.waterIsClear(abovePos.below(), 0, 0, 0) && this.surfaceClear(abovePos.below(), 0, 0, 0)){
             return new Vec3(abovePos.getX() + 0.5F, abovePos.getY() - 1F, abovePos.getZ() + 0.5F);
         }
         return null;
