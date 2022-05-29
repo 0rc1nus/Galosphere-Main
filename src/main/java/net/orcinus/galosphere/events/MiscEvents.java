@@ -78,9 +78,6 @@ public class MiscEvents {
                     if (!player.getAbilities().instabuild) {
                         stack.shrink(1);
                     }
-                    if (player instanceof ServerPlayer serverPlayer) {
-                        GCriteriaTriggers.LUMIERE_COMPOST.trigger(serverPlayer);
-                    }
                     world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
                     world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);

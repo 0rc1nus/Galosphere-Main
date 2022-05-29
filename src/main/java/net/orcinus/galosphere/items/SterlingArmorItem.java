@@ -56,7 +56,7 @@ public class SterlingArmorItem extends ArmorItem {
     }
 
     public float getExplosionResistance(EquipmentSlot slot) {
-        return material.getDefenseForSlot(slot);
+        return material.getDefenseForSlot(slot) * 2;
     }
 
     private static class SterlingArmorMaterial implements ArmorMaterial {

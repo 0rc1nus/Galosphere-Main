@@ -2,6 +2,7 @@ package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 
 import javax.annotation.Nullable;
 
@@ -44,6 +46,9 @@ public class LumiereComposterBlock extends ComposterBlock {
             return InteractionResult.sidedSuccess(world.isClientSide);
         } else if (i == 8) {
             extractGlowstoneDust(state, world, pos);
+            if (player instanceof ServerPlayer serverPlayer) {
+                GCriteriaTriggers.LUMIERE_COMPOST.trigger(serverPlayer);
+            }
             return InteractionResult.sidedSuccess(world.isClientSide);
         } else {
             return InteractionResult.PASS;
