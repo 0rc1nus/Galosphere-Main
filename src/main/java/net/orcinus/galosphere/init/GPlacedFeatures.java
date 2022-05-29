@@ -23,8 +23,6 @@ public class GPlacedFeatures {
     public static void init() {
     }
 
-    //Large Spike 180 212
-    //Normal Spike 256 324
     public static final Holder<PlacedFeature> LARGE_CEILING_ALLURITE_CRYSTALS = registerPlacedFeature("large_ceiling_allurite_crystals", GConfiguredFeatures.LARGE_ALLURITE_CRYSTAL_CEILING, CountPlacement.of(UniformInt.of(140, 180)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
     public static final Holder<PlacedFeature> LARGE_CEILING_LUMIERE_CRYSTALS = registerPlacedFeature("large_ceiling_lumiere_crystals", GConfiguredFeatures.LARGE_LUMIERE_CRYSTAL_CEILING, CountPlacement.of(UniformInt.of(140, 180)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
     public static final Holder<PlacedFeature> ALLURITE_CEILING_CRYSTALS = registerPlacedFeature("allurite_ceiling_crystals", GConfiguredFeatures.ALLURITE_CRYSTAL_CEILING, CountPlacement.of(UniformInt.of(180, 200)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
@@ -49,7 +47,6 @@ public class GPlacedFeatures {
 
         return BuiltinRegistries.register(BuiltinRegistries.PLACED_FEATURE, resourceLocation, placedFeature);
     }
-
 
     private static List<PlacementModifier> orePlacement(PlacementModifier modifier, PlacementModifier modifier2) {
         return List.of(modifier, InSquarePlacement.spread(), modifier2, BiomeFilter.biome());
