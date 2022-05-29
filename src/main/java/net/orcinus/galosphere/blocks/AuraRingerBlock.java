@@ -43,7 +43,7 @@ public class AuraRingerBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, Random pRandom) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
         EntityType<?> dummy = EntityType.ZOMBIE;
         for (BlockPos blockPos : this.getRadius(pos)) {
             if (state.getValue(RINGING)) {
@@ -78,19 +78,19 @@ public class AuraRingerBlock extends BaseEntityBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> pBlockEntityType) {
-        return !world.isClientSide() ? createTickerHelper(pBlockEntityType, GBlockEntityTypes.AURA_RINGER.get(), AuraRingerBlockEntity::ringingTick) : super.getTicker(world, state, pBlockEntityType);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> te) {
+        return !world.isClientSide() ? createTickerHelper(te, GBlockEntityTypes.AURA_RINGER.get(), AuraRingerBlockEntity::ringingTick) : super.getTicker(world, state, te);
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        ItemStack stack = pPlayer.getItemInHand(pHand);
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ItemStack stack = player.getItemInHand(hand);
         if (!state.getValue(RINGING) && stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem()) {
             this.activate(state, world, pos);
             return InteractionResult.sidedSuccess(world.isClientSide());
         }
         else {
-            return super.use(state, world, pos, pPlayer, pHand, pHit);
+            return super.use(state, world, pos, player, hand, hit);
         }
     }
 
@@ -104,7 +104,7 @@ public class AuraRingerBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random pRandom) {
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         if (state.getValue(RINGING)) {
             world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_DEPLETE, SoundSource.BLOCKS, 1.0F, 1.0F);
             world.setBlock(pos, state.setValue(RINGING, false), 3);

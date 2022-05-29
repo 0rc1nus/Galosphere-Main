@@ -19,8 +19,8 @@ import java.util.List;
 
 public class AuraRingerBlockEntity extends BlockEntity {
 
-    public AuraRingerBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(GBlockEntityTypes.AURA_RINGER.get(), pWorldPosition, pBlockState);
+    public AuraRingerBlockEntity(BlockPos worldPosition, BlockState state) {
+        super(GBlockEntityTypes.AURA_RINGER.get(), worldPosition, state);
     }
 
     public static void ringingTick(Level world, BlockPos pos, BlockState state, AuraRingerBlockEntity type) {
