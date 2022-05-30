@@ -400,7 +400,7 @@ d50f8778b2dae1f37981020b2fe811c0a7400c3a data/galosphere/recipes/sterling_horse_
 3696d02685d75f2553431bd5d5811d694208daca data/galosphere/tags/blocks/sparkles_spawn_on.json
 6fad8a143304d2b491fe42c0ed9889d050c27918 data/galosphere/tags/items/sparkle_tempt_items.json
 428d2d61a1ab8b2a55e44cd35b5d43e7578f18ff data/minecraft/tags/blocks/beacon_base_blocks.json
-e18c6e163a0c61f75eff71c60838cbebd57bcf4c data/minecraft/tags/blocks/crystal_sound_blocks.json
+e7c660607ff4e4d4b52e550f8cc43837c3694821 data/minecraft/tags/blocks/crystal_sound_blocks.json
 a4b1251d8651888eecdba026afd939341d64b2a7 data/minecraft/tags/blocks/mineable/axe.json
 559b20c3ee5ffdcbd92556b48995b113165a87cd data/minecraft/tags/blocks/mineable/hoe.json
 6690112d038760aee4ad0d8dc69b19ab06cbaa35 data/minecraft/tags/blocks/mineable/pickaxe.json
