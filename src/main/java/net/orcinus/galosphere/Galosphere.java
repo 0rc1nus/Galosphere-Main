@@ -9,6 +9,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.events.WorldEvents;
+import net.orcinus.galosphere.init.GAttributes;
 import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
@@ -37,6 +38,7 @@ public class Galosphere {
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         modEventBus.addListener(this::commonSetup);
 
+        GAttributes.ATTRIBUTES.register(modEventBus);
         GBlocks.BLOCKS.register(modEventBus);
         GBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         GBiomes.BIOMES.register(modEventBus);
