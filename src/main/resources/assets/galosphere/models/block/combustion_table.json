@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "top": "galosphere:block/combustion_table_top",
-    "bottom": "galosphere:block/aura_listener_bottom",
+    "bottom": "galosphere:block/combustion_table_bottom",
     "side": "galosphere:block/combustion_table_side"
   }
 }

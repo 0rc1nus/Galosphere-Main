@@ -27,8 +27,8 @@ public class SterlingArmorModel<T extends LivingEntity> extends HumanoidModel<T>
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
         PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
-		PartDefinition helmet = head.addOrReplaceChild("helmet", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -10.25F, -6.0F, 2.0F, 12.0F, 12.0F, new CubeDeformation(0.0F))
-		.texOffs(20, 16).addBox(-4.0F, -7.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(1.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition helmet = head.addOrReplaceChild("helmet", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -12.25F, -6.0F, 2.0F, 12.0F, 12.0F, new CubeDeformation(0.0F))
+		.texOffs(20, 16).addBox(-4.0F, -9.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(1.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
     }
