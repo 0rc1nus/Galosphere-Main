@@ -1,10 +1,10 @@
 package net.orcinus.galosphere.util;
 
+import com.google.common.collect.Lists;
 import net.minecraft.Util;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.List;
 
