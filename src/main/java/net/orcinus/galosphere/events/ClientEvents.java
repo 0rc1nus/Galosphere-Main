@@ -63,7 +63,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
-        event.registerLayerDefinition(GModelLayers.STERLING_HELMET, SterlingArmorModel::createArmorLayer);
+        event.registerLayerDefinition(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
     }
 
     @SubscribeEvent

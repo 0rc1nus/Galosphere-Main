@@ -21,8 +21,7 @@ public class SterlingArmorModel<T extends LivingEntity> extends HumanoidModel<T>
         this.helmet = this.head.getChild("helmet");
     }
 
-    public static LayerDefinition createArmorLayer() {
-        //grabs the cube from humanoid
+    public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
 		PartDefinition partdefinition = meshdefinition.getRoot();
 

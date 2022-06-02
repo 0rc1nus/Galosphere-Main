@@ -69,7 +69,7 @@ public class SterlingArmorItem extends ArmorItem {
             @Nullable
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
-                return armorSlot == EquipmentSlot.HEAD ? new SterlingArmorModel<>(SterlingArmorModel.createArmorLayer().bakeRoot()) : IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
+                return armorSlot == EquipmentSlot.HEAD ? new SterlingArmorModel<>(SterlingArmorModel.createBodyLayer().bakeRoot()) : IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
             }
         });
     }
