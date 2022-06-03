@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.entities.SparkleEntity;
-import net.orcinus.galosphere.init.GSoundEvents;
 
 public class BiteClusterGoal extends MoveToBlockGoal {
     private final SparkleEntity sparkle;
@@ -39,9 +38,6 @@ public class BiteClusterGoal extends MoveToBlockGoal {
     public void tick() {
         this.sparkle.getLookControl().setLookAt(this.blockPos.getX(), this.blockPos.getY(), this.blockPos.getZ());
         if (this.isReachedTarget()) {
-            if (this.ticksWaited % 4 == 0) {
-                this.sparkle.playSound(GSoundEvents.SPARKLE_BITE.get(), 1.0F, 1.0F);
-            }
             if (this.ticksWaited >= 40) {
                 this.onReachedTarget();
             } else {

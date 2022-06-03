@@ -41,7 +41,7 @@ public class WorldEvents {
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_CEILING_CRYSTALS);
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_FLOOR_CRYSTALS);
             mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 10, 4, 6));
-            mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(GEntityTypes.SPARKLE.get(), 10, 4, 6));
+            mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(GEntityTypes.SPARKLE.get(), 120, 4, 6));
         }
 
     }

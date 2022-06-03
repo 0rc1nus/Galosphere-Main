@@ -12,7 +12,7 @@
   "advancements.husbandry.crystal_lamps.title": "Balanced, as all things should be",
   "advancements.husbandry.crystal_lamps.description": "Have all Crystal Lamps in your inventory",
   "attribute.name.generic.explosion_resistance": "Explosion Resistance",
-  "itemGroup.galosphere": "Caves And Trenches",
+  "itemGroup.galosphere": "Galosphere",
   "biome.galosphere.crystal_canyons": "Crystal Canyons",
   "block.galosphere.amethyst_stairs": "Amethyst Stairs",
   "block.galosphere.amethyst_slab": "Amethyst Slab",
@@ -77,6 +77,5 @@
   "entity.galosphere.silver_bomb": "Silver Bomb",
   "entity.galosphere.sparkle": "Sparkle",
   "effect.galosphere.illusive": "Illusive",
-  "container.galosphere.combustion_table": "Combustion Table",
-  "subtitles.entity.sparkle.bite": "Sparkle bites"
+  "container.galosphere.combustion_table": "Combustion Table"
 }

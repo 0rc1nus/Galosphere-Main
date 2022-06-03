@@ -7,7 +7,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -16,17 +15,17 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.material.Fluids;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
-import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 
 public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
     //-53648423032165391
     //-2978 22 -2718
+
+    //6208361605178432479
+    //-795 -13 9216
 
     public CrystalSpikeFeature(Codec<CrystalSpikeConfig> codec) {
         super(codec);
