@@ -22,6 +22,7 @@ public class LumiereBlock extends AmethystBlock {
     private static final Map<Block, Block> BLOCK_REFORMING_MAP = Util.make(Maps.newHashMap(), map -> {
         map.put(Blocks.GRANITE, Blocks.RED_SAND);
         map.put(Blocks.RED_SAND, Blocks.SAND);
+        map.put(Blocks.COBBLESTONE, Blocks.GRAVEL);
     });
     private final boolean charged;
 
