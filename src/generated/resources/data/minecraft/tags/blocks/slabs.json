@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "galosphere:amethyst_slab",
+    "galosphere:allurite_slab",
+    "galosphere:lumiere_slab",
+    "galosphere:smooth_amethyst_slab",
+    "galosphere:smooth_allurite_slab",
+    "galosphere:smooth_lumiere_slab",
+    "galosphere:amethyst_brick_slab",
+    "galosphere:allurite_brick_slab",
+    "galosphere:lumiere_brick_slab"
+  ]
+}

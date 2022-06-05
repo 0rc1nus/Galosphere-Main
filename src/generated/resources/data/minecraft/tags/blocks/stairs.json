@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "galosphere:amethyst_stairs",
+    "galosphere:allurite_stairs",
+    "galosphere:lumiere_stairs",
+    "galosphere:smooth_amethyst_stairs",
+    "galosphere:smooth_allurite_stairs",
+    "galosphere:smooth_lumiere_stairs",
+    "galosphere:amethyst_brick_stairs",
+    "galosphere:allurite_brick_stairs",
+    "galosphere:lumiere_brick_stairs"
+  ]
+}
