@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:allurite_brick_slab"
+    ]
+  },
+  "criteria": {
+    "hasallurite_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:allurite_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:allurite_brick_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hasallurite_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

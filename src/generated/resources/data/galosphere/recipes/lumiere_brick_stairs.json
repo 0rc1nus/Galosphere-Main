@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "galosphere:lumiere_bricks"
+    }
+  },
+  "result": {
+    "item": "galosphere:lumiere_brick_stairs",
+    "count": 4
+  }
+}

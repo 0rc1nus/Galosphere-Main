@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "galosphere:amethyst_bricks"
+    }
+  },
+  "result": {
+    "item": "galosphere:amethyst_brick_stairs",
+    "count": 4
+  }
+}

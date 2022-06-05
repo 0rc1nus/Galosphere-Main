@@ -59,6 +59,12 @@ public class GRecipeProvider extends RecipeProvider {
         slabBlock(consumer, GBlocks.SMOOTH_ALLURITE_SLAB.get(), GBlocks.SMOOTH_ALLURITE.get().asItem());
         stairsBlock(consumer, GBlocks.SMOOTH_LUMIERE_STAIRS.get(), GBlocks.SMOOTH_LUMIERE.get().asItem());
         slabBlock(consumer, GBlocks.SMOOTH_LUMIERE_SLAB.get(), GBlocks.SMOOTH_LUMIERE.get().asItem());
+        stairsBlock(consumer, GBlocks.AMETHYST_BRICK_STAIRS.get(), GBlocks.AMETHYST_BRICKS.get().asItem());
+        slabBlock(consumer, GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.AMETHYST_BRICKS.get().asItem());
+        stairsBlock(consumer, GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.ALLURITE_BRICKS.get().asItem());
+        slabBlock(consumer, GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.ALLURITE_BRICKS.get().asItem());
+        stairsBlock(consumer, GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.LUMIERE_BRICKS.get().asItem());
+        slabBlock(consumer, GBlocks.LUMIERE_BRICK_SLAB.get(), GBlocks.LUMIERE_BRICKS.get().asItem());
         chiseled(consumer, GBlocks.AMETHYST_SLAB.get().asItem(), GBlocks.CHISELED_AMETHYST.get().asItem());
         chiseled(consumer, GBlocks.ALLURITE_SLAB.get().asItem(), GBlocks.CHISELED_ALLURITE.get().asItem());
         chiseled(consumer, GBlocks.LUMIERE_SLAB.get().asItem(), GBlocks.CHISELED_LUMIERE.get().asItem());

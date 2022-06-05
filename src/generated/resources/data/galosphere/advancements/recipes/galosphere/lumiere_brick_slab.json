@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:lumiere_brick_slab"
+    ]
+  },
+  "criteria": {
+    "haslumiere_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:lumiere_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:lumiere_brick_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "haslumiere_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -28,17 +28,18 @@ public class AuraRingerBlockEntity extends BlockEntity {
         if (state.getBlock() instanceof AuraRingerBlock) {
             if (state.getValue(AuraRingerBlock.RINGING)) {
                 for (LivingEntity livingEntity : list) {
+                    MobEffectInstance illusive = new MobEffectInstance(GMobEffects.ILLUSIVE.get(), 200, 0, false, false);
                     if (livingEntity instanceof Villager villager) {
                         Vec3 vec3 = Vec3.atBottomCenterOf(pos).add(0.0D, 0.6F, 0.0D);
                         villager.getNavigation().moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.5D);
                         if (villager.blockPosition().closerThan(pos, 3)) {
                             villager.getLookControl().setLookAt(vec3.x(), vec3.y(), vec3.z());
                         }
-                        villager.addEffect(new MobEffectInstance(GMobEffects.ILLUSIVE.get(), 200));
+                        villager.addEffect(illusive);
                     }
                     if (livingEntity instanceof Player player) {
                         if (player.getAbilities().instabuild) return;
-                        player.addEffect(new MobEffectInstance(GMobEffects.ILLUSIVE.get(), 200));
+                        player.addEffect(illusive);
                     }
                 }
             }
