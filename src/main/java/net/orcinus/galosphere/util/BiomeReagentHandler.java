@@ -15,6 +15,9 @@ public class BiomeReagentHandler {
     //3477 73 -3050
     //-1490930914106892748
     //156 -9 482
+    //460628901
+    //1248939201
+    //53285197, coords: 5237 23 -5750
     public static final Climate.Parameter FULL_RANGE = Climate.Parameter.span(-1.0F, 1.0F);
     public static final Climate.Parameter CAVE_BIOME_RANGE = Climate.Parameter.span(0.2F, 0.9F);
 
