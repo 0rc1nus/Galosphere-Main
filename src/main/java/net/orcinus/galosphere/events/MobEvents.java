@@ -168,11 +168,11 @@ public class MobEvents {
                 for (int y = -radius; y <= radius; y++) {
                     BlockPos blockPos = new BlockPos(event.getTargetX() + x, event.getTargetY() + y, event.getTargetZ() + z);
                     BlockState blockState = world.getBlockState(blockPos);
-                    if (pos.closerThan(blockPos, radius / 2.0D) && blockState.is(GBlocks.WARPED_ANCHOR.get()) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
+                    if (pos.closerThan(blockPos, 12) && blockState.is(GBlocks.WARPED_ANCHOR.get()) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
                         GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
                         world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
                         world.setBlockAndUpdate(blockPos, blockState.setValue(WarpedAnchorBlock.WARPED_CHARGE, blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1));
-                        player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                        world.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
                         event.setTargetX(blockPos.getX() + 0.5D);
                         event.setTargetY(blockPos.getY() + 0.5D);
                         event.setTargetZ(blockPos.getZ() + 0.5D);

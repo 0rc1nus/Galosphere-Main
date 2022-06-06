@@ -2,6 +2,7 @@ package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -72,11 +73,15 @@ public class WarpedAnchorBlock extends Block {
         ItemStack stack = player.getItemInHand(hand);
         int i = state.getValue(WARPED_CHARGE);
         if (stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem() && i < 4) {
-            world.setBlock(pos, state.setValue(WARPED_CHARGE, i + 1), 2);
-            world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            this.incrementCharge(state, world, pos, i);
             return InteractionResult.SUCCESS;
         }
         return super.use(state, world, pos, player, hand, hit);
+    }
+
+    public void incrementCharge(BlockState state, Level world, BlockPos pos, int i) {
+        world.setBlock(pos, state.setValue(WARPED_CHARGE, i + 1), 2);
+        world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
 
     @Override
