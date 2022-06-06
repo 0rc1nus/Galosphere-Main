@@ -1,15 +1,23 @@
 modLoader="javafml"
-loaderVersion="[32,)"
+loaderVersion="[39,)"
 license="All rights reserved"
 [[mods]]
 modId="galosphere"
 version="1.18.2-1.0.0"
 displayName="Galosphere"
 logoFile= "galosphere.png"
-credits="You the player!"
-authors="Orcinus, Ninni"
+authors="Orcinus"
 description='''
-This mod enhances the underground even more by adding new content to the base game
+This mod enhances the underground by adding new content to the base game
+
+Author:
+- Orcinus
+
+Artist:
+- Ninni
+
+Ambassador:
+- Binome
 '''
 [[dependencies.galosphere]]
     modId="forge"
