@@ -31,7 +31,7 @@ public class SterlingArmorItem extends ArmorItem {
     private static final SterlingArmorMaterial material = new SterlingArmorMaterial();
     private static final String HELMET_TEXTURE = Galosphere.MODID + ":textures/entity/sterling_helmet.png";
     private static final String LEGS_TEXTURE = Galosphere.MODID + ":textures/entity/sterling_armor_2.png";
-    private static final String TEXTURE = Galosphere.MODID + ":textures/entity/sterling_armor.png";
+    private static final String TEXTURE = Galosphere.MODID + ":textures/entity/sterling_optional.png";
 
     public SterlingArmorItem(EquipmentSlot slot, Properties properties) {
         super(material, slot, properties);
