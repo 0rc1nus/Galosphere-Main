@@ -3,6 +3,7 @@ package net.orcinus.galosphere.datagen;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
@@ -39,13 +40,13 @@ public class LumiereReformingManager extends SimpleJsonResourceReloadListener {
                 try (Reader reader = new BufferedReader(new InputStreamReader(iResource.getInputStream(), StandardCharsets.UTF_8))) {
                     JsonObject jsonObject = GsonHelper.fromJson(GSON_INSTANCE, reader, JsonObject.class);
                     if (jsonObject != null) {
-                        for (JsonElement entry : jsonObject.getAsJsonArray("entries")) {
+                        JsonArray entryList = jsonObject.get("entries").getAsJsonArray();
+                        for (JsonElement entry : entryList) {
                             REFORMING_TABLE.put(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(entry.getAsJsonObject().get("accepted_block").getAsString())), ForgeRegistries.BLOCKS.getValue(new ResourceLocation(entry.getAsJsonObject().get("returned_block").getAsString())));
                         }
                     }
                 } catch (RuntimeException | IOException exception) {
                     Galosphere.LOGGER.error("Couldn't read lumiere reforming table list {} in data pack {}", resourceLocation, iResource.getSourceName(), exception);
-
                 } finally {
                     IOUtils.closeQuietly(iResource);
                 }
