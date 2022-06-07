@@ -12,7 +12,7 @@ public class GalosphereTab extends CreativeModeTab {
 
     @Override
     public ItemStack makeIcon() {
-        return GItems.SILVER_BOMB.get().getDefaultInstance();
+        return GItems.ICON_ITEM.get().getDefaultInstance();
     }
 
 }

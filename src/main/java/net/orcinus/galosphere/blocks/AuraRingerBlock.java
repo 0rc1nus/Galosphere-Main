@@ -99,9 +99,6 @@ public class AuraRingerBlock extends BaseEntityBlock {
     public void activate(BlockState state, Level world, BlockPos pos) {
         world.scheduleTick(pos, this, 400);
         world.setBlock(pos, state.setValue(RINGING, true), 2);
-        for (int i = 0; i < 20; i++) {
-            world.addParticle(ParticleTypes.REVERSE_PORTAL, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, 0.0, 0.0, 0.0);
-        }
         world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.5F);
     }
 

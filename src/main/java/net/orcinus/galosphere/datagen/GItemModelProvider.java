@@ -66,6 +66,7 @@ public class GItemModelProvider extends ItemModelProvider {
         item("sterling_leggings");
         item("sterling_boots");
         item("sterling_horse_armor");
+        item("icon_item");
 
         spawnEggItem("sparkle");
     }
