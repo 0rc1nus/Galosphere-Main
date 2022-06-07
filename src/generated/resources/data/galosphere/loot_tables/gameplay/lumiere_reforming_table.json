@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "accepted_block": "minecraft:red_sand",
+      "returned_block": "minecraft:sand"
+    },
+    {
+      "accepted_block": "minecraft:granite",
+      "returned_block": "minecraft:red_sand"
+    },
+    {
+      "accepted_block": "minecraft:cobblestone",
+      "returned_block": "minecraft:gravel"
+    }
+  ]
+}
