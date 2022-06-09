@@ -12,7 +12,7 @@ public class IconItem extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        pStack.setCount(0);
+    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slotId, boolean isSelected) {
+        stack.setCount(0);
     }
 }
