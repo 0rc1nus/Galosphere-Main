@@ -18,7 +18,7 @@ import java.util.Map;
 @OnlyIn(Dist.CLIENT)
 public class SparkleRenderer extends MobRenderer<SparkleEntity, EntityModel<SparkleEntity>> {
     private static final Map<SparkleEntity.CrystalType, ResourceLocation> TEXTURE_BY_TYPE = Util.make(Maps.newHashMap(), (map) -> {
-        for(SparkleEntity.CrystalType type : SparkleEntity.CrystalType.BY_ID) {
+        for (SparkleEntity.CrystalType type : SparkleEntity.CrystalType.BY_ID) {
             map.put(type, new ResourceLocation(Galosphere.MODID, String.format("textures/entity/sparkle/%s_sparkle.png", type.getName())));
         }
     });
