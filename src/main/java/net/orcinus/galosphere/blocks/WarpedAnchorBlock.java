@@ -74,6 +74,9 @@ public class WarpedAnchorBlock extends Block {
         int i = state.getValue(WARPED_CHARGE);
         if (stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem() && i < 4) {
             this.incrementCharge(state, world, pos, i);
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
             return InteractionResult.SUCCESS;
         }
         return super.use(state, world, pos, player, hand, hit);

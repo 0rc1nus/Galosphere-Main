@@ -87,6 +87,9 @@ public class AuraRingerBlock extends BaseEntityBlock {
         ItemStack stack = player.getItemInHand(hand);
         if (!state.getValue(RINGING) && stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem()) {
             this.activate(state, world, pos);
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
             world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
             return InteractionResult.sidedSuccess(world.isClientSide());
         }
