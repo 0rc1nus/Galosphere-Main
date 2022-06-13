@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#forge:ores/silver"
+    "#forge:storage_blocks/silver"
   ]
 }

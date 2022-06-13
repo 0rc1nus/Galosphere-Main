@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#forge:nuggets/silver"
+    "galosphere:silver_ingot"
   ]
 }

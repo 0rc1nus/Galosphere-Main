@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_gunpowder": {
+    "has_tnt": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:gunpowder"
+              "minecraft:tnt"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_gunpowder",
+      "has_tnt",
       "has_the_recipe"
     ]
   ]

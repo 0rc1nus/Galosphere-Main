@@ -6,7 +6,7 @@
   ],
   "key": {
     "S": {
-      "item": "galosphere:silver_block"
+      "tag": "forge:storage_blocks/silver"
     },
     "C": {
       "item": "galosphere:allurite_block"

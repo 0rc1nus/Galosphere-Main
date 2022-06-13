@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "galosphere:silver_block"
-            ]
+            "tag": "forge:storage_blocks/silver"
           }
         ]
       }

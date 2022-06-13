@@ -4,7 +4,7 @@
     "item": "minecraft:leather_boots"
   },
   "addition": {
-    "item": "galosphere:silver_ingot"
+    "tag": "forge:ingots/silver"
   },
   "result": {
     "item": "galosphere:sterling_boots"

@@ -7,10 +7,10 @@
   ],
   "key": {
     "R": {
-      "item": "galosphere:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     "G": {
-      "item": "minecraft:gunpowder"
+      "item": "minecraft:tnt"
     }
   },
   "result": {

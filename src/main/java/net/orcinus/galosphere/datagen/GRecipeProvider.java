@@ -1,6 +1,7 @@
 package net.orcinus.galosphere.datagen;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -11,6 +12,7 @@ import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.data.recipes.UpgradeRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.compat.init.ForgeItemTags;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
 
@@ -80,11 +83,11 @@ public class GRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder
                 .shaped(GBlocks.COMBUSTION_TABLE.get())
                 .define('#', ItemTags.PLANKS)
-                .define('@', GItems.SILVER_INGOT.get().asItem())
+                .define('@', ForgeItemTags.SILVER_INGOT)
                 .pattern("@@")
                 .pattern("##")
                 .pattern("##")
-                .unlockedBy("has_silver_ingot", has(GItems.SILVER_INGOT.get())).save(consumer);
+                .unlockedBy("has_silver_ingot", has(ForgeItemTags.SILVER_INGOT)).save(consumer);
 
         ShapedRecipeBuilder
                 .shaped(GBlocks.AMETHYST_LAMP.get())
@@ -115,29 +118,29 @@ public class GRecipeProvider extends RecipeProvider {
 
         ShapedRecipeBuilder
                 .shaped(GItems.SILVER_BOMB.get())
-                .define('R', GItems.SILVER_INGOT.get())
-                .define('G', Items.GUNPOWDER)
+                .define('R', ForgeItemTags.SILVER_INGOT)
+                .define('G', Blocks.TNT)
                 .pattern(" R ")
                 .pattern("RGR")
                 .pattern(" R ")
-                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER)).save(consumer);
+                .unlockedBy("has_tnt", has(Blocks.TNT)).save(consumer);
 
         ShapedRecipeBuilder
                 .shaped(GBlocks.AURA_RINGER.get())
-                .define('S', GBlocks.SILVER_BLOCK.get())
+                .define('S', ForgeItemTags.SILVER_STORAGE_BLOCKS)
                 .define('C', GBlocks.ALLURITE_BLOCK.get())
                 .pattern("SSS")
                 .pattern("CCC")
                 .pattern("SSS")
-                .unlockedBy("has_silver_block", has(GBlocks.SILVER_BLOCK.get())).save(consumer);
+                .unlockedBy("has_silver_block", has(ForgeItemTags.SILVER_STORAGE_BLOCKS)).save(consumer);
 
         ShapedRecipeBuilder
                 .shaped(GBlocks.WARPED_ANCHOR.get())
-                .define('S', GBlocks.SILVER_BLOCK.get())
+                .define('S', ForgeItemTags.SILVER_STORAGE_BLOCKS)
                 .define('C', GBlocks.ALLURITE_BLOCK.get())
                 .pattern("CCC")
                 .pattern("SSS")
-                .unlockedBy("has_silver_block", has(GBlocks.SILVER_BLOCK.get())).save(consumer);
+                .unlockedBy("has_silver_block", has(ForgeItemTags.SILVER_STORAGE_BLOCKS)).save(consumer);
 
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_ALLURITE.get(), GBlocks.ALLURITE_BLOCK.get());
@@ -202,11 +205,11 @@ public class GRecipeProvider extends RecipeProvider {
         stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICKS.get(), GBlocks.SMOOTH_ALLURITE.get());
         stonecutterResultFromBase(consumer, GBlocks.LUMIERE_BRICKS.get(), GBlocks.SMOOTH_LUMIERE.get());
 
-        smithing(consumer, Items.LEATHER_CHESTPLATE, GItems.STERLING_CHESTPLATE.get(), GItems.SILVER_INGOT.get());
-        smithing(consumer, Items.LEATHER_HELMET, GItems.STERLING_HELMET.get(), GItems.SILVER_INGOT.get());
-        smithing(consumer, Items.LEATHER_LEGGINGS, GItems.STERLING_LEGGINGS.get(), GItems.SILVER_INGOT.get());
-        smithing(consumer, Items.LEATHER_BOOTS, GItems.STERLING_BOOTS.get(), GItems.SILVER_INGOT.get());
-        smithing(consumer, Items.LEATHER_HORSE_ARMOR, GItems.STERLING_HORSE_ARMOR.get(), GItems.SILVER_INGOT.get());
+        smithing(consumer, Items.LEATHER_CHESTPLATE, GItems.STERLING_CHESTPLATE.get(), ForgeItemTags.SILVER_INGOT);
+        smithing(consumer, Items.LEATHER_HELMET, GItems.STERLING_HELMET.get(), ForgeItemTags.SILVER_INGOT);
+        smithing(consumer, Items.LEATHER_LEGGINGS, GItems.STERLING_LEGGINGS.get(), ForgeItemTags.SILVER_INGOT);
+        smithing(consumer, Items.LEATHER_BOOTS, GItems.STERLING_BOOTS.get(), ForgeItemTags.SILVER_INGOT);
+        smithing(consumer, Items.LEATHER_HORSE_ARMOR, GItems.STERLING_HORSE_ARMOR.get(), ForgeItemTags.SILVER_INGOT);
 
     }
 
@@ -299,6 +302,10 @@ public class GRecipeProvider extends RecipeProvider {
     }
 
     private static void smithing(Consumer<FinishedRecipe> consumer, Item firstItem, Item secondItem, Item combinationItem) {
+        UpgradeRecipeBuilder.smithing(Ingredient.of(firstItem), Ingredient.of(combinationItem), secondItem).unlocks("has_netherite_ingot", has(combinationItem)).save(consumer, new ResourceLocation(Galosphere.MODID, getItemName(secondItem) + "_smithing"));
+    }
+
+    private static void smithing(Consumer<FinishedRecipe> consumer, Item firstItem, Item secondItem, TagKey<Item> combinationItem) {
         UpgradeRecipeBuilder.smithing(Ingredient.of(firstItem), Ingredient.of(combinationItem), secondItem).unlocks("has_netherite_ingot", has(combinationItem)).save(consumer, new ResourceLocation(Galosphere.MODID, getItemName(secondItem) + "_smithing"));
     }
 

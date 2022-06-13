@@ -4,7 +4,7 @@
     "item": "minecraft:leather_horse_armor"
   },
   "addition": {
-    "item": "galosphere:silver_ingot"
+    "tag": "forge:ingots/silver"
   },
   "result": {
     "item": "galosphere:sterling_horse_armor"

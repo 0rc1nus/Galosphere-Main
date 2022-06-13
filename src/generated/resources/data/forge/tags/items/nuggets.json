@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#forge:storage_blocks/silver"
+    "#forge:nuggets/silver"
   ]
 }

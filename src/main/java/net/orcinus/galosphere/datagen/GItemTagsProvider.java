@@ -6,6 +6,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.compat.init.ForgeItemTags;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItemTags;
 import net.orcinus.galosphere.init.GItems;
 import org.jetbrains.annotations.Nullable;
@@ -20,5 +22,13 @@ public class GItemTagsProvider extends ItemTagsProvider {
     protected void addTags() {
         this.tag(GItemTags.SPARKLE_TEMPT_ITEMS).add(Items.GLOW_LICHEN);
         this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES).add(GItems.STERLING_HELMET.get(), GItems.STERLING_CHESTPLATE.get(), GItems.STERLING_LEGGINGS.get(), GItems.STERLING_BOOTS.get(), GItems.STERLING_HORSE_ARMOR.get());
+        this.tag(ForgeItemTags.SILVER_INGOT).add(GItems.SILVER_INGOT.get());
+        this.tag(ForgeItemTags.SILVER_NUGGETS).add(GItems.SILVER_NUGGET.get());
+        this.tag(ForgeItemTags.SILVER_ORES).add(GBlocks.SILVER_ORE.get().asItem()).add(GBlocks.DEEPSLATE_SILVER_ORE.get().asItem());
+        this.tag(ForgeItemTags.INGOTS).addTags(ForgeItemTags.SILVER_INGOT);
+        this.tag(ForgeItemTags.NUGGETS).addTags(ForgeItemTags.SILVER_NUGGETS);
+        this.tag(ForgeItemTags.ORES).addTags(ForgeItemTags.SILVER_ORES);
+        this.tag(ForgeItemTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get().asItem());
+        this.tag(ForgeItemTags.STORAGE_BLOCKS).addTag(ForgeItemTags.SILVER_STORAGE_BLOCKS);
     }
 }
