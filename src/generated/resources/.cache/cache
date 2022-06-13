@@ -162,6 +162,8 @@ d68411a4feefb3af96f38ee5fe1cd415c2255eff data/forge/tags/items/ingots/silver.jso
 e646bb53c4ff0e436943951f087c240541b63e5a data/forge/tags/items/nuggets/silver.json
 0d1d401bdc2282349b66f841d5febee4c074cabb data/forge/tags/items/ores.json
 ed62e74cbcb524ec94be1f35ee0467cb2375f7aa data/forge/tags/items/ores/silver.json
+351ad8c34a48ddf9df128fc6f4e5040cbf46875a data/forge/tags/items/raw_ores.json
+6e57264aad69bebb3675c1c9e93a4205fc5ca52c data/forge/tags/items/raw_ores/silver.json
 a68c6de6ef36f81f3f3b18740c79b09583ed31f1 data/forge/tags/items/storage_blocks.json
 428d2d61a1ab8b2a55e44cd35b5d43e7578f18ff data/forge/tags/items/storage_blocks/silver.json
 584ff0572c78625142e5a281557c7f5aaa640d28 data/galosphere/advancements/recipes/galosphere/allurite_block.json
