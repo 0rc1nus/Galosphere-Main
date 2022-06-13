@@ -3,7 +3,7 @@ loaderVersion="[39,)"
 license="All rights reserved"
 [[mods]]
 modId="galosphere"
-version="1.18.2-1.0.1"
+version="1.18.2-1.0.2"
 displayName="Galosphere"
 logoFile= "galosphere.png"
 authors="Orcinus"
