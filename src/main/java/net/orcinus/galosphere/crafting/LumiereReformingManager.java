@@ -1,4 +1,4 @@
-package net.orcinus.galosphere.datagen;
+package net.orcinus.galosphere.crafting;
 
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;

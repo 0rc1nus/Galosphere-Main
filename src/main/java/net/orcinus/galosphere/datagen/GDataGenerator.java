@@ -25,6 +25,7 @@ public class GDataGenerator {
         dataGenerator.addProvider(event.includeServer(), new GBlockTagsProvider(dataGenerator, helper));
         dataGenerator.addProvider(event.includeServer(), new GItemTagsProvider(dataGenerator, helper));
         dataGenerator.addProvider(event.includeServer(), new GEntityTypeTagsProvider(dataGenerator, helper));
+        dataGenerator.addProvider(event.includeServer(), new GBiomeTagsProvider(dataGenerator, helper));
     }
 
 }
