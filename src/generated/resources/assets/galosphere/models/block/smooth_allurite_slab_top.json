@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "side": "galosphere:block/smooth_allurite",
     "bottom": "galosphere:block/smooth_allurite",
+    "side": "galosphere:block/smooth_allurite",
     "top": "galosphere:block/smooth_allurite"
   }
 }

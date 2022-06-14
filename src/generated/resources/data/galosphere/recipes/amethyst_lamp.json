@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "R": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
   "pattern": [
     " R ",
     "RGR",
     " R "
   ],
-  "key": {
-    "R": {
-      "item": "minecraft:amethyst_shard"
-    },
-    "G": {
-      "item": "minecraft:glowstone"
-    }
-  },
   "result": {
     "item": "galosphere:amethyst_lamp"
   }

@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "item": "minecraft:tnt"
+    },
+    "R": {
+      "tag": "forge:ingots/silver"
+    }
+  },
   "pattern": [
     " R ",
     "RGR",
     " R "
   ],
-  "key": {
-    "R": {
-      "tag": "forge:ingots/silver"
-    },
-    "G": {
-      "item": "minecraft:tnt"
-    }
-  },
   "result": {
     "item": "galosphere:silver_bomb"
   }

@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###"
-  ],
   "key": {
     "#": {
       "item": "galosphere:allurite_bricks"
     }
   },
+  "pattern": [
+    "###"
+  ],
   "result": {
-    "item": "galosphere:allurite_brick_slab",
-    "count": 6
+    "count": 6,
+    "item": "galosphere:allurite_brick_slab"
   }
 }

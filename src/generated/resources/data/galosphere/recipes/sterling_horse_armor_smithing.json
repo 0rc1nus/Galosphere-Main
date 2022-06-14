@@ -1,10 +1,10 @@
 {
   "type": "minecraft:smithing",
-  "base": {
-    "item": "minecraft:leather_horse_armor"
-  },
   "addition": {
     "tag": "forge:ingots/silver"
+  },
+  "base": {
+    "item": "minecraft:leather_horse_armor"
   },
   "result": {
     "item": "galosphere:sterling_horse_armor"

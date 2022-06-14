@@ -239,7 +239,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .define('#', slab)
                 .pattern("#")
                 .pattern("#")
-                .unlockedBy("has_" + slab.getRegistryName().getPath(), has(slab))
+                .unlockedBy("has_" + Registry.ITEM.getKey(slab).getPath(), has(slab))
                 .save(consumer);
     }
 
@@ -247,7 +247,7 @@ public class GRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.
                 shapeless(result, count)
                 .requires(item)
-                .unlockedBy("has_" + item.getRegistryName().getPath(), has(item)).save(consumer);
+                .unlockedBy("has_" + Registry.ITEM.getKey(item).getPath(), has(item)).save(consumer);
     }
 
     private void twoXtwo(Consumer<FinishedRecipe> consumer, ItemLike result, Item item, int count) {
@@ -256,7 +256,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .define('S', item)
                 .pattern("SS")
                 .pattern("SS")
-                .unlockedBy("has_" + item.getRegistryName().getPath(), has(item)).save(consumer);
+                .unlockedBy("has_" + Registry.ITEM.getKey(item).getPath(), has(item)).save(consumer);
     }
 
     private void threeXthree(Consumer<FinishedRecipe> consumer, ItemLike result, Item item) {
@@ -266,7 +266,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern("SSS")
                 .pattern("SSS")
                 .pattern("SSS")
-                .unlockedBy("has" + item.getRegistryName().getPath(), has(item)).save(consumer);
+                .unlockedBy("has" + Registry.ITEM.getKey(item).getPath(), has(item)).save(consumer);
     }
 
     private void stairsBlock(Consumer<FinishedRecipe> consumer, ItemLike result, Item item) {
@@ -276,7 +276,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern("#  ")
                 .pattern("## ")
                 .pattern("###")
-                .unlockedBy("has" + item.getRegistryName().getPath(), has(item)).save(consumer);
+                .unlockedBy("has" + Registry.ITEM.getKey(item).getPath(), has(item)).save(consumer);
     }
 
     private void slabBlock(Consumer<FinishedRecipe> consumer, ItemLike result, Item item) {
@@ -284,7 +284,7 @@ public class GRecipeProvider extends RecipeProvider {
                 shaped(result, 6)
                 .define('#', item)
                 .pattern("###")
-                .unlockedBy("has" + item.getRegistryName().getPath(), has(item)).save(consumer);
+                .unlockedBy("has" + Registry.ITEM.getKey(item).getPath(), has(item)).save(consumer);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> consumer, List<ItemLike> items, ItemLike p_176594_, float p_176595_, int p_176596_, String p_176597_) {

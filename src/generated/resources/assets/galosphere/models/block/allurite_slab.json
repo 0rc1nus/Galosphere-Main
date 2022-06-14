@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab",
   "textures": {
-    "side": "galosphere:block/allurite_block",
     "bottom": "galosphere:block/allurite_block",
+    "side": "galosphere:block/allurite_block",
     "top": "galosphere:block/allurite_block"
   }
 }

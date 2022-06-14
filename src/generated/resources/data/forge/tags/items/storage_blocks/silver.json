@@ -1,10 +1,5 @@
 {
-  "replace": false,
   "values": [
-    "galosphere:silver_block",
-    {
-      "id": "oreganized:silver_block",
-      "required": false
-    }
+    "galosphere:silver_block"
   ]
 }

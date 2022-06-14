@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "SS",
-    "SS"
-  ],
   "key": {
     "S": {
       "item": "galosphere:lumiere_block"
     }
   },
+  "pattern": [
+    "SS",
+    "SS"
+  ],
   "result": {
-    "item": "galosphere:smooth_lumiere",
-    "count": 4
+    "count": 4,
+    "item": "galosphere:smooth_lumiere"
   }
 }

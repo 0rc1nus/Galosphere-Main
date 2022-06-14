@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "galosphere:block/lumiere_slab_top"
-    },
     "type=bottom": {
       "model": "galosphere:block/lumiere_slab"
     },
     "type=double": {
       "model": "galosphere:block/lumiere_block"
+    },
+    "type=top": {
+      "model": "galosphere:block/lumiere_slab_top"
     }
   }
 }

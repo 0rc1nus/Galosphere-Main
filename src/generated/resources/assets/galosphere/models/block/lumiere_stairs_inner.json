@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/inner_stairs",
   "textures": {
-    "side": "galosphere:block/lumiere_block",
     "bottom": "galosphere:block/lumiere_block",
+    "side": "galosphere:block/lumiere_block",
     "top": "galosphere:block/lumiere_block"
   }
 }

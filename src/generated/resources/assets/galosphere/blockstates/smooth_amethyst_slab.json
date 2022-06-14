@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "galosphere:block/smooth_amethyst_slab_top"
-    },
     "type=bottom": {
       "model": "galosphere:block/smooth_amethyst_slab"
     },
     "type=double": {
       "model": "galosphere:block/smooth_amethyst"
+    },
+    "type=top": {
+      "model": "galosphere:block/smooth_amethyst_slab_top"
     }
   }
 }

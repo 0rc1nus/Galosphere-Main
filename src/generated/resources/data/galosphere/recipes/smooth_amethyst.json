@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "SS",
-    "SS"
-  ],
   "key": {
     "S": {
       "item": "minecraft:amethyst_block"
     }
   },
+  "pattern": [
+    "SS",
+    "SS"
+  ],
   "result": {
-    "item": "galosphere:smooth_amethyst",
-    "count": 4
+    "count": 4,
+    "item": "galosphere:smooth_amethyst"
   }
 }

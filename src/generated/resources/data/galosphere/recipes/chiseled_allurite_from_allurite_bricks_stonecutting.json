@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
+  "count": 1,
   "ingredient": {
     "item": "galosphere:allurite_bricks"
   },
-  "result": "galosphere:chiseled_allurite",
-  "count": 1
+  "result": "galosphere:chiseled_allurite"
 }

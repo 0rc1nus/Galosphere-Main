@@ -1,15 +1,19 @@
 package net.orcinus.galosphere;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
-import net.orcinus.galosphere.events.WorldEvents;
 import net.orcinus.galosphere.init.GAttributes;
+import net.orcinus.galosphere.init.GBiomeModifiers;
 import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
@@ -22,6 +26,7 @@ import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
 import net.orcinus.galosphere.util.GalosphereTab;
+import net.orcinus.galosphere.world.GalosphereBiomeProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,15 +46,14 @@ public class Galosphere {
         GBlocks.BLOCKS.register(modEventBus);
         GBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         GBiomes.BIOMES.register(modEventBus);
+        GBiomeModifiers.BIOME_MODIFIERS.register(modEventBus);
         GEntityTypes.ENTITY_TYPES.register(modEventBus);
         GFeatures.FEATURES.register(modEventBus);
         GItems.ITEMS.register(modEventBus);
         GMobEffects.MOB_EFFECTS.register(modEventBus);
         GMenuTypes.MENU_TYPES.register(modEventBus);
         GParticleTypes.PARTICLES.register(modEventBus);
-
         eventBus.register(this);
-        eventBus.register(new WorldEvents());
         eventBus.register(new MobEvents());
         eventBus.register(new MiscEvents());
 

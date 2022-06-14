@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ArmorItem;
@@ -44,7 +45,7 @@ public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
 //                            poseStack.mulPose(Vector3f.XP.rotationDegrees(-30.0F));
                             poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
                             poseStack.scale(0.625F, -0.625F, -0.625F);
-                            Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, packedLight);
+                            Minecraft.getInstance().getItemRenderer().renderStatic(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, entity.level, packedLight, OverlayTexture.NO_OVERLAY, entity.getId() + ItemTransforms.TransformType.HEAD.ordinal());
                         }
                         poseStack.popPose();
 

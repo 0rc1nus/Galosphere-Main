@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#  ",
-    "## ",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "galosphere:smooth_lumiere"
     }
   },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
   "result": {
-    "item": "galosphere:smooth_lumiere_stairs",
-    "count": 4
+    "count": 4,
+    "item": "galosphere:smooth_lumiere_stairs"
   }
 }

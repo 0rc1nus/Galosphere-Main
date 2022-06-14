@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
+  "count": 1,
   "ingredient": {
     "item": "galosphere:smooth_lumiere"
   },
-  "result": "galosphere:smooth_lumiere_stairs",
-  "count": 1
+  "result": "galosphere:smooth_lumiere_stairs"
 }

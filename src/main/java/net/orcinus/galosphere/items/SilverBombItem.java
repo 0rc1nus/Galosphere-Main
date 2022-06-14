@@ -3,7 +3,6 @@ package net.orcinus.galosphere.items;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -50,16 +49,16 @@ public class SilverBombItem extends Item {
         CompoundTag tag = stack.getOrCreateTag();
         String nameText = "item." + Galosphere.MODID + ".silver_bomb.";
         if (tag.getInt("Duration") > 0) {
-            list.add((new TranslatableComponent(nameText + "duration")).append(" ").append(String.valueOf(tag.getInt("Duration"))).withStyle(ChatFormatting.GRAY));
+            list.add((Component.translatable(nameText + "duration")).append(" ").append(String.valueOf(tag.getInt("Duration"))).withStyle(ChatFormatting.GRAY));
         }
         if (tag.getInt("Explosion") > 0) {
-            list.add((new TranslatableComponent(nameText + "explosion")).append(" ").append(String.valueOf(tag.getInt("Explosion"))).withStyle(ChatFormatting.GRAY));
+            list.add((Component.translatable(nameText + "explosion")).append(" ").append(String.valueOf(tag.getInt("Explosion"))).withStyle(ChatFormatting.GRAY));
         }
         if (tag.getInt("Bouncy") > 0) {
-            list.add((new TranslatableComponent(nameText + "bouncy")).append(" ").append(String.valueOf(tag.getInt("Bouncy"))).withStyle(ChatFormatting.GRAY));
+            list.add((Component.translatable(nameText + "bouncy")).append(" ").append(String.valueOf(tag.getInt("Bouncy"))).withStyle(ChatFormatting.GRAY));
         }
         if (tag.getBoolean("Shrapnel")) {
-            list.add((new TranslatableComponent(nameText + "shrapnel")).withStyle(ChatFormatting.GRAY));
+            list.add((Component.translatable(nameText + "shrapnel")).withStyle(ChatFormatting.GRAY));
         }
     }
 

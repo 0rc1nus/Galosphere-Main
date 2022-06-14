@@ -28,7 +28,7 @@ public class IllusiveOverlay {
 
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
-        PoseStack matrixStack = event.getMatrixStack();
+        PoseStack matrixStack = event.getPoseStack();
         if (player == null) return;
 
         int left = mc.getWindow().getGuiScaledWidth() / 2 - 91;

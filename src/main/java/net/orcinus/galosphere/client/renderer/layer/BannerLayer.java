@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
@@ -39,7 +40,7 @@ public class BannerLayer<T extends LivingEntity, M extends EntityModel<T> & Head
                         stack.translate(0.0D, -0.25D, 0.0D);
                         stack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
                         stack.scale(0.625F, -0.625F, -0.625F);
-                        Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.HEAD, false, stack, source, packedLight);
+                        Minecraft.getInstance().getItemRenderer().renderStatic(entity, itemstack, ItemTransforms.TransformType.HEAD, false, stack, source, entity.level, packedLight, OverlayTexture.NO_OVERLAY, entity.getId() + ItemTransforms.TransformType.HEAD.ordinal());
                     }
                     stack.popPose();
                 }
