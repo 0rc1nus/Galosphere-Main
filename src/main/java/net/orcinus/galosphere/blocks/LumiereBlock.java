@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AmethystBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.orcinus.galosphere.datagen.LumiereReformingManager;
+import net.orcinus.galosphere.crafting.LumiereReformingManager;
 import net.orcinus.galosphere.init.GBlocks;
 
 import java.util.Map;
