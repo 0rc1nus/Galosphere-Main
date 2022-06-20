@@ -55,4 +55,18 @@ public class BiomeReagentHandler {
         return ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Galosphere.MODID, name));
     }
 
+    //if (young1) {
+    //			poseStack.pushPose();
+    //			float f1 = 1.0F / 2.0F;
+    //			poseStack.scale(f1, f1, f1);
+    //			poseStack.translate(0.0D, 1.5F, 5.0F / 16.0F);
+    //			this.headParts().forEach((part) -> {
+    //				part.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    //			});
+    //			poseStack.popPose();
+    //		} else {
+    //			this.headParts().forEach((part) -> {
+    //				part.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    //			});
+    //		}
 }

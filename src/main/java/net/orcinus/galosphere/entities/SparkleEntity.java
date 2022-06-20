@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -44,9 +45,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BiteClusterGoal;
+import net.orcinus.galosphere.entities.ai.SparkleRandomSwimmingGoal;
 import net.orcinus.galosphere.entities.ai.WalkAndSwimGoal;
 import net.orcinus.galosphere.entities.ai.WalkToGroundGoal;
-import net.orcinus.galosphere.entities.ai.SparkleRandomSwimmingGoal;
 import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingGroundControl;
 import net.orcinus.galosphere.entities.ai.navigation.SwimWalkPathNavigation;
 import net.orcinus.galosphere.init.GBlockTags;
@@ -58,7 +59,6 @@ import net.orcinus.galosphere.init.GItems;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Random;
 
 public class SparkleEntity extends Animal {
     public static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(SparkleEntity.class, EntityDataSerializers.INT);
@@ -75,7 +75,11 @@ public class SparkleEntity extends Animal {
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
         this.switchNavigator(false);
-        this.maxUpStep = 1.0F;
+    }
+
+    @Override
+    public float getStepHeight() {
+        return 1.0F;
     }
 
     private void switchNavigator(boolean onLand) {
@@ -101,13 +105,13 @@ public class SparkleEntity extends Animal {
             this.waterTicks--;
         }
         if (this.isInWaterOrBubble() && this.groundNavigationInuse) {
-            switchNavigator(false);
+            this.switchNavigator(false);
         }
         if (!this.isInWaterOrBubble() && !this.groundNavigationInuse) {
-            switchNavigator(true);
+            this.switchNavigator(true);
         }
         if (!level.isClientSide) {
-            if (isInWater()) {
+            if (this.isInWater()) {
                 swimTicks++;
             } else {
                 swimTicks--;
@@ -146,7 +150,7 @@ public class SparkleEntity extends Animal {
         this.entityData.define(CRYSTAL_TYPE, 0);
     }
 
-    public static boolean checkSparkleSpawnRules(EntityType<? extends LivingEntity> sparkle, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random random) {
+    public static boolean checkSparkleSpawnRules(EntityType<? extends LivingEntity> sparkle, LevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return world.getBlockState(pos.below()).is(GBlockTags.SPARKLES_SPAWNABLE_ON);
     }
 

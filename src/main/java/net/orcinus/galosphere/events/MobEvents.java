@@ -32,7 +32,6 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.entities.SparkleEntity;
-import net.orcinus.galosphere.init.GBlockTags;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypes;
@@ -45,7 +44,7 @@ public class MobEvents {
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
-        SpawnPlacements.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (entity, world, spawn, pos, random) -> world.getBlockState(pos.below()).is(GBlockTags.SPARKLES_SPAWNABLE_ON));
+        SpawnPlacements.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules);
         event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
     }
 
