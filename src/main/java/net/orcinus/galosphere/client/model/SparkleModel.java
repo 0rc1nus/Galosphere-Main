@@ -11,8 +11,12 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.entities.SparkleEntity;
 
+@OnlyIn(Dist.CLIENT)
 public class SparkleModel<T extends SparkleEntity> extends AgeableListModel<T> {
 	private final ModelPart body;
 	private final ModelPart tail;
@@ -42,7 +46,7 @@ public class SparkleModel<T extends SparkleEntity> extends AgeableListModel<T> {
 
 		PartDefinition crystal1 = tail.addOrReplaceChild("crystal1", CubeListBuilder.create().texOffs(24, 4).addBox(0.0F, -3.0F, 0.0F, 0.0F, 6.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, 5.0F, 0.0F, 0.0F, 0.7854F));
 
-		PartDefinition crystal2 = tail.addOrReplaceChild("crystal2", CubeListBuilder.create().texOffs(24, 4).addBox(0.0F, -3.0F, 0.0F, 0.0F, 6.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, 5.0F, 0.0F, 0.0F, -0.7854F));
+		PartDefinition crystal2 = tail.addOrReplaceChild("crystal2", CubeListBuilder.create().texOffs(24, 4).addBox(0.0F, -3.0F, 0.0F, 0.0F, 6.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, 5.0F, 0.0F, 0.0F, 2.3562F));
 
 		PartDefinition leftLeg = partdefinition.addOrReplaceChild("leftLeg", CubeListBuilder.create().texOffs(-3, 5).addBox(0.0F, 0.0F, -1.5F, 5.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, 22.0F, 4.5F, 0.0F, 0.0F, 0.3927F));
 
@@ -67,7 +71,23 @@ public class SparkleModel<T extends SparkleEntity> extends AgeableListModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+		if (entity.isInWaterOrBubble()) {
+			this.body.yRot = Mth.cos(ageInTicks / 2.0F) / 8.0F;
+			this.tail.yRot = Mth.sin(ageInTicks / 2.0F) / 3.5F;
+		} else {
+			this.body.yRot = 0.0F;
+			this.leftLeg.xRot = Mth.sin(limbSwing) * limbSwingAmount;
+			this.leftLeg.yRot = Mth.cos(limbSwing) * limbSwingAmount * 2.0F;
+			this.rightLeg.xRot = -Mth.sin(limbSwing * 1.5F) * limbSwingAmount;
+			this.rightLeg.yRot = Mth.cos(limbSwing * 1.5F) * limbSwingAmount * 2.0F;
+			this.leftArm.xRot = -Mth.sin(limbSwing * 1.5F) * limbSwingAmount;
+			this.leftArm.yRot = Mth.cos(limbSwing * 1.5F) * limbSwingAmount * 2.0F;
+			this.rightArm.xRot = Mth.sin(limbSwing) * limbSwingAmount;
+			this.rightArm.yRot = Mth.cos(limbSwing) * limbSwingAmount * 2.0F;
+			this.tail.yRot = Mth.cos(limbSwing * 1.0F * 2.0F) * limbSwingAmount;
+			this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
+			this.head.xRot = headPitch * ((float) Math.PI / 180F);
+		}
 	}
 
 	@Override
