@@ -22,6 +22,7 @@ public class SparkleRenderer extends MobRenderer<SparkleEntity, EntityModel<Spar
             map.put(type, new ResourceLocation(Galosphere.MODID, String.format("textures/entity/sparkle/%s_sparkle.png", type.getName())));
         }
     });
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/sparkle/sparkle.png");
 
     public SparkleRenderer(EntityRendererProvider.Context context) {
         super(context, new SparkleModel<>(context.bakeLayer(GModelLayers.SPARKLE)), 0.6F);
@@ -29,7 +30,7 @@ public class SparkleRenderer extends MobRenderer<SparkleEntity, EntityModel<Spar
 
     @Override
     public ResourceLocation getTextureLocation(SparkleEntity entity) {
-        return TEXTURE_BY_TYPE.get(entity.getCrystaltype());
+        return entity.getCrystaltype() == SparkleEntity.CrystalType.NONE ? TEXTURE : TEXTURE_BY_TYPE.get(entity.getCrystaltype());
     }
 
 }
