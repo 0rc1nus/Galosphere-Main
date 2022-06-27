@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "galosphere:amethyst_stairs"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "hasamethyst_block": {
+    "has_amethyst_block": {
       "conditions": {
         "items": [
           {
@@ -18,11 +12,17 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "galosphere:amethyst_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "hasamethyst_block",
+      "has_amethyst_block",
       "has_the_recipe"
     ]
   ],

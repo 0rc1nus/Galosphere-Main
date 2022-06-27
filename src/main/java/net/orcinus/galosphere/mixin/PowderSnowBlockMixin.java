@@ -4,7 +4,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.PowderSnowBlock;
+import net.orcinus.galosphere.init.GItemTags;
 import net.orcinus.galosphere.init.GItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,7 +24,8 @@ public class PowderSnowBlockMixin {
                 cir.setReturnValue(true);
             }
             if (livingEntity instanceof Horse horse) {
-                if (horse.getItemBySlot(EquipmentSlot.CHEST).is(GItems.STERLING_HORSE_ARMOR.get())) {
+                ItemStack chestSlot = horse.getItemBySlot(EquipmentSlot.CHEST);
+                if (chestSlot.is(GItemTags.NON_SINKABLES_HORSE_ARMORS)) {
                     cir.setReturnValue(true);
                 }
             }

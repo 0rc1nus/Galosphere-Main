@@ -9,6 +9,7 @@ import net.orcinus.galosphere.Galosphere;
 public class GItemTags {
 
     public static final TagKey<Item> SPARKLE_TEMPT_ITEMS = bind("sparkle_tempt_items");
+    public static final TagKey<Item> NON_SINKABLES_HORSE_ARMORS = bind("non_sinkable_horse_armors");
 
     private static TagKey<Item> bind(String name) {
         return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Galosphere.MODID, name));

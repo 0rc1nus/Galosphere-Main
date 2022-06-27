@@ -21,6 +21,7 @@ public class GItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags() {
         this.tag(GItemTags.SPARKLE_TEMPT_ITEMS).add(Items.GLOW_LICHEN);
+        this.tag(GItemTags.NON_SINKABLES_HORSE_ARMORS).add(GItems.STERLING_HORSE_ARMOR.get(), Items.LEATHER_HORSE_ARMOR);
         this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES).add(GItems.STERLING_HELMET.get(), GItems.STERLING_CHESTPLATE.get(), GItems.STERLING_LEGGINGS.get(), GItems.STERLING_BOOTS.get(), GItems.STERLING_HORSE_ARMOR.get());
         this.tag(ForgeItemTags.SILVER_INGOT).add(GItems.SILVER_INGOT.get());
         this.tag(ForgeItemTags.SILVER_NUGGETS).add(GItems.SILVER_NUGGET.get());
