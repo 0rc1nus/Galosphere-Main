@@ -44,7 +44,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.entities.ai.BiteClusterGoal;
+import net.orcinus.galosphere.entities.ai.FindClusterGoal;
 import net.orcinus.galosphere.entities.ai.SparkleRandomSwimmingGoal;
 import net.orcinus.galosphere.entities.ai.WalkAndSwimGoal;
 import net.orcinus.galosphere.entities.ai.WalkToGroundGoal;
@@ -67,6 +67,7 @@ public class SparkleEntity extends Animal {
     public float prevWaterTicks;
     public float waterTicks;
     private int swimTicks = -1000;
+    private int eatingCooldownTicks;
     private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
     private static final UniformInt LONG_REGROWTH_TICKS = UniformInt.of(12000, 24000);
 
@@ -111,10 +112,13 @@ public class SparkleEntity extends Animal {
             this.switchNavigator(true);
         }
         if (!level.isClientSide) {
+            if (this.eatingCooldownTicks < 0) {
+                this.eatingCooldownTicks++;
+            }
             if (this.isInWater()) {
-                swimTicks++;
+                this.swimTicks++;
             } else {
-                swimTicks--;
+                this.swimTicks--;
             }
         }
     }
@@ -166,6 +170,7 @@ public class SparkleEntity extends Animal {
         super.readAdditionalSaveData(tag);
         this.setCrystalType(CrystalType.BY_ID[tag.getInt("CrystalType")]);
         this.setGrowthTicks(tag.getInt("GrowthTicks"));
+        this.setEatingCooldownTicks(tag.getInt("CooldownTicks"));
     }
 
     @Override
@@ -173,6 +178,15 @@ public class SparkleEntity extends Animal {
         super.addAdditionalSaveData(tag);
         tag.putInt("CrystalType", this.getCrystaltype().getId());
         tag.putInt("GrowthTicks", this.getGrowthTicks());
+        tag.putInt("CooldownTicks", this.getEatingCooldownTicks());
+    }
+
+    public void setEatingCooldownTicks(int growthTicks) {
+        this.eatingCooldownTicks = growthTicks;
+    }
+
+    public int getEatingCooldownTicks() {
+        return this.eatingCooldownTicks;
     }
 
     public void setGrowthTicks(int growthTicks) {
@@ -199,7 +213,7 @@ public class SparkleEntity extends Animal {
         this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(GItemTags.SPARKLE_TEMPT_ITEMS), false));
         this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(7, new BiteClusterGoal(this));
+        this.goalSelector.addGoal(7, new FindClusterGoal(this));
         this.goalSelector.addGoal(8, new SparkleRandomSwimmingGoal(this, 1.0D, 10));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
