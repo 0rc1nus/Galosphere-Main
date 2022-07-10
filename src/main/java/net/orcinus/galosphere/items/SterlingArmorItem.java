@@ -58,7 +58,7 @@ public class SterlingArmorItem extends ArmorItem {
         double amount = this.getExplosionResistance(slot);
         builder.put(Attributes.ARMOR, new AttributeModifier(defaultUUid, "Armor modifier", this.getMaterial().getDefenseForSlot(slot), AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(defaultUUid, "Armor toughness", this.getMaterial().getToughness(), AttributeModifier.Operation.ADDITION));
-        builder.put(GAttributes.EXPLOSION_RESISTANCE.get(), new AttributeModifier(uuid, "Armor explosion resistance", amount, AttributeModifier.Operation.ADDITION));
+        builder.put(GAttributes.EXPLOSION_RESISTANCE, new AttributeModifier(uuid, "Armor explosion resistance", amount, AttributeModifier.Operation.ADDITION));
         return slot == this.slot ? builder.build() : super.getDefaultAttributeModifiers(slot);
     }
 
