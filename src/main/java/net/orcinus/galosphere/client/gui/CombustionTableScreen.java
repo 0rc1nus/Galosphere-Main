@@ -2,16 +2,16 @@ package net.orcinus.galosphere.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.Galosphere;
 
-@OnlyIn(Dist.CLIENT)
+@Environment(EnvType.CLIENT)
 public class CombustionTableScreen extends AbstractContainerScreen<CombustionTableMenu> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/misc/gui/container/combustion_table.png");
 

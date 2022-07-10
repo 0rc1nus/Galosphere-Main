@@ -64,7 +64,7 @@ public class GBiomes {
 
     public static void init() {
         for (Biome biome : BIOME_KEYS.keySet()) {
-            Registry.register(BuiltinRegistries.BIOME, BIOME_KEYS.get(biome), biome);
+            Registry.register(BuiltinRegistries.BIOME, BIOME_KEYS.get(biome).location(), biome);
         }
     }
 

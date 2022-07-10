@@ -76,11 +76,7 @@ public class SparkleEntity extends Animal {
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
         this.switchNavigator(false);
-    }
-
-    @Override
-    public float getStepHeight() {
-        return 1.0F;
+        this.maxUpStep = 1.0F;
     }
 
     private void switchNavigator(boolean onLand) {
@@ -227,7 +223,7 @@ public class SparkleEntity extends Animal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mob) {
-        SparkleEntity sparkleEntity = GEntityTypes.SPARKLE.get().create(world);
+        SparkleEntity sparkleEntity = GEntityTypes.SPARKLE.create(world);
         if (sparkleEntity != null) {
             sparkleEntity.setCrystalType(CrystalType.NONE);
         }
@@ -296,8 +292,8 @@ public class SparkleEntity extends Animal {
 
     public enum CrystalType {
         NONE(0, "none", null, null),
-        ALLURITE(1, "allurite", GItems.ALLURITE_SHARD.get(), GBlocks.ALLURITE_CLUSTER.get().asItem()),
-        LUMIERE(2, "lumiere", GItems.LUMIERE_SHARD.get(), GBlocks.LUMIERE_CLUSTER.get().asItem());
+        ALLURITE(1, "allurite", GItems.ALLURITE_SHARD, GBlocks.ALLURITE_CLUSTER.asItem()),
+        LUMIERE(2, "lumiere", GItems.LUMIERE_SHARD, GBlocks.LUMIERE_CLUSTER.asItem());
 
         public static final SparkleEntity.CrystalType[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(SparkleEntity.CrystalType::getId)).toArray(CrystalType[]::new);
         private final int id;

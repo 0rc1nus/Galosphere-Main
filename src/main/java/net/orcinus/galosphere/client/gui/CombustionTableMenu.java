@@ -35,12 +35,12 @@ public class CombustionTableMenu extends AbstractContainerMenu {
     };
 
     public CombustionTableMenu(int id, Inventory inventory, final ContainerLevelAccess access) {
-        super(GMenuTypes.COMBUSTION_TABLE.get(), id);
+        super(GMenuTypes.COMBUSTION_TABLE, id);
         this.access = access;
         this.addSlot(new Slot(this.container, 0, 44, 29) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(GItems.SILVER_BOMB.get());
+                return stack.is(GItems.SILVER_BOMB);
             }
         });
         this.addSlot(new CombustionSlot(this.container, 1, 44, 50));
@@ -79,7 +79,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, GBlocks.COMBUSTION_TABLE.get());
+        return stillValid(this.access, player, GBlocks.COMBUSTION_TABLE);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
         int duration = tag.getInt("Duration");
         boolean shrapnel = tag.getBoolean("Shrapnel");
         boolean initFlag = true;
-        if (bombStack.is(GItems.SILVER_BOMB.get())) {
+        if (bombStack.is(GItems.SILVER_BOMB)) {
             if (!exploStat1.isEmpty() || !exploStat2.isEmpty() || !exploStat3.isEmpty()) {
                 CompoundTag currentTag = bombStack.getTag();
                 Item leadIngot = getLeadIngot();

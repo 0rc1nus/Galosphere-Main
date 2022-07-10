@@ -1,18 +1,17 @@
 package net.orcinus.galosphere.init;
 
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.gui.CombustionTableMenu;
 
-@Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GMenuTypes {
 
-    public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Galosphere.MODID);
+    public static MenuType<CombustionTableMenu> COMBUSTION_TABLE;
 
-    public static final RegistryObject<MenuType<CombustionTableMenu>> COMBUSTION_TABLE = MENU_TYPES.register("combustion_table", () -> new MenuType<>(CombustionTableMenu::new));
+    public static void init() {
+        COMBUSTION_TABLE = ScreenHandlerRegistry.registerSimple(new ResourceLocation(Galosphere.MODID, "combustion_table"), CombustionTableMenu::new);
+    }
 
 }

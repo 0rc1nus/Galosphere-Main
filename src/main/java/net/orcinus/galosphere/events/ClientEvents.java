@@ -1,47 +1,14 @@
 package net.orcinus.galosphere.events;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.HorseRenderer;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
-import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.client.gui.CombustionTableScreen;
-import net.orcinus.galosphere.client.gui.IllusiveOverlay;
-import net.orcinus.galosphere.client.model.SparkleModel;
-import net.orcinus.galosphere.client.model.SterlingArmorModel;
-import net.orcinus.galosphere.client.particles.AuraParticle;
-import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
-import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
-import net.orcinus.galosphere.client.renderer.SparkleRenderer;
-import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
-import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
-import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.GEntityTypes;
-import net.orcinus.galosphere.init.GMenuTypes;
-import net.orcinus.galosphere.init.GModelLayers;
-import net.orcinus.galosphere.init.GParticleTypes;
-
 public class ClientEvents {
 
-    @SubscribeEvent 
-    public static void onClientSetup(final FMLClientSetupEvent event) {
-
-        MenuScreens.register(GMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
-
-        MinecraftForge.EVENT_BUS.register(new IllusiveOverlay());
-
-    }
+//    @SubscribeEvent
+//    public static void onClientSetup(final FMLClientSetupEvent event) {
+//
+//        MenuScreens.register(GMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
+//
+//        MinecraftForge.EVENT_BUS.register(new IllusiveOverlay());
+//
+//    }
 
 }
