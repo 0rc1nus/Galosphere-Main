@@ -6,7 +6,6 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -25,13 +24,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GParticleTypes;
@@ -50,7 +49,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     }
 
     public SilverBombEntity(Level world, LivingEntity entity, ItemStack stack) {
-        super(GEntityTypes.SIVLER_BOMB.get(), entity, world);
+        super(GEntityTypes.SIVLER_BOMB, entity, world);
         if (!stack.isEmpty() && stack.hasTag()) {
             CompoundTag tag = stack.getTag();
             if (tag != null) {
@@ -115,12 +114,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return GItems.SILVER_BOMB.get();
-    }
-
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
+        return GItems.SILVER_BOMB;
     }
 
     @Override
@@ -158,7 +152,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         if (this.shrapnel && compatUtil.isModInstalled("oreganized")) {
             this.shrapnelExplode(compatUtil);
         } else {
-            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+            boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
             this.level.explode(this, null, new ExplosionDamageCalculator() {
                 @Override
                 public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
@@ -207,7 +201,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         if (id == 3) {
             ItemStack itemstack = this.getItemRaw();
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle((itemstack.isEmpty() ? GParticleTypes.SILVER_BOMB.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack)), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle((itemstack.isEmpty() ? GParticleTypes.SILVER_BOMB : new ItemParticleOption(ParticleTypes.ITEM, itemstack)), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }

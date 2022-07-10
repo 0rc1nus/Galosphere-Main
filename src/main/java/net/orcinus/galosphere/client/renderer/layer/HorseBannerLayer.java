@@ -2,6 +2,8 @@ package net.orcinus.galosphere.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,12 +16,11 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.mixin.access.AbstractHorseAccessor;
 
-@OnlyIn(Dist.CLIENT)
+@Environment(EnvType.CLIENT)
 public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
 
     public HorseBannerLayer(RenderLayerParent<Horse, HorseModel<Horse>> parent) {
@@ -28,7 +29,7 @@ public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource source, int packedLight, Horse entity, float p_117353_, float p_117354_, float p_117355_, float p_117356_, float p_117357_, float p_117358_) {
-        if (entity.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
+        if (entity.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
             if (!((IBanner) entity).getBanner().isEmpty()) {
                 ItemStack itemstack = ((IBanner) entity).getBanner();
                 if (itemstack != null) {
@@ -39,7 +40,7 @@ public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
 //                        this.getParentModel().headParts().forEach(modelPart -> modelPart.translateAndRotate(poseStack));
                         if (!(item instanceof ArmorItem) || ((ArmorItem) item).getSlot() != EquipmentSlot.HEAD) {
                             poseStack.translate(0.0D, 0.35D, 0.3D);
-                            if (entity.standAnimO > 0.0F) {
+                            if (((AbstractHorseAccessor)entity).getStandAnimO() > 0.0F) {
                                 poseStack.translate(0.0D, 0.35D, 0.35D);
                             }
 //                            poseStack.mulPose(Vector3f.XP.rotationDegrees(-30.0F));

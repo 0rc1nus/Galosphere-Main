@@ -1,11 +1,11 @@
 package net.orcinus.galosphere.util;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class CompatUtil {
@@ -14,7 +14,7 @@ public class CompatUtil {
     }
 
     public boolean isModInstalled(String modid) {
-        return ModList.get().isLoaded(modid);
+        return FabricLoader.getInstance().isModLoaded(modid);
     }
 
     public boolean matchesCompatBlock(Block block, String modid, String name) {

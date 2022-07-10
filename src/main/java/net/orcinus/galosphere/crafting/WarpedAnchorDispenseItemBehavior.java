@@ -19,7 +19,7 @@ public class WarpedAnchorDispenseItemBehavior extends OptionalDispenseItemBehavi
         BlockPos blockpos = source.getPos().above();
         Level world = source.getLevel();
         BlockState state = world.getBlockState(blockpos);
-        WarpedAnchorBlock block = (WarpedAnchorBlock) GBlocks.WARPED_ANCHOR.get();
+        WarpedAnchorBlock block = (WarpedAnchorBlock) GBlocks.WARPED_ANCHOR;
         this.setSuccess(true);
         if (state.getBlock() == block) {
             if (state.getValue(WarpedAnchorBlock.WARPED_CHARGE) < 4) {

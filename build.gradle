@@ -1,137 +1,76 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = "https://files.minecraftforge.net/maven" }
-        maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
-        maven { url = 'https://maven.parchmentmc.org' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${project.forgegradle_version}", changing: true
-        classpath 'org.parchmentmc:librarian:1.+'
-        classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
-    }
+plugins {
+    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'maven-publish'
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: "org.spongepowered.mixin"
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
-mixin {
-    add sourceSets.main, "galosphere.refmap.json"
-}
-
-version = "${project.minecraft_version}-${project.mod_version}"
-group = 'net.orcinus.galosphere'
-archivesBaseName = 'Galosphere'
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-minecraft {
-    mappings channel: "${project.mappings_channel}", version: "${project.mappings_version}"
-
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=galosphere.mixins.json"
-            mods {
-                galosphere {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=galosphere.mixins.json"
-
-            mods {
-                galosphere {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            property 'forge.logging.console.level', 'debug'
-            property "mixin.env.remapRefMap", "true"
-            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
-
-            args '--mod', 'galosphere', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                galosphere {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
 
 repositories {
-    maven {
-        url "https://www.cursemaven.com"
-    }
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/galosphere.accesswidener")
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    implementation fg.deobf("curse.maven:jei-238222:3834070")
-    implementation fg.deobf("curse.maven:jade-324717:3824831")
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    implementation fg.deobf("curse.maven:darker-depths-460681:3849425")
-    implementation fg.deobf("curse.maven:autoreglib-250363:3857246")
+    // Uncomment the following line to enable the deprecated Fabric API modules.
+    // These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
-    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    // modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
+    it.options.release = 17
+}
+
+java {
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
+    withSourcesJar()
 }
 
 jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "Galosphere",
-                "Specification-Vendor"    : "Orcinus, Ninni",
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : "Galosphere",
-                "Implementation-Version"  : "1.0.0",
-                "Implementation-Vendor"   : "Orcinus",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "galosphere.mixins.json"
-        ])
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
     }
-    finalizedBy 'reobfJar'
 }
 
-jar.finalizedBy('reobfJar')
-
+// configure the maven publication
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact jar
+            from components.java
         }
     }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        maven {
-            url "https://maven.minecraftforge.net"
-        }
+        // Add repositories to publish to here.
+        // Notice: This block does NOT have the same function as the block in the top level.
+        // The repositories here will be used for publishing your artifact, not for
+        // retrieving dependencies.
     }
 }

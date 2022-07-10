@@ -5,10 +5,14 @@
   "minVersion": "0.8",
   "refmap": "galosphere.refmap.json",
   "mixins": [
+    "LightningBoltAccessor",
     "LightningBoltMixin",
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
-    "PowderSnowBlockMixin"
+    "PowderSnowBlockMixin",
+    "access.AbstractHorseAccessor",
+    "access.BreakingItemParticleAccessor",
+    "access.SpellParticleAccessor"
   ],
   "client": [
   ],

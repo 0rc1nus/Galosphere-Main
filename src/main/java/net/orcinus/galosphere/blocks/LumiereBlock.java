@@ -30,11 +30,6 @@ public class LumiereBlock extends AmethystBlock {
     }
 
     @Override
-    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        return this.charged ? 6 : 0;
-    }
-
-    @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         BlockPos abovePos = pos.above();
         if (this.charged) {
@@ -42,7 +37,7 @@ public class LumiereBlock extends AmethystBlock {
             for (Block block : reformingTable.keySet()) {
                 if (world.getBlockState(abovePos).is(block)) {
                     world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.75F, 1.4F);
-                    world.setBlock(pos, GBlocks.LUMIERE_BLOCK.get().defaultBlockState(), 2);
+                    world.setBlock(pos, GBlocks.LUMIERE_BLOCK.defaultBlockState(), 2);
                     if (world.getBlockState(abovePos).isCollisionShapeFullBlock(world, abovePos)) {
                         world.levelEvent(2009, abovePos, 0);
                     }

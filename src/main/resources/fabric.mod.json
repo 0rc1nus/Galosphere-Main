@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "galosphere",
+  "version": "${version}",
+
+  "name": "Galosphere",
+  "description": "Galosphere is a mod that aims to revamp the swamp biomes in vanilla",
+  "authors": [
+    "Orcinus",
+    "Ninni"
+  ],
+  "contact": {
+    "sources": "https://github.com/0rc1nus/Galosphere"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/galosphere/icon.png",
+
+  "accessWidener" : "galosphere.accesswidener",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.orcinus.galosphere.Galosphere"
+    ],
+    "client": [
+      "net.orcinus.galosphere.GalosphereClient"
+    ]
+  },
+  "mixins": [
+    "galosphere.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

@@ -19,7 +19,7 @@ public class AuraRingerDispenseItemBehavior extends OptionalDispenseItemBehavior
         BlockPos blockpos = source.getPos().relative(direction);
         Level world = source.getLevel();
         BlockState state = world.getBlockState(blockpos);
-        AuraRingerBlock block = (AuraRingerBlock) GBlocks.AURA_RINGER.get();
+        AuraRingerBlock block = (AuraRingerBlock) GBlocks.AURA_RINGER;
         this.setSuccess(true);
         if (state.getBlock() == block) {
             if (!state.getValue(AuraRingerBlock.RINGING)) {

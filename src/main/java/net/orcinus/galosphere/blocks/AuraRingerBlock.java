@@ -52,7 +52,7 @@ public class AuraRingerBlock extends BaseEntityBlock {
                     double posX = blockPos.getX() + 0.5D;
                     double posY = blockPos.getY();
                     double posZ = blockPos.getZ() + 0.5D;
-                    world.addParticle(GParticleTypes.AURA_LISTENER.get(), posX, posY + 0.1D, posZ, 0.0D, 0.0D, 0.0D);
+                    world.addParticle(GParticleTypes.AURA_LISTENER, posX, posY + 0.1D, posZ, 0.0D, 0.0D, 0.0D);
                 }
             }
         }
@@ -80,13 +80,13 @@ public class AuraRingerBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> te) {
-        return !world.isClientSide() ? createTickerHelper(te, GBlockEntityTypes.AURA_RINGER.get(), AuraRingerBlockEntity::ringingTick) : super.getTicker(world, state, te);
+        return !world.isClientSide() ? createTickerHelper(te, GBlockEntityTypes.AURA_RINGER, AuraRingerBlockEntity::ringingTick) : super.getTicker(world, state, te);
     }
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!state.getValue(RINGING) && stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem()) {
+        if (!state.getValue(RINGING) && stack.getItem() == GBlocks.ALLURITE_BLOCK.asItem()) {
             this.activate(state, world, pos);
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);

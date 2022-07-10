@@ -1,19 +1,30 @@
 package net.orcinus.galosphere.init;
 
+import com.google.common.collect.Maps;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.effects.GMobEffect;
 
-@Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+import java.util.Map;
+
 public class GMobEffects {
 
-    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Galosphere.MODID);
+    public static final Map<ResourceLocation, MobEffect> EFFECTS = Maps.newLinkedHashMap();
 
-    public static final RegistryObject<MobEffect> ILLUSIVE = MOB_EFFECTS.register("illusive", () -> new GMobEffect(MobEffectCategory.HARMFUL, 623007));
+    public static final MobEffect ILLUSIVE = registerMobEffect("illusive", new GMobEffect(MobEffectCategory.HARMFUL, 623007));
+
+    public static <M extends MobEffect> M registerMobEffect(String name, M mobEffect) {
+        EFFECTS.put(new ResourceLocation(Galosphere.MODID, name), mobEffect);
+        return mobEffect;
+    }
+
+    public static void init() {
+        for (ResourceLocation id : EFFECTS.keySet()) {
+            Registry.register(Registry.MOB_EFFECT, id, EFFECTS.get(id));
+        }
+    }
 
 }

@@ -50,7 +50,7 @@ public class MiscEvents {
         ResourceLocation name = event.getName();
         LootTable table = event.getTable();
         if (name.equals(new ResourceLocation("entities/pillager"))) {
-            table.addPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_INGOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());
+            table.addPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_INGOT).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());
         }
     }
 
@@ -74,13 +74,13 @@ public class MiscEvents {
             ((IBanner) player).setBanner(ItemStack.EMPTY);
         }
         if (state.getBlock() == Blocks.COMPOSTER) {
-            if (stack.getItem() == GItems.LUMIERE_SHARD.get()) {
+            if (stack.getItem() == GItems.LUMIERE_SHARD) {
                 if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8) {
                     event.setCanceled(true);
                     if (!player.getAbilities().instabuild) {
                         stack.shrink(1);
                     }
-                    world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
+                    world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
                     world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                     player.swing(hand);
@@ -95,7 +95,7 @@ public class MiscEvents {
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
         BannerRendererUtil util = new BannerRendererUtil();
-        if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
+        if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET)) {
             if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                 player.gameEvent(GameEvent.EQUIP, player);
                 ItemStack copy = stack.copy();
@@ -112,11 +112,11 @@ public class MiscEvents {
 
     @SubscribeEvent
     public void onTagsUpdated(TagsUpdatedEvent event) {
-        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new AuraRingerDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.asItem(), new AuraRingerDispenseItemBehavior());
 
-        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new WarpedAnchorDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.asItem(), new WarpedAnchorDispenseItemBehavior());
 
-        DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD, new LumiereComposterDispenseItemBehavior());
 
         Registry.ITEM.getTagOrEmpty(ItemTags.CLUSTER_MAX_HARVESTABLES).iterator().forEachRemaining(holder -> {
             DispenserBlock.registerBehavior(holder.value(), new PickaxeDispenseItemBehavior());

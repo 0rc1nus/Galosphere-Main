@@ -26,7 +26,7 @@ public class LumiereComposterDispenseItemBehavior extends OptionalDispenseItemBe
         if (state.is(Blocks.COMPOSTER)) {
             if (state.getValue(ComposterBlock.LEVEL) > 0) {
                 world.playSound(null, blockpos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                world.setBlock(blockpos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(ComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
+                world.setBlock(blockpos, GBlocks.LUMIERE_COMPOSTER.defaultBlockState().setValue(ComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
                 stack.shrink(1);
             } else {
                 this.setSuccess(false);

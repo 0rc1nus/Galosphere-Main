@@ -20,7 +20,7 @@ import java.util.List;
 public class AuraRingerBlockEntity extends BlockEntity {
 
     public AuraRingerBlockEntity(BlockPos worldPosition, BlockState state) {
-        super(GBlockEntityTypes.AURA_RINGER.get(), worldPosition, state);
+        super(GBlockEntityTypes.AURA_RINGER, worldPosition, state);
     }
 
     public static void ringingTick(Level world, BlockPos pos, BlockState state, AuraRingerBlockEntity type) {
@@ -28,7 +28,7 @@ public class AuraRingerBlockEntity extends BlockEntity {
         if (state.getBlock() instanceof AuraRingerBlock) {
             if (state.getValue(AuraRingerBlock.RINGING)) {
                 for (LivingEntity livingEntity : list) {
-                    MobEffectInstance illusive = new MobEffectInstance(GMobEffects.ILLUSIVE.get(), 200, 0, false, false);
+                    MobEffectInstance illusive = new MobEffectInstance(GMobEffects.ILLUSIVE, 200, 0, false, false);
                     if (livingEntity instanceof Villager villager) {
                         Vec3 vec3 = Vec3.atBottomCenterOf(pos).add(0.0D, 0.6F, 0.0D);
                         villager.getNavigation().moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.5D);

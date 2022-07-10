@@ -20,7 +20,7 @@ public class PowderSnowBlockMixin {
     @Inject(at = @At("RETURN"), method = "canEntityWalkOnPowderSnow", cancellable = true)
     private static void G$canEntityWalkOnPowderSnow(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (entity instanceof LivingEntity livingEntity) {
-            if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(GItems.STERLING_BOOTS.get())) {
+            if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(GItems.STERLING_BOOTS)) {
                 cir.setReturnValue(true);
             }
             if (livingEntity instanceof Horse horse) {

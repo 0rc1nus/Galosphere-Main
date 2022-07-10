@@ -33,14 +33,10 @@ import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GModelLayers;
 import net.orcinus.galosphere.init.GParticleTypes;
 
-@Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
 
     @SubscribeEvent 
     public static void onClientSetup(final FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(GBlocks.ALLURITE_CLUSTER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(GBlocks.LUMIERE_CLUSTER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(GBlocks.WARPED_ANCHOR.get(), RenderType.cutout());
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
 
@@ -58,26 +54,6 @@ public class ClientEvents {
             if (playerRenderer == null) return;
             playerRenderer.addLayer(new BannerLayer<>(playerRenderer));
         });
-    }
-
-    @SubscribeEvent
-    public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
-        event.registerLayerDefinition(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
-    }
-
-    @SubscribeEvent
-    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(GEntityTypes.SPARKLE.get(), SparkleRenderer::new);
-        event.registerEntityRenderer(GEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
-    }
-
-    @SubscribeEvent
-    public static void registerParticles(ParticleFactoryRegisterEvent event) {
-        ParticleEngine engine = Minecraft.getInstance().particleEngine;
-        engine.register(GParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
-        engine.register(GParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
-        engine.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
     }
 
 }

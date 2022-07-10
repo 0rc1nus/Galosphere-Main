@@ -72,7 +72,7 @@ public class WarpedAnchorBlock extends Block {
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
         int i = state.getValue(WARPED_CHARGE);
-        if (stack.getItem() == GBlocks.ALLURITE_BLOCK.get().asItem() && i < 4) {
+        if (stack.getItem() == GBlocks.ALLURITE_BLOCK.asItem() && i < 4) {
             this.incrementCharge(state, world, pos, i);
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
@@ -93,7 +93,7 @@ public class WarpedAnchorBlock extends Block {
         if (state.getValue(WARPED_CHARGE) > 0) {
             int value = random.nextInt(3) + state.getValue(WARPED_CHARGE);
             for (int i = 0; i < value; ++i) {
-                world.addParticle(GParticleTypes.WARPED.get(), pos.getX() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getY() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getZ() + 0.5D + random.nextGaussian() * (double) 0.13F, 0.0D, 0.0D, 0.0D);
+                world.addParticle(GParticleTypes.WARPED, pos.getX() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getY() + 0.5D + random.nextGaussian() * (double) 0.13F, pos.getZ() + 0.5D + random.nextGaussian() * (double) 0.13F, 0.0D, 0.0D, 0.0D);
             }
         }
     }

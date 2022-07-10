@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.init.GBiomes;
 
 import java.util.function.Consumer;
 
@@ -20,8 +21,6 @@ public class BiomeReagentHandler {
     //53285197, coords: 5237 23 -5750
     public static final Climate.Parameter FULL_RANGE = Climate.Parameter.span(-1.0F, 1.0F);
     public static final Climate.Parameter CAVE_BIOME_RANGE = Climate.Parameter.span(0.2F, 0.9F);
-
-    public static final ResourceKey<Biome> CRYSTAL_CANYONS = registerResourceKey("crystal_canyons");
 
     //temperature
     //humidity
@@ -48,11 +47,7 @@ public class BiomeReagentHandler {
 //            0.0F);
 
     public static void init(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer) {
-        consumer.accept(Pair.of(CRYSTAL_CANYONS_PARAMETER, CRYSTAL_CANYONS));
-    }
-
-    private static ResourceKey<Biome> registerResourceKey(String name) {
-        return ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Galosphere.MODID, name));
+        consumer.accept(Pair.of(CRYSTAL_CANYONS_PARAMETER, GBiomes.CRYSTAL_CANYONS_KEY));
     }
 
     //if (young1) {

@@ -21,7 +21,7 @@ public class LightningBoltMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LightningBolt;clearCopperOnLightningStrike(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"), method = "tick")
     private void G$tick(CallbackInfo ci) {
         LightningBolt $this = (LightningBolt)(Object)this;
-        chargeLumiereOnLightningStrike(((LightningBolt)(Object)this).level, $this.getStrikePosition());
+        chargeLumiereOnLightningStrike(((LightningBolt)(Object)this).level, ((LightningBoltAccessor)$this).callGetStrikePosition());
     }
 
     private static void chargeLumiereOnLightningStrike(Level world, BlockPos pos) {
@@ -37,7 +37,7 @@ public class LightningBoltMixin {
         }
 
         if (blockstate1.getBlock() instanceof LumiereBlock) {
-            world.setBlockAndUpdate(blockpos, GBlocks.CHARGED_LUMIERE_BLOCK.get().defaultBlockState());
+            world.setBlockAndUpdate(blockpos, GBlocks.CHARGED_LUMIERE_BLOCK.defaultBlockState());
             BlockPos.MutableBlockPos mut = pos.mutable();
             int i = world.random.nextInt(3) + 3;
 
@@ -66,7 +66,7 @@ public class LightningBoltMixin {
         for(BlockPos blockpos : BlockPos.randomInCube(world.random, 10, pos, 1)) {
             BlockState blockstate = world.getBlockState(blockpos);
             if (blockstate.getBlock() instanceof LumiereBlock) {
-                world.setBlockAndUpdate(blockpos, GBlocks.CHARGED_LUMIERE_BLOCK.get().defaultBlockState());
+                world.setBlockAndUpdate(blockpos, GBlocks.CHARGED_LUMIERE_BLOCK.defaultBlockState());
                 world.levelEvent(3002, blockpos, -1);
                 return Optional.of(blockpos);
             }
