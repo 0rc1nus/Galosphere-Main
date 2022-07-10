@@ -8,17 +8,15 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.init.GAttributes;
-import net.orcinus.galosphere.init.GBiomeModifiers;
 import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
@@ -38,9 +36,6 @@ public class Galosphere implements ModInitializer {
     public static final CreativeModeTab GALOSPHERE = FabricItemGroupBuilder.create(new ResourceLocation(MODID, MODID)).icon(() -> new ItemStack(GItems.ICON_ITEM)).build();
 
     public Galosphere() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        IEventBus eventBus = MinecraftForge.EVENT_BUS;
-        modEventBus.addListener(this::commonSetup);
 
         GAttributes.ATTRIBUTES.register(modEventBus);
         GMenuTypes.MENU_TYPES.register(modEventBus);
@@ -81,5 +76,9 @@ public class Galosphere implements ModInitializer {
             featureHolder.unwrapKey().ifPresent(placedFeatureResourceKey -> BiomeModifications.addFeature(BiomeSelectors.includeByKey(GBiomes.CRYSTAL_CANYONS_KEY), decoration, placedFeatureResourceKey));
         });
 
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(GBiomes.CRYSTAL_CANYONS_KEY), MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(GBiomes.CRYSTAL_CANYONS_KEY), MobCategory.MONSTER, EntityType.GLOW_SQUID, 120, 4, 6);
+
+        
     }
 }
