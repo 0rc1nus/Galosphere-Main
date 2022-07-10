@@ -104,7 +104,7 @@ public class SterlingArmorItem extends ArmorItem {
 
         @Override
         public Ingredient getRepairIngredient() {
-            return Ingredient.of(GItems.SILVER_INGOT.get());
+            return Ingredient.of(GItems.SILVER_INGOT);
         }
 
         @Override
