@@ -4,18 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -27,7 +20,6 @@ import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -116,7 +108,6 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     @Override
     public void tick() {
         super.tick();
-        CompatUtil compatUtil = new CompatUtil();
         if (!this.isRemoved()) {
             if (this.level.isClientSide() && !this.isInWater()) {
                 this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.3D, this.getZ(), 0.0D, 0.0D, 0.0D);
@@ -129,7 +120,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
             if (!this.isInWater()) {
                 if (i == k) {
                     if (!this.level.isClientSide()) {
-                        bombExplode(compatUtil);
+                        this.bombExplode();
                     }
                 }
             }
@@ -140,11 +131,11 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         CompatUtil compatUtil = new CompatUtil();
         if (!this.level.isClientSide()) {
-            this.bombExplode(compatUtil);
+            this.bombExplode();
         }
     }
 
-    private void bombExplode(CompatUtil compatUtil) {
+    private void bombExplode() {
         boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
         this.level.explode(this, null, new ExplosionDamageCalculator() {
             @Override
@@ -172,13 +163,13 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         Vec3 vec3 = deltaMovement.subtract(deltaMovement.x / 5, 0.0D, deltaMovement.z / 5);
         Direction direction = hit.getDirection();
         double booster = 0.3D + (bouncy / 10.0F);
-        if (direction == Direction.UP || direction == Direction.DOWN) {
+        if (direction.getAxis() == Direction.Axis.Y) {
             this.setDeltaMovement(vec3.x, vec3.y < 0.0D ? -vec3.y * booster : 0.0D, vec3.z);
         }
-        if (direction == Direction.WEST || direction == Direction.EAST) {
+        if (direction.getAxis() == Direction.Axis.X) {
             this.setDeltaMovement(vec3.x < 0.65D ? -vec3.x * booster * Mth.sin(Mth.PI / 2): 0.0D, vec3.y, vec3.z);
         }
-        if (direction == Direction.NORTH || direction == Direction.SOUTH) {
+        if (direction.getAxis() == Direction.Axis.Z) {
             this.setDeltaMovement(vec3.x, vec3.y, vec3.z < 0.65D ? -vec3.z * booster * Mth.sin(3 * Mth.PI / 4) : 0.0D);
         }
         if (!this.level.isClientSide() && this.isInWater()) {
