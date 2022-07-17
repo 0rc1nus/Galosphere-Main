@@ -6,8 +6,11 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.orcinus.galosphere.client.gui.CombustionTableMenu;
+import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraParticle;
@@ -18,6 +21,7 @@ import net.orcinus.galosphere.client.renderer.SterlingArmorRenderer;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GModelLayers;
 import net.orcinus.galosphere.init.GParticleTypes;
 
@@ -26,6 +30,8 @@ public class GalosphereClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), GBlocks.ALLURITE_CLUSTER, GBlocks.LUMIERE_CLUSTER, GBlocks.WARPED_ANCHOR);
+
+        ScreenRegistry.register(GMenuTypes.COMBUSTION_TABLE, CombustionTableScreen::new);
 
         ParticleFactoryRegistry.getInstance().register(GParticleTypes.AURA_LISTENER, AuraParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(GParticleTypes.SILVER_BOMB, new SilverBombProvider());

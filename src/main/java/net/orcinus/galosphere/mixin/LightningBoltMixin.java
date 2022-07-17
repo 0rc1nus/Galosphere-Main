@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.LightningRodBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.blocks.LumiereBlock;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.mixin.access.LightningBoltAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

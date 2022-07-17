@@ -39,7 +39,6 @@ import net.orcinus.galosphere.util.CompatUtil;
 public class SilverBombEntity extends ThrowableItemProjectile {
     private static final EntityDataAccessor<Integer> TIME = SynchedEntityData.defineId(SilverBombEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> LAST_DURATION = SynchedEntityData.defineId(SilverBombEntity.class, EntityDataSerializers.INT);
-    private boolean shrapnel;
     private int duration;
     private int explosion;
     private int bouncy;
@@ -56,7 +55,6 @@ public class SilverBombEntity extends ThrowableItemProjectile {
                 this.explosion = tag.getInt("Explosion");
                 this.duration = tag.getInt("Duration");
                 this.bouncy = tag.getInt("Bouncy");
-                this.shrapnel = tag.getBoolean("Shrapnel");
             }
         }
         this.entityData.set(LAST_DURATION, this.duration * 20);
@@ -77,7 +75,6 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         this.duration = tag.getInt("Duration");
         this.explosion = tag.getInt("Explosion");
         this.bouncy = tag.getInt("Bouncy");
-        this.shrapnel = tag.getBoolean("Shrapnel");
     }
 
     @Override
@@ -88,7 +85,6 @@ public class SilverBombEntity extends ThrowableItemProjectile {
         tag.putInt("Duration", this.duration);
         tag.putInt("Explosion", this.explosion);
         tag.putInt("Bouncy", this.bouncy);
-        tag.putBoolean("Sharpnel", this.shrapnel);
     }
 
     public void setTime(int time) {
@@ -141,7 +137,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult pResult) {
+    protected void onHitEntity(EntityHitResult result) {
         CompatUtil compatUtil = new CompatUtil();
         if (!this.level.isClientSide()) {
             this.bombExplode(compatUtil);
@@ -149,51 +145,14 @@ public class SilverBombEntity extends ThrowableItemProjectile {
     }
 
     private void bombExplode(CompatUtil compatUtil) {
-        if (this.shrapnel && compatUtil.isModInstalled("oreganized")) {
-            this.shrapnelExplode(compatUtil);
-        } else {
-            boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
-            this.level.explode(this, null, new ExplosionDamageCalculator() {
-                @Override
-                public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
-                    return world.getBlockState(pos).getBlock().defaultDestroyTime() < 3.0D;
-                }
-            }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
-        }
+        boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
+        this.level.explode(this, null, new ExplosionDamageCalculator() {
+            @Override
+            public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
+                return world.getBlockState(pos).getBlock().defaultDestroyTime() < 3.0D;
+            }
+        }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
         this.remove(RemovalReason.DISCARDED);
-    }
-
-    public void shrapnelExplode(CompatUtil compatUtil) {
-        String modid = "oreganized";
-        SimpleParticleType LEAD_SHRAPNEL = compatUtil.getCompatParticle(modid, "lead_shrapnel");
-        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 6.0F, Explosion.BlockInteraction.NONE);
-
-        //Source: https://github.com/GL33P-0R4NG3/oreganized/blob/1.0.0-release-1.18.x/src/main/java/me/gleep/oreganized/entities/PrimedShrapnelBomb.java
-
-        if (!this.level.isClientSide()) ((ServerLevel) this.level).sendParticles(LEAD_SHRAPNEL, this.getX(), this.getY(0.0625D),                 this.getZ(), 100, 0.0D, 0.0D, 0.0D, 5);
-            int primedShrapnelBombRadius = 30;
-            int radius = (primedShrapnelBombRadius / 4) + explosion;
-        for (Entity entity : this.level.getEntities(this, new AABB(this.getX() - radius, this.getY() - 4, this.getZ() - radius, this.getX() + radius, this.getY() + 4, this.getZ() + radius))) {
-            int random = (int) (Math.random() * 100);
-            boolean shouldPoison = false;
-            if (entity.distanceToSqr(this) <= 4 * 4) {
-                shouldPoison = true;
-            } else if (entity.distanceToSqr(this) <= 8 * 8) {
-                if (random < 60) shouldPoison = true;
-            } else if (entity.distanceToSqr(this) <= 15 * 15) {
-                if (random < radius) shouldPoison = true;
-            } else if (entity.distanceToSqr(this) <= radius * radius) {
-                if (random < 5) shouldPoison = true;
-            }
-            if (shouldPoison) {
-                if (entity instanceof LivingEntity livingEntity) {
-                    MobEffect STUNNED = compatUtil.getCompatEffect(modid, "stunned");
-                    livingEntity.hurt(DamageSource.MAGIC, 2);
-                    livingEntity.addEffect(new MobEffectInstance(STUNNED, 40 * 20));
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 260));
-                }
-            }
-        }
     }
 
     @Override

@@ -10,6 +10,8 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
@@ -17,7 +19,7 @@ public class SterlingArmorModel<T extends LivingEntity> extends HumanoidModel<T>
     public ModelPart helmet;
 
     public SterlingArmorModel(ModelPart part) {
-        super(part);
+        super(part, RenderType::armorCutoutNoCull);
         this.helmet = this.head.getChild("helmet");
     }
 

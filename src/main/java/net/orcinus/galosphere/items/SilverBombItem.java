@@ -57,9 +57,6 @@ public class SilverBombItem extends Item {
         if (tag.getInt("Bouncy") > 0) {
             list.add((Component.translatable(nameText + "bouncy")).append(" ").append(String.valueOf(tag.getInt("Bouncy"))).withStyle(ChatFormatting.GRAY));
         }
-        if (tag.getBoolean("Shrapnel")) {
-            list.add((Component.translatable(nameText + "shrapnel")).withStyle(ChatFormatting.GRAY));
-        }
     }
 
 }

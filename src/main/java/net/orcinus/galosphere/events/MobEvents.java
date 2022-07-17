@@ -1,3 +1,15 @@
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.orcinus.galosphere.api.IBanner;
+import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.util.BannerRendererUtil;
+
 //package net.orcinus.galosphere.events;
 //
 //import net.minecraft.core.BlockPos;
@@ -40,33 +52,9 @@
 //import net.orcinus.galosphere.util.BannerRendererUtil;
 //
 //@Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-//public class MobEvents {
+public class MobEvents {
 //
-//    @SubscribeEvent
-//    public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
-//        SpawnPlacements.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules);
-//        event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
-//    }
 //
-//    @SubscribeEvent
-//    public void onBreakSpeedChanged(PlayerEvent.BreakSpeed event) {
-//        BlockState state = event.getState();
-//        if (state.getBlock() == Blocks.BUDDING_AMETHYST) {
-//            event.setNewSpeed(2.0F);
-//        }
-//    }
-//
-//    @SubscribeEvent
-//    public void onLivingDeath(LivingDeathEvent event) {
-//        LivingEntity livingEntity = event.getEntityLiving();
-//        if (livingEntity instanceof Horse horse) {
-//            if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-//                ItemStack copy = ((IBanner) horse).getBanner();
-//                horse.spawnAtLocation(copy);
-//                ((IBanner) horse).setBanner(ItemStack.EMPTY);
-//            }
-//        }
-//    }
 //
 //    @SubscribeEvent
 //    public void onLivingDamage(LivingHurtEvent event) {
@@ -134,51 +122,5 @@
 //        }
 //    }
 //
-//    @SubscribeEvent
-//    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-//        LivingEntity entity = event.getEntityLiving();
-//        if (entity instanceof IBanner bannerEntity) {
-//            if (!bannerEntity.getBanner().isEmpty()) {
-//                if (entity instanceof Horse horse) {
-//                    if (!((IBanner)horse).getBanner().isEmpty() && !horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-//                        ItemStack copy = ((IBanner) horse).getBanner();
-//                        horse.spawnAtLocation(copy);
-//                        ((IBanner) horse).setBanner(ItemStack.EMPTY);
-//                    }
-//                } else {
-//                    if (!entity.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
-//                        ItemStack copy = bannerEntity.getBanner();
-//                        entity.spawnAtLocation(copy);
-//                        bannerEntity.setBanner(ItemStack.EMPTY);
-//                    }
-//                }
-//            }
-//        }
-//    }
 //
-//    @SubscribeEvent
-//    public void onTeleportEvent(EntityTeleportEvent.EnderPearl event) {
-//        ServerPlayer player = event.getPlayer();
-//        BlockPos pos = new BlockPos(event.getTarget());
-//        Level world = player.getLevel();
-//        int radius = 16;
-//        for (int x = -radius; x <= radius; x++) {
-//            for (int z = -radius; z <= radius; z++) {
-//                for (int y = -radius; y <= radius; y++) {
-//                    BlockPos blockPos = new BlockPos(event.getTargetX() + x, event.getTargetY() + y, event.getTargetZ() + z);
-//                    BlockState blockState = world.getBlockState(blockPos);
-//                    if (pos.closerThan(blockPos, 12) && blockState.is(GBlocks.WARPED_ANCHOR.get()) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
-//                        GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
-//                        world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
-//                        world.setBlockAndUpdate(blockPos, blockState.setValue(WarpedAnchorBlock.WARPED_CHARGE, blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1));
-//                        world.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
-//                        event.setTargetX(blockPos.getX() + 0.5D);
-//                        event.setTargetY(blockPos.getY() + 0.5D);
-//                        event.setTargetZ(blockPos.getZ() + 0.5D);
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//}
+}

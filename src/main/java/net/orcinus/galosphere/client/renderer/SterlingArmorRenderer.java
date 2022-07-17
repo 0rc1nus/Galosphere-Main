@@ -14,7 +14,7 @@ import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.init.GModelLayers;
 
 public class SterlingArmorRenderer implements ArmorRenderer {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/sterling_armor.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/sterling_helmet.png");
 
     @Override
     public void render(PoseStack matrices, MultiBufferSource vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, HumanoidModel<LivingEntity> contextModel) {

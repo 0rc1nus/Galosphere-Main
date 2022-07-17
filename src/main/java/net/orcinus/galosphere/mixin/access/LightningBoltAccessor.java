@@ -1,4 +1,4 @@
-package net.orcinus.galosphere.mixin;
+package net.orcinus.galosphere.mixin.access;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LightningBolt;
