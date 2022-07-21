@@ -20,9 +20,6 @@ import java.util.UUID;
 
 public class SterlingArmorItem extends ArmorItem {
     private static final SterlingArmorMaterial material = new SterlingArmorMaterial();
-    private static final String HELMET_TEXTURE = Galosphere.MODID + ":textures/entity/sterling_helmet.png";
-    private static final String LEGS_TEXTURE = Galosphere.MODID + ":textures/entity/sterling_layer_2.png";
-    private static final String TEXTURE = Galosphere.MODID + ":textures/entity/sterling_layer_1.png";
 
     public SterlingArmorItem(EquipmentSlot slot, Properties properties) {
         super(material, slot, properties);

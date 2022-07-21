@@ -12,11 +12,15 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.ReloadableResourceManager;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -46,6 +50,7 @@ import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
+import net.orcinus.galosphere.crafting.LumiereReformingManager;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.WarpedAnchorDispenseItemBehavior;
 import net.orcinus.galosphere.entities.SparkleEntity;
@@ -63,6 +68,7 @@ import net.orcinus.galosphere.init.GPlacedFeatures;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.intellij.lang.annotations.Identifier;
 
 public class Galosphere implements ModInitializer {
     
@@ -82,6 +88,8 @@ public class Galosphere implements ModInitializer {
         GPlacedFeatures.init();
         GMenuTypes.init();
         GMobEffects.init();
+
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new LumiereReformingManager());
 
         FabricDefaultAttributeRegistry.register(GEntityTypes.SPARKLE, SparkleEntity.createAttributes());
 
@@ -161,23 +169,6 @@ public class Galosphere implements ModInitializer {
                 return InteractionResultHolder.pass(ItemStack.EMPTY);
             }
         });
-
-        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            ItemStack stack = player.getItemInHand(hand);
-            if (player.isShiftKeyDown() && stack.isEmpty() && entity instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR) && !((IBanner)horse).getBanner().isEmpty() && !horse.level.isClientSide()) {
-                ItemStack copy = stack.copy();
-                player.setItemInHand(hand, copy);
-                horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
-                horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
-                ((IBanner) horse).setBanner(ItemStack.EMPTY);
-                return InteractionResult.SUCCESS;
-            }
-            else {
-                return InteractionResult.PASS;
-            }
-        });
-
-
 
     }
 }

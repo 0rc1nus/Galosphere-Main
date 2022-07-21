@@ -5,6 +5,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.orcinus.galosphere.client.renderer.SterlingArmorRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,6 +22,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
     @Inject(at = @At("RETURN"), method = "<init>")
     private void G$init(EntityRendererProvider.Context context, boolean bl, CallbackInfo ci) {
         this.addLayer(new BannerLayer<>(this));
+        this.addLayer(new SterlingArmorRenderer<>(this));
     }
 
 }

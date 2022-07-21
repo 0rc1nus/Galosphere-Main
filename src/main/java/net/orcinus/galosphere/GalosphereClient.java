@@ -43,7 +43,6 @@ public class GalosphereClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
 
-        ArmorRenderer.register(new SterlingArmorRenderer(), GItems.STERLING_HELMET);
     }
 
 }

@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
@@ -24,7 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class LumiereReformingManager extends SimpleJsonResourceReloadListener {
+public class LumiereReformingManager extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
     private static final Gson GSON_INSTANCE = (new GsonBuilder()).create();
     private static final Map<Block, Block> REFORMING_TABLE = Maps.newHashMap();
 
@@ -58,4 +59,10 @@ public class LumiereReformingManager extends SimpleJsonResourceReloadListener {
     public static Map<Block, Block> getReformingTable() {
         return REFORMING_TABLE;
     }
+
+    @Override
+    public ResourceLocation getFabricId() {
+        return new ResourceLocation(Galosphere.MODID, "loot_tables/gameplay");
+    }
+
 }
