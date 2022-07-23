@@ -5,7 +5,7 @@
       "item": "galosphere:allurite_block"
     },
     "S": {
-      "tag": "forge:storage_blocks/silver"
+      "item": "galosphere:silver_block"
     }
   },
   "pattern": [

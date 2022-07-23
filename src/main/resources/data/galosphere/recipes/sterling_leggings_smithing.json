@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing",
   "addition": {
-    "tag": "forge:ingots/silver"
+    "item": "galosphere:silver_ingot"
   },
   "base": {
     "item": "minecraft:leather_leggings"

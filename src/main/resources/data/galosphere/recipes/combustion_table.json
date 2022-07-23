@@ -5,7 +5,7 @@
       "tag": "minecraft:planks"
     },
     "@": {
-      "tag": "forge:ingots/silver"
+      "item": "galosphere:silver_ingot"
     }
   },
   "pattern": [
