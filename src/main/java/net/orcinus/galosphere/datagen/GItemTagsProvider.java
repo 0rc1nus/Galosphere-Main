@@ -4,6 +4,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.compat.init.ForgeItemTags;
@@ -26,11 +27,11 @@ public class GItemTagsProvider extends ItemTagsProvider {
         this.tag(ForgeItemTags.SILVER_INGOT).add(GItems.SILVER_INGOT.get());
         this.tag(ForgeItemTags.SILVER_NUGGETS).add(GItems.SILVER_NUGGET.get());
         this.tag(ForgeItemTags.SILVER_ORES).add(GBlocks.SILVER_ORE.get().asItem()).add(GBlocks.DEEPSLATE_SILVER_ORE.get().asItem());
-        this.tag(ForgeItemTags.INGOTS).addTags(ForgeItemTags.SILVER_INGOT);
-        this.tag(ForgeItemTags.NUGGETS).addTags(ForgeItemTags.SILVER_NUGGETS);
-        this.tag(ForgeItemTags.ORES).addTags(ForgeItemTags.SILVER_ORES);
+        this.tag(Tags.Items.INGOTS).addTags(ForgeItemTags.SILVER_INGOT);
+        this.tag(Tags.Items.NUGGETS).addTags(ForgeItemTags.SILVER_NUGGETS);
+        this.tag(Tags.Items.ORES).addTags(ForgeItemTags.SILVER_ORES);
         this.tag(ForgeItemTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get().asItem());
-        this.tag(ForgeItemTags.STORAGE_BLOCKS).addTag(ForgeItemTags.SILVER_STORAGE_BLOCKS);
+        this.tag(Tags.Items.STORAGE_BLOCKS).addTag(ForgeItemTags.SILVER_STORAGE_BLOCKS);
         this.tag(ForgeItemTags.SILVER_RAW_ORES).add(GItems.RAW_SILVER.get());
         this.tag(ForgeItemTags.RAW_ORES).addTag(ForgeItemTags.SILVER_RAW_ORES);
     }

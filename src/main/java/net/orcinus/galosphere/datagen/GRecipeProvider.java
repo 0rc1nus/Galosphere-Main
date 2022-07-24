@@ -117,7 +117,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_glowstone", has(Blocks.GLOWSTONE)).save(consumer);
 
         ShapedRecipeBuilder
-                .shaped(GItems.SILVER_BOMB.get())
+                .shaped(GItems.SILVER_BOMB.get(), 2)
                 .define('R', ForgeItemTags.SILVER_INGOT)
                 .define('G', Blocks.TNT)
                 .pattern(" R ")

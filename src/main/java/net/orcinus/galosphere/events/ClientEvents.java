@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,8 +38,6 @@ public class ClientEvents {
 
     @SubscribeEvent 
     public static void onClientSetup(final FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(GBlocks.ALLURITE_CLUSTER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(GBlocks.LUMIERE_CLUSTER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(GBlocks.WARPED_ANCHOR.get(), RenderType.cutout());
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
@@ -73,7 +71,7 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
-    public static void registerParticles(ParticleFactoryRegisterEvent event) {
+    public static void registerParticles(RegisterParticleProvidersEvent event) {
         ParticleEngine engine = Minecraft.getInstance().particleEngine;
         engine.register(GParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
         engine.register(GParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());

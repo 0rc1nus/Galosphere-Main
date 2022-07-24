@@ -1,4 +1,4 @@
-// 1.19	2022-06-27T12:51:12.8864414	Recipes
+// 1.19	2022-07-23T21:01:03.8910173	Recipes
 72253d925debf7454f27a04c90e91eb51fe80e72 data/galosphere/advancements/recipes/galosphere/allurite_block.json
 fa2bb57df656036cffe7cde55df4e2ccec5c7040 data/galosphere/advancements/recipes/galosphere/allurite_bricks.json
 bd0cda04f102b3317bb60f0a41757f2242320c3a data/galosphere/advancements/recipes/galosphere/allurite_bricks_from_allurite_block_stonecutting.json
@@ -173,7 +173,7 @@ ab3e2141585034b33f9d9ce33c15b17797d16929 data/galosphere/recipes/lumiere_stairs.
 2b6c3d4d3a5e7e39c6d3fb82beef1df245066074 data/galosphere/recipes/raw_silver.json
 7da85af77728440bee272908b582be84bc7f97ab data/galosphere/recipes/raw_silver_block.json
 b97196c3a674c31198a0ea1d54460ccd8d28df03 data/galosphere/recipes/silver_block.json
-73d00a52c5678805cbb56ef223710b2b66e8c5f2 data/galosphere/recipes/silver_bomb.json
+6174202818bbf32fc705b583791cf08903a5f43c data/galosphere/recipes/silver_bomb.json
 08114ec81205c675e9183c0676f2f9bcaedfb72c data/galosphere/recipes/silver_ingot.json
 9952cef7516840f3dfef257945419e5809c68235 data/galosphere/recipes/silver_ingot_from_blasting_deepslate_silver_ore.json
 2e86e333f80c7909bec2ce33a9238e2a1ae43c2b data/galosphere/recipes/silver_ingot_from_blasting_raw_silver.json

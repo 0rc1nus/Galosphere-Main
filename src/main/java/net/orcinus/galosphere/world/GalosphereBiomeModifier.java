@@ -32,7 +32,7 @@ public class GalosphereBiomeModifier implements BiomeModifier {
                 builder.getGenerationSettings().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_CEILING_CRYSTALS);
                 builder.getGenerationSettings().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_FLOOR_CRYSTALS);
                 builder.getMobSpawnSettings().addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 10, 4, 6));
-                builder.getMobSpawnSettings().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(GEntityTypes.SPARKLE.get(), 120, 4, 6));
+                builder.getMobSpawnSettings().addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(GEntityTypes.SPARKLE.get(), 30, 4, 6));
             }
         }
     }

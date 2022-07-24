@@ -96,11 +96,7 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
-    implementation fg.deobf("curse.maven:jei-238222:3834070")
-    implementation fg.deobf("curse.maven:jade-324717:3824831")
-
-    implementation fg.deobf("curse.maven:darker-depths-460681:3849425")
-    implementation fg.deobf("curse.maven:autoreglib-250363:3857246")
+//    implementation fg.deobf("curse.maven:darker-depths-460681:3883991")
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }

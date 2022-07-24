@@ -62,10 +62,10 @@ public class MiscEvents {
     @SubscribeEvent
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         ItemStack stack = event.getItemStack();
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         InteractionHand hand = event.getHand();
         BlockPos pos = event.getPos();
-        Level world = event.getWorld();
+        Level world = event.getLevel();
         BlockState state = world.getBlockState(pos);
         if (player.isShiftKeyDown() && !((IBanner) player).getBanner().isEmpty() && stack.isEmpty()) {
             ItemStack copy = ((IBanner) player).getBanner();
@@ -92,7 +92,7 @@ public class MiscEvents {
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickItem event) {
         ItemStack stack = event.getItemStack();
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         InteractionHand hand = event.getHand();
         BannerRendererUtil util = new BannerRendererUtil();
         if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {

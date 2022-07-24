@@ -17,11 +17,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.init.GAttributes;
 import net.orcinus.galosphere.init.GItems;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -64,12 +65,12 @@ public class SterlingArmorItem extends ArmorItem {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-        consumer.accept(new IItemRenderProperties() {
-            @Nullable
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        super.initializeClient(consumer);
+        consumer.accept(new IClientItemExtensions() {
             @Override
-            public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
-                return armorSlot == EquipmentSlot.HEAD ? new SterlingArmorModel<>(SterlingArmorModel.createBodyLayer().bakeRoot()) : IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return slot == EquipmentSlot.HEAD ? new SterlingArmorModel<>(SterlingArmorModel.createBodyLayer().bakeRoot()) : IClientItemExtensions.super.getHumanoidArmorModel(livingEntity, itemStack, equipmentSlot, original);
             }
         });
     }

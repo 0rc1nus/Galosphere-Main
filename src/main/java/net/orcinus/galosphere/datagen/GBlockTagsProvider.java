@@ -4,6 +4,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.compat.init.ForgeBlockTags;
@@ -33,7 +34,7 @@ public class GBlockTagsProvider extends BlockTagsProvider {
 
         this.tag(ForgeBlockTags.SILVER_ORE).add(GBlocks.SILVER_ORE.get(), GBlocks.DEEPSLATE_SILVER_ORE.get());
         this.tag(ForgeBlockTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get());
-        this.tag(ForgeBlockTags.ORES).addTags(ForgeBlockTags.SILVER_ORE);
-        this.tag(ForgeBlockTags.STORAGE_BLOCKS).addTags(ForgeBlockTags.SILVER_STORAGE_BLOCKS);
+        this.tag(Tags.Blocks.ORES).addTags(ForgeBlockTags.SILVER_ORE);
+        this.tag(Tags.Blocks.STORAGE_BLOCKS).addTags(ForgeBlockTags.SILVER_STORAGE_BLOCKS);
     }
 }

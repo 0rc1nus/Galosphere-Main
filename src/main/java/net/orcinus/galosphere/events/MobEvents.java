@@ -58,7 +58,7 @@ public class MobEvents {
 
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
-        LivingEntity livingEntity = event.getEntityLiving();
+        LivingEntity livingEntity = event.getEntity();
         if (livingEntity instanceof Horse horse) {
             if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
                 ItemStack copy = ((IBanner) horse).getBanner();
@@ -70,7 +70,7 @@ public class MobEvents {
 
     @SubscribeEvent
     public void onLivingDamage(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         boolean flag = event.getSource().isExplosion();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (flag) {
@@ -97,7 +97,7 @@ public class MobEvents {
     @SubscribeEvent
     public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
         ItemStack stack = event.getItemStack();
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         InteractionHand hand = event.getHand();
         Entity target = event.getTarget();
         BannerRendererUtil util = new BannerRendererUtil();
@@ -135,8 +135,8 @@ public class MobEvents {
     }
 
     @SubscribeEvent
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity instanceof IBanner bannerEntity) {
             if (!bannerEntity.getBanner().isEmpty()) {
                 if (entity instanceof Horse horse) {
