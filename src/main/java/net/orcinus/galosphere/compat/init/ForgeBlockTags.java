@@ -9,7 +9,6 @@ public class ForgeBlockTags {
 
     public static final TagKey<Block> SILVER_ORE = bind("ores/silver");
     public static final TagKey<Block> SILVER_STORAGE_BLOCKS = bind("storage_blocks/silver");
-    public static final TagKey<Block> STORAGE_BLOCKS = bind("storage_blocks");
 
     private static TagKey<Block> bind(String path) {
         return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation("forge", path));
