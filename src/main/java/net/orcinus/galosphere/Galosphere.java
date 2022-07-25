@@ -59,6 +59,7 @@ import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GConfiguredFeatures;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GFeatures;
 import net.orcinus.galosphere.init.GItems;
@@ -82,6 +83,7 @@ public class Galosphere implements ModInitializer {
         GItems.init();
         GAttributes.init();
         GBiomes.init();
+        GCriteriaTriggers.init();
         GBlockEntityTypes.init();
         GFeatures.init();
         GConfiguredFeatures.init();
@@ -110,7 +112,7 @@ public class Galosphere implements ModInitializer {
         }).build().forEach(featureHolder -> featureHolder.unwrapKey().ifPresent(placedFeatureResourceKey -> BiomeModifications.addFeature(BiomeSelectors.includeByKey(GBiomes.CRYSTAL_CANYONS_KEY), GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureResourceKey)));
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(GBiomes.CRYSTAL_CANYONS_KEY), MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(GBiomes.CRYSTAL_CANYONS_KEY), MobCategory.MONSTER, EntityType.GLOW_SQUID, 120, 4, 6);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(GBiomes.CRYSTAL_CANYONS_KEY), MobCategory.UNDERGROUND_WATER_CREATURE, GEntityTypes.SPARKLE, 10, 4, 6);
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (id.equals(EntityType.PILLAGER.getDefaultLootTable())) {
