@@ -8,14 +8,18 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.items.SterlingArmorItem;
+import net.orcinus.galosphere.mixin.access.LivingEntityAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin implements IBanner {
@@ -67,6 +71,35 @@ public class LivingEntityMixin implements IBanner {
                 ItemStack copy = ((IBanner) horse).getBanner();
                 horse.spawnAtLocation(copy);
                 ((IBanner) horse).setBanner(ItemStack.EMPTY);
+            }
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "getDamageAfterArmorAbsorb", cancellable = true)
+    private void G$getDamageAfterArmorAbsorb(DamageSource damageSource, float f, CallbackInfoReturnable<Float> cir) {
+        LivingEntity $this = (LivingEntity) (Object) this;
+        if (!damageSource.isBypassArmor()) {
+            ((LivingEntityAccessor) this).callHurtArmor(damageSource, f);
+            boolean flag = damageSource.isExplosion();
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                if (flag) {
+                    Item item = $this.getItemBySlot(slot).getItem();
+                    float reductionAmount = 0.0F;
+                    if ($this instanceof Horse horse) {
+                        Item horseItem = horse.getArmor().getItem();
+                        if (horseItem == GItems.STERLING_HORSE_ARMOR) {
+                            float damageReduction = 3.0F;
+                            reductionAmount = f - damageReduction;
+                        }
+                    }
+                    if (item instanceof SterlingArmorItem sterlingArmorItem) {
+                        float damageReduction = sterlingArmorItem.getExplosionResistance(slot);
+                        reductionAmount = f - damageReduction;
+                    }
+                    if (item instanceof SterlingArmorItem || ($this instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR))) {
+                        cir.setReturnValue(reductionAmount / 3);
+                    }
+                }
             }
         }
     }
