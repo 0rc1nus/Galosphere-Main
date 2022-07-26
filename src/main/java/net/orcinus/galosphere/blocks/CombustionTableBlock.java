@@ -2,6 +2,7 @@ package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,7 +20,7 @@ import net.orcinus.galosphere.client.gui.CombustionTableMenu;
 import javax.annotation.Nullable;
 
 public class CombustionTableBlock extends Block {
-    private static final Component CONTAINER_TITLE = Component.translatable("container.galosphere.combustion_table");
+    private static final Component CONTAINER_TITLE = new TranslatableComponent("container.galosphere.combustion_table");
 
     public CombustionTableBlock(Properties properties) {
         super(properties);

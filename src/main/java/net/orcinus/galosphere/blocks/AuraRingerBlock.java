@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -44,7 +43,7 @@ public class AuraRingerBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
         EntityType<?> dummy = EntityType.ZOMBIE;
         for (BlockPos blockPos : this.getRadius(pos)) {
             if (state.getValue(RINGING)) {
@@ -106,7 +105,7 @@ public class AuraRingerBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         if (state.getValue(RINGING)) {
             world.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_DEPLETE, SoundSource.BLOCKS, 1.0F, 1.0F);
             world.setBlock(pos, state.setValue(RINGING, false), 3);

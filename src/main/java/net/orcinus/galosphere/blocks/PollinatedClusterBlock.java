@@ -4,19 +4,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.phys.BlockHitResult;
 
-import net.minecraft.util.RandomSource;
+import java.util.Random;
 
 public class PollinatedClusterBlock extends AmethystClusterBlock {
     public static final BooleanProperty POLLINATED = BooleanProperty.create("pollinated");
@@ -33,7 +28,7 @@ public class PollinatedClusterBlock extends AmethystClusterBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
         if (state.getValue(POLLINATED)) {
             Direction direction = state.getValue(FACING);
             double i = pos.getX();

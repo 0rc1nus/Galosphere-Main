@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
@@ -19,6 +18,7 @@ import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 
 import java.util.HashSet;
+import java.util.Random;
 
 public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
     //-53648423032165391
@@ -35,7 +35,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
     public boolean place(FeaturePlaceContext<CrystalSpikeConfig> context) {
         WorldGenLevel world = context.level();
         BlockPos blockPos = context.origin();
-        RandomSource random = context.random();
+        Random random = context.random();
         CrystalSpikeConfig config = context.config();
         HashSet<BlockPos> trigList = Sets.newHashSet();
         HashSet<BlockPos> clusterPos = Sets.newHashSet();
@@ -51,7 +51,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         return flag;
     }
 
-    private boolean placeCrystals(WorldGenLevel world, RandomSource random, CrystalSpikeConfig config, HashSet<BlockPos> trigList, HashSet<BlockPos> clusterPos, boolean flag) {
+    private boolean placeCrystals(WorldGenLevel world, Random random, CrystalSpikeConfig config, HashSet<BlockPos> trigList, HashSet<BlockPos> clusterPos, boolean flag) {
         for (BlockPos pos : trigList) {
             if (world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
                 this.setBlock(world, pos, config.crystal_state);
@@ -72,7 +72,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         return flag;
     }
 
-    public boolean placeSpike(LevelAccessor world, BlockPos blockPos, int startRadius, int height, int randomChance, HashSet<BlockPos> crystalPos, Direction direction, RandomSource random) {
+    public boolean placeSpike(LevelAccessor world, BlockPos blockPos, int startRadius, int height, int randomChance, HashSet<BlockPos> crystalPos, Direction direction, Random random) {
         boolean flag = false;
         for (int y = 0; y < height; y++) {
             int radius = startRadius - y / 2;
@@ -125,7 +125,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         return flag;
     }
 
-    private boolean calciteBloom(LevelAccessor world, BlockPos blockPos, RandomSource random, int crystalRadius) {
+    private boolean calciteBloom(LevelAccessor world, BlockPos blockPos, Random random, int crystalRadius) {
         int radius = crystalRadius / 4;
         int height = ConstantInt.of(2).sample(random);
         boolean flag = false;

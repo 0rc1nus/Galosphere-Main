@@ -2,7 +2,6 @@ package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +28,7 @@ import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GParticleTypes;
 import org.jetbrains.annotations.Nullable;
 
-import net.minecraft.util.RandomSource;
+import java.util.Random;
 
 public class WarpedAnchorBlock extends Block {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -88,7 +87,7 @@ public class WarpedAnchorBlock extends Block {
     }
 
     @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
         super.animateTick(state, world, pos, random);
         if (state.getValue(WARPED_CHARGE) > 0) {
             int value = random.nextInt(3) + state.getValue(WARPED_CHARGE);

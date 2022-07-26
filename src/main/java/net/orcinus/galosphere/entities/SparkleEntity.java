@@ -8,7 +8,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -59,6 +58,7 @@ import net.orcinus.galosphere.init.GItems;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 
 public class SparkleEntity extends Animal {
     public static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(SparkleEntity.class, EntityDataSerializers.INT);
@@ -150,7 +150,7 @@ public class SparkleEntity extends Animal {
         this.entityData.define(CRYSTAL_TYPE, 0);
     }
 
-    public static boolean checkSparkleSpawnRules(EntityType<? extends LivingEntity> sparkle, LevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
+    public static boolean checkSparkleSpawnRules(EntityType<? extends LivingEntity> sparkle, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random random) {
         return world.getBlockState(pos.below()).is(GBlockTags.SPARKLES_SPAWNABLE_ON);
     }
 

@@ -1,23 +1,30 @@
 package net.orcinus.galosphere.mixin;
 
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
@@ -46,7 +53,7 @@ public class PlayerMixin {
                             }
                             copy.setCount(1);
                             horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
-                            horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
+                            horse.gameEvent(GameEvent.MOB_INTERACT, player);
                             ((IBanner) horse).setBanner(copy);
                             player.swing(interactionHand);
                             cir.setReturnValue(InteractionResult.SUCCESS);
@@ -58,7 +65,7 @@ public class PlayerMixin {
                         ItemStack copy = ((IBanner) horse).getBanner();
                         player.setItemInHand(interactionHand, copy);
                         horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
-                        horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
+                        horse.gameEvent(GameEvent.MOB_INTERACT, player);
                         ((IBanner) horse).setBanner(ItemStack.EMPTY);
                         cir.setReturnValue(InteractionResult.SUCCESS);
                     }
