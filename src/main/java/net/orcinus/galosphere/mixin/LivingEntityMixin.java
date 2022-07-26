@@ -102,12 +102,7 @@ public class LivingEntityMixin implements IBanner {
                         reductionAmount = f - damageReduction;
                     }
                     if (item instanceof SterlingArmorItem || ($this instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR))) {
-                        float finalReductionAmount = reductionAmount / 2;
-                        $this.level.players().forEach(player -> {
-                            player.sendMessage(new TranslatableComponent("The reduction amount is " + finalReductionAmount), player.getUUID());
-                            player.sendMessage(new TranslatableComponent("The original amount is " + f), player.getUUID());
-                        });
-                        cir.setReturnValue(finalReductionAmount);
+                        cir.setReturnValue(reductionAmount / 3);
                     }
                 }
             }
