@@ -14,6 +14,7 @@
     "access.BreakingItemParticleAccessor",
     "access.GuiAccessor",
     "access.LightningBoltAccessor",
+    "access.LivingEntityAccessor",
     "access.SpellParticleAccessor"
   ],
   "client": [
