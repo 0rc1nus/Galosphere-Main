@@ -43,6 +43,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=galosphere.mixins.json"
+            arg "-mixin.config=galenacapes.forge.mixins.json"
             mods {
                 galosphere {
                     source sourceSets.main
