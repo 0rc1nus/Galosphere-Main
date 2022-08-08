@@ -3,6 +3,7 @@ package net.orcinus.galosphere.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,6 +18,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 import net.minecraft.util.RandomSource;
+import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GParticleTypes;
 
 public class PollinatedClusterBlock extends AmethystClusterBlock {
     public static final BooleanProperty POLLINATED = BooleanProperty.create("pollinated");
@@ -48,11 +51,12 @@ public class PollinatedClusterBlock extends AmethystClusterBlock {
             double z = k + 0.5D;
             mut.set(i + Mth.nextInt(random, -10, 10), j - random.nextInt(10), k + Mth.nextInt(random, -10, 10));
             BlockState blockstate = world.getBlockState(mut);
+            SimpleParticleType particleType = this.defaultBlockState().is(GBlocks.LUMIERE_CLUSTER.get()) ? GParticleTypes.LUMIERE_RAIN.get() : GParticleTypes.AURA_RAIN.get();
             if (!blockstate.isCollisionShapeFullBlock(world, mut)) {
-                world.addParticle(ParticleTypes.END_ROD, (double) mut.getX() + direction.getStepX() + random.nextDouble(), (double) mut.getY() + direction.getStepY() + random.nextDouble(), (double) mut.getZ() + direction.getStepZ() + random.nextDouble(), velX, velY, velZ);
+                world.addParticle(particleType, (double) mut.getX() + direction.getStepX() + random.nextDouble(), (double) mut.getY() + direction.getStepY() + random.nextDouble(), (double) mut.getZ() + direction.getStepZ() + random.nextDouble(), velX, velY, velZ);
             }
             if (random.nextInt(5) == 0) {
-                world.addParticle(ParticleTypes.END_ROD, x + direction.getStepX(), y + direction.getStepY(), z + direction.getStepZ(), velX, velY, velZ);
+                world.addParticle(particleType, x + direction.getStepX(), y + direction.getStepY(), z + direction.getStepZ(), velX, velY, velZ);
             }
         }
     }

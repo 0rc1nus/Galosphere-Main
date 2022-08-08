@@ -34,7 +34,7 @@ public class GBlockTagsProvider extends BlockTagsProvider {
 
         this.tag(ForgeBlockTags.SILVER_ORE).add(GBlocks.SILVER_ORE.get(), GBlocks.DEEPSLATE_SILVER_ORE.get());
         this.tag(ForgeBlockTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get());
-        this.tag(Tags.Blocks.ORES).addTags(ForgeBlockTags.SILVER_ORE);
-        this.tag(Tags.Blocks.STORAGE_BLOCKS).addTags(ForgeBlockTags.SILVER_STORAGE_BLOCKS);
+        this.tag(Tags.Blocks.ORES).addTag(ForgeBlockTags.SILVER_ORE);
+        this.tag(Tags.Blocks.STORAGE_BLOCKS).addTag(ForgeBlockTags.SILVER_STORAGE_BLOCKS);
     }
 }

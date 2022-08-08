@@ -3,7 +3,6 @@ package net.orcinus.galosphere.blocks.blockentities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -39,7 +38,10 @@ public class AuraRingerBlockEntity extends BlockEntity {
                     }
                     if (livingEntity instanceof Player player) {
                         if (player.getAbilities().instabuild) return;
-                        player.addEffect(illusive);
+                        boolean flag = !player.hasEffect(GMobEffects.ILLUSIVE.get()) || (player.hasEffect(GMobEffects.ILLUSIVE.get()) && player.getEffect(GMobEffects.ILLUSIVE.get()).getDuration() < 100);
+                        if (flag) {
+                            player.addEffect(illusive);
+                        }
                     }
                 }
             }
