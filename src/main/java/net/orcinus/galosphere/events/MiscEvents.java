@@ -74,6 +74,18 @@ public class MiscEvents {
             ((IBanner) player).setBanner(ItemStack.EMPTY);
         }
         if (state.getBlock() == Blocks.COMPOSTER) {
+            InteractionHand offHand = InteractionHand.OFF_HAND;
+            ItemStack offHandStack = player.getItemInHand(offHand);
+            if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8 && offHandStack.is(GItems.LUMIERE_SHARD.get())) {
+                event.setCanceled(true);
+                if (!player.getAbilities().instabuild) {
+                    offHandStack.shrink(1);
+                }
+                world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
+                world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+                player.swing(offHand);
+            }
             if (stack.getItem() == GItems.LUMIERE_SHARD.get()) {
                 if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8) {
                     event.setCanceled(true);

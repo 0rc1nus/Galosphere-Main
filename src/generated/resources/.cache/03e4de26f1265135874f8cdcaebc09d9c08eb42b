@@ -1,12 +1,12 @@
-// 1.19	2022-06-27T12:51:12.8916358	Tags for minecraft:item
+// 1.19	2022-08-08T20:23:54.696425	Tags for minecraft:item
 bf2ad799074f5c44acee490bdf3d3ae81d56997b data/forge/tags/items/ingots.json
 0ceaaec06992eb7173faa9cc1f1b2a05ad3c7cab data/forge/tags/items/ingots/silver.json
 f9a637e96c99d2b17b5183761d2dbcc66f1e2a62 data/forge/tags/items/nuggets.json
 65fe93d1810f95b0445bfcc92987f6761a3fd050 data/forge/tags/items/nuggets/silver.json
 021e86d55679a27d4519fa177cd4425c51105d50 data/forge/tags/items/ores.json
 d22848f4f97f051b3ec5eefda7df36a01718e88a data/forge/tags/items/ores/silver.json
-73b2aed3020988f50862dc5387a0e288cf806a6c data/forge/tags/items/raw_ores.json
-c13b75b77619e89812295c5dd959ec842a62ce65 data/forge/tags/items/raw_ores/silver.json
+a3c07e3e70f2a3617cc80fceac947d9055c7a002 data/forge/tags/items/raw_materials.json
+c13b75b77619e89812295c5dd959ec842a62ce65 data/forge/tags/items/raw_materials/silver.json
 947e93f58ab65dc0dcb8bc7db4b06fd6b517391f data/forge/tags/items/storage_blocks.json
 77953532df9dfaebb1305885a11df18f585acef3 data/forge/tags/items/storage_blocks/silver.json
 140ec1ca4b33251ba785849283285aae614ae8fe data/galosphere/tags/items/non_sinkable_horse_armors.json
