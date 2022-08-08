@@ -39,7 +39,9 @@ public class AuraRingerBlockEntity extends BlockEntity {
                     }
                     if (livingEntity instanceof Player player) {
                         if (player.getAbilities().instabuild) return;
-                        player.addEffect(illusive);
+                        if (!player.hasEffect(GMobEffects.ILLUSIVE) || (player.hasEffect(GMobEffects.ILLUSIVE) && player.getEffect(GMobEffects.ILLUSIVE).getDuration() < 100)) {
+                            player.addEffect(illusive);
+                        }
                     }
                 }
             }
