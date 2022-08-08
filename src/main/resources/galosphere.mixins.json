@@ -4,6 +4,7 @@
   "package": "net.orcinus.galosphere.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ComposterBlockMixin",
     "LightningBoltMixin",
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
