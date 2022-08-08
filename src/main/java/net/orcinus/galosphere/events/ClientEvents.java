@@ -76,7 +76,7 @@ public class ClientEvents {
         event.register(GParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
         event.register(GParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
         event.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
-        event.register(GParticleTypes.AURA_RAIN.get(), CrystalRainParticle.Provider::new);
+        event.register(GParticleTypes.ALLURITE_RAIN.get(), CrystalRainParticle.Provider::new);
         event.register(GParticleTypes.LUMIERE_RAIN.get(), CrystalRainParticle.Provider::new);
     }
 
