@@ -13,7 +13,7 @@ import net.orcinus.galosphere.Galosphere;
 
 @OnlyIn(Dist.CLIENT)
 public class CombustionTableScreen extends AbstractContainerScreen<CombustionTableMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/misc/gui/container/combustion_table.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/gui/container/combustion_table.png");
 
     public CombustionTableScreen(CombustionTableMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
@@ -22,13 +22,15 @@ public class CombustionTableScreen extends AbstractContainerScreen<CombustionTab
         this.imageWidth = 175;
         this.imageHeight = 201;
     }
-    
+
+    @Override
     public void render(PoseStack source, int mouseX, int mouseY, float delta) {
         this.renderBackground(source);
         super.render(source, mouseX, mouseY, delta);
         this.renderTooltip(source, mouseX, mouseY);
     }
 
+    @Override
     protected void renderBg(PoseStack stack, float delta, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
