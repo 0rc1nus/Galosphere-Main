@@ -37,42 +37,16 @@ public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
                         Item item = itemstack.getItem();
                         poseStack.pushPose();
                         poseStack.scale(1.0F, 1.0F, 1.0F);
-//                        this.getParentModel().headParts().forEach(modelPart -> modelPart.translateAndRotate(poseStack));
                         if (!(item instanceof ArmorItem) || ((ArmorItem) item).getSlot() != EquipmentSlot.HEAD) {
                             poseStack.translate(0.0D, 0.35D, 0.3D);
                             if (((AbstractHorseAccessor)entity).getStandAnimO() > 0.0F) {
                                 poseStack.translate(0.0D, 0.35D, 0.35D);
                             }
-//                            poseStack.mulPose(Vector3f.XP.rotationDegrees(-30.0F));
                             poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
                             poseStack.scale(0.625F, -0.625F, -0.625F);
                             Minecraft.getInstance().getItemRenderer().renderStatic(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, entity.level, packedLight, OverlayTexture.NO_OVERLAY, entity.getId() + ItemTransforms.TransformType.HEAD.ordinal());
                         }
                         poseStack.popPose();
-
-//                        poseStack.pushPose();
-//                        poseStack.scale(1.0F, 1.0F, 1.0F);
-//                        poseStack.translate(0.6D, 2.0D, 0.1D);
-//                        poseStack.scale(0.625F, -0.625F, -0.625F);
-//
-//                        poseStack.mulPose(Vector3f.YN.rotationDegrees(90.0F));
-//
-////                        poseStack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
-////                        poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-//                        Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, packedLight);
-//
-//                        poseStack.popPose();
-//
-//                        poseStack.pushPose();
-//
-//                        poseStack.scale(1.0F, 1.0F, 1.0F);
-//                        poseStack.translate(-0.6D, 2.0D, 0.1D);
-//                        poseStack.scale(0.625F, -0.625F, -0.625F);
-//
-//                        poseStack.mulPose(Vector3f.YN.rotationDegrees(-90.0F));
-//
-//                        Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, packedLight);
-//                        poseStack.popPose();
                     }
                 }
             }
