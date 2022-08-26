@@ -66,6 +66,11 @@ public class GBlockLootTables extends BlockLoot {
         dropSlab(GBlocks.ALLURITE_BRICK_SLAB);
         dropSelf(GBlocks.LUMIERE_BRICK_STAIRS.get());
         dropSlab(GBlocks.LUMIERE_BRICK_SLAB);
+        dropSelf(GBlocks.LICHEN_MOSS.get());
+        dropSelf(GBlocks.LICHEN_ROOTS.get());
+        dropSelf(GBlocks.LICHEN_SHELF.get());
+        dropSelf(GBlocks.BOWL_LICHEN.get());
+        dropSelf(GBlocks.CHANDELIER.get());
     }
 
     private void dropSlab(RegistryObject<Block> slab) {

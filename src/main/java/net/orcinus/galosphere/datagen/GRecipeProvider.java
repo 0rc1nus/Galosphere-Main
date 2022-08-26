@@ -142,6 +142,17 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern("SSS")
                 .unlockedBy("has_silver_block", has(ForgeItemTags.SILVER_STORAGE_BLOCKS)).save(consumer);
 
+        ShapedRecipeBuilder
+                .shaped(GBlocks.CHANDELIER.get())
+                .define('#', Tags.Items.INGOTS_COPPER)
+                .define('@', GItems.BOTTLE_OF_FAY.get())
+                .pattern("@ @")
+                .pattern("###")
+                .pattern(" # ")
+                .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_FAY.get()))
+                .save(consumer);
+
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_ALLURITE.get(), GBlocks.ALLURITE_BLOCK.get());
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_LUMIERE.get(), GBlocks.LUMIERE_BLOCK.get());

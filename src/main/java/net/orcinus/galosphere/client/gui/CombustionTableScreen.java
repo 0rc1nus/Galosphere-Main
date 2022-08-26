@@ -13,7 +13,7 @@ import net.orcinus.galosphere.Galosphere;
 
 @OnlyIn(Dist.CLIENT)
 public class CombustionTableScreen extends AbstractContainerScreen<CombustionTableMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/misc/gui/container/combustion_table.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/gui/container/combustion_table.png");
 
     public CombustionTableScreen(CombustionTableMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "waterlogged=false": {
+      "model": "galosphere:block/bowl_lichen"
+    },
+    "waterlogged=true": {
+      "model": "galosphere:block/bowl_lichen"
+    }
+  }
+}

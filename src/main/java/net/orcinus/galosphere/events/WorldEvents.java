@@ -44,5 +44,10 @@ public class WorldEvents {
             mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(GEntityTypes.SPARKLE.get(), 120, 4, 6));
         }
 
+        if (biome == GBiomes.LICHEN_CAVES.get()) {
+            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.BOWL_LICHEN);
+            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LICHEN_VEGETATION);
+        }
+
     }
 }

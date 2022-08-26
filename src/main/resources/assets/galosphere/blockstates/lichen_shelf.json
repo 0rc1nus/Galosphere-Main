@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "galosphere:block/lichen_shelf",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "galosphere:block/lichen_shelf"
+    },
+    "facing=south": {
+      "model": "galosphere:block/lichen_shelf",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "galosphere:block/lichen_shelf",
+      "y": 270
+    }
+  }
+}

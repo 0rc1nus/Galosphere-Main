@@ -39,6 +39,9 @@
     "galosphere:lumiere_cluster",
     "galosphere:raw_silver_block",
     "galosphere:combustion_table",
-    "galosphere:charged_lumiere_block"
+    "galosphere:charged_lumiere_block",
+    "galosphere:allurite_lamp",
+    "galosphere:lumiere_lamp",
+    "galosphere:amethyst_lamp"
   ]
 }

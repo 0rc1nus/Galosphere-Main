@@ -3,6 +3,7 @@ package net.orcinus.galosphere.init;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AmethystBlock;
+import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.OreBlock;
@@ -68,6 +69,11 @@ public class GBlocks {
     public static final RegistryObject<Block> LUMIERE_LAMP = registerBlock("lumiere_lamp", () -> new Block(BlockBehaviour.Properties.of(GMaterials.LUMIERE, MaterialColor.COLOR_YELLOW).lightLevel(state -> 15).strength(0.3F).sound(SoundType.AMETHYST)));
     public static final RegistryObject<Block> LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> COMBUSTION_TABLE = registerBlock("combustion_table", () -> new CombustionTableBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2.5F).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> LICHEN_MOSS = registerBlock("lichen_moss", () -> new LichenMossBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_CYAN).strength(0.1f).sound(SoundType.MOSS).lightLevel(state -> state.getValue(LichenMossBlock.LIT) ? 1 : 0).emissiveRendering((blockState, blockGetter, blockPos) -> blockState.getValue(LichenMossBlock.LIT))));
+    public static final RegistryObject<Block> LICHEN_ROOTS = registerBlock("lichen_roots", () -> new LichenRootsBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT, MaterialColor.TERRACOTTA_CYAN).noCollission().instabreak().sound(SoundType.ROOTS)));
+    public static final RegistryObject<Block> BOWL_LICHEN = registerBlock("bowl_lichen", () -> new LichenMushroomBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_CYAN).instabreak().noCollission().sound(SoundType.FUNGUS)));
+    public static final RegistryObject<Block> LICHEN_SHELF = registerBlock("lichen_shelf", () -> new BaseCoralWallFanBlock(BlockBehaviour.Properties.copy(Blocks.BRAIN_CORAL_WALL_FAN).noCollission().sound(SoundType.WET_GRASS)));
+    public static final RegistryObject<Block> CHANDELIER = registerBlock("chandelier", () -> new ChandelierBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(3.5f).sound(SoundType.LANTERN).lightLevel(blockState -> 15).noOcclusion()));
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier) {
         RegistryObject<B> block = BLOCKS.register(name, supplier);

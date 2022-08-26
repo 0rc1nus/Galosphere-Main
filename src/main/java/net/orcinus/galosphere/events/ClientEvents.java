@@ -19,14 +19,17 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.IllusiveOverlay;
+import net.orcinus.galosphere.client.model.FayModel;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraParticle;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
+import net.orcinus.galosphere.client.renderer.FayRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
+import net.orcinus.galosphere.entities.FayEntity;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GMenuTypes;
@@ -41,6 +44,10 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(GBlocks.ALLURITE_CLUSTER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(GBlocks.LUMIERE_CLUSTER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(GBlocks.WARPED_ANCHOR.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(GBlocks.LICHEN_ROOTS.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(GBlocks.BOWL_LICHEN.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(GBlocks.LICHEN_SHELF.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(GBlocks.CHANDELIER.get(), RenderType.translucent());
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE.get(), CombustionTableScreen::new);
 
@@ -63,12 +70,14 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
+        event.registerLayerDefinition(GModelLayers.FAY, FayModel::createBodyLayer);
         event.registerLayerDefinition(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(GEntityTypes.SPARKLE.get(), SparkleRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.FAY.get(), FayRenderer::new);
         event.registerEntityRenderer(GEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
     }
 

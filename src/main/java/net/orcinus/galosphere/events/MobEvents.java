@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.IBanner;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
+import net.orcinus.galosphere.entities.FayEntity;
 import net.orcinus.galosphere.entities.SparkleEntity;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
@@ -47,6 +48,7 @@ public class MobEvents {
         SpawnPlacements.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules);
 
         event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
+        event.put(GEntityTypes.FAY.get(), FayEntity.createAttributes().build());
     }
 
     @SubscribeEvent
