@@ -2,27 +2,25 @@ package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class PollinatedClusterBlock extends AmethystClusterBlock {
     public static final BooleanProperty POLLINATED = BooleanProperty.create("pollinated");
+    private final Supplier<? extends SimpleParticleType> particleType;
 
-    public PollinatedClusterBlock(Properties properties) {
+    public PollinatedClusterBlock(Supplier<? extends SimpleParticleType> particleType, Properties properties) {
         super(7, 3, properties);
+        this.particleType = particleType;
         this.registerDefaultState(this.defaultBlockState().setValue(POLLINATED, false));
     }
 
@@ -49,10 +47,10 @@ public class PollinatedClusterBlock extends AmethystClusterBlock {
             mut.set(i + Mth.nextInt(random, -10, 10), j - random.nextInt(10), k + Mth.nextInt(random, -10, 10));
             BlockState blockstate = world.getBlockState(mut);
             if (!blockstate.isCollisionShapeFullBlock(world, mut)) {
-                world.addParticle(ParticleTypes.END_ROD, (double) mut.getX() + direction.getStepX() + random.nextDouble(), (double) mut.getY() + direction.getStepY() + random.nextDouble(), (double) mut.getZ() + direction.getStepZ() + random.nextDouble(), velX, velY, velZ);
+                world.addParticle(this.particleType.get(), (double) mut.getX() + direction.getStepX() + random.nextDouble(), (double) mut.getY() + direction.getStepY() + random.nextDouble(), (double) mut.getZ() + direction.getStepZ() + random.nextDouble(), velX, velY, velZ);
             }
             if (random.nextInt(5) == 0) {
-                world.addParticle(ParticleTypes.END_ROD, x + direction.getStepX(), y + direction.getStepY(), z + direction.getStepZ(), velX, velY, velZ);
+                world.addParticle(this.particleType.get(), x + direction.getStepX(), y + direction.getStepY(), z + direction.getStepZ(), velX, velY, velZ);
             }
         }
     }

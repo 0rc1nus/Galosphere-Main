@@ -23,6 +23,7 @@ import net.orcinus.galosphere.client.model.FayModel;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraParticle;
+import net.orcinus.galosphere.client.particles.CrystalRainParticle;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.FayRenderer;
@@ -87,6 +88,8 @@ public class ClientEvents {
         engine.register(GParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
         engine.register(GParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
         engine.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
+        engine.register(GParticleTypes.ALLURITE_RAIN.get(), CrystalRainParticle.Provider::new);
+        engine.register(GParticleTypes.LUMIERE_RAIN.get(), CrystalRainParticle.Provider::new);
     }
 
 }

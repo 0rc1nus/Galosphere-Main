@@ -16,6 +16,8 @@ public class GParticleTypes {
     public static final RegistryObject<SimpleParticleType> AURA_LISTENER = registerParticle("aura_listener", false);
     public static final RegistryObject<SimpleParticleType> SILVER_BOMB = registerParticle("item_silverbomb", false);
     public static final RegistryObject<SimpleParticleType> WARPED = registerParticle("warped", false);
+    public static final RegistryObject<SimpleParticleType> ALLURITE_RAIN = registerParticle("allurite_rain", false);
+    public static final RegistryObject<SimpleParticleType> LUMIERE_RAIN = registerParticle("lumiere_rain", false);
 
     public static RegistryObject<SimpleParticleType> registerParticle(String key, boolean alwaysShow) {
         return PARTICLES.register(key, () -> new SimpleParticleType(alwaysShow));
