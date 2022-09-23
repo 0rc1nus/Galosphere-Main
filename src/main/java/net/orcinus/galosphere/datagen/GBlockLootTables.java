@@ -11,6 +11,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
@@ -66,6 +67,18 @@ public class GBlockLootTables extends BlockLoot {
         this.dropSlab(GBlocks.ALLURITE_BRICK_SLAB);
         this.dropSelf(GBlocks.LUMIERE_BRICK_STAIRS.get());
         this.dropSlab(GBlocks.LUMIERE_BRICK_SLAB);
+        this.dropSelf(GBlocks.LICHEN_MOSS.get());
+        this.dropSelf(GBlocks.LICHEN_ROOTS.get());
+        this.dropSelf(GBlocks.LICHEN_SHELF.get());
+        this.dropSelf(GBlocks.BOWL_LICHEN.get());
+        this.dropSelf(GBlocks.CHANDELIER.get());
+        this.addVinesDroptable(GBlocks.LICHEN_CORDYCEPS.get(), GBlocks.LICHEN_CORDYCEPS_PLANT.get());
+    }
+
+    private void addVinesDroptable(Block block, Block plantBlock) {
+        LootTable.Builder loottable$builder = createSilkTouchOrShearsDispatchTable(block, LootItem.lootTableItem(block).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.33F, 0.55F, 0.77F, 1.0F)));
+        this.add(block, loottable$builder);
+        this.add(plantBlock, loottable$builder);
     }
 
     private void dropSlab(RegistryObject<Block> slab) {

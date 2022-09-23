@@ -1,0 +1,18 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "galosphere:crystal_canyons",
+  "spawners": [
+    {
+      "type": "galosphere:sparkle",
+      "weight": 30,
+      "minCount": 4,
+      "maxCount": 6
+    },
+    {
+      "type": "minecraft:glow_squid",
+      "weight": 10,
+      "minCount": 4,
+      "maxCount": 6
+    }
+  ]
+}

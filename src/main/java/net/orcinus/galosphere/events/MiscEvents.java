@@ -8,9 +8,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -27,17 +29,19 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingGetProjectileEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.api.IBanner;
+import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
+import net.orcinus.galosphere.crafting.LumiereReformingManager;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.WarpedAnchorDispenseItemBehavior;
-import net.orcinus.galosphere.crafting.LumiereReformingManager;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.util.BannerRendererUtil;
@@ -67,11 +71,11 @@ public class MiscEvents {
         BlockPos pos = event.getPos();
         Level world = event.getLevel();
         BlockState state = world.getBlockState(pos);
-        if (player.isShiftKeyDown() && !((IBanner) player).getBanner().isEmpty() && stack.isEmpty()) {
-            ItemStack copy = ((IBanner) player).getBanner();
+        if (player.isShiftKeyDown() && !((BannerAttachable) player).getBanner().isEmpty() && stack.isEmpty()) {
+            ItemStack copy = ((BannerAttachable) player).getBanner();
             player.setItemInHand(hand, copy);
             player.gameEvent(GameEvent.EQUIP, player);
-            ((IBanner) player).setBanner(ItemStack.EMPTY);
+            ((BannerAttachable) player).setBanner(ItemStack.EMPTY);
         }
         if (state.getBlock() == Blocks.COMPOSTER) {
             InteractionHand offHand = InteractionHand.OFF_HAND;
@@ -106,8 +110,9 @@ public class MiscEvents {
         ItemStack stack = event.getItemStack();
         Player player = event.getEntity();
         InteractionHand hand = event.getHand();
+        Level world = event.getLevel();
         BannerRendererUtil util = new BannerRendererUtil();
-        if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
+        if (((BannerAttachable) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
             if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                 player.gameEvent(GameEvent.EQUIP, player);
                 ItemStack copy = stack.copy();
@@ -115,7 +120,7 @@ public class MiscEvents {
                     stack.shrink(1);
                 }
                 copy.setCount(1);
-                ((IBanner) player).setBanner(copy);
+                ((BannerAttachable) player).setBanner(copy);
                 player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1.0F, 1.0F);
                 player.swing(hand);
             }

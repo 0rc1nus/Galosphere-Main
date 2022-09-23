@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.init.GBiomes;
 
 import java.util.function.Consumer;
 
@@ -22,6 +23,7 @@ public class BiomeReagentHandler {
     public static final Climate.Parameter CAVE_BIOME_RANGE = Climate.Parameter.span(0.2F, 0.9F);
 
     public static final ResourceKey<Biome> CRYSTAL_CANYONS = registerResourceKey("crystal_canyons");
+    public static final ResourceKey<Biome> LICHEN_CAVES = registerResourceKey("lichen_caves");
 
     //temperature
     //humidity
@@ -38,6 +40,15 @@ public class BiomeReagentHandler {
             CAVE_BIOME_RANGE,
             FULL_RANGE,
             0.0F);
+    public static final Climate.ParameterPoint LICHEN_CAVES_PARAMETER = Climate.parameters(
+            FULL_RANGE,
+            FULL_RANGE,
+            Climate.Parameter.span(0.03F, 0.8F),
+            Climate.Parameter.span(-1.0F, -0.2225F),
+            CAVE_BIOME_RANGE,
+            FULL_RANGE,
+            0.0F
+    );
 //    public static final Climate.ParameterPoint CRYSTAL_CANYONS_PARAMETER2 = Climate.parameters(
 //            Climate.Parameter.span(-1.0F, -0.8F),
 //            FULL_RANGE,
@@ -49,24 +60,11 @@ public class BiomeReagentHandler {
 
     public static void init(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer) {
         consumer.accept(Pair.of(CRYSTAL_CANYONS_PARAMETER, CRYSTAL_CANYONS));
+        consumer.accept(Pair.of(LICHEN_CAVES_PARAMETER, LICHEN_CAVES));
     }
 
     private static ResourceKey<Biome> registerResourceKey(String name) {
         return ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Galosphere.MODID, name));
     }
 
-    //if (young1) {
-    //			poseStack.pushPose();
-    //			float f1 = 1.0F / 2.0F;
-    //			poseStack.scale(f1, f1, f1);
-    //			poseStack.translate(0.0D, 1.5F, 5.0F / 16.0F);
-    //			this.headParts().forEach((part) -> {
-    //				part.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-    //			});
-    //			poseStack.popPose();
-    //		} else {
-    //			this.headParts().forEach((part) -> {
-    //				part.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-    //			});
-    //		}
 }

@@ -1,0 +1,15 @@
+{
+  "type": "forge:add_features",
+  "biomes": "galosphere:crystal_canyons",
+  "features": [
+    "galosphere:large_ceiling_allurite_crystals",
+    "galosphere:large_ceiling_lumiere_crystals",
+    "galosphere:allurite_ceiling_crystals",
+    "galosphere:lumiere_ceiling_crystals",
+    "galosphere:large_floor_allurite_crystals",
+    "galosphere:large_floor_lumiere_crystals",
+    "galosphere:allurite_floor_crystals",
+    "galosphere:lumiere_floor_crystals"
+  ],
+  "step": "vegetal_decoration"
+}

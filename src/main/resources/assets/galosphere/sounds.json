@@ -1,0 +1,9 @@
+{
+  "item.bottle_of_fay.pickup": {
+    "sounds": [
+      "galosphere:item/bottle_of_fay/fay_bottle_pickup",
+      "galosphere:item/bottle_of_fay/fay_bottle_pickup2"
+    ],
+    "subtitle": "subtitles.item.galosphere.bottle_of_fay.pickup"
+  }
+}

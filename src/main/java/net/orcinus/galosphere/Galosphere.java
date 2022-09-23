@@ -9,7 +9,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.orcinus.galosphere.events.MiscEvents;
 import net.orcinus.galosphere.events.MobEvents;
 import net.orcinus.galosphere.init.GAttributes;
-import net.orcinus.galosphere.init.GBiomeModifiers;
 import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
@@ -21,6 +20,7 @@ import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
+import net.orcinus.galosphere.init.GVanillaIntegration;
 import net.orcinus.galosphere.util.GalosphereTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,13 +41,13 @@ public class Galosphere {
         GBlocks.BLOCKS.register(modEventBus);
         GBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         GBiomes.BIOMES.register(modEventBus);
-        GBiomeModifiers.BIOME_MODIFIERS.register(modEventBus);
         GEntityTypes.ENTITY_TYPES.register(modEventBus);
         GFeatures.FEATURES.register(modEventBus);
         GItems.ITEMS.register(modEventBus);
         GMobEffects.MOB_EFFECTS.register(modEventBus);
         GMenuTypes.MENU_TYPES.register(modEventBus);
         GParticleTypes.PARTICLES.register(modEventBus);
+
         eventBus.register(this);
         eventBus.register(new MobEvents());
         eventBus.register(new MiscEvents());
@@ -56,6 +56,7 @@ public class Galosphere {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            GVanillaIntegration.init();
             GConfiguredFeatures.init();
             GPlacedFeatures.init();
         });

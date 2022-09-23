@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_features",
+  "biomes": "galosphere:lichen_caves",
+  "features": [
+    "galosphere:bowl_lichen",
+    "galosphere:lichen_caves_vegetation",
+    "galosphere:lichen_cordyceps_column"
+  ],
+  "step": "vegetal_decoration"
+}

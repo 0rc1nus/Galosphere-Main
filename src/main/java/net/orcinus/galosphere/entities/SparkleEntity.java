@@ -2,6 +2,7 @@ package net.orcinus.galosphere.entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -264,6 +265,9 @@ public class SparkleEntity extends Animal {
             return InteractionResult.SUCCESS;
         }
         else if (this.getCrystaltype() == CrystalType.NONE && stack.is(GItemTags.SPARKLE_TEMPT_ITEMS)) {
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
             this.setGrowthTicks(this.getGrowthTicks() - Mth.nextInt(random, 20, 40));
             return InteractionResult.SUCCESS;
         }

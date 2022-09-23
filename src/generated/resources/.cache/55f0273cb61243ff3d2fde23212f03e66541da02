@@ -1,6 +1,6 @@
-// 1.19	2022-07-24T07:30:56.0019998	Tags for minecraft:worldgen/biome
-4d7762fb2f561bc8a98501832f6dfd93a999427a data/forge/tags/worldgen/biome/is_underground.json
-4d7762fb2f561bc8a98501832f6dfd93a999427a data/minecraft/tags/worldgen/biome/has_structure/mineshaft.json
-4d7762fb2f561bc8a98501832f6dfd93a999427a data/minecraft/tags/worldgen/biome/has_structure/ruined_portal_standard.json
-4d7762fb2f561bc8a98501832f6dfd93a999427a data/minecraft/tags/worldgen/biome/is_overworld.json
-4d7762fb2f561bc8a98501832f6dfd93a999427a data/minecraft/tags/worldgen/biome/stronghold_biased_to.json
+// 1.19.1	2022-08-17T14:51:18.5617168	Tags for minecraft:worldgen/biome
+aa86b3b673675a7bdc843bf15852883944f66c10 data/forge/tags/worldgen/biome/is_underground.json
+aa86b3b673675a7bdc843bf15852883944f66c10 data/minecraft/tags/worldgen/biome/has_structure/mineshaft.json
+aa86b3b673675a7bdc843bf15852883944f66c10 data/minecraft/tags/worldgen/biome/has_structure/ruined_portal_standard.json
+aa86b3b673675a7bdc843bf15852883944f66c10 data/minecraft/tags/worldgen/biome/is_overworld.json
+aa86b3b673675a7bdc843bf15852883944f66c10 data/minecraft/tags/worldgen/biome/stronghold_biased_to.json

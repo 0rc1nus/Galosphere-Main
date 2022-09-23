@@ -29,8 +29,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.api.IBanner;
+import net.orcinus.galosphere.api.BannerAttachable;
+import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
+import net.orcinus.galosphere.entities.FayEntity;
 import net.orcinus.galosphere.entities.SparkleEntity;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
@@ -46,6 +48,7 @@ public class MobEvents {
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
         SpawnPlacements.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules);
         event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
+        event.put(GEntityTypes.FAY.get(), FayEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -60,10 +63,10 @@ public class MobEvents {
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity livingEntity = event.getEntity();
         if (livingEntity instanceof Horse horse) {
-            if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-                ItemStack copy = ((IBanner) horse).getBanner();
+            if (!((BannerAttachable)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
+                ItemStack copy = ((BannerAttachable) horse).getBanner();
                 horse.spawnAtLocation(copy);
-                ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
             }
         }
     }
@@ -103,7 +106,7 @@ public class MobEvents {
         BannerRendererUtil util = new BannerRendererUtil();
         if (target instanceof Horse horse) {
             if (horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-                if (((IBanner) horse).getBanner().isEmpty()) {
+                if (((BannerAttachable) horse).getBanner().isEmpty()) {
                     if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                         if (!horse.level.isClientSide()) {
                             event.setCanceled(true);
@@ -114,7 +117,7 @@ public class MobEvents {
                             copy.setCount(1);
                             horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
                             horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
-                            ((IBanner) horse).setBanner(copy);
+                            ((BannerAttachable) horse).setBanner(copy);
                             player.swing(hand);
                         }
                     }
@@ -122,11 +125,11 @@ public class MobEvents {
                     if (player.isShiftKeyDown() && stack.isEmpty()) {
                         if (!horse.level.isClientSide()) {
                             event.setCanceled(true);
-                            ItemStack copy = ((IBanner) horse).getBanner();
+                            ItemStack copy = ((BannerAttachable) horse).getBanner();
                             player.setItemInHand(hand, copy);
                             horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
                             horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
-                            ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                            ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
                         }
                     }
                 }
@@ -137,13 +140,13 @@ public class MobEvents {
     @SubscribeEvent
     public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity instanceof IBanner bannerEntity) {
+        if (entity instanceof BannerAttachable bannerEntity) {
             if (!bannerEntity.getBanner().isEmpty()) {
                 if (entity instanceof Horse horse) {
-                    if (!((IBanner)horse).getBanner().isEmpty() && !horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-                        ItemStack copy = ((IBanner) horse).getBanner();
+                    if (!((BannerAttachable)horse).getBanner().isEmpty() && !horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
+                        ItemStack copy = ((BannerAttachable) horse).getBanner();
                         horse.spawnAtLocation(copy);
-                        ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                        ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
                     }
                 } else {
                     if (!entity.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
@@ -152,6 +155,11 @@ public class MobEvents {
                         bannerEntity.setBanner(ItemStack.EMPTY);
                     }
                 }
+            }
+        }
+        if (entity.isAlive() && entity instanceof GoldenBreath goldenBreath) {
+            if (goldenBreath.getGoldenAirSupply() > 0) {
+                goldenBreath.setGoldenAirSupply(goldenBreath.decreaseGoldenAirSupply(entity, (int) goldenBreath.getGoldenAirSupply()));
             }
         }
     }

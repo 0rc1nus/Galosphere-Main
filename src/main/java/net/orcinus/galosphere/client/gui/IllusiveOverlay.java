@@ -23,7 +23,7 @@ public class IllusiveOverlay {
     private static final ResourceLocation GALOSPHERE_ICONS = new ResourceLocation(Galosphere.MODID, "textures/gui/galosphere_icons.png");
 
     @SubscribeEvent(priority = EventPriority.LOW)
-    public void onPostRender(RenderGuiOverlayEvent.Pre event) {
+    public void onPreRender(RenderGuiOverlayEvent.Pre event) {
         if (event.isCanceled()) return;
 
         Minecraft mc = Minecraft.getInstance();

@@ -55,6 +55,7 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem("amethyst_lamp");
         blockItem("allurite_lamp");
         blockItem("lumiere_lamp");
+        blockItem("lichen_moss");
         item("silver_ingot");
         item("allurite_shard");
         item("lumiere_shard");
@@ -67,8 +68,16 @@ public class GItemModelProvider extends ItemModelProvider {
         item("sterling_boots");
         item("sterling_horse_armor");
         item("icon_item");
+        item("bottle_of_fay");
+        item("chandelier");
+        item("lichen_cordyceps");
+        item("golden_lichen_cordyceps");
+        itemWithBlockDirectory("lichen_roots");
+        itemWithBlockDirectory("bowl_lichen");
+        itemWithBlockDirectory("lichen_shelf");
 
         spawnEggItem("sparkle");
+        spawnEggItem("fay");
     }
 
     private void spawnEggItem(String entityName) {
@@ -77,6 +86,10 @@ public class GItemModelProvider extends ItemModelProvider {
 
     private void blockItem(String parent) {
         withExistingParent(parent, modLoc("block/" + parent));
+    }
+
+    private void itemWithBlockDirectory(String parent) {
+        withExistingParent(parent, new ResourceLocation("item/generated")).texture("layer0", new ResourceLocation(Galosphere.MODID, "block/" + parent));
     }
 
     private void item(String parent) {

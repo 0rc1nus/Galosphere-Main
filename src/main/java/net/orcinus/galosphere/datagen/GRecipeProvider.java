@@ -81,6 +81,24 @@ public class GRecipeProvider extends RecipeProvider {
         shaplessOne(consumer, GItems.RAW_SILVER.get(), GBlocks.RAW_SILVER_BLOCK.get().asItem(), 9);
 
         ShapedRecipeBuilder
+                .shaped(GItems.GOLDEN_LICHEN_CORDYCEPS.get())
+                .define('#', Tags.Items.NUGGETS_GOLD)
+                .define('@', GItems.LICHEN_CORDYCEPS.get())
+                .pattern("###")
+                .pattern("#@#")
+                .pattern("###")
+                .unlockedBy("has_lichen_cordyceps", has(GItems.LICHEN_CORDYCEPS.get())).save(consumer);
+
+        ShapedRecipeBuilder
+                .shaped(GBlocks.CHANDELIER.get())
+                 .define('#', Tags.Items.INGOTS_COPPER)
+                 .define('@', GItems.BOTTLE_OF_FAY.get())
+                 .pattern("@ @")
+                 .pattern("###")
+                 .pattern(" # ")
+                 .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER)).unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_FAY.get())).save(consumer);
+
+        ShapedRecipeBuilder
                 .shaped(GBlocks.COMBUSTION_TABLE.get())
                 .define('#', ItemTags.PLANKS)
                 .define('@', ForgeItemTags.SILVER_INGOT)

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:ingots/copper"
+    },
+    "@": {
+      "item": "galosphere:bottle_of_fay"
+    }
+  },
+  "pattern": [
+    "@ @",
+    "###",
+    " # "
+  ],
+  "result": {
+    "item": "galosphere:chandelier"
+  }
+}

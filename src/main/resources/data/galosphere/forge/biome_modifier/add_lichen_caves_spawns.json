@@ -1,0 +1,12 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "galosphere:lichen_caves",
+  "spawners": [
+    {
+      "type": "galosphere:fay",
+      "weight": 20,
+      "minCount": 8,
+      "maxCount": 8
+    }
+  ]
+}
