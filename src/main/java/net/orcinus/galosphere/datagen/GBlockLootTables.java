@@ -1,17 +1,21 @@
 package net.orcinus.galosphere.datagen;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.Direction;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
@@ -73,6 +77,26 @@ public class GBlockLootTables extends BlockLoot {
         this.dropSelf(GBlocks.BOWL_LICHEN.get());
         this.dropSelf(GBlocks.CHANDELIER.get());
         this.addVinesDroptable(GBlocks.LICHEN_CORDYCEPS.get(), GBlocks.LICHEN_CORDYCEPS_PLANT.get());
+        this.add(GBlocks.GLOW_INK_CLUMPS.get(), GBlockLootTables::createMultifaceBlockDrops);
+    }
+
+    public static LootTable.Builder createMultifaceBlockDrops(Block block) {
+        return LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .add(
+                                        applyExplosionDecay(block,
+                                                LootItem.lootTableItem(block)
+                                                        .apply(Direction.values(), direction ->
+                                                                SetItemCountFunction.setCount(ConstantValue.exactly(1.0f), true)
+                                                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(
+                                                                                StatePropertiesPredicate.Builder.properties()
+                                                                                        .hasProperty(MultifaceBlock.getFaceProperty(direction), true)
+                                                                        ))
+                                                        )
+                                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(-1.0f), true)))
+                                )
+                );
     }
 
     private void addVinesDroptable(Block block, Block plantBlock) {

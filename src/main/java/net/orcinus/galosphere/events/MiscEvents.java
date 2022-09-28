@@ -59,6 +59,22 @@ public class MiscEvents {
     }
 
     @SubscribeEvent
+    public void onLivingProjectile(LivingGetProjectileEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (!ProjectileWeaponItem.getHeldProjectile(entity, stack -> stack.getItem() == GItems.GLOW_FLARE.get()).isEmpty() && entity instanceof Player) {
+            event.setProjectileItemStack(new ItemStack(GItems.GLOW_FLARE.get()));
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingStoppedUsingItem(LivingEntityUseItemEvent.Stop event) {
+        ItemStack projectileStack = ProjectileWeaponItem.getHeldProjectile(event.getEntity(), stack -> stack.getItem() == GItems.GLOW_FLARE.get());
+        if (!projectileStack.isEmpty() && (event.getEntity() instanceof Player player && !player.getAbilities().instabuild)) {
+            projectileStack.shrink(1);
+        }
+    }
+
+    @SubscribeEvent
     public void onResourceLoad(AddReloadListenerEvent event) {
         event.addListener(new LumiereReformingManager());
     }

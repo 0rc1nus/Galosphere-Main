@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -33,21 +34,19 @@ public class GoldenBreathOverlay {
         if (player == null) return;
 
         if (event.getOverlay().id().equals(VanillaGuiOverlay.PLAYER_HEALTH.id())) {
-            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderTexture(0, GALOSPHERE_ICONS);
-            RenderSystem.enableBlend();
-            this.renderGoldenAirSupply(matrixStack, mc.gui, mc.player, mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
-            RenderSystem.disableBlend();
+            if (!Minecraft.getInstance().options.hideGui && Minecraft.getInstance().gameMode.canHurtPlayer() && Minecraft.getInstance().getCameraEntity() instanceof Player) {
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                RenderSystem.setShaderTexture(0, GALOSPHERE_ICONS);
+                RenderSystem.enableBlend();
+                this.renderGoldenAirSupply(matrixStack, mc.gui, mc.player, mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
+                RenderSystem.disableBlend();
+            }
         }
     }
 
     private void renderGoldenAirSupply(PoseStack poseStack, Gui gui, Player player, int width, int height) {
         if (player == null) return;
-
-        if (gui instanceof ForgeGui forgeGui && !forgeGui.getMinecraft().options.hideGui && forgeGui.shouldDrawSurvivalElements()) {
-            return;
-        }
 
         int n = width / 2 + 91;
         int o = height - 39;

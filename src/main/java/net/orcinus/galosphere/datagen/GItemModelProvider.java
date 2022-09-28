@@ -72,12 +72,16 @@ public class GItemModelProvider extends ItemModelProvider {
         item("chandelier");
         item("lichen_cordyceps");
         item("golden_lichen_cordyceps");
+        item("glow_flare");
         itemWithBlockDirectory("lichen_roots");
         itemWithBlockDirectory("bowl_lichen");
         itemWithBlockDirectory("lichen_shelf");
+        itemWithBlockDirectory("glow_ink_clumps");
 
         spawnEggItem("sparkle");
         spawnEggItem("fay");
+
+        withExistingParent("crossbow_glow_flare", new ResourceLocation("item/crossbow")).texture("layer0", new ResourceLocation(Galosphere.MODID, "item/crossbow_glow_flare"));
     }
 
     private void spawnEggItem(String entityName) {

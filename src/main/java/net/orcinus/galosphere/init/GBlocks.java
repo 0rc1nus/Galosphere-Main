@@ -23,6 +23,7 @@ import net.orcinus.galosphere.blocks.CordycepsBlock;
 import net.orcinus.galosphere.blocks.CordycepsPlantBlock;
 import net.orcinus.galosphere.blocks.CrystalSlabBlock;
 import net.orcinus.galosphere.blocks.CrystalStairsBlock;
+import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
 import net.orcinus.galosphere.blocks.LichenMossBlock;
 import net.orcinus.galosphere.blocks.LichenMushroomBlock;
 import net.orcinus.galosphere.blocks.LichenRootsBlock;
@@ -88,6 +89,7 @@ public class GBlocks {
     public static final RegistryObject<Block> CHANDELIER = registerBlock("chandelier", () -> new ChandelierBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(3.5f).sound(SoundType.LANTERN).lightLevel(blockState -> 15).noOcclusion()));
     public static final RegistryObject<Block> LICHEN_CORDYCEPS = registerNoTabBlock("lichen_cordyceps", () -> new CordycepsBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_CYAN).lightLevel(state -> state.getValue(CordycepsBlock.BULB) ? 8 : 0).noCollission().sound(SoundType.ROOTS)));
     public static final RegistryObject<Block> LICHEN_CORDYCEPS_PLANT = registerNoTabBlock("lichen_cordyceps_plant", () -> new CordycepsPlantBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_CYAN).instabreak().noCollission().sound(SoundType.ROOTS)));
+    public static final RegistryObject<Block> GLOW_INK_CLUMPS = registerBlock("glow_ink_clumps", () -> new GlowInkClumpsBlock(BlockBehaviour.Properties.of(Material.SCULK, MaterialColor.COLOR_LIGHT_BLUE).noCollission().strength(0.2F).sound(SoundType.GLOW_LICHEN).lightLevel(GlowInkClumpsBlock.emission(7, 2))));
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier) {
         RegistryObject<B> block = BLOCKS.register(name, supplier);

@@ -1,4 +1,4 @@
-// 1.19.1	2022-09-07T16:21:39.0977147	LootTables
+// 1.19.1	2022-09-23T14:56:05.713661	LootTables
 ccf2377cbdc0c444b94a2ac316fbfe7db63ed3e1 data/galosphere/loot_tables/blocks/allurite_block.json
 58a66a9e7f04f398efbbb156595f9f563b15e68a data/galosphere/loot_tables/blocks/allurite_bricks.json
 34e8f20d584efb863b9ba7eb090bd985f2366d07 data/galosphere/loot_tables/blocks/allurite_brick_slab.json
@@ -22,6 +22,7 @@ e4ccd4c18e0336b5e7441eb979f2fa0fad0d03aa data/galosphere/loot_tables/blocks/chis
 379b68fcde70762d0c1559ca46c2fa2ebaedd051 data/galosphere/loot_tables/blocks/chiseled_lumiere.json
 34df8a95eee403eb68358da7f9217e54d3d82e60 data/galosphere/loot_tables/blocks/combustion_table.json
 5b7cb76a2299d2309de0ef5a3aafc2906fe1e2d1 data/galosphere/loot_tables/blocks/deepslate_silver_ore.json
+e8a275185420e6c2214e07afe324aecd402163db data/galosphere/loot_tables/blocks/glow_ink_clumps.json
 95f30163edab5a53d09de56d9a5831d9f7eb0416 data/galosphere/loot_tables/blocks/lichen_cordyceps.json
 95f30163edab5a53d09de56d9a5831d9f7eb0416 data/galosphere/loot_tables/blocks/lichen_cordyceps_plant.json
 43f980ff3707221e72551f685f977fd6cc32335e data/galosphere/loot_tables/blocks/lichen_moss.json

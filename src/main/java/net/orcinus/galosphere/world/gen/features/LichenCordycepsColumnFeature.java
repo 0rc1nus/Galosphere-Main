@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.orcinus.galosphere.blocks.CordycepsBlock;
 import net.orcinus.galosphere.init.GBlocks;
 
-public class LichenCordycepsColumnFeature  extends Feature<NoneFeatureConfiguration> {
+public class LichenCordycepsColumnFeature extends Feature<NoneFeatureConfiguration> {
 
     public LichenCordycepsColumnFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
@@ -33,7 +33,7 @@ public class LichenCordycepsColumnFeature  extends Feature<NoneFeatureConfigurat
             for (int i = 0; i <= length; ++i) {
                 if (world.isStateAtPosition(mutableBlockPos, DripstoneUtils::isEmptyOrWater)) {
                     if (i == length || !world.isEmptyBlock(mutableBlockPos.above())) {
-                        world.setBlock(mutableBlockPos, GBlocks.LICHEN_CORDYCEPS.get().defaultBlockState().setValue(CordycepsBlock.BULB, true).setValue(GrowingPlantHeadBlock.AGE, Mth.nextInt(random, 17, 25)), 2);
+                        world.setBlock(mutableBlockPos, GBlocks.LICHEN_CORDYCEPS.get().defaultBlockState().setValue(CordycepsBlock.BULB, random.nextBoolean()).setValue(GrowingPlantHeadBlock.AGE, Mth.nextInt(random, 17, 25)), 2);
                         break;
                     }
                     world.setBlock(mutableBlockPos, GBlocks.LICHEN_CORDYCEPS_PLANT.get().defaultBlockState(), 2);

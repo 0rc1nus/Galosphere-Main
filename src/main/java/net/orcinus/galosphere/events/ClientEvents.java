@@ -1,12 +1,14 @@
 package net.orcinus.galosphere.events;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.HorseRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CrossbowItem;
@@ -29,9 +31,11 @@ import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraParticle;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
+import net.orcinus.galosphere.client.particles.FayDustParticle;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.FayRenderer;
+import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
@@ -53,6 +57,8 @@ public class ClientEvents {
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         eventBus.register(new IllusiveOverlay());
         eventBus.register(new GoldenBreathOverlay());
+
+        event.enqueueWork(() -> ItemProperties.register(Items.CROSSBOW, new ResourceLocation(Galosphere.MODID, "glow_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.GLOW_FLARE.get()) ? 1.0F : 0.0F));
 
     }
 
@@ -85,6 +91,7 @@ public class ClientEvents {
         event.registerEntityRenderer(GEntityTypes.SPARKLE.get(), SparkleRenderer::new);
         event.registerEntityRenderer(GEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
         event.registerEntityRenderer(GEntityTypes.FAY.get(), FayRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.GLOW_FLARE.get(), GlowFlareEntityRenderer::new);
     }
 
     @SubscribeEvent
@@ -94,6 +101,7 @@ public class ClientEvents {
         event.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
         event.register(GParticleTypes.ALLURITE_RAIN.get(), CrystalRainParticle.Provider::new);
         event.register(GParticleTypes.LUMIERE_RAIN.get(), CrystalRainParticle.Provider::new);
+        event.register(GParticleTypes.FAY_DUST.get(), FayDustParticle.FayDustProvider::new);
     }
 
 }

@@ -2,7 +2,6 @@ package net.orcinus.galosphere.init;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -39,6 +38,7 @@ public class GItems {
     public static final RegistryObject<Item> BOTTLE_OF_FAY = ITEMS.register("bottle_of_fay", () -> new PixieBottleItem(new Item.Properties().stacksTo(16).tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> LICHEN_CORDYCEPS = ITEMS.register("lichen_cordyceps", () -> new LichenCordycepsItem(GBlocks.LICHEN_CORDYCEPS.get(), new Item.Properties().food(GFoods.LICHEN_CORDYCEPS).tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> GOLDEN_LICHEN_CORDYCEPS = ITEMS.register("golden_lichen_cordyceps", () -> new GoldenLichenCordycepsItem(new Item.Properties().food(GFoods.GOLDEN_LICHEN_CORDYCEPS).tab(Galosphere.GALOSPHERE)));
+    public static final RegistryObject<Item> GLOW_FLARE = registerBaseItem("glow_flare");
 
     public static RegistryObject<Item> registerBaseItem(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties().tab(Galosphere.GALOSPHERE)));

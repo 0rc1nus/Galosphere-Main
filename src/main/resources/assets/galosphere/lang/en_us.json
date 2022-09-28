@@ -79,6 +79,8 @@
   "item.galosphere.bottle_of_fay": "Bottle of Fay",
   "item.galosphere.lichen_cordyceps": "Lichen Cordyceps",
   "item.galosphere.golden_lichen_cordyceps": "Golden Lichen Cordyceps",
+  "item.galosphere.glow_flare": "Glow Flare",
+  "item.galosphere.fay_bounded_spyglass": "Fay Bounded Spyglass",
   "item.galosphere.sparkle_spawn_egg": "Sparkle Spawn Egg",
   "item.galosphere.fay_spawn_egg": "Fay Spawn Egg",
   "item.galosphere.silver_bomb.duration": "Duration:",
@@ -88,6 +90,7 @@
   "entity.galosphere.silver_bomb": "Silver Bomb",
   "entity.galosphere.sparkle": "Sparkle",
   "entity.galosphere.fay": "Fay",
+  "entity.galosphere.glow_flare": "Glow Flare",
   "effect.galosphere.illusive": "Illusive",
   "container.galosphere.combustion_table": "Combustion Table"
 }

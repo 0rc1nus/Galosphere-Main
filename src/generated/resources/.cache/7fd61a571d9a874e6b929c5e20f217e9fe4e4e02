@@ -1,4 +1,4 @@
-// 1.19.1	2022-09-18T15:49:39.6859121	Item Models: galosphere
+// 1.19.1	2022-09-24T21:43:20.7540042	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -22,8 +22,11 @@ f07e01d1fde4d91096693930382a59951365ed6d assets/galosphere/models/item/bowl_lich
 9eb1e8b37a1b23ba07ff84f01e46dfbe795adf0a assets/galosphere/models/item/chiseled_amethyst.json
 167c731dec70783f25a99d26a97c63737f50c5f6 assets/galosphere/models/item/chiseled_lumiere.json
 64f451e4ed9eec09789d2750141384a7a63959e1 assets/galosphere/models/item/combustion_table.json
+3dae1bf292f1b05b2f1610706643d0f332a6acab assets/galosphere/models/item/crossbow_glow_flare.json
 0831c5d1bb3f2b649c55e6815c5c67e035181002 assets/galosphere/models/item/deepslate_silver_ore.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/galosphere/models/item/fay_spawn_egg.json
+77485e2124d67c688123e6f8c3c103d416907145 assets/galosphere/models/item/glow_flare.json
+104da9a53213e771877b81309037af2390932b30 assets/galosphere/models/item/glow_ink_clumps.json
 45babef5bcaaf20ddf5be9f65ccc3b60ad6cf911 assets/galosphere/models/item/golden_lichen_cordyceps.json
 d24f38f5f10466f6ed4908249a0ffa15b596f219 assets/galosphere/models/item/icon_item.json
 95523a21b1c387065b6541f3598ebd760fa28d22 assets/galosphere/models/item/lichen_cordyceps.json

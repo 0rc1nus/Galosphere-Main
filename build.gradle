@@ -96,6 +96,8 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    implementation fg.deobf("curse.maven:savage-and-ravage-381736:3926547")
+    implementation fg.deobf("curse.maven:blueprint-382216:3971299")
 }
 
 jar {
