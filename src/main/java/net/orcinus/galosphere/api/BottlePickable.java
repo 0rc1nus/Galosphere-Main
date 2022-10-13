@@ -2,7 +2,7 @@ package net.orcinus.galosphere.api;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.orcinus.galosphere.entities.FayEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 
 public interface BottlePickable {
 
@@ -10,7 +10,7 @@ public interface BottlePickable {
 
     void setFromBottle(boolean fromBottle);
 
-    static void saveDefaultDataFromBottleTag(FayEntity fay, ItemStack stack) {
+    static void saveDefaultDataFromBottleTag(SpectreEntity fay, ItemStack stack) {
         CompoundTag compoundTag = stack.getOrCreateTag();
         if (fay.hasCustomName()) {
             stack.setHoverName(fay.getCustomName());
@@ -36,7 +36,7 @@ public interface BottlePickable {
         compoundTag.putFloat("Health", fay.getHealth());
     }
 
-    static void loadDefaultDataFromBottleTag(FayEntity fay, CompoundTag compoundTag) {
+    static void loadDefaultDataFromBottleTag(SpectreEntity fay, CompoundTag compoundTag) {
         if (compoundTag.contains("CanBeManipulated")) {
             fay.setCanBeManipulated(compoundTag.getBoolean("CanBeManipulated"));
         }

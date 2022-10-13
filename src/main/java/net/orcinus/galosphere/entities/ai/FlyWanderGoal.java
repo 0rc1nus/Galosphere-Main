@@ -4,15 +4,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.entities.FayEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
 public class FlyWanderGoal extends Goal {
-    private final FayEntity fay;
+    private final SpectreEntity fay;
 
-    public FlyWanderGoal(FayEntity fay) {
+    public FlyWanderGoal(SpectreEntity fay) {
         this.fay = fay;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }

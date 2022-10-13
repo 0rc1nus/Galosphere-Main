@@ -22,7 +22,7 @@ public class SpawnPlacementsMixin {
     @Inject(at = @At("TAIL"), method = "<clinit>")
     private static void G$init(CallbackInfo ci) {
         DATA_BY_TYPE.put(GEntityTypes.SPARKLE, new SpawnPlacements.Data(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnPlacements.Type.ON_GROUND, SparkleEntity::checkSparkleSpawnRules));
-        DATA_BY_TYPE.put(GEntityTypes.FAY, new SpawnPlacements.Data(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnPlacements.Type.ON_GROUND, (entityType, serverLevelAccessor, mobSpawnType, blockPos, randomSource) -> serverLevelAccessor.getBlockState(blockPos.below()).isValidSpawn(serverLevelAccessor, blockPos.below(), entityType)));
+        DATA_BY_TYPE.put(GEntityTypes.SPECTRE, new SpawnPlacements.Data(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnPlacements.Type.ON_GROUND, (entityType, serverLevelAccessor, mobSpawnType, blockPos, randomSource) -> serverLevelAccessor.getBlockState(blockPos.below()).isValidSpawn(serverLevelAccessor, blockPos.below(), entityType)));
     }
 
 }

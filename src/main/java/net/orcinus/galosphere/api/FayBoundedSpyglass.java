@@ -3,7 +3,7 @@ package net.orcinus.galosphere.api;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.orcinus.galosphere.entities.FayEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GItems;
 
 public interface FayBoundedSpyglass {
@@ -17,7 +17,7 @@ public interface FayBoundedSpyglass {
         return compoundtag != null && (compoundtag.contains("FayBoundId") && compoundtag.contains("FayBoundUUID"));
     }
 
-    static void addFayBoundedTags(FayEntity fay, CompoundTag compoundTag) {
+    static void addFayBoundedTags(SpectreEntity fay, CompoundTag compoundTag) {
         compoundTag.putInt("FayBoundId", fay.getId());
         compoundTag.putUUID("FayBoundUUID", fay.getUUID());
     }

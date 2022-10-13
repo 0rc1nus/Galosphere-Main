@@ -50,12 +50,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-public class FayEntity extends PathfinderMob implements FlyingAnimal, BottlePickable {
-    private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(FayEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    private static final EntityDataAccessor<Boolean> CAN_BE_MANIPULATED = SynchedEntityData.defineId(FayEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(FayEntity.class, EntityDataSerializers.BOOLEAN);
+public class SpectreEntity extends PathfinderMob implements FlyingAnimal, BottlePickable {
+    private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Boolean> CAN_BE_MANIPULATED = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public FayEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
+    public SpectreEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
     }

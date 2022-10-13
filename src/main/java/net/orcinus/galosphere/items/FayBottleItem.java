@@ -17,7 +17,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.orcinus.galosphere.api.BottlePickable;
-import net.orcinus.galosphere.entities.FayEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GEntityTypes;
 
 public class FayBottleItem extends Item {
@@ -41,11 +41,11 @@ public class FayBottleItem extends Item {
             if (!playerEntity.getInventory().add(new ItemStack(Items.GLASS_BOTTLE))) {
                 playerEntity.drop(new ItemStack(Items.GLASS_BOTTLE), false);
             }
-            FayEntity fay = GEntityTypes.FAY.create(world);
+            SpectreEntity fay = GEntityTypes.SPECTRE.create(world);
             fay.setPos(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
             world.playSound(null, blockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.NEUTRAL, 1.0F, 1.0F);
             Entity entity = fay.getType().spawn(serverWorld, stack, null, blockPos, MobSpawnType.SPAWN_EGG, true, false);
-            if (entity instanceof FayEntity fay1) {
+            if (entity instanceof SpectreEntity fay1) {
                 BottlePickable.loadDefaultDataFromBottleTag(fay1, compoundTag);
                 fay1.setFromBottle(true);
             }

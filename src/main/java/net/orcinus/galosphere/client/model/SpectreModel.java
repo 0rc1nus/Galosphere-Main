@@ -13,13 +13,13 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
-import net.orcinus.galosphere.entities.FayEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 
 @Environment(EnvType.CLIENT)
-public class FayModel<T extends FayEntity> extends EntityModel<T> {
+public class SpectreModel<T extends SpectreEntity> extends EntityModel<T> {
     private final ModelPart head;
 
-    public FayModel(ModelPart root) {
+    public SpectreModel(ModelPart root) {
         this.head = root.getChild("head");
     }
 

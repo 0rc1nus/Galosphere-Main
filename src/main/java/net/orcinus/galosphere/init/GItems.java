@@ -35,7 +35,7 @@ public class GItems {
     public static final Item STERLING_BOOTS = register("sterling_boots", new SterlingArmorItem(EquipmentSlot.FEET, new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(1)));
     public static final Item STERLING_HORSE_ARMOR = register("sterling_horse_armor", new GHorseArmorItem(4, "sterling"));
     public static final Item SPARKLE_SPAWN_EGG = register("sparkle_spawn_egg", new SpawnEggItem(GEntityTypes.SPARKLE, 16777215, 2422488, new Item.Properties().tab(Galosphere.GALOSPHERE)));
-    public static final Item FAY_SPAWN_EGG = register("fay_spawn_egg", new SpawnEggItem(GEntityTypes.FAY, 16777215, 10803902, new Item.Properties().tab(Galosphere.GALOSPHERE)));
+    public static final Item FAY_SPAWN_EGG = register("fay_spawn_egg", new SpawnEggItem(GEntityTypes.SPECTRE, 16777215, 10803902, new Item.Properties().tab(Galosphere.GALOSPHERE)));
     public static final Item ICON_ITEM = register("icon_item", new IconItem(new Item.Properties().stacksTo(0)));
     public static final Item BOTTLE_OF_FAY = register("bottle_of_fay", new FayBottleItem(new Item.Properties().stacksTo(16).tab(Galosphere.GALOSPHERE)));
     public static final Item LICHEN_CORDYCEPS = register("lichen_cordyceps", new LichenCordycepsItem(GBlocks.LICHEN_CORDYCEPS, new Item.Properties().food(GFoods.LICHEN_CORDYCEPS).tab(Galosphere.GALOSPHERE)));

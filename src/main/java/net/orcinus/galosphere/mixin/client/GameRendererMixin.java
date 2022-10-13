@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.entities.FayEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.mixin.access.GameRendererAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,7 +16,7 @@ public class GameRendererMixin {
 
     @Inject(at = @At("TAIL"), method = "checkEntityPostEffect")
     private void GE$checkEntityPostEffect(Entity entity, CallbackInfo ci) {
-        if (entity instanceof FayEntity) {
+        if (entity instanceof SpectreEntity) {
             ((GameRendererAccessor)this).callLoadEffect(new ResourceLocation(Galosphere.MODID, "shaders/post/fay.json"));
         }
     }

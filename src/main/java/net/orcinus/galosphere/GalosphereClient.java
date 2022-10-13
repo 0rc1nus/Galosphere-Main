@@ -12,16 +12,16 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Items;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
-import net.orcinus.galosphere.client.model.FayModel;
+import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraParticle;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
-import net.orcinus.galosphere.client.renderer.FayRenderer;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
+import net.orcinus.galosphere.client.renderer.SpectreRenderer;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
@@ -57,11 +57,11 @@ public class GalosphereClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(GEntityTypes.SIVLER_BOMB, context -> new ThrownItemRenderer<>(context, 1.5F, false));
         EntityRendererRegistry.register(GEntityTypes.SPARKLE, SparkleRenderer::new);
-        EntityRendererRegistry.register(GEntityTypes.FAY, FayRenderer::new);
+        EntityRendererRegistry.register(GEntityTypes.SPECTRE, SpectreRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.GLOW_FLARE, GlowFlareEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
-        EntityModelLayerRegistry.registerModelLayer(GModelLayers.FAY, FayModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
 
         GNetwork.init();
