@@ -1,15 +1,14 @@
 package net.orcinus.galosphere.init;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.effects.GMobEffect;
+
+import java.util.Map;
 
 public class GMobEffects {
 

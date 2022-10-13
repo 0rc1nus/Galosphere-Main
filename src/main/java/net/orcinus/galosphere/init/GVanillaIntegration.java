@@ -1,7 +1,6 @@
 package net.orcinus.galosphere.init;
 
 import com.google.common.collect.ImmutableMap;
-
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;

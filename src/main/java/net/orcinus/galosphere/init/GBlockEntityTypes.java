@@ -1,9 +1,6 @@
 package net.orcinus.galosphere.init;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +9,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.blocks.blockentities.AuraRingerBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.GlowInkClumpsBlockEntity;
+
+import java.util.Map;
 
 public class GBlockEntityTypes {
 

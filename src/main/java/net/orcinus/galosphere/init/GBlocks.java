@@ -1,9 +1,6 @@
 package net.orcinus.galosphere.init;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -33,6 +30,8 @@ import net.orcinus.galosphere.blocks.LumiereBlock;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
+
+import java.util.Map;
 
 public class GBlocks {
 

@@ -1,7 +1,5 @@
 package net.orcinus.galosphere.init;
 
-import java.util.List;
-
 import net.minecraft.core.Holder;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -25,6 +23,8 @@ import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
+
+import java.util.List;
 
 public class GConfiguredFeatures {
 

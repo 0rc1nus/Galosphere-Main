@@ -3,12 +3,12 @@ package net.orcinus.galosphere.entities.ai;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.orcinus.galosphere.entities.SparkleEntity;
-import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.EnumSet;
 

@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.orcinus.galosphere.Galosphere;
 
-public class GSounds {
+public class GSoundEvents {
 
     public static final SoundEvent MUSIC_CRYSTAL_CANYONS = register("music.biome.crystal_canyons");
 
@@ -16,4 +16,5 @@ public class GSounds {
 
     public static void init() {
     }
+
 }

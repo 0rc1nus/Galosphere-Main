@@ -26,7 +26,7 @@ import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
-import net.orcinus.galosphere.init.GSounds;
+import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.init.GVanillaIntegration;
 
 public class Galosphere implements ModInitializer {
@@ -35,15 +35,11 @@ public class Galosphere implements ModInitializer {
     public static final String MODID = "galosphere";
     public static final CreativeModeTab GALOSPHERE = FabricItemGroupBuilder.create(Galosphere.id(MODID)).icon(() -> new ItemStack(GItems.ICON_ITEM)).build();
 
-    public static ResourceLocation id(String path) {
-        return new ResourceLocation(MODID, path);
-    }
-
     @Override
     public void onInitialize() {
         GItems.init();
         GBlocks.init();
-        GSounds.init();
+        GSoundEvents.init();
         GAttributes.init();
         GBiomes.init();
         GBiomeModifier.init();
@@ -61,4 +57,9 @@ public class Galosphere implements ModInitializer {
         
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new LumiereReformingManager());
     }
+
+    public static ResourceLocation id(String path) {
+        return new ResourceLocation(MODID, path);
+    }
+
 }

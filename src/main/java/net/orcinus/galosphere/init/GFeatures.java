@@ -1,9 +1,6 @@
 package net.orcinus.galosphere.init;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -16,6 +13,8 @@ import net.orcinus.galosphere.world.gen.features.LichenCordycepsColumnFeature;
 import net.orcinus.galosphere.world.gen.features.LichenMushroomFeature;
 import net.orcinus.galosphere.world.gen.features.LichenPatchFeature;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
+
+import java.util.Map;
 
 public class GFeatures {
 
