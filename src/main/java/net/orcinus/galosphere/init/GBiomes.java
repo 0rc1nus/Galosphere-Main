@@ -1,14 +1,17 @@
 package net.orcinus.galosphere.init;
 
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Maps;
+
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.Biome;
@@ -17,14 +20,13 @@ import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.orcinus.galosphere.Galosphere;
 
-import javax.annotation.Nullable;
-import java.util.Map;
-
 public class GBiomes {
+    
     private static final Map<Biome, ResourceKey<Biome>> BIOME_KEYS = Maps.newLinkedHashMap();
 
     public static final Biome CRYSTAL_CANYONS = GBiomes.crystalCanyons();
     public static final Biome LICHEN_CAVES = GBiomes.lichenCaves();
+
     public static final ResourceKey<Biome> CRYSTAL_CANYONS_KEY = register("crystal_canyons", CRYSTAL_CANYONS);
     public static final ResourceKey<Biome> LICHEN_CAVES_KEY = register("lichen_caves", LICHEN_CAVES);
 
@@ -40,7 +42,7 @@ public class GBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DRIPSTONE_CAVES);
+        Music music = Musics.createGameMusic(GSounds.MUSIC_CRYSTAL_CANYONS);
         return biome(0.5F, 0.5F, mobBuilder, biomeBuilder, music, 4159204);
     }
 
@@ -56,7 +58,7 @@ public class GBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DRIPSTONE_CAVES);
+        Music music = Musics.createGameMusic(GSounds.MUSIC_CRYSTAL_CANYONS);
         return biome(0.5F, 0.5F, mobBuilder, biomeBuilder, music, 4445678);
     }
 
@@ -75,7 +77,7 @@ public class GBiomes {
     }
 
     private static ResourceKey<Biome> register(String string, Biome biome) {
-        ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Galosphere.MODID, string));
+        ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, Galosphere.id(string));
         BIOME_KEYS.put(biome, key);
         return key;
     }
@@ -85,5 +87,4 @@ public class GBiomes {
             Registry.register(BuiltinRegistries.BIOME, BIOME_KEYS.get(biome).location(), biome);
         }
     }
-
 }

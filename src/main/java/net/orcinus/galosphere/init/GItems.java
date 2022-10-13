@@ -1,25 +1,24 @@
 package net.orcinus.galosphere.init;
 
+import java.util.Map;
+
 import com.google.common.collect.Maps;
+
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.items.FayBottleItem;
 import net.orcinus.galosphere.items.FayBoundedSpyglassItem;
 import net.orcinus.galosphere.items.GHorseArmorItem;
 import net.orcinus.galosphere.items.GlowFlareItem;
 import net.orcinus.galosphere.items.GoldenLichenCordycepsItem;
 import net.orcinus.galosphere.items.IconItem;
-import net.orcinus.galosphere.items.FayBottleItem;
 import net.orcinus.galosphere.items.LichenCordycepsItem;
 import net.orcinus.galosphere.items.SilverBombItem;
 import net.orcinus.galosphere.items.SterlingArmorItem;
-
-import java.util.Map;
 
 public class GItems {
 
@@ -46,7 +45,7 @@ public class GItems {
     public static final Item FAY_BOUNDED_SPYGLASS = register("fay_bounded_spyglass", new FayBoundedSpyglassItem(new Item.Properties().stacksTo(1)));
 
     public static <I extends Item> I register(String name, I item) {
-        ITEMS.put(new ResourceLocation(Galosphere.MODID, name), item);
+        ITEMS.put(Galosphere.id(name), item);
         return item;
     }
 

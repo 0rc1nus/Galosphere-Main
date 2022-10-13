@@ -1,6 +1,9 @@
 package net.orcinus.galosphere.init;
 
+import java.util.Map;
+
 import com.google.common.collect.Maps;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -10,8 +13,6 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.blocks.blockentities.AuraRingerBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.GlowInkClumpsBlockEntity;
 
-import java.util.Map;
-
 public class GBlockEntityTypes {
 
     public static final Map<ResourceLocation, BlockEntityType<?>> BLOCK_ENTITIES = Maps.newLinkedHashMap();
@@ -20,7 +21,7 @@ public class GBlockEntityTypes {
     public static final BlockEntityType<GlowInkClumpsBlockEntity> GLOW_INK_CLUMPS = registerBlockEntityType("glow_ink_clumps", FabricBlockEntityTypeBuilder.create(GlowInkClumpsBlockEntity::new, GBlocks.GLOW_INK_CLUMPS).build(null));
 
     public static <T extends BlockEntity, B extends BlockEntityType<T>> B registerBlockEntityType(String name, B type) {
-        BLOCK_ENTITIES.put(new ResourceLocation(Galosphere.MODID, name), type);
+        BLOCK_ENTITIES.put(Galosphere.id(name), type);
         return type;
     }
 

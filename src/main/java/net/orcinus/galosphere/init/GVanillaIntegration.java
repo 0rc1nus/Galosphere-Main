@@ -1,18 +1,11 @@
 package net.orcinus.galosphere.init;
 
 import com.google.common.collect.ImmutableMap;
+
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.Util;
-import net.minecraft.core.BlockSource;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
-import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.entity.projectile.FireworkRocketEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
@@ -20,7 +13,6 @@ import net.orcinus.galosphere.crafting.GlowFlareDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.WarpedAnchorDispenseItemBehavior;
-import net.orcinus.galosphere.entities.GlowFlareEntity;
 
 public class GVanillaIntegration {
 

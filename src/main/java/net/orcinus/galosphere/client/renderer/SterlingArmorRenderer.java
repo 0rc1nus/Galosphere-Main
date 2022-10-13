@@ -2,13 +2,10 @@ package net.orcinus.galosphere.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -18,7 +15,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
@@ -26,7 +22,7 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GModelLayers;
 
 public class SterlingArmorRenderer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/sterling_helmet.png");
+    private static final ResourceLocation TEXTURE = Galosphere.id("textures/entity/sterling_helmet.png");
     private final SterlingArmorModel<T> model;
 
     public SterlingArmorRenderer(RenderLayerParent<T, M> renderLayerParent) {

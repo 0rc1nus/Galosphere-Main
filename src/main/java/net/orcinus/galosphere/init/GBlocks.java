@@ -1,6 +1,9 @@
 package net.orcinus.galosphere.init;
 
+import java.util.Map;
+
 import com.google.common.collect.Maps;
+
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -30,8 +33,6 @@ import net.orcinus.galosphere.blocks.LumiereBlock;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
-
-import java.util.Map;
 
 public class GBlocks {
 
@@ -90,14 +91,14 @@ public class GBlocks {
     public static final Block GLOW_INK_CLUMPS = registerBlock("glow_ink_clumps", new GlowInkClumpsBlock(BlockBehaviour.Properties.of(Material.SCULK, MaterialColor.COLOR_LIGHT_BLUE).noCollission().strength(0.2F).sound(SoundType.GLOW_LICHEN).lightLevel(GlowInkClumpsBlock.emission(7, 2))));
 
     public static <B extends Block> B registerBlock(String name, B block) {
-        ResourceLocation id = new ResourceLocation(Galosphere.MODID, name);
+        ResourceLocation id = Galosphere.id(name);
         BLOCKS.put(id, block);
         GItems.ITEMS.put(id, new BlockItem(block, new Item.Properties().tab(Galosphere.GALOSPHERE)));
         return block;
     }
 
     public static <B extends Block> B registerNoTabBlock(String name, B block) {
-        BLOCKS.put(new ResourceLocation(Galosphere.MODID, name), block);
+        BLOCKS.put(Galosphere.id(name), block);
         return block;
     }
 

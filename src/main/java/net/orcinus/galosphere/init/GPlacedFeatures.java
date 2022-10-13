@@ -1,5 +1,7 @@
 package net.orcinus.galosphere.init;
 
+import java.util.List;
+
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.data.BuiltinRegistries;
@@ -20,8 +22,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import net.orcinus.galosphere.Galosphere;
-
-import java.util.List;
 
 public class GPlacedFeatures {
 
@@ -47,7 +47,7 @@ public class GPlacedFeatures {
     }
 
     public static <FC extends FeatureConfiguration> Holder<PlacedFeature> registerPlacedFeature(String id, Holder<ConfiguredFeature<FC, ?>> feature, List<PlacementModifier> placementModifiers) {
-        ResourceLocation resourceLocation = new ResourceLocation(Galosphere.MODID, id);
+        ResourceLocation resourceLocation = Galosphere.id(id);
         if (BuiltinRegistries.PLACED_FEATURE.keySet().contains(resourceLocation))
             throw new IllegalStateException("Placed Feature ID: \"" + resourceLocation + "\" already exists in the Placed Features registry!");
 

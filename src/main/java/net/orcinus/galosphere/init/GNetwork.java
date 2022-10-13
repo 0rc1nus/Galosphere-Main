@@ -10,8 +10,8 @@ import net.orcinus.galosphere.network.SendPerspectivePacket;
 
 public class GNetwork {
 
-    public static final ResourceLocation SEND_PARTICLES = new ResourceLocation(Galosphere.MODID, "send_particles");
-    public static final ResourceLocation SEND_PERSPECTIVE = new ResourceLocation(Galosphere.MODID, "send_perspective");
+    public static final ResourceLocation SEND_PARTICLES = Galosphere.id("send_particles");
+    public static final ResourceLocation SEND_PERSPECTIVE = Galosphere.id("send_perspective");
 
     @Environment(EnvType.CLIENT)
     public static void init() {

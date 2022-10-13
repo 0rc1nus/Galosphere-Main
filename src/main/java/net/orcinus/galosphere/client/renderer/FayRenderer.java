@@ -13,7 +13,7 @@ import net.orcinus.galosphere.init.GModelLayers;
 
 @Environment(EnvType.CLIENT)
 public class FayRenderer extends MobRenderer<FayEntity, FayModel<FayEntity>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/fay/fay.png");
+    private static final ResourceLocation TEXTURE = Galosphere.id("textures/entity/fay/fay.png");
 
     public FayRenderer(EntityRendererProvider.Context context) {
         super(context, new FayModel<>(context.bakeLayer(GModelLayers.FAY)), 0.1F);

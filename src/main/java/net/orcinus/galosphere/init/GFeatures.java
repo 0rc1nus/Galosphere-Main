@@ -1,6 +1,9 @@
 package net.orcinus.galosphere.init;
 
+import java.util.Map;
+
 import com.google.common.collect.Maps;
+
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -14,8 +17,6 @@ import net.orcinus.galosphere.world.gen.features.LichenMushroomFeature;
 import net.orcinus.galosphere.world.gen.features.LichenPatchFeature;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 
-import java.util.Map;
-
 public class GFeatures {
 
     public static final Map<ResourceLocation, Feature<?>> FEATURES = Maps.newLinkedHashMap();
@@ -26,7 +27,7 @@ public class GFeatures {
     public static final Feature<NoneFeatureConfiguration> LICHEN_CORDYCEPS_COLUMN = registerFeature("lichen_cordyceps_column", new LichenCordycepsColumnFeature(NoneFeatureConfiguration.CODEC));
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> F registerFeature(String name, F feature) {
-        FEATURES.put(new ResourceLocation(Galosphere.MODID, name), feature);
+        FEATURES.put(Galosphere.id(name), feature);
         return feature;
     }
 

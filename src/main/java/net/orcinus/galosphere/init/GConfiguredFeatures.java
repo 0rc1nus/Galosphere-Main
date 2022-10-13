@@ -1,5 +1,7 @@
 package net.orcinus.galosphere.init;
 
+import java.util.List;
+
 import net.minecraft.core.Holder;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -24,8 +26,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 
-import java.util.List;
-
 public class GConfiguredFeatures {
 
     public static void init() {
@@ -47,7 +47,7 @@ public class GConfiguredFeatures {
     public static final Holder<ConfiguredFeature<NoneFeatureConfiguration, ?>> LICHEN_CORDYCEPS = registerConfiguredFeature("lichen_cordyceps", GFeatures.LICHEN_CORDYCEPS_COLUMN, new NoneFeatureConfiguration());
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<FC, ?>> registerConfiguredFeature(String id, F feature, FC featureConfiguration) {
-        ResourceLocation resourceLocation = new ResourceLocation(Galosphere.MODID, id);
+        ResourceLocation resourceLocation = Galosphere.id(id);
 
         if (BuiltinRegistries.CONFIGURED_FEATURE.keySet().contains(resourceLocation))
             throw new IllegalStateException("Placed Feature ID: \"" + resourceLocation + "\" already exists in the Placed Features registry!");
