@@ -14,6 +14,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -150,7 +151,7 @@ public class SparkleEntity extends Animal {
         this.entityData.define(CRYSTAL_TYPE, 0);
     }
 
-    public static boolean checkSparkleSpawnRules(EntityType<? extends LivingEntity> sparkle, LevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
+    public static boolean checkSparkleSpawnRules(EntityType<? extends Entity> sparkle, LevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return world.getBlockState(pos.below()).is(GBlockTags.SPARKLES_SPAWNABLE_ON);
     }
 

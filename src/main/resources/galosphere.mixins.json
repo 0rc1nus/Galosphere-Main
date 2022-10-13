@@ -5,23 +5,34 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ComposterBlockMixin",
+    "CrossbowItemMixin",
     "LightningBoltMixin",
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
     "PlayerMixin",
     "PowderSnowBlockMixin",
+    "SpawnPlacementsMixin",
     "ThrownEnderpearlMixin",
     "access.AbstractHorseAccessor",
-    "access.BreakingItemParticleAccessor",
-    "access.GuiAccessor",
+    "access.FireworkRocketEntityAccessor",
     "access.LightningBoltAccessor",
-    "access.LivingEntityAccessor",
-    "access.SpellParticleAccessor"
+    "access.LivingEntityAccessor"
   ],
   "client": [
+    "access.BreakingItemParticleAccessor",
+    "access.GameRendererAccessor",
+    "access.GuiAccessor",
+    "access.PlayerItemInHandLayerAccessor",
+    "access.SpellParticleAccessor",
     "client.ArmorStandRendererMixin",
+    "client.GameRendererMixin",
     "client.GuiMixin",
     "client.HorseRendererMixin",
+    "client.ItemModelShaperMixin",
+    "client.ItemRendererMixin",
+    "client.LevelRendererMixin",
+    "client.MultiPlayerGameModeMixin",
+    "client.PlayerItemInHandLayerMixin",
     "client.PlayerRendererMixin"
   ],
   "injectors": {

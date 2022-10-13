@@ -15,12 +15,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ArmorStandRendererMixin extends LivingEntityRenderer<ArmorStand, ArmorStandArmorModel> {
 
     @Inject(at = @At("RETURN"), method = "<init>")
-    public void onConstruct (EntityRendererProvider.Context ctx, CallbackInfo cbi) {
+    public void onConstruct(EntityRendererProvider.Context ctx, CallbackInfo cbi) {
         addLayer(new SterlingArmorRenderer<>(this));
     }
-
 
     private ArmorStandRendererMixin(EntityRendererProvider.Context context, ArmorStandArmorModel entityModel, float f){
         super(context, entityModel, f);
     }
+
 }

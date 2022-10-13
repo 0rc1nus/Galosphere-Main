@@ -18,14 +18,10 @@ import net.minecraft.world.level.material.Fluids;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
-    //-53648423032165391
-    //-2978 22 -2718
-
-    //6208361605178432479
-    //-795 -13 9216
 
     public CrystalSpikeFeature(Codec<CrystalSpikeConfig> codec) {
         super(codec);
@@ -44,6 +40,13 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         final int randomChance = random.nextInt(4);
         final int stepHeight = radiusCheck + 14 + Mth.nextInt(random, 10, 14);
         if (world.isStateAtPosition(blockPos.relative(config.crystal_direction.getDirection().getOpposite()), DripstoneUtils::isEmptyOrWaterOrLava) && world.getBlockState(blockPos).is(BlockTags.BASE_STONE_OVERWORLD)) {
+            if (!world.isStateAtPosition(blockPos.relative(config.crystal_direction.getDirection().getOpposite(), 5), DripstoneUtils::isEmptyOrWaterOrLava)) {
+                if (radiusCheck < 4) {
+                    radiusCheck /= 2;
+                } else {
+                    return false;
+                }
+            }
             if (this.placeSpike(world, blockPos, radiusCheck, stepHeight, randomChance, trigList, config.crystal_direction.getDirection(), random)) {
                 flag = placeCrystals(world, random, config, trigList, clusterPos, flag);
             }

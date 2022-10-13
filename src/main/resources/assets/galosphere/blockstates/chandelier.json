@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "galosphere:block/chandelier"
+    },
+    "hanging=true": {
+      "model": "galosphere:block/chandelier",
+      "x": 180
+    }
+  }
+}

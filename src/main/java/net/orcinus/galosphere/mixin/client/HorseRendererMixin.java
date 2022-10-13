@@ -22,4 +22,5 @@ public abstract class HorseRendererMixin extends AbstractHorseRenderer<Horse, Ho
     private void G$init(EntityRendererProvider.Context context, CallbackInfo ci) {
         this.addLayer(new HorseBannerLayer(this));
     }
+
 }
