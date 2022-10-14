@@ -1,5 +1,11 @@
 package net.orcinus.galosphere.entities;
 
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -14,7 +20,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -44,11 +50,7 @@ import net.orcinus.galosphere.entities.ai.FlyWanderGoal;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetwork;
 import net.orcinus.galosphere.init.GParticleTypes;
-
-import javax.annotation.Nullable;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 public class SpectreEntity extends PathfinderMob implements FlyingAnimal, BottlePickable {
     private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.OPTIONAL_UUID);
@@ -93,6 +95,21 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
         }
         tag.putBoolean("FromBottle", this.fromBottle());
         tag.putBoolean("CanBeManipulated", this.canBeManipulated());
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return GSoundEvents.SPECTRE_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return GSoundEvents.SPECTRE_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return GSoundEvents.SPECTRE_DEATH;
     }
 
     @Nullable
@@ -175,8 +192,8 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     private void manualControl(UUID uuid) {
         Player player = this.level.getPlayerByUUID(uuid);
         if (player != null) {
-            player.xxa = 0.0F;
-            player.zza = 0.0F;
+            player.xxa = 0;
+            player.zza = 0;
             player.setJumping(false);
             if (!player.isScoping() || this.isDeadOrDying()) {
                 this.setManipulatorUUID(null);
@@ -184,7 +201,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
                     this.stopUsingSpyglass(player);
                 } else {
                     ((SpectreBoundedSpyglass)player).setUsingSpectreBoundedSpyglass(false);
-                    this.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
+                    player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_END, getSoundSource(), 1, 1);
                 }
             }
         }
@@ -213,7 +230,8 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
 
     @Environment(EnvType.CLIENT)
     public boolean matchesClientPlayerUUID() {
-        return Minecraft.getInstance().player != null && Minecraft.getInstance().player.getUUID().equals(this.getManipulatorUUID());
+        final Minecraft client = Minecraft.getInstance();
+        return client.player != null && Minecraft.getInstance().player.getUUID().equals(this.getManipulatorUUID());
     }
 
     @Override
@@ -238,7 +256,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         ItemStack stack = player.getItemInHand(interactionHand);
         if (this.canBeManipulated() && stack.is(Items.SPYGLASS)) {
-            this.playSound(SoundEvents.LODESTONE_COMPASS_LOCK, 1.0F, 1.0F);
+            this.playSound(GSoundEvents.SPECTRE_LOCK_TO_SPYGLASS, 1, 1);
             ItemStack spectreBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUNDED_SPYGLASS);
             if (this.hasCustomName()) {
                 spectreBoundedSpyglass.setHoverName(this.getCustomName());
@@ -249,7 +267,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
             return InteractionResult.SUCCESS;
         }
         if (stack.is(Items.GLASS_BOTTLE)) {
-            this.level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0f, 1.0f);
+            this.level.playSound(player, player.getX(), player.getY(), player.getZ(), GSoundEvents.SPECTRE_BOTTLE_FILL, SoundSource.NEUTRAL, 1.0f, 1.0f);
             if (!this.level.isClientSide()) {
                 this.gameEvent(GameEvent.ENTITY_INTERACT);
                 ItemStack itemStack2 = new ItemStack(GItems.BOTTLE_OF_SPECTRE);
@@ -264,7 +282,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
                 stack.shrink(1);
             }
             this.setCanBeManipulated(true);
-            this.playSound(SoundEvents.ALLAY_ITEM_GIVEN, 1.0F, 1.0F);
+            this.playSound(GSoundEvents.SPECTRE_RECEIVE_ITEM, 1, 1);
             return InteractionResult.SUCCESS;
         }
         return super.mobInteract(player, interactionHand);
@@ -272,14 +290,14 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
 
     public void setCamera(Player player) {
         if (!this.level.isClientSide()) {
-            player.zza = 0.0F;
+            player.zza = 0;
             ((SpectreBoundedSpyglass)player).setUsingSpectreBoundedSpyglass(true);
             this.setManipulatorUUID(player.getUUID());
             FriendlyByteBuf buf = PacketByteBufs.create();
             buf.writeUUID(player.getUUID());
             buf.writeInt(this.getId());
             ServerPlayNetworking.send((ServerPlayer) player, GNetwork.SEND_PERSPECTIVE, buf);
-            this.playSound(SoundEvents.ALLAY_ITEM_GIVEN, 1.0F, 1.0F);
+            player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_BEGIN, getSoundSource(), 1, 1);
         }
     }
 

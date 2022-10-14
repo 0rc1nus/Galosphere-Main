@@ -2,7 +2,6 @@ package net.orcinus.galosphere.entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
@@ -18,6 +17,7 @@ import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.mixin.access.FireworkRocketEntityAccessor;
 
 public class GlowFlareEntity extends FireworkRocketEntity {
@@ -77,7 +77,7 @@ public class GlowFlareEntity extends FireworkRocketEntity {
             if (this.level.getBlockState(hitPos).isSolidRender(this.level, hitPos) && ((material != Material.LAVA && material.isReplaceable()) || this.level.isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
                 this.level.setBlock(placePos, GBlocks.GLOW_INK_CLUMPS.defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(result.getDirection().getOpposite()), true).setValue(BlockStateProperties.AGE_15, 15).setValue(BlockStateProperties.WATERLOGGED, this.level.getBlockState(placePos).is(Blocks.WATER)), 2);
             }
-            this.playSound(SoundEvents.SCULK_BLOCK_CHARGE, 1.0F, 1.0F);
+            this.playSound(GSoundEvents.GLOW_FLARE_SPREAD, 1.0F, 1.0F);
             this.discard();
         }
     }

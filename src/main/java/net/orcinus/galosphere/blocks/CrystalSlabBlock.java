@@ -24,5 +24,4 @@ public class CrystalSlabBlock extends SlabBlock {
             world.playSound(null, blockpos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
         }
     }
-
 }

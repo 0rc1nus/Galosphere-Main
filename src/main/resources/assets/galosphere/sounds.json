@@ -1,4 +1,280 @@
 {
+	"entity.spectre.ambient": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/ambient1",
+				"pitch": 1.4,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/ambient2",
+				"pitch": 1.4,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/ambient3",
+				"pitch": 1.4,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/ambient4",
+				"pitch": 1.4,
+				"volume": 0.3
+			}
+		]
+	},
+	"entity.spectre.hurt": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/hurt1",
+				"pitch": 1.4,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/hurt2",
+				"pitch": 1.4,
+				"volume": 0.3
+			}
+		]
+	},
+	"entity.spectre.death": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/death",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		]
+	},
+	"entity.spectre.receive_item": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/give",
+				"pitch": 1.2,
+				"volume": 0.5
+			},
+			{
+				"name": "galosphere:entity/spectre/give",
+				"pitch": 1.3,
+				"volume": 0.5
+			},
+			{
+				"name": "galosphere:entity/spectre/give",
+				"pitch": 1.4,
+				"volume": 0.5
+			}
+		]
+	},
+	"entity.spectre.lock_to_spyglass": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/lock",
+				"pitch": 1.0,
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:entity/spectre/lock",
+				"pitch": 1.1,
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:entity/spectre/lock",
+				"pitch": 1.2,
+				"volume": 0.9
+			}
+		]
+	},
+	"entity.spectre.manipulate.begin": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/manipulate_begin",
+				"pitch": 1.0,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/manipulate_begin",
+				"pitch": 1.1,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/manipulate_begin",
+				"pitch": 1.2,
+				"volume": 0.3
+			}
+		]
+	},
+	"entity.spectre.manipulate.end": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/manipulate_end",
+				"pitch": 1.0,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/manipulate_end",
+				"pitch": 1.1,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/manipulate_end",
+				"pitch": 1.2,
+				"volume": 0.3
+			}
+		]
+	},
+	"entity.glow_flare.spread": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/glow_flare/spread1",
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/glow_flare/spread2",
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/glow_flare/spread3",
+				"volume": 0.3
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.allurite.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block/allurite/break1",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/allurite/break2",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/allurite/break3",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/allurite/break4",
+				"volume": 0.55
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.allurite.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.allurite.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.allurite.hit": {
+		"sounds": [
+			{
+				"name": "block.amethyst_block.hit",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.allurite.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/allurite/place1",
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/allurite/place2",
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:block/allurite/place3",
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/allurite/place4",
+				"volume": 0.9
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.allurite.step": {
+		"sounds": [
+			{
+				"name": "block.amethyst_block.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.lumiere.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block/lumiere/break1",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/lumiere/break2",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/lumiere/break3",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/lumiere/break4",
+				"volume": 0.55
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.lumiere.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lumiere.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.lumiere.hit": {
+		"sounds": [
+			{
+				"name": "block.amethyst_block.hit",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.lumiere.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/lumiere/place1",
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/lumiere/place2",
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:block/lumiere/place3",
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/lumiere/place4",
+				"volume": 0.9
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.lumiere.step": {
+		"sounds": [
+			{
+				"name": "block.amethyst_block.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"music.biome.crystal_canyons": {
 		"sounds": [
 			{

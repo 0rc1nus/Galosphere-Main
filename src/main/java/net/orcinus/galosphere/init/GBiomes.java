@@ -1,6 +1,11 @@
 package net.orcinus.galosphere.init;
 
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Maps;
+
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
@@ -14,9 +19,6 @@ import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.orcinus.galosphere.Galosphere;
-
-import javax.annotation.Nullable;
-import java.util.Map;
 
 public class GBiomes {
     
@@ -40,7 +42,7 @@ public class GBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-        Music music = Musics.createGameMusic(GSoundEvents.MUSIC_CRYSTAL_CANYONS);
+        Music music = Musics.createGameMusic(GSoundEvents.MUSIC_LICHEN_CAVES);
         return biome(0.5F, 0.5F, mobBuilder, biomeBuilder, music, 4159204);
     }
 
