@@ -21,6 +21,7 @@ import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.init.GNetworkHandler;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
+import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.init.GVanillaIntegration;
 import net.orcinus.galosphere.util.GalosphereTab;
 import org.apache.logging.log4j.LogManager;
@@ -48,6 +49,7 @@ public class Galosphere {
         GMobEffects.MOB_EFFECTS.register(modEventBus);
         GMenuTypes.MENU_TYPES.register(modEventBus);
         GParticleTypes.PARTICLES.register(modEventBus);
+        GSoundEvents.SOUND_EVENTS.register(modEventBus);
 
         eventBus.register(this);
         eventBus.register(new MobEvents());

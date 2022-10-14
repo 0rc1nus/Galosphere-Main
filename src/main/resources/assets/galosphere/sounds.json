@@ -1,9 +1,82 @@
 {
-  "item.bottle_of_fay.pickup": {
+  "music.biome.crystal_canyons": {
     "sounds": [
-      "galosphere:item/bottle_of_fay/fay_bottle_pickup",
-      "galosphere:item/bottle_of_fay/fay_bottle_pickup2"
-    ],
-    "subtitle": "subtitles.item.galosphere.bottle_of_fay.pickup"
+      {
+        "name": "galosphere:music/trinity",
+        "stream": true,
+        "weight": 10
+      },
+      {
+        "name": "music/game/an_ordinary_day",
+        "stream": true
+      },
+      {
+        "name": "music/game/hal1",
+        "stream": true
+      },
+      {
+        "name": "music/game/hal4",
+        "stream": true
+      },
+      {
+        "name": "music/game/infinite_amethyst",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "music/game/nuance1",
+        "stream": true
+      },
+      {
+        "name": "music/game/nuance2",
+        "stream": true
+      },
+      {
+        "name": "music/game/wending",
+        "stream": true,
+        "volume": 0.4,
+        "weight": 2
+      }
+    ]
+  },
+  "music.biome.lichen_caves": {
+    "sounds": [
+      {
+        "name": "galosphere:music/trinity",
+        "stream": true,
+        "weight": 1
+      },
+      {
+        "name": "music/game/an_ordinary_day",
+        "stream": true
+      },
+      {
+        "name": "music/game/hal1",
+        "stream": true
+      },
+      {
+        "name": "music/game/hal4",
+        "stream": true
+      },
+      {
+        "name": "music/game/infinite_amethyst",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "music/game/nuance1",
+        "stream": true
+      },
+      {
+        "name": "music/game/nuance2",
+        "stream": true
+      },
+      {
+        "name": "music/game/wending",
+        "stream": true,
+        "volume": 0.4,
+        "weight": 2
+      }
+    ]
   }
 }
