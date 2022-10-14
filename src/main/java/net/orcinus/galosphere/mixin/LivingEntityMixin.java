@@ -144,7 +144,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
                     if ($this instanceof Horse horse) {
                         Item horseItem = horse.getArmor().getItem();
                         if (horseItem == GItems.STERLING_HORSE_ARMOR) {
-                            float damageReduction = 3.0F;
+                            float damageReduction = 4.0F;
                             reductionAmount = f - damageReduction;
                         }
                     }
