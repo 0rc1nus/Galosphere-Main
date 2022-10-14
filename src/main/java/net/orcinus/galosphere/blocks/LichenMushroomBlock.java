@@ -82,7 +82,7 @@ public class LichenMushroomBlock extends BushBlock implements BonemealableBlock,
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        int radius = Mth.nextInt(random, 2, 3);
+        int radius = Mth.nextInt(random, 1, 2);
         int height = radius * 2;
         LichenMushroomFeature.generateHugeLichenMushroom(world, pos, random, radius, height, Sets.newHashSet());
     }
