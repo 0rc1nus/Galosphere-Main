@@ -1,7 +1,17 @@
 package net.orcinus.galosphere.mixin.client;
 
+import java.util.Random;
+
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiComponent;
@@ -10,26 +20,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.Fluids;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.mixin.access.GuiAccessor;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Random;
 
 @Mixin(Gui.class)
 public class GuiMixin {
     @Shadow private int screenWidth;
     @Shadow private int screenHeight;
     @Shadow @Final private Minecraft minecraft;
-    private static final ResourceLocation GALOSPHERE_ICONS = new ResourceLocation(Galosphere.MODID, "textures/gui/galosphere_icons.png");
+    private static final ResourceLocation GALOSPHERE_ICONS = Galosphere.id("textures/gui/galosphere_icons.png");
 
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     private void G$render(PoseStack poseStack, float f, CallbackInfo ci) {
@@ -133,5 +134,4 @@ public class GuiMixin {
             }
         }
     }
-
 }

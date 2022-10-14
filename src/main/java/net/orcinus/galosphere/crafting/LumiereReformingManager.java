@@ -1,11 +1,20 @@
 package net.orcinus.galosphere.crafting;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.NoSuchElementException;
+
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -17,14 +26,6 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.block.Block;
 import net.orcinus.galosphere.Galosphere;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.NoSuchElementException;
-
 public class LumiereReformingManager extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
     private static final Gson GSON_INSTANCE = (new GsonBuilder()).create();
     private static final Map<Block, Block> REFORMING_TABLE = Maps.newHashMap();
@@ -35,7 +36,7 @@ public class LumiereReformingManager extends SimpleJsonResourceReloadListener im
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager resourceManagerIn, ProfilerFiller pProfiler) {
-        ResourceLocation resourceLocation = new ResourceLocation(Galosphere.MODID, "loot_tables/gameplay/lumiere_reforming_table.json");
+        ResourceLocation resourceLocation = Galosphere.id("loot_tables/gameplay/lumiere_reforming_table.json");
         try {
             for (Resource iResource : resourceManagerIn.getResourceStack(resourceLocation)) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(iResource.open(), StandardCharsets.UTF_8))) {
@@ -62,7 +63,6 @@ public class LumiereReformingManager extends SimpleJsonResourceReloadListener im
 
     @Override
     public ResourceLocation getFabricId() {
-        return new ResourceLocation(Galosphere.MODID, "loot_tables/gameplay");
+        return Galosphere.id("loot_tables/gameplay");
     }
-
 }
