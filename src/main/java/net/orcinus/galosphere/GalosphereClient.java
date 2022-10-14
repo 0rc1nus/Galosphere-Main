@@ -43,7 +43,9 @@ public class GalosphereClient implements ClientModInitializer {
                 GBlocks.LICHEN_SHELF,
                 GBlocks.LICHEN_CORDYCEPS,
                 GBlocks.LICHEN_CORDYCEPS_PLANT,
-                GBlocks.GLOW_INK_CLUMPS
+                GBlocks.GLOW_INK_CLUMPS,
+                GBlocks.POTTED_BOWL_LICHEN,
+                GBlocks.POTTED_LICHEN_ROOTS
         );
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), GBlocks.CHANDELIER);
 

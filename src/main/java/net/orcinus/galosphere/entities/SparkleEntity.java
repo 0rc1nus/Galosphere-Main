@@ -260,6 +260,9 @@ public class SparkleEntity extends Animal {
             return InteractionResult.SUCCESS;
         }
         else if (this.getCrystaltype() == CrystalType.NONE && stack.is(GItemTags.SPARKLE_TEMPT_ITEMS)) {
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
             this.setGrowthTicks(this.getGrowthTicks() - Mth.nextInt(random, 20, 40));
             return InteractionResult.SUCCESS;
         }
