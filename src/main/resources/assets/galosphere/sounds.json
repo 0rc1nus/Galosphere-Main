@@ -1,144 +1,4 @@
 {
-	"entity.spectre.ambient": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/spectre/ambient1",
-				"pitch": 1.4,
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/spectre/ambient2",
-				"pitch": 1.4,
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/spectre/ambient3",
-				"pitch": 1.4,
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/spectre/ambient4",
-				"pitch": 1.4,
-				"volume": 0.3
-			}
-		]
-	},
-	"entity.spectre.hurt": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/spectre/hurt1",
-				"pitch": 1.4,
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/spectre/hurt2",
-				"pitch": 1.4,
-				"volume": 0.3
-			}
-		]
-	},
-	"entity.spectre.death": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/spectre/death",
-				"pitch": 1.4,
-				"volume": 0.4
-			}
-		]
-	},
-	"entity.spectre.receive_item": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/spectre/give",
-				"pitch": 1.2,
-				"volume": 0.5
-			},
-			{
-				"name": "galosphere:entity/spectre/give",
-				"pitch": 1.3,
-				"volume": 0.5
-			},
-			{
-				"name": "galosphere:entity/spectre/give",
-				"pitch": 1.4,
-				"volume": 0.5
-			}
-		]
-	},
-	"entity.spectre.lock_to_spyglass": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/spectre/lock",
-				"pitch": 1.0,
-				"volume": 0.9
-			},
-			{
-				"name": "galosphere:entity/spectre/lock",
-				"pitch": 1.1,
-				"volume": 0.9
-			},
-			{
-				"name": "galosphere:entity/spectre/lock",
-				"pitch": 1.2,
-				"volume": 0.9
-			}
-		]
-	},
-	"entity.spectre.manipulate.begin": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/spectre/manipulate_begin",
-				"pitch": 1.0,
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/spectre/manipulate_begin",
-				"pitch": 1.1,
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/spectre/manipulate_begin",
-				"pitch": 1.2,
-				"volume": 0.3
-			}
-		]
-	},
-	"entity.spectre.manipulate.end": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/spectre/manipulate_end",
-				"pitch": 1.0,
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/spectre/manipulate_end",
-				"pitch": 1.1,
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/spectre/manipulate_end",
-				"pitch": 1.2,
-				"volume": 0.3
-			}
-		]
-	},
-	"entity.glow_flare.spread": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/glow_flare/spread1",
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/glow_flare/spread2",
-				"volume": 0.3
-			},
-			{
-				"name": "galosphere:entity/glow_flare/spread3",
-				"volume": 0.3
-			}
-		],
-		"subtitle": "subtitles.block.generic.place"
-	},
 	"block.allurite.break": {
 		"sounds": [
 			{
@@ -274,6 +134,151 @@
 			}
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"entity.glow_flare.spread": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/glow_flare/spread1",
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/glow_flare/spread2",
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/glow_flare/spread3",
+				"volume": 0.3
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"entity.spectre.ambient": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/ambient1",
+				"pitch": 1.4,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/ambient2",
+				"pitch": 1.4,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/ambient3",
+				"pitch": 1.4,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/ambient4",
+				"pitch": 1.4,
+				"volume": 0.3
+			}
+		],
+		"subtitle": "subtitles.entity.spectre.ambient"
+	},
+	"entity.spectre.death": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/death",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.spectre.death"
+	},
+	"entity.spectre.hurt": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/hurt1",
+				"pitch": 1.4,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/hurt2",
+				"pitch": 1.4,
+				"volume": 0.3
+			}
+		],
+		"subtitle": "subtitles.entity.spectre.hurt"
+	},
+	"entity.spectre.lock_to_spyglass": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/lock",
+				"pitch": 1,
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:entity/spectre/lock",
+				"pitch": 1.1,
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:entity/spectre/lock",
+				"pitch": 1.2,
+				"volume": 0.9
+			}
+		],
+		"subtitle": "subtitles.entity.spectre.lock_to_spyglass"
+	},
+	"entity.spectre.manipulate.begin": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/manipulate_begin",
+				"pitch": 1,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/manipulate_begin",
+				"pitch": 1.1,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/manipulate_begin",
+				"pitch": 1.2,
+				"volume": 0.3
+			}
+		]
+	},
+	"entity.spectre.manipulate.end": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/manipulate_end",
+				"pitch": 1,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/manipulate_end",
+				"pitch": 1.1,
+				"volume": 0.3
+			},
+			{
+				"name": "galosphere:entity/spectre/manipulate_end",
+				"pitch": 1.2,
+				"volume": 0.3
+			}
+		]
+	},
+	"entity.spectre.receive_item": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/spectre/give",
+				"pitch": 1.2,
+				"volume": 0.5
+			},
+			{
+				"name": "galosphere:entity/spectre/give",
+				"pitch": 1.3,
+				"volume": 0.5
+			},
+			{
+				"name": "galosphere:entity/spectre/give",
+				"pitch": 1.4,
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.entity.spectre.receive_item"
 	},
 	"music.biome.crystal_canyons": {
 		"sounds": [
