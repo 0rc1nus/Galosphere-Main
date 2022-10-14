@@ -10,8 +10,7 @@
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
     "PlayerMixin",
-    "PowderSnowBlockMixin",
-    "SpyglassItemMixin"
+    "PowderSnowBlockMixin"
   ],
   "client": [
     "client.ItemModelShaperMixin",
