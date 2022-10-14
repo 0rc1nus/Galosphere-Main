@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "galosphere:item/bottle_of_fay"
+    "layer0": "galosphere:item/bottle_of_spectre"
   }
 }
