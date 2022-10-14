@@ -1,14 +1,13 @@
 package net.orcinus.galosphere.entities;
 
-import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -34,20 +33,28 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.network.PacketDistributor;
+import net.orcinus.galosphere.api.BottlePickable;
+import net.orcinus.galosphere.api.FayBoundedSpyglass;
 import net.orcinus.galosphere.entities.ai.FlyWanderGoal;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GNetworkHandler;
 import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.network.SendPerspectivePacket;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-public class FayEntity extends PathfinderMob implements FlyingAnimal {
-    private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(FayEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    private static final EntityDataAccessor<Boolean> CAN_BE_MANIPULATED = SynchedEntityData.defineId(FayEntity.class, EntityDataSerializers.BOOLEAN);
+public class SpectreEntity extends PathfinderMob implements FlyingAnimal, BottlePickable {
+    private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Boolean> CAN_BE_MANIPULATED = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public FayEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
+    public SpectreEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
     }
@@ -57,21 +64,23 @@ public class FayEntity extends PathfinderMob implements FlyingAnimal {
         super.defineSynchedData();
         this.entityData.define(MANIPULATOR, Optional.empty());
         this.entityData.define(CAN_BE_MANIPULATED, false);
+        this.entityData.define(FROM_BOTTLE, false);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         UUID uuid;
-        if (tag.hasUUID("Owner")) {
-            uuid = tag.getUUID("Owner");
+        if (tag.hasUUID("Manipulator")) {
+            uuid = tag.getUUID("Manipulator");
         } else {
-            String s = tag.getString("Owner");
+            String s = tag.getString("Manipulator");
             uuid = OldUsersConverter.convertMobOwnerIfNecessary(Objects.requireNonNull(this.getServer()), s);
         }
         if (uuid != null) {
             this.setManipulatorUUID(uuid);
         }
+        this.setFromBottle(tag.getBoolean("FromBottle"));
         this.setCanBeManipulated(tag.getBoolean("CanBeManipulated"));
     }
 
@@ -81,6 +90,7 @@ public class FayEntity extends PathfinderMob implements FlyingAnimal {
         if (this.getManipulatorUUID() != null) {
             tag.putUUID("Manipulator", this.getManipulatorUUID());
         }
+        tag.putBoolean("FromBottle", this.fromBottle());
         tag.putBoolean("CanBeManipulated", this.canBeManipulated());
     }
 
@@ -120,8 +130,8 @@ public class FayEntity extends PathfinderMob implements FlyingAnimal {
         }
     }
 
-    private void spawnFluidParticle(Level world, double p_27781_, double p_27782_, double p_27783_, double p_27784_, double p_27785_, ParticleOptions options) {
-        world.addParticle(options, Mth.lerp(world.random.nextDouble(), p_27781_, p_27782_), p_27785_, Mth.lerp(world.random.nextDouble(), p_27783_, p_27784_), 0.0D, 0.0D, 0.0D);
+    private void spawnFluidParticle(Level world, double minX, double maxX, double minZ, double maxZ, double y, ParticleOptions options) {
+        world.addParticle(options, Mth.lerp(world.random.nextDouble(), minX, maxX), y, Mth.lerp(world.random.nextDouble(), minZ, maxZ), 0.0D, 0.0D, 0.0D);
     }
 
     @Override
@@ -155,29 +165,54 @@ public class FayEntity extends PathfinderMob implements FlyingAnimal {
     @Override
     public void aiStep() {
         super.aiStep();
-        LocalPlayer localPlayer = Minecraft.getInstance().player;
-        if (this.level.isClientSide() || (localPlayer != null && localPlayer.getUUID() == this.getManipulatorUUID())) {
-            Optional<UUID> manipulatorUUID = this.entityData.get(MANIPULATOR);
-            Optional<Player> optional = manipulatorUUID.map(this.level::getPlayerByUUID);
-            optional.ifPresent(player -> {
-                if (!player.isScoping()) {
-                    if (this.level.isClientSide()) {
-                        Minecraft minecraft = Minecraft.getInstance();
-                        if (minecraft.player == player) {
-                            minecraft.setCameraEntity(player);
-                        }
-                    } else {
-                        this.setManipulatorUUID(null);
-                        this.playSound(SoundEvents.ALLAY_ITEM_TAKEN, 1.0F, 1.0F);
-                    }
-                }
-            });
-            if (!this.level.isClientSide() && manipulatorUUID.isPresent()) {
-                if (optional.isEmpty()) {
-                    this.entityData.set(MANIPULATOR, Optional.empty());
+        if (!this.level.isClientSide() || this.matchesClientPlayerUUID()) {
+            Optional<UUID> optionalUUID = this.entityData.get(MANIPULATOR);
+            optionalUUID.ifPresent(this::manualControl);
+        }
+    }
+
+    private void manualControl(UUID uuid) {
+        Player player = this.level.getPlayerByUUID(uuid);
+        if (player != null) {
+            player.xxa = 0.0F;
+            player.zza = 0.0F;
+            player.setJumping(false);
+            if (!player.isScoping() || this.isDeadOrDying()) {
+                this.setManipulatorUUID(null);
+                if (this.level.isClientSide) {
+                    this.stopUsingSpyglass(player);
+                } else {
+                    ((FayBoundedSpyglass)player).setUsingFayBoundedSpyglass(false);
+                    this.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
                 }
             }
         }
+        if (!this.level.isClientSide() && player == null) {
+            this.entityData.set(MANIPULATOR, Optional.empty());
+        }
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double d) {
+        return !this.hasCustomName() && !this.fromBottle();
+    }
+
+    @Override
+    public boolean requiresCustomPersistence() {
+        return super.requiresCustomPersistence() || this.fromBottle();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void stopUsingSpyglass(Player player) {
+        Minecraft client = Minecraft.getInstance();
+        if (client.player == player) {
+            client.setCameraEntity(player);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean matchesClientPlayerUUID() {
+        return Minecraft.getInstance().player != null && Minecraft.getInstance().player.getUUID().equals(this.getManipulatorUUID());
     }
 
     @Override
@@ -201,37 +236,32 @@ public class FayEntity extends PathfinderMob implements FlyingAnimal {
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         ItemStack stack = player.getItemInHand(interactionHand);
+        if (this.canBeManipulated() && stack.is(Items.SPYGLASS)) {
+            this.playSound(SoundEvents.LODESTONE_COMPASS_LOCK, 1.0F, 1.0F);
+            ItemStack fayBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUNDED_SPYGLASS.get());
+            if (this.hasCustomName()) {
+                fayBoundedSpyglass.setHoverName(this.getCustomName());
+            }
+            FayBoundedSpyglass.addFayBoundedTags(this, fayBoundedSpyglass.getOrCreateTag());
+            player.setItemInHand(interactionHand, fayBoundedSpyglass);
+            this.setCanBeManipulated(false);
+            return InteractionResult.SUCCESS;
+        }
         if (stack.is(Items.GLASS_BOTTLE)) {
             this.level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0f, 1.0f);
             if (!this.level.isClientSide()) {
                 this.gameEvent(GameEvent.ENTITY_INTERACT);
-                ItemStack itemStack2 = new ItemStack(GItems.BOTTLE_OF_FAY.get());
-                CompoundTag compoundTag = itemStack2.getOrCreateTag();
-                if (this.hasCustomName()) {
-                    itemStack2.setHoverName(this.getCustomName());
-                }
-                if (this.isNoAi()) {
-                    compoundTag.putBoolean("NoAI", this.isNoAi());
-                }
-                if (this.isSilent()) {
-                    compoundTag.putBoolean("Silent", this.isSilent());
-                }
-                if (this.isNoGravity()) {
-                    compoundTag.putBoolean("NoGravity", this.isNoGravity());
-                }
-                if (this.hasGlowingTag()) {
-                    compoundTag.putBoolean("Glowing", this.hasGlowingTag());
-                }
-                if (this.isInvulnerable()) {
-                    compoundTag.putBoolean("Invulnerable", this.isInvulnerable());
-                }
-                compoundTag.putFloat("Health", this.getHealth());
+                ItemStack itemStack2 = new ItemStack(GItems.BOTTLE_OF_SPECTRE.get());
+                BottlePickable.saveDefaultDataFromBottleTag(this, itemStack2);
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(stack, player, itemStack2));
                 this.discard();
             }
             return InteractionResult.SUCCESS;
         }
         else if (stack.is(GItems.ALLURITE_SHARD.get()) && this.getManipulatorUUID() == null && !this.canBeManipulated()) {
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
             this.setCanBeManipulated(true);
             this.playSound(SoundEvents.ALLAY_ITEM_GIVEN, 1.0F, 1.0F);
             return InteractionResult.SUCCESS;
@@ -240,14 +270,11 @@ public class FayEntity extends PathfinderMob implements FlyingAnimal {
     }
 
     public void setCamera(Player player) {
-        if (this.level.isClientSide()) {
-            Minecraft minecraft = Minecraft.getInstance();
-            if (minecraft.player == player) {
-                minecraft.options.setCameraType(CameraType.FIRST_PERSON);
-                minecraft.setCameraEntity(this);
-            }
-        } else {
+        if (!this.level.isClientSide()) {
+            player.zza = 0.0F;
+            ((FayBoundedSpyglass)player).setUsingFayBoundedSpyglass(true);
             this.setManipulatorUUID(player.getUUID());
+            GNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), new SendPerspectivePacket(player.getUUID(), this.getId()));
             this.playSound(SoundEvents.ALLAY_ITEM_GIVEN, 1.0F, 1.0F);
         }
     }
@@ -257,4 +284,13 @@ public class FayEntity extends PathfinderMob implements FlyingAnimal {
         return !this.onGround;
     }
 
+    @Override
+    public boolean fromBottle() {
+        return this.entityData.get(FROM_BOTTLE);
+    }
+
+    @Override
+    public void setFromBottle(boolean fromBottle) {
+        this.entityData.set(FROM_BOTTLE, fromBottle);
+    }
 }

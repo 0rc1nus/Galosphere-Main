@@ -2,6 +2,7 @@ package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +21,21 @@ public class CordycepsBlock extends GrowingPlantHeadBlock {
     public CordycepsBlock(Properties properties) {
         super(properties, Direction.UP, SHAPE, false, 0.1);
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(BULB, false));
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        BlockPos blockPos2 = blockPos.relative(this.growthDirection);
+        int i = Math.min(blockState.getValue(AGE) + 1, 25);
+        int j = this.getBlocksToGrowWhenBonemealed(randomSource);
+        for (int k = 0; k < j && this.canGrowInto(serverLevel.getBlockState(blockPos2)); ++k) {
+            if (blockState.hasProperty(BULB) && !blockState.getValue(BULB)) {
+                blockState = blockState.setValue(BULB, true);
+            }
+            serverLevel.setBlockAndUpdate(blockPos2, blockState.setValue(AGE, i));
+            blockPos2 = blockPos2.relative(this.growthDirection);
+            i = Math.min(i + 1, 25);
+        }
     }
 
     @Override

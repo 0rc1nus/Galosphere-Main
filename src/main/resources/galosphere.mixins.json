@@ -9,10 +9,14 @@
     "LightningBoltMixin",
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
+    "PlayerMixin",
     "PowderSnowBlockMixin",
     "SpyglassItemMixin"
   ],
   "client": [
+    "client.ItemModelShaperMixin",
+    "client.ItemRendererMixin",
+    "client.PlayerItemInHandLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

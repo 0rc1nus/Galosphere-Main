@@ -17,12 +17,12 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.orcinus.galosphere.entities.FayEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GEntityTypes;
 
-public class PixieBottleItem extends Item {
+public class SpectreBottleItem extends Item {
 
-    public PixieBottleItem(Properties properties) {
+    public SpectreBottleItem(Properties properties) {
         super(properties);
     }
 
@@ -57,7 +57,7 @@ public class PixieBottleItem extends Item {
             if (!playerEntity.getInventory().add(new ItemStack(Items.GLASS_BOTTLE))) {
                 playerEntity.drop(new ItemStack(Items.GLASS_BOTTLE), false);
             }
-            FayEntity pixie = GEntityTypes.FAY.get().create(world);
+            SpectreEntity pixie = GEntityTypes.SPECTRE.get().create(world);
             pixie.setPos(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
             world.playSound(null, blockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.NEUTRAL, 1.0F, 1.0F);
             if (compoundTag.contains("NoAI")) {

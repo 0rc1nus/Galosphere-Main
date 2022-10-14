@@ -1,14 +1,10 @@
 package net.orcinus.galosphere.events;
 
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.particle.GlowParticle;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.HorseRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CrossbowItem;
@@ -26,20 +22,19 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.GoldenBreathOverlay;
 import net.orcinus.galosphere.client.gui.IllusiveOverlay;
-import net.orcinus.galosphere.client.model.FayModel;
 import net.orcinus.galosphere.client.model.SparkleModel;
+import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraParticle;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
 import net.orcinus.galosphere.client.particles.FayDustParticle;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
-import net.orcinus.galosphere.client.renderer.FayRenderer;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
+import net.orcinus.galosphere.client.renderer.SpectreRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
-import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMenuTypes;
@@ -64,7 +59,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void loadEntityShader(RegisterEntitySpectatorShadersEvent event) {
-        event.register(GEntityTypes.FAY.get(), new ResourceLocation(Galosphere.MODID, "shaders/post/fay.json"));
+        event.register(GEntityTypes.SPECTRE.get(), new ResourceLocation(Galosphere.MODID, "shaders/post/fay.json"));
     }
 
     @SubscribeEvent
@@ -83,14 +78,14 @@ public class ClientEvents {
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
         event.registerLayerDefinition(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
-        event.registerLayerDefinition(GModelLayers.FAY, FayModel::createBodyLayer);
+        event.registerLayerDefinition(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(GEntityTypes.SPARKLE.get(), SparkleRenderer::new);
         event.registerEntityRenderer(GEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
-        event.registerEntityRenderer(GEntityTypes.FAY.get(), FayRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.SPECTRE.get(), SpectreRenderer::new);
         event.registerEntityRenderer(GEntityTypes.GLOW_FLARE.get(), GlowFlareEntityRenderer::new);
     }
 

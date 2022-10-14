@@ -1,4 +1,4 @@
-package net.orcinus.galosphere.packet;
+package net.orcinus.galosphere.network;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

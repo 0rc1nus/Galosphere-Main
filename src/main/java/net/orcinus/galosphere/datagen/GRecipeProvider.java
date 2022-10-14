@@ -84,11 +84,11 @@ public class GRecipeProvider extends RecipeProvider {
                 .define('#', Items.GLOW_INK_SAC)
                 .define('S', Tags.Items.INGOTS_COPPER)
                 .define('@', Items.GUNPOWDER)
-                .define('F', GItems.BOTTLE_OF_FAY.get())
+                .define('F', GItems.BOTTLE_OF_SPECTRE.get())
                 .pattern("#F#")
                 .pattern("S@S")
                 .pattern(" S ")
-                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_FAY.get()))
+                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_SPECTRE.get()))
                 .unlockedBy("has_glow_ink_sac", has(Items.GLOW_INK_SAC))
                 .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
                 .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER)).save(consumer);
@@ -105,12 +105,12 @@ public class GRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder
                 .shaped(GBlocks.CHANDELIER.get())
                  .define('#', Tags.Items.INGOTS_COPPER)
-                 .define('@', GItems.BOTTLE_OF_FAY.get())
+                 .define('@', GItems.BOTTLE_OF_SPECTRE.get())
                  .pattern("@ @")
                  .pattern("###")
                  .pattern(" # ")
                  .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
-                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_FAY.get())).save(consumer);
+                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_SPECTRE.get())).save(consumer);
 
         ShapedRecipeBuilder
                 .shaped(GBlocks.COMBUSTION_TABLE.get())

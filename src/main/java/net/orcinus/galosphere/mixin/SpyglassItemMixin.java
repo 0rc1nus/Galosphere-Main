@@ -5,7 +5,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,12 +14,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpyglassItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.orcinus.galosphere.entities.FayEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 import java.util.UUID;
@@ -49,7 +45,7 @@ public abstract class SpyglassItemMixin extends Item {
             int id = stack.getTag().getInt("FayBoundId");
             UUID uuid = stack.getTag().getUUID("FayBoundUUID");
             Entity entity = world.getEntity(id);
-            if (entity instanceof FayEntity fay) {
+            if (entity instanceof SpectreEntity fay) {
                 fay.setUUID(uuid);
                 if (livingEntity instanceof Player player && fay.getManipulatorUUID() != player.getUUID()) {
                     fay.setCamera(player);
@@ -60,7 +56,7 @@ public abstract class SpyglassItemMixin extends Item {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity livingEntity, InteractionHand p_41401_) {
-        if (livingEntity instanceof FayEntity fayEntity && fayEntity.canBeManipulated()) {
+        if (livingEntity instanceof SpectreEntity fayEntity && fayEntity.canBeManipulated()) {
             fayEntity.playSound(SoundEvents.LODESTONE_COMPASS_LOCK, 1.0F, 1.0F);
             boolean flag = !player.getAbilities().instabuild && stack.getCount() == 1;
             if (flag) {
@@ -82,7 +78,7 @@ public abstract class SpyglassItemMixin extends Item {
         return InteractionResult.SUCCESS;
     }
 
-    private void addFayBoundTags(FayEntity fay, CompoundTag compoundTag) {
+    private void addFayBoundTags(SpectreEntity fay, CompoundTag compoundTag) {
         compoundTag.putInt("FayBoundId", fay.getId());
         compoundTag.putUUID("FayBoundUUID", fay.getUUID());
     }

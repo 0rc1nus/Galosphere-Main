@@ -68,7 +68,7 @@ public class GItemModelProvider extends ItemModelProvider {
         item("sterling_boots");
         item("sterling_horse_armor");
         item("icon_item");
-        item("bottle_of_fay");
+        item("bottle_of_spectre");
         item("chandelier");
         item("lichen_cordyceps");
         item("golden_lichen_cordyceps");
@@ -79,7 +79,7 @@ public class GItemModelProvider extends ItemModelProvider {
         itemWithBlockDirectory("glow_ink_clumps");
 
         spawnEggItem("sparkle");
-        spawnEggItem("fay");
+        spawnEggItem("spectre");
 
         withExistingParent("crossbow_glow_flare", new ResourceLocation("item/crossbow")).texture("layer0", new ResourceLocation(Galosphere.MODID, "item/crossbow_glow_flare"));
     }
