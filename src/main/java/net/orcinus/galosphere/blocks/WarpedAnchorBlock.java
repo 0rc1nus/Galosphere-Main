@@ -2,9 +2,9 @@ package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -28,8 +28,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GParticleTypes;
 import org.jetbrains.annotations.Nullable;
-
-import net.minecraft.util.RandomSource;
 
 public class WarpedAnchorBlock extends Block {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;

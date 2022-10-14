@@ -17,8 +17,6 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.util.CompatUtil;
 
-import java.util.Optional;
-
 public class CombustionTableMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
     public final Container container = new SimpleContainer(4) {

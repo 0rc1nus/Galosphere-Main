@@ -3,16 +3,7 @@ package net.orcinus.galosphere.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
@@ -21,7 +12,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.init.GBlocks;
 
@@ -36,7 +26,17 @@ public class CordycepsBlock extends GrowingPlantHeadBlock {
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        serverLevel.setBlock(blockPos, blockState.setValue(BULB, true), 2);
+        BlockPos blockPos2 = blockPos.relative(this.growthDirection);
+        int i = Math.min(blockState.getValue(AGE) + 1, 25);
+        int j = this.getBlocksToGrowWhenBonemealed(randomSource);
+        for (int k = 0; k < j && this.canGrowInto(serverLevel.getBlockState(blockPos2)); ++k) {
+            if (blockState.hasProperty(BULB) && !blockState.getValue(BULB)) {
+                blockState = blockState.setValue(BULB, true);
+            }
+            serverLevel.setBlockAndUpdate(blockPos2, blockState.setValue(AGE, i));
+            blockPos2 = blockPos2.relative(this.growthDirection);
+            i = Math.min(i + 1, 25);
+        }
     }
 
     @Override
