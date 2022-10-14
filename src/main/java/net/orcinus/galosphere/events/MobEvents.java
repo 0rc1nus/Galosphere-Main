@@ -86,7 +86,7 @@ public class MobEvents {
                 if (entity instanceof Horse horse) {
                     Item horseItem = horse.getArmor().getItem();
                     if (horseItem == GItems.STERLING_HORSE_ARMOR.get()) {
-                        float damageReduction = 3.0F;
+                        float damageReduction = 4.0F;
                         reductionAmount = event.getAmount() - damageReduction;
                     }
                 }
