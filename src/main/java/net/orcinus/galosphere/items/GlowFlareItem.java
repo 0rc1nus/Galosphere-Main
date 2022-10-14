@@ -1,6 +1,8 @@
 package net.orcinus.galosphere.items;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.item.Item;
@@ -8,7 +10,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.orcinus.galosphere.criterion.GCriterion;
 import net.orcinus.galosphere.entities.GlowFlareEntity;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 
 public class GlowFlareItem extends Item {
 
@@ -20,6 +24,9 @@ public class GlowFlareItem extends Item {
     public InteractionResult useOn(UseOnContext useOnContext) {
         Level level = useOnContext.getLevel();
         if (!level.isClientSide) {
+            if (useOnContext.getPlayer() instanceof ServerPlayer serverPlayer) {
+                GCriteriaTriggers.LIGHT_SPREAD.trigger(serverPlayer);
+            }
             ItemStack itemStack = useOnContext.getItemInHand();
             Vec3 vec3 = useOnContext.getClickLocation();
             Direction direction = useOnContext.getClickedFace();

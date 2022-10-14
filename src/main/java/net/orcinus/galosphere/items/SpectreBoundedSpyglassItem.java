@@ -1,5 +1,7 @@
 package net.orcinus.galosphere.items;
 
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -12,6 +14,7 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.orcinus.galosphere.api.FayBoundedSpyglass;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 
 public class SpectreBoundedSpyglassItem extends Item {
 
@@ -34,8 +37,13 @@ public class SpectreBoundedSpyglassItem extends Item {
         if (!FayBoundedSpyglass.canUseFayBoundedSpyglass(player.getItemInHand(interactionHand), player)) {
             return InteractionResultHolder.fail(player.getItemInHand(interactionHand));
         } else {
+            if (player instanceof ServerPlayer serverPlayer) {
+                if (!level.isClientSide) {
+                    GCriteriaTriggers.USE_SPECTRE_SPYGLASS.trigger(serverPlayer);
+                }
+                player.awardStat(Stats.ITEM_USED.get(this));
+            }
             player.playSound(SoundEvents.SPYGLASS_USE, 1.0f, 1.0f);
-            player.awardStat(Stats.ITEM_USED.get(this));
             return ItemUtils.startUsingInstantly(level, player, interactionHand);
         }
     }

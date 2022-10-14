@@ -41,6 +41,7 @@ import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.api.BottlePickable;
 import net.orcinus.galosphere.api.FayBoundedSpyglass;
 import net.orcinus.galosphere.entities.ai.FlyWanderGoal;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetwork;
 import net.orcinus.galosphere.init.GParticleTypes;
@@ -195,7 +196,12 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
 
     @Override
     public boolean removeWhenFarAway(double d) {
-        return this.getManipulatorUUID() == null || !this.hasCustomName();
+        return !this.hasCustomName() && !this.fromBottle();
+    }
+
+    @Override
+    public boolean requiresCustomPersistence() {
+        return super.requiresCustomPersistence() || this.fromBottle();
     }
 
     @Environment(EnvType.CLIENT)

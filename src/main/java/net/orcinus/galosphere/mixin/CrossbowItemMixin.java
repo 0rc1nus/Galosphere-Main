@@ -2,6 +2,7 @@ package net.orcinus.galosphere.mixin;
 
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.GlowFlareEntity;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,6 +39,10 @@ public class CrossbowItemMixin {
         if (!world.isClientSide && ammo.is(GItems.GLOW_FLARE)) {
             ci.cancel();
             Projectile projectile = new GlowFlareEntity(world, ammo, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true);
+
+            if (entity instanceof ServerPlayer serverPlayer) {
+                GCriteriaTriggers.LIGHT_SPREAD.trigger(serverPlayer);
+            }
 
             if (entity instanceof CrossbowAttackMob crossbowattackmob) {
                 crossbowattackmob.shootCrossbowProjectile(crossbowattackmob.getTarget(), stack, projectile, p_40904_);
