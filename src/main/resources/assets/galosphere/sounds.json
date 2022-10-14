@@ -1,4 +1,161 @@
 {
+	"block.lumiere.compost": {
+		"sounds": [
+			{
+				"name": "galosphere:block/lumiere/compost1",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere/compost2",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere/compost3",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere/compost4",
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.lumiere.compost"
+	},
+	"block.lumiere_cluster.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block/lumiere_cluster/break1",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere_cluster/break2",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere_cluster/break3",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere_cluster/break4",
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.lumiere_cluster.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lumiere.fall",
+				"type": "event"
+			}
+		]
+	},
+	"block.lumiere_cluster.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lumiere.hit",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.lumiere_cluster.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/lumiere_cluster/place1",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere_cluster/place2",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere_cluster/place3",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/lumiere_cluster/place4",
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.lumiere_cluster.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lumiere.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.allurite_cluster.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block/allurite_cluster/break1",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/allurite_cluster/break2",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/allurite_cluster/break3",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/allurite_cluster/break4",
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.allurite_cluster.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.allurite.fall",
+				"type": "event"
+			}
+		]
+	},
+	"block.allurite_cluster.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.allurite.hit",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.allurite_cluster.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/allurite_cluster/place1",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/allurite_cluster/place2",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/allurite_cluster/place3",
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/allurite_cluster/place4",
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.allurite_cluster.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.allurite.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"block.allurite.break": {
 		"sounds": [
 			{

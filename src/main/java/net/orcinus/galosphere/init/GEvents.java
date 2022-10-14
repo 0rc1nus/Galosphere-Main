@@ -70,7 +70,7 @@ public class GEvents {
                     player.getItemInHand(hand).shrink(1);
                 }
                 world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
-                world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, GSoundEvents.LUMIERE_COMPOST, SoundSource.BLOCKS, 1.0F, 1.0F);
                 world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                 return InteractionResult.SUCCESS;
             }

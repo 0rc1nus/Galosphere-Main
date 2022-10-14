@@ -11,6 +11,8 @@ public class GSoundEvents {
     public static final SoundEvent MUSIC_CRYSTAL_CANYONS = register("music.biome.crystal_canyons");
     public static final SoundEvent MUSIC_LICHEN_CAVES = register("music.biome.lichen_caves");
 
+    public static final SoundEvent LUMIERE_COMPOST = register("block.lumiere.compost");
+
     public static final SoundEvent GLOW_FLARE_SPREAD = register("entity.glow_flare.spread");
 
     public static final SoundEvent SPECTRE_AMBIENT = register("entity.spectre.ambient");
