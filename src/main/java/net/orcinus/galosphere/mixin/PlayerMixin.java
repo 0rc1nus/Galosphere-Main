@@ -28,7 +28,7 @@ public class PlayerMixin {
     @Inject(at = @At("TAIL"), method = "isScoping", cancellable = true)
     private void GE$isScoping(CallbackInfoReturnable<Boolean> cir) {
         Player $this = (Player) (Object) this;
-        if ($this.isUsingItem() && $this.getUseItem().is(GItems.FAY_BOUNDED_SPYGLASS)) {
+        if ($this.isUsingItem() && $this.getUseItem().is(GItems.SPECTRE_BOUNDED_SPYGLASS)) {
             cir.setReturnValue(true);
         }
     }

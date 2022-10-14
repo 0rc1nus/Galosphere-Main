@@ -9,7 +9,7 @@ import net.orcinus.galosphere.init.GItems;
 public interface FayBoundedSpyglass {
 
     static boolean canUseFayBoundedSpyglass(ItemStack stack, LivingEntity livingEntity) {
-        return stack.is(GItems.FAY_BOUNDED_SPYGLASS) && FayBoundedSpyglass.isFayBoundedSpyglass(stack) && !(livingEntity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6);
+        return stack.is(GItems.SPECTRE_BOUNDED_SPYGLASS) && FayBoundedSpyglass.isFayBoundedSpyglass(stack) && !(livingEntity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6);
     }
 
     static boolean isFayBoundedSpyglass(ItemStack stack) {

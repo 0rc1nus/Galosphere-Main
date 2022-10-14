@@ -13,9 +13,9 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.orcinus.galosphere.api.FayBoundedSpyglass;
 
-public class FayBoundedSpyglassItem extends Item {
+public class SpectreBoundedSpyglassItem extends Item {
 
-    public FayBoundedSpyglassItem(Item.Properties properties) {
+    public SpectreBoundedSpyglassItem(Item.Properties properties) {
         super(properties);
     }
 

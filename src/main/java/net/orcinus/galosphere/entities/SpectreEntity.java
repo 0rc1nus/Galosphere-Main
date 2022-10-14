@@ -234,7 +234,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
         ItemStack stack = player.getItemInHand(interactionHand);
         if (this.canBeManipulated() && stack.is(Items.SPYGLASS)) {
             this.playSound(SoundEvents.LODESTONE_COMPASS_LOCK, 1.0F, 1.0F);
-            ItemStack fayBoundedSpyglass = new ItemStack(GItems.FAY_BOUNDED_SPYGLASS);
+            ItemStack fayBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUNDED_SPYGLASS);
             if (this.hasCustomName()) {
                 fayBoundedSpyglass.setHoverName(this.getCustomName());
             }
@@ -247,7 +247,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
             this.level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0f, 1.0f);
             if (!this.level.isClientSide()) {
                 this.gameEvent(GameEvent.ENTITY_INTERACT);
-                ItemStack itemStack2 = new ItemStack(GItems.BOTTLE_OF_FAY);
+                ItemStack itemStack2 = new ItemStack(GItems.BOTTLE_OF_SPECTRE);
                 BottlePickable.saveDefaultDataFromBottleTag(this, itemStack2);
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(stack, player, itemStack2));
                 this.discard();

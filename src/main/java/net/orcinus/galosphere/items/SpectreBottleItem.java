@@ -20,9 +20,9 @@ import net.orcinus.galosphere.api.BottlePickable;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GEntityTypes;
 
-public class FayBottleItem extends Item {
+public class SpectreBottleItem extends Item {
 
-    public FayBottleItem(Properties properties) {
+    public SpectreBottleItem(Properties properties) {
         super(properties);
     }
 
