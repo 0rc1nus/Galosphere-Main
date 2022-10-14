@@ -16,8 +16,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.orcinus.galosphere.api.BannerAttachable;
-import net.orcinus.galosphere.api.FayBoundedSpyglass;
 import net.orcinus.galosphere.api.GoldenBreath;
+import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
@@ -32,45 +32,45 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Optional;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin implements BannerAttachable, GoldenBreath, FayBoundedSpyglass {
+public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundedSpyglass {
     @Shadow protected ItemStack useItem;
     private static final EntityDataAccessor<ItemStack> BANNER_STACK = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.ITEM_STACK );
     private static final EntityDataAccessor<Float> GOLDEN_AIR_SUPPLY = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Boolean> USING_FAY_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Inject(at = @At("HEAD"), method = "defineSynchedData")
     public void G$defineSynchedData(CallbackInfo ci) {
         SynchedEntityData data = ((LivingEntity) (Object) this).getEntityData();
         data.define(BANNER_STACK, ItemStack.EMPTY);
         data.define(GOLDEN_AIR_SUPPLY, 0.0F);
-        data.define(USING_FAY_BOUNDED_SPYGLASS, false);
+        data.define(USING_SPECTRE_BOUNDED_SPYGLASS, false);
     }
 
     @Inject(at = @At("RETURN"), method = "addAdditionalSaveData")
     public void G$addAdditionalSaveData(CompoundTag tag, CallbackInfo ci) {
         tag.put("BannerStack", ((LivingEntity)(Object)this).getEntityData().get(BANNER_STACK).save(new CompoundTag()));
         tag.putFloat("GoldenAirSupply", this.getGoldenAirSupply());
-        tag.putBoolean("UsingFayBoundedSpyglass", this.isUsingFayBoundedSpyglass());
+        tag.putBoolean("UsingSpectreBoundedSpyglass", this.isUsingSpectreBoundedSpyglass());
     }
 
     @Inject(at = @At("RETURN"), method = "readAdditionalSaveData")
     public void G$readAdditionalSavaData(CompoundTag tag, CallbackInfo ci) {
         this.setBanner(ItemStack.of(tag.getCompound("BannerStack")));
         this.setGoldenAirSupply(tag.getFloat("GoldenAirSupply"));
-        this.setUsingFayBoundedSpyglass(tag.getBoolean("UsingFayBoundedSpyglass"));
+        this.setUsingSpectreBoundedSpyglass(tag.getBoolean("UsingSpectreBoundedSpyglass"));
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void G$tick(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        if (FayBoundedSpyglass.canUseFayBoundedSpyglass(this.useItem, entity) && this.useItem.getTag() != null) {
+        if (SpectreBoundedSpyglass.canUseSpectreBoundedSpyglass(this.useItem, entity) && this.useItem.getTag() != null) {
             if (!entity.level.isClientSide) {
-                Entity fayBound = ((ServerLevel)entity.level).getEntity(this.useItem.getTag().getUUID("FayBoundUUID"));
-                Optional.ofNullable(fayBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(fay -> {
-                    if (entity instanceof Player player && fay.getManipulatorUUID() != player.getUUID()) {
-                        boolean withinDistance = Math.sqrt(Math.pow((player.getX() - fay.getX()), 2) + Math.pow((player.getZ() - fay.getZ()), 2)) < 110;
+                Entity spectreBound = ((ServerLevel)entity.level).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
+                Optional.ofNullable(spectreBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(spectre -> {
+                    if (entity instanceof Player player && spectre.getManipulatorUUID() != player.getUUID()) {
+                        boolean withinDistance = Math.sqrt(Math.pow((player.getX() - spectre.getX()), 2) + Math.pow((player.getZ() - spectre.getZ()), 2)) < 110;
                         if (withinDistance) {
-                            fay.setCamera(player);
+                            spectre.setCamera(player);
                         }
                     }
                 });
@@ -181,12 +181,12 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, FayBou
     }
 
     @Override
-    public boolean isUsingFayBoundedSpyglass() {
-        return ((LivingEntity)(Object)this).getEntityData().get(USING_FAY_BOUNDED_SPYGLASS);
+    public boolean isUsingSpectreBoundedSpyglass() {
+        return ((LivingEntity)(Object)this).getEntityData().get(USING_SPECTRE_BOUNDED_SPYGLASS);
     }
 
     @Override
-    public void setUsingFayBoundedSpyglass(boolean usingFayBoundedSpyglass) {
-        ((LivingEntity)(Object)this).getEntityData().set(USING_FAY_BOUNDED_SPYGLASS, usingFayBoundedSpyglass);
+    public void setUsingSpectreBoundedSpyglass(boolean usingSpectreBoundedSpyglass) {
+        ((LivingEntity)(Object)this).getEntityData().set(USING_SPECTRE_BOUNDED_SPYGLASS, usingSpectreBoundedSpyglass);
     }
 }

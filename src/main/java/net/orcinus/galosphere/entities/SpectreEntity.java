@@ -39,9 +39,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.api.BottlePickable;
-import net.orcinus.galosphere.api.FayBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
 import net.orcinus.galosphere.entities.ai.FlyWanderGoal;
-import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetwork;
 import net.orcinus.galosphere.init.GParticleTypes;
@@ -184,7 +183,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
                 if (this.level.isClientSide) {
                     this.stopUsingSpyglass(player);
                 } else {
-                    ((FayBoundedSpyglass)player).setUsingFayBoundedSpyglass(false);
+                    ((SpectreBoundedSpyglass)player).setUsingSpectreBoundedSpyglass(false);
                     this.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
                 }
             }
@@ -240,12 +239,12 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
         ItemStack stack = player.getItemInHand(interactionHand);
         if (this.canBeManipulated() && stack.is(Items.SPYGLASS)) {
             this.playSound(SoundEvents.LODESTONE_COMPASS_LOCK, 1.0F, 1.0F);
-            ItemStack fayBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUNDED_SPYGLASS);
+            ItemStack spectreBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUNDED_SPYGLASS);
             if (this.hasCustomName()) {
-                fayBoundedSpyglass.setHoverName(this.getCustomName());
+                spectreBoundedSpyglass.setHoverName(this.getCustomName());
             }
-            FayBoundedSpyglass.addFayBoundedTags(this, fayBoundedSpyglass.getOrCreateTag());
-            player.setItemInHand(interactionHand, fayBoundedSpyglass);
+            SpectreBoundedSpyglass.addSpectreBoundedTags(this, spectreBoundedSpyglass.getOrCreateTag());
+            player.setItemInHand(interactionHand, spectreBoundedSpyglass);
             this.setCanBeManipulated(false);
             return InteractionResult.SUCCESS;
         }
@@ -274,7 +273,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     public void setCamera(Player player) {
         if (!this.level.isClientSide()) {
             player.zza = 0.0F;
-            ((FayBoundedSpyglass)player).setUsingFayBoundedSpyglass(true);
+            ((SpectreBoundedSpyglass)player).setUsingSpectreBoundedSpyglass(true);
             this.setManipulatorUUID(player.getUUID());
             FriendlyByteBuf buf = PacketByteBufs.create();
             buf.writeUUID(player.getUUID());
