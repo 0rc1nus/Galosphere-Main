@@ -78,6 +78,8 @@ public class GBlockLootTables extends BlockLoot {
         this.dropSelf(GBlocks.CHANDELIER.get());
         this.addVinesDroptable(GBlocks.LICHEN_CORDYCEPS.get(), GBlocks.LICHEN_CORDYCEPS_PLANT.get());
         this.add(GBlocks.GLOW_INK_CLUMPS.get(), GBlockLootTables::createMultifaceBlockDrops);
+        this.dropPottedContents(GBlocks.POTTED_BOWL_LICHEN.get());
+        this.dropPottedContents(GBlocks.POTTED_LICHEN_ROOTS.get());
     }
 
     public static LootTable.Builder createMultifaceBlockDrops(Block block) {
