@@ -1,7 +1,6 @@
 package net.orcinus.galosphere.datagen;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -152,6 +151,28 @@ public class GRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
                 .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_SPECTRE.get()))
                 .save(consumer);
+
+        ShapedRecipeBuilder.shaped(GItems.GLOW_FLARE.get(), 3)
+                .define('#', Items.GLOW_INK_SAC)
+                .define('S', Tags.Items.INGOTS_COPPER)
+                .define('@', Items.GUNPOWDER)
+                .define('F', GItems.BOTTLE_OF_SPECTRE.get())
+                .pattern("#F#")
+                .pattern("S@S")
+                .pattern(" S ")
+                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_SPECTRE.get()))
+                .unlockedBy("has_glow_ink_sac", has(Items.GLOW_INK_SAC))
+                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
+                .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER)).save(consumer);
+
+        ShapedRecipeBuilder
+                .shaped(GItems.GOLDEN_LICHEN_CORDYCEPS.get())
+                .define('#', Tags.Items.NUGGETS_GOLD)
+                .define('@', GItems.LICHEN_CORDYCEPS.get())
+                .pattern("###")
+                .pattern("#@#")
+                .pattern("###")
+                .unlockedBy("has_lichen_cordyceps", has(GItems.LICHEN_CORDYCEPS.get())).save(consumer);
 
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_ALLURITE.get(), GBlocks.ALLURITE_BLOCK.get());

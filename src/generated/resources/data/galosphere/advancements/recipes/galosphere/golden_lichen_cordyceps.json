@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:golden_lichen_cordyceps"
+    ]
+  },
+  "criteria": {
+    "has_lichen_cordyceps": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:lichen_cordyceps"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:golden_lichen_cordyceps"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lichen_cordyceps",
+      "has_the_recipe"
+    ]
+  ]
+}

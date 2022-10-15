@@ -2,7 +2,6 @@ package net.orcinus.galosphere.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.AmethystBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
@@ -15,7 +14,6 @@ import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.blocks.CordycepsBlock;
 import net.orcinus.galosphere.init.GBlocks;
-import org.apache.logging.log4j.Level;
 
 import java.util.Objects;
 

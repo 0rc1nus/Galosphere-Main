@@ -1,0 +1,71 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "galosphere:glow_flare"
+    ]
+  },
+  "criteria": {
+    "has_bottle_of_fay": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:bottle_of_spectre"
+            ]
+          }
+        ]
+      }
+    },
+    "has_glow_ink_sac": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:glow_ink_sac"
+            ]
+          }
+        ]
+      }
+    },
+    "has_gunpowder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:gunpowder"
+            ]
+          }
+        ]
+      }
+    },
+    "has_copper_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/copper"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "galosphere:glow_flare"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bottle_of_fay",
+      "has_glow_ink_sac",
+      "has_gunpowder",
+      "has_copper_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}
