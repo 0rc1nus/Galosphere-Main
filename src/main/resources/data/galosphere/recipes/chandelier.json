@@ -1,19 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "minecraft:copper_ingot"
-    },
-    "@": {
-      "item": "galosphere:bottle_of_fay"
-    }
-  },
-  "pattern": [
-    "@ @",
-    "###",
-    " # "
-  ],
-  "result": {
-    "item": "galosphere:chandelier"
-  }
+	"type": "minecraft:crafting_shaped",
+	"key": {
+		"#": {
+			"item": "minecraft:copper_ingot"
+		},
+		"@": {
+			"item": "galosphere:bottle_of_spectre"
+		}
+	},
+	"pattern": [
+		"@ @",
+		"###",
+		" # "
+	],
+	"result": {
+		"item": "galosphere:chandelier"
+	}
 }
