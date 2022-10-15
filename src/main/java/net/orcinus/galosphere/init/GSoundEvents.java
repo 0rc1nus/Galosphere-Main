@@ -1,6 +1,5 @@
 package net.orcinus.galosphere.init;
 
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.SoundType;
@@ -48,9 +47,6 @@ public class GSoundEvents {
 
     private static SoundType register(String name, float volume, float pitch) {
         return new ForgeSoundType(volume, pitch, register(block(name, "break")), register(block(name, "step")), register(block(name, "place")), register(block(name, "hit")), register(block(name, "fall")));
-    }
-
-    public static void init() {
     }
 
 }
