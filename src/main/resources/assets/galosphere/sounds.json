@@ -349,6 +349,78 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"block.silver.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.silver.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.silver.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.silver.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/silver/place1",
+				"pitch": 1.4,
+				"volume": 0.7
+			},
+			{
+				"name": "galosphere:block/silver/place2",
+				"pitch": 1.4,
+				"volume": 0.7
+			},
+			{
+				"name": "galosphere:block/silver/place3",
+				"pitch": 1.4,
+				"volume": 0.7
+			},
+			{
+				"name": "galosphere:block/silver/place4",
+				"pitch": 1.4,
+				"volume": 0.7
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.silver.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block/silver/step1",
+				"volume": 0.65
+			},
+			{
+				"name": "galosphere:block/silver/step2",
+				"volume": 0.65
+			},
+			{
+				"name": "galosphere:block/silver/step3",
+				"volume": 0.65
+			},
+			{
+				"name": "galosphere:block/silver/step4",
+				"volume": 0.65
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"entity.glow_flare.spread": {
 		"sounds": [
 			{
