@@ -7,9 +7,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.CrossbowAttackMob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.GlowFlareEntity;
@@ -21,6 +23,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CrossbowItem.class)
 public class CrossbowItemMixin {
+
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/CrossbowItem;setCharged(Lnet/minecraft/world/item/ItemStack;Z)V"), method = "releaseUsing")
+    private void GE$releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int i, CallbackInfo ci) {
+        ItemStack projectileStack = ProjectileWeaponItem.getHeldProjectile(livingEntity, stack -> stack.getItem() == GItems.GLOW_FLARE.get());
+        if (!projectileStack.isEmpty() && (livingEntity instanceof Player player && !player.getAbilities().instabuild)) {
+            projectileStack.shrink(1);
+        }
+    }
 
     @Inject(at = @At("HEAD"), method = "shootProjectile", cancellable = true)
     private static void GE$shootProjectile(Level world, LivingEntity entity, InteractionHand hand, ItemStack stack, ItemStack ammo, float p_40900_, boolean p_40901_, float p_40902_, float p_40903_, float p_40904_, CallbackInfo ci) {

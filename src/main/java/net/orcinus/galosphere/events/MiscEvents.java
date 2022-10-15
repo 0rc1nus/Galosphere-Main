@@ -8,11 +8,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -29,8 +27,6 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingGetProjectileEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,12 +34,14 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
+import net.orcinus.galosphere.crafting.GlowFlareDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereReformingManager;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.WarpedAnchorDispenseItemBehavior;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -55,22 +53,6 @@ public class MiscEvents {
         LootTable table = event.getTable();
         if (name.equals(new ResourceLocation("entities/pillager"))) {
             table.addPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_INGOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());
-        }
-    }
-
-    @SubscribeEvent
-    public void onLivingProjectile(LivingGetProjectileEvent event) {
-        LivingEntity entity = event.getEntity();
-        if (!ProjectileWeaponItem.getHeldProjectile(entity, stack -> stack.getItem() == GItems.GLOW_FLARE.get()).isEmpty() && entity instanceof Player) {
-            event.setProjectileItemStack(new ItemStack(GItems.GLOW_FLARE.get()));
-        }
-    }
-
-    @SubscribeEvent
-    public void onLivingStoppedUsingItem(LivingEntityUseItemEvent.Stop event) {
-        ItemStack projectileStack = ProjectileWeaponItem.getHeldProjectile(event.getEntity(), stack -> stack.getItem() == GItems.GLOW_FLARE.get());
-        if (!projectileStack.isEmpty() && (event.getEntity() instanceof Player player && !player.getAbilities().instabuild)) {
-            projectileStack.shrink(1);
         }
     }
 
@@ -96,16 +78,6 @@ public class MiscEvents {
         if (state.getBlock() == Blocks.COMPOSTER) {
             InteractionHand offHand = InteractionHand.OFF_HAND;
             ItemStack offHandStack = player.getItemInHand(offHand);
-            if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8 && offHandStack.is(GItems.LUMIERE_SHARD.get())) {
-                event.setCanceled(true);
-                if (!player.getAbilities().instabuild) {
-                    offHandStack.shrink(1);
-                }
-                world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
-                world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                player.swing(offHand);
-            }
             if (stack.getItem() == GItems.LUMIERE_SHARD.get()) {
                 if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8) {
                     event.setCanceled(true);
@@ -113,7 +85,7 @@ public class MiscEvents {
                         stack.shrink(1);
                     }
                     world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
-                    world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    world.playSound(null, pos, GSoundEvents.LUMIERE_COMPOST.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                     world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                     player.swing(hand);
                 }
@@ -146,11 +118,9 @@ public class MiscEvents {
     @SubscribeEvent
     public void onTagsUpdated(TagsUpdatedEvent event) {
         DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new AuraRingerDispenseItemBehavior());
-
         DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new WarpedAnchorDispenseItemBehavior());
-
         DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
-
+        DispenserBlock.registerBehavior(GItems.GLOW_FLARE.get(), new GlowFlareDispenseItemBehavior());
         Registry.ITEM.getTagOrEmpty(ItemTags.CLUSTER_MAX_HARVESTABLES).iterator().forEachRemaining(holder -> {
             DispenserBlock.registerBehavior(holder.value(), new PickaxeDispenseItemBehavior());
         });

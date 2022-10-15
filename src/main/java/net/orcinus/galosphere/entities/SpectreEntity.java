@@ -9,14 +9,16 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -30,6 +32,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -37,16 +40,18 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 import net.orcinus.galosphere.api.BottlePickable;
-import net.orcinus.galosphere.api.FayBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
 import net.orcinus.galosphere.entities.ai.FlyWanderGoal;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetworkHandler;
 import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.network.SendPerspectivePacket;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 public class SpectreEntity extends PathfinderMob implements FlyingAnimal, BottlePickable {
@@ -65,6 +70,10 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
         this.entityData.define(MANIPULATOR, Optional.empty());
         this.entityData.define(CAN_BE_MANIPULATED, false);
         this.entityData.define(FROM_BOTTLE, false);
+    }
+
+    public static boolean checkSpectreSpawnRules(EntityType<? extends LivingEntity> spectre, LevelAccessor world, MobSpawnType reason, BlockPos blockPos, Random random) {
+        return world.getBlockState(blockPos.below()).isValidSpawn(world, blockPos.below(), spectre);
     }
 
     @Override
@@ -92,6 +101,24 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
         }
         tag.putBoolean("FromBottle", this.fromBottle());
         tag.putBoolean("CanBeManipulated", this.canBeManipulated());
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return GSoundEvents.SPECTRE_AMBIENT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return GSoundEvents.SPECTRE_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return GSoundEvents.SPECTRE_DEATH.get();
     }
 
     @Nullable
@@ -182,8 +209,8 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
                 if (this.level.isClientSide) {
                     this.stopUsingSpyglass(player);
                 } else {
-                    ((FayBoundedSpyglass)player).setUsingFayBoundedSpyglass(false);
-                    this.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
+                    ((SpectreBoundedSpyglass)player).setUsingSpectreBoundedSpyglass(false);
+                    player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_END.get(), getSoundSource(), 1, 1);
                 }
             }
         }
@@ -236,19 +263,19 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         ItemStack stack = player.getItemInHand(interactionHand);
-        if (this.canBeManipulated() && stack.is(Items.SPYGLASS)) {
-            this.playSound(SoundEvents.LODESTONE_COMPASS_LOCK, 1.0F, 1.0F);
-            ItemStack fayBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUNDED_SPYGLASS.get());
+        if (this.canBeManipulated() && (stack.is(GItems.SPECTRE_BOUND_SPYGLASS.get())) || stack.is(Items.SPYGLASS)) {
+            this.playSound(GSoundEvents.SPECTRE_LOCK_TO_SPYGLASS.get(), 1, 1);
+            ItemStack spectreBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUND_SPYGLASS.get());
             if (this.hasCustomName()) {
-                fayBoundedSpyglass.setHoverName(this.getCustomName());
+                spectreBoundedSpyglass.setHoverName(this.getCustomName());
             }
-            FayBoundedSpyglass.addFayBoundedTags(this, fayBoundedSpyglass.getOrCreateTag());
-            player.setItemInHand(interactionHand, fayBoundedSpyglass);
+            SpectreBoundedSpyglass.addSpectreBoundedTags(this, spectreBoundedSpyglass.getOrCreateTag());
+            player.setItemInHand(interactionHand, spectreBoundedSpyglass);
             this.setCanBeManipulated(false);
             return InteractionResult.SUCCESS;
         }
         if (stack.is(Items.GLASS_BOTTLE)) {
-            this.level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0f, 1.0f);
+            this.level.playSound(player, player.getX(), player.getY(), player.getZ(), GSoundEvents.SPECTRE_BOTTLE_FILL.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
             if (!this.level.isClientSide()) {
                 this.gameEvent(GameEvent.ENTITY_INTERACT);
                 ItemStack itemStack2 = new ItemStack(GItems.BOTTLE_OF_SPECTRE.get());
@@ -263,7 +290,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
                 stack.shrink(1);
             }
             this.setCanBeManipulated(true);
-            this.playSound(SoundEvents.ALLAY_ITEM_GIVEN, 1.0F, 1.0F);
+            this.playSound(GSoundEvents.SPECTRE_RECEIVE_ITEM.get(), 1, 1);
             return InteractionResult.SUCCESS;
         }
         return super.mobInteract(player, interactionHand);
@@ -272,10 +299,10 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     public void setCamera(Player player) {
         if (!this.level.isClientSide()) {
             player.zza = 0.0F;
-            ((FayBoundedSpyglass)player).setUsingFayBoundedSpyglass(true);
+            ((SpectreBoundedSpyglass)player).setUsingSpectreBoundedSpyglass(true);
             this.setManipulatorUUID(player.getUUID());
             GNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), new SendPerspectivePacket(player.getUUID(), this.getId()));
-            this.playSound(SoundEvents.ALLAY_ITEM_GIVEN, 1.0F, 1.0F);
+            this.playSound(GSoundEvents.SPECTRE_MANIPULATE_BEGIN.get(), 1.0F, 1.0F);
         }
     }
 

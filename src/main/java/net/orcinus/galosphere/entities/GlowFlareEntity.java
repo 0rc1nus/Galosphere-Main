@@ -38,6 +38,11 @@ public class GlowFlareEntity extends FireworkRocketEntity {
         this.setOwner(entity);
     }
 
+    public GlowFlareEntity(Level level, ItemStack itemStack, double d, double e, double f, boolean bl) {
+        this(level, d, e, f, itemStack);
+        this.entityData.set(FireworkRocketEntity.DATA_SHOT_AT_ANGLE, bl);
+    }
+
     public GlowFlareEntity(Level level, double d, double e, double f, ItemStack itemStack) {
         super(GEntityTypes.GLOW_FLARE.get(), level);
         this.life = 0;

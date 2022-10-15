@@ -33,7 +33,6 @@ import net.orcinus.galosphere.init.GParticleTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
 
 public class AuraRingerBlock extends BaseEntityBlock {
     public static final BooleanProperty RINGING = BooleanProperty.create("ringing");

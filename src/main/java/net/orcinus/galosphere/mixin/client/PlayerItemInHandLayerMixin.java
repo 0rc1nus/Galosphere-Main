@@ -18,7 +18,7 @@ public class PlayerItemInHandLayerMixin {
 
     @Inject(at = @At("HEAD"), method = "renderArmWithItem", cancellable = true)
     private void GE$renderArmWithItem(LivingEntity livingEntity, ItemStack itemStack, ItemTransforms.TransformType transformType, HumanoidArm humanoidArm, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, CallbackInfo ci) {
-        if (itemStack.is(GItems.SPECTRE_BOUNDED_SPYGLASS.get()) && livingEntity.getUseItem() == itemStack && livingEntity.swingTime == 0) {
+        if (itemStack.is(GItems.SPECTRE_BOUND_SPYGLASS.get()) && livingEntity.getUseItem() == itemStack && livingEntity.swingTime == 0) {
             ci.cancel();
             ((PlayerItemInHandLayer<?, ?>)(Object)this).renderArmWithSpyglass(livingEntity, itemStack, humanoidArm, poseStack, multiBufferSource, i);
         }

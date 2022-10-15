@@ -31,7 +31,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.BannerAttachable;
-import net.orcinus.galosphere.api.FayBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
 import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.entities.SpectreEntity;
@@ -167,14 +167,14 @@ public class MobEvents {
                 goldenBreath.setGoldenAirSupply(goldenBreath.decreaseGoldenAirSupply(entity, (int) goldenBreath.getGoldenAirSupply()));
             }
         }
-        if (FayBoundedSpyglass.canUseFayBoundedSpyglass(useItem, entity) && useItem.getTag() != null) {
+        if (SpectreBoundedSpyglass.canUseSpectreBoundedSpyglass(useItem, entity) && useItem.getTag() != null) {
             if (!entity.level.isClientSide) {
-                Entity fayBound = ((ServerLevel)entity.level).getEntity(useItem.getTag().getUUID("FayBoundUUID"));
-                Optional.ofNullable(fayBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(fay -> {
-                    if (entity instanceof Player player && fay.getManipulatorUUID() != player.getUUID()) {
-                        boolean withinDistance = Math.sqrt(Math.pow((player.getX() - fay.getX()), 2) + Math.pow((player.getZ() - fay.getZ()), 2)) < 110;
+                Entity spectreBound = ((ServerLevel)entity.level).getEntity(useItem.getTag().getUUID("SpectreBoundUUID"));
+                Optional.ofNullable(spectreBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(spectre -> {
+                    if (entity instanceof Player player && spectre.getManipulatorUUID() != player.getUUID()) {
+                        boolean withinDistance = Math.sqrt(Math.pow((player.getX() - spectre.getX()), 2) + Math.pow((player.getZ() - spectre.getZ()), 2)) < 110;
                         if (withinDistance) {
-                            fay.setCamera(player);
+                            spectre.setCamera(player);
                         }
                     }
                 });
