@@ -3,7 +3,6 @@ package net.orcinus.galosphere.network;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Optional;
@@ -33,7 +32,6 @@ public class SendPerspectivePacket {
             Minecraft client = Minecraft.getInstance();
             Optional.ofNullable(client.level).flatMap(world -> Optional.ofNullable(world.getPlayerByUUID(packet.uuid)).filter(player -> player.equals(client.player)).flatMap(player -> Optional.ofNullable(client.level.getEntity(packet.id)))).ifPresent(entity -> {
                 client.setCameraEntity(entity);
-                client.player.resetPos();
                 if (!client.options.getCameraType().isFirstPerson()) {
                     client.options.setCameraType(CameraType.FIRST_PERSON);
                 }
