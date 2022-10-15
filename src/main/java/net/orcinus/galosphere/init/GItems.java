@@ -15,7 +15,7 @@ import net.orcinus.galosphere.items.IconItem;
 import net.orcinus.galosphere.items.LichenCordycepsItem;
 import net.orcinus.galosphere.items.SpectreBottleItem;
 import net.orcinus.galosphere.items.SilverBombItem;
-import net.orcinus.galosphere.items.SpectreBoundedSpyglassItem;
+import net.orcinus.galosphere.items.SpectreBoundSpyglassItem;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -41,7 +41,7 @@ public class GItems {
     public static final RegistryObject<Item> LICHEN_CORDYCEPS = ITEMS.register("lichen_cordyceps", () -> new LichenCordycepsItem(GBlocks.LICHEN_CORDYCEPS.get(), new Item.Properties().food(GFoods.LICHEN_CORDYCEPS).tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> GOLDEN_LICHEN_CORDYCEPS = ITEMS.register("golden_lichen_cordyceps", () -> new GoldenLichenCordycepsItem(new Item.Properties().food(GFoods.GOLDEN_LICHEN_CORDYCEPS).tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> GLOW_FLARE = ITEMS.register("glow_flare", () -> new GlowFlareItem(new Item.Properties().tab(Galosphere.GALOSPHERE)));
-    public static final RegistryObject<Item> SPECTRE_BOUNDED_SPYGLASS = ITEMS.register("spectre_bounded_spyglass", () -> new SpectreBoundedSpyglassItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SPECTRE_BOUND_SPYGLASS = ITEMS.register("spectre_bound_spyglass", () -> new SpectreBoundSpyglassItem(new Item.Properties().stacksTo(1)));
 
     public static RegistryObject<Item> registerBaseItem(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties().tab(Galosphere.GALOSPHERE)));

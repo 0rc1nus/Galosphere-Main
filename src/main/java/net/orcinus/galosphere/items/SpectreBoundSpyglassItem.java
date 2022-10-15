@@ -15,9 +15,9 @@ import net.minecraft.world.level.Level;
 import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
 
-public class SpectreBoundedSpyglassItem extends Item {
+public class SpectreBoundSpyglassItem extends Item {
 
-    public SpectreBoundedSpyglassItem(Properties properties) {
+    public SpectreBoundSpyglassItem(Properties properties) {
         super(properties);
     }
 
