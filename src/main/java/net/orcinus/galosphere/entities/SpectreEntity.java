@@ -257,12 +257,12 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
         ItemStack stack = player.getItemInHand(interactionHand);
         if (this.canBeManipulated() && stack.is(Items.SPYGLASS)) {
             this.playSound(GSoundEvents.SPECTRE_LOCK_TO_SPYGLASS, 1, 1);
-            ItemStack spectreBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUNDED_SPYGLASS);
+            ItemStack spyglass = new ItemStack(GItems.SPECTRE_BOUND_SPYGLASS);
             if (this.hasCustomName()) {
-                spectreBoundedSpyglass.setHoverName(this.getCustomName());
+                spyglass.setHoverName(this.getCustomName());
             }
-            SpectreBoundedSpyglass.addSpectreBoundedTags(this, spectreBoundedSpyglass.getOrCreateTag());
-            player.setItemInHand(interactionHand, spectreBoundedSpyglass);
+            SpectreBoundedSpyglass.addSpectreBoundedTags(this, spyglass.getOrCreateTag());
+            player.setItemInHand(interactionHand, spyglass);
             this.setCanBeManipulated(false);
             return InteractionResult.SUCCESS;
         }

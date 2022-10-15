@@ -1,5 +1,10 @@
 package net.orcinus.galosphere.mixin;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -17,10 +22,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.util.BannerRendererUtil;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public class PlayerMixin {
@@ -28,7 +29,7 @@ public class PlayerMixin {
     @Inject(at = @At("TAIL"), method = "isScoping", cancellable = true)
     private void GE$isScoping(CallbackInfoReturnable<Boolean> cir) {
         Player $this = (Player) (Object) this;
-        if ($this.isUsingItem() && $this.getUseItem().is(GItems.SPECTRE_BOUNDED_SPYGLASS)) {
+        if ($this.isUsingItem() && $this.getUseItem().is(GItems.SPECTRE_BOUND_SPYGLASS)) {
             cir.setReturnValue(true);
         }
     }

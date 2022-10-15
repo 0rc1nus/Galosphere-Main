@@ -1,5 +1,14 @@
 package net.orcinus.galosphere.mixin;
 
+import java.util.Optional;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -22,14 +31,6 @@ import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.mixin.access.LivingEntityAccessor;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Optional;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundedSpyglass {
@@ -63,7 +64,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     @Inject(at = @At("HEAD"), method = "tick")
     private void G$tick(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        if (SpectreBoundedSpyglass.canUseSpectreBoundedSpyglass(this.useItem, entity) && this.useItem.getTag() != null) {
+        if (SpectreBoundedSpyglass.canUseSpectreBoundSpyglass(this.useItem, entity) && this.useItem.getTag() != null) {
             if (!entity.level.isClientSide) {
                 Entity spectreBound = ((ServerLevel)entity.level).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
                 Optional.ofNullable(spectreBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(spectre -> {

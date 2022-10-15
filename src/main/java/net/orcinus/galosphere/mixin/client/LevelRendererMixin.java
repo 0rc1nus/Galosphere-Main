@@ -96,7 +96,6 @@ public abstract class LevelRendererMixin {
 
     private boolean shouldRenderPlayer() {
         LocalPlayer player = this.minecraft.player;
-        return player != null && player.isScoping() && SpectreBoundedSpyglass.canUseSpectreBoundedSpyglass(player.getUseItem(), player) && ((SpectreBoundedSpyglass)player).isUsingSpectreBoundedSpyglass();
+        return player != null && player.isScoping() && SpectreBoundedSpyglass.canUseSpectreBoundSpyglass(player.getUseItem(), player) && ((SpectreBoundedSpyglass)player).isUsingSpectreBoundedSpyglass();
     }
-
 }
