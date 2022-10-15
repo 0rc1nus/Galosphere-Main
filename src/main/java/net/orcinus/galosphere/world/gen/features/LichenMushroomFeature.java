@@ -5,11 +5,13 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GlowLichenBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -49,7 +51,7 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
                 if ((world.isEmptyBlock(checkpos) || !world.getFluidState(checkpos).isEmpty()) && !flag2) {
                     tries++;
                     if (tries < 5) {
-                        return generateLichenMushroom(world, blockPos.below(), random, radius, stemHeight, set, tries);
+                        return this.generateLichenMushroom(world, blockPos.below(), random, radius, stemHeight, set, tries);
                     } else {
                         return false;
                     }
@@ -61,7 +63,83 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
         return false;
     }
 
-    public static void generateHugeLichenMushroom(WorldGenLevel world, BlockPos blockPos, Random random, int radius, int stemHeight, HashSet<BlockPos> set) {
+    public static boolean generateHugeLichenMushroom(WorldGenLevel world, BlockPos blockPos, Random random, int radius, int stemHeight, HashSet<BlockPos> set) {
+        if (!LichenMushroomFeature.checkAirExposure(world, blockPos, stemHeight)) {
+            return false;
+        } else {
+            if (radius == 1) {
+                LichenMushroomFeature.generateUnqiueLichenMushroom(world, blockPos, set);
+            } else {
+                LichenMushroomFeature.generateDefaultLichenMushroom(world, blockPos, radius, stemHeight, set);
+            }
+            set.forEach(mossPos -> {
+                if (random.nextInt(3) == 0) {
+                    if (world.isStateAtPosition(mossPos.above(), DripstoneUtils::isEmptyOrWater)) {
+                        Block block = random.nextInt(10) == 0 ? GBlocks.BOWL_LICHEN .get(): GBlocks.LICHEN_ROOTS.get();
+                        world.setBlock(mossPos.above(), block.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(mossPos.above()).is(Blocks.WATER)), 2);
+                    }
+                }
+                if (random.nextInt(5) == 0) {
+                    Direction.Plane.HORIZONTAL.forEach(direction -> {
+                        if (world.isStateAtPosition(mossPos.relative(direction), state -> state.isAir() || state.is(Blocks.WATER) || state.getMaterial().isReplaceable())) {
+                            world.setBlock(mossPos.relative(direction), GBlocks.LICHEN_SHELF.get().defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, direction).setValue(BaseCoralWallFanBlock.WATERLOGGED, world.getBlockState(mossPos.relative(direction)).is(Blocks.WATER)), 2);
+                        }
+                    });
+                }
+                if (random.nextInt(15) == 0) {
+                    Arrays.stream(Direction.values()).filter(direction -> world.isStateAtPosition(mossPos.relative(direction), LichenMushroomFeature::canGenerate)).forEach(direction -> world.setBlock(mossPos.relative(direction), Blocks.GLOW_LICHEN.defaultBlockState().setValue(GlowLichenBlock.getFaceProperty(direction.getOpposite()), true).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(mossPos.relative(direction)).is(Blocks.WATER)), 2));
+                }
+            });
+            return true;
+        }
+    }
+
+    private static void generateUnqiueLichenMushroom(WorldGenLevel world, BlockPos blockPos, HashSet<BlockPos> set) {
+        int stemRadius = 1;
+        int capRadius = 2;
+        int radiusOneHeight = 3;
+        for (int x = -stemRadius; x <= stemRadius; x++) {
+            for (int z = -stemRadius; z <= stemRadius; z++) {
+                BlockPos generatePos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
+                for (int y = 0; y < radiusOneHeight; y++) {
+                    BlockPos pos = generatePos.above(y);
+                    boolean flag = x == stemRadius || x == -stemRadius;
+                    boolean flag1 = z == stemRadius || z == -stemRadius;
+                    if (y == 1) {
+                        if (flag && flag1) continue;
+                    } else if (y == 2) {
+                        if (flag || flag1) continue;
+                    }
+                    if (world.isStateAtPosition(pos, LichenMushroomFeature::canGenerate)) {
+                        world.setBlock(pos, Blocks.MUSHROOM_STEM.defaultBlockState(), 2);
+                    }
+                }
+                BlockPos capPos = generatePos.above(radiusOneHeight);
+                if (world.isStateAtPosition(capPos, LichenMushroomFeature::canGenerate)) {
+                    world.setBlock(capPos, GBlocks.LICHEN_MOSS.get().defaultBlockState(), 2);
+                    set.add(capPos);
+                }
+            }
+        }
+        for (int x = -capRadius; x <= capRadius; x++) {
+            for (int z = -capRadius; z <= capRadius; z++) {
+                BlockPos capPos = new BlockPos(blockPos.getX() + x, blockPos.getY() + radiusOneHeight + 1, blockPos.getZ() + z);
+                boolean flag = (x == capRadius || x == -capRadius) && (z == capRadius || z == -capRadius);
+                if (flag) continue;
+                if (x * x + z * z <= 1) continue;
+                if (world.isStateAtPosition(capPos, LichenMushroomFeature::canGenerate)) {
+                    world.setBlock(capPos, GBlocks.LICHEN_MOSS.get().defaultBlockState(), 2);
+                    set.add(capPos);
+                }
+            }
+        }
+    }
+
+    private static boolean canGenerate(BlockState state) {
+        return state.getMaterial().isReplaceable() || state.isAir() || state.is(Blocks.WATER) || state.is(GBlocks.BOWL_LICHEN.get());
+    }
+
+    private static void generateDefaultLichenMushroom(WorldGenLevel world, BlockPos blockPos, int radius, int stemHeight, HashSet<BlockPos> set) {
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 for (int y = 0; y < stemHeight; y++) {
@@ -71,7 +149,7 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
                     boolean flag1 = z == -radius || z == radius;
                     boolean flag2 = y == 0 && flag && flag1;
                     if (x * x + (2 * (Math.log(y * y) * f4) / f4) + z * z <= radius * radius && !flag2) {
-                        if (world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava) || world.getBlockState(pos).getMaterial().isReplaceable()) {
+                        if (world.isStateAtPosition(pos, LichenMushroomFeature::canGenerate)) {
                             world.setBlock(pos, Blocks.MUSHROOM_STEM.defaultBlockState(), 2);
                         }
                         for (int xMossRadius = -radius * 2; xMossRadius <= radius * 2; xMossRadius++) {
@@ -79,15 +157,15 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
                                 BlockPos mossPos = new BlockPos(blockPos.getX() + xMossRadius, blockPos.getY() + stemHeight - 1, blockPos.getZ() + zMossRadius);
                                 int distance = xMossRadius * xMossRadius + zMossRadius * zMossRadius;
                                 if (distance < radius * 4) {
-                                    if (world.isStateAtPosition(mossPos, DripstoneUtils::isEmptyOrWaterOrLava) || world.getBlockState(mossPos).getMaterial().isReplaceable()) {
+                                    if (world.isStateAtPosition(mossPos, LichenMushroomFeature::canGenerate)) {
                                         world.setBlock(mossPos, GBlocks.LICHEN_MOSS.get().defaultBlockState(), 2);
+                                        set.add(mossPos);
                                     }
-                                    set.add(mossPos);
                                 } else if (distance <= radius * 8 && distance >= radius * 4) {
-                                    if (world.isStateAtPosition(mossPos.above(), DripstoneUtils::isEmptyOrWaterOrLava) || world.getBlockState(mossPos.above()).getMaterial().isReplaceable()) {
+                                    if (world.isStateAtPosition(mossPos.above(), LichenMushroomFeature::canGenerate)) {
                                         world.setBlock(mossPos.above(), GBlocks.LICHEN_MOSS.get().defaultBlockState(), 2);
+                                        set.add(mossPos.above());
                                     }
-                                    set.add(mossPos.above());
                                 }
                             }
                         }
@@ -95,26 +173,15 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
-        set.forEach(mossPos -> {
-            if (random.nextInt(3) == 0) {
-                if (world.isEmptyBlock(mossPos.above()) || world.getBlockState(mossPos).getMaterial().isReplaceable()) {
-                    Block block = random.nextInt(10) == 0 ? GBlocks.BOWL_LICHEN.get() : GBlocks.LICHEN_ROOTS.get();
-                    world.setBlock(mossPos.above(), block.defaultBlockState(), 2);
-                }
+    }
+
+    public static boolean checkAirExposure(LevelAccessor world, BlockPos blockPos, int height) {
+        for (int y = 0; y < height; y++) {
+            if (world.isStateAtPosition(blockPos.above(y), LichenMushroomFeature::canGenerate)) {
+                return true;
             }
-            if (random.nextInt(5) == 0) {
-                Direction.Plane.HORIZONTAL.forEach(direction -> {
-                    if (world.isEmptyBlock(mossPos.relative(direction)) || world.getBlockState(mossPos.relative(direction)).getMaterial().isReplaceable()) {
-                        world.setBlock(mossPos.relative(direction), GBlocks.LICHEN_SHELF.get().defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, direction).setValue(BaseCoralWallFanBlock.WATERLOGGED, world.getBlockState(mossPos.relative(direction)).is(Blocks.WATER)), 2);
-                    }
-                });
-            }
-            if (random.nextInt(15) == 0) {
-                Arrays.stream(Direction.values()).filter(direction -> world.isStateAtPosition(mossPos.relative(direction), DripstoneUtils::isEmptyOrWater)).forEach(direction -> {
-                    world.setBlock(mossPos.relative(direction), Blocks.GLOW_LICHEN.defaultBlockState().setValue(GlowLichenBlock.getFaceProperty(direction.getOpposite()), true).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(mossPos.relative(direction)).is(Blocks.WATER)), 2);
-                });
-            }
-        });
+        }
+        return false;
     }
 
 }

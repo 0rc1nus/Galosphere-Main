@@ -145,12 +145,12 @@ public class GRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder
                 .shaped(GBlocks.CHANDELIER.get())
                 .define('#', Tags.Items.INGOTS_COPPER)
-                .define('@', GItems.BOTTLE_OF_FAY.get())
+                .define('@', GItems.BOTTLE_OF_SPECTRE.get())
                 .pattern("@ @")
                 .pattern("###")
                 .pattern(" # ")
                 .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
-                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_FAY.get()))
+                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_SPECTRE.get()))
                 .save(consumer);
 
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_AMETHYST.get(), Blocks.AMETHYST_BLOCK);

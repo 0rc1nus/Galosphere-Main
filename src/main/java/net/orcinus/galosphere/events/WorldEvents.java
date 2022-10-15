@@ -41,12 +41,14 @@ public class WorldEvents {
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_CEILING_CRYSTALS);
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_FLOOR_CRYSTALS);
             mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 10, 4, 6));
-            mobBuilder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(GEntityTypes.SPARKLE.get(), 120, 4, 6));
+            mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(GEntityTypes.SPARKLE.get(), 120, 4, 6));
         }
 
         if (biome == GBiomes.LICHEN_CAVES.get()) {
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.BOWL_LICHEN);
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LICHEN_VEGETATION);
+            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LICHEN_CORDYCEPS_COLUMN);
+            mobBuilder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(GEntityTypes.SPECTRE.get(), 20, 8, 8));
         }
 
     }

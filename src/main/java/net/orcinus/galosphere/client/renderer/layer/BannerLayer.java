@@ -16,7 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.orcinus.galosphere.api.IBanner;
+import net.orcinus.galosphere.api.BannerAttachable;
 
 @OnlyIn(Dist.CLIENT)
 public class BannerLayer<T extends LivingEntity, M extends EntityModel<T> & HeadedModel> extends RenderLayer<T, M> {
@@ -27,8 +27,8 @@ public class BannerLayer<T extends LivingEntity, M extends EntityModel<T> & Head
 
     @Override
     public void render(PoseStack stack, MultiBufferSource source, int packedLight, T entity, float p_117353_, float p_117354_, float p_117355_, float p_117356_, float p_117357_, float p_117358_) {
-        if (!((IBanner)entity).getBanner().isEmpty()) {
-            ItemStack itemstack = ((IBanner)entity).getBanner();
+        if (!((BannerAttachable)entity).getBanner().isEmpty()) {
+            ItemStack itemstack = ((BannerAttachable)entity).getBanner();
             if (itemstack != null) {
                 if (!itemstack.isEmpty()) {
                     Item item = itemstack.getItem();

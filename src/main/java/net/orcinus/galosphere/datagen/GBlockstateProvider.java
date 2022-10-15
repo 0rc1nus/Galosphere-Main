@@ -6,12 +6,14 @@ import net.minecraft.world.level.block.AmethystBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.blocks.CordycepsBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import org.apache.logging.log4j.Level;
 
@@ -48,6 +50,12 @@ public class GBlockstateProvider extends BlockStateProvider {
 
         this.crossBlock(GBlocks.LICHEN_ROOTS);
         this.crossBlock(GBlocks.BOWL_LICHEN);
+        this.getVariantBuilder(GBlocks.LICHEN_CORDYCEPS.get()).forAllStatesExcept(state -> {
+            BlockModelBuilder crossFile = models().cross("lichen_cordyceps", new ResourceLocation(Galosphere.MODID, "block/lichen_cordyceps"));
+            BlockModelBuilder bulbcrossFile = models().cross("lichen_cordyceps_bulb", new ResourceLocation(Galosphere.MODID, "block/lichen_cordyceps_bulb"));
+            return ConfiguredModel.builder().modelFile(state.getValue(CordycepsBlock.BULB) ? bulbcrossFile : crossFile).build();
+        }, CordycepsBlock.AGE);
+        this.crossBlock(GBlocks.LICHEN_CORDYCEPS_PLANT);
 
         this.slabBlock(GBlocks.AMETHYST_SLAB.get(), "amethyst_block", true);
         this.slabBlock(GBlocks.ALLURITE_SLAB.get(), "allurite_block");

@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 public class LumiereComposterDispenseItemBehavior extends OptionalDispenseItemBehavior {
 
@@ -25,7 +26,7 @@ public class LumiereComposterDispenseItemBehavior extends OptionalDispenseItemBe
         this.setSuccess(true);
         if (state.is(Blocks.COMPOSTER)) {
             if (state.getValue(ComposterBlock.LEVEL) > 0) {
-                world.playSound(null, blockpos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, blockpos, GSoundEvents.LUMIERE_COMPOST.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 world.setBlock(blockpos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(ComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
                 stack.shrink(1);
             } else {

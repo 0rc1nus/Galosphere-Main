@@ -38,7 +38,7 @@ public class GBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DRIPSTONE_CAVES);
+        Music music = Musics.createGameMusic(GSoundEvents.MUSIC_LICHEN_CAVES.get());
         return biome(0.5F, 0.5F, mobBuilder, biomeBuilder, music, 4159204);
     }
 
@@ -54,7 +54,7 @@ public class GBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DRIPSTONE_CAVES);
+        Music music = Musics.createGameMusic(GSoundEvents.MUSIC_CRYSTAL_CANYONS.get());
         return biome(0.5F, 0.5F, mobBuilder, biomeBuilder, music, 4445678);
     }
 

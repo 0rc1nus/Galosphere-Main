@@ -5,12 +5,17 @@
   "minVersion": "0.8",
   "refmap": "galosphere.refmap.json",
   "mixins": [
+    "CrossbowItemMixin",
     "LightningBoltMixin",
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
+    "PlayerMixin",
     "PowderSnowBlockMixin"
   ],
   "client": [
+    "client.ItemModelShaperMixin",
+    "client.ItemRendererMixin",
+    "client.PlayerItemInHandLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

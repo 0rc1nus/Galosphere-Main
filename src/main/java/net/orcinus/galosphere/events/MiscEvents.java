@@ -31,15 +31,17 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.api.IBanner;
+import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
+import net.orcinus.galosphere.crafting.GlowFlareDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
+import net.orcinus.galosphere.crafting.LumiereReformingManager;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.WarpedAnchorDispenseItemBehavior;
-import net.orcinus.galosphere.crafting.LumiereReformingManager;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -67,11 +69,11 @@ public class MiscEvents {
         BlockPos pos = event.getPos();
         Level world = event.getWorld();
         BlockState state = world.getBlockState(pos);
-        if (player.isShiftKeyDown() && !((IBanner) player).getBanner().isEmpty() && stack.isEmpty()) {
-            ItemStack copy = ((IBanner) player).getBanner();
+        if (player.isShiftKeyDown() && !((BannerAttachable) player).getBanner().isEmpty() && stack.isEmpty()) {
+            ItemStack copy = ((BannerAttachable) player).getBanner();
             player.setItemInHand(hand, copy);
             player.gameEvent(GameEvent.EQUIP, player);
-            ((IBanner) player).setBanner(ItemStack.EMPTY);
+            ((BannerAttachable) player).setBanner(ItemStack.EMPTY);
         }
         if (state.getBlock() == Blocks.COMPOSTER) {
             if (stack.getItem() == GItems.LUMIERE_SHARD.get()) {
@@ -81,7 +83,7 @@ public class MiscEvents {
                         stack.shrink(1);
                     }
                     world.setBlock(pos, GBlocks.LUMIERE_COMPOSTER.get().defaultBlockState().setValue(LumiereComposterBlock.LEVEL, state.getValue(ComposterBlock.LEVEL)), 2);
-                    world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    world.playSound(null, pos, GSoundEvents.LUMIERE_COMPOST.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                     world.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                     player.swing(hand);
                 }
@@ -95,7 +97,7 @@ public class MiscEvents {
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
         BannerRendererUtil util = new BannerRendererUtil();
-        if (((IBanner) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
+        if (((BannerAttachable) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
             if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                 player.gameEvent(GameEvent.EQUIP, player);
                 ItemStack copy = stack.copy();
@@ -103,7 +105,7 @@ public class MiscEvents {
                     stack.shrink(1);
                 }
                 copy.setCount(1);
-                ((IBanner) player).setBanner(copy);
+                ((BannerAttachable) player).setBanner(copy);
                 player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1.0F, 1.0F);
                 player.swing(hand);
             }
@@ -113,15 +115,12 @@ public class MiscEvents {
     @SubscribeEvent
     public void onTagsUpdated(TagsUpdatedEvent event) {
         DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new AuraRingerDispenseItemBehavior());
-
         DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new WarpedAnchorDispenseItemBehavior());
-
         DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
-
+        DispenserBlock.registerBehavior(GItems.GLOW_FLARE.get(), new GlowFlareDispenseItemBehavior());
         Registry.ITEM.getTagOrEmpty(ItemTags.CLUSTER_MAX_HARVESTABLES).iterator().forEachRemaining(holder -> {
             DispenserBlock.registerBehavior(holder.value(), new PickaxeDispenseItemBehavior());
         });
-
     }
 
 }

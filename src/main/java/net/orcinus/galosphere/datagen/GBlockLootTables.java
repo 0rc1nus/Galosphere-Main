@@ -1,16 +1,24 @@
 package net.orcinus.galosphere.datagen;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.Direction;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
@@ -20,6 +28,7 @@ import net.orcinus.galosphere.init.GItems;
 import java.util.stream.Collectors;
 
 public class GBlockLootTables extends BlockLoot {
+    private static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
 
     @Override
     protected void addTables() {
@@ -71,6 +80,22 @@ public class GBlockLootTables extends BlockLoot {
         dropSelf(GBlocks.LICHEN_SHELF.get());
         dropSelf(GBlocks.BOWL_LICHEN.get());
         dropSelf(GBlocks.CHANDELIER.get());
+        this.addVinesDroptable(GBlocks.LICHEN_CORDYCEPS.get(), GBlocks.LICHEN_CORDYCEPS_PLANT.get());
+        this.add(GBlocks.GLOW_INK_CLUMPS.get(), GBlockLootTables::createMultifaceBlockDrops);
+        this.dropPottedContents(GBlocks.POTTED_BOWL_LICHEN.get());
+        this.dropPottedContents(GBlocks.POTTED_LICHEN_ROOTS.get());
+    }
+
+    public static LootTable.Builder createMultifaceBlockDrops(Block block) {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(applyExplosionDecay(block, LootItem.lootTableItem(block).when(HAS_SHEARS).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PipeBlock.EAST, true)))).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PipeBlock.WEST, true)))).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PipeBlock.NORTH, true)))).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PipeBlock.SOUTH, true)))).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PipeBlock.UP, true)))).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PipeBlock.DOWN, true)))).apply(SetItemCountFunction.setCount(ConstantValue.exactly(-1.0F), true)))));
+    }
+
+    private void addVinesDroptable(Block block, Block plantBlock) {
+        LootTable.Builder loottable$builder = createSilkTouchOrShearsDispatchTable(block, LootItem.lootTableItem(block).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.33F, 0.55F, 0.77F, 1.0F)));
+        this.add(block, loottable$builder);
+        this.add(plantBlock, loottable$builder);
     }
 
     private void dropSlab(RegistryObject<Block> slab) {

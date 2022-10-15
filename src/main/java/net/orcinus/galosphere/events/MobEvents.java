@@ -1,6 +1,7 @@
 package net.orcinus.galosphere.events;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -29,10 +30,12 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.api.IBanner;
+import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
+import net.orcinus.galosphere.api.GoldenBreath;
+import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
-import net.orcinus.galosphere.entities.FayEntity;
 import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypes;
@@ -40,15 +43,18 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
+import java.util.Optional;
+
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MobEvents {
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
         SpawnPlacements.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules);
+        SpawnPlacements.register(GEntityTypes.SPECTRE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpectreEntity::checkSpectreSpawnRules);
 
         event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
-        event.put(GEntityTypes.FAY.get(), FayEntity.createAttributes().build());
+        event.put(GEntityTypes.SPECTRE.get(), SpectreEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -63,10 +69,10 @@ public class MobEvents {
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
         if (livingEntity instanceof Horse horse) {
-            if (!((IBanner)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-                ItemStack copy = ((IBanner) horse).getBanner();
+            if (!((BannerAttachable)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
+                ItemStack copy = ((BannerAttachable) horse).getBanner();
                 horse.spawnAtLocation(copy);
-                ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
             }
         }
     }
@@ -106,7 +112,7 @@ public class MobEvents {
         BannerRendererUtil util = new BannerRendererUtil();
         if (target instanceof Horse horse) {
             if (horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-                if (((IBanner) horse).getBanner().isEmpty()) {
+                if (((BannerAttachable) horse).getBanner().isEmpty()) {
                     if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
                         if (!horse.level.isClientSide()) {
                             event.setCanceled(true);
@@ -117,7 +123,7 @@ public class MobEvents {
                             copy.setCount(1);
                             horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
                             horse.gameEvent(GameEvent.MOB_INTERACT, player);
-                            ((IBanner) horse).setBanner(copy);
+                            ((BannerAttachable) horse).setBanner(copy);
                             player.swing(hand);
                         }
                     }
@@ -125,11 +131,11 @@ public class MobEvents {
                     if (player.isShiftKeyDown() && stack.isEmpty()) {
                         if (!horse.level.isClientSide()) {
                             event.setCanceled(true);
-                            ItemStack copy = ((IBanner) horse).getBanner();
+                            ItemStack copy = ((BannerAttachable) horse).getBanner();
                             player.setItemInHand(hand, copy);
                             horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
                             horse.gameEvent(GameEvent.MOB_INTERACT, player);
-                            ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                            ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
                         }
                     }
                 }
@@ -140,13 +146,14 @@ public class MobEvents {
     @SubscribeEvent
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        if (entity instanceof IBanner bannerEntity) {
+        ItemStack useItem = entity.getUseItem();
+        if (entity instanceof BannerAttachable bannerEntity) {
             if (!bannerEntity.getBanner().isEmpty()) {
                 if (entity instanceof Horse horse) {
-                    if (!((IBanner)horse).getBanner().isEmpty() && !horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-                        ItemStack copy = ((IBanner) horse).getBanner();
+                    if (!((BannerAttachable)horse).getBanner().isEmpty() && !horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
+                        ItemStack copy = ((BannerAttachable) horse).getBanner();
                         horse.spawnAtLocation(copy);
-                        ((IBanner) horse).setBanner(ItemStack.EMPTY);
+                        ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
                     }
                 } else {
                     if (!entity.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET.get())) {
@@ -155,6 +162,24 @@ public class MobEvents {
                         bannerEntity.setBanner(ItemStack.EMPTY);
                     }
                 }
+            }
+        }
+        if (entity.isAlive() && entity instanceof GoldenBreath goldenBreath) {
+            if (goldenBreath.getGoldenAirSupply() > 0) {
+                goldenBreath.setGoldenAirSupply(goldenBreath.decreaseGoldenAirSupply(entity, (int) goldenBreath.getGoldenAirSupply()));
+            }
+        }
+        if (SpectreBoundedSpyglass.canUseSpectreBoundedSpyglass(useItem, entity) && useItem.getTag() != null) {
+            if (!entity.level.isClientSide) {
+                Entity spectreBound = ((ServerLevel)entity.level).getEntity(useItem.getTag().getUUID("SpectreBoundUUID"));
+                Optional.ofNullable(spectreBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(spectre -> {
+                    if (entity instanceof Player player && spectre.getManipulatorUUID() != player.getUUID()) {
+                        boolean withinDistance = Math.sqrt(Math.pow((player.getX() - spectre.getX()), 2) + Math.pow((player.getZ() - spectre.getZ()), 2)) < 110;
+                        if (withinDistance) {
+                            spectre.setCamera(player);
+                        }
+                    }
+                });
             }
         }
     }
