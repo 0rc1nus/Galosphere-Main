@@ -22,7 +22,6 @@ public class SendPerspectivePacket implements ClientPlayNetworking.PlayChannelHa
             if (world != null) {
                 Optional.ofNullable(world.getPlayerByUUID(uuid)).filter(player -> player.equals(client.player)).flatMap(player -> Optional.ofNullable(client.level.getEntity(id))).ifPresent(entity -> {
                     client.setCameraEntity(entity);
-                    client.player.resetPos();
                     if (!client.options.getCameraType().isFirstPerson()) {
                         client.options.setCameraType(CameraType.FIRST_PERSON);
                     }
