@@ -97,6 +97,8 @@
   "item.galosphere.silver_bomb.shrapnel": "Shrapnel",
   "entity.galosphere.silver_bomb": "Silver Bomb",
   "entity.galosphere.sparkle": "Sparkle",
+  "entity.galosphere.glow_flare": "Glow Flare",
+  "entity.galosphere.spectre": "Spectre",
   "effect.galosphere.illusive": "Illusive",
   "container.galosphere.combustion_table": "Combustion Table",
   "subtitles.block.lumiere.compost": "Composter filled with Lumiere Shard",
