@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "@": {
+      "item": "minecraft:gunpowder"
+    },
+    "F": {
+      "item": "galosphere:bottle_of_spectre"
+    },
+    "S": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "#F#",
+    "S@S",
+    " S "
+  ],
+  "result": {
+    "count": 3,
+    "item": "galosphere:glow_flare"
+  }
+}
