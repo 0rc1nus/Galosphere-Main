@@ -22,6 +22,7 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.GoldenBreathOverlay;
 import net.orcinus.galosphere.client.gui.IllusiveOverlay;
+import net.orcinus.galosphere.client.gui.SpectreOverlay;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
@@ -51,6 +52,7 @@ public class ClientEvents {
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         eventBus.register(new IllusiveOverlay());
         eventBus.register(new GoldenBreathOverlay());
+        eventBus.register(new SpectreOverlay());
 
         event.enqueueWork(() -> ItemProperties.register(Items.CROSSBOW, new ResourceLocation(Galosphere.MODID, "glow_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.GLOW_FLARE.get()) ? 1.0F : 0.0F));
 

@@ -88,7 +88,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern("#F#")
                 .pattern("S@S")
                 .pattern(" S ")
-                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_SPECTRE.get()))
+                .unlockedBy("has_bottle_of_spectre", has(GItems.BOTTLE_OF_SPECTRE.get()))
                 .unlockedBy("has_glow_ink_sac", has(Items.GLOW_INK_SAC))
                 .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
                 .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER)).save(consumer);
@@ -110,7 +110,7 @@ public class GRecipeProvider extends RecipeProvider {
                  .pattern("###")
                  .pattern(" # ")
                  .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
-                .unlockedBy("has_bottle_of_fay", has(GItems.BOTTLE_OF_SPECTRE.get())).save(consumer);
+                .unlockedBy("has_bottle_of_spectre", has(GItems.BOTTLE_OF_SPECTRE.get())).save(consumer);
 
         ShapedRecipeBuilder
                 .shaped(GBlocks.COMBUSTION_TABLE.get())

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bottle_of_fay": {
+    "has_bottle_of_spectre": {
       "conditions": {
         "items": [
           {
@@ -56,7 +56,7 @@
   },
   "requirements": [
     [
-      "has_bottle_of_fay",
+      "has_bottle_of_spectre",
       "has_glow_ink_sac",
       "has_gunpowder",
       "has_copper_ingot",

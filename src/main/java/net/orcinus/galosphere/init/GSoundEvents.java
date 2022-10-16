@@ -37,6 +37,7 @@ public class GSoundEvents {
     public static final SoundType LUMIERE = register("lumiere", 1, 1);
     public static final SoundType LUMIERE_CLUSTER = register("lumiere_cluster", 1, 1);
     public static final SoundType SILVER = register("silver", 1, 1);
+    public static final SoundType GLOW_INK_CLUMPS = register("glow_ink_clumps", 1, 1);
 
     private static RegistryObject<SoundEvent> register(String string) {
         return SOUND_EVENTS.register(string, () -> new SoundEvent(new ResourceLocation(Galosphere.MODID, string)));

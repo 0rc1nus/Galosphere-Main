@@ -40,7 +40,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 import net.orcinus.galosphere.api.BottlePickable;
-import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.entities.ai.FlyWanderGoal;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetworkHandler;
@@ -209,7 +209,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
                 if (this.level.isClientSide) {
                     this.stopUsingSpyglass(player);
                 } else {
-                    ((SpectreBoundedSpyglass)player).setUsingSpectreBoundedSpyglass(false);
+                    ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(false);
                     player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_END.get(), getSoundSource(), 1, 1);
                 }
             }
@@ -269,7 +269,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
             if (this.hasCustomName()) {
                 spectreBoundedSpyglass.setHoverName(this.getCustomName());
             }
-            SpectreBoundedSpyglass.addSpectreBoundedTags(this, spectreBoundedSpyglass.getOrCreateTag());
+            SpectreBoundSpyglass.addSpectreBoundedTags(this, spectreBoundedSpyglass.getOrCreateTag());
             player.setItemInHand(interactionHand, spectreBoundedSpyglass);
             this.setCanBeManipulated(false);
             return InteractionResult.SUCCESS;
@@ -299,7 +299,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     public void setCamera(Player player) {
         if (!this.level.isClientSide()) {
             player.zza = 0.0F;
-            ((SpectreBoundedSpyglass)player).setUsingSpectreBoundedSpyglass(true);
+            ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(true);
             this.setManipulatorUUID(player.getUUID());
             GNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), new SendPerspectivePacket(player.getUUID(), this.getId()));
             this.playSound(GSoundEvents.SPECTRE_MANIPULATE_BEGIN.get(), 1.0F, 1.0F);

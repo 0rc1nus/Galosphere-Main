@@ -31,7 +31,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.BannerAttachable;
-import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.entities.SpectreEntity;
@@ -167,7 +167,7 @@ public class MobEvents {
                 goldenBreath.setGoldenAirSupply(goldenBreath.decreaseGoldenAirSupply(entity, (int) goldenBreath.getGoldenAirSupply()));
             }
         }
-        if (SpectreBoundedSpyglass.canUseSpectreBoundedSpyglass(useItem, entity) && useItem.getTag() != null) {
+        if (SpectreBoundSpyglass.canUseSpectreBoundedSpyglass(useItem, entity) && useItem.getTag() != null) {
             if (!entity.level.isClientSide) {
                 Entity spectreBound = ((ServerLevel)entity.level).getEntity(useItem.getTag().getUUID("SpectreBoundUUID"));
                 Optional.ofNullable(spectreBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(spectre -> {
