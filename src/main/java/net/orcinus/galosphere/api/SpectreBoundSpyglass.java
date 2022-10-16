@@ -6,10 +6,10 @@ import net.minecraft.world.item.ItemStack;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GItems;
 
-public interface SpectreBoundedSpyglass {
+public interface SpectreBoundSpyglass {
 
     static boolean canUseSpectreBoundedSpyglass(ItemStack stack, LivingEntity livingEntity) {
-        return stack.is(GItems.SPECTRE_BOUND_SPYGLASS.get()) && SpectreBoundedSpyglass.isSpectreBoundedSpyglass(stack) && !(livingEntity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6);
+        return stack.is(GItems.SPECTRE_BOUND_SPYGLASS.get()) && SpectreBoundSpyglass.isSpectreBoundedSpyglass(stack) && !(livingEntity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6);
     }
 
     static boolean isSpectreBoundedSpyglass(ItemStack stack) {
