@@ -26,6 +26,7 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.GoldenBreathOverlay;
 import net.orcinus.galosphere.client.gui.IllusiveOverlay;
+import net.orcinus.galosphere.client.gui.SpectreOverlay;
 import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
@@ -69,6 +70,7 @@ public class ClientEvents {
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         eventBus.register(new IllusiveOverlay());
         eventBus.register(new GoldenBreathOverlay());
+        eventBus.register(new SpectreOverlay());
 
         ClientRegistry.registerEntityShader(SpectreEntity.class, new ResourceLocation(Galosphere.MODID, "shaders/post/fay.json"));
 
