@@ -24,7 +24,25 @@ public class GBiomes {
     private static final Map<Biome, ResourceKey<Biome>> BIOME_KEYS = Maps.newLinkedHashMap();
 
     public static final Biome CRYSTAL_CANYONS = GBiomes.crystalCanyons();
+    public static final Biome LICHEN_CAVES = GBiomes.lichenCaves();
     public static final ResourceKey<Biome> CRYSTAL_CANYONS_KEY = register("crystal_canyons", CRYSTAL_CANYONS);
+    public static final ResourceKey<Biome> LICHEN_CAVES_KEY = register("lichen_caves", LICHEN_CAVES);
+
+    public static Biome lichenCaves() {
+        MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mobBuilder);
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder();
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
+        BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
+        BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DRIPSTONE_CAVES);
+        return biome(0.5F, 0.5F, mobBuilder, biomeBuilder, music, 4159204);
+    }
 
     public static Biome crystalCanyons() {
         MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();

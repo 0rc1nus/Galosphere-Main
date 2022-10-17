@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "bulb=false": {
+      "model": "galosphere:block/lichen_cordyceps"
+    },
+    "bulb=true": {
+      "model": "galosphere:block/lichen_cordyceps_bulb"
+    }
+  }
+}

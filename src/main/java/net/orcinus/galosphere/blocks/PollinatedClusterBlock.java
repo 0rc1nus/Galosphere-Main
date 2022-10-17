@@ -3,6 +3,7 @@ package net.orcinus.galosphere.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AmethystClusterBlock;
@@ -15,9 +16,11 @@ import java.util.Random;
 
 public class PollinatedClusterBlock extends AmethystClusterBlock {
     public static final BooleanProperty POLLINATED = BooleanProperty.create("pollinated");
+    private final SimpleParticleType simpleParticleType;
 
-    public PollinatedClusterBlock(Properties properties) {
+    public PollinatedClusterBlock(SimpleParticleType simpleParticleType, Properties properties) {
         super(7, 3, properties);
+        this.simpleParticleType = simpleParticleType;
         this.registerDefaultState(this.defaultBlockState().setValue(POLLINATED, false));
     }
 
@@ -44,10 +47,10 @@ public class PollinatedClusterBlock extends AmethystClusterBlock {
             mut.set(i + Mth.nextInt(random, -10, 10), j - random.nextInt(10), k + Mth.nextInt(random, -10, 10));
             BlockState blockstate = world.getBlockState(mut);
             if (!blockstate.isCollisionShapeFullBlock(world, mut)) {
-                world.addParticle(ParticleTypes.END_ROD, (double) mut.getX() + direction.getStepX() + random.nextDouble(), (double) mut.getY() + direction.getStepY() + random.nextDouble(), (double) mut.getZ() + direction.getStepZ() + random.nextDouble(), velX, velY, velZ);
+                world.addParticle(this.simpleParticleType, (double) mut.getX() + direction.getStepX() + random.nextDouble(), (double) mut.getY() + direction.getStepY() + random.nextDouble(), (double) mut.getZ() + direction.getStepZ() + random.nextDouble(), velX, velY, velZ);
             }
             if (random.nextInt(5) == 0) {
-                world.addParticle(ParticleTypes.END_ROD, x + direction.getStepX(), y + direction.getStepY(), z + direction.getStepZ(), velX, velY, velZ);
+                world.addParticle(this.simpleParticleType, x + direction.getStepX(), y + direction.getStepY(), z + direction.getStepZ(), velX, velY, velZ);
             }
         }
     }

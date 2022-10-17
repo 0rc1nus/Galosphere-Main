@@ -8,8 +8,12 @@ import net.orcinus.galosphere.Galosphere;
 
 public class GParticleTypes {
 
+    public static void init() { }
+
     public static final SimpleParticleType AURA_LISTENER = Registry.register(Registry.PARTICLE_TYPE, new ResourceLocation(Galosphere.MODID, "aura_listener"), FabricParticleTypes.simple());
     public static final SimpleParticleType SILVER_BOMB = Registry.register(Registry.PARTICLE_TYPE, new ResourceLocation(Galosphere.MODID, "item_silverbomb"), FabricParticleTypes.simple());
     public static final SimpleParticleType WARPED = Registry.register(Registry.PARTICLE_TYPE, new ResourceLocation(Galosphere.MODID, "warped"), FabricParticleTypes.simple());
+    public static final SimpleParticleType ALLURITE_RAIN = Registry.register(Registry.PARTICLE_TYPE, new ResourceLocation(Galosphere.MODID, "allurite_rain"), FabricParticleTypes.simple());
+    public static final SimpleParticleType LUMIERE_RAIN = Registry.register(Registry.PARTICLE_TYPE, new ResourceLocation(Galosphere.MODID, "lumiere_rain"), FabricParticleTypes.simple());
 
 }
