@@ -39,6 +39,7 @@ import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.entities.SparkleEntity;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
@@ -207,6 +208,7 @@ public class MobEvents {
             poses.sort(new DistanceComparator(pearl.blockPosition()));
             for (BlockPos blockPos : poses) {
                 event.setCanceled(true);
+                GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
                 pearl.level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
                 pearl.level.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
                 player.teleportTo(blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D);
