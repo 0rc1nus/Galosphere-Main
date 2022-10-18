@@ -1,5 +1,6 @@
 package net.orcinus.galosphere.events;
 
+import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +44,9 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
+import net.orcinus.galosphere.util.DistanceComparator;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -186,25 +190,32 @@ public class MobEvents {
 
     @SubscribeEvent
     public void onTeleportEvent(EntityTeleportEvent.EnderPearl event) {
+        ThrownEnderpearl pearl = event.getPearlEntity();
+        List<BlockPos> poses = Lists.newArrayList();
         ServerPlayer player = event.getPlayer();
-        BlockPos pos = new BlockPos(event.getTarget());
         Level world = player.getLevel();
         int radius = 16;
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 for (int y = -radius; y <= radius; y++) {
-                    BlockPos blockPos = new BlockPos(event.getTargetX() + x, event.getTargetY() + y, event.getTargetZ() + z);
+                    BlockPos blockPos = new BlockPos(pearl.getX() + x, pearl.getY() + y, pearl.getZ() + z);
                     BlockState blockState = world.getBlockState(blockPos);
-                    if (pos.closerThan(blockPos, 12) && blockState.is(GBlocks.WARPED_ANCHOR.get()) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
-                        GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
-                        world.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
-                        world.setBlockAndUpdate(blockPos, blockState.setValue(WarpedAnchorBlock.WARPED_CHARGE, blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1));
-                        world.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
-                        event.setTargetX(blockPos.getX() + 0.5D);
-                        event.setTargetY(blockPos.getY() + 0.5D);
-                        event.setTargetZ(blockPos.getZ() + 0.5D);
+                    if (blockState.is(GBlocks.WARPED_ANCHOR.get()) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
+                        poses.add(blockPos);
                     }
                 }
+            }
+        }
+        if (!poses.isEmpty()) {
+            poses.sort(new DistanceComparator(pearl.blockPosition()));
+            for (BlockPos blockPos : poses) {
+                event.setCanceled(true);
+                pearl.level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+                pearl.level.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+                player.teleportTo(blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D);
+                pearl.level.setBlock(blockPos, pearl.level.getBlockState(blockPos).setValue(WarpedAnchorBlock.WARPED_CHARGE, pearl.level.getBlockState(blockPos).getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1), 2);
+                pearl.discard();
+                break;
             }
         }
     }
