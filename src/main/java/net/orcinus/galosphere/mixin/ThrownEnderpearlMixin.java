@@ -12,6 +12,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.HitResult;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.util.DistanceComparator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,6 +46,7 @@ public class ThrownEnderpearlMixin {
             poses.sort(new DistanceComparator($this.blockPosition()));
             for (BlockPos blockPos : poses) {
                 ci.cancel();
+                GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
                 $this.level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
                 $this.level.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
                 player.teleportTo(blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D);
