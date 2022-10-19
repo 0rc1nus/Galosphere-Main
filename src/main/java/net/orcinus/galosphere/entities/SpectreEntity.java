@@ -1,11 +1,5 @@
 package net.orcinus.galosphere.entities;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -51,6 +45,11 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetwork;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
+
+import javax.annotation.Nullable;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 public class SpectreEntity extends PathfinderMob implements FlyingAnimal, BottlePickable {
     private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.OPTIONAL_UUID);
