@@ -50,6 +50,7 @@ public class ThrownEnderpearlMixin {
                 $this.level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
                 $this.level.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
                 player.teleportTo(blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D);
+                player.resetFallDistance();
                 $this.level.setBlock(blockPos, $this.level.getBlockState(blockPos).setValue(WarpedAnchorBlock.WARPED_CHARGE, $this.level.getBlockState(blockPos).getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1), 2);
                 $this.discard();
                 break;
