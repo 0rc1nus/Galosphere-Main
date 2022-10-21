@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
@@ -55,6 +56,8 @@ public class MobEvents {
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
         SpawnPlacements.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules);
+        SpawnPlacements.register(GEntityTypes.SPECTRE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+
         event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
         event.put(GEntityTypes.SPECTRE.get(), SpectreEntity.createAttributes().build());
     }

@@ -3,7 +3,7 @@
   "biomes": "galosphere:lichen_caves",
   "spawners": [
     {
-      "type": "galosphere:fay",
+      "type": "galosphere:spectre",
       "weight": 20,
       "minCount": 8,
       "maxCount": 8

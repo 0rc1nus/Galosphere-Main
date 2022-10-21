@@ -12,6 +12,7 @@ import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -70,10 +71,6 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
         this.entityData.define(MANIPULATOR, Optional.empty());
         this.entityData.define(CAN_BE_MANIPULATED, false);
         this.entityData.define(FROM_BOTTLE, false);
-    }
-
-    public static boolean checkSpectreSpawnRules(EntityType<? extends LivingEntity> spectre, LevelAccessor world, MobSpawnType reason, BlockPos blockPos, Random random) {
-        return world.getBlockState(blockPos.below()).isValidSpawn(world, blockPos.below(), spectre);
     }
 
     @Override
