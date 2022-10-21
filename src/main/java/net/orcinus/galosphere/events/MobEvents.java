@@ -44,8 +44,8 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
-import net.orcinus.galosphere.util.DistanceComparator;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -194,6 +194,7 @@ public class MobEvents {
         List<BlockPos> poses = Lists.newArrayList();
         ServerPlayer player = event.getPlayer();
         Level world = player.getLevel();
+        BlockPos pearlPos = pearl.blockPosition();
         int radius = 16;
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
@@ -207,7 +208,7 @@ public class MobEvents {
             }
         }
         if (!poses.isEmpty()) {
-            poses.sort(new DistanceComparator(pearl.blockPosition()));
+            poses.sort(Comparator.comparingDouble(pearlPos::distSqr));
             for (BlockPos blockPos : poses) {
                 event.setCanceled(true);
                 GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
