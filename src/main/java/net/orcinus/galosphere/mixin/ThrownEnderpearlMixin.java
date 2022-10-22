@@ -13,12 +13,12 @@ import net.minecraft.world.phys.HitResult;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
-import net.orcinus.galosphere.util.DistanceComparator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Mixin(ThrownEnderpearl.class)
@@ -30,6 +30,7 @@ public class ThrownEnderpearlMixin {
         List<BlockPos> poses = Lists.newArrayList();
         ServerPlayer player = (ServerPlayer) $this.getOwner();
         Level world = player.getLevel();
+        BlockPos pos = $this.blockPosition();
         int radius = 16;
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
@@ -43,7 +44,7 @@ public class ThrownEnderpearlMixin {
             }
         }
         if (!poses.isEmpty()) {
-            poses.sort(new DistanceComparator($this.blockPosition()));
+            poses.sort(Comparator.comparingDouble(pos::distSqr));
             for (BlockPos blockPos : poses) {
                 ci.cancel();
                 GCriteriaTriggers.WARPED_TELEPORT.trigger(player);

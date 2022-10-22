@@ -52,7 +52,7 @@ public class GBiomeModifier {
     }
 
     public static void addLichenCavesSpawns() {
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(GBiomes.LICHEN_CAVES_KEY), MobCategory.UNDERGROUND_WATER_CREATURE, GEntityTypes.SPECTRE, 20, 8, 8);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(GBiomes.LICHEN_CAVES_KEY), MobCategory.AMBIENT, GEntityTypes.SPECTRE, 20, 8, 8);
     }
 
     public static void addFeature(ResourceKey<Biome> biomeResourceKey, GenerationStep.Decoration decoration, Holder<PlacedFeature> featureHolder) {
