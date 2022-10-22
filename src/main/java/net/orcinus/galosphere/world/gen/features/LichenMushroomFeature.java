@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
@@ -79,15 +80,17 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
                         world.setBlock(mossPos.above(), block.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(mossPos.above()).is(Blocks.WATER)), 2);
                     }
                 }
-                if (random.nextInt(5) == 0) {
-                    Direction.Plane.HORIZONTAL.forEach(direction -> {
-                        if (world.isStateAtPosition(mossPos.relative(direction), state -> state.isAir() || state.is(Blocks.WATER) || state.getMaterial().isReplaceable())) {
-                            world.setBlock(mossPos.relative(direction), GBlocks.LICHEN_SHELF.get().defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, direction).setValue(BaseCoralWallFanBlock.WATERLOGGED, world.getBlockState(mossPos.relative(direction)).is(Blocks.WATER)), 2);
-                        }
-                    });
+                Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
+                if (world.isStateAtPosition(mossPos.relative(direction), LichenMushroomFeature::canGenerate)) {
+                    if (random.nextInt(3) == 0) {
+                        world.setBlock(mossPos.relative(direction), GBlocks.LICHEN_SHELF.defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, direction).setValue(BaseCoralWallFanBlock.WATERLOGGED, world.getFluidState(mossPos.relative(direction)).is(FluidTags.WATER)), 2);
+                    }
                 }
-                if (random.nextInt(15) == 0) {
-                    Arrays.stream(Direction.values()).filter(direction -> world.isStateAtPosition(mossPos.relative(direction), LichenMushroomFeature::canGenerate)).forEach(direction -> world.setBlock(mossPos.relative(direction), Blocks.GLOW_LICHEN.defaultBlockState().setValue(GlowLichenBlock.getFaceProperty(direction.getOpposite()), true).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(mossPos.relative(direction)).is(Blocks.WATER)), 2));
+                Direction randomDir = Direction.getRandom(random);
+                if (world.isStateAtPosition(mossPos.relative(randomDir), LichenMushroomFeature::canGenerate)) {
+                    if (random.nextInt(3) == 0) {
+                        world.setBlock(mossPos.relative(randomDir), Blocks.GLOW_LICHEN.defaultBlockState().setValue(GlowLichenBlock.getFaceProperty(randomDir.getOpposite()), true).setValue(BlockStateProperties.WATERLOGGED, world.getFluidState(mossPos.relative(randomDir)).is(FluidTags.WATER)), 2);
+                    }
                 }
             });
             return true;
