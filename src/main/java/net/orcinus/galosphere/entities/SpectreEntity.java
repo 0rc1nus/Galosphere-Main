@@ -231,7 +231,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     @Environment(EnvType.CLIENT)
     public boolean matchesClientPlayerUUID() {
         final Minecraft client = Minecraft.getInstance();
-        return client.player != null && Minecraft.getInstance().player.getUUID().equals(this.getManipulatorUUID());
+        return client.player != null && client.player.getUUID().equals(this.getManipulatorUUID());
     }
 
     @Override
