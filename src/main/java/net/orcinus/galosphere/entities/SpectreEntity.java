@@ -237,19 +237,19 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     @Override
     public void travel(Vec3 velocity) {
         if (this.getManipulatorUUID() != null) {
-            Optional<Player> controller = this.entityData.get(MANIPULATOR).map(this.level::getPlayerByUUID);
-            controller.ifPresent(player -> {
-                this.setYRot(player.getYRot());
-                this.yRotO = this.getYRot();
-                this.setXRot(player.getXRot() * 0.5F);
-                this.setRot(this.getYRot(), this.getXRot());
-                this.yBodyRot = this.getYRot();
-                this.yHeadRot = this.getYRot();
-            });
-        }
-        else {
+            this.entityData.get(MANIPULATOR).map(this.level::getPlayerByUUID).ifPresent(this::rotatePlayer);
+        } else {
             super.travel(velocity);
         }
+    }
+
+    private void rotatePlayer(Player player) {
+        this.setYRot(player.getYRot());
+        this.yRotO = this.getYRot();
+        this.setXRot(player.getXRot() * 0.5F);
+        this.setRot(this.getYRot(), this.getXRot());
+        this.yBodyRot = this.getYRot();
+        this.yHeadRot = this.getYRot();
     }
 
     @Override
