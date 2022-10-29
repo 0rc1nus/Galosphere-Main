@@ -1,10 +1,13 @@
 package net.orcinus.galosphere.datagen;
 
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -13,7 +16,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.blocks.CordycepsBlock;
+import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.init.GBlocks;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -76,6 +81,37 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.stairsBlock(GBlocks.ALLURITE_BRICK_STAIRS.get(), "allurite_bricks");
         this.stairsBlock(GBlocks.LUMIERE_BRICK_STAIRS.get(), "lumiere_bricks");
 
+        this.getVariantBuilder(GBlocks.COMBUSTION_TABLE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(models().cubeBottomTop("combustion_table", new ResourceLocation(Galosphere.MODID, "block/combustion_table_side"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_bottom"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_top"))).build());
+
+        this.pollinatedCluster(GBlocks.ALLURITE_CLUSTER.get());
+        this.pollinatedCluster(GBlocks.LUMIERE_CLUSTER.get());
+
+    }
+
+    private void pollinatedCluster(@NotNull Block block) {
+        this.getVariantBuilder(block).forAllStatesExcept(state -> {
+            Direction facing = state.getValue(AmethystClusterBlock.FACING);
+            int rotationX = 90;
+            int rotationY = 90;
+            if (facing == Direction.UP) {
+                rotationX = 0;
+                rotationY = 0;
+            } else if (facing == Direction.DOWN) {
+                rotationX = 180;
+                rotationY = 0;
+            } else if (facing == Direction.WEST) {
+                rotationY *= 3;
+            } else if (facing == Direction.NORTH) {
+                rotationY = 0;
+            } else if (facing == Direction.SOUTH) {
+                rotationY *= 2;
+            }
+            return ConfiguredModel.builder()
+                    .modelFile(models().cross(ForgeRegistries.BLOCKS.getKey(block).getPath(), new ResourceLocation(Galosphere.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(block).getPath())).renderType("cutout"))
+                    .rotationX(rotationX)
+                    .rotationY(rotationY)
+                    .build();
+        }, BlockStateProperties.WATERLOGGED, PollinatedClusterBlock.POLLINATED);
     }
 
     private void crossBlock(RegistryObject<Block> block) {
