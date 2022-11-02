@@ -3,17 +3,14 @@ package net.orcinus.galosphere;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Items;
-import net.orcinus.galosphere.client.gui.CombustionTableMenu;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.model.FayModel;
 import net.orcinus.galosphere.client.model.SparkleModel;
@@ -25,7 +22,6 @@ import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.FayRenderer;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
-import net.orcinus.galosphere.client.renderer.SterlingArmorRenderer;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
@@ -33,7 +29,7 @@ import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GModelLayers;
 import net.orcinus.galosphere.init.GNetwork;
 import net.orcinus.galosphere.init.GParticleTypes;
-import net.orcinus.galosphere.mixin.ItemPropertiesAccessor;
+import net.orcinus.galosphere.mixin.access.ItemPropertiesAccessor;
 
 public class GalosphereClient implements ClientModInitializer {
 

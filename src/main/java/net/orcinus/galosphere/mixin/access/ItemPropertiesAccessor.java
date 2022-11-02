@@ -1,4 +1,4 @@
-package net.orcinus.galosphere.mixin;
+package net.orcinus.galosphere.mixin.access;
 
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;

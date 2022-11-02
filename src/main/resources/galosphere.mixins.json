@@ -7,7 +7,7 @@
     "ComposterBlockMixin",
     "CrossbowItemMixin",
     "EntityMixin",
-    "ItemPropertiesAccessor",
+    "access.ItemPropertiesAccessor",
     "LightningBoltMixin",
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
