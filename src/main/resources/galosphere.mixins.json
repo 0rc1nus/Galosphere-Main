@@ -6,6 +6,7 @@
   "refmap": "galosphere.refmap.json",
   "mixins": [
     "CrossbowItemMixin",
+    "EntityMixin",
     "LightningBoltMixin",
     "LivingEntityMixin",
     "OverworldBiomeBuilderMixin",
