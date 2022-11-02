@@ -260,7 +260,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         ItemStack stack = player.getItemInHand(interactionHand);
-        if (this.canBeManipulated() && (stack.is(GItems.SPECTRE_BOUND_SPYGLASS.get())) || stack.is(Items.SPYGLASS)) {
+        if (this.canBeManipulated() && (stack.is(GItems.SPECTRE_BOUND_SPYGLASS.get()) || stack.is(Items.SPYGLASS))) {
             this.playSound(GSoundEvents.SPECTRE_LOCK_TO_SPYGLASS.get(), 1, 1);
             ItemStack spectreBoundedSpyglass = new ItemStack(GItems.SPECTRE_BOUND_SPYGLASS.get());
             if (this.hasCustomName()) {
@@ -271,7 +271,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
             this.setCanBeManipulated(false);
             return InteractionResult.SUCCESS;
         }
-        if (stack.is(Items.GLASS_BOTTLE)) {
+        else if (stack.is(Items.GLASS_BOTTLE)) {
             this.level.playSound(player, player.getX(), player.getY(), player.getZ(), GSoundEvents.SPECTRE_BOTTLE_FILL.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
             if (!this.level.isClientSide()) {
                 this.gameEvent(GameEvent.ENTITY_INTERACT);

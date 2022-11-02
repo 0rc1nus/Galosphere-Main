@@ -77,7 +77,6 @@ public class MiscEvents {
         }
         if (state.getBlock() == Blocks.COMPOSTER) {
             InteractionHand offHand = InteractionHand.OFF_HAND;
-            ItemStack offHandStack = player.getItemInHand(offHand);
             if (stack.getItem() == GItems.LUMIERE_SHARD.get()) {
                 if (state.getValue(ComposterBlock.LEVEL) > 0 && state.getValue(ComposterBlock.LEVEL) < 8) {
                     event.setCanceled(true);
