@@ -6,6 +6,7 @@
   "mixins": [
     "ComposterBlockMixin",
     "CrossbowItemMixin",
+    "EntityMixin",
     "ItemPropertiesAccessor",
     "LightningBoltMixin",
     "LivingEntityMixin",
