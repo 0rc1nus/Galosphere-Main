@@ -83,7 +83,7 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
                 Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
                 if (world.isStateAtPosition(mossPos.relative(direction), LichenMushroomFeature::canGenerate)) {
                     if (random.nextInt(3) == 0) {
-                        world.setBlock(mossPos.relative(direction), GBlocks.LICHEN_SHELF.defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, direction).setValue(BaseCoralWallFanBlock.WATERLOGGED, world.getFluidState(mossPos.relative(direction)).is(FluidTags.WATER)), 2);
+                        world.setBlock(mossPos.relative(direction), GBlocks.LICHEN_SHELF.get().defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, direction).setValue(BaseCoralWallFanBlock.WATERLOGGED, world.getFluidState(mossPos.relative(direction)).is(FluidTags.WATER)), 2);
                     }
                 }
                 Direction randomDir = Direction.getRandom(random);
