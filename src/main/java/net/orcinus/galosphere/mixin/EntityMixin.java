@@ -26,8 +26,7 @@ public class EntityMixin {
 
     @Unique
     private double spectrePerspectiveValue(double value) {
-        Entity $this = (Entity) (Object) this;
-        boolean flag = $this instanceof Player player && this.isFirstPerspective() && player.getUseItem().is(GItems.SPECTRE_BOUND_SPYGLASS.get()) && player.isUsingItem();
+        boolean flag = (Entity) (Object) this instanceof Player player && this.isFirstPerspective() && player.getUseItem().is(GItems.SPECTRE_BOUND_SPYGLASS.get()) && player.isUsingItem();
         return flag ? value * 8 : value;
     }
 
