@@ -5,6 +5,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -26,14 +28,13 @@ public class EntityMixin {
 
     @Unique
     private double spectrePerspectiveValue(double value) {
-        Entity $this = (Entity) (Object) this;
-        boolean flag = $this instanceof Player player && this.isFirstPerspective() && player.getUseItem().is(GItems.SPECTRE_BOUND_SPYGLASS.get()) && player.isUsingItem();
+        boolean flag = (Entity) (Object) this instanceof Player player && this.isFirstPerspective() && SpectreBoundSpyglass.canUseSpectreBoundedSpyglass(player.getUseItem(), player);
         return flag ? value * 8 : value;
     }
 
     @OnlyIn(Dist.CLIENT)
     private boolean isFirstPerspective() {
-        return Minecraft.getInstance().options.getCameraType().isFirstPerson();
+        return Minecraft.getInstance().options.getCameraType().isFirstPerson() && Minecraft.getInstance().getCameraEntity() instanceof SpectreEntity;
     }
 
 }
