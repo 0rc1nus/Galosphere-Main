@@ -9,6 +9,9 @@
     "Orcinus",
     "Ninni"
   ],
+  "contributors": [
+    "Bunten"
+  ],
   "contact": {
     "sources": "https://github.com/0rc1nus/Galosphere"
   },
@@ -31,7 +34,7 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.6",
+    "fabricloader": ">=0.14.9",
     "fabric": "*",
     "minecraft": ">=1.19",
     "java": ">=17"
