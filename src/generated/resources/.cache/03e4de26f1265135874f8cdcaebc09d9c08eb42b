@@ -1,4 +1,4 @@
-// 1.19.1	2022-08-17T14:51:18.5495272	Tags for minecraft:item
+// 1.19.2	2022-11-14T14:28:23.0058133	Tags for minecraft:item
 bf2ad799074f5c44acee490bdf3d3ae81d56997b data/forge/tags/items/ingots.json
 0ceaaec06992eb7173faa9cc1f1b2a05ad3c7cab data/forge/tags/items/ingots/silver.json
 f9a637e96c99d2b17b5183761d2dbcc66f1e2a62 data/forge/tags/items/nuggets.json
@@ -12,3 +12,5 @@ c13b75b77619e89812295c5dd959ec842a62ce65 data/forge/tags/items/raw_materials/sil
 140ec1ca4b33251ba785849283285aae614ae8fe data/galosphere/tags/items/non_sinkable_horse_armors.json
 81db4915f4f80c962cdeb4281b6ee49cff4bea7d data/galosphere/tags/items/sparkle_tempt_items.json
 646c83f2ad68cb9b8b2ed243377ab1c3f75fab3e data/minecraft/tags/items/freeze_immune_wearables.json
+d7f4ea8068fdcb0d57cf2fa31d838f8dc3d01f26 data/minecraft/tags/items/slabs.json
+fe9b9df99f3d7d295d298783d8ca56500b07abdd data/minecraft/tags/items/stairs.json
