@@ -2,7 +2,7 @@
   "parent": "minecraft:story/root",
   "display": {
     "icon": {
-      "item": "galosphere:spectre_bounded_spyglass"
+      "item": "galosphere:spectre_bound_spyglass"
     },
     "title": {
       "translate": "advancements.story.use_spectre_spyglass.title"
