@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:husbandry/root",
+  "parent": "minecraft:adventure/root",
   "criteria": {
     "crystal_lamps": {
       "conditions": {

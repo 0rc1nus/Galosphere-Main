@@ -20,6 +20,7 @@ import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 import javax.annotation.Nullable;
 
@@ -80,7 +81,7 @@ public class GlowFlareEntity extends FireworkRocketEntity {
             if (this.level.getBlockState(hitPos).isSolidRender(this.level, hitPos) && ((material != Material.LAVA && material.isReplaceable()) || this.level.isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
                 this.level.setBlock(placePos, GBlocks.GLOW_INK_CLUMPS.get().defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(result.getDirection().getOpposite()), true).setValue(BlockStateProperties.AGE_15, 15).setValue(BlockStateProperties.WATERLOGGED, this.level.getBlockState(placePos).is(Blocks.WATER)), 2);
             }
-            this.playSound(SoundEvents.SCULK_BLOCK_CHARGE, 1.0F, 1.0F);
+            this.playSound(GSoundEvents.GLOW_FLARE_SPREAD.get(), 1.0F, 1.0F);
             this.discard();
         }
     }

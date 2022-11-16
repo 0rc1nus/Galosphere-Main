@@ -1,4 +1,4 @@
-// 1.19.2	2022-11-14T14:19:28.6519734	Recipes
+// 1.19.2	2022-11-16T15:46:28.4473444	Recipes
 72253d925debf7454f27a04c90e91eb51fe80e72 data/galosphere/advancements/recipes/galosphere/allurite_block.json
 fa2bb57df656036cffe7cde55df4e2ccec5c7040 data/galosphere/advancements/recipes/galosphere/allurite_bricks.json
 bd0cda04f102b3317bb60f0a41757f2242320c3a data/galosphere/advancements/recipes/galosphere/allurite_bricks_from_allurite_block_stonecutting.json
@@ -143,7 +143,7 @@ a5bf7c65c740af1fa7637844091f8a1b9aa4f504 data/galosphere/recipes/amethyst_slab_f
 31f34d82e5e78089750865035c3282c28581d21e data/galosphere/recipes/amethyst_stairs.json
 07023866865b4c051a6314f1b40064caaa5b4ffb data/galosphere/recipes/amethyst_stairs_from_amethyst_block_stonecutting.json
 84d583d0ca99a76481950419d918eb2c2362f70b data/galosphere/recipes/aura_ringer.json
-5694633894f49c8356d5dfc12f9b7057b8e86c57 data/galosphere/recipes/chandelier.json
+2718bea4426399267799ed5e1116b1b41a7112bb data/galosphere/recipes/chandelier.json
 8e3863df3aae442a97d6e06deec9cf95903f4554 data/galosphere/recipes/chiseled_allurite.json
 10db78f1c09dcfdf3f075e5568b4af7a59acf9a0 data/galosphere/recipes/chiseled_allurite_from_allurite_block_stonecutting.json
 82d845b9be0277f18868f797936822814147421b data/galosphere/recipes/chiseled_allurite_from_allurite_bricks_stonecutting.json

@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:story/root",
+  "parent": "minecraft:husbandry/plant_seed",
   "display": {
     "icon": {
       "item": "galosphere:lumiere_shard"

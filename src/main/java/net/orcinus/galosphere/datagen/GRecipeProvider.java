@@ -107,7 +107,7 @@ public class GRecipeProvider extends RecipeProvider {
                  .define('#', Tags.Items.INGOTS_COPPER)
                  .define('@', GItems.BOTTLE_OF_SPECTRE.get())
                  .pattern("@ @")
-                 .pattern("###")
+                 .pattern("@#@")
                  .pattern(" # ")
                  .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
                 .unlockedBy("has_bottle_of_spectre", has(GItems.BOTTLE_OF_SPECTRE.get())).save(consumer);

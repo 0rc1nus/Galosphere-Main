@@ -1,8 +1,8 @@
 package net.orcinus.galosphere.api;
 
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraftforge.common.ForgeMod;
 
 public interface GoldenBreath {
 
@@ -16,7 +16,7 @@ public interface GoldenBreath {
 
     default int decreaseGoldenAirSupply(LivingEntity livingEntity, int i) {
         int j = EnchantmentHelper.getRespiration(livingEntity);
-        int reductionValue = livingEntity.isEyeInFluid(FluidTags.WATER) ? 1 : 4;
+        int reductionValue = livingEntity.isEyeInFluidType(ForgeMod.WATER_TYPE.get()) ? 1 : 4;
         if (j > 0 && livingEntity.getRandom().nextInt(j + 1) > 0) {
             return i;
         }

@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:story/root",
+  "parent": "galosphere:adventure/silver_ingot",
   "display": {
     "icon": {
       "item": "galosphere:sterling_helmet",
