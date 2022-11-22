@@ -30,9 +30,11 @@ import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
+import net.orcinus.galosphere.compat.integration.terrablender.GalosphereRegion;
 import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.GlowFlareDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
@@ -46,6 +48,25 @@ import net.orcinus.galosphere.util.BannerRendererUtil;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MiscEvents {
+
+    @SubscribeEvent
+    public void onParallelDispatched(ParallelDispatchEvent event) {
+        event.enqueueWork(() -> {
+            try {
+                Class<?> aClass = Class.forName("terrablender.api.Region");
+                if (aClass != null) {
+                    try {
+                        Class<?> clazz = Class.forName("orcinus.galosphere.compat.integration.terrablender.GalosphereRegion");
+                        ((GalosphereRegion)clazz.getConstructor().newInstance()).init(event);
+                    } catch (ReflectiveOperationException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 
     @SubscribeEvent
     public void onLoottableLoad(LootTableLoadEvent event) {

@@ -5,10 +5,10 @@
       "item": "galosphere:glow_flare"
     },
     "title": {
-      "translate": "advancements.story.light_spread.title"
+      "translate": "advancements.galosphere.light_spread.title"
     },
     "description": {
-      "translate": "advancements.story.light_spread.description"
+      "translate": "advancements.galosphere.light_spread.description"
     },
     "frame": "task",
     "show_toast": true,

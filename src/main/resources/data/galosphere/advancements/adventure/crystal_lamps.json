@@ -27,7 +27,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.husbandry.crystal_lamps.description"
+      "translate": "advancements.galosphere.crystal_lamps.description"
     },
     "frame": "challenge",
     "hidden": false,
@@ -36,7 +36,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.husbandry.crystal_lamps.title"
+      "translate": "advancements.galosphere.crystal_lamps.title"
     }
   },
   "requirements": [

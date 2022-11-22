@@ -5,10 +5,10 @@
       "item": "galosphere:silver_bomb"
     },
     "title": {
-      "translate": "advancements.story.silver_bomb.title"
+      "translate": "advancements.galosphere.silver_bomb.title"
     },
     "description": {
-      "translate": "advancements.story.silver_bomb.description"
+      "translate": "advancements.galosphere.silver_bomb.description"
     },
     "frame": "task",
     "show_toast": true,
