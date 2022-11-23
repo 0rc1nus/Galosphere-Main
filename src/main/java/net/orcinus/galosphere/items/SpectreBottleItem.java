@@ -19,6 +19,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.orcinus.galosphere.api.BottlePickable;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 public class SpectreBottleItem extends Item {
 
@@ -43,7 +44,7 @@ public class SpectreBottleItem extends Item {
             }
             SpectreEntity fay = GEntityTypes.SPECTRE.create(world);
             fay.setPos(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
-            world.playSound(null, blockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.NEUTRAL, 1.0F, 1.0F);
+            world.playSound(null, blockPos, GSoundEvents.SPECTRE_BOTTLE_EMPTY, SoundSource.NEUTRAL, 1.0F, 1.0F);
             Entity entity = fay.getType().spawn(serverWorld, stack, null, blockPos, MobSpawnType.SPAWN_EGG, true, false);
             if (entity instanceof SpectreEntity fay1) {
                 BottlePickable.loadDefaultDataFromBottleTag(fay1, compoundTag);

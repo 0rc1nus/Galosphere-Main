@@ -1,0 +1,37 @@
+{
+  "parent": "galosphere:adventure/silver_ingot",
+  "display": {
+    "icon": {
+      "item": "galosphere:silver_bomb"
+    },
+    "title": {
+      "translate": "advancements.galosphere.silver_bomb.title"
+    },
+    "description": {
+      "translate": "advancements.galosphere.silver_bomb.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "silver_bomb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:silver_bomb"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "silver_bomb"
+    ]
+  ]
+}

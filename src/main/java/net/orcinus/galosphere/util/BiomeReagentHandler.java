@@ -1,12 +1,9 @@
 package net.orcinus.galosphere.util;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
-import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.init.GBiomes;
 
 import java.util.function.Consumer;
@@ -30,13 +27,14 @@ public class BiomeReagentHandler {
     //weirdness
     //offset
     public static final Climate.ParameterPoint CRYSTAL_CANYONS_PARAMETER = Climate.parameters(
-            Climate.Parameter.span(-1.0F, -0.45F),
-            Climate.Parameter.span(-1.0F, -0.35F),
-            Climate.Parameter.span(0.03F, 0.3F),
-            Climate.Parameter.span(-0.2225F,0.45F),
+            FULL_RANGE,
+            Climate.Parameter.span(-1.0F, -0.78F),
+            Climate.Parameter.span(0.7F, 1.0F),
+            Climate.Parameter.span(-1.0F, -0.668F),
             CAVE_BIOME_RANGE,
             FULL_RANGE,
-            0.0F);
+            0.0F
+    );
     //-1369 125 -402
     //seed: 1423576046821451571
 //    public static final Climate.ParameterPoint LICHEN_CAVES_PARAMETER = Climate.parameters(
