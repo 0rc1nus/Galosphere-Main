@@ -103,7 +103,7 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "Galosphere",
-                "Specification-Vendor"    : "Orcinus, Ninni",
+                "Specification-Vendor"    : "Orcinus",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : "Galosphere",
                 "Implementation-Version"  : "1.0.0",

@@ -57,7 +57,7 @@ public class MiscEvents {
                 if (aClass != null) {
                     try {
                         Class<?> clazz = Class.forName("orcinus.galosphere.compat.integration.terrablender.GalosphereRegion");
-                        ((GalosphereRegion)clazz.getConstructor().newInstance()).init(event);
+                        ((GalosphereRegion) clazz.getConstructor().newInstance()).init(event);
                     } catch (ReflectiveOperationException e) {
                         throw new RuntimeException(e);
                     }

@@ -83,28 +83,13 @@ public class GBlockLootTables extends BlockLoot {
     }
 
     public static LootTable.Builder createMultifaceBlockDrops(Block block) {
-        return LootTable.lootTable()
-                .withPool(
-                        LootPool.lootPool()
-                                .add(
-                                        applyExplosionDecay(block,
-                                                LootItem.lootTableItem(block)
-                                                        .apply(Direction.values(), direction ->
-                                                                SetItemCountFunction.setCount(ConstantValue.exactly(1.0f), true)
-                                                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(
-                                                                                StatePropertiesPredicate.Builder.properties()
-                                                                                        .hasProperty(MultifaceBlock.getFaceProperty(direction), true)
-                                                                        ))
-                                                        )
-                                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(-1.0f), true)))
-                                )
-                );
+        return LootTable.lootTable().withPool(LootPool.lootPool().add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(Direction.values(), direction -> SetItemCountFunction.setCount(ConstantValue.exactly(1.0f), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MultifaceBlock.getFaceProperty(direction), true)))).apply(SetItemCountFunction.setCount(ConstantValue.exactly(-1.0f), true)))));
     }
 
     private void addVinesDroptable(Block block, Block plantBlock) {
-        LootTable.Builder loottable$builder = createSilkTouchOrShearsDispatchTable(block, LootItem.lootTableItem(block).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.33F, 0.55F, 0.77F, 1.0F)));
-        this.add(block, loottable$builder);
-        this.add(plantBlock, loottable$builder);
+        LootTable.Builder builder = createSilkTouchOrShearsDispatchTable(block, LootItem.lootTableItem(block).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.33F, 0.55F, 0.77F, 1.0F)));
+        this.add(block, builder);
+        this.add(plantBlock, builder);
     }
 
     private void dropSlab(RegistryObject<Block> slab) {
