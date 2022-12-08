@@ -17,6 +17,8 @@ import com.google.gson.JsonObject;
 
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -44,7 +46,7 @@ public class LumiereReformingManager extends SimpleJsonResourceReloadListener im
                     if (jsonObject != null) {
                         JsonArray entryList = jsonObject.get("entries").getAsJsonArray();
                         for (JsonElement entry : entryList) {
-                            REFORMING_TABLE.put(Registry.BLOCK.get(new ResourceLocation(entry.getAsJsonObject().get("accepted_block").getAsString())), Registry.BLOCK.get(new ResourceLocation(entry.getAsJsonObject().get("returned_block").getAsString())));
+                            REFORMING_TABLE.put(BuiltInRegistries.BLOCK.get(new ResourceLocation(entry.getAsJsonObject().get("accepted_block").getAsString())), BuiltInRegistries.BLOCK.get(new ResourceLocation(entry.getAsJsonObject().get("returned_block").getAsString())));
                         }
                     }
                 } catch (RuntimeException | IOException exception) {

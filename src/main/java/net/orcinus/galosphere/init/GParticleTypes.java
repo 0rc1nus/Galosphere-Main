@@ -3,16 +3,17 @@ package net.orcinus.galosphere.init;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.orcinus.galosphere.Galosphere;
 
 public class GParticleTypes {
 
     public static void init() { }
 
-    public static final SimpleParticleType AURA_LISTENER = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("aura_listener"), FabricParticleTypes.simple());
-    public static final SimpleParticleType SILVER_BOMB = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("item_silverbomb"), FabricParticleTypes.simple());
-    public static final SimpleParticleType WARPED = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("warped"), FabricParticleTypes.simple());
-    public static final SimpleParticleType ALLURITE_RAIN = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("allurite_rain"), FabricParticleTypes.simple());
-    public static final SimpleParticleType LUMIERE_RAIN = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("lumiere_rain"), FabricParticleTypes.simple());
+    public static final SimpleParticleType AURA_LISTENER = Registry.register(BuiltInRegistries.PARTICLE_TYPE, Galosphere.id("aura_listener"), FabricParticleTypes.simple());
+    public static final SimpleParticleType SILVER_BOMB = Registry.register(BuiltInRegistries.PARTICLE_TYPE, Galosphere.id("item_silverbomb"), FabricParticleTypes.simple());
+    public static final SimpleParticleType WARPED = Registry.register(BuiltInRegistries.PARTICLE_TYPE, Galosphere.id("warped"), FabricParticleTypes.simple());
+    public static final SimpleParticleType ALLURITE_RAIN = Registry.register(BuiltInRegistries.PARTICLE_TYPE, Galosphere.id("allurite_rain"), FabricParticleTypes.simple());
+    public static final SimpleParticleType LUMIERE_RAIN = Registry.register(BuiltInRegistries.PARTICLE_TYPE, Galosphere.id("lumiere_rain"), FabricParticleTypes.simple());
 
 }

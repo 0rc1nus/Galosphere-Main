@@ -25,7 +25,7 @@ public class ItemRendererMixin {
     @ModifyVariable(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z", ordinal = 0), method = "render", index = 8, argsOnly = true)
     private BakedModel GE$render(BakedModel value, ItemStack itemStack, ItemTransforms.TransformType transformType, boolean bl, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, BakedModel bakedModel) {
         if (itemStack.is(GItems.SPECTRE_BOUND_SPYGLASS)) {
-            return this.itemModelShaper.getModelManager().getModel(new ModelResourceLocation("minecraft:spyglass#inventory"));
+            return this.itemModelShaper.getModelManager().getModel(ModelResourceLocation.vanilla("spyglass", "inventory"));
         }
         return value;
     }

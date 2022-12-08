@@ -1,8 +1,7 @@
 package net.orcinus.galosphere.client.particles;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
@@ -15,6 +14,8 @@ import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
 public class AuraParticle extends TextureSheetParticle {
@@ -47,25 +48,25 @@ public class AuraParticle extends TextureSheetParticle {
 
     @Override
     public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
-        Quaternion upper = Vector3f.XP.rotation(Mth.PI / 2);
-        Quaternion lower = Vector3f.XN.rotation(Mth.PI / 2);
+        Quaternionf upper = new Quaternionf().rotationX(Mth.PI / 2);
+        Quaternionf lower = Axis.XN.rotation(Mth.PI / 2);
         renderParticle(pBuffer, pRenderInfo, pPartialTicks, upper);
         renderParticle(pBuffer, pRenderInfo, pPartialTicks, lower);
     }
 
-    private void renderParticle(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks, Quaternion quaternion) {
+    private void renderParticle(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks, Quaternionf quaternion) {
         Vec3 vec3 = pRenderInfo.getPosition();
         float f = (float)(Mth.lerp(pPartialTicks, this.xo, this.x) - vec3.x());
         float f1 = (float)(Mth.lerp(pPartialTicks, this.yo, this.y) - vec3.y());
         float f2 = (float)(Mth.lerp(pPartialTicks, this.zo, this.z) - vec3.z());
         Vector3f vector3f1 = new Vector3f(-1.0F, -1.0F, 0.0F);
-        vector3f1.transform(quaternion);
+        vector3f1.rotate(quaternion);
         Vector3f[] avector3f = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float f4 = this.getQuadSize(pPartialTicks);
 
         for(int i = 0; i < 4; ++i) {
             Vector3f vector3f = avector3f[i];
-            vector3f.transform(quaternion);
+            vector3f.rotate(quaternion);
             vector3f.mul(f4);
             vector3f.add(f, f1, f2);
         }

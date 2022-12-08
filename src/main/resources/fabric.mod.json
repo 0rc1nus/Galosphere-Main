@@ -27,6 +27,9 @@
     ],
     "client": [
       "net.orcinus.galosphere.GalosphereClient"
+    ],
+    "fabric-datagen": [
+      "net.orcinus.galosphere.data.GalosphereDataGenerator"
     ]
   },
   "mixins": [

@@ -1,10 +1,7 @@
 package net.orcinus.galosphere;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -28,33 +25,35 @@ import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
 import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.init.GVanillaIntegration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Galosphere implements ModInitializer {
     
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "galosphere";
-    public static final CreativeModeTab GALOSPHERE = FabricItemGroupBuilder.create(Galosphere.id(MODID)).icon(() -> new ItemStack(GItems.ICON_ITEM)).build();
+    public static final CreativeModeTab GALOSPHERE = FabricItemGroup
+            .builder(Galosphere.id(MODID))
+            .icon(() -> new ItemStack(GItems.ICON_ITEM))
+            .build();
 
     @Override
     public void onInitialize() {
         GItems.init();
         GBlocks.init();
+        GBiomeModifier.init();
         GSoundEvents.init();
         GAttributes.init();
-        GBiomes.init();
-        GBiomeModifier.init();
         GCriteriaTriggers.init();
         GBlockEntityTypes.init();
         GEntityTypes.init();
         GEvents.init();
         GFeatures.init();
-        GConfiguredFeatures.init();
         GParticleTypes.init();
-        GPlacedFeatures.init();
         GMenuTypes.init();
         GMobEffects.init();
         GVanillaIntegration.init();
-        
+
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new LumiereReformingManager());
     }
 

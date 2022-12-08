@@ -1,7 +1,7 @@
 package net.orcinus.galosphere.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -29,11 +29,11 @@ public class GlowFlareEntityRenderer extends EntityRenderer<GlowFlareEntity> {
     public void render(GlowFlareEntity entity, float p_114657_, float p_114658_, PoseStack poseStack, MultiBufferSource source, int p_114661_) {
         poseStack.pushPose();
         poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
         if (entity.isShotAtAngle()) {
-            poseStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
+            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
         }
         this.itemRenderer.renderStatic(new ItemStack(GItems.GLOW_FLARE), ItemTransforms.TransformType.GROUND, 15728880, OverlayTexture.NO_OVERLAY, poseStack, source, entity.getId());
         poseStack.popPose();

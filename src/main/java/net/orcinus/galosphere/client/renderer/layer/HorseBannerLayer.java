@@ -1,7 +1,7 @@
 package net.orcinus.galosphere.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -42,7 +42,7 @@ public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
                             if (((AbstractHorseAccessor)entity).getStandAnimO() > 0.0F) {
                                 poseStack.translate(0.0D, 0.35D, 0.35D);
                             }
-                            poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+                            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
                             poseStack.scale(0.625F, -0.625F, -0.625F);
                             Minecraft.getInstance().getItemRenderer().renderStatic(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, entity.level, packedLight, OverlayTexture.NO_OVERLAY, entity.getId() + ItemTransforms.TransformType.HEAD.ordinal());
                         }

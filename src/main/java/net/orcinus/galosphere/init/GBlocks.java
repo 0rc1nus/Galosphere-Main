@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -96,7 +97,7 @@ public class GBlocks {
     public static <B extends Block> B registerBlock(String name, B block) {
         ResourceLocation id = Galosphere.id(name);
         BLOCKS.put(id, block);
-        GItems.ITEMS.put(id, new BlockItem(block, new Item.Properties().tab(Galosphere.GALOSPHERE)));
+        GItems.ITEMS.put(id, new BlockItem(block, new Item.Properties()));
         return block;
     }
 
@@ -107,7 +108,7 @@ public class GBlocks {
 
     public static void init() {
         for (ResourceLocation name : BLOCKS.keySet()) {
-            Registry.register(Registry.BLOCK, name, BLOCKS.get(name));
+            Registry.register(BuiltInRegistries.BLOCK, name, BLOCKS.get(name));
         }
     }
 

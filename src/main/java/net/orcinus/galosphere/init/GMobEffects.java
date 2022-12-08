@@ -2,6 +2,7 @@ package net.orcinus.galosphere.init;
 
 import com.google.common.collect.Maps;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -23,7 +24,7 @@ public class GMobEffects {
 
     public static void init() {
         for (ResourceLocation id : EFFECTS.keySet()) {
-            Registry.register(Registry.MOB_EFFECT, id, EFFECTS.get(id));
+            Registry.register(BuiltInRegistries.MOB_EFFECT, id, EFFECTS.get(id));
         }
     }
 

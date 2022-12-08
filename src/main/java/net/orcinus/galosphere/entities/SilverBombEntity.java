@@ -129,7 +129,6 @@ public class SilverBombEntity extends ThrowableItemProjectile {
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        CompatUtil compatUtil = new CompatUtil();
         if (!this.level.isClientSide()) {
             this.bombExplode();
         }
@@ -142,7 +141,7 @@ public class SilverBombEntity extends ThrowableItemProjectile {
             public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
                 return world.getBlockState(pos).getBlock().defaultDestroyTime() < 3.0D;
             }
-        }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
+        }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE);
         this.remove(RemovalReason.DISCARDED);
     }
 

@@ -1,14 +1,9 @@
 package net.orcinus.galosphere.init;
 
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
-import com.google.common.collect.Maps;
-
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
@@ -18,22 +13,24 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.orcinus.galosphere.Galosphere;
 
+import javax.annotation.Nullable;
+
 public class GBiomes {
-    
-    private static final Map<Biome, ResourceKey<Biome>> BIOME_KEYS = Maps.newLinkedHashMap();
 
-    public static final Biome CRYSTAL_CANYONS = GBiomes.crystalCanyons();
-    public static final Biome LICHEN_CAVES = GBiomes.lichenCaves();
+    public static final ResourceKey<Biome> CRYSTAL_CANYONS_KEY = register("crystal_canyons");
+    public static final ResourceKey<Biome> LICHEN_CAVES_KEY = register("lichen_caves");
 
-    public static final ResourceKey<Biome> CRYSTAL_CANYONS_KEY = register("crystal_canyons", CRYSTAL_CANYONS);
-    public static final ResourceKey<Biome> LICHEN_CAVES_KEY = register("lichen_caves", LICHEN_CAVES);
-
-    public static Biome lichenCaves() {
+    public static Biome lichenCaves(BootstapContext<Biome> bootstapContext) {
+        HolderGetter<PlacedFeature> holderGetter = bootstapContext.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> holderGetter2 = bootstapContext.lookup(Registries.CONFIGURED_CARVER);
         MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobBuilder);
-        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder();
+        GBiomeModifier.addLichenCavesSpawns(mobBuilder);
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(holderGetter, holderGetter2);
         BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
         BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
@@ -42,14 +39,18 @@ public class GBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        GBiomeModifier.addLichenCavesFeatures(biomeBuilder);
         Music music = Musics.createGameMusic(GSoundEvents.MUSIC_LICHEN_CAVES);
         return biome(0.5F, 0.5F, mobBuilder, biomeBuilder, music, 4159204);
     }
 
-    public static Biome crystalCanyons() {
+    public static Biome crystalCanyons(BootstapContext<Biome> bootstapContext) {
+        HolderGetter<PlacedFeature> holderGetter = bootstapContext.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> holderGetter2 = bootstapContext.lookup(Registries.CONFIGURED_CARVER);
         MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mobBuilder);
-        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder();
+        GBiomeModifier.addCrystalCanyonsSpawns(mobBuilder);
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(holderGetter, holderGetter2);
         BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
         BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
@@ -58,6 +59,7 @@ public class GBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        GBiomeModifier.addCrystalCanyonsFeatures(biomeBuilder);
         Music music = Musics.createGameMusic(GSoundEvents.MUSIC_CRYSTAL_CANYONS);
         return biome(0.5F, 0.5F, mobBuilder, biomeBuilder, music, 4445678);
     }
@@ -76,15 +78,12 @@ public class GBiomes {
         return Mth.hsvToRgb(0.62222224F - value * 0.05F, 0.5F + value * 0.1F, 1.0F);
     }
 
-    private static ResourceKey<Biome> register(String string, Biome biome) {
-        ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, Galosphere.id(string));
-        BIOME_KEYS.put(biome, key);
-        return key;
+    private static ResourceKey<Biome> register(String string) {
+        return ResourceKey.create(Registries.BIOME, Galosphere.id(string));
     }
 
-    public static void init() {
-        for (Biome biome : BIOME_KEYS.keySet()) {
-            Registry.register(BuiltinRegistries.BIOME, BIOME_KEYS.get(biome).location(), biome);
-        }
+    public static void bootstrap(BootstapContext<Biome> biomeRegisterable) {
+        biomeRegisterable.register(CRYSTAL_CANYONS_KEY, GBiomes.crystalCanyons(biomeRegisterable));
+        biomeRegisterable.register(LICHEN_CAVES_KEY, GBiomes.lichenCaves(biomeRegisterable));
     }
 }
