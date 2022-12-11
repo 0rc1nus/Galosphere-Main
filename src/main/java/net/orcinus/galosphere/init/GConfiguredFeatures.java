@@ -44,25 +44,29 @@ public class GConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LICHEN_CORDYCEPS = createKey("lichen_cordyceps");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        context.register(LARGE_ALLURITE_CRYSTAL_FLOOR, new ConfiguredFeature<>(GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.ALLURITE_BLOCK.defaultBlockState(), GBlocks.ALLURITE_CLUSTER.defaultBlockState(), UniformInt.of(4, 7), CaveSurface.FLOOR)));
-        context.register(LARGE_LUMIERE_CRYSTAL_FLOOR, new ConfiguredFeature<>(GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.LUMIERE_BLOCK.defaultBlockState(), GBlocks.LUMIERE_CLUSTER.defaultBlockState(), UniformInt.of(4, 7), CaveSurface.FLOOR)));
-        context.register(LARGE_ALLURITE_CRYSTAL_CEILING, new ConfiguredFeature<>(GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.ALLURITE_BLOCK.defaultBlockState(), GBlocks.ALLURITE_CLUSTER.defaultBlockState(), UniformInt.of(4, 7), CaveSurface.CEILING)));
-        context.register(LARGE_LUMIERE_CRYSTAL_CEILING, new ConfiguredFeature<>(GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.LUMIERE_BLOCK.defaultBlockState(), GBlocks.LUMIERE_CLUSTER.defaultBlockState(), UniformInt.of(4, 7), CaveSurface.CEILING)));
-        context.register(ALLURITE_CRYSTAL_FLOOR, new ConfiguredFeature<>(GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.ALLURITE_BLOCK.defaultBlockState(), GBlocks.ALLURITE_CLUSTER.defaultBlockState(), UniformInt.of(1, 3), CaveSurface.FLOOR)));
-        context.register(LUMIERE_CRYSTAL_FLOOR, new ConfiguredFeature<>(GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.LUMIERE_BLOCK.defaultBlockState(), GBlocks.LUMIERE_CLUSTER.defaultBlockState(), UniformInt.of(1, 3), CaveSurface.FLOOR)));
-        context.register(ALLURITE_CRYSTAL_CEILING, new ConfiguredFeature<>(GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.ALLURITE_BLOCK.defaultBlockState(), GBlocks.ALLURITE_CLUSTER.defaultBlockState(), UniformInt.of(1, 3), CaveSurface.CEILING)));
-        context.register(LUMIERE_CRYSTAL_CEILING, new ConfiguredFeature<>(GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.LUMIERE_BLOCK.defaultBlockState(), GBlocks.LUMIERE_CLUSTER.defaultBlockState(), UniformInt.of(1, 3), CaveSurface.CEILING)));
-        context.register(ORE_SILVER, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), GBlocks.SILVER_ORE.defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), GBlocks.DEEPSLATE_SILVER_ORE.defaultBlockState())), 9)));
-        context.register(ORE_SILVER_SMALL, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), GBlocks.SILVER_ORE.defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), GBlocks.DEEPSLATE_SILVER_ORE.defaultBlockState())), 4)));
-        context.register(BOWL_LICHEN, new ConfiguredFeature<>(GFeatures.BOWL_LICHEN, FeatureConfiguration.NONE));
-        context.register(LICHEN_VEGETATION, new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(GBlocks.BOWL_LICHEN.defaultBlockState(), 4).add(GBlocks.LICHEN_ROOTS.defaultBlockState(), 50).add(Blocks.AIR.defaultBlockState(), 15)))));
-        context.register(LICHEN_PATCH, new ConfiguredFeature<>(GFeatures.LICHEN_PATCH, new VegetationPatchConfiguration(BlockTags.MOSS_REPLACEABLE, BlockStateProvider.simple(GBlocks.LICHEN_MOSS), PlacementUtils.inlinePlaced(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(LICHEN_VEGETATION)), CaveSurface.FLOOR, ConstantInt.of(1), 0.0F, 5, 0.8F, UniformInt.of(4, 7), 0.3F)));
-        context.register(LICHEN_CORDYCEPS, new ConfiguredFeature<>(GFeatures.LICHEN_CORDYCEPS_COLUMN, FeatureConfiguration.NONE));
+        registerConfiguredFeature(context, LARGE_ALLURITE_CRYSTAL_FLOOR, GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.ALLURITE_BLOCK.defaultBlockState(), GBlocks.ALLURITE_CLUSTER.defaultBlockState(), UniformInt.of(4, 7), CaveSurface.FLOOR));
+        registerConfiguredFeature(context, LARGE_LUMIERE_CRYSTAL_FLOOR, GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.LUMIERE_BLOCK.defaultBlockState(), GBlocks.LUMIERE_CLUSTER.defaultBlockState(), UniformInt.of(4, 7), CaveSurface.FLOOR));
+        registerConfiguredFeature(context, LARGE_ALLURITE_CRYSTAL_CEILING, GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.ALLURITE_BLOCK.defaultBlockState(), GBlocks.ALLURITE_CLUSTER.defaultBlockState(), UniformInt.of(4, 7), CaveSurface.CEILING));
+        registerConfiguredFeature(context, LARGE_LUMIERE_CRYSTAL_CEILING, GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.LUMIERE_BLOCK.defaultBlockState(), GBlocks.LUMIERE_CLUSTER.defaultBlockState(), UniformInt.of(4, 7), CaveSurface.CEILING));
+        registerConfiguredFeature(context, ALLURITE_CRYSTAL_FLOOR, GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.ALLURITE_BLOCK.defaultBlockState(), GBlocks.ALLURITE_CLUSTER.defaultBlockState(), UniformInt.of(1, 3), CaveSurface.FLOOR));
+        registerConfiguredFeature(context, LUMIERE_CRYSTAL_FLOOR, GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.LUMIERE_BLOCK.defaultBlockState(), GBlocks.LUMIERE_CLUSTER.defaultBlockState(), UniformInt.of(1, 3), CaveSurface.FLOOR));
+        registerConfiguredFeature(context, ALLURITE_CRYSTAL_CEILING, GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.ALLURITE_BLOCK.defaultBlockState(), GBlocks.ALLURITE_CLUSTER.defaultBlockState(), UniformInt.of(1, 3), CaveSurface.CEILING));
+        registerConfiguredFeature(context, LUMIERE_CRYSTAL_CEILING, GFeatures.CRYSTAL_SPIKE, new CrystalSpikeConfig(GBlocks.LUMIERE_BLOCK.defaultBlockState(), GBlocks.LUMIERE_CLUSTER.defaultBlockState(), UniformInt.of(1, 3), CaveSurface.CEILING));
+        registerConfiguredFeature(context, ORE_SILVER, Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), GBlocks.SILVER_ORE.defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), GBlocks.DEEPSLATE_SILVER_ORE.defaultBlockState())), 9));
+        registerConfiguredFeature(context, ORE_SILVER_SMALL, Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), GBlocks.SILVER_ORE.defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), GBlocks.DEEPSLATE_SILVER_ORE.defaultBlockState())), 4));
+        registerConfiguredFeature(context, BOWL_LICHEN, GFeatures.BOWL_LICHEN, FeatureConfiguration.NONE);
+        registerConfiguredFeature(context, LICHEN_VEGETATION, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(GBlocks.BOWL_LICHEN.defaultBlockState(), 4).add(GBlocks.LICHEN_ROOTS.defaultBlockState(), 50).add(Blocks.AIR.defaultBlockState(), 15))));
+        registerConfiguredFeature(context, LICHEN_PATCH, GFeatures.LICHEN_PATCH, new VegetationPatchConfiguration(BlockTags.MOSS_REPLACEABLE, BlockStateProvider.simple(GBlocks.LICHEN_MOSS), PlacementUtils.inlinePlaced(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(LICHEN_VEGETATION)), CaveSurface.FLOOR, ConstantInt.of(1), 0.0F, 5, 0.8F, UniformInt.of(4, 7), 0.3F));
+        registerConfiguredFeature(context, LICHEN_CORDYCEPS, GFeatures.LICHEN_CORDYCEPS_COLUMN, FeatureConfiguration.NONE);
+
+    }
+
+    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
+        context.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String string) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Galosphere.MODID, string));
     }
-
 
 }

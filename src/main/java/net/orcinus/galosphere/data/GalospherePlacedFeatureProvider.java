@@ -10,6 +10,7 @@ import net.orcinus.galosphere.init.GPlacedFeatures;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("UnstableApiUsage")
 public class GalospherePlacedFeatureProvider extends FabricDynamicRegistryProvider {
 
     public GalospherePlacedFeatureProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {

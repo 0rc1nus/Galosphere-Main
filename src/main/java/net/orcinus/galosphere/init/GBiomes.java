@@ -21,8 +21,8 @@ import javax.annotation.Nullable;
 
 public class GBiomes {
 
-    public static final ResourceKey<Biome> CRYSTAL_CANYONS_KEY = register("crystal_canyons");
-    public static final ResourceKey<Biome> LICHEN_CAVES_KEY = register("lichen_caves");
+    public static final ResourceKey<Biome> CRYSTAL_CANYONS = register("crystal_canyons");
+    public static final ResourceKey<Biome> LICHEN_CAVES = register("lichen_caves");
 
     public static Biome lichenCaves(BootstapContext<Biome> bootstapContext) {
         HolderGetter<PlacedFeature> holderGetter = bootstapContext.lookup(Registries.PLACED_FEATURE);
@@ -83,7 +83,7 @@ public class GBiomes {
     }
 
     public static void bootstrap(BootstapContext<Biome> biomeRegisterable) {
-        biomeRegisterable.register(CRYSTAL_CANYONS_KEY, GBiomes.crystalCanyons(biomeRegisterable));
-        biomeRegisterable.register(LICHEN_CAVES_KEY, GBiomes.lichenCaves(biomeRegisterable));
+        biomeRegisterable.register(CRYSTAL_CANYONS, GBiomes.crystalCanyons(biomeRegisterable));
+        biomeRegisterable.register(LICHEN_CAVES, GBiomes.lichenCaves(biomeRegisterable));
     }
 }

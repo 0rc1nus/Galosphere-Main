@@ -25,8 +25,6 @@ import java.util.List;
 
 public class GPlacedFeatures {
 
-    public static void init() { }
-
     public static final ResourceKey<PlacedFeature> LARGE_CEILING_ALLURITE_CRYSTALS = createKey("large_ceiling_allurite_crystals");
     public static final ResourceKey<PlacedFeature> LARGE_CEILING_LUMIERE_CRYSTALS = createKey("large_ceiling_lumiere_crystals");
     public static final ResourceKey<PlacedFeature> ALLURITE_CEILING_CRYSTALS = createKey("allurite_ceiling_crystals");

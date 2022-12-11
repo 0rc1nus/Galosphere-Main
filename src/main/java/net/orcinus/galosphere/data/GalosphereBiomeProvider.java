@@ -10,6 +10,7 @@ import net.orcinus.galosphere.init.GBiomes;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("UnstableApiUsage")
 public class GalosphereBiomeProvider extends FabricDynamicRegistryProvider {
 
     public GalosphereBiomeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
@@ -18,10 +19,8 @@ public class GalosphereBiomeProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
-
-        add(registries, entries, GBiomes.CRYSTAL_CANYONS_KEY);
-        add(registries, entries, GBiomes.LICHEN_CAVES_KEY);
-
+        add(registries, entries, GBiomes.CRYSTAL_CANYONS);
+        add(registries, entries, GBiomes.LICHEN_CAVES);
     }
 
     private void add(HolderLookup.Provider registries, Entries entries, ResourceKey<Biome> biome) {
