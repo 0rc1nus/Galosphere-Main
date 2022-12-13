@@ -20,10 +20,16 @@ public class OverworldBiomeBuilderMixin {
 
     @Shadow @Final private Climate.Parameter FULL_RANGE;
 
+    @Shadow @Final private Climate.Parameter[] erosions;
+
+    @Shadow @Final private Climate.Parameter[] humidities;
+
+    @Shadow @Final private Climate.Parameter midInlandContinentalness;
+
     @Inject(at = @At("RETURN"), method = "addUndergroundBiomes")
     public void G$addUndergroundBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer, CallbackInfo ci) {
-        consumer.accept(Pair.of(Climate.parameters(Climate.Parameter.span(-1.0F, -0.45F), this.FULL_RANGE, Climate.Parameter.span(0.7F, 1.0F), Climate.Parameter.span(-1.0F, -0.78F), Climate.Parameter.span(0.2F, 0.9F), this.FULL_RANGE, 0.0F), GBiomes.CRYSTAL_CANYONS));
-        consumer.accept(Pair.of(Climate.parameters(this.FULL_RANGE, Climate.Parameter.span(0.45F, 1.0F), this.FULL_RANGE, this.FULL_RANGE, Climate.Parameter.span(0.2F, 0.9F), this.FULL_RANGE, 0.0F), GBiomes.LICHEN_CAVES));
+        consumer.accept(Pair.of(Climate.parameters(this.FULL_RANGE, this.FULL_RANGE, Climate.Parameter.span(0.7F, 1.0F), Climate.Parameter.span(this.erosions[0], this.erosions[1]), Climate.Parameter.span(0.2F, 0.9F), this.FULL_RANGE, 0.0F), GBiomes.CRYSTAL_CANYONS));
+        consumer.accept(Pair.of(Climate.parameters(this.FULL_RANGE, this.humidities[4], this.midInlandContinentalness, this.erosions[4], Climate.Parameter.span(0.2F, 0.9F), this.FULL_RANGE, 0.0F), GBiomes.LICHEN_CAVES));
     }
 
 }

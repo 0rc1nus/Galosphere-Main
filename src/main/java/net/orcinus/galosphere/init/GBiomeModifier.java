@@ -16,7 +16,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 public class GBiomeModifier {
 
     public static void init() {
-        addOres();
+//        addOres();
     }
 
     public static void addOres() {
