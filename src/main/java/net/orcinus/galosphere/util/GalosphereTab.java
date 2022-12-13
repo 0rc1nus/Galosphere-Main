@@ -21,8 +21,33 @@ public class GalosphereTab {
     private static void createiveTabInit(FeatureFlagSet featureFlagSet, CreativeModeTab.Output output, boolean flag) {
         output.accept(GItems.SPARKLE_SPAWN_EGG);
         output.accept(GItems.SPECTRE_SPAWN_EGG);
+        output.accept(GItems.BOTTLE_OF_SPECTRE);
         output.accept(GItems.ALLURITE_SHARD);
         output.accept(GItems.LUMIERE_SHARD);
+
+        output.accept(GItems.SILVER_INGOT);
+        output.accept(GItems.RAW_SILVER);
+        output.accept(GItems.SILVER_NUGGET);
+        output.accept(GItems.SILVER_BOMB);
+        output.accept(GItems.STERLING_HELMET);
+        output.accept(GItems.STERLING_CHESTPLATE);
+        output.accept(GItems.STERLING_LEGGINGS);
+        output.accept(GItems.STERLING_BOOTS);
+        output.accept(GItems.STERLING_HORSE_ARMOR);
+
+        output.accept(GItems.LICHEN_CORDYCEPS);
+        output.accept(GItems.GOLDEN_LICHEN_CORDYCEPS);
+        output.accept(GItems.GLOW_FLARE);
+
+        output.accept(GBlocks.AURA_RINGER);
+        output.accept(GBlocks.COMBUSTION_TABLE);
+        output.accept(GBlocks.WARPED_ANCHOR);
+        output.accept(GBlocks.SILVER_ORE);
+        output.accept(GBlocks.DEEPSLATE_SILVER_ORE);
+        output.accept(GBlocks.RAW_SILVER_BLOCK);
+        output.accept(GBlocks.SILVER_BLOCK);
+        output.accept(GBlocks.CHANDELIER);
+
         output.accept(GBlocks.ALLURITE_BLOCK);
         output.accept(GBlocks.LUMIERE_BLOCK);
         output.accept(GBlocks.CHARGED_LUMIERE_BLOCK);
@@ -58,33 +83,12 @@ public class GalosphereTab {
         output.accept(GBlocks.AMETHYST_LAMP);
         output.accept(GBlocks.ALLURITE_LAMP);
         output.accept(GBlocks.LUMIERE_LAMP);
-        output.accept(GBlocks.SILVER_BLOCK);
-        output.accept(GBlocks.RAW_SILVER_BLOCK);
-        output.accept(GBlocks.SILVER_ORE);
-        output.accept(GBlocks.DEEPSLATE_SILVER_ORE);
-        output.accept(GBlocks.AURA_RINGER);
-        output.accept(GBlocks.WARPED_ANCHOR);
-        output.accept(GBlocks.COMBUSTION_TABLE);
         output.accept(GBlocks.LICHEN_MOSS);
         output.accept(GBlocks.LICHEN_ROOTS);
         output.accept(GBlocks.BOWL_LICHEN);
         output.accept(GBlocks.LICHEN_SHELF);
         output.accept(GBlocks.GLOW_INK_CLUMPS);
-        output.accept(GBlocks.CHANDELIER);
 
-        output.accept(GItems.SILVER_INGOT);
-        output.accept(GItems.RAW_SILVER);
-        output.accept(GItems.SILVER_NUGGET);
-        output.accept(GItems.SILVER_BOMB);
-        output.accept(GItems.STERLING_HELMET);
-        output.accept(GItems.STERLING_CHESTPLATE);
-        output.accept(GItems.STERLING_LEGGINGS);
-        output.accept(GItems.STERLING_BOOTS);
-        output.accept(GItems.STERLING_HORSE_ARMOR);
-        output.accept(GItems.BOTTLE_OF_SPECTRE);
-        output.accept(GItems.GLOW_FLARE);
-        output.accept(GItems.LICHEN_CORDYCEPS);
-        output.accept(GItems.GOLDEN_LICHEN_CORDYCEPS);
     }
 
 }
