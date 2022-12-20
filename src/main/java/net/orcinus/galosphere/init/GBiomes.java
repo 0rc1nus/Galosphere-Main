@@ -1,6 +1,9 @@
 package net.orcinus.galosphere.init;
 
+import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvents;
@@ -22,6 +25,9 @@ import javax.annotation.Nullable;
 public class GBiomes {
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Galosphere.MODID);
+
+    public static final ResourceKey<Biome> CRYSTAL_CANYONS_KEY = registerResourceKey("crystal_canyons");
+    public static final ResourceKey<Biome> LICHEN_CAVES_KEY = registerResourceKey("lichen_caves");
 
     public static final RegistryObject<Biome> CRYSTAL_CANYONS = BIOMES.register("crystal_canyons", GBiomes::crystalCanyons);
     public static final RegistryObject<Biome> LICHEN_CAVES = BIOMES.register("lichen_caves", GBiomes::lichenCaves);
@@ -70,6 +76,10 @@ public class GBiomes {
         float value = temperature / 3.0F;
         value = Mth.clamp(value, -1.0F, 1.0F);
         return Mth.hsvToRgb(0.62222224F - value * 0.05F, 0.5F + value * 0.1F, 1.0F);
+    }
+
+    private static ResourceKey<Biome> registerResourceKey(String name) {
+        return ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Galosphere.MODID, name));
     }
 
 }
