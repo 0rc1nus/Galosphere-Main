@@ -1,19 +1,15 @@
 package net.orcinus.galosphere.init;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.orcinus.galosphere.Galosphere;
 
 public class GSoundEvents {
 
-    public static final Holder.Reference<SoundEvent> MUSIC_CRYSTAL_CANYONS = registerForHolder("music.overworld.crystal_canyons");
-    public static final Holder.Reference<SoundEvent> MUSIC_LICHEN_CAVES = registerForHolder("music.overworld.lichen_caves");
+    public static final SoundEvent MUSIC_CRYSTAL_CANYONS = register("music.biome.crystal_canyons");
+    public static final SoundEvent MUSIC_LICHEN_CAVES = register("music.biome.lichen_caves");
 
     public static final SoundEvent LUMIERE_COMPOST = register("block.lumiere.compost");
 
@@ -38,7 +34,7 @@ public class GSoundEvents {
 
     private static SoundEvent register(String string) {
         ResourceLocation id = Galosphere.id(string);
-        return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
+        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id));
     }
 
     private static String block(String name, String append) {
@@ -47,18 +43,6 @@ public class GSoundEvents {
 
     private static SoundType register(String name, float volume, float pitch) {
         return new SoundType(volume, pitch, register(block(name, "break")), register(block(name, "step")), register(block(name, "place")), register(block(name, "hit")), register(block(name, "fall")));
-    }
-
-    private static Holder.Reference<SoundEvent> registerForHolder(String string) {
-        return registerForHolder(new ResourceLocation(Galosphere.MODID, string));
-    }
-
-    private static Holder.Reference<SoundEvent> registerForHolder(ResourceLocation resourceLocation) {
-        return registerForHolder(resourceLocation, resourceLocation);
-    }
-
-    private static Holder.Reference<SoundEvent> registerForHolder(ResourceLocation resourceLocation, ResourceLocation resourceLocation2) {
-        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, resourceLocation, SoundEvent.createVariableRangeEvent(resourceLocation2));
     }
 
     public static void init() {

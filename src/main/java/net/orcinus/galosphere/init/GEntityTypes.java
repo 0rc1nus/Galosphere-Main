@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +23,7 @@ public class GEntityTypes {
     public static final EntityType<GlowFlareEntity> GLOW_FLARE = register("glow_flare", EntityType.Builder.<GlowFlareEntity>of(GlowFlareEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(Galosphere.id("glow_flare").toString()));
 
     private static <T extends Entity> EntityType<T> register(String id, EntityType<T> builder) {
-        return Registry.register(BuiltInRegistries.ENTITY_TYPE, Galosphere.id(id), builder);
+        return Registry.register(Registry.ENTITY_TYPE, Galosphere.id(id), builder);
     }
 
     public static void init() {

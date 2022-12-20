@@ -1,7 +1,7 @@
 package net.orcinus.galosphere.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -38,7 +38,7 @@ public class BannerLayer<T extends LivingEntity, M extends EntityModel<T> & Head
                     this.getParentModel().getHead().translateAndRotate(stack);
                     if (!(item instanceof ArmorItem) || ((ArmorItem) item).getSlot() != EquipmentSlot.HEAD) {
                         stack.translate(0.0D, -0.25D, 0.0D);
-                        stack.mulPose(Axis.YP.rotationDegrees(180.0F));
+                        stack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
                         stack.scale(0.625F, -0.625F, -0.625F);
                         Minecraft.getInstance().getItemRenderer().renderStatic(entity, itemstack, ItemTransforms.TransformType.HEAD, false, stack, source, entity.level, packedLight, OverlayTexture.NO_OVERLAY, entity.getId() + ItemTransforms.TransformType.HEAD.ordinal());
                     }

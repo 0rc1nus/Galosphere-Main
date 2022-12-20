@@ -17,7 +17,7 @@ public class ItemModelShaperMixin {
     @Inject(at = @At("HEAD"), method = "getItemModel(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/client/resources/model/BakedModel;", cancellable = true)
     private void GE$getItemModel(ItemStack stack, CallbackInfoReturnable<BakedModel> cir) {
         if (stack.is(GItems.SPECTRE_BOUND_SPYGLASS)) {
-            cir.setReturnValue(((ItemModelShaper)(Object)this).getModelManager().getModel(ModelResourceLocation.vanilla("spyglass", "inventory")));
+            cir.setReturnValue(((ItemModelShaper)(Object)this).getModelManager().getModel(new ModelResourceLocation("minecraft:spyglass_in_hand#inventory")));
         }
     }
 }

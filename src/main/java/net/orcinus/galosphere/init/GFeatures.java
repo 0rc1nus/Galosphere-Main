@@ -2,7 +2,6 @@ package net.orcinus.galosphere.init;
 
 import com.google.common.collect.Maps;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -33,7 +32,7 @@ public class GFeatures {
 
     public static void init() {
         for (ResourceLocation id : FEATURES.keySet()) {
-            Registry.register(BuiltInRegistries.FEATURE, id, FEATURES.get(id));
+            Registry.register(Registry.FEATURE, id, FEATURES.get(id));
         }
     }
 
