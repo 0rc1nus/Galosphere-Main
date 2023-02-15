@@ -1,5 +1,6 @@
 package net.orcinus.galosphere.mixin;
 
+import net.orcinus.galosphere.config.GalosphereConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,7 +37,7 @@ public class PlayerMixin {
 
     @Inject(at = @At("HEAD"), method = "getDestroySpeed", cancellable = true)
     private void G$getDestroySpeed(BlockState blockState, CallbackInfoReturnable<Float> cir) {
-        if (blockState.getBlock() == Blocks.BUDDING_AMETHYST) {
+        if (GalosphereConfig.slowBuddingAmethystDestroySpeed && blockState.getBlock() == Blocks.BUDDING_AMETHYST) {
             cir.setReturnValue(2.0F);
         }
     }

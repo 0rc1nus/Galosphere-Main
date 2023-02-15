@@ -1,4 +1,7 @@
 {
+	"galosphere.midnightconfig.title": "Galosphere Config",
+	"galosphere.midnightconfig.slowBuddingAmethystDestroySpeed": "Slowed Budding Amethyst Destroy Speed",
+	"galosphere.midnightconfig.pillagerDropSilverIngot": "Pillager Drop Silver Ingots",
 	"advancements.galosphere.crystal_lamps.description": "Have all Crystal Lamps in your inventory",
 	"advancements.galosphere.crystal_lamps.title": "Balanced, As All Things Should Be",
 	"advancements.galosphere.light_spread.description": "Deploy a Glow Flare",

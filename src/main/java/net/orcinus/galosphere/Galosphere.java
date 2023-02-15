@@ -1,5 +1,6 @@
 package net.orcinus.galosphere;
 
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -7,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.crafting.LumiereReformingManager;
 import net.orcinus.galosphere.init.GAttributes;
 import net.orcinus.galosphere.init.GBiomeModifier;
@@ -36,6 +38,7 @@ public class Galosphere implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        MidnightConfig.init(MODID, GalosphereConfig.class);
         GItems.init();
         GBlocks.init();
         GSoundEvents.init();

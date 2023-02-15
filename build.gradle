@@ -11,6 +11,16 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+    maven { url 'https://maven.terraformersmc.com/releases/' }
+    maven { url 'https://jitpack.io'}
+    maven { url "https://maven.shedaniel.me/" }
 }
 
 loom {
@@ -18,18 +28,16 @@ loom {
 }
 
 dependencies {
-    // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    include "maven.modrinth:midnightlib:${project.midnightlib_version}"
 
-    // Uncomment the following line to enable the deprecated Fabric API modules.
-    // These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
-
-    // modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
+    modRuntimeOnly "maven.modrinth:lazydfu:${project.lazydfu_version}"
+    modRuntimeOnly "maven.modrinth:fastload:${project.fastload_version}"
 }
 
 processResources {
