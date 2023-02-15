@@ -35,6 +35,7 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.compat.integration.terrablender.GalosphereRegion;
+import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.GlowFlareDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
@@ -72,7 +73,7 @@ public class MiscEvents {
     public void onLoottableLoad(LootTableLoadEvent event) {
         ResourceLocation name = event.getName();
         LootTable table = event.getTable();
-        if (name.equals(new ResourceLocation("entities/pillager"))) {
+        if (name.equals(new ResourceLocation("entities/pillager")) && GalosphereConfig.PILLAGER_DROP_SILVER_INGOT.get()) {
             table.addPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_INGOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());
         }
     }
