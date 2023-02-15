@@ -41,9 +41,9 @@ public class BiomeReagentHandler {
     );
     public static final Climate.ParameterPoint LICHEN_CAVES_PARAMETER = Climate.parameters(
             Climate.Parameter.span(-1.0F, 1.0F),
-            Climate.Parameter.span(0.3F, 1.0F),
-            Climate.Parameter.span(0.03F, 0.3F),
-            Climate.Parameter.span(0.05F, 0.45F),
+            Climate.Parameter.span(-1.0F, -0.7F),
+            Climate.Parameter.span(-1.0F, 1.0F),
+            Climate.Parameter.span(-1.0F, 1.0F),
             Climate.Parameter.span(0.2F, 0.9F),
             Climate.Parameter.span(-1.0F, 1.0F),
             0.0F
