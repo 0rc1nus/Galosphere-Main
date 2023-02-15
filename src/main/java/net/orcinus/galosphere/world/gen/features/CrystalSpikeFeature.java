@@ -77,6 +77,9 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
 
     public boolean placeSpike(LevelAccessor world, BlockPos blockPos, int startRadius, int height, int randomChance, HashSet<BlockPos> crystalPos, Direction direction, RandomSource random) {
         boolean flag = false;
+        if (startRadius < 1) {
+            return false;
+        }
         for (int y = 0; y < height; y++) {
             int radius = startRadius - y / 2;
             for (int x = -radius; x <= radius; x++) {
