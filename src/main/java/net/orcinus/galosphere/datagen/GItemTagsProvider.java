@@ -38,7 +38,7 @@ public class GItemTagsProvider extends ItemTagsProvider {
         this.tag(Tags.Items.NUGGETS).addTag(ForgeItemTags.SILVER_NUGGETS);
         this.tag(Tags.Items.ORES).addTag(ForgeItemTags.SILVER_ORES);
         this.tag(ForgeItemTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get().asItem());
-        this.tag(Tags.Items.STORAGE_BLOCKS).addTag(ForgeItemTags.SILVER_STORAGE_BLOCKS);
+        this.tag(Tags.Items.STORAGE_BLOCKS).addTag(ForgeItemTags.SILVER_STORAGE_BLOCKS).addTag(ForgeItemTags.STORAGE_BLOCKS_RAW_SILVER);
         this.tag(ForgeItemTags.RAW_MATERIALS_SILVER).add(GItems.RAW_SILVER.get());
         this.tag(ForgeItemTags.STORAGE_BLOCKS_RAW_SILVER).add(GBlocks.RAW_SILVER_BLOCK.get().asItem());
         this.tag(Tags.Items.RAW_MATERIALS).addTag(ForgeItemTags.RAW_MATERIALS_SILVER);
