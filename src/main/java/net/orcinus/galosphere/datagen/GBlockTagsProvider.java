@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.compat.init.ForgeBlockTags;
+import net.orcinus.galosphere.compat.init.ForgeItemTags;
 import net.orcinus.galosphere.init.GBlockTags;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.Nullable;
@@ -30,11 +31,12 @@ public class GBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.SLABS).add(GBlocks.AMETHYST_SLAB.get(), GBlocks.ALLURITE_SLAB.get(), GBlocks.LUMIERE_SLAB.get(), GBlocks.SMOOTH_AMETHYST_SLAB.get(), GBlocks.SMOOTH_ALLURITE_SLAB.get(), GBlocks.SMOOTH_LUMIERE_SLAB.get(), GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.LUMIERE_BRICK_SLAB.get());
 
         this.tag(GBlockTags.CRYSTAL_SPIKES_BLOCKS).add(GBlocks.ALLURITE_BLOCK.get(), GBlocks.LUMIERE_BLOCK.get());
-        this.tag(GBlockTags.SPARKLES_SPAWNABLE_ON).add(Blocks.CALCITE).addTags(BlockTags.BASE_STONE_OVERWORLD, GBlockTags.CRYSTAL_SPIKES_BLOCKS);
+        this.tag(GBlockTags.SPARKLES_SPAWNABLE_ON).add(Blocks.CALCITE).addTag(BlockTags.BASE_STONE_OVERWORLD).addTag(GBlockTags.CRYSTAL_SPIKES_BLOCKS);
 
+        this.tag(ForgeBlockTags.STORAGE_BLOCKS_RAW_SILVER).add(GBlocks.RAW_SILVER_BLOCK.get());
         this.tag(ForgeBlockTags.SILVER_ORE).add(GBlocks.SILVER_ORE.get(), GBlocks.DEEPSLATE_SILVER_ORE.get());
         this.tag(ForgeBlockTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get());
-        this.tag(ForgeBlockTags.ORES).addTags(ForgeBlockTags.SILVER_ORE);
-        this.tag(ForgeBlockTags.STORAGE_BLOCKS).addTags(ForgeBlockTags.SILVER_STORAGE_BLOCKS);
+        this.tag(ForgeBlockTags.ORES).addTag(ForgeBlockTags.SILVER_ORE);
+        this.tag(ForgeBlockTags.STORAGE_BLOCKS).addTag(ForgeBlockTags.SILVER_STORAGE_BLOCKS).addTag(ForgeBlockTags.STORAGE_BLOCKS_RAW_SILVER);
     }
 }

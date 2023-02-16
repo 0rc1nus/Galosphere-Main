@@ -26,11 +26,12 @@ public class GItemTagsProvider extends ItemTagsProvider {
         this.tag(ForgeItemTags.SILVER_INGOT).add(GItems.SILVER_INGOT.get());
         this.tag(ForgeItemTags.SILVER_NUGGETS).add(GItems.SILVER_NUGGET.get());
         this.tag(ForgeItemTags.SILVER_ORES).add(GBlocks.SILVER_ORE.get().asItem()).add(GBlocks.DEEPSLATE_SILVER_ORE.get().asItem());
-        this.tag(ForgeItemTags.INGOTS).addTags(ForgeItemTags.SILVER_INGOT);
-        this.tag(ForgeItemTags.NUGGETS).addTags(ForgeItemTags.SILVER_NUGGETS);
-        this.tag(ForgeItemTags.ORES).addTags(ForgeItemTags.SILVER_ORES);
+        this.tag(ForgeItemTags.INGOTS).addTag(ForgeItemTags.SILVER_INGOT);
+        this.tag(ForgeItemTags.NUGGETS).addTag(ForgeItemTags.SILVER_NUGGETS);
+        this.tag(ForgeItemTags.ORES).addTag(ForgeItemTags.SILVER_ORES);
+        this.tag(ForgeItemTags.STORAGE_BLOCKS_RAW_SILVER).add(GBlocks.RAW_SILVER_BLOCK.get().asItem());
         this.tag(ForgeItemTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get().asItem());
-        this.tag(ForgeItemTags.STORAGE_BLOCKS).addTag(ForgeItemTags.SILVER_STORAGE_BLOCKS);
+        this.tag(ForgeItemTags.STORAGE_BLOCKS).addTag(ForgeItemTags.SILVER_STORAGE_BLOCKS).addTag(ForgeItemTags.STORAGE_BLOCKS_RAW_SILVER);
         this.tag(ForgeItemTags.SILVER_RAW_ORES).add(GItems.RAW_SILVER.get());
         this.tag(ForgeItemTags.RAW_ORES).addTag(ForgeItemTags.SILVER_RAW_ORES);
     }
