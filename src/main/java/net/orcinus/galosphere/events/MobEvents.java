@@ -36,6 +36,7 @@ import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
+import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.entities.SparkleEntity;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GBlocks;
@@ -64,7 +65,7 @@ public class MobEvents {
     @SubscribeEvent
     public void onBreakSpeedChanged(PlayerEvent.BreakSpeed event) {
         BlockState state = event.getState();
-        if (state.getBlock() == Blocks.BUDDING_AMETHYST) {
+        if (state.getBlock() == Blocks.BUDDING_AMETHYST && GalosphereConfig.SLOWED_BUDDING_AMETHYST_MINING_SPEED.get()) {
             event.setNewSpeed(2.0F);
         }
     }
