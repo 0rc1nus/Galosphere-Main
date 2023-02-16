@@ -11,6 +11,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.compat.init.ForgeBlockTags;
 import net.orcinus.galosphere.compat.init.ForgeItemTags;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItemTags;
@@ -39,6 +40,7 @@ public class GItemTagsProvider extends ItemTagsProvider {
         this.tag(ForgeItemTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get().asItem());
         this.tag(Tags.Items.STORAGE_BLOCKS).addTag(ForgeItemTags.SILVER_STORAGE_BLOCKS);
         this.tag(ForgeItemTags.RAW_MATERIALS_SILVER).add(GItems.RAW_SILVER.get());
+        this.tag(ForgeItemTags.STORAGE_BLOCKS_RAW_SILVER).add(GBlocks.RAW_SILVER_BLOCK.get().asItem());
         this.tag(Tags.Items.RAW_MATERIALS).addTag(ForgeItemTags.RAW_MATERIALS_SILVER);
     }
 }
