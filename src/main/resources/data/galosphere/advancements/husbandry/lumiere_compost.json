@@ -1,14 +1,14 @@
 {
-  "parent": "minecraft:story/root",
+  "parent": "minecraft:husbandry/plant_seed",
   "display": {
     "icon": {
       "item": "galosphere:lumiere_shard"
     },
     "title": {
-      "translate": "advancements.story.lumiere_compost.title"
+      "translate": "advancements.galosphere.lumiere_compost.title"
     },
     "description": {
-      "translate": "advancements.story.lumiere_compost.description"
+      "translate": "advancements.galosphere.lumiere_compost.description"
     },
     "frame": "task",
     "show_toast": true,

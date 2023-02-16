@@ -10,7 +10,7 @@
       "tag": "forge:ingots/silver"
     },
     "G": {
-      "item": "minecraft:tnt"
+      "item": "minecraft:gunpowder"
     }
   },
   "result": {

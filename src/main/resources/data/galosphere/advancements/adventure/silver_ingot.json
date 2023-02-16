@@ -1,14 +1,14 @@
 {
-  "parent": "minecraft:story/root",
+  "parent": "minecraft:adventure/root",
   "display": {
     "icon": {
       "item": "galosphere:silver_ingot"
     },
     "title": {
-      "translate": "advancements.story.silver_ingot.title"
+      "translate": "advancements.galosphere.silver_ingot.title"
     },
     "description": {
-      "translate": "advancements.story.silver_ingot.description"
+      "translate": "advancements.galosphere.silver_ingot.description"
     },
     "frame": "task",
     "show_toast": true,

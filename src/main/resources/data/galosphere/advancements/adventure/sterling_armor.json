@@ -1,15 +1,15 @@
 {
-  "parent": "minecraft:story/root",
+  "parent": "galosphere:adventure/silver_ingot",
   "display": {
     "icon": {
       "item": "galosphere:sterling_helmet",
       "nbt": "{Damage:0}"
     },
     "title": {
-      "translate": "advancements.story.sterling_armor.title"
+      "translate": "advancements.galosphere.sterling_armor.title"
     },
     "description": {
-      "translate": "advancements.story.sterling_armor.description"
+      "translate": "advancements.galosphere.sterling_armor.description"
     },
     "frame": "goal",
     "show_toast": true,

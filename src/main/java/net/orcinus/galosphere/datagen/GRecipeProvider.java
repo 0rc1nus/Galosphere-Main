@@ -118,11 +118,11 @@ public class GRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder
                 .shaped(GItems.SILVER_BOMB.get())
                 .define('R', ForgeItemTags.SILVER_INGOT)
-                .define('G', Blocks.TNT)
+                .define('G', Items.GUNPOWDER)
                 .pattern(" R ")
                 .pattern("RGR")
                 .pattern(" R ")
-                .unlockedBy("has_tnt", has(Blocks.TNT)).save(consumer);
+                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER)).save(consumer);
 
         ShapedRecipeBuilder
                 .shaped(GBlocks.AURA_RINGER.get())
