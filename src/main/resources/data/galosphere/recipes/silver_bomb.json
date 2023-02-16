@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "G": {
-      "item": "minecraft:tnt"
+      "item": "minecraft:gunpowder"
     },
     "R": {
       "item": "galosphere:silver_ingot"

@@ -77,7 +77,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
             uuid = tag.getUUID("Manipulator");
         } else {
             String s = tag.getString("Manipulator");
-            uuid = OldUsersConverter.convertMobOwnerIfNecessary(Objects.requireNonNull(this.getServer()), s);
+            uuid = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), s);
         }
         if (uuid != null) {
             this.setManipulatorUUID(uuid);

@@ -24,6 +24,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
+import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
 public class GEvents {
@@ -82,7 +83,7 @@ public class GEvents {
 
     private static void registerLootableEvents() {
         LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if (id.equals(EntityType.PILLAGER.getDefaultLootTable())) {
+            if (id.equals(EntityType.PILLAGER.getDefaultLootTable()) && GalosphereConfig.pillagerDropSilverIngot) {
                 tableBuilder.pool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_INGOT).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))));
             }
         });

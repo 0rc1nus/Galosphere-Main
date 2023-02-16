@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.orcinus.galosphere.api.BannerAttachable;
+import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,7 +36,7 @@ public class PlayerMixin {
 
     @Inject(at = @At("HEAD"), method = "getDestroySpeed", cancellable = true)
     private void G$getDestroySpeed(BlockState blockState, CallbackInfoReturnable<Float> cir) {
-        if (blockState.getBlock() == Blocks.BUDDING_AMETHYST) {
+        if (GalosphereConfig.slowBuddingAmethystDestroySpeed && blockState.getBlock() == Blocks.BUDDING_AMETHYST) {
             cir.setReturnValue(2.0F);
         }
     }

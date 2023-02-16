@@ -7,12 +7,12 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_tnt": {
+    "has_gunpowder": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:tnt"
+              "minecraft:gunpowder"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_tnt",
+      "has_gunpowder",
       "has_the_recipe"
     ]
   ],
