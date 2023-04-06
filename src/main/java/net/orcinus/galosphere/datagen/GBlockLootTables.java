@@ -83,6 +83,13 @@ public class GBlockLootTables extends BlockLoot {
         this.add(GBlocks.GLOW_INK_CLUMPS.get(), GBlockLootTables::createMultifaceBlockDrops);
         this.dropPottedContents(GBlocks.POTTED_BOWL_LICHEN.get());
         this.dropPottedContents(GBlocks.POTTED_LICHEN_ROOTS.get());
+        this.dropSelf(GBlocks.SILVER_TILES.get());
+        this.dropSelf(GBlocks.SILVER_TILES_STAIRS.get());
+        this.dropSlab(GBlocks.SILVER_TILES_SLAB);
+        this.dropSelf(GBlocks.SILVER_PANEL.get());
+        this.dropSelf(GBlocks.SILVER_PANEL_STAIRS.get());
+        this.dropSlab(GBlocks.SILVER_PANEL_SLAB);
+        this.dropSelf(GBlocks.SILVER_LATTICE.get());
     }
 
     public static LootTable.Builder createMultifaceBlockDrops(Block block) {

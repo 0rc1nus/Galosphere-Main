@@ -42,6 +42,13 @@
     "galosphere:amethyst_lamp",
     "galosphere:allurite_lamp",
     "galosphere:lumiere_lamp",
-    "galosphere:chandelier"
+    "galosphere:chandelier",
+    "galosphere:silver_tiles",
+    "galosphere:silver_tiles_slab",
+    "galosphere:silver_tiles_stairs",
+    "galosphere:silver_panel",
+    "galosphere:silver_panel_slab",
+    "galosphere:silver_panel_stairs",
+    "galosphere:silver_lattice"
   ]
 }

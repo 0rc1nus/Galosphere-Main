@@ -86,6 +86,14 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.pollinatedCluster(GBlocks.ALLURITE_CLUSTER.get());
         this.pollinatedCluster(GBlocks.LUMIERE_CLUSTER.get());
 
+        this.simpleBlock(GBlocks.SILVER_TILES.get());
+        this.slabBlock(GBlocks.SILVER_TILES_SLAB.get(), "silver_tiles");
+        this.stairsBlock(GBlocks.SILVER_TILES_STAIRS.get(), "silver_tiles");
+
+        this.simpleBlock(GBlocks.SILVER_PANEL.get());
+        this.slabBlock(GBlocks.SILVER_PANEL_SLAB.get(), "silver_panel");
+        this.stairsBlock(GBlocks.SILVER_PANEL_STAIRS.get(), "silver_panel");
+
     }
 
     private void pollinatedCluster(@NotNull Block block) {

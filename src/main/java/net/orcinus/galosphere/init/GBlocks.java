@@ -8,7 +8,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -43,6 +46,16 @@ public class GBlocks {
     public static final RegistryObject<Block> MONSTROMETER = registerBlock("monstrometer", () -> new MonstrometerBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).lightLevel(state -> MonstrometerBlock.isActive(state) ? 4 : 0).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(GSoundEvents.MONSTROMETER)));
     public static final RegistryObject<Block> COMBUSTION_TABLE = registerBlock("combustion_table", () -> new CombustionTableBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2.5F).sound(GSoundEvents.SILVER).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> WARPED_ANCHOR = registerBlock("warped_anchor", () -> new WarpedAnchorBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).lightLevel(state -> state.getValue(WarpedAnchorBlock.WARPED_CHARGE) * 3).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(GSoundEvents.SILVER)));
+
+    public static final RegistryObject<Block> SILVER_TILES = registerBlock("silver_tiles", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(GSoundEvents.SILVER).strength(3.0F, 6.0F)));
+    public static final RegistryObject<Block> SILVER_TILES_STAIRS = registerBlock("silver_tiles_stairs", () -> new StairBlock(SILVER_TILES.get().defaultBlockState(), BlockBehaviour.Properties.copy(SILVER_TILES.get())));
+    public static final RegistryObject<Block> SILVER_TILES_SLAB = registerBlock("silver_tiles_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(SILVER_TILES.get())));
+
+    public static final RegistryObject<Block> SILVER_PANEL = registerBlock("silver_panel", () -> new Block(BlockBehaviour.Properties.copy(SILVER_TILES.get())));
+    public static final RegistryObject<Block> SILVER_PANEL_STAIRS = registerBlock("silver_panel_stairs", () -> new StairBlock(SILVER_PANEL.get().defaultBlockState(), BlockBehaviour.Properties.copy(SILVER_TILES.get())));
+    public static final RegistryObject<Block> SILVER_PANEL_SLAB = registerBlock("silver_panel_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(SILVER_PANEL.get())));
+
+    public static final RegistryObject<Block> SILVER_LATTICE = registerBlock("silver_lattice", () -> new IronBarsBlock(BlockBehaviour.Properties.copy(SILVER_TILES.get()).sound(GSoundEvents.SILVER_LATTICE).noOcclusion()));
 
     public static final RegistryObject<Block> SILVER_ORE = registerBlock("silver_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(SILVER_ORE.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE)));

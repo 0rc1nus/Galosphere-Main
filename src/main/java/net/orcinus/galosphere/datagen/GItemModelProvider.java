@@ -54,7 +54,7 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem("amethyst_lamp");
         blockItem("allurite_lamp");
         blockItem("lumiere_lamp");
-        blockItem("lichen_moss");
+        blockItem("lichen_moss");;
         withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", new ResourceLocation(Galosphere.MODID, "block/monstrometer_top")).texture("bottom", new ResourceLocation(Galosphere.MODID, "block/monstrometer_bottom")).texture("side", new ResourceLocation(Galosphere.MODID, "block/monstrometer_side"));
         item("silver_ingot");
         item("allurite_shard");
@@ -74,6 +74,7 @@ public class GItemModelProvider extends ItemModelProvider {
         item("golden_lichen_cordyceps");
         item("glow_flare");
         item("chandelier");
+        itemWithBlockDirectory("silver_lattice");
         itemWithBlockDirectory("lichen_roots");
         itemWithBlockDirectory("bowl_lichen");
         itemWithBlockDirectory("lichen_shelf");

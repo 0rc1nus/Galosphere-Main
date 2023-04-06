@@ -1,4 +1,4 @@
-// 1.19.2	2023-04-06T15:13:41.3083238	LootTables
+// 1.19.2	2023-04-06T17:46:14.77384	LootTables
 ccf2377cbdc0c444b94a2ac316fbfe7db63ed3e1 data/galosphere/loot_tables/blocks/allurite_block.json
 58a66a9e7f04f398efbbb156595f9f563b15e68a data/galosphere/loot_tables/blocks/allurite_bricks.json
 34e8f20d584efb863b9ba7eb090bd985f2366d07 data/galosphere/loot_tables/blocks/allurite_brick_slab.json
@@ -41,7 +41,14 @@ d7642e0e67e16146fd3c2a92dfd80cb893413a35 data/galosphere/loot_tables/blocks/lumi
 0cd9e1881636d55c27e7d5aa0c4a371b36e48516 data/galosphere/loot_tables/blocks/potted_lichen_roots.json
 bf3026ac5822e44019bb0e114ee4866e27056421 data/galosphere/loot_tables/blocks/raw_silver_block.json
 9e7d9e772f094a4cf86de473d5456e9916245b20 data/galosphere/loot_tables/blocks/silver_block.json
+e7f5cd8c0a83addebe8ab41102691422bd21f95b data/galosphere/loot_tables/blocks/silver_lattice.json
 07c8b98c701425da852ff75562a19c7b87e3c64f data/galosphere/loot_tables/blocks/silver_ore.json
+d5f592d5b5e3212a116f616ce0771699294ce46d data/galosphere/loot_tables/blocks/silver_panel.json
+122481c8c41f01abbb1426501c9c3ef3ba2c1f7d data/galosphere/loot_tables/blocks/silver_panel_slab.json
+32c5485cfdb3462de2a3f9b9a9ed7344cdfc95fe data/galosphere/loot_tables/blocks/silver_panel_stairs.json
+4b0506aa90def56388206b684600de5eb3e59943 data/galosphere/loot_tables/blocks/silver_tiles.json
+3d8f9aff69b007b6a60d7390c25c02466b69bcff data/galosphere/loot_tables/blocks/silver_tiles_slab.json
+e3c472c1758edaea165fb969fe04eaf1a1f33c75 data/galosphere/loot_tables/blocks/silver_tiles_stairs.json
 d1a29044dba21ead7aa86a35525deeb16092d4a7 data/galosphere/loot_tables/blocks/smooth_allurite.json
 7c7571f4c518d612eed9fdf98e0d0334b0e656c8 data/galosphere/loot_tables/blocks/smooth_allurite_slab.json
 ae1fdde9e7b759360e4820e84c758a4a974e7d23 data/galosphere/loot_tables/blocks/smooth_allurite_stairs.json
