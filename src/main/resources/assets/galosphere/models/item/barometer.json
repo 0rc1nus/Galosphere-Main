@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "galosphere:item/barometer"
+  },
+  "overrides": [
+    { "predicate": { "galosphere:weather_level": 0.0 }, "model": "galosphere:item/barometer_04" },
+    { "predicate": { "galosphere:weather_level": 0.2 }, "model": "galosphere:item/barometer_03" },
+    { "predicate": { "galosphere:weather_level": 0.4 }, "model": "galosphere:item/barometer_02" },
+    { "predicate": { "galosphere:weather_level": 0.6 }, "model": "galosphere:item/barometer_01" },
+    { "predicate": { "galosphere:weather_level": 1.0 }, "model": "galosphere:item/barometer_00" }
+  ]
+}

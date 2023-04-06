@@ -9,6 +9,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.network.BarometerPacket;
 import net.orcinus.galosphere.network.SendParticlesPacket;
 import net.orcinus.galosphere.network.SendPerspectivePacket;
 
@@ -31,6 +32,7 @@ public class GNetworkHandler {
     public static void init() {
         INSTANCE.registerMessage(getPacketID(), SendParticlesPacket.class, SendParticlesPacket::write, SendParticlesPacket::read, SendParticlesPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         INSTANCE.registerMessage(getPacketID(), SendPerspectivePacket.class, SendPerspectivePacket::write, SendPerspectivePacket::read, SendPerspectivePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        INSTANCE.registerMessage(getPacketID(), BarometerPacket.class, BarometerPacket::write, BarometerPacket::read, BarometerPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 
     public static void sendToAllInRangeClients(BlockPos pos, ServerLevel level, double distance, SendParticlesPacket message) {

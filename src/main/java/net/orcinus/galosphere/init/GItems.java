@@ -34,6 +34,7 @@ public class GItems {
     public static final RegistryObject<Item> RAW_SILVER = registerBaseItem("raw_silver");
     public static final RegistryObject<Item> SILVER_INGOT = registerBaseItem("silver_ingot");
     public static final RegistryObject<Item> SILVER_NUGGET = registerBaseItem("silver_nugget");
+    public static final RegistryObject<Item> BAROMETER = registerBaseItem("barometer");
     public static final RegistryObject<Item> SILVER_BOMB = ITEMS.register("silver_bomb", () -> new SilverBombItem(new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(16)));
     public static final RegistryObject<Item> STERLING_HELMET = ITEMS.register("sterling_helmet", () -> new SterlingArmorItem(EquipmentSlot.HEAD, new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(1)));
     public static final RegistryObject<Item> STERLING_CHESTPLATE = ITEMS.register("sterling_chestplate", () -> new SterlingArmorItem(EquipmentSlot.CHEST, new Item.Properties().tab(Galosphere.GALOSPHERE).stacksTo(1)));

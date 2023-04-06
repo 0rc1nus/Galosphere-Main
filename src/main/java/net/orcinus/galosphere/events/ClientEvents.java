@@ -1,13 +1,19 @@
 package net.orcinus.galosphere.events;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.entity.HorseRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -40,9 +46,11 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GModelLayers;
 import net.orcinus.galosphere.init.GParticleTypes;
+import org.jetbrains.annotations.Nullable;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
+    public static int clearWeatherTime;
 
     @SubscribeEvent 
     public static void onClientSetup(final FMLClientSetupEvent event) {
@@ -53,7 +61,53 @@ public class ClientEvents {
         eventBus.register(new GoldenBreathOverlay());
         eventBus.register(new SpectreOverlay());
 
-        event.enqueueWork(() -> ItemProperties.register(Items.CROSSBOW, new ResourceLocation(Galosphere.MODID, "glow_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.GLOW_FLARE.get()) ? 1.0F : 0.0F));
+        event.enqueueWork(() -> {
+            ItemProperties.register(Items.CROSSBOW, new ResourceLocation(Galosphere.MODID, "glow_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.GLOW_FLARE.get()) ? 1.0F : 0.0F);
+            ItemProperties.register(GItems.BAROMETER.get(), new ResourceLocation(Galosphere.MODID, "weather_level"), new ClampedItemPropertyFunction() {
+                private double rotation;
+                private int ticksBeforeChange;
+
+                @Override
+                public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
+                    Entity entity = livingEntity != null ? livingEntity : itemStack.getEntityRepresentation();
+                    float[][] predicates = new float[][]{{0.25F, 0.3F, 0.5F, 0.7F, 0.9F}, {0.9F, 0.7F, 0.5F, 0.3F, 0.25F}};
+                    if (entity == null) {
+                        return 0.0f;
+                    }
+                    if (clientLevel == null && entity.level instanceof ClientLevel clientWorld) {
+                        clientLevel = clientWorld;
+                    }
+                    if (clientLevel == null) {
+                        return 0.0f;
+                    }
+                    float max;
+                    float speed = 0.00525F;
+                    if (ClientEvents.clearWeatherTime < 12000) {
+                        max = predicates[clientLevel.isRaining() ? 1 : 0][ClientEvents.clearWeatherTime / 3000];
+                    } else {
+                        max = clientLevel.getLevelData().isRaining() ? 0.0F : 1.0F;
+                    }
+                    float rainLevel = clientLevel.getRainLevel(1.0F);
+                    if ((rainLevel > 0.9F || rainLevel < 0.1F) && ClientEvents.clearWeatherTime == 0 && this.ticksBeforeChange == 0) {
+                        this.ticksBeforeChange = 800;
+                    }
+                    if (this.ticksBeforeChange > 0) {
+                        this.ticksBeforeChange--;
+                    }
+                    if (!clientLevel.dimensionType().natural() && clientLevel.getRandom().nextFloat() < 0.1F) {
+                        this.rotation = Mth.positiveModulo(Math.random() - this.rotation, 1);
+                    }
+                    if (this.rotation < max && this.ticksBeforeChange == 0) {
+                        this.rotation += speed;
+                    }
+                    if (this.rotation > max && this.ticksBeforeChange == 0) {
+                        this.rotation -= speed;
+                    }
+                    return this.rotation >= 0.99 ? 1 : (float) this.rotation;
+                }
+
+            });
+        });
 
     }
 
