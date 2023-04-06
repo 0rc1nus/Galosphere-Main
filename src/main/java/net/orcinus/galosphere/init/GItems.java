@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.items.ChandelierItem;
 import net.orcinus.galosphere.items.GHorseArmorItem;
 import net.orcinus.galosphere.items.GlowFlareItem;
 import net.orcinus.galosphere.items.GoldenLichenCordycepsItem;
@@ -42,6 +43,7 @@ public class GItems {
     public static final RegistryObject<Item> GOLDEN_LICHEN_CORDYCEPS = ITEMS.register("golden_lichen_cordyceps", () -> new GoldenLichenCordycepsItem(new Item.Properties().food(GFoods.GOLDEN_LICHEN_CORDYCEPS).tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> GLOW_FLARE = ITEMS.register("glow_flare", () -> new GlowFlareItem(new Item.Properties().tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> SPECTRE_BOUND_SPYGLASS = ITEMS.register("spectre_bound_spyglass", () -> new SpectreBoundSpyglassItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CHANDELIER = ITEMS.register("chandelier", () -> new ChandelierItem(GBlocks.CHANDELIER.get(), new Item.Properties().tab(Galosphere.GALOSPHERE)));
 
     public static RegistryObject<Item> registerBaseItem(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties().tab(Galosphere.GALOSPHERE)));

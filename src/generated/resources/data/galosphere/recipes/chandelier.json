@@ -6,12 +6,15 @@
     },
     "@": {
       "item": "galosphere:bottle_of_spectre"
+    },
+    "C": {
+      "tag": "forge:ingots/iron"
     }
   },
   "pattern": [
-    "@ @",
-    "@#@",
-    " # "
+    "@",
+    "C",
+    "#"
   ],
   "result": {
     "item": "galosphere:chandelier"

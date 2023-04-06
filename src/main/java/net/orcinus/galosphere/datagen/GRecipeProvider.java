@@ -106,11 +106,13 @@ public class GRecipeProvider extends RecipeProvider {
                 .shaped(GBlocks.CHANDELIER.get())
                  .define('#', Tags.Items.INGOTS_COPPER)
                  .define('@', GItems.BOTTLE_OF_SPECTRE.get())
-                 .pattern("@ @")
-                 .pattern("@#@")
-                 .pattern(" # ")
+                 .define('C', Tags.Items.INGOTS_IRON)
+                 .pattern("@")
+                 .pattern("C")
+                 .pattern("#")
                  .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
-                .unlockedBy("has_bottle_of_spectre", has(GItems.BOTTLE_OF_SPECTRE.get())).save(consumer);
+                 .unlockedBy("has_iron_nugget", has(Tags.Items.INGOTS_IRON))
+                 .unlockedBy("has_bottle_of_spectre", has(GItems.BOTTLE_OF_SPECTRE.get())).save(consumer);
 
         ShapedRecipeBuilder
                 .shaped(GBlocks.COMBUSTION_TABLE.get())

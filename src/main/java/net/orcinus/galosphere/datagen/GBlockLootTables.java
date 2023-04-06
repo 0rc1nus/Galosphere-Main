@@ -8,7 +8,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -76,6 +78,7 @@ public class GBlockLootTables extends BlockLoot {
         this.dropSelf(GBlocks.LICHEN_SHELF.get());
         this.dropSelf(GBlocks.BOWL_LICHEN.get());
         this.dropSelf(GBlocks.CHANDELIER.get());
+        this.add(GBlocks.CHANDELIER.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
         this.addVinesDroptable(GBlocks.LICHEN_CORDYCEPS.get(), GBlocks.LICHEN_CORDYCEPS_PLANT.get());
         this.add(GBlocks.GLOW_INK_CLUMPS.get(), GBlockLootTables::createMultifaceBlockDrops);
         this.dropPottedContents(GBlocks.POTTED_BOWL_LICHEN.get());

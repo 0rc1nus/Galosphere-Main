@@ -1,10 +1,17 @@
 {
   "variants": {
-    "hanging=false": {
-      "model": "galosphere:block/chandelier"
+    "half=lower,vertical_direction=up": {
+      "model": "galosphere:block/chandelier_bottom"
     },
-    "hanging=true": {
-      "model": "galosphere:block/chandelier",
+    "half=lower,vertical_direction=down": {
+      "model": "galosphere:block/chandelier_bottom",
+      "x": 180
+    },
+    "half=upper,vertical_direction=up": {
+      "model": "galosphere:block/chandelier_top"
+    },
+    "half=upper,vertical_direction=down": {
+      "model": "galosphere:block/chandelier_top",
       "x": 180
     }
   }
