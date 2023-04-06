@@ -49,13 +49,13 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem("chiseled_allurite");
         blockItem("chiseled_lumiere");
         blockItem("charged_lumiere_block");
-        blockItem("aura_ringer");
         blockItem("warped_anchor");
         blockItem("combustion_table");
         blockItem("amethyst_lamp");
         blockItem("allurite_lamp");
         blockItem("lumiere_lamp");
         blockItem("lichen_moss");
+        withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", new ResourceLocation(Galosphere.MODID, "block/monstrometer_top")).texture("bottom", new ResourceLocation(Galosphere.MODID, "block/monstrometer_bottom")).texture("side", new ResourceLocation(Galosphere.MODID, "block/monstrometer_side"));
         item("silver_ingot");
         item("allurite_shard");
         item("lumiere_shard");

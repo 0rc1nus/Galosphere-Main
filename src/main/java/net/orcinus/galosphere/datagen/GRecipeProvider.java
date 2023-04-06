@@ -160,9 +160,9 @@ public class GRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_gunpowder", has(Items.GUNPOWDER)).save(consumer);
 
         ShapedRecipeBuilder
-                .shaped(GBlocks.AURA_RINGER.get())
+                .shaped(GBlocks.MONSTROMETER.get())
                 .define('S', ForgeItemTags.SILVER_STORAGE_BLOCKS)
-                .define('C', GBlocks.ALLURITE_BLOCK.get())
+                .define('C', GBlocks.LUMIERE_BLOCK.get())
                 .pattern("SSS")
                 .pattern("CCC")
                 .pattern("SSS")

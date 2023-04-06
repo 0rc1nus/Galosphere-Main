@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "galosphere:block/monstrometer_bottom",
+    "side": "galosphere:block/monstrometer_side",
+    "top": "galosphere:block/monstrometer_top"
+  }
+}

@@ -271,7 +271,9 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
             if (!this.level.isClientSide()) {
                 this.gameEvent(GameEvent.ENTITY_INTERACT);
                 ItemStack itemStack2 = new ItemStack(GItems.BOTTLE_OF_SPECTRE.get());
-                BottlePickable.saveDefaultDataFromBottleTag(this, itemStack2);
+                CompoundTag compoundTag = new CompoundTag();
+                this.save(compoundTag);
+                itemStack2.setTag(compoundTag);
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(stack, player, itemStack2));
                 this.discard();
             }

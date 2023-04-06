@@ -1,4 +1,4 @@
-// 1.19.2	2022-11-14T14:19:28.6659373	Item Models: galosphere
+// 1.19.2	2023-04-06T15:13:41.3103255	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -13,7 +13,6 @@ ea34c4dddb48bd70564882eb33dbdb20647ba1ed assets/galosphere/models/item/amethyst_
 307f23afd62770b51cce3aa3f107afd5ce4e8934 assets/galosphere/models/item/amethyst_lamp.json
 f59faed84ee792287ad751de555fb8b637f1b51d assets/galosphere/models/item/amethyst_slab.json
 9c251dc6c06ce06496d79ae35e7341f037e63d55 assets/galosphere/models/item/amethyst_stairs.json
-af9089bbedd85b8b1cafaee6e77cb4d5cfd4299e assets/galosphere/models/item/aura_ringer.json
 737d07be7fa70b3d2bbaf13a5e7ac20c45f930bc assets/galosphere/models/item/bottle_of_spectre.json
 f07e01d1fde4d91096693930382a59951365ed6d assets/galosphere/models/item/bowl_lichen.json
 88fcef04b5dd79042e57b448d7e59c83d791b0d7 assets/galosphere/models/item/chandelier.json
@@ -40,6 +39,7 @@ e5e89b2bb2046a3eaa53c3b66017b018476f2e83 assets/galosphere/models/item/lumiere_b
 f2d37dc6b89b1642846b22a0e197c5fdd7ea1f85 assets/galosphere/models/item/lumiere_shard.json
 e5799ac4d7313f3d3d6a3c638292bcebd9fa7913 assets/galosphere/models/item/lumiere_slab.json
 1704af7fbd62ae191a220c64744014a4c4ba96ae assets/galosphere/models/item/lumiere_stairs.json
+a58d3c391f55cc6fb794e3bc6096e37e831cbd0a assets/galosphere/models/item/monstrometer.json
 7db8655dce9c1151b5455cfd3b10e40ee3879fc9 assets/galosphere/models/item/raw_silver.json
 0957d596cd485148c9bf35dd238f624cf8720eab assets/galosphere/models/item/raw_silver_block.json
 61d810d6c73ac39876ee1b9eebadcfd80730f2a8 assets/galosphere/models/item/silver_block.json

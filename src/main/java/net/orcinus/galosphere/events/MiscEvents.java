@@ -36,7 +36,7 @@ import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.compat.integration.terrablender.GalosphereRegion;
 import net.orcinus.galosphere.config.GalosphereConfig;
-import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
+import net.orcinus.galosphere.crafting.MonstrometerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.GlowFlareDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereReformingManager;
@@ -138,7 +138,7 @@ public class MiscEvents {
 
     @SubscribeEvent
     public void onTagsUpdated(TagsUpdatedEvent event) {
-        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new AuraRingerDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new MonstrometerDispenseItemBehavior());
         DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.get().asItem(), new WarpedAnchorDispenseItemBehavior());
         DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD.get(), new LumiereComposterDispenseItemBehavior());
         DispenserBlock.registerBehavior(GItems.GLOW_FLARE.get(), new GlowFlareDispenseItemBehavior());
