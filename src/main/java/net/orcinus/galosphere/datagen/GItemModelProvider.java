@@ -54,7 +54,13 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem("amethyst_lamp");
         blockItem("allurite_lamp");
         blockItem("lumiere_lamp");
-        blockItem("lichen_moss");;
+        blockItem("lichen_moss");
+        blockItem("silver_tiles");
+        blockItem("silver_tiles_stairs");
+        blockItem("silver_tiles_slab");
+        blockItem("silver_panel");
+        blockItem("silver_panel_stairs");
+        blockItem("silver_panel_slab");
         withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", new ResourceLocation(Galosphere.MODID, "block/monstrometer_top")).texture("bottom", new ResourceLocation(Galosphere.MODID, "block/monstrometer_bottom")).texture("side", new ResourceLocation(Galosphere.MODID, "block/monstrometer_side"));
         item("silver_ingot");
         item("allurite_shard");

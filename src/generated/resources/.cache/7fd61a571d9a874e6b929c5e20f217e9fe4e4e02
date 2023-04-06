@@ -1,4 +1,4 @@
-// 1.19.2	2023-04-06T17:46:14.7667621	Item Models: galosphere
+// 1.19.2	2023-04-06T18:01:16.4427637	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -48,6 +48,12 @@ c405b98892a51f58be5d5233962ab1d79987367b assets/galosphere/models/item/silver_in
 87a377bb8e970595c6561122a874b2a4075097d5 assets/galosphere/models/item/silver_lattice.json
 97989c51061ed2f196be5e1e0cd5cca680c5e75f assets/galosphere/models/item/silver_nugget.json
 8b116d5884545c6939a67fd0445edb8b522df7f2 assets/galosphere/models/item/silver_ore.json
+c0085e3ca947e55308aba0decc98f4d4b5db7246 assets/galosphere/models/item/silver_panel.json
+390dc23d63fef541ac671bf3ef695d9a9ced455a assets/galosphere/models/item/silver_panel_slab.json
+6d45b83779d9b5b606f7db73dc463900805c5de7 assets/galosphere/models/item/silver_panel_stairs.json
+4c3acca2c10e083af43a87a7ab641032e05baad4 assets/galosphere/models/item/silver_tiles.json
+52a3566cc93b617f654aed621159f634ff7b52c9 assets/galosphere/models/item/silver_tiles_slab.json
+d882d1502fd8785ba70a93509af737e22d5d0c37 assets/galosphere/models/item/silver_tiles_stairs.json
 3861798d1af29c9d5d76f303426e0ad6c919fac9 assets/galosphere/models/item/smooth_allurite.json
 d5831cd188ec729294fa17843d9cc7189e357673 assets/galosphere/models/item/smooth_allurite_slab.json
 f025257ff9bd3c9b053f6323f52014cda80a8ac3 assets/galosphere/models/item/smooth_allurite_stairs.json

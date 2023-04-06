@@ -48,10 +48,16 @@ public class GRecipeProvider extends RecipeProvider {
         twoXtwo(consumer, GBlocks.AMETHYST_BRICKS.get(), GBlocks.SMOOTH_AMETHYST.get().asItem(), 4);
         twoXtwo(consumer, GBlocks.ALLURITE_BRICKS.get(), GBlocks.SMOOTH_ALLURITE.get().asItem(), 4);
         twoXtwo(consumer, GBlocks.LUMIERE_BRICKS.get(), GBlocks.SMOOTH_LUMIERE.get().asItem(), 4);
+        twoXtwo(consumer, GBlocks.SILVER_PANEL.get(), GBlocks.SILVER_BLOCK.get().asItem(), 4);
+        twoXtwo(consumer, GBlocks.SILVER_TILES.get(), GBlocks.SILVER_PANEL.get().asItem(), 4);
         threeXthree(consumer, GBlocks.SILVER_BLOCK.get(), GItems.SILVER_INGOT.get());
         threeXthree(consumer, GBlocks.RAW_SILVER_BLOCK.get(), GItems.RAW_SILVER.get());
         stairsBlock(consumer, GBlocks.AMETHYST_STAIRS.get(), Items.AMETHYST_BLOCK);
         slabBlock(consumer, GBlocks.AMETHYST_SLAB.get(), Items.AMETHYST_BLOCK);
+        stairsBlock(consumer, GBlocks.SILVER_PANEL_STAIRS.get(), GBlocks.SILVER_PANEL.get().asItem());
+        slabBlock(consumer, GBlocks.SILVER_PANEL_SLAB.get(), GBlocks.SILVER_PANEL.get().asItem());
+        stairsBlock(consumer, GBlocks.SILVER_TILES_STAIRS.get(), GBlocks.SILVER_TILES.get().asItem());
+        slabBlock(consumer, GBlocks.SILVER_TILES_SLAB.get(), GBlocks.SILVER_TILES.get().asItem());
         stairsBlock(consumer, GBlocks.ALLURITE_STAIRS.get(), GBlocks.ALLURITE_BLOCK.get().asItem());
         slabBlock(consumer, GBlocks.ALLURITE_SLAB.get(), GBlocks.ALLURITE_BLOCK.get().asItem());
         stairsBlock(consumer, GBlocks.LUMIERE_STAIRS.get(), GBlocks.LUMIERE_BLOCK.get().asItem());
@@ -79,6 +85,13 @@ public class GRecipeProvider extends RecipeProvider {
 
         shaplessOne(consumer, GItems.SILVER_INGOT.get(), GBlocks.SILVER_BLOCK.get().asItem(), 9);
         shaplessOne(consumer, GItems.RAW_SILVER.get(), GBlocks.RAW_SILVER_BLOCK.get().asItem(), 9);
+
+        ShapedRecipeBuilder.shaped(GBlocks.SILVER_LATTICE.get(), 16)
+                .define('#', GItems.SILVER_INGOT.get())
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_silver_ingot", has(GItems.SILVER_INGOT.get()))
+                .save(consumer);
 
         ShapedRecipeBuilder.shaped(GItems.GLOW_FLARE.get(), 3)
                 .define('#', Items.GLOW_INK_SAC)
@@ -238,6 +251,22 @@ public class GRecipeProvider extends RecipeProvider {
         stonecutterResultFromBase(consumer, GBlocks.AMETHYST_BRICKS.get(), GBlocks.SMOOTH_AMETHYST.get());
         stonecutterResultFromBase(consumer, GBlocks.ALLURITE_BRICKS.get(), GBlocks.SMOOTH_ALLURITE.get());
         stonecutterResultFromBase(consumer, GBlocks.LUMIERE_BRICKS.get(), GBlocks.SMOOTH_LUMIERE.get());
+
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_PANEL.get(), GBlocks.SILVER_BLOCK.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_PANEL_STAIRS.get(), GBlocks.SILVER_BLOCK.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_PANEL_SLAB.get(), GBlocks.SILVER_BLOCK.get(), 4);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_TILES.get(), GBlocks.SILVER_BLOCK.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_TILES_STAIRS.get(), GBlocks.SILVER_BLOCK.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_TILES_SLAB.get(), GBlocks.SILVER_BLOCK.get(), 4);
+
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_PANEL_STAIRS.get(), GBlocks.SILVER_PANEL.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_PANEL_SLAB.get(), GBlocks.SILVER_PANEL.get(), 4);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_TILES.get(), GBlocks.SILVER_PANEL.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_TILES_STAIRS.get(), GBlocks.SILVER_PANEL.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_TILES_SLAB.get(), GBlocks.SILVER_PANEL.get(), 4);
+
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_TILES_STAIRS.get(), GBlocks.SILVER_TILES.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.SILVER_TILES_SLAB.get(), GBlocks.SILVER_TILES.get(), 4);
 
         smithing(consumer, Items.LEATHER_CHESTPLATE, GItems.STERLING_CHESTPLATE.get(), ForgeItemTags.SILVER_INGOT);
         smithing(consumer, Items.LEATHER_HELMET, GItems.STERLING_HELMET.get(), ForgeItemTags.SILVER_INGOT);
