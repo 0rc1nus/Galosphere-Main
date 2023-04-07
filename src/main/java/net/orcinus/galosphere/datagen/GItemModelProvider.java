@@ -88,6 +88,7 @@ public class GItemModelProvider extends ItemModelProvider {
 
         spawnEggItem("sparkle");
         spawnEggItem("spectre");
+        spawnEggItem("specterpillar");
 
         withExistingParent("crossbow_glow_flare", new ResourceLocation("item/crossbow")).texture("layer0", new ResourceLocation(Galosphere.MODID, "item/crossbow_glow_flare"));
     }

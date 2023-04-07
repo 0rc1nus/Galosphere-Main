@@ -36,6 +36,9 @@ public class GSoundEvents {
     public static final RegistryObject<SoundEvent> SPECTRE_MANIPULATE_BEGIN = register("entity.spectre.manipulate.begin");
     public static final RegistryObject<SoundEvent> SPECTRE_MANIPULATE_END = register("entity.spectre.manipulate.end");
 
+    public static final RegistryObject<SoundEvent> SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
+    public static final RegistryObject<SoundEvent> SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
+
     public static final SoundType ALLURITE = soundType("allurite");
     public static final SoundType ALLURITE_CLUSTER = soundType("allurite_cluster");
     public static final SoundType MONSTROMETER = soundType("monstrometer");

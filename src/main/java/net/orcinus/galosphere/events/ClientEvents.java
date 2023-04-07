@@ -29,6 +29,7 @@ import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.GoldenBreathOverlay;
 import net.orcinus.galosphere.client.gui.SpectreOverlay;
 import net.orcinus.galosphere.client.model.SparkleModel;
+import net.orcinus.galosphere.client.model.SpecterpillarModel;
 import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraParticle;
@@ -38,6 +39,7 @@ import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
+import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
@@ -133,6 +135,7 @@ public class ClientEvents {
         event.registerLayerDefinition(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
         event.registerLayerDefinition(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
         event.registerLayerDefinition(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
+        event.registerLayerDefinition(GModelLayers.SPECTERPILLAR, SpecterpillarModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -141,6 +144,7 @@ public class ClientEvents {
         event.registerEntityRenderer(GEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
         event.registerEntityRenderer(GEntityTypes.SPECTRE.get(), SpectreRenderer::new);
         event.registerEntityRenderer(GEntityTypes.GLOW_FLARE.get(), GlowFlareEntityRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.SPECTERPILLAR.get(), SpecterpillarRenderer::new);
     }
 
     @SubscribeEvent

@@ -1,5 +1,8 @@
 package net.orcinus.galosphere.entities;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Dynamic;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -7,29 +10,42 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -38,26 +54,64 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 import net.orcinus.galosphere.api.BottlePickable;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
-import net.orcinus.galosphere.entities.ai.FlyWanderGoal;
+import net.orcinus.galosphere.entities.ai.SpectreAi;
+import net.orcinus.galosphere.init.GBlockTags;
+import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GItemTags;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GNetworkHandler;
 import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.network.SendPerspectivePacket;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-public class SpectreEntity extends PathfinderMob implements FlyingAnimal, BottlePickable {
+public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickable {
     private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Boolean> CAN_BE_MANIPULATED = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
+    protected static final ImmutableList<SensorType<? extends Sensor<? super SpectreEntity>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, SensorType.IS_IN_WATER, GSensorTypes.SPECTRE_TEMPTATIONS.get());
+    protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, MemoryModuleType.BREED_TARGET, MemoryModuleType.IS_PREGNANT, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.IS_PANICKING, GMemoryModuleTypes.NEAREST_LICHEN_MOSS.get());
 
-    public SpectreEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
+    public SpectreEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
+    }
+
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return stack.is(GItemTags.SPECTRE_TEMPT_ITEMS);
+    }
+
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob p_146744_) {
+        return GEntityTypes.SPECTRE.get().create(serverLevel);
+    }
+
+    @Override
+    public void spawnChildFromBreeding(ServerLevel serverLevel, Animal animal) {
+        ServerPlayer serverPlayer = this.getLoveCause();
+        if (serverPlayer == null) {
+            serverPlayer = animal.getLoveCause();
+        }
+        if (serverPlayer != null) {
+            serverPlayer.awardStat(Stats.ANIMALS_BRED);
+            CriteriaTriggers.BRED_ANIMALS.trigger(serverPlayer, this, animal, null);
+        }
+        this.setAge(6000);
+        animal.setAge(6000);
+        this.resetLove();
+        animal.resetLove();
+        this.getBrain().setMemory(MemoryModuleType.IS_PREGNANT, Unit.INSTANCE);
+        serverLevel.broadcastEntityEvent(this, (byte)18);
+        if (serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+            serverLevel.addFreshEntity(new ExperienceOrb(serverLevel, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(7) + 1));
+        }
     }
 
     @Override
@@ -66,6 +120,10 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
         this.entityData.define(MANIPULATOR, Optional.empty());
         this.entityData.define(CAN_BE_MANIPULATED, false);
         this.entityData.define(FROM_BOTTLE, false);
+    }
+
+    public static boolean checkSpectreSpawnRules(EntityType<? extends LivingEntity> type, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return level.getBlockState(pos.below()).is(GBlockTags.SPECTRES_SPAWNABLE_ON);
     }
 
     @Override
@@ -172,9 +230,29 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     }
 
     @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(1, new FlyWanderGoal(this));
-        this.goalSelector.addGoal(2, new FloatGoal(this));
+    protected Brain.Provider<SpectreEntity> brainProvider() {
+        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
+    }
+
+    @Override
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return SpectreAi.makeBrain(this.brainProvider().makeBrain(dynamic));
+    }
+
+    @Override
+    public Brain<SpectreEntity> getBrain() {
+        return (Brain<SpectreEntity>) super.getBrain();
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        this.level.getProfiler().push("spectreBrain");
+        this.getBrain().tick((ServerLevel)this.level, this);
+        this.level.getProfiler().pop();
+        this.level.getProfiler().push("spectreActivityUpdate");
+        SpectreAi.updateActivity(this);
+        this.level.getProfiler().pop();
+        super.customServerAiStep();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -185,8 +263,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     public void aiStep() {
         super.aiStep();
         if (!this.level.isClientSide() || this.matchesClientPlayerUUID()) {
-            Optional<UUID> optionalUUID = this.entityData.get(MANIPULATOR);
-            optionalUUID.ifPresent(this::manualControl);
+            this.entityData.get(MANIPULATOR).ifPresent(this::manualControl);
         }
     }
 
@@ -253,7 +330,7 @@ public class SpectreEntity extends PathfinderMob implements FlyingAnimal, Bottle
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
+    public InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         ItemStack stack = player.getItemInHand(interactionHand);
         if (this.canBeManipulated() && (stack.is(GItems.SPECTRE_BOUND_SPYGLASS.get()) || stack.is(Items.SPYGLASS))) {
             this.playSound(GSoundEvents.SPECTRE_LOCK_TO_SPYGLASS.get(), 1, 1);

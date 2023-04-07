@@ -28,6 +28,7 @@ public class GItems {
 
     public static final RegistryObject<Item> SPARKLE_SPAWN_EGG = ITEMS.register("sparkle_spawn_egg", () -> new ForgeSpawnEggItem(GEntityTypes.SPARKLE, 0xF0F5F4, 0x24F6D8, new Item.Properties().tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> SPECTRE_SPAWN_EGG = ITEMS.register("spectre_spawn_egg", () -> new ForgeSpawnEggItem(GEntityTypes.SPECTRE, 0xFFF3DD, 0x9CCDB6, new Item.Properties().tab(Galosphere.GALOSPHERE)));
+    public static final RegistryObject<Item> SPECTERPILLAR_SPAWN_EGG = ITEMS.register("specterpillar_spawn_egg", () -> new ForgeSpawnEggItem(GEntityTypes.SPECTERPILLAR, 0xFFF3DD, 0xF7CF7B, new Item.Properties().tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> BOTTLE_OF_SPECTRE = ITEMS.register("bottle_of_spectre", () -> new SpectreBottleItem(new Item.Properties().stacksTo(1).tab(Galosphere.GALOSPHERE)));
     public static final RegistryObject<Item> ALLURITE_SHARD = registerBaseItem("allurite_shard");
     public static final RegistryObject<Item> LUMIERE_SHARD = registerBaseItem("lumiere_shard");

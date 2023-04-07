@@ -53,12 +53,6 @@ public class GBlockstateProvider extends BlockStateProvider {
 
         this.crossBlock(GBlocks.LICHEN_ROOTS);
         this.crossBlock(GBlocks.BOWL_LICHEN);
-        this.getVariantBuilder(GBlocks.LICHEN_CORDYCEPS.get()).forAllStatesExcept(state -> {
-            boolean bulb = state.getValue(CordycepsBlock.BULB);
-            BlockModelBuilder crossFile = models().cross("lichen_cordyceps", new ResourceLocation(Galosphere.MODID, "block/lichen_cordyceps")).renderType("cutout");
-            BlockModelBuilder bulbcrossFile = models().cross("lichen_cordyceps_bulb", new ResourceLocation(Galosphere.MODID, "block/lichen_cordyceps_bulb")).renderType("cutout");
-            return ConfiguredModel.builder().modelFile(bulb ? bulbcrossFile : crossFile).build();
-        }, CordycepsBlock.AGE);
         this.crossBlock(GBlocks.LICHEN_CORDYCEPS_PLANT);
 
         this.slabBlock(GBlocks.AMETHYST_SLAB.get(), "amethyst_block", true);

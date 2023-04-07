@@ -1,4 +1,4 @@
-// 1.19.2	2023-04-06T17:46:14.7758331	Block States: galosphere
+// 1.19.2	2023-04-07T09:00:05.2471836	Block States: galosphere
 e8a6c48438ce60e5698f734f81a093310076a2f6 assets/galosphere/blockstates/allurite_block.json
 c4a5cfdbca2744348894311c402079e73dcd9c31 assets/galosphere/blockstates/allurite_bricks.json
 a303895830e08a7daf67085ebf76fb305e6fbede assets/galosphere/blockstates/allurite_brick_slab.json
@@ -20,7 +20,6 @@ b7b0a5a457df1f49f59c4047a6479210f0e7dbdb assets/galosphere/blockstates/chiseled_
 35b5156888c81e3a668ff3be8aec5c4d646898b7 assets/galosphere/blockstates/chiseled_lumiere.json
 4093b40ac8f23a37f640d0ee1e2c64989f02c5b5 assets/galosphere/blockstates/combustion_table.json
 7dcb3b26117485a3287a0cdb3fb3a8d244b396f4 assets/galosphere/blockstates/deepslate_silver_ore.json
-24e1c2d06002b937bc2094f146f730e1b290e168 assets/galosphere/blockstates/lichen_cordyceps.json
 e8af8b2c39af8151796582f9c040fd52d0287f04 assets/galosphere/blockstates/lichen_cordyceps_plant.json
 4c46d81eaf6d1fd3443fe13aaed8d52b62e01cdd assets/galosphere/blockstates/lichen_moss.json
 bab7516ba9444490b0bd650d5d9d3b287b62d10c assets/galosphere/blockstates/lichen_roots.json
@@ -83,8 +82,6 @@ c72df9f4189ff697a2407caa140df438f782b744 assets/galosphere/models/block/chiseled
 12ea609f71db4b7094613f0b7fdbe2a71ec97742 assets/galosphere/models/block/chiseled_lumiere.json
 d3525beb0b4ea21d18aa4f3b4348c26efb9f87fc assets/galosphere/models/block/combustion_table.json
 c9d2f6fdc17f388cc4ab20be94f39fa78ce770b5 assets/galosphere/models/block/deepslate_silver_ore.json
-782b8d75fb26508cfe28f0df1f569187f784ce09 assets/galosphere/models/block/lichen_cordyceps.json
-e89f81eb5cc6c2c12b87cc5cee4a8d277e795ca9 assets/galosphere/models/block/lichen_cordyceps_bulb.json
 c2ea7e1065125470ca61152ee5a2af0df2619fa2 assets/galosphere/models/block/lichen_cordyceps_plant.json
 c0d31f35cc2b27096be8e184e63527f8ace4f60a assets/galosphere/models/block/lichen_moss.json
 fe1806b5b9155c8d01447b4662759bfdef3f76be assets/galosphere/models/block/lichen_roots.json

@@ -1,4 +1,4 @@
-// 1.19.2	2023-04-06T18:01:16.4427637	Item Models: galosphere
+// 1.19.2	2023-04-07T09:00:05.2451869	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -64,6 +64,7 @@ f025257ff9bd3c9b053f6323f52014cda80a8ac3 assets/galosphere/models/item/smooth_al
 eb0c0ad54be106393aad7036ad6913413ac97aba assets/galosphere/models/item/smooth_lumiere_slab.json
 7a98076fe60bcd01e757d0dab9171fafd26a6d83 assets/galosphere/models/item/smooth_lumiere_stairs.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/galosphere/models/item/sparkle_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/galosphere/models/item/specterpillar_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/galosphere/models/item/spectre_spawn_egg.json
 470609c312356a7d107b058ce6d6df9f3d907ec3 assets/galosphere/models/item/sterling_boots.json
 faf6706e6b97024e8429b5b3f9f52ec252ee1143 assets/galosphere/models/item/sterling_chestplate.json

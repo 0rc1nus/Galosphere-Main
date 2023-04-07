@@ -19,10 +19,12 @@ import net.orcinus.galosphere.init.GConfiguredFeatures;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GFeatures;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GNetworkHandler;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
+import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.init.GVanillaIntegration;
 import net.orcinus.galosphere.util.GalosphereTab;
@@ -50,8 +52,10 @@ public class Galosphere {
         GEntityTypes.ENTITY_TYPES.register(modEventBus);
         GFeatures.FEATURES.register(modEventBus);
         GItems.ITEMS.register(modEventBus);
+        GMemoryModuleTypes.MEMORY_MODULE_TYPES.register(modEventBus);
         GMenuTypes.MENU_TYPES.register(modEventBus);
         GParticleTypes.PARTICLES.register(modEventBus);
+        GSensorTypes.SENSOR_TYPES.register(modEventBus);
         GSoundEvents.SOUND_EVENTS.register(modEventBus);
 
         eventBus.register(this);

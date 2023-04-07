@@ -35,6 +35,7 @@ public class GBlockTagsProvider extends BlockTagsProvider {
 
         this.tag(GBlockTags.CRYSTAL_SPIKES_BLOCKS).add(GBlocks.ALLURITE_BLOCK.get(), GBlocks.LUMIERE_BLOCK.get());
         this.tag(GBlockTags.SPARKLES_SPAWNABLE_ON).add(Blocks.CALCITE).addTags(BlockTags.BASE_STONE_OVERWORLD, GBlockTags.CRYSTAL_SPIKES_BLOCKS);
+        this.tag(GBlockTags.SPECTRES_SPAWNABLE_ON).add(GBlocks.LICHEN_MOSS.get());
 
         this.tag(ForgeBlockTags.SILVER_ORE).add(GBlocks.SILVER_ORE.get(), GBlocks.DEEPSLATE_SILVER_ORE.get());
         this.tag(ForgeBlockTags.SILVER_STORAGE_BLOCKS).add(GBlocks.SILVER_BLOCK.get());
