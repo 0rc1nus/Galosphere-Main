@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -50,6 +51,10 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(GBlocks.DEEPSLATE_SILVER_ORE.get());
         this.simpleBlock(GBlocks.CHARGED_LUMIERE_BLOCK.get());
         this.simpleBlock(GBlocks.LICHEN_MOSS.get());
+        this.getVariantBuilder(GBlocks.LICHEN_MOSS.get()).forAllStates(blockState -> {
+            ModelFile modelFile = blockState.getValue(BlockStateProperties.LIT) ? models().cubeAll("lichen_moss_lit", new ResourceLocation(Galosphere.MODID, "block/lichen_moss_lit")) : models().cubeAll("lichen_moss", new ResourceLocation(Galosphere.MODID, "block/lichen_moss"));
+            return ConfiguredModel.builder().modelFile(modelFile).build();
+        });
 
         this.crossBlock(GBlocks.LICHEN_ROOTS);
         this.crossBlock(GBlocks.BOWL_LICHEN);
