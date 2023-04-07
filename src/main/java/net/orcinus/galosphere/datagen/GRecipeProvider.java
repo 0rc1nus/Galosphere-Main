@@ -86,6 +86,15 @@ public class GRecipeProvider extends RecipeProvider {
         shaplessOne(consumer, GItems.SILVER_INGOT.get(), GBlocks.SILVER_BLOCK.get().asItem(), 9);
         shaplessOne(consumer, GItems.RAW_SILVER.get(), GBlocks.RAW_SILVER_BLOCK.get().asItem(), 9);
 
+        ShapedRecipeBuilder.shaped(GItems.BAROMETER.get())
+                .define('#', GItems.SILVER_INGOT.get())
+                .define('@', Items.REDSTONE)
+                .pattern(" # ")
+                .pattern("#@#")
+                .pattern(" # ")
+                .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .save(consumer);
+
         ShapedRecipeBuilder.shaped(GBlocks.SILVER_LATTICE.get(), 16)
                 .define('#', GItems.SILVER_INGOT.get())
                 .pattern("###")
@@ -96,14 +105,12 @@ public class GRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(GItems.GLOW_FLARE.get(), 3)
                 .define('#', Items.GLOW_INK_SAC)
                 .define('S', Tags.Items.INGOTS_COPPER)
-                .define('@', Items.GUNPOWDER)
                 .define('F', GItems.BOTTLE_OF_SPECTRE.get())
-                .pattern("#F#")
-                .pattern("S@S")
+                .pattern(" F ")
+                .pattern(" # ")
                 .pattern(" S ")
                 .unlockedBy("has_bottle_of_spectre", has(GItems.BOTTLE_OF_SPECTRE.get()))
                 .unlockedBy("has_glow_ink_sac", has(Items.GLOW_INK_SAC))
-                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
                 .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER)).save(consumer);
 
         ShapedRecipeBuilder

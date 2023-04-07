@@ -17,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.blocks.CordycepsBlock;
+import net.orcinus.galosphere.blocks.LichenMossBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.NotNull;
@@ -50,9 +51,9 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(GBlocks.SILVER_ORE.get());
         this.simpleBlock(GBlocks.DEEPSLATE_SILVER_ORE.get());
         this.simpleBlock(GBlocks.CHARGED_LUMIERE_BLOCK.get());
-        this.simpleBlock(GBlocks.LICHEN_MOSS.get());
-        this.getVariantBuilder(GBlocks.LICHEN_MOSS.get()).forAllStates(blockState -> {
-            ModelFile modelFile = blockState.getValue(BlockStateProperties.LIT) ? models().cubeAll("lichen_moss_lit", new ResourceLocation(Galosphere.MODID, "block/lichen_moss_lit")) : models().cubeAll("lichen_moss", new ResourceLocation(Galosphere.MODID, "block/lichen_moss"));
+        this.getVariantBuilder(GBlocks.LICHEN_MOSS.get()).forAllStatesExcept(blockState -> {
+            String name = blockState.getValue(LichenMossBlock.LIT) ? "lichen_moss_lit" : "lichen_moss";
+            ModelFile modelFile = models().cubeAll(name, new ResourceLocation(Galosphere.MODID, "block/" + name));
             return ConfiguredModel.builder().modelFile(modelFile).build();
         });
 

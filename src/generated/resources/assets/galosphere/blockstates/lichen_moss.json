@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "lit=false": {
       "model": "galosphere:block/lichen_moss"
+    },
+    "lit=true": {
+      "model": "galosphere:block/lichen_moss_lit"
     }
   }
 }
