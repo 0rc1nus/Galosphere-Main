@@ -5,6 +5,7 @@
   "minVersion": "0.8",
   "refmap": "galosphere.refmap.json",
   "mixins": [
+    "ChorusFruitItemMixin",
     "CrossbowItemMixin",
     "EntityMixin",
     "LightningBoltMixin",
