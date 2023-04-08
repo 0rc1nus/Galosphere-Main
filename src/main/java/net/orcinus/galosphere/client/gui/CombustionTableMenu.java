@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GItemTags;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.util.CompatUtil;
@@ -104,9 +105,9 @@ public class CombustionTableMenu extends AbstractContainerMenu {
                 if (currentTag != null) {
                     for (int i = 1; i < 4; i++) {
                         ItemStack item = this.container.getItem(i);
-                        if (item.is(Items.SLIME_BALL)) bouncyCount++;
-                        if (item.is(Items.STRING)) durationCount++;
-                        if (item.is(Items.GUNPOWDER)) explosionCount++;
+                        if (item.is(GItemTags.BOMB_BOUNCY_MODIFIERS)) bouncyCount++;
+                        if (item.is(GItemTags.BOMB_DURATION_MODIFIERS)) durationCount++;
+                        if (item.is(GItemTags.BOMB_EXPLOSION_MODIFIERS)) explosionCount++;
                         if (bouncy + bouncyCount <= 3 && duration + durationCount <= 3 && explosion + explosionCount <= 3) {
                             initFlag = true;
                         }
@@ -200,7 +201,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(ItemStack stack) {
-            return stack.is(Items.STRING) || stack.is(Items.GUNPOWDER) || stack.is(Items.SLIME_BALL);
+            return stack.is(GItemTags.BOMB_EXPLOSION_MODIFIERS) || stack.is(GItemTags.BOMB_BOUNCY_MODIFIERS) || stack.is(GItemTags.BOMB_DURATION_MODIFIERS);
         }
 
     }
