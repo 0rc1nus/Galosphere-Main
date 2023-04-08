@@ -1,6 +1,18 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_allurite_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:allurite_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_silver_block": {
       "conditions": {
         "items": [
@@ -20,6 +32,7 @@
   },
   "requirements": [
     [
+      "has_allurite_block",
       "has_silver_block",
       "has_the_recipe"
     ]

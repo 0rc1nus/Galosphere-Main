@@ -150,6 +150,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern(" R ")
                 .pattern("RGR")
                 .pattern(" R ")
+                .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD))
                 .unlockedBy("has_glowstone", has(Blocks.GLOWSTONE)).save(consumer);
 
         ShapedRecipeBuilder
@@ -159,6 +160,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern(" R ")
                 .pattern("RGR")
                 .pattern(" R ")
+                .unlockedBy("has_allurite_shard", has(GItems.ALLURITE_SHARD.get()))
                 .unlockedBy("has_glowstone", has(Blocks.GLOWSTONE)).save(consumer);
 
         ShapedRecipeBuilder
@@ -168,6 +170,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern(" R ")
                 .pattern("RGR")
                 .pattern(" R ")
+                .unlockedBy("has_lumiere_shard", has(GItems.LUMIERE_SHARD.get()))
                 .unlockedBy("has_glowstone", has(Blocks.GLOWSTONE)).save(consumer);
 
         ShapedRecipeBuilder
@@ -186,6 +189,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .pattern("SSS")
                 .pattern("CCC")
                 .pattern("SSS")
+                .unlockedBy("has_lumiere_block", has(GBlocks.LUMIERE_BLOCK.get()))
                 .unlockedBy("has_silver_block", has(ForgeItemTags.SILVER_STORAGE_BLOCKS)).save(consumer);
 
         ShapedRecipeBuilder
@@ -194,6 +198,7 @@ public class GRecipeProvider extends RecipeProvider {
                 .define('C', GBlocks.ALLURITE_BLOCK.get())
                 .pattern("CCC")
                 .pattern("SSS")
+                .unlockedBy("has_allurite_block", has(GBlocks.ALLURITE_BLOCK.get()))
                 .unlockedBy("has_silver_block", has(ForgeItemTags.SILVER_STORAGE_BLOCKS)).save(consumer);
 
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
