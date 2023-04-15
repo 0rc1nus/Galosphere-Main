@@ -15,6 +15,10 @@ public class GSoundEvents {
 
     public static final SoundEvent GLOW_FLARE_SPREAD = register("entity.glow_flare.spread");
 
+    public static final SoundEvent MONSTROMETER_CHARGE = register("block.monstrometer.charge");
+    public static final SoundEvent MONSTROMETER_ACTIVATE = register("block.monstrometer.activate");
+    public static final SoundEvent MONSTROMETER_DEACTIVATE = register("block.monstrometer.deactivate");
+
     public static final SoundEvent SPECTRE_AMBIENT = register("entity.spectre.ambient");
     public static final SoundEvent SPECTRE_BOTTLE_EMPTY = register("entity.spectre.bottle.empty");
     public static final SoundEvent SPECTRE_BOTTLE_FILL = register("entity.spectre.bottle.fill");
@@ -25,12 +29,24 @@ public class GSoundEvents {
     public static final SoundEvent SPECTRE_MANIPULATE_BEGIN = register("entity.spectre.manipulate.begin");
     public static final SoundEvent SPECTRE_MANIPULATE_END = register("entity.spectre.manipulate.end");
 
-    public static final SoundType ALLURITE = register("allurite", 1, 1);
-    public static final SoundType ALLURITE_CLUSTER = register("allurite_cluster", 1, 1);
-    public static final SoundType LUMIERE = register("lumiere", 1, 1);
-    public static final SoundType LUMIERE_CLUSTER = register("lumiere_cluster", 1, 1);
-    public static final SoundType SILVER = register("silver", 1, 1);
-    public static final SoundType GLOW_INK_CLUMPS = register("glow_ink_clumps", 1, 1);
+    public static final SoundEvent SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
+    public static final SoundEvent SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
+
+    public static final SoundType ALLURITE = soundType("allurite");
+    public static final SoundType ALLURITE_CLUSTER = soundType("allurite_cluster");
+    public static final SoundType MONSTROMETER = soundType("monstrometer");
+    public static final SoundType BOWL_LICHEN = soundType("bowl_lichen");
+    public static final SoundType COMBUSTION_TABLE = soundType("combustion_table");
+    public static final SoundType GLOW_INK_CLUMPS = soundType("glow_ink_clumps");
+    public static final SoundType LICHEN_CORDYCEPS = soundType("lichen_cordyceps");
+    public static final SoundType LICHEN_CORDYCEPS_BULB = soundType("lichen_cordyceps_bulb");
+    public static final SoundType LICHEN_MOSS = soundType("lichen_moss");
+    public static final SoundType LICHEN_ROOTS = soundType("lichen_roots");
+    public static final SoundType LICHEN_SHELF = soundType("lichen_shelf");
+    public static final SoundType LUMIERE = soundType("lumiere");
+    public static final SoundType LUMIERE_CLUSTER = soundType("lumiere_cluster");
+    public static final SoundType SILVER = soundType("silver");
+    public static final SoundType SILVER_LATTICE = soundType("silver_lattice");
 
     private static SoundEvent register(String string) {
         ResourceLocation id = Galosphere.id(string);
@@ -41,8 +57,8 @@ public class GSoundEvents {
         return "block." + name + "." + append;
     }
 
-    private static SoundType register(String name, float volume, float pitch) {
-        return new SoundType(volume, pitch, register(block(name, "break")), register(block(name, "step")), register(block(name, "place")), register(block(name, "hit")), register(block(name, "fall")));
+    private static SoundType soundType(String name) {
+        return new SoundType(1, 1, register(block(name, "break")), register(block(name, "step")), register(block(name, "place")), register(block(name, "hit")), register(block(name, "fall")));
     }
 
     public static void init() {

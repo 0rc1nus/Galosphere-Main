@@ -31,13 +31,13 @@ public class ThrownEnderpearlMixin {
         ServerPlayer player = (ServerPlayer) $this.getOwner();
         Level world = player.getLevel();
         BlockPos pos = $this.blockPosition();
-        int radius = 16;
+        int radius = 64;
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 for (int y = -radius; y <= radius; y++) {
                     BlockPos blockPos = new BlockPos($this.getX() + x, $this.getY() + y, $this.getZ() + z);
                     BlockState blockState = world.getBlockState(blockPos);
-                    if (blockState.is(GBlocks.WARPED_ANCHOR) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
+                    if (blockState.is(GBlocks.WARPED_ANCHOR) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0 && blockPos.closerThan(pos, 16 * blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE))) {
                         poses.add(blockPos);
                     }
                 }

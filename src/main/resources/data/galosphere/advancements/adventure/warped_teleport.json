@@ -1,14 +1,14 @@
 {
-  "parent": "minecraft:adventure/root",
+  "parent": "galosphere:adventure/silver_ingot",
   "display": {
     "icon": {
-      "item": "galosphere:spectre_bound_spyglass"
+      "item": "minecraft:ender_pearl"
     },
     "title": {
-      "translate": "advancements.galosphere.use_spectre_spyglass.title"
+      "translate": "advancements.galosphere.warped_teleport.title"
     },
     "description": {
-      "translate": "advancements.galosphere.use_spectre_spyglass.description"
+      "translate": "advancements.galosphere.warped_teleport.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,14 +16,14 @@
     "hidden": false
   },
   "criteria": {
-    "use_spectre_spyglass": {
-      "trigger": "galosphere:use_spectre_spyglass",
+    "warped_teleport": {
+      "trigger": "galosphere:warped_teleport",
       "conditions": {}
     }
   },
   "requirements": [
     [
-      "use_spectre_spyglass"
+      "warped_teleport"
     ]
   ]
 }

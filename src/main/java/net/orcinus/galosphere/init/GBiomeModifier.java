@@ -15,16 +15,15 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 public class GBiomeModifier {
 
     public static void init() {
-        addOres();
-        addCrystalCanyonsFeatures();
-        addCrystalCanyonsSpawns();
-        addLichenCavesFeatures();
-        addLichenCavesSpawns();
+        GBiomeModifier.addOres();
+        GBiomeModifier.addCrystalCanyonsFeatures();
+        GBiomeModifier.addCrystalCanyonsSpawns();
+        GBiomeModifier.addLichenCavesFeatures();
+        GBiomeModifier.addLichenCavesSpawns();
     }
 
     public static void addOres() {
         Util.make(ImmutableList.<Holder<PlacedFeature>>builder(), list -> {
-            list.add(GPlacedFeatures.ORE_SILVER_MIDDLE);
             list.add(GPlacedFeatures.ORE_SILVER_SMALL);
         }).build().forEach(featureHolder -> featureHolder.unwrapKey().ifPresent(placedFeatureResourceKey -> BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureResourceKey)));
     }
@@ -38,6 +37,7 @@ public class GBiomeModifier {
         addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.ALLURITE_FLOOR_CRYSTALS);
         addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_CEILING_CRYSTALS);
         addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_FLOOR_CRYSTALS);
+        addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.ORE_SILVER_LARGE);
     }
 
     public static void addCrystalCanyonsSpawns() {
@@ -47,6 +47,7 @@ public class GBiomeModifier {
 
     public static void addLichenCavesFeatures() {
         addFeature(GBiomes.LICHEN_CAVES_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.BOWL_LICHEN);
+        addFeature(GBiomes.LICHEN_CAVES_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.GRAVEL_PATCH);
         addFeature(GBiomes.LICHEN_CAVES_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LICHEN_VEGETATION);
         addFeature(GBiomes.LICHEN_CAVES_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LICHEN_CORDYCEPS_COLUMN);
     }

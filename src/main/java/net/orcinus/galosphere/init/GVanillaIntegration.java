@@ -7,7 +7,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.orcinus.galosphere.crafting.AuraRingerDispenseItemBehavior;
+import net.orcinus.galosphere.crafting.MonstrometerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.GlowFlareDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
@@ -31,7 +31,7 @@ public class GVanillaIntegration {
     }
 
     public static void registerDispenserBehaviors() {
-        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.asItem(), new AuraRingerDispenseItemBehavior());
+        DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.asItem(), new MonstrometerDispenseItemBehavior());
         DispenserBlock.registerBehavior(GBlocks.ALLURITE_BLOCK.asItem(), new WarpedAnchorDispenseItemBehavior());
         DispenserBlock.registerBehavior(GItems.LUMIERE_SHARD, new LumiereComposterDispenseItemBehavior());
 

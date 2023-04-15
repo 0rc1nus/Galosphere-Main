@@ -7,8 +7,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.blocks.blockentities.AuraRingerBlockEntity;
+import net.orcinus.galosphere.blocks.blockentities.CordycepsBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.GlowInkClumpsBlockEntity;
+import net.orcinus.galosphere.blocks.blockentities.MonstrometerBlockEntity;
 
 import java.util.Map;
 
@@ -16,8 +17,9 @@ public class GBlockEntityTypes {
 
     public static final Map<ResourceLocation, BlockEntityType<?>> BLOCK_ENTITIES = Maps.newLinkedHashMap();
 
-    public static final BlockEntityType<AuraRingerBlockEntity> AURA_RINGER = registerBlockEntityType("aura_ringer", FabricBlockEntityTypeBuilder.create(AuraRingerBlockEntity::new, GBlocks.AURA_RINGER).build(null));
+    public static final BlockEntityType<MonstrometerBlockEntity> MONSTROMETER = registerBlockEntityType("monstrometer", FabricBlockEntityTypeBuilder.create(MonstrometerBlockEntity::new, GBlocks.MONSTROMETER).build(null));
     public static final BlockEntityType<GlowInkClumpsBlockEntity> GLOW_INK_CLUMPS = registerBlockEntityType("glow_ink_clumps", FabricBlockEntityTypeBuilder.create(GlowInkClumpsBlockEntity::new, GBlocks.GLOW_INK_CLUMPS).build(null));
+    public static final BlockEntityType<CordycepsBlockEntity> CORDYCEPS = registerBlockEntityType("cordyceps", FabricBlockEntityTypeBuilder.create(CordycepsBlockEntity::new, GBlocks.LICHEN_CORDYCEPS).build(null));
 
     public static <T extends BlockEntity, B extends BlockEntityType<T>> B registerBlockEntityType(String name, B type) {
         BLOCK_ENTITIES.put(Galosphere.id(name), type);

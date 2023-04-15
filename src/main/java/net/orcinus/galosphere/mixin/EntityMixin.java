@@ -5,9 +5,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.entities.SpectreEntity;
-import net.orcinus.galosphere.init.GItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,7 +27,7 @@ public class EntityMixin {
 
     @Unique
     private double spectrePerspectiveValue(double value) {
-        boolean flag = (Entity) (Object) this instanceof Player player && this.isFirstPerspective() && SpectreBoundedSpyglass.canUseSpectreBoundSpyglass(player.getUseItem(), player);
+        boolean flag = (Entity) (Object) this instanceof Player player && this.isFirstPerspective() && SpectreBoundSpyglass.canUseSpectreBoundSpyglass(player.getUseItem(), player);
         return flag ? value * 8 : value;
     }
 

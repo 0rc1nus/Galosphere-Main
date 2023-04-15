@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bottle_of_fay": {
+    "has_bottle_of_spectre": {
       "conditions": {
         "items": [
           {
@@ -25,6 +25,18 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_iron_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:iron_nugget"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "galosphere:chandelier"
@@ -35,7 +47,8 @@
   "requirements": [
     [
       "has_copper_ingot",
-      "has_bottle_of_fay",
+      "has_bottle_of_spectre",
+      "has_iron_nugget",
       "has_the_recipe"
     ]
   ],

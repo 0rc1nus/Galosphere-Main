@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "galosphere:block/silver_tiles_slab"
+    },
+    "type=double": {
+      "model": "galosphere:block/silver_tiles"
+    },
+    "type=top": {
+      "model": "galosphere:block/silver_tiles_slab_top"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "galosphere:block/silver_panel_slab"
+    },
+    "type=double": {
+      "model": "galosphere:block/silver_panel"
+    },
+    "type=top": {
+      "model": "galosphere:block/silver_panel_slab_top"
+    }
+  }
+}

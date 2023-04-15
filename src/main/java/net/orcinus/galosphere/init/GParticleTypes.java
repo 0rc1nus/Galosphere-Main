@@ -9,7 +9,7 @@ public class GParticleTypes {
 
     public static void init() { }
 
-    public static final SimpleParticleType AURA_LISTENER = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("aura_listener"), FabricParticleTypes.simple());
+    public static final SimpleParticleType AURA_RINGER_INDICATOR = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("aura_ringer_indicator"), FabricParticleTypes.simple());
     public static final SimpleParticleType SILVER_BOMB = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("item_silverbomb"), FabricParticleTypes.simple());
     public static final SimpleParticleType WARPED = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("warped"), FabricParticleTypes.simple());
     public static final SimpleParticleType ALLURITE_RAIN = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("allurite_rain"), FabricParticleTypes.simple());

@@ -26,14 +26,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.api.GoldenBreath;
-import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.mixin.access.LivingEntityAccessor;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundedSpyglass {
+public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass {
     @Shadow protected ItemStack useItem;
     private static final EntityDataAccessor<ItemStack> BANNER_STACK = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.ITEM_STACK );
     private static final EntityDataAccessor<Float> GOLDEN_AIR_SUPPLY = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.FLOAT);
@@ -64,7 +64,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     @Inject(at = @At("HEAD"), method = "tick")
     private void G$tick(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        if (SpectreBoundedSpyglass.canUseSpectreBoundSpyglass(this.useItem, entity) && this.useItem.getTag() != null) {
+        if (SpectreBoundSpyglass.canUseSpectreBoundSpyglass(this.useItem, entity) && this.useItem.getTag() != null) {
             if (!entity.level.isClientSide) {
                 Entity spectreBound = ((ServerLevel)entity.level).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
                 Optional.ofNullable(spectreBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(spectre -> {

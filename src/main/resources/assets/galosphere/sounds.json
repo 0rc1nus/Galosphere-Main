@@ -135,6 +135,233 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"block.monstrometer.activate": {
+		"sounds": [
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/monstrometer/activate1",
+				"pitch": 1.3,
+				"volume": 0.8
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/monstrometer/activate2",
+				"pitch": 1.3,
+				"volume": 0.8
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/monstrometer/activate3",
+				"pitch": 1.3,
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.monstrometer.activate"
+	},
+	"block.monstrometer.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.combustion_table.break",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.monstrometer.charge": {
+		"sounds": [
+			{
+				"name": "galosphere:block/monstrometer/charge1",
+				"volume": 0.5
+			},
+			{
+				"name": "galosphere:block/monstrometer/charge2",
+				"volume": 0.5
+			},
+			{
+				"name": "galosphere:block/monstrometer/charge3",
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.block.monstrometer.charge"
+	},
+	"block.monstrometer.deactivate": {
+		"sounds": [
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/monstrometer/deactivate1",
+				"pitch": 1.3,
+				"volume": 0.8
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/monstrometer/deactivate2",
+				"pitch": 1.3,
+				"volume": 0.8
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/monstrometer/deactivate3",
+				"pitch": 1.3,
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.monstrometer.deactivate"
+	},
+	"block.monstrometer.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.combustion_table.fall",
+				"type": "event"
+			}
+		]
+	},
+	"block.monstrometer.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.combustion_table.hit",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.monstrometer.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block.combustion_table.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.monstrometer.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.combustion_table.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.bowl_lichen.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.bowl_lichen.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.bowl_lichen.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.bowl_lichen.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.bowl_lichen.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.bowl_lichen.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.bowl_lichen.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/bowl_lichen/place1",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/bowl_lichen/place2",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/bowl_lichen/place3",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/bowl_lichen/place4",
+				"pitch": 1.4,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.bowl_lichen.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_moss.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.combustion_table.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.combustion_table.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.combustion_table.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.combustion_table.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver.hit",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.combustion_table.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/combustion_table/place1",
+				"pitch": 1.2,
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/combustion_table/place2",
+				"pitch": 1.2,
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:block/combustion_table/place3",
+				"pitch": 1.2,
+				"volume": 0.7
+			},
+			{
+				"name": "galosphere:block/combustion_table/place4",
+				"pitch": 1.2,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.combustion_table.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"block.glow_ink_clumps.break": {
 		"sounds": [
 			{
@@ -188,6 +415,235 @@
 				"pitch": 1.5,
 				"type": "event",
 				"volume": 0.2
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.lichen_moss.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_moss.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.lichen_moss.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_moss.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.lichen_moss.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_moss.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.lichen_moss.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/lichen_moss/place1",
+				"pitch": 1.1,
+				"volume": 0.25
+			},
+			{
+				"name": "galosphere:block/lichen_moss/place2",
+				"pitch": 1.1,
+				"volume": 0.25
+			},
+			{
+				"name": "galosphere:block/lichen_moss/place3",
+				"pitch": 1.1,
+				"volume": 0.25
+			},
+			{
+				"name": "galosphere:block/lichen_moss/place4",
+				"pitch": 1.1,
+				"volume": 0.25
+			},
+			{
+				"name": "galosphere:block/lichen_moss/place5",
+				"pitch": 1.1,
+				"volume": 0.25
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.lichen_cordyceps.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.bowl_lichen.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.lichen_cordyceps.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.bowl_lichen.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.lichen_cordyceps.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.bowl_lichen.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.lichen_cordyceps.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block.bowl_lichen.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.lichen_cordyceps.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.bowl_lichen.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.lichen_moss.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block/lichen_moss/step1",
+				"volume": 0.35
+			},
+			{
+				"name": "galosphere:block/lichen_moss/step2",
+				"volume": 0.35
+			},
+			{
+				"name": "galosphere:block/lichen_moss/step3",
+				"volume": 0.35
+			},
+			{
+				"name": "galosphere:block/lichen_moss/step4",
+				"volume": 0.35
+			},
+			{
+				"name": "galosphere:block/lichen_moss/step5",
+				"volume": 0.35
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.lichen_roots.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_roots.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.lichen_roots.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_roots.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.lichen_roots.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_roots.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.lichen_roots.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/lichen_roots/place1",
+				"pitch": 1.2,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:block/lichen_roots/place2",
+				"pitch": 1.2,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:block/lichen_roots/place3",
+				"pitch": 1.2,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:block/lichen_roots/place4",
+				"pitch": 1.2,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.lichen_roots.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_moss.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.lichen_shelf.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_roots.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.lichen_shelf.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_roots.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.lichen_shelf.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_roots.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.lichen_shelf.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_roots.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.lichen_shelf.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.lichen_roots.step",
+				"type": "event"
 			}
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
@@ -421,6 +877,78 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"block.silver_lattice.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver_lattice.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.silver_lattice.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver_lattice.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.silver_lattice.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.silver_lattice.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.silver_lattice.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/silver_lattice/place1",
+				"pitch": 1.25,
+				"volume": 0.7
+			},
+			{
+				"name": "galosphere:block/silver_lattice/place2",
+				"pitch": 1.25,
+				"volume": 0.7
+			},
+			{
+				"name": "galosphere:block/silver_lattice/place3",
+				"pitch": 1.25,
+				"volume": 0.7
+			},
+			{
+				"name": "galosphere:block/silver_lattice/place4",
+				"pitch": 1.25,
+				"volume": 0.7
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.silver_lattice.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block/silver/step1",
+				"volume": 0.65
+			},
+			{
+				"name": "galosphere:block/silver/step2",
+				"volume": 0.65
+			},
+			{
+				"name": "galosphere:block/silver/step3",
+				"volume": 0.65
+			},
+			{
+				"name": "galosphere:block/silver/step4",
+				"volume": 0.65
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"entity.glow_flare.spread": {
 		"sounds": [
 			{
@@ -431,6 +959,28 @@
 			}
 		],
 		"subtitle": "subtitles.block.generic.place"
+	},
+	"entity.specterpillar.death": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/specterpillar/death",
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.entity.specterpillar.death"
+	},
+	"entity.specterpillar.hurt": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/specterpillar/hurt1",
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:entity/specterpillar/hurt2",
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.entity.specterpillar.hurt"
 	},
 	"entity.spectre.ambient": {
 		"sounds": [
@@ -565,7 +1115,7 @@
 			{
 				"name": "galosphere:music/trinity",
 				"stream": true,
-				"weight": 10
+				"weight": 5
 			},
 			{
 				"name": "music/game/an_ordinary_day",
@@ -603,9 +1153,9 @@
 	"music.biome.lichen_caves": {
 		"sounds": [
 			{
-				"name": "galosphere:music/trinity",
+				"name": "galosphere:music/spectral",
 				"stream": true,
-				"weight": 1
+				"weight": 5
 			},
 			{
 				"name": "music/game/an_ordinary_day",

@@ -1,9 +1,13 @@
 package net.orcinus.galosphere.init;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -16,12 +20,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.config.GalosphereConfig;
@@ -30,9 +36,22 @@ import net.orcinus.galosphere.util.BannerRendererUtil;
 public class GEvents {
 
     public static void init() {
-        registerLootableEvents();
-        registerBlockUseEvents();
-        registerItemUseEvents();
+        GEvents.registerServerTickEvents();
+        GEvents.registerLootTableEvents();
+        GEvents.registerBlockUseEvents();
+        GEvents.registerItemUseEvents();
+    }
+
+    private static void registerServerTickEvents() {
+        ServerTickEvents.START_WORLD_TICK.register(Galosphere.id("send_barometer_info"), (level) -> {
+            level.getPlayers((player) -> player.getLevel() != null).forEach((player) -> {
+                FriendlyByteBuf buf = PacketByteBufs.create();
+                ServerLevelData levelData = (ServerLevelData) level.getLevelData();
+                int rainTime = levelData.getClearWeatherTime() > 0 ? levelData.getClearWeatherTime() : levelData.getRainTime();
+                buf.writeInt(rainTime);
+                ServerPlayNetworking.send(player, GNetwork.BAROMETER_INFO, buf);
+            });
+        });
     }
 
     private static void registerItemUseEvents() {
@@ -81,7 +100,7 @@ public class GEvents {
         });
     }
 
-    private static void registerLootableEvents() {
+    private static void registerLootTableEvents() {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (id.equals(EntityType.PILLAGER.getDefaultLootTable()) && GalosphereConfig.pillagerDropSilverIngot) {
                 tableBuilder.pool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_INGOT).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());

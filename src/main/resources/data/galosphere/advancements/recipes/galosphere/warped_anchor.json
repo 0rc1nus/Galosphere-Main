@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:storage_blocks/silver"
+            "items": [
+              "galosphere:silver_block"
+            ]
           }
         ]
       },

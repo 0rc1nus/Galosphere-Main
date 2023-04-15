@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "galosphere",
   "version": "${version}",
-
   "name": "Galosphere",
   "description": "Galosphere is a mod that aims to revamp the underground",
   "authors": [
@@ -10,16 +9,14 @@
     "Ninni"
   ],
   "contributors": [
-    "Bunten"
+    "bunten"
   ],
   "contact": {
     "sources": "https://github.com/0rc1nus/Galosphere"
   },
-
   "license": "CC0-1.0",
   "icon": "assets/galosphere/icon.png",
-
-  "accessWidener" : "galosphere.accesswidener",
+  "accessWidener": "galosphere.accesswidener",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -27,19 +24,18 @@
     ],
     "client": [
       "net.orcinus.galosphere.GalosphereClient"
+    ],
+    "modmenu": [
+      "net.orcinus.galosphere.config.GalosphereModMenu"
     ]
   },
   "mixins": [
     "galosphere.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.14.9",
     "fabric": "*",
     "minecraft": ">=1.19",
     "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

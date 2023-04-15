@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "galosphere:block/lichen_cordyceps_alive_stage_5"
+  }
+}

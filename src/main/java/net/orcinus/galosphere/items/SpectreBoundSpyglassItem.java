@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
 
 public class SpectreBoundSpyglassItem extends Item {
@@ -33,7 +33,7 @@ public class SpectreBoundSpyglassItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
-        if (!SpectreBoundedSpyglass.canUseSpectreBoundSpyglass(player.getItemInHand(interactionHand), player)) {
+        if (!SpectreBoundSpyglass.canUseSpectreBoundSpyglass(player.getItemInHand(interactionHand), player)) {
             return InteractionResultHolder.fail(player.getItemInHand(interactionHand));
         } else {
             if (player instanceof ServerPlayer serverPlayer) {

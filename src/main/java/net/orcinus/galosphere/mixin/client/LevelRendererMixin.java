@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.PostChain;
 import net.minecraft.client.renderer.RenderBuffers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.api.SpectreBoundedSpyglass;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -96,6 +96,6 @@ public abstract class LevelRendererMixin {
 
     private boolean shouldRenderPlayer() {
         LocalPlayer player = this.minecraft.player;
-        return player != null && player.isScoping() && SpectreBoundedSpyglass.canUseSpectreBoundSpyglass(player.getUseItem(), player) && ((SpectreBoundedSpyglass)player).isUsingSpectreBoundedSpyglass();
+        return player != null && player.isScoping() && SpectreBoundSpyglass.canUseSpectreBoundSpyglass(player.getUseItem(), player) && ((SpectreBoundSpyglass)player).isUsingSpectreBoundedSpyglass();
     }
 }

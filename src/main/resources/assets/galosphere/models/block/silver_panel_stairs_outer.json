@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "galosphere:block/silver_panel",
+    "side": "galosphere:block/silver_panel",
+    "top": "galosphere:block/silver_panel"
+  }
+}
