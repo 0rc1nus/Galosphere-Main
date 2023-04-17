@@ -148,7 +148,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
                     }
                 }
                 if (item instanceof SterlingArmorItem sterlingArmorItem) {
-                    float damageReduction = sterlingArmorItem.getIllagerBaneLevel(slot);
+                    float damageReduction = sterlingArmorItem.getTraitorResistance(slot);
                     reductionAmount = f - damageReduction;
                 }
                 if (item instanceof SterlingArmorItem || ($this instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR))) {

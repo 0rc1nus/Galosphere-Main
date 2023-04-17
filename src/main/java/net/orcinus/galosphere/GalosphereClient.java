@@ -93,7 +93,7 @@ public class GalosphereClient implements ClientModInitializer {
             @Override
             public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
                 Entity entity = livingEntity != null ? livingEntity : itemStack.getEntityRepresentation();
-                float[][] predicates = new float[][]{{0.25F, 0.3F, 0.5F, 0.7F, 0.9F}, {0.9F, 0.7F, 0.5F, 0.3F, 0.25F}};
+                float[][] predicates = new float[][]{{0.15F, 0.13F, 0.2F, 0.27F, 0.34F, 0.41F, 0.48F, 0.55F, 0.62F, 0.69F, 0.76F, 0.83F, 0.9F}, {0.9F, 0.83F, 0.76F, 0.69F, 0.55F, 0.48F, 0.41F, 0.34F, 0.27F, 0.2F, 0.13F, 0.15F}};
                 if (entity == null) {
                     return 0.0f;
                 }
@@ -105,13 +105,15 @@ public class GalosphereClient implements ClientModInitializer {
                 }
                 float max;
                 float speed = 0.00525F;
-                if (GalosphereClient.clearWeatherTime < 12000) {
-                    max = predicates[clientLevel.isRaining() ? 1 : 0][GalosphereClient.clearWeatherTime / 3000];
+                int clearWeatherTime = GalosphereClient.clearWeatherTime;
+                int index = clearWeatherTime < 5 ? 0 : clearWeatherTime / 1000;
+                if (clearWeatherTime < 12000) {
+                    max = predicates[clientLevel.isRaining() ? 1 : 0][index];
                 } else {
                     max = clientLevel.getLevelData().isRaining() ? 0.0F : 1.0F;
                 }
                 float rainLevel = clientLevel.getRainLevel(1.0F);
-                if ((rainLevel > 0.9F || rainLevel < 0.1F) && GalosphereClient.clearWeatherTime == 0 && this.ticksBeforeChange == 0) {
+                if ((rainLevel > 0.9F || rainLevel < 0.1F) && clearWeatherTime == 0 && this.ticksBeforeChange == 0) {
                     this.ticksBeforeChange = 800;
                 }
                 if (this.ticksBeforeChange > 0) {
