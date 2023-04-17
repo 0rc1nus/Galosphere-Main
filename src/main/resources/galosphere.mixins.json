@@ -13,7 +13,6 @@
     "OverworldBiomeBuilderMixin",
     "PlayerMixin",
     "PowderSnowBlockMixin",
-    "SpawnPlacementsMixin",
     "ThrownEnderpearlMixin",
     "access.AbstractHorseAccessor",
     "access.FireworkRocketEntityAccessor",

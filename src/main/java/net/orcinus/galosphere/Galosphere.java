@@ -6,10 +6,14 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.crafting.LumiereReformingManager;
+import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GAttributes;
 import net.orcinus.galosphere.init.GBiomeModifier;
 import net.orcinus.galosphere.init.GBiomes;
@@ -54,7 +58,10 @@ public class Galosphere implements ModInitializer {
         GPlacedFeatures.init();
         GMenuTypes.init();
         GVanillaIntegration.init();
-        
+
+        SpawnPlacements.register(GEntityTypes.SPARKLE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules);
+        SpawnPlacements.register(GEntityTypes.SPECTRE, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpectreEntity::checkSpectreSpawnRules);
+
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new LumiereReformingManager());
     }
 

@@ -32,6 +32,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
@@ -127,7 +128,7 @@ public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickabl
         this.entityData.define(FROM_BOTTLE, false);
     }
 
-    public static boolean checkSpectreSpawnRules(EntityType<Entity> type, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+    public static boolean checkSpectreSpawnRules(EntityType<? extends LivingEntity> type, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(GBlockTags.SPECTRES_SPAWNABLE_ON);
     }
 

@@ -1,14 +1,5 @@
 package net.orcinus.galosphere.mixin;
 
-import java.util.Optional;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -19,6 +10,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -28,9 +21,17 @@ import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
-import net.orcinus.galosphere.mixin.access.LivingEntityAccessor;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Optional;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass {
@@ -132,30 +133,26 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         }
     }
 
-    @Inject(at = @At("HEAD"), method = "getDamageAfterArmorAbsorb", cancellable = true)
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F", shift = At.Shift.AFTER), method = "getDamageAfterArmorAbsorb", cancellable = true)
     private void G$getDamageAfterArmorAbsorb(DamageSource damageSource, float f, CallbackInfoReturnable<Float> cir) {
         LivingEntity $this = (LivingEntity) (Object) this;
-        if (!damageSource.isBypassArmor()) {
-            ((LivingEntityAccessor) this).callHurtArmor(damageSource, f);
-            boolean flag = damageSource.isExplosion();
+        if (damageSource.getEntity() instanceof Mob mob && (mob.getMobType() == MobType.ILLAGER || mob.getType().is(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES))) {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
-                if (flag) {
-                    Item item = $this.getItemBySlot(slot).getItem();
-                    float reductionAmount = 0.0F;
-                    if ($this instanceof Horse horse) {
-                        Item horseItem = horse.getArmor().getItem();
-                        if (horseItem == GItems.STERLING_HORSE_ARMOR) {
-                            float damageReduction = 4.0F;
-                            reductionAmount = f - damageReduction;
-                        }
-                    }
-                    if (item instanceof SterlingArmorItem sterlingArmorItem) {
-                        float damageReduction = sterlingArmorItem.getExplosionResistance(slot);
+                Item item = $this.getItemBySlot(slot).getItem();
+                float reductionAmount = 0.0F;
+                if ($this instanceof Horse horse) {
+                    Item horseItem = horse.getArmor().getItem();
+                    if (horseItem == GItems.STERLING_HORSE_ARMOR) {
+                        float damageReduction = 4.0F;
                         reductionAmount = f - damageReduction;
                     }
-                    if (item instanceof SterlingArmorItem || ($this instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR))) {
-                        cir.setReturnValue(reductionAmount / 3);
-                    }
+                }
+                if (item instanceof SterlingArmorItem sterlingArmorItem) {
+                    float damageReduction = sterlingArmorItem.getIllagerBaneLevel(slot);
+                    reductionAmount = f - damageReduction;
+                }
+                if (item instanceof SterlingArmorItem || ($this instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR))) {
+                    cir.setReturnValue(reductionAmount / 3);
                 }
             }
         }

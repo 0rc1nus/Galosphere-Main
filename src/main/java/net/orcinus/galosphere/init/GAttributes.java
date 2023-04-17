@@ -13,7 +13,7 @@ public class GAttributes {
 
     public static final Map<ResourceLocation, Attribute> ATTRIBUTES = Maps.newLinkedHashMap();
 
-    public static final Attribute EXPLOSION_RESISTANCE = registerAttribute("explosion_resistance", (new RangedAttribute("attribute.name.generic.explosion_resistance", 0.0D, 0.0D, 10.0D)));
+    public static final Attribute TRAITOR_RESISTANCE = registerAttribute("traitor_resistance", (new RangedAttribute("attribute.name.generic.traitor_resistance", 0.0D, 0.0D, 10.0D)));
 
     public static <A extends Attribute> A registerAttribute(String name, A attribute) {
         ATTRIBUTES.put(Galosphere.id(name), attribute);
