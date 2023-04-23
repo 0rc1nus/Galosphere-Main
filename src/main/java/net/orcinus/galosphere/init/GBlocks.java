@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.AmethystBlock;
 import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CaveVines;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.IronBarsBlock;
@@ -36,6 +37,8 @@ import net.orcinus.galosphere.blocks.LichenRootsBlock;
 import net.orcinus.galosphere.blocks.LumiereBlock;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
+import net.orcinus.galosphere.blocks.SilverLatticeBlock;
+import net.orcinus.galosphere.blocks.SilverLatticeVineBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 
 public class GBlocks {
@@ -61,7 +64,8 @@ public class GBlocks {
     public static final Block SILVER_PANEL_STAIRS = registerBlock("silver_panel_stairs", new StairBlock(SILVER_PANEL.defaultBlockState(), BlockBehaviour.Properties.copy(SILVER_TILES)));
     public static final Block SILVER_PANEL_SLAB = registerBlock("silver_panel_slab", new SlabBlock(BlockBehaviour.Properties.copy(SILVER_PANEL)));
 
-    public static final Block SILVER_LATTICE = registerBlock("silver_lattice", new IronBarsBlock(BlockBehaviour.Properties.copy(SILVER_TILES).sound(GSoundEvents.SILVER_LATTICE).noOcclusion()));
+    public static final Block SILVER_LATTICE = registerBlock("silver_lattice", new SilverLatticeBlock(BlockBehaviour.Properties.copy(SILVER_TILES).sound(GSoundEvents.SILVER_LATTICE).noOcclusion()));
+    public static final Block GLOW_BERRIES_SILVER_LATTICE = registerNoTabBlock("glow_berries_silver_lattice", new SilverLatticeVineBlock(BlockBehaviour.Properties.copy(SILVER_TILES).sound(GSoundEvents.SILVER_LATTICE).lightLevel(CaveVines.emission(14)).noOcclusion()));
 
     public static final Block ALLURITE_BLOCK = registerBlock("allurite_block", new AmethystBlock(BlockBehaviour.Properties.of(GMaterials.ALLURITE, MaterialColor.COLOR_CYAN).strength(1.5F).sound(GSoundEvents.ALLURITE).requiresCorrectToolForDrops()));
     public static final Block LUMIERE_BLOCK = registerBlock("lumiere_block", new LumiereBlock(false, BlockBehaviour.Properties.of(GMaterials.LUMIERE, MaterialColor.COLOR_YELLOW).lightLevel(state -> 0).strength(1.5F).sound(GSoundEvents.LUMIERE).requiresCorrectToolForDrops()));

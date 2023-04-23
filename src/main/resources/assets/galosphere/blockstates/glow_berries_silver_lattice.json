@@ -1,0 +1,222 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_post_ends"
+      },
+      "when":{
+        "berries": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_post"
+      },
+      "when": {
+        "berries": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_cap"
+      },
+      "when": {
+        "berries": "false",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_cap",
+        "y": 90
+      },
+      "when": {
+        "berries": "false",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_cap_alt"
+      },
+      "when": {
+        "berries": "false",
+        "east": "false",
+        "north": "false",
+        "south": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_cap_alt",
+        "y": 90
+      },
+      "when": {
+        "berries": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_side"
+      },
+      "when": {
+        "berries": "false",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_side",
+        "y": 90
+      },
+      "when": {
+        "berries": "false",
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_side_alt"
+      },
+      "when": {
+        "berries": "false",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/glow_berries_silver_lattice_side_alt",
+        "y": 90
+      },
+      "when": {
+        "berries": "false",
+        "west": "true"
+      }
+    },
+
+
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_post_ends"
+      },
+      "when":{
+        "berries": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_post"
+      },
+      "when": {
+        "berries": "true",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_cap"
+      },
+      "when": {
+        "berries": "true",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_cap",
+        "y": 90
+      },
+      "when": {
+        "berries": "true",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_cap_alt"
+      },
+      "when": {
+        "berries": "true",
+        "east": "false",
+        "north": "false",
+        "south": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_cap_alt",
+        "y": 90
+      },
+      "when": {
+        "berries": "true",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_side"
+      },
+      "when": {
+        "berries": "true",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_side",
+        "y": 90
+      },
+      "when": {
+        "berries": "true",
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_side_alt"
+      },
+      "when": {
+        "berries": "true",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "galosphere:block/lit_glow_berries_silver_lattice_side_alt",
+        "y": 90
+      },
+      "when": {
+        "berries": "true",
+        "west": "true"
+      }
+    }
+  ]
+}
