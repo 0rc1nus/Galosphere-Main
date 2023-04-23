@@ -85,7 +85,6 @@ public class SilverLatticeVineBlock extends SilverLatticeBlock implements Boneme
             return InteractionResult.sidedSuccess(level.isClientSide);
         } else if (stack.isEmpty()) {
             BlockState lattice = GBlocks.SILVER_LATTICE.defaultBlockState().setValue(NORTH, blockState.getValue(NORTH)).setValue(EAST, blockState.getValue(EAST)).setValue(SOUTH, blockState.getValue(SOUTH)).setValue(WEST, blockState.getValue(WEST)).setValue(WATERLOGGED, blockState.getValue(WATERLOGGED));
-//            popResource(level, blockPos, new ItemStack(Items.GLOW_BERRIES));
             if (!player.getInventory().add(new ItemStack(Items.GLOW_BERRIES))) {
                 player.drop(new ItemStack(Items.GLOW_BERRIES), false);
             }
