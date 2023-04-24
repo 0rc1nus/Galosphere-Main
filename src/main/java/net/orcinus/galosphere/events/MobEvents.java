@@ -104,7 +104,7 @@ public class MobEvents {
             float illagerReduction = 0.0F;
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
                 if (entity.getItemBySlot(equipmentSlot).getItem() instanceof SterlingArmorItem sterlingArmorItem && equipmentSlot.getType() == EquipmentSlot.Type.ARMOR) {
-                    illagerReduction+=sterlingArmorItem.getTraitorResistance(equipmentSlot);
+                    illagerReduction+=sterlingArmorItem.getInsurgentResistance(equipmentSlot);
                 }
             }
             if (illagerReduction > 0) {
