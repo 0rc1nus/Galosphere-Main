@@ -4,19 +4,18 @@
     "layer0": "galosphere:item/barometer"
   },
   "overrides": [
-    { "predicate": { "galosphere:weather_level": 0.0 }, "model": "galosphere:item/barometer_13" },
-    { "predicate": { "galosphere:weather_level": 0.09 }, "model": "galosphere:item/barometer_12" },
-    { "predicate": { "galosphere:weather_level": 0.23 }, "model": "galosphere:item/barometer_11" },
-    { "predicate": { "galosphere:weather_level": 0.3 }, "model": "galosphere:item/barometer_10" },
-    { "predicate": { "galosphere:weather_level": 0.37 }, "model": "galosphere:item/barometer_09" },
-    { "predicate": { "galosphere:weather_level": 0.44 }, "model": "galosphere:item/barometer_08" },
-    { "predicate": { "galosphere:weather_level": 0.51 }, "model": "galosphere:item/barometer_07" },
-    { "predicate": { "galosphere:weather_level": 0.58 }, "model": "galosphere:item/barometer_06" },
-    { "predicate": { "galosphere:weather_level": 0.65 }, "model": "galosphere:item/barometer_05" },
-    { "predicate": { "galosphere:weather_level": 0.72 }, "model": "galosphere:item/barometer_04" },
-    { "predicate": { "galosphere:weather_level": 0.79 }, "model": "galosphere:item/barometer_03" },
-    { "predicate": { "galosphere:weather_level": 0.86 }, "model": "galosphere:item/barometer_02" },
-    { "predicate": { "galosphere:weather_level": 0.93 }, "model": "galosphere:item/barometer_01" },
+    { "predicate": { "galosphere:weather_level": 0.0 }, "model": "galosphere:item/barometer_12" },
+    { "predicate": { "galosphere:weather_level": 0.09 }, "model": "galosphere:item/barometer_11" },
+    { "predicate": { "galosphere:weather_level": 0.23 }, "model": "galosphere:item/barometer_10" },
+    { "predicate": { "galosphere:weather_level": 0.31 }, "model": "galosphere:item/barometer_09" },
+    { "predicate": { "galosphere:weather_level": 0.38 }, "model": "galosphere:item/barometer_08" },
+    { "predicate": { "galosphere:weather_level": 0.46 }, "model": "galosphere:item/barometer_07" },
+    { "predicate": { "galosphere:weather_level": 0.54 }, "model": "galosphere:item/barometer_06" },
+    { "predicate": { "galosphere:weather_level": 0.62 }, "model": "galosphere:item/barometer_05" },
+    { "predicate": { "galosphere:weather_level": 0.69 }, "model": "galosphere:item/barometer_04" },
+    { "predicate": { "galosphere:weather_level": 0.80 }, "model": "galosphere:item/barometer_03" },
+    { "predicate": { "galosphere:weather_level": 0.85 }, "model": "galosphere:item/barometer_02" },
+    { "predicate": { "galosphere:weather_level": 0.92 }, "model": "galosphere:item/barometer_01" },
     { "predicate": { "galosphere:weather_level": 1.0 }, "model": "galosphere:item/barometer_00" }
   ]
 }
