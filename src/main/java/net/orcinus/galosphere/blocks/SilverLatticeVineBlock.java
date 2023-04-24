@@ -48,8 +48,11 @@ public class SilverLatticeVineBlock extends SilverLatticeBlock implements Boneme
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        if (!blockState.getValue(SPREADABLE)) {
+            return;
+        }
         if (randomSource.nextBoolean()) {
-            if (blockState.getValue(BERRIES) && blockState.getValue(SPREADABLE)) {
+            if (blockState.getValue(BERRIES)) {
                 for (Direction direction : Direction.values()) {
                     BlockPos relativePos = blockPos.relative(direction);
                     BlockState relativeState = serverLevel.getBlockState(relativePos);
