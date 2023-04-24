@@ -14,7 +14,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.orcinus.galosphere.api.BannerAttachable;
@@ -135,25 +134,21 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F", shift = At.Shift.AFTER), method = "getDamageAfterArmorAbsorb", cancellable = true)
     private void G$getDamageAfterArmorAbsorb(DamageSource damageSource, float f, CallbackInfoReturnable<Float> cir) {
-        LivingEntity $this = (LivingEntity) (Object) this;
-        if (damageSource.getEntity() instanceof Mob mob && (mob.getMobType() == MobType.ILLAGER || mob.getType().is(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES))) {
-            for (EquipmentSlot slot : EquipmentSlot.values()) {
-                Item item = $this.getItemBySlot(slot).getItem();
-                float reductionAmount = 0.0F;
-                if ($this instanceof Horse horse) {
-                    Item horseItem = horse.getArmor().getItem();
-                    if (horseItem == GItems.STERLING_HORSE_ARMOR) {
-                        float damageReduction = 4.0F;
-                        reductionAmount = f - damageReduction;
-                    }
+        LivingEntity entity = (LivingEntity) (Object) this;
+        boolean flag = damageSource.getEntity() instanceof Mob mob && (mob.getMobType() == MobType.ILLAGER || mob.getType().is(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES));
+        if (flag) {
+            if (entity instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
+                cir.setReturnValue(f - 4.0F);
+            }
+            float illagerReduction = 0.0F;
+            for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
+                if (entity.getItemBySlot(equipmentSlot).getItem() instanceof SterlingArmorItem sterlingArmorItem && equipmentSlot.getType() == EquipmentSlot.Type.ARMOR) {
+                    illagerReduction+=sterlingArmorItem.getInsurgentResistance(equipmentSlot);
                 }
-                if (item instanceof SterlingArmorItem sterlingArmorItem) {
-                    float damageReduction = sterlingArmorItem.getTraitorResistance(slot);
-                    reductionAmount = f - damageReduction;
-                }
-                if (item instanceof SterlingArmorItem || ($this instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR))) {
-                    cir.setReturnValue(reductionAmount / 3);
-                }
+            }
+            if (illagerReduction > 0) {
+                float value = 3.0F * (f / illagerReduction);
+                cir.setReturnValue(value);
             }
         }
     }
