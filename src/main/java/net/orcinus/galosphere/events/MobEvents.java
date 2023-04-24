@@ -7,16 +7,17 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.item.BannerItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -44,6 +45,7 @@ import net.orcinus.galosphere.entities.SpecterpillarEntity;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
+import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
@@ -92,25 +94,22 @@ public class MobEvents {
     @SubscribeEvent
     public void onLivingDamage(LivingHurtEvent event) {
         LivingEntity entity = event.getEntity();
-        boolean flag = event.getSource().isExplosion();
-        for (EquipmentSlot slot : EquipmentSlot.values()) {
-            if (flag) {
-                float reductionAmount = 0.0F;
-                Item item = entity.getItemBySlot(slot).getItem();
-                if (entity instanceof Horse horse) {
-                    Item horseItem = horse.getArmor().getItem();
-                    if (horseItem == GItems.STERLING_HORSE_ARMOR.get()) {
-                        float damageReduction = 4.0F;
-                        reductionAmount = event.getAmount() - damageReduction;
-                    }
+        DamageSource source = event.getSource();
+        float originalAmount = event.getAmount();
+        boolean flag = source.getEntity() instanceof Mob mob && (mob.getMobType() == MobType.ILLAGER || mob.getType().is(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES));
+        if (flag) {
+            if (entity instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
+                event.setAmount(originalAmount - 4.0F);
+            }
+            float illagerReduction = 0.0F;
+            for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
+                if (entity.getItemBySlot(equipmentSlot).getItem() instanceof SterlingArmorItem sterlingArmorItem && equipmentSlot.getType() == EquipmentSlot.Type.ARMOR) {
+                    illagerReduction+=sterlingArmorItem.getTraitorResistance(equipmentSlot);
                 }
-                if (item instanceof SterlingArmorItem sterlingArmorItem) {
-                    float damageReduction = sterlingArmorItem.getExplosionResistance(slot);
-                    reductionAmount = event.getAmount() - damageReduction;
-                }
-                if (item instanceof SterlingArmorItem || (entity instanceof Horse && ((Horse)entity).getArmor().getItem() == GItems.STERLING_HORSE_ARMOR.get())){
-                    event.setAmount(reductionAmount);
-                }
+            }
+            if (illagerReduction > 0) {
+                float value = 3.0F * (originalAmount / illagerReduction);
+                event.setAmount(value);
             }
         }
     }

@@ -56,10 +56,9 @@ public class SterlingArmorItem extends ArmorItem {
         UUID uuid = UUID.fromString("fb112e48-f201-4a6f-ae86-0f11df4f8e79");
         UUID[] ARMOR_MODIFIER_UUID_PER_SLOT = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
         UUID defaultUUid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getIndex()];
-        double amount = this.getExplosionResistance(slot);
         builder.put(Attributes.ARMOR, new AttributeModifier(defaultUUid, "Armor modifier", this.getMaterial().getDefenseForSlot(slot), AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(defaultUUid, "Armor toughness", this.getMaterial().getToughness(), AttributeModifier.Operation.ADDITION));
-        builder.put(GAttributes.EXPLOSION_RESISTANCE.get(), new AttributeModifier(uuid, "Armor explosion resistance", amount, AttributeModifier.Operation.ADDITION));
+        builder.put(GAttributes.INSURGENT_RESISTANCE.get(), new AttributeModifier(uuid, "Armor insurgent resistance", this.getTraitorResistance(slot), AttributeModifier.Operation.ADDITION));
         return slot == this.slot ? builder.build() : super.getDefaultAttributeModifiers(slot);
     }
 
@@ -75,8 +74,8 @@ public class SterlingArmorItem extends ArmorItem {
         });
     }
 
-    public float getExplosionResistance(EquipmentSlot slot) {
-        float[] array = new float[]{3, 5, 4, 2};
+    public float getTraitorResistance(EquipmentSlot slot) {
+        float[] array = {3, 5, 6, 2};
         return array[slot.getIndex()];
     }
 

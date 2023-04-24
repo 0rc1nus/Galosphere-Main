@@ -72,7 +72,7 @@ public class ClientEvents {
                 @Override
                 public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
                     Entity entity = livingEntity != null ? livingEntity : itemStack.getEntityRepresentation();
-                    float[][] predicates = new float[][]{{0.25F, 0.3F, 0.5F, 0.7F, 0.9F}, {0.9F, 0.7F, 0.5F, 0.3F, 0.25F}};
+                    float[][] predicates = new float[][]{{0.15F, 0.13F, 0.21F, 0.28F, 0.36F, 0.44F, 0.52F, 0.59F, 0.70F, 0.75F, 0.82F, 0.9F}, {0.9F, 0.82F, 0.70F, 0.59F, 0.52F, 0.44F, 0.36F, 0.28F, 0.21F, 0.13F, 0.15F}};
                     if (entity == null) {
                         return 0.0f;
                     }
@@ -84,13 +84,15 @@ public class ClientEvents {
                     }
                     float max;
                     float speed = 0.00525F;
-                    if (ClientEvents.clearWeatherTime < 12000) {
-                        max = predicates[clientLevel.isRaining() ? 1 : 0][ClientEvents.clearWeatherTime / 3000];
+                    int clearWeatherTime = ClientEvents.clearWeatherTime;
+                    int index = clearWeatherTime < 5 ? 0 : Math.max(0, clearWeatherTime / 1000);
+                    if (clearWeatherTime < 12000) {
+                        max = predicates[clientLevel.isRaining() ? 1 : 0][index];
                     } else {
                         max = clientLevel.getLevelData().isRaining() ? 0.0F : 1.0F;
                     }
                     float rainLevel = clientLevel.getRainLevel(1.0F);
-                    if ((rainLevel > 0.9F || rainLevel < 0.1F) && ClientEvents.clearWeatherTime == 0 && this.ticksBeforeChange == 0) {
+                    if ((rainLevel > 0.9F || rainLevel < 0.1F) && clearWeatherTime == 0 && this.ticksBeforeChange == 0) {
                         this.ticksBeforeChange = 800;
                     }
                     if (this.ticksBeforeChange > 0) {

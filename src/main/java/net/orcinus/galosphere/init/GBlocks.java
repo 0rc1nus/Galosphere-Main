@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.AmethystBlock;
 import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CaveVines;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.IronBarsBlock;
@@ -34,6 +35,8 @@ import net.orcinus.galosphere.blocks.LichenRootsBlock;
 import net.orcinus.galosphere.blocks.LumiereBlock;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
+import net.orcinus.galosphere.blocks.SilverLatticeBlock;
+import net.orcinus.galosphere.blocks.SilverLatticeVineBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 
 import java.util.function.Supplier;
@@ -55,7 +58,8 @@ public class GBlocks {
     public static final RegistryObject<Block> SILVER_PANEL_STAIRS = registerBlock("silver_panel_stairs", () -> new StairBlock(SILVER_PANEL.get().defaultBlockState(), BlockBehaviour.Properties.copy(SILVER_TILES.get())));
     public static final RegistryObject<Block> SILVER_PANEL_SLAB = registerBlock("silver_panel_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(SILVER_PANEL.get())));
 
-    public static final RegistryObject<Block> SILVER_LATTICE = registerBlock("silver_lattice", () -> new IronBarsBlock(BlockBehaviour.Properties.copy(SILVER_TILES.get()).sound(GSoundEvents.SILVER_LATTICE).noOcclusion()));
+    public static final RegistryObject<Block> SILVER_LATTICE = registerBlock("silver_lattice", () -> new SilverLatticeBlock(BlockBehaviour.Properties.copy(SILVER_TILES.get()).sound(GSoundEvents.SILVER_LATTICE).noOcclusion()));
+    public static final RegistryObject<Block> GLOW_BERRIES_SILVER_LATTICE = registerNoTabBlock("glow_berries_silver_lattice", () -> new SilverLatticeVineBlock(BlockBehaviour.Properties.copy(SILVER_TILES.get()).sound(GSoundEvents.SILVER_LATTICE).lightLevel(CaveVines.emission(14)).noOcclusion()));
 
     public static final RegistryObject<Block> SILVER_ORE = registerBlock("silver_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(SILVER_ORE.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE)));

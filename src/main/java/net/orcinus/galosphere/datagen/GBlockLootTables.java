@@ -90,6 +90,7 @@ public class GBlockLootTables extends BlockLoot {
         this.dropSelf(GBlocks.SILVER_PANEL_STAIRS.get());
         this.dropSlab(GBlocks.SILVER_PANEL_SLAB);
         this.dropSelf(GBlocks.SILVER_LATTICE.get());
+        this.dropOther(GBlocks.GLOW_BERRIES_SILVER_LATTICE.get(), GBlocks.SILVER_LATTICE.get());
     }
 
     public static LootTable.Builder createMultifaceBlockDrops(Block block) {
