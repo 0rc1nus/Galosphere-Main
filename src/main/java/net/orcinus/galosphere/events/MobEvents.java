@@ -82,11 +82,11 @@ public class MobEvents {
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity livingEntity = event.getEntity();
-        if (livingEntity instanceof Horse horse) {
-            if (!((BannerAttachable)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
-                ItemStack copy = ((BannerAttachable) horse).getBanner();
+        if (livingEntity instanceof Horse horse && horse instanceof BannerAttachable bannerAttachable) {
+            if (!bannerAttachable.getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
+                ItemStack copy = bannerAttachable.getBanner();
                 horse.spawnAtLocation(copy);
-                ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
+                bannerAttachable.setBanner(ItemStack.EMPTY);
             }
         }
     }
@@ -108,7 +108,7 @@ public class MobEvents {
                 }
             }
             if (illagerReduction > 0) {
-                float value = 3.0F * (originalAmount / illagerReduction);
+                float value = 4 * (originalAmount / illagerReduction);
                 event.setAmount(value);
             }
         }
