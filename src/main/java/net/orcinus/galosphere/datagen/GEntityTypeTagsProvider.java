@@ -20,6 +20,7 @@ public class GEntityTypeTagsProvider extends EntityTypeTagsProvider {
     protected void addTags() {
         this.tag(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES).add(EntityType.VEX).add(EntityType.EVOKER_FANGS).add(EntityType.RAVAGER);
         this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(GEntityTypes.SIVLER_BOMB.get());
+        this.tag(EntityTypeTags.FROG_FOOD).add(GEntityTypes.SPECTERPILLAR.get());
     }
 
 }

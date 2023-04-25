@@ -33,13 +33,22 @@ public class BiomeReagentHandler {
             Climate.Parameter.span(-1.0F, 1.0F),
             Climate.Parameter.span(-1.0F, 1.0F),
             Climate.Parameter.span(0.7F, 1.0F),
-            Climate.Parameter.span(Climate.Parameter.span(-1.0F, -0.78F),
-            Climate.Parameter.span(-0.78F, -0.375F)),
+            Climate.Parameter.span(
+                    Climate.Parameter.span(-1.0F, -0.78F),
+                    Climate.Parameter.span(-0.78F, -0.375F)
+            ),
             Climate.Parameter.span(0.2F, 0.9F),
             Climate.Parameter.span(-1.0F, 1.0F),
             0.0F
     );
-    public static final Climate.ParameterPoint LICHEN_CAVES_PARAMETER = Climate.parameters(Climate.Parameter.span(-1.0F, 1.0F), Climate.Parameter.span(-1.0F, 1.0F), Climate.Parameter.span(-0.2F, -0.15F), Climate.Parameter.span(-0.78F, -0.5F), Climate.Parameter.span(0.2F, 0.9F), Climate.Parameter.span(-1.0F, 1.0F), 0.0F);
+    public static final Climate.ParameterPoint LICHEN_CAVES_PARAMETER = Climate.parameters(
+            Climate.Parameter.span(-1.0F, 1.0F),
+            Climate.Parameter.span(-1.0F, 1.0F),
+            Climate.Parameter.span(0.6F, 0.7F),
+            Climate.Parameter.span(-0.9F, -0.7F),
+            Climate.Parameter.span(0.2F, 0.9F),
+            Climate.Parameter.span(-1.0F, 1.0F),
+            0.0F);
 //    public static final Climate.ParameterPoint CRYSTAL_CANYONS_PARAMETER2 = Climate.parameters(
 //            Climate.Parameter.span(-1.0F, -0.8F),
 //            FULL_RANGE,
