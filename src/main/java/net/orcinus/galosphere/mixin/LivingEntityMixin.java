@@ -123,11 +123,11 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     @Inject(at = @At("HEAD"), method = "die")
     private void G$die(DamageSource damageSource, CallbackInfo ci) {
         LivingEntity $this = (LivingEntity)(Object)this;
-        if ($this instanceof Horse horse) {
-            if (!((BannerAttachable)horse).getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
-                ItemStack copy = ((BannerAttachable) horse).getBanner();
+        if ($this instanceof Horse horse && horse instanceof BannerAttachable bannerAttachable) {
+            if (!bannerAttachable.getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
+                ItemStack copy = bannerAttachable.getBanner();
                 horse.spawnAtLocation(copy);
-                ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
+                bannerAttachable.setBanner(ItemStack.EMPTY);
             }
         }
     }
@@ -147,7 +147,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
                 }
             }
             if (illagerReduction > 0) {
-                float value = 3.0F * (f / illagerReduction);
+                float value = 4.0F * (f / illagerReduction);
                 cir.setReturnValue(value);
             }
         }
