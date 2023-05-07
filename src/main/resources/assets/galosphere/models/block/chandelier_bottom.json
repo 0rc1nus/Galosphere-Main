@@ -1,0 +1,36 @@
+{
+	"render_type": "cutout",
+	"parent": "block/block",
+	"textures": {
+		"0": "galosphere:block/chandelier",
+		"particle": "galosphere:block/chandelier"
+	},
+	"elements": [
+		{
+			"from": [8, 0, -2],
+			"to": [8, 16, 18],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [1, 8, 9, 0], "texture": "#0"},
+				"east": {"uv": [1, 8, 9, 0], "texture": "#0"},
+				"south": {"uv": [1, 8, 9, 0], "texture": "#0"},
+				"west": {"uv": [1, 8, 9, 0], "texture": "#0"},
+				"up": {"uv": [0, 18, 32, 32], "texture": "#missing"},
+				"down": {"uv": [0, 18, 32, 32], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [8, 0, -2],
+			"to": [8, 16, 18],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [1, 8, 9, 0], "texture": "#0"},
+				"east": {"uv": [1, 8, 9, 0], "texture": "#0"},
+				"south": {"uv": [1, 8, 9, 0], "texture": "#0"},
+				"west": {"uv": [1, 8, 9, 0], "texture": "#0"},
+				"up": {"uv": [0, 18, 32, 32], "texture": "#missing"},
+				"down": {"uv": [0, 18, 32, 32], "texture": "#missing"}
+			}
+		}
+	]
+}

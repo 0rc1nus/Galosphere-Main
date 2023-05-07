@@ -49,13 +49,19 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem("chiseled_allurite");
         blockItem("chiseled_lumiere");
         blockItem("charged_lumiere_block");
-        blockItem("aura_ringer");
         blockItem("warped_anchor");
         blockItem("combustion_table");
         blockItem("amethyst_lamp");
         blockItem("allurite_lamp");
         blockItem("lumiere_lamp");
         blockItem("lichen_moss");
+        blockItem("silver_tiles");
+        blockItem("silver_tiles_stairs");
+        blockItem("silver_tiles_slab");
+        blockItem("silver_panel");
+        blockItem("silver_panel_stairs");
+        blockItem("silver_panel_slab");
+        withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", new ResourceLocation(Galosphere.MODID, "block/monstrometer_top")).texture("bottom", new ResourceLocation(Galosphere.MODID, "block/monstrometer_bottom")).texture("side", new ResourceLocation(Galosphere.MODID, "block/monstrometer_side"));
         item("silver_ingot");
         item("allurite_shard");
         item("lumiere_shard");
@@ -73,6 +79,8 @@ public class GItemModelProvider extends ItemModelProvider {
         item("lichen_cordyceps");
         item("golden_lichen_cordyceps");
         item("glow_flare");
+        item("chandelier");
+        itemWithBlockDirectory("silver_lattice");
         itemWithBlockDirectory("lichen_roots");
         itemWithBlockDirectory("bowl_lichen");
         itemWithBlockDirectory("lichen_shelf");
@@ -80,6 +88,7 @@ public class GItemModelProvider extends ItemModelProvider {
 
         spawnEggItem("sparkle");
         spawnEggItem("spectre");
+        spawnEggItem("specterpillar");
 
         withExistingParent("crossbow_glow_flare", new ResourceLocation("item/crossbow")).texture("layer0", new ResourceLocation(Galosphere.MODID, "item/crossbow_glow_flare"));
     }

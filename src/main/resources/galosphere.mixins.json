@@ -5,6 +5,7 @@
   "minVersion": "0.8",
   "refmap": "galosphere.refmap.json",
   "mixins": [
+    "ChorusFruitItemMixin",
     "CrossbowItemMixin",
     "EntityMixin",
     "LightningBoltMixin",
@@ -14,6 +15,7 @@
     "PowderSnowBlockMixin"
   ],
   "client": [
+    "client.ClientLevelMixin",
     "client.ItemModelShaperMixin",
     "client.ItemRendererMixin",
     "client.PlayerItemInHandLayerMixin"

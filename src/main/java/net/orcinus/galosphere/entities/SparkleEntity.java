@@ -1,8 +1,9 @@
 package net.orcinus.galosphere.entities;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -21,107 +22,90 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.MoveControl;
-import net.minecraft.world.entity.ai.goal.BreedGoal;
-import net.minecraft.world.entity.ai.goal.FollowParentGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.PanicGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.TemptGoal;
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.entities.ai.FindClusterGoal;
-import net.orcinus.galosphere.entities.ai.SparkleRandomSwimmingGoal;
-import net.orcinus.galosphere.entities.ai.WalkAndSwimGoal;
-import net.orcinus.galosphere.entities.ai.WalkToGroundGoal;
-import net.orcinus.galosphere.entities.ai.control.SmoothSwimmingGroundControl;
-import net.orcinus.galosphere.entities.ai.navigation.SwimWalkPathNavigation;
+import net.orcinus.galosphere.entities.ai.SparkleAi;
 import net.orcinus.galosphere.init.GBlockTags;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItemTags;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GMemoryModuleTypes;
+import net.orcinus.galosphere.init.GSensorTypes;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class SparkleEntity extends Animal {
-    public static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(SparkleEntity.class, EntityDataSerializers.INT);
-    private boolean groundNavigationInuse;
-    private int growthTicks;
-    public float prevWaterTicks;
-    public float waterTicks;
-    private int swimTicks = -1000;
-    private int eatingCooldownTicks;
+    private static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(SparkleEntity.class, EntityDataSerializers.INT);
+    protected static final ImmutableList<SensorType<? extends Sensor<? super SparkleEntity>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, GSensorTypes.SPARKLE_TEMPTATIONS.get(), GSensorTypes.NEAREST_POLLINATED_CLUSTER.get(), SensorType.IS_IN_WATER);
+    protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, GMemoryModuleTypes.POLLINATED_COOLDOWN.get(), MemoryModuleType.IS_TEMPTED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, MemoryModuleType.IS_IN_WATER, MemoryModuleType.IS_PANICKING);
     private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
-    private static final UniformInt LONG_REGROWTH_TICKS = UniformInt.of(12000, 24000);
+    private int growthTicks;
 
     public SparkleEntity(EntityType<? extends SparkleEntity> type, Level world) {
         super(type, world);
-        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
-        this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
-        this.switchNavigator(false);
+        this.setPathfindingMalus(BlockPathTypes.WATER, 4.0F);
+        this.setPathfindingMalus(BlockPathTypes.TRAPDOOR, -1.0F);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos p_27573_, LevelReader p_27574_) {
+        return 0.0F;
+    }
+
+    @Override
+    protected Brain.Provider<SparkleEntity> brainProvider() {
+        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
+    }
+
+    @Override
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return SparkleAi.makeBrain(this.brainProvider().makeBrain(dynamic));
+    }
+
+    @Override
+    public Brain<SparkleEntity> getBrain() {
+        return (Brain<SparkleEntity>) super.getBrain();
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        this.level.getProfiler().push("sparkleBrain");
+        this.getBrain().tick((ServerLevel)this.level, this);
+        this.level.getProfiler().pop();
+        this.level.getProfiler().push("sparkleActivityUpdate");
+        SparkleAi.updateActivity(this);
+        this.level.getProfiler().pop();
+        super.customServerAiStep();
     }
 
     @Override
     public float getStepHeight() {
         return 1.0F;
-    }
-
-    private void switchNavigator(boolean onLand) {
-        if (onLand) {
-            this.moveControl = new MoveControl(this);
-            this.navigation = new GroundPathNavigation(this, level);
-            this.groundNavigationInuse = true;
-        } else {
-            this.moveControl = new SmoothSwimmingGroundControl(this, 1.2F, 1.6F);
-            this.navigation = new SwimWalkPathNavigation(this, level);
-            this.groundNavigationInuse = false;
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        this.prevWaterTicks = this.waterTicks;
-        if (this.isInWaterOrBubble() && this.waterTicks < 5.0F) {
-            this.waterTicks++;
-        }
-        if (!this.isInWaterOrBubble() && this.waterTicks > 0.0F) {
-            this.waterTicks--;
-        }
-        if (this.isInWaterOrBubble() && this.groundNavigationInuse) {
-            this.switchNavigator(false);
-        }
-        if (!this.isInWaterOrBubble() && !this.groundNavigationInuse) {
-            this.switchNavigator(true);
-        }
-        if (!level.isClientSide) {
-            if (this.eatingCooldownTicks < 0) {
-                this.eatingCooldownTicks++;
-            }
-            if (this.isInWater()) {
-                this.swimTicks++;
-            } else {
-                this.swimTicks--;
-            }
-        }
     }
 
     @Override
@@ -136,6 +120,11 @@ public class SparkleEntity extends Animal {
     }
 
     @Override
+    public boolean canCutCorner(BlockPathTypes pathTypes) {
+        return super.canCutCorner(pathTypes) && pathTypes != BlockPathTypes.WATER_BORDER;
+    }
+
+    @Override
     public boolean canBreatheUnderwater() {
         return true;
     }
@@ -146,7 +135,7 @@ public class SparkleEntity extends Animal {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.2F).add(Attributes.FOLLOW_RANGE, 16.0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 1.0D);
     }
 
     @Override
@@ -171,7 +160,6 @@ public class SparkleEntity extends Animal {
         super.readAdditionalSaveData(tag);
         this.setCrystalType(CrystalType.BY_ID[tag.getInt("CrystalType")]);
         this.setGrowthTicks(tag.getInt("GrowthTicks"));
-        this.setEatingCooldownTicks(tag.getInt("CooldownTicks"));
     }
 
     @Override
@@ -179,15 +167,6 @@ public class SparkleEntity extends Animal {
         super.addAdditionalSaveData(tag);
         tag.putInt("CrystalType", this.getCrystaltype().getId());
         tag.putInt("GrowthTicks", this.getGrowthTicks());
-        tag.putInt("CooldownTicks", this.getEatingCooldownTicks());
-    }
-
-    public void setEatingCooldownTicks(int growthTicks) {
-        this.eatingCooldownTicks = growthTicks;
-    }
-
-    public int getEatingCooldownTicks() {
-        return this.eatingCooldownTicks;
     }
 
     public void setGrowthTicks(int growthTicks) {
@@ -198,7 +177,7 @@ public class SparkleEntity extends Animal {
         return this.growthTicks;
     }
 
-    public void setCrystalType(SparkleEntity.CrystalType type) {
+    public void setCrystalType(CrystalType type) {
         this.entityData.set(CRYSTAL_TYPE, type.getId());
     }
 
@@ -207,17 +186,8 @@ public class SparkleEntity extends Animal {
     }
 
     @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(2, new WalkAndSwimGoal(this));
-        this.goalSelector.addGoal(2, new WalkToGroundGoal(this));
-        this.goalSelector.addGoal(3, new PanicGoal(this, 1.4D));
-        this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new TemptGoal(this, 1.0D, Ingredient.of(GItemTags.SPARKLE_TEMPT_ITEMS), false));
-        this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(7, new FindClusterGoal(this));
-        this.goalSelector.addGoal(8, new SparkleRandomSwimmingGoal(this, 1.0D, 10));
-        this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
+    protected PathNavigation createNavigation(Level world) {
+        return new AmphibiousPathNavigation(this, world);
     }
 
     @Override
@@ -278,24 +248,15 @@ public class SparkleEntity extends Animal {
         this.spawnShard(stack);
         this.playSound(SoundEvents.CALCITE_HIT, 1.0F, 1.0F);
         this.setCrystalType(CrystalType.NONE);
-        UniformInt growthTicks = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0 ? LONG_REGROWTH_TICKS : REGROWTH_TICKS;
-        this.setGrowthTicks(growthTicks.sample(this.getRandom()));
+        this.setGrowthTicks(REGROWTH_TICKS.sample(this.getRandom()));
     }
 
     private void spawnShard(ItemStack stack) {
-        Item item = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0 ? this.getCrystaltype().getSilktouchItem() : this.getCrystaltype().getItem();
-        int rolls = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack) > 0 ? 1 + EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack) : 1;
+        Item item = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0 ? this.getCrystaltype().getSilktouchItem() : this.getCrystaltype().getItem();
+        int rolls = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack) > 0 ? 1 + EnchantmentHelper.getTagEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack) : 1;
         for (int i = 0; i < rolls; i++) {
             this.spawnAtLocation(item);
         }
-    }
-
-    public boolean shouldEnterWater() {
-        return swimTicks <= -1000;
-    }
-
-    public boolean shouldLeaveWater() {
-        return swimTicks > 600;
     }
 
     public enum CrystalType {
@@ -303,7 +264,7 @@ public class SparkleEntity extends Animal {
         ALLURITE(1, "allurite", GItems.ALLURITE_SHARD.get(), GBlocks.ALLURITE_CLUSTER.get().asItem()),
         LUMIERE(2, "lumiere", GItems.LUMIERE_SHARD.get(), GBlocks.LUMIERE_CLUSTER.get().asItem());
 
-        public static final SparkleEntity.CrystalType[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(SparkleEntity.CrystalType::getId)).toArray(CrystalType[]::new);
+        public static final CrystalType[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(CrystalType::getId)).toArray(CrystalType[]::new);
         private final int id;
         private final String name;
         private final Item item;

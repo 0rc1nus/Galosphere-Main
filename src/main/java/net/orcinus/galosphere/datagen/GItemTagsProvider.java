@@ -28,7 +28,11 @@ public class GItemTagsProvider extends ItemTagsProvider {
     protected void addTags() {
         GItems.ITEMS.getEntries().stream().map(RegistryObject::get).filter(BlockItem.class::isInstance).map(BlockItem.class::cast).map(BlockItem::getBlock).filter(StairBlock.class::isInstance).forEach(block -> this.tag(ItemTags.STAIRS).add(block.asItem()));
         GItems.ITEMS.getEntries().stream().map(RegistryObject::get).filter(BlockItem.class::isInstance).map(BlockItem.class::cast).map(BlockItem::getBlock).filter(SlabBlock.class::isInstance).forEach(block -> this.tag(ItemTags.SLABS).add(block.asItem()));
+        this.tag(GItemTags.BOMB_BOUNCY_MODIFIERS).add(Items.SLIME_BALL);
+        this.tag(GItemTags.BOMB_EXPLOSION_MODIFIERS).add(Items.GUNPOWDER);
+        this.tag(GItemTags.BOMB_DURATION_MODIFIERS).add(Items.STRING);
         this.tag(GItemTags.SPARKLE_TEMPT_ITEMS).add(Items.GLOW_LICHEN);
+        this.tag(GItemTags.SPECTRE_TEMPT_ITEMS).add(GBlocks.LICHEN_SHELF.get().asItem());
         this.tag(GItemTags.NON_SINKABLES_HORSE_ARMORS).add(GItems.STERLING_HORSE_ARMOR.get(), Items.LEATHER_HORSE_ARMOR);
         this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES).add(GItems.STERLING_HELMET.get(), GItems.STERLING_CHESTPLATE.get(), GItems.STERLING_LEGGINGS.get(), GItems.STERLING_BOOTS.get(), GItems.STERLING_HORSE_ARMOR.get());
         this.tag(ForgeItemTags.SILVER_INGOT).add(GItems.SILVER_INGOT.get());

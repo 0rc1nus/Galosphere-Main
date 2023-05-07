@@ -1,0 +1,40 @@
+{
+	"multipart": [
+		{
+			"apply": {
+				"model": "galosphere:block/monstrometer",
+				"uvlock": true
+			},
+			"when": {
+				"charged": "false"
+			}
+		},
+		{
+			"apply": {
+				"model": "galosphere:block/monstrometer_charged",
+				"uvlock": true
+			},
+			"when": {
+				"charged": "true"
+			}
+		},
+		{
+			"apply": {
+				"model": "galosphere:block/monstrometer_top",
+				"uvlock": true
+			},
+			"when": {
+				"active": "false"
+			}
+		},
+		{
+			"apply": {
+				"model": "galosphere:block/monstrometer_top_active",
+				"uvlock": true
+			},
+			"when": {
+				"active": "true"
+			}
+		}
+	]
+}

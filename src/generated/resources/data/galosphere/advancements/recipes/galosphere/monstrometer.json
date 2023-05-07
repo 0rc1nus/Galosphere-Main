@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lumiere_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:lumiere_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_silver_block": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:storage_blocks/silver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "galosphere:monstrometer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_lumiere_block",
+      "has_silver_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "galosphere:monstrometer"
+    ]
+  }
+}

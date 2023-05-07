@@ -13,6 +13,18 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_lumiere_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:lumiere_shard"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "galosphere:lumiere_lamp"
@@ -22,6 +34,7 @@
   },
   "requirements": [
     [
+      "has_lumiere_shard",
       "has_glowstone",
       "has_the_recipe"
     ]

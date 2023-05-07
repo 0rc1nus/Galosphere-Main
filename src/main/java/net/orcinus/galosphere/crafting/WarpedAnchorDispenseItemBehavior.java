@@ -2,13 +2,10 @@ package net.orcinus.galosphere.crafting;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
-import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.orcinus.galosphere.blocks.AuraRingerBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.init.GBlocks;
 

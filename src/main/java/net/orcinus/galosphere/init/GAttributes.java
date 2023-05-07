@@ -13,6 +13,6 @@ public class GAttributes {
 
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, Galosphere.MODID);
 
-    public static final RegistryObject<Attribute> EXPLOSION_RESISTANCE = ATTRIBUTES.register("explosion_resistance", () -> (new RangedAttribute("attribute.name.generic.explosion_resistance", 0.0D, 0.0D, 10.0D)));
+    public static final RegistryObject<Attribute> INSURGENT_RESISTANCE = ATTRIBUTES.register("insurgent_resistance", () -> (new RangedAttribute("attribute.name.generic.insurgent_resistance", 0.0D, 0.0D, 10.0D)));
 
 }

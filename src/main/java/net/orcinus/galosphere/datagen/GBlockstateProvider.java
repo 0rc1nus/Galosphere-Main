@@ -11,11 +11,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.blocks.CordycepsBlock;
+import net.orcinus.galosphere.blocks.LichenMossBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.NotNull;
@@ -49,16 +51,14 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(GBlocks.SILVER_ORE.get());
         this.simpleBlock(GBlocks.DEEPSLATE_SILVER_ORE.get());
         this.simpleBlock(GBlocks.CHARGED_LUMIERE_BLOCK.get());
-        this.simpleBlock(GBlocks.LICHEN_MOSS.get());
+        this.getVariantBuilder(GBlocks.LICHEN_MOSS.get()).forAllStatesExcept(blockState -> {
+            String name = blockState.getValue(LichenMossBlock.LIT) ? "lichen_moss_lit" : "lichen_moss";
+            ModelFile modelFile = models().cubeAll(name, new ResourceLocation(Galosphere.MODID, "block/" + name));
+            return ConfiguredModel.builder().modelFile(modelFile).build();
+        });
 
         this.crossBlock(GBlocks.LICHEN_ROOTS);
         this.crossBlock(GBlocks.BOWL_LICHEN);
-        this.getVariantBuilder(GBlocks.LICHEN_CORDYCEPS.get()).forAllStatesExcept(state -> {
-            boolean bulb = state.getValue(CordycepsBlock.BULB);
-            BlockModelBuilder crossFile = models().cross("lichen_cordyceps", new ResourceLocation(Galosphere.MODID, "block/lichen_cordyceps")).renderType("cutout");
-            BlockModelBuilder bulbcrossFile = models().cross("lichen_cordyceps_bulb", new ResourceLocation(Galosphere.MODID, "block/lichen_cordyceps_bulb")).renderType("cutout");
-            return ConfiguredModel.builder().modelFile(bulb ? bulbcrossFile : crossFile).build();
-        }, CordycepsBlock.AGE);
         this.crossBlock(GBlocks.LICHEN_CORDYCEPS_PLANT);
 
         this.slabBlock(GBlocks.AMETHYST_SLAB.get(), "amethyst_block", true);
@@ -85,6 +85,14 @@ public class GBlockstateProvider extends BlockStateProvider {
 
         this.pollinatedCluster(GBlocks.ALLURITE_CLUSTER.get());
         this.pollinatedCluster(GBlocks.LUMIERE_CLUSTER.get());
+
+        this.simpleBlock(GBlocks.SILVER_TILES.get());
+        this.slabBlock(GBlocks.SILVER_TILES_SLAB.get(), "silver_tiles");
+        this.stairsBlock(GBlocks.SILVER_TILES_STAIRS.get(), "silver_tiles");
+
+        this.simpleBlock(GBlocks.SILVER_PANEL.get());
+        this.slabBlock(GBlocks.SILVER_PANEL_SLAB.get(), "silver_panel");
+        this.stairsBlock(GBlocks.SILVER_PANEL_STAIRS.get(), "silver_panel");
 
     }
 

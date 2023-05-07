@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "galosphere:silver_ingot"
+    },
+    "@": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#@#",
+    " # "
+  ],
+  "result": {
+    "item": "galosphere:barometer"
+  }
+}

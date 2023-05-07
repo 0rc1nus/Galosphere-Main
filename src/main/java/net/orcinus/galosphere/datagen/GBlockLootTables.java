@@ -8,7 +8,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -50,7 +52,7 @@ public class GBlockLootTables extends BlockLoot {
         this.dropSelf(GBlocks.CHISELED_AMETHYST.get());
         this.add(GBlocks.ALLURITE_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(GItems.ALLURITE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(GItems.ALLURITE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
         this.add(GBlocks.LUMIERE_CLUSTER.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(GItems.LUMIERE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(GItems.LUMIERE_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
-        this.dropSelf(GBlocks.AURA_RINGER.get());
+        this.dropSelf(GBlocks.MONSTROMETER.get());
         this.dropSelf(GBlocks.LUMIERE_LAMP.get());
         this.dropSelf(GBlocks.ALLURITE_LAMP.get());
         this.dropSelf(GBlocks.AMETHYST_LAMP.get());
@@ -76,10 +78,19 @@ public class GBlockLootTables extends BlockLoot {
         this.dropSelf(GBlocks.LICHEN_SHELF.get());
         this.dropSelf(GBlocks.BOWL_LICHEN.get());
         this.dropSelf(GBlocks.CHANDELIER.get());
+        this.add(GBlocks.CHANDELIER.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
         this.addVinesDroptable(GBlocks.LICHEN_CORDYCEPS.get(), GBlocks.LICHEN_CORDYCEPS_PLANT.get());
         this.add(GBlocks.GLOW_INK_CLUMPS.get(), GBlockLootTables::createMultifaceBlockDrops);
         this.dropPottedContents(GBlocks.POTTED_BOWL_LICHEN.get());
         this.dropPottedContents(GBlocks.POTTED_LICHEN_ROOTS.get());
+        this.dropSelf(GBlocks.SILVER_TILES.get());
+        this.dropSelf(GBlocks.SILVER_TILES_STAIRS.get());
+        this.dropSlab(GBlocks.SILVER_TILES_SLAB);
+        this.dropSelf(GBlocks.SILVER_PANEL.get());
+        this.dropSelf(GBlocks.SILVER_PANEL_STAIRS.get());
+        this.dropSlab(GBlocks.SILVER_PANEL_SLAB);
+        this.dropSelf(GBlocks.SILVER_LATTICE.get());
+        this.dropOther(GBlocks.GLOW_BERRIES_SILVER_LATTICE.get(), GBlocks.SILVER_LATTICE.get());
     }
 
     public static LootTable.Builder createMultifaceBlockDrops(Block block) {

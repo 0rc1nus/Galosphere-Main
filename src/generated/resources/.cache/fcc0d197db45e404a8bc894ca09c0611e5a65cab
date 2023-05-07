@@ -1,2 +1,4 @@
-// 1.19.2	2022-11-14T14:19:28.6328296	Tags for minecraft:entity_type
+// 1.19.2	2023-04-25T22:06:47.0720186	Tags for minecraft:entity_type
+95a925ce91c129956df40bd3117377165cc41056 data/galosphere/tags/entity_types/sterling_immune_entity_types.json
+9757327fb8283797218b3d8972e30a7ee3f9692c data/minecraft/tags/entity_types/frog_food.json
 4a42af1a3918e19a33d18551510b0ff55586bb05 data/minecraft/tags/entity_types/impact_projectiles.json
