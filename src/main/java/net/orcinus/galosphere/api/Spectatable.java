@@ -16,10 +16,6 @@ public interface Spectatable {
 
     void spectateTick(UUID uuid);
 
-    default boolean cancelKeybindings() {
-        return false;
-    }
-
     @Environment(EnvType.CLIENT)
     default boolean matchesClientPlayerUUID() {
         return Minecraft.getInstance().player != null && Minecraft.getInstance().player.getUUID().equals(this.getManipulatorUUID());

@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -53,10 +52,7 @@ public class GEvents {
     public static void clientInit() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             LocalPlayer player = client.player;
-            if (player != null && (player instanceof SpectreBoundSpyglass spectreBoundSpyglass && spectreBoundSpyglass.isUsingSpectreBoundedSpyglass() && (client.getCameraEntity() instanceof Spectatable spectatable))) {
-                if (spectatable.cancelKeybindings()) {
-                    KeyMapping.releaseAll();
-                }
+            if (player != null && (player instanceof SpectreBoundSpyglass spectreBoundSpyglass && spectreBoundSpyglass.isUsingSpectreBoundedSpyglass()) && client.getCameraEntity() instanceof Spectatable) {
                 player.setDeltaMovement(player.getDeltaMovement().multiply(0, 1, 0));
                 player.xxa = 0.0F;
                 player.zza = 0.0F;

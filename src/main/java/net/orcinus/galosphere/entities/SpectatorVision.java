@@ -52,11 +52,6 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
     }
 
     @Override
-    public boolean cancelKeybindings() {
-        return true;
-    }
-
-    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(MANIPULATOR, Optional.empty());
