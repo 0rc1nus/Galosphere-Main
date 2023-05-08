@@ -1,7 +1,10 @@
 package net.orcinus.galosphere.events;
 
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.entity.HorseRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -20,13 +23,18 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterEntitySpectatorShadersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.api.Spectatable;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
+import net.orcinus.galosphere.client.SpectatorTickHandler;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.GoldenBreathOverlay;
+import net.orcinus.galosphere.client.gui.SpectatorVisionOverlay;
 import net.orcinus.galosphere.client.gui.SpectreOverlay;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SpecterpillarModel;
@@ -39,7 +47,9 @@ import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
+import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
 import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
+import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
@@ -62,9 +72,13 @@ public class ClientEvents {
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         eventBus.register(new GoldenBreathOverlay());
         eventBus.register(new SpectreOverlay());
+        eventBus.register(new SpectatorVisionOverlay());
+
+        eventBus.addListener((TickEvent.ClientTickEvent clientTickEvent) -> SpectatorTickHandler.tick());
 
         event.enqueueWork(() -> {
             ItemProperties.register(Items.CROSSBOW, new ResourceLocation(Galosphere.MODID, "glow_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.GLOW_FLARE.get()) ? 1.0F : 0.0F);
+            ItemProperties.register(Items.CROSSBOW, new ResourceLocation(Galosphere.MODID, "spectre_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.SPECTRE_FLARE.get()) ? 1.0F : 0.0F);
             ItemProperties.register(GItems.BAROMETER.get(), new ResourceLocation(Galosphere.MODID, "weather_level"), new ClampedItemPropertyFunction() {
                 private double rotation;
                 private int ticksBeforeChange;
@@ -117,7 +131,8 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void loadEntityShader(RegisterEntitySpectatorShadersEvent event) {
-        event.register(GEntityTypes.SPECTRE.get(), new ResourceLocation(Galosphere.MODID, "shaders/post/fay.json"));
+        event.register(GEntityTypes.SPECTRE.get(), new ResourceLocation(Galosphere.MODID, "shaders/post/spectre.json"));
+        event.register(GEntityTypes.SPECTATOR_VISION.get(), new ResourceLocation(Galosphere.MODID, "shaders/post/spectre.json"));
     }
 
     @SubscribeEvent
@@ -146,7 +161,9 @@ public class ClientEvents {
         event.registerEntityRenderer(GEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
         event.registerEntityRenderer(GEntityTypes.SPECTRE.get(), SpectreRenderer::new);
         event.registerEntityRenderer(GEntityTypes.GLOW_FLARE.get(), GlowFlareEntityRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.SPECTRE_FLARE.get(), SpectreFlareRenderer::new);
         event.registerEntityRenderer(GEntityTypes.SPECTERPILLAR.get(), SpecterpillarRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.SPECTATOR_VISION.get(), SpectatorVisionRenderer::new);
     }
 
     @SubscribeEvent

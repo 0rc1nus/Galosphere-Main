@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/crossbow",
+  "textures": {
+    "layer0": "galosphere:item/crossbow_spectre_flare"
+  }
+}

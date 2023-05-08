@@ -41,6 +41,7 @@ import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.SpectatorVision;
 import net.orcinus.galosphere.entities.SpecterpillarEntity;
 import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.init.GBlocks;
@@ -63,6 +64,7 @@ public class MobEvents {
         event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
         event.put(GEntityTypes.SPECTRE.get(), SpectreEntity.createAttributes().build());
         event.put(GEntityTypes.SPECTERPILLAR.get(), SpecterpillarEntity.createAttributes().build());
+        event.put(GEntityTypes.SPECTATOR_VISION.get(), SpectatorVision.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -180,7 +182,7 @@ public class MobEvents {
                 goldenBreath.setGoldenAirSupply(goldenBreath.decreaseGoldenAirSupply(entity, (int) goldenBreath.getGoldenAirSupply()));
             }
         }
-        if (SpectreBoundSpyglass.canUseSpectreBoundedSpyglass(useItem, entity) && useItem.getTag() != null) {
+        if (SpectreBoundSpyglass.canUseSpectreBoundedSpyglass(useItem) && useItem.getTag() != null) {
             if (!entity.level.isClientSide) {
                 Entity spectreBound = ((ServerLevel)entity.level).getEntity(useItem.getTag().getUUID("SpectreBoundUUID"));
                 Optional.ofNullable(spectreBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(spectre -> {

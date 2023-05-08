@@ -5,19 +5,19 @@
       "item": "minecraft:glow_ink_sac"
     },
     "F": {
-      "item": "galosphere:bottle_of_spectre"
+      "item": "minecraft:stick"
     },
     "S": {
       "tag": "forge:ingots/copper"
     }
   },
   "pattern": [
-    " F ",
     " # ",
-    " S "
+    " S ",
+    " F "
   ],
   "result": {
-    "count": 3,
+    "count": 4,
     "item": "galosphere:glow_flare"
   }
 }

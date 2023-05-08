@@ -1,23 +1,23 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_copper_ingot": {
+    "has_bottle_of_spectre": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/copper"
+            "items": [
+              "galosphere:bottle_of_spectre"
+            ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_glow_ink_sac": {
+    "has_silver_ingot": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:glow_ink_sac"
-            ]
+            "tag": "forge:ingots/silver"
           }
         ]
       },
@@ -25,21 +25,21 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "galosphere:glow_flare"
+        "recipe": "galosphere:spectre_flare"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_glow_ink_sac",
-      "has_copper_ingot",
+      "has_silver_ingot",
+      "has_bottle_of_spectre",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "galosphere:glow_flare"
+      "galosphere:spectre_flare"
     ]
   }
 }
