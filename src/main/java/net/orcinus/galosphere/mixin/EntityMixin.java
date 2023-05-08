@@ -27,7 +27,7 @@ public class EntityMixin {
 
     @Unique
     private double spectrePerspectiveValue(double value) {
-        boolean flag = (Entity) (Object) this instanceof Player player && this.isFirstPerspective() && SpectreBoundSpyglass.canUseSpectreBoundSpyglass(player.getUseItem(), player);
+        boolean flag = (Entity) (Object) this instanceof Player player && this.isFirstPerspective() && SpectreBoundSpyglass.canUseSpectreBoundSpyglass(player.getUseItem());
         return flag ? value * 8 : value;
     }
 

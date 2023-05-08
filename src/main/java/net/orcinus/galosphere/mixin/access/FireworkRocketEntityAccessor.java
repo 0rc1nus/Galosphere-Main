@@ -28,4 +28,6 @@ public interface FireworkRocketEntityAccessor {
     @Accessor
     int getLife();
 
+    @Accessor
+    int getLifetime();
 }

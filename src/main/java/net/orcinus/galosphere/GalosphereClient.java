@@ -28,10 +28,14 @@ import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
+import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
 import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
+import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
+import net.orcinus.galosphere.entities.SpectatorVision;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GEvents;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GModelLayers;
@@ -73,18 +77,22 @@ public class GalosphereClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(GEntityTypes.SIVLER_BOMB, context -> new ThrownItemRenderer<>(context, 1.5F, false));
         EntityRendererRegistry.register(GEntityTypes.GLOW_FLARE, GlowFlareEntityRenderer::new);
+        EntityRendererRegistry.register(GEntityTypes.SPECTRE_FLARE, SpectreFlareRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.SPARKLE, SparkleRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.SPECTRE, SpectreRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.SPECTERPILLAR, SpecterpillarRenderer::new);
+        EntityRendererRegistry.register(GEntityTypes.SPECTATOR_VISION, SpectatorVisionRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTERPILLAR, SpecterpillarModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
 
+        GEvents.clientInit();
         GNetwork.init();
 
         ItemProperties.register(Items.CROSSBOW, Galosphere.id("glow_flare"), (stack, world, entity, i) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.GLOW_FLARE) ? 1 : 0);
+        ItemProperties.register(Items.CROSSBOW, Galosphere.id("spectre_flare"), (stack, world, entity, i) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.SPECTRE_FLARE) ? 1 : 0);
         ItemProperties.register(GItems.BAROMETER, Galosphere.id("weather_level"), new ClampedItemPropertyFunction() {
             private double rotation;
             private int ticksBeforeChange;

@@ -11,6 +11,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.GoldenBreath;
+import net.orcinus.galosphere.api.Spectatable;
+import net.orcinus.galosphere.entities.SpectatorVision;
 import net.orcinus.galosphere.mixin.access.GuiAccessor;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,6 +27,16 @@ public class GuiMixin {
     @Shadow private int screenHeight;
     @Shadow @Final private Minecraft minecraft;
     private static final ResourceLocation GALOSPHERE_ICONS = new ResourceLocation(Galosphere.MODID, "textures/gui/galosphere_icons.png");
+
+    @Inject(at = @At("HEAD"), method = "render", cancellable = true)
+    private void G$renderSpectatorVision(PoseStack poseStack, float f, CallbackInfo ci) {
+        if (this.minecraft.getCameraEntity() instanceof Spectatable spectatable && spectatable.getManipulatorUUID() != null && this.minecraft.level != null) {
+            Player player = this.minecraft.level.getPlayerByUUID(spectatable.getManipulatorUUID());
+            if (player == this.minecraft.player) {
+                ci.cancel();
+            }
+        }
+    }
 
     @Inject(at = @At("TAIL"), method = "render")
     private void G$renderPlayerHealth(PoseStack poseStack, float f, CallbackInfo ci) {

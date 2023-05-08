@@ -58,6 +58,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.api.BottlePickable;
+import net.orcinus.galosphere.api.Spectatable;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.entities.ai.SpectreAi;
 import net.orcinus.galosphere.init.GBlockTags;
@@ -74,7 +75,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 
-public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickable {
+public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickable, Spectatable {
     private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Boolean> CAN_BE_MANIPULATED = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
@@ -204,6 +205,28 @@ public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickabl
         this.entityData.set(MANIPULATOR, Optional.ofNullable(uuid));
     }
 
+    @Override
+    public void spectateTick(UUID uuid) {
+        Player player = this.level.getPlayerByUUID(uuid);
+        if (player != null) {
+            player.xxa = 0.0F;
+            player.zza = 0.0F;
+            player.setJumping(false);
+            if (!player.isScoping() || this.isDeadOrDying()) {
+                this.setManipulatorUUID(null);
+                if (this.level.isClientSide) {
+                    this.stopUsingSpyglass(player);
+                } else {
+                    ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(false);
+                    player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_END, getSoundSource(), 1, 1);
+                }
+            }
+        }
+        if (!this.level.isClientSide() && player == null) {
+            this.entityData.set(MANIPULATOR, Optional.empty());
+        }
+    }
+
     public boolean canBeManipulated() {
         return this.entityData.get(CAN_BE_MANIPULATED);
     }
@@ -287,28 +310,7 @@ public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickabl
     public void aiStep() {
         super.aiStep();
         if (!this.level.isClientSide() || this.matchesClientPlayerUUID()) {
-            this.entityData.get(MANIPULATOR).ifPresent(this::manualControl);
-        }
-    }
-
-    private void manualControl(UUID uuid) {
-        Player player = this.level.getPlayerByUUID(uuid);
-        if (player != null) {
-            player.xxa = 0.0F;
-            player.zza = 0.0F;
-            player.setJumping(false);
-            if (!player.isScoping() || this.isDeadOrDying()) {
-                this.setManipulatorUUID(null);
-                if (this.level.isClientSide) {
-                    this.stopUsingSpyglass(player);
-                } else {
-                    ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(false);
-                    player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_END, getSoundSource(), 1, 1);
-                }
-            }
-        }
-        if (!this.level.isClientSide() && player == null) {
-            this.entityData.set(MANIPULATOR, Optional.empty());
+            this.entityData.get(MANIPULATOR).ifPresent(this::spectateTick);
         }
     }
 
@@ -330,27 +332,13 @@ public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickabl
         }
     }
 
-    @Environment(EnvType.CLIENT)
-    public boolean matchesClientPlayerUUID() {
-        return Minecraft.getInstance().player != null && Minecraft.getInstance().player.getUUID().equals(this.getManipulatorUUID());
-    }
-
     @Override
     public void travel(Vec3 velocity) {
         if (this.getManipulatorUUID() != null) {
-            this.entityData.get(MANIPULATOR).map(this.level::getPlayerByUUID).ifPresent(this::copyPlayerRotation);
+            this.entityData.get(MANIPULATOR).map(this.level::getPlayerByUUID).ifPresent(uuid -> this.copyPlayerRotation(this, uuid));
         } else {
             super.travel(velocity);
         }
-    }
-
-    private void copyPlayerRotation(Player player) {
-        this.setYRot(player.getYRot());
-        this.yRotO = this.getYRot();
-        this.setXRot(player.getXRot() * 0.5F);
-        this.setRot(this.getYRot(), this.getXRot());
-        this.yBodyRot = this.getYRot();
-        this.yHeadRot = this.getYRot();
     }
 
     @Override

@@ -31,6 +31,7 @@
     "client.GuiMixin",
     "client.HorseRendererMixin",
     "client.ItemBlockRenderTypesMixin",
+    "client.ItemInHandRendererMixin",
     "client.ItemModelShaperMixin",
     "client.ItemRendererMixin",
     "client.LevelRendererMixin",

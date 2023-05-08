@@ -16,6 +16,7 @@ import net.orcinus.galosphere.items.LichenCordycepsItem;
 import net.orcinus.galosphere.items.SilverBombItem;
 import net.orcinus.galosphere.items.SpectreBottleItem;
 import net.orcinus.galosphere.items.SpectreBoundSpyglassItem;
+import net.orcinus.galosphere.items.SpectreFlareItem;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 
 import java.util.Map;
@@ -45,6 +46,7 @@ public class GItems {
     public static final Item LICHEN_CORDYCEPS = register("lichen_cordyceps", new LichenCordycepsItem(GBlocks.LICHEN_CORDYCEPS, new Item.Properties().food(GFoods.LICHEN_CORDYCEPS).tab(Galosphere.GALOSPHERE)));
     public static final Item GOLDEN_LICHEN_CORDYCEPS = register("golden_lichen_cordyceps", new GoldenLichenCordycepsItem(new Item.Properties().food(GFoods.GOLDEN_LICHEN_CORDYCEPS).tab(Galosphere.GALOSPHERE)));
     public static final Item GLOW_FLARE = register("glow_flare", new GlowFlareItem(new Item.Properties().tab(Galosphere.GALOSPHERE)));
+    public static final Item SPECTRE_FLARE = register("spectre_flare", new SpectreFlareItem(new Item.Properties().tab(Galosphere.GALOSPHERE)));
     public static final Item SPECTRE_BOUND_SPYGLASS = register("spectre_bound_spyglass", new SpectreBoundSpyglassItem(new Item.Properties().stacksTo(1)));
     public static final Item CHANDELIER = register("chandelier", new ChandelierItem(GBlocks.CHANDELIER, new Item.Properties().tab(Galosphere.GALOSPHERE)));
 

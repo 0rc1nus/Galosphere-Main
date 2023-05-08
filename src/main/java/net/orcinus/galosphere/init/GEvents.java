@@ -1,11 +1,16 @@
 package net.orcinus.galosphere.init;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
@@ -29,6 +34,8 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.BannerAttachable;
+import net.orcinus.galosphere.api.Spectatable;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.util.BannerRendererUtil;
@@ -40,6 +47,23 @@ public class GEvents {
         GEvents.registerLootTableEvents();
         GEvents.registerBlockUseEvents();
         GEvents.registerItemUseEvents();
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void clientInit() {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            LocalPlayer player = client.player;
+            if (player != null && (player instanceof SpectreBoundSpyglass spectreBoundSpyglass && spectreBoundSpyglass.isUsingSpectreBoundedSpyglass() && (client.getCameraEntity() instanceof Spectatable spectatable))) {
+                if (spectatable.cancelKeybindings()) {
+                    KeyMapping.releaseAll();
+                }
+                player.setDeltaMovement(player.getDeltaMovement().multiply(0, 1, 0));
+                player.xxa = 0.0F;
+                player.zza = 0.0F;
+                player.setJumping(false);
+                player.setSprinting(false);
+            }
+        });
     }
 
     private static void registerServerTickEvents() {

@@ -11,24 +11,31 @@ import net.minecraft.world.entity.monster.CrossbowAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.GlowFlareEntity;
+import net.orcinus.galosphere.entities.SpectreFlare;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GItems;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.function.Predicate;
+
 @Mixin(CrossbowItem.class)
 public class CrossbowItemMixin {
+    @Unique
+    private static final Predicate<ItemStack> PREDICATE = stack -> stack.is(GItems.GLOW_FLARE) || stack.is(GItems.SPECTRE_FLARE);
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/CrossbowItem;setCharged(Lnet/minecraft/world/item/ItemStack;Z)V"), method = "releaseUsing")
     private void GE$releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int i, CallbackInfo ci) {
-        ItemStack projectileStack = ProjectileWeaponItem.getHeldProjectile(livingEntity, stack -> stack.getItem() == GItems.GLOW_FLARE);
+        ItemStack projectileStack = ProjectileWeaponItem.getHeldProjectile(livingEntity, PREDICATE);
         if (!projectileStack.isEmpty() && (livingEntity instanceof Player player && !player.getAbilities().instabuild)) {
             projectileStack.shrink(1);
         }
@@ -36,9 +43,9 @@ public class CrossbowItemMixin {
 
     @Inject(at = @At("HEAD"), method = "shootProjectile", cancellable = true)
     private static void GE$shootProjectile(Level world, LivingEntity entity, InteractionHand hand, ItemStack stack, ItemStack ammo, float p_40900_, boolean p_40901_, float p_40902_, float p_40903_, float p_40904_, CallbackInfo ci) {
-        if (!world.isClientSide && ammo.is(GItems.GLOW_FLARE)) {
+        if (!world.isClientSide && PREDICATE.test(ammo)) {
             ci.cancel();
-            Projectile projectile = new GlowFlareEntity(world, ammo, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true);
+            Projectile projectile = ammo.is(GItems.SPECTRE_FLARE) ? new SpectreFlare(world, ammo, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true) : new GlowFlareEntity(world, ammo, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true);
 
             if (entity instanceof ServerPlayer serverPlayer) {
                 GCriteriaTriggers.LIGHT_SPREAD.trigger(serverPlayer);

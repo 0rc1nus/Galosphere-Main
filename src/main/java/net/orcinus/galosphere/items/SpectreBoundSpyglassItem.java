@@ -33,7 +33,7 @@ public class SpectreBoundSpyglassItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
-        if (!SpectreBoundSpyglass.canUseSpectreBoundSpyglass(player.getItemInHand(interactionHand), player)) {
+        if (!SpectreBoundSpyglass.canUseSpectreBoundSpyglass(player.getItemInHand(interactionHand))) {
             return InteractionResultHolder.fail(player.getItemInHand(interactionHand));
         } else {
             if (player instanceof ServerPlayer serverPlayer) {

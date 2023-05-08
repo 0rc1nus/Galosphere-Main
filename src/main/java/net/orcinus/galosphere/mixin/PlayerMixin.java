@@ -1,11 +1,5 @@
 package net.orcinus.galosphere.mixin;
 
-import net.orcinus.galosphere.config.GalosphereConfig;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -21,8 +15,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.orcinus.galosphere.api.BannerAttachable;
+import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.util.BannerRendererUtil;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public class PlayerMixin {
@@ -45,8 +44,13 @@ public class PlayerMixin {
     @Inject(at = @At("HEAD"), method = "getProjectile", cancellable = true)
     private void GE$getProjectile(ItemStack itemStack, CallbackInfoReturnable<ItemStack> cir) {
         LivingEntity $this = (LivingEntity) (Object) this;
-        if (!ProjectileWeaponItem.getHeldProjectile($this, stack -> stack.getItem() == GItems.GLOW_FLARE).isEmpty() && $this instanceof Player) {
-            cir.setReturnValue(new ItemStack(GItems.GLOW_FLARE));
+        if ($this instanceof Player) {
+            if (!ProjectileWeaponItem.getHeldProjectile($this, stack -> stack.is(GItems.GLOW_FLARE)).isEmpty()) {
+                cir.setReturnValue(new ItemStack(GItems.GLOW_FLARE));
+            }
+            if (!ProjectileWeaponItem.getHeldProjectile($this, stack -> stack.is(GItems.SPECTRE_FLARE)).isEmpty()) {
+                cir.setReturnValue(new ItemStack(GItems.SPECTRE_FLARE));
+            }
         }
     }
 

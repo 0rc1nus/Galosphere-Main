@@ -8,8 +8,8 @@ import net.orcinus.galosphere.init.GItems;
 
 public interface SpectreBoundSpyglass {
 
-    static boolean canUseSpectreBoundSpyglass(ItemStack stack, LivingEntity livingEntity) {
-        return stack.is(GItems.SPECTRE_BOUND_SPYGLASS) && SpectreBoundSpyglass.isSpectreBoundSpyglass(stack) && !(livingEntity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6);
+    static boolean canUseSpectreBoundSpyglass(ItemStack stack) {
+        return stack.is(GItems.SPECTRE_BOUND_SPYGLASS) && SpectreBoundSpyglass.isSpectreBoundSpyglass(stack);
     }
 
     static boolean isSpectreBoundSpyglass(ItemStack stack) {
