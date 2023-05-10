@@ -13,10 +13,10 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Spectre;
 
 @Environment(EnvType.CLIENT)
-public class SpectreModel<T extends SpectreEntity> extends EntityModel<T> {
+public class SpectreModel<T extends Spectre> extends EntityModel<T> {
     private final ModelPart head;
     private final ModelPart body;
 

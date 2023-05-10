@@ -1,16 +1,11 @@
 package net.orcinus.galosphere.blocks.blockentities;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.blocks.CordycepsBlock;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GEntityTypes;
 
@@ -51,7 +46,7 @@ public class CordycepsBlockEntity extends BlockEntity {
         }
     }
 
-    private void spawnSpectre(Level world, BlockPos pos, SpectreEntity spectre) {
+    private void spawnSpectre(Level world, BlockPos pos, Spectre spectre) {
         spectre.moveTo(pos.getX() + 0.5D, (double) pos.getY() + 0.5D, pos.getZ() + 0.5D, 0.0F, 0.0f);
         spectre.setPersistenceRequired();
         world.addFreshEntity(spectre);

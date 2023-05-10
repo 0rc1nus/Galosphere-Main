@@ -8,10 +8,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
-public class FindValidLandingPosition extends Behavior<SpectreEntity> {
+public class FindValidLandingPosition extends Behavior<Spectre> {
     private final Block block;
 
     public FindValidLandingPosition(Block block) {
@@ -20,7 +20,7 @@ public class FindValidLandingPosition extends Behavior<SpectreEntity> {
     }
 
     @Override
-    protected void start(ServerLevel serverLevel, SpectreEntity livingEntity, long l) {
+    protected void start(ServerLevel serverLevel, Spectre livingEntity, long l) {
         CollisionContext collisionContext = CollisionContext.of(livingEntity);
         BlockPos blockPos = livingEntity.blockPosition();
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();

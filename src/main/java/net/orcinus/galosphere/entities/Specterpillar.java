@@ -31,13 +31,13 @@ import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 
-public class SpecterpillarEntity extends PathfinderMob {
-    protected static final ImmutableList<SensorType<? extends Sensor<? super SpecterpillarEntity>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.SPECTRE_TEMPTATIONS, GSensorTypes.NEAREST_LICHEN_MOSS);
+public class Specterpillar extends PathfinderMob {
+    protected static final ImmutableList<SensorType<? extends Sensor<? super Specterpillar>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.SPECTRE_TEMPTATIONS, GSensorTypes.NEAREST_LICHEN_MOSS);
     protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.NEAREST_VISIBLE_ADULT, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.BREED_TARGET, MemoryModuleType.IS_PANICKING, GMemoryModuleTypes.CAN_BURY, GMemoryModuleTypes.NEAREST_LICHEN_MOSS);
     public final AnimationState burrowAnimationState = new AnimationState();
     private int age;
 
-    public SpecterpillarEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
+    public Specterpillar(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
         this.maxUpStep = 1.0F;
     }
@@ -64,13 +64,13 @@ public class SpecterpillarEntity extends PathfinderMob {
     }
 
     @Override
-    protected Brain.Provider<SpecterpillarEntity> brainProvider() {
+    protected Brain.Provider<Specterpillar> brainProvider() {
         return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
     }
 
     @Override
-    public Brain<SpecterpillarEntity> getBrain() {
-        return (Brain<SpecterpillarEntity>) super.getBrain();
+    public Brain<Specterpillar> getBrain() {
+        return (Brain<Specterpillar>) super.getBrain();
     }
 
     @Override

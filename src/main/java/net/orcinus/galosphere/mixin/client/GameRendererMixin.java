@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.entity.Entity;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.api.Spectatable;
-import net.orcinus.galosphere.entities.SpectreEntity;
 import net.orcinus.galosphere.mixin.access.GameRendererAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

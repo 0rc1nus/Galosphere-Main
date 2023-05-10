@@ -14,10 +14,10 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.orcinus.galosphere.client.animations.SpecterpillarAnimations;
-import net.orcinus.galosphere.entities.SpecterpillarEntity;
+import net.orcinus.galosphere.entities.Specterpillar;
 
 @Environment(EnvType.CLIENT)
-public class SpecterpillarModel<T extends SpecterpillarEntity> extends HierarchicalModel<T> {
+public class SpecterpillarModel<T extends Specterpillar> extends HierarchicalModel<T> {
     private final ModelPart root;
     private final ModelPart body;
 

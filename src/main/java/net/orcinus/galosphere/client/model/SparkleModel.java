@@ -14,10 +14,10 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
-import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.Sparkle;
 
 @Environment(EnvType.CLIENT)
-public class SparkleModel<T extends SparkleEntity> extends AgeableListModel<T> {
+public class SparkleModel<T extends Sparkle> extends AgeableListModel<T> {
 	private final ModelPart body;
 	private final ModelPart tail;
 	private final ModelPart leftLeg;

@@ -6,13 +6,13 @@ import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.orcinus.galosphere.entities.GlowFlareEntity;
+import net.orcinus.galosphere.entities.GlowFlare;
 
 public class GlowFlareDispenseItemBehavior extends OptionalDispenseItemBehavior {
     @Override
     public ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
         Direction direction = blockSource.getBlockState().getValue(DispenserBlock.FACING);
-        GlowFlareEntity glowFlare = new GlowFlareEntity(blockSource.getLevel(), itemStack, blockSource.x(), blockSource.y(), blockSource.x(), true);
+        GlowFlare glowFlare = new GlowFlare(blockSource.getLevel(), itemStack, blockSource.x(), blockSource.y(), blockSource.x(), true);
         DispenseItemBehavior.setEntityPokingOutOfBlock(blockSource, glowFlare, direction);
         glowFlare.shoot(direction.getStepX(), direction.getStepY(), direction.getStepZ(), 0.5f, 1.0f);
         blockSource.getLevel().addFreshEntity(glowFlare);

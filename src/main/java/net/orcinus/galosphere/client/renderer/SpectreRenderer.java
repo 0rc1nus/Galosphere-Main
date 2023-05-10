@@ -8,11 +8,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.model.SpectreModel;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GModelLayers;
 
 @Environment(EnvType.CLIENT)
-public class SpectreRenderer extends MobRenderer<SpectreEntity, SpectreModel<SpectreEntity>> {
+public class SpectreRenderer extends MobRenderer<Spectre, SpectreModel<Spectre>> {
     private static final ResourceLocation TEXTURE = Galosphere.id("textures/entity/spectre/spectre.png");
     private static final ResourceLocation LINKED_TEXTURE = Galosphere.id("textures/entity/spectre/spectre_linked.png");
 
@@ -21,12 +21,12 @@ public class SpectreRenderer extends MobRenderer<SpectreEntity, SpectreModel<Spe
     }
 
     @Override
-    protected int getBlockLightLevel(SpectreEntity entity, BlockPos blockPos) {
+    protected int getBlockLightLevel(Spectre entity, BlockPos blockPos) {
         return 15;
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SpectreEntity entity) {
+    public ResourceLocation getTextureLocation(Spectre entity) {
         return entity.getManipulatorUUID() != null ? LINKED_TEXTURE : TEXTURE;
     }
 

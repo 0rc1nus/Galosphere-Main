@@ -20,14 +20,14 @@ import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromLookTarget;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.schedule.Activity;
-import net.orcinus.galosphere.entities.SpecterpillarEntity;
+import net.orcinus.galosphere.entities.Specterpillar;
 import net.orcinus.galosphere.entities.ai.tasks.Burrow;
 import net.orcinus.galosphere.entities.ai.tasks.PathfindBurrowSpot;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
 public class SpecterpillarAi {
 
-    public static Brain<?> makeBrain(Brain<SpecterpillarEntity> brain) {
+    public static Brain<?> makeBrain(Brain<Specterpillar> brain) {
         SpecterpillarAi.initCoreActivity(brain);
         SpecterpillarAi.initIdleActivity(brain);
         SpecterpillarAi.initDigActivity(brain);
@@ -37,7 +37,7 @@ public class SpecterpillarAi {
         return brain;
     }
 
-    private static void initCoreActivity(Brain<SpecterpillarEntity> brain) {
+    private static void initCoreActivity(Brain<Specterpillar> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new AnimalPanic(0.5F),
                 new LookAtTargetSink(45, 90),
@@ -46,7 +46,7 @@ public class SpecterpillarAi {
         ));
     }
 
-    private static void initIdleActivity(Brain<SpecterpillarEntity> brain) {
+    private static void initIdleActivity(Brain<Specterpillar> brain) {
         brain.addActivityWithConditions(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0f), UniformInt.of(30, 60))),
                 Pair.of(1, new FollowTemptation(livingEntity -> 0.25F)),
@@ -58,7 +58,7 @@ public class SpecterpillarAi {
         ), ImmutableSet.of(Pair.of(GMemoryModuleTypes.CAN_BURY, MemoryStatus.VALUE_ABSENT)));
     }
 
-    private static void initDigActivity(Brain<SpecterpillarEntity> brain) {
+    private static void initDigActivity(Brain<Specterpillar> brain) {
         brain.addActivityWithConditions(Activity.DIG, ImmutableList.of(
                 Pair.of(0, new PathfindBurrowSpot()),
                 Pair.of(1, new Burrow())
@@ -66,7 +66,7 @@ public class SpecterpillarAi {
                 ImmutableSet.of(Pair.of(GMemoryModuleTypes.CAN_BURY, MemoryStatus.VALUE_PRESENT)));
     }
 
-    public static void updateActivity(SpecterpillarEntity specterpillar) {
+    public static void updateActivity(Specterpillar specterpillar) {
         specterpillar.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.DIG, Activity.IDLE));
     }
 

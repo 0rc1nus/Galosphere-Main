@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.crafting.LumiereReformingManager;
-import net.orcinus.galosphere.entities.SparkleEntity;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Sparkle;
+import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GAttributes;
 import net.orcinus.galosphere.init.GBiomeModifier;
 import net.orcinus.galosphere.init.GBiomes;
@@ -59,8 +59,8 @@ public class Galosphere implements ModInitializer {
         GMenuTypes.init();
         GVanillaIntegration.init();
 
-        SpawnPlacements.register(GEntityTypes.SPARKLE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules);
-        SpawnPlacements.register(GEntityTypes.SPECTRE, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpectreEntity::checkSpectreSpawnRules);
+        SpawnPlacements.register(GEntityTypes.SPARKLE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sparkle::checkSparkleSpawnRules);
+        SpawnPlacements.register(GEntityTypes.SPECTRE, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Spectre::checkSpectreSpawnRules);
 
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new LumiereReformingManager());
     }

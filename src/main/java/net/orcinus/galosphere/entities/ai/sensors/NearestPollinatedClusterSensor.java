@@ -8,17 +8,17 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
-import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-public class NearestPollinatedClusterSensor extends Sensor<SparkleEntity> {
+public class NearestPollinatedClusterSensor extends Sensor<Sparkle> {
 
     @Override
-    protected void doTick(ServerLevel world, SparkleEntity entity) {
+    protected void doTick(ServerLevel world, Sparkle entity) {
         List<BlockPos> poses = Lists.newArrayList();
         int range = 8;
         for (int x = -range; x <= range; x++) {

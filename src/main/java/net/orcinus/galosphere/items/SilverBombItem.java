@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.entities.SilverBombEntity;
+import net.orcinus.galosphere.entities.SilverBomb;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class SilverBombItem extends Item {
         world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         player.getCooldowns().addCooldown(this, 20);
         if (!world.isClientSide()) {
-            SilverBombEntity silverBomb = new SilverBombEntity(world, player, itemstack);
+            SilverBomb silverBomb = new SilverBomb(world, player, itemstack);
             silverBomb.setItem(itemstack);
             silverBomb.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.0F, 1.0F);
             world.addFreshEntity(silverBomb);

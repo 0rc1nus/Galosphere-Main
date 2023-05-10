@@ -75,14 +75,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 
-public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickable, Spectatable {
-    private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    private static final EntityDataAccessor<Boolean> CAN_BE_MANIPULATED = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(SpectreEntity.class, EntityDataSerializers.BOOLEAN);
-    protected static final ImmutableList<SensorType<? extends Sensor<? super SpectreEntity>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, SensorType.IS_IN_WATER, GSensorTypes.SPECTRE_TEMPTATIONS);
+public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spectatable {
+    private static final EntityDataAccessor<Optional<UUID>> MANIPULATOR = SynchedEntityData.defineId(Spectre.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Boolean> CAN_BE_MANIPULATED = SynchedEntityData.defineId(Spectre.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(Spectre.class, EntityDataSerializers.BOOLEAN);
+    protected static final ImmutableList<SensorType<? extends Sensor<? super Spectre>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, SensorType.IS_IN_WATER, GSensorTypes.SPECTRE_TEMPTATIONS);
     protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, MemoryModuleType.BREED_TARGET, MemoryModuleType.IS_PREGNANT, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.IS_PANICKING, GMemoryModuleTypes.NEAREST_LICHEN_MOSS);
 
-    public SpectreEntity(EntityType<? extends Animal> entityType, Level level) {
+    public Spectre(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
     }
@@ -277,7 +277,7 @@ public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickabl
     }
 
     @Override
-    protected Brain.Provider<SpectreEntity> brainProvider() {
+    protected Brain.Provider<Spectre> brainProvider() {
         return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
     }
 
@@ -287,8 +287,8 @@ public class SpectreEntity extends Animal implements FlyingAnimal, BottlePickabl
     }
 
     @Override
-    public Brain<SpectreEntity> getBrain() {
-        return (Brain<SpectreEntity>) super.getBrain();
+    public Brain<Spectre> getBrain() {
+        return (Brain<Spectre>) super.getBrain();
     }
 
     @Override

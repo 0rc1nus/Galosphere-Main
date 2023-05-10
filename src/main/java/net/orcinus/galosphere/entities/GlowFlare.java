@@ -20,22 +20,22 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.mixin.access.FireworkRocketEntityAccessor;
 
-public class GlowFlareEntity extends FireworkRocketEntity {
+public class GlowFlare extends FireworkRocketEntity {
 
-    public GlowFlareEntity(EntityType<? extends GlowFlareEntity> type, Level world) {
+    public GlowFlare(EntityType<? extends GlowFlare> type, Level world) {
         super(type, world);
     }
 
-    public GlowFlareEntity(Level world, ItemStack stack, Entity entity, double x, double y, double z, boolean shotAtAngle) {
+    public GlowFlare(Level world, ItemStack stack, Entity entity, double x, double y, double z, boolean shotAtAngle) {
         super(world, stack, entity, x, y, z, shotAtAngle);
     }
 
-    public GlowFlareEntity(Level level, @org.jetbrains.annotations.Nullable Entity entity, double d, double e, double f, ItemStack itemStack) {
+    public GlowFlare(Level level, @org.jetbrains.annotations.Nullable Entity entity, double d, double e, double f, ItemStack itemStack) {
         this(level, d, e, f, itemStack);
         this.setOwner(entity);
     }
 
-    public GlowFlareEntity(Level level, double d, double e, double f, ItemStack itemStack) {
+    public GlowFlare(Level level, double d, double e, double f, ItemStack itemStack) {
         super(GEntityTypes.GLOW_FLARE, level);
         ((FireworkRocketEntityAccessor)this).setLife(0);
         this.setPos(d, e, f);
@@ -46,7 +46,7 @@ public class GlowFlareEntity extends FireworkRocketEntity {
         ((FireworkRocketEntityAccessor) this).setLifeTime(200);
     }
 
-    public GlowFlareEntity(Level level, ItemStack itemStack, double d, double e, double f, boolean bl) {
+    public GlowFlare(Level level, ItemStack itemStack, double d, double e, double f, boolean bl) {
         this(level, d, e, f, itemStack);
         this.entityData.set(FireworkRocketEntityAccessor.getDATA_SHOT_AT_ANGLE(), bl);
     }

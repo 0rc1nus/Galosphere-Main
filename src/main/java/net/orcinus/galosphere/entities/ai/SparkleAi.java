@@ -29,7 +29,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.entities.ai.tasks.WalkToPollinatedCluster;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItemTags;
@@ -37,7 +37,7 @@ import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
 public class SparkleAi {
 
-    public static Brain<?> makeBrain(Brain<SparkleEntity> brain) {
+    public static Brain<?> makeBrain(Brain<Sparkle> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
         initSwimActivity(brain);
@@ -47,7 +47,7 @@ public class SparkleAi {
         return brain;
     }
 
-    private static void initCoreActivity(Brain<SparkleEntity> brain) {
+    private static void initCoreActivity(Brain<Sparkle> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new AnimalPanic(2.0F),
                 new LookAtTargetSink(45, 90),
@@ -57,7 +57,7 @@ public class SparkleAi {
         ));
     }
 
-    private static void initIdleActivity(Brain<SparkleEntity> brain) {
+    private static void initIdleActivity(Brain<Sparkle> brain) {
         brain.addActivityWithConditions(Activity.IDLE, ImmutableList.of(
                         Pair.of(0, new AnimalMakeLove(GEntityTypes.SPARKLE, 1.0F)),
                         Pair.of(1, new FollowTemptation((entity) -> 2.0F)),
@@ -75,7 +75,7 @@ public class SparkleAi {
                 ImmutableSet.of(Pair.of(MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_ABSENT)));
     }
 
-    private static void initSwimActivity(Brain<SparkleEntity> brain) {
+    private static void initSwimActivity(Brain<Sparkle> brain) {
         brain.addActivityWithConditions(Activity.SWIM, ImmutableList.of(
                         Pair.of(0, new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60))),
                         Pair.of(1, new FollowTemptation((entity) -> 2.0F)),
@@ -95,7 +95,7 @@ public class SparkleAi {
                 ImmutableSet.of(Pair.of(MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_PRESENT)));
     }
 
-    public static void updateActivity(SparkleEntity entity) {
+    public static void updateActivity(Sparkle entity) {
         entity.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.SWIM, Activity.IDLE));
     }
 
