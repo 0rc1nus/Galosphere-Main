@@ -102,16 +102,23 @@ public class GRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_silver_ingot", has(GItems.SILVER_INGOT.get()))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(GItems.GLOW_FLARE.get(), 3)
+        ShapedRecipeBuilder.shaped(GItems.GLOW_FLARE.get(), 4)
                 .define('#', Items.GLOW_INK_SAC)
                 .define('S', Tags.Items.INGOTS_COPPER)
-                .define('F', GItems.BOTTLE_OF_SPECTRE.get())
-                .pattern(" F ")
+                .define('F', Items.STICK)
                 .pattern(" # ")
                 .pattern(" S ")
-                .unlockedBy("has_bottle_of_spectre", has(GItems.BOTTLE_OF_SPECTRE.get()))
+                .pattern(" F ")
                 .unlockedBy("has_glow_ink_sac", has(Items.GLOW_INK_SAC))
                 .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER)).save(consumer);
+
+        ShapedRecipeBuilder.shaped(GItems.SPECTRE_FLARE.get())
+                .define('#', ForgeItemTags.SILVER_INGOT)
+                .define('S', GItems.BOTTLE_OF_SPECTRE.get())
+                .pattern("S")
+                .pattern("#")
+                .unlockedBy("has_silver_ingot", has(ForgeItemTags.SILVER_INGOT))
+                .unlockedBy("has_bottle_of_spectre", has(GItems.BOTTLE_OF_SPECTRE.get())).save(consumer);
 
         ShapedRecipeBuilder
                 .shaped(GItems.GOLDEN_LICHEN_CORDYCEPS.get())

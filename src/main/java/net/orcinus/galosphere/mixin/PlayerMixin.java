@@ -24,8 +24,13 @@ public class PlayerMixin {
     @Inject(at = @At("HEAD"), method = "getProjectile", cancellable = true)
     private void GE$getProjectile(ItemStack itemStack, CallbackInfoReturnable<ItemStack> cir) {
         LivingEntity $this = (LivingEntity) (Object) this;
-        if (!ProjectileWeaponItem.getHeldProjectile($this, stack -> stack.getItem() == GItems.GLOW_FLARE.get()).isEmpty() && $this instanceof Player) {
-            cir.setReturnValue(new ItemStack(GItems.GLOW_FLARE.get()));
+        if ($this instanceof Player) {
+            if (!ProjectileWeaponItem.getHeldProjectile($this, stack -> stack.is(GItems.GLOW_FLARE.get())).isEmpty()) {
+                cir.setReturnValue(new ItemStack(GItems.GLOW_FLARE.get()));
+            }
+            if (!ProjectileWeaponItem.getHeldProjectile($this, stack -> stack.is(GItems.SPECTRE_FLARE.get())).isEmpty()) {
+                cir.setReturnValue(new ItemStack(GItems.SPECTRE_FLARE.get()));
+            }
         }
     }
 
