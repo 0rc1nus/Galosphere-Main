@@ -49,12 +49,7 @@ public class SpectreFlare extends FireworkRocketEntity {
             this.entityData.set(FireworkRocketEntityAccessor.getDATA_ID_FIREWORKS_ITEM(), itemStack.copy());
         }
         this.setDeltaMovement(this.random.triangle(0.0, 0.002297), 0.05, this.random.triangle(0.0, 0.002297));
-        ((FireworkRocketEntityAccessor) this).setLifeTime(100);
-    }
-
-    public SpectreFlare(Level level, ItemStack itemStack, double d, double e, double f, boolean bl) {
-        this(level, d, e, f, itemStack);
-        this.entityData.set(FireworkRocketEntityAccessor.getDATA_SHOT_AT_ANGLE(), bl);
+        ((FireworkRocketEntityAccessor)this).setLifeTime(100);
     }
 
     @Override
@@ -74,7 +69,7 @@ public class SpectreFlare extends FireworkRocketEntity {
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) {
+    protected void onHitEntity(EntityHitResult entityHitResult) {
     }
 
     @Override

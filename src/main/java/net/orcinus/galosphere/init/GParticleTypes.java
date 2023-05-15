@@ -14,5 +14,6 @@ public class GParticleTypes {
     public static final SimpleParticleType WARPED = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("warped"), FabricParticleTypes.simple());
     public static final SimpleParticleType ALLURITE_RAIN = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("allurite_rain"), FabricParticleTypes.simple());
     public static final SimpleParticleType LUMIERE_RAIN = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("lumiere_rain"), FabricParticleTypes.simple());
+    public static final SimpleParticleType SPECTATE_ORB = Registry.register(Registry.PARTICLE_TYPE, Galosphere.id("spectate_orb"), FabricParticleTypes.simple());
 
 }

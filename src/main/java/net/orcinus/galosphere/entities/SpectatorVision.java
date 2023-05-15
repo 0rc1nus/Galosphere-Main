@@ -2,15 +2,16 @@ package net.orcinus.galosphere.entities;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
+import net.minecraft.util.Mth;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -27,6 +28,7 @@ import net.orcinus.galosphere.api.Spectatable;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GNetwork;
+import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,6 +69,9 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
     @Override
     public void tick() {
         super.tick();
+        if (this.getManipulatorUUID() == null) {
+            this.discard();
+        }
         if (!this.isRemoved()) {
             int spectatableTime = this.getSpectatableTime();
             if (spectatableTime > 0) {
@@ -77,6 +82,23 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
             }
             if (!this.level.isClientSide() || this.matchesClientPlayerUUID()) {
                 this.entityData.get(MANIPULATOR).ifPresent(this::spectateTick);
+            }
+            if (this.level.isClientSide) {
+                if (this.random.nextInt(5) == 0) {
+                    int count = UniformInt.of(6, 12).sample(this.random);
+                    BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+                    BlockPos blockPos = this.blockPosition();
+                    int range = 3;
+                    for (int i = 0; i < count; i++) {
+                        mutableBlockPos.setWithOffset(blockPos, Mth.nextInt(this.random, -range, range), Mth.nextInt(this.random, -range, range), Mth.nextInt(this.random, -range, range));
+                        if (!this.level.getBlockState(mutableBlockPos).isCollisionShapeFullBlock(this.level, mutableBlockPos)) {
+                            float velX = 0.06F * (blockPos.getX() - mutableBlockPos.getX());
+                            float velY = 0.06F * (blockPos.getY() - mutableBlockPos.getY());
+                            float velZ = 0.06F * (blockPos.getZ() - mutableBlockPos.getZ());
+                            this.level.addParticle(GParticleTypes.SPECTATE_ORB, mutableBlockPos.getX() + 0.5F, mutableBlockPos.getY(), mutableBlockPos.getZ() + 0.5F, velX, velY, velZ);
+                        }
+                    }
+                }
             }
         }
     }
@@ -175,11 +197,6 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
 
     public void setPhase(int phase) {
         this.entityData.set(PHASE, phase);
-    }
-
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this);
     }
 
     public static SpectatorVision create(Level world, Vec3 blockPos, ServerPlayer serverPlayer, int ticks) {

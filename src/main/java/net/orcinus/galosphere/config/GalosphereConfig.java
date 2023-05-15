@@ -8,5 +8,7 @@ public class GalosphereConfig {
     public static boolean slowBuddingAmethystDestroySpeed = true;
     @MidnightConfig.Entry
     public static boolean pillagerDropSilverIngot = true;
+    @MidnightConfig.Entry
+    public static boolean spectreFlareAncientCityLoot = true;
 
 }

@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.orcinus.galosphere.criterion.GCriterion;
 import net.orcinus.galosphere.entities.GlowFlare;
 import net.orcinus.galosphere.entities.SpectreFlare;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
@@ -44,10 +45,12 @@ public class CrossbowItemMixin {
     private static void GE$shootProjectile(Level world, LivingEntity entity, InteractionHand hand, ItemStack stack, ItemStack ammo, float p_40900_, boolean p_40901_, float p_40902_, float p_40903_, float p_40904_, CallbackInfo ci) {
         if (!world.isClientSide && PREDICATE.test(ammo)) {
             ci.cancel();
-            Projectile projectile = ammo.is(GItems.SPECTRE_FLARE) ? new SpectreFlare(world, ammo, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true) : new GlowFlare(world, ammo, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true);
+            boolean isSpectreFlare = ammo.is(GItems.SPECTRE_FLARE);
+            Projectile projectile = isSpectreFlare ? new SpectreFlare(world, ammo, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true) : new GlowFlare(world, ammo, entity, entity.getX(), entity.getEyeY() - (double)0.15F, entity.getZ(), true);
 
             if (entity instanceof ServerPlayer serverPlayer) {
-                GCriteriaTriggers.LIGHT_SPREAD.trigger(serverPlayer);
+                GCriterion criteria = isSpectreFlare ? GCriteriaTriggers.USE_SPECTRE_FLARE : GCriteriaTriggers.LIGHT_SPREAD;
+                criteria.trigger(serverPlayer);
             }
 
             if (entity instanceof CrossbowAttackMob crossbowattackmob) {

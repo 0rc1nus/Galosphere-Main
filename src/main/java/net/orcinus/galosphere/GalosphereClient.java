@@ -24,6 +24,7 @@ import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
 import net.orcinus.galosphere.client.particles.IndicatorParticle;
+import net.orcinus.galosphere.client.particles.SpectateOrbParticle;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
@@ -74,6 +75,7 @@ public class GalosphereClient implements ClientModInitializer {
         particleFactoryRegistry.register(GParticleTypes.WARPED, WarpedProvider::new);
         particleFactoryRegistry.register(GParticleTypes.ALLURITE_RAIN, CrystalRainParticle.Provider::new);
         particleFactoryRegistry.register(GParticleTypes.LUMIERE_RAIN, CrystalRainParticle.Provider::new);
+        particleFactoryRegistry.register(GParticleTypes.SPECTATE_ORB, SpectateOrbParticle.Provider::new);
 
         EntityRendererRegistry.register(GEntityTypes.SIVLER_BOMB, context -> new ThrownItemRenderer<>(context, 1.5F, false));
         EntityRendererRegistry.register(GEntityTypes.GLOW_FLARE, GlowFlareEntityRenderer::new);
