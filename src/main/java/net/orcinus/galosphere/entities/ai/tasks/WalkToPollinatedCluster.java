@@ -72,10 +72,10 @@ public class WalkToPollinatedCluster extends Behavior<Sparkle> {
     protected void stop(ServerLevel world, Sparkle entity, long p_22550_) {
         this.getNearestCluster(entity).filter(blockPos -> this.isPollinatedCluster(world.getBlockState(blockPos))).ifPresent(blockPos -> {
             if (!this.setCooldownOnly) {
-                Block block = entity.getCrystaltype().getGlintedState();
-                if (block == null) return;
-                world.setBlock(blockPos, block.withPropertiesOf(world.getBlockState(blockPos)), 2);
-                world.playSound(null, blockPos, block.defaultBlockState().getSoundType().getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                BlockState state = world.getBlockState(blockPos);
+                Block placeState = entity.getClustersToGlinted().get(state.getBlock());
+                world.setBlock(blockPos, placeState.withPropertiesOf(state), 2);
+                world.playSound(null, blockPos, placeState.defaultBlockState().getSoundType().getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 world.levelEvent(2005, blockPos, 0);
                 entity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_POLLINATED_CLUSTER.get());
             }

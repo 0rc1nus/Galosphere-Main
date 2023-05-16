@@ -1,7 +1,9 @@
 package net.orcinus.galosphere.entities;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import com.mojang.serialization.Dynamic;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -59,12 +61,17 @@ import net.orcinus.galosphere.init.GSensorTypes;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Map;
 
 public class Sparkle extends Animal {
     private static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(Sparkle.class, EntityDataSerializers.INT);
     protected static final ImmutableList<SensorType<? extends Sensor<? super Sparkle>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, GSensorTypes.SPARKLE_TEMPTATIONS.get(), GSensorTypes.NEAREST_POLLINATED_CLUSTER.get(), SensorType.IS_IN_WATER);
     protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, GMemoryModuleTypes.POLLINATED_COOLDOWN.get(), MemoryModuleType.IS_TEMPTED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, MemoryModuleType.IS_IN_WATER, MemoryModuleType.IS_PANICKING);
     private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
+    private final Map<Block, Block> clustersToGlinted = Util.make(Maps.newHashMap(), map -> {
+        map.put(GBlocks.ALLURITE_CLUSTER.get(), GBlocks.GLINTED_ALLURITE_CLUSTER.get());
+        map.put(GBlocks.LUMIERE_CLUSTER.get(), GBlocks.GLINTED_LUMIERE_CLUSTER.get());
+    });
     private int growthTicks;
 
     public Sparkle(EntityType<? extends Sparkle> type, Level world) {
@@ -72,6 +79,10 @@ public class Sparkle extends Animal {
         this.setPathfindingMalus(BlockPathTypes.WATER, 4.0F);
         this.setPathfindingMalus(BlockPathTypes.TRAPDOOR, -1.0F);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+    }
+
+    public Map<Block, Block> getClustersToGlinted() {
+        return this.clustersToGlinted;
     }
 
     @Override
@@ -262,27 +273,21 @@ public class Sparkle extends Animal {
     }
 
     public enum CrystalType {
-        NONE(0, "none", null, null, null),
-        ALLURITE(1, "allurite", GBlocks.GLINTED_ALLURITE_CLUSTER.get(), GItems.ALLURITE_SHARD.get(), GBlocks.ALLURITE_CLUSTER.get().asItem()),
-        LUMIERE(2, "lumiere", GBlocks.GLINTED_LUMIERE_CLUSTER.get(), GItems.LUMIERE_SHARD.get(), GBlocks.LUMIERE_CLUSTER.get().asItem());
+        NONE(0, "none", null, null),
+        ALLURITE(1, "allurite", GItems.ALLURITE_SHARD.get(), GBlocks.ALLURITE_CLUSTER.get().asItem()),
+        LUMIERE(2, "lumiere", GItems.LUMIERE_SHARD.get(), GBlocks.LUMIERE_CLUSTER.get().asItem());
 
         public static final CrystalType[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(CrystalType::getId)).toArray(CrystalType[]::new);
         private final int id;
         private final String name;
-        private final Block glintedState;
         private final Item item;
         private final Item silktouchItem;
 
-        CrystalType(int id, String name, Block glintedState, Item item, Item silktouchItem) {
+        CrystalType(int id, String name, Item item, Item silktouchItem) {
             this.id = id;
             this.name = name;
-            this.glintedState = glintedState;
             this.item = item;
             this.silktouchItem = silktouchItem;
-        }
-
-        public Block getGlintedState() {
-            return this.glintedState;
         }
 
         public int getId() {
