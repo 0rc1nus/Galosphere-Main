@@ -22,35 +22,9 @@
                       }
                     ]
                   }
-                },
-                {
-                  "block": "galosphere:lumiere_cluster",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "pollinated": "true"
-                  }
                 }
               ],
-              "name": "galosphere:glinted_lumiere_cluster"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "enchantments": [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels": {
-                          "min": 1
-                        }
-                      }
-                    ]
-                  }
-                }
-              ],
-              "name": "galosphere:lumiere_cluster"
+              "name": "galosphere:glinted_allurite_cluster"
             },
             {
               "type": "minecraft:alternatives",
@@ -77,7 +51,7 @@
                       "function": "minecraft:apply_bonus"
                     }
                   ],
-                  "name": "galosphere:lumiere_shard"
+                  "name": "galosphere:allurite_shard"
                 },
                 {
                   "type": "minecraft:item",
@@ -91,7 +65,7 @@
                       "function": "minecraft:explosion_decay"
                     }
                   ],
-                  "name": "galosphere:lumiere_shard"
+                  "name": "galosphere:allurite_shard"
                 }
               ]
             }

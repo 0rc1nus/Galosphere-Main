@@ -64,7 +64,9 @@ public class GalosphereClient implements ClientModInitializer {
                 GBlocks.POTTED_LICHEN_ROOTS,
                 GBlocks.SILVER_LATTICE,
                 GBlocks.CHANDELIER,
-                GBlocks.GLOW_BERRIES_SILVER_LATTICE
+                GBlocks.GLOW_BERRIES_SILVER_LATTICE,
+                GBlocks.GLINTED_ALLURITE_CLUSTER,
+                GBlocks.GLINTED_LUMIERE_CLUSTER
         );
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE, CombustionTableScreen::new);

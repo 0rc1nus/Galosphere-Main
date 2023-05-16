@@ -11,6 +11,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -67,7 +68,8 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                 for (Direction direction : Direction.values()) {
                     BlockPos relative = pos.relative(direction);
                     if (random.nextBoolean() && world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater) && world.getBlockState(pos).equals(config.crystal_state)) {
-                        this.setBlock(world, relative, config.cluster_state.setValue(PollinatedClusterBlock.POLLINATED, random.nextBoolean()).setValue(PollinatedClusterBlock.FACING, direction).setValue(PollinatedClusterBlock.WATERLOGGED, world.getFluidState(relative).getType() == Fluids.WATER));
+                        BlockState blockState = random.nextBoolean() ? config.cluster_state : config.glinted_cluster;
+                        this.setBlock(world, relative, blockState.setValue(PollinatedClusterBlock.FACING, direction).setValue(PollinatedClusterBlock.WATERLOGGED, world.getFluidState(relative).getType() == Fluids.WATER));
                     }
                 }
             }
