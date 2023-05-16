@@ -2,6 +2,11 @@ package net.orcinus.galosphere.datagen;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.data.models.blockstates.Variant;
+import net.minecraft.data.models.blockstates.VariantProperties;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
@@ -85,6 +90,8 @@ public class GBlockstateProvider extends BlockStateProvider {
 
         this.pollinatedCluster(GBlocks.ALLURITE_CLUSTER.get());
         this.pollinatedCluster(GBlocks.LUMIERE_CLUSTER.get());
+        this.pollinatedCluster(GBlocks.GLINTED_ALLURITE_CLUSTER.get());
+        this.pollinatedCluster(GBlocks.GLINTED_LUMIERE_CLUSTER.get());
 
         this.simpleBlock(GBlocks.SILVER_TILES.get());
         this.slabBlock(GBlocks.SILVER_TILES_SLAB.get(), "silver_tiles");
@@ -114,8 +121,12 @@ public class GBlockstateProvider extends BlockStateProvider {
             } else if (facing == Direction.SOUTH) {
                 rotationY *= 2;
             }
+            String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+            if (path.contains("glinted_")) {
+                path = path.replace("glinted_", "");
+            }
             return ConfiguredModel.builder()
-                    .modelFile(models().cross(ForgeRegistries.BLOCKS.getKey(block).getPath(), new ResourceLocation(Galosphere.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(block).getPath())).renderType("cutout"))
+                    .modelFile(models().cross(path, new ResourceLocation(Galosphere.MODID, "block/" + path)).renderType("cutout"))
                     .rotationX(rotationX)
                     .rotationY(rotationY)
                     .build();

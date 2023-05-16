@@ -13,6 +13,8 @@ public class CrystalSpikeConfig implements FeatureConfiguration {
             return config.crystal_state;
         }), BlockState.CODEC.fieldOf("cluster_state").forGetter(config -> {
             return config.cluster_state;
+        }), BlockState.CODEC.fieldOf("glinted_cluster").forGetter(config -> {
+            return config.glinted_cluster;
         }), IntProvider.CODEC.fieldOf("xz_radius").forGetter(config -> {
             return config.xzRadius;
         }), CaveSurface.CODEC.fieldOf("crystal_direction").forGetter(config -> {
@@ -22,12 +24,14 @@ public class CrystalSpikeConfig implements FeatureConfiguration {
 
     public final BlockState crystal_state;
     public final BlockState cluster_state;
+    public final BlockState glinted_cluster;
     public final IntProvider xzRadius;
     public final CaveSurface crystal_direction;
 
-    public CrystalSpikeConfig(BlockState crystal_state, BlockState cluster_state, IntProvider xzRadius, CaveSurface crystal_direction) {
+    public CrystalSpikeConfig(BlockState crystal_state, BlockState cluster_state, BlockState glinted_cluster, IntProvider xzRadius, CaveSurface crystal_direction) {
         this.cluster_state = cluster_state;
         this.crystal_state = crystal_state;
+        this.glinted_cluster = glinted_cluster;
         this.xzRadius = xzRadius;
         this.crystal_direction = crystal_direction;
     }

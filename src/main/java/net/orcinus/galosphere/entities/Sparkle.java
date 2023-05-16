@@ -42,6 +42,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
@@ -260,21 +262,27 @@ public class Sparkle extends Animal {
     }
 
     public enum CrystalType {
-        NONE(0, "none", null, null),
-        ALLURITE(1, "allurite", GItems.ALLURITE_SHARD.get(), GBlocks.ALLURITE_CLUSTER.get().asItem()),
-        LUMIERE(2, "lumiere", GItems.LUMIERE_SHARD.get(), GBlocks.LUMIERE_CLUSTER.get().asItem());
+        NONE(0, "none", null, null, null),
+        ALLURITE(1, "allurite", GBlocks.GLINTED_ALLURITE_CLUSTER.get(), GItems.ALLURITE_SHARD.get(), GBlocks.ALLURITE_CLUSTER.get().asItem()),
+        LUMIERE(2, "lumiere", GBlocks.GLINTED_LUMIERE_CLUSTER.get(), GItems.LUMIERE_SHARD.get(), GBlocks.LUMIERE_CLUSTER.get().asItem());
 
         public static final CrystalType[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(CrystalType::getId)).toArray(CrystalType[]::new);
         private final int id;
         private final String name;
+        private final Block glintedState;
         private final Item item;
         private final Item silktouchItem;
 
-        CrystalType(int id, String name, Item item, Item silktouchItem) {
+        CrystalType(int id, String name, Block glintedState, Item item, Item silktouchItem) {
             this.id = id;
             this.name = name;
+            this.glintedState = glintedState;
             this.item = item;
             this.silktouchItem = silktouchItem;
+        }
+
+        public Block getGlintedState() {
+            return this.glintedState;
         }
 
         public int getId() {

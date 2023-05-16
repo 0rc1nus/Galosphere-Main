@@ -22,6 +22,32 @@
                       }
                     ]
                   }
+                },
+                {
+                  "block": "galosphere:allurite_cluster",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "pollinated": "true"
+                  }
+                }
+              ],
+              "name": "galosphere:glinted_allurite_cluster"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
                 }
               ],
               "name": "galosphere:allurite_cluster"
