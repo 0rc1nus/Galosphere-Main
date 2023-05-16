@@ -7,11 +7,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.model.SpecterpillarModel;
-import net.orcinus.galosphere.entities.SpecterpillarEntity;
+import net.orcinus.galosphere.entities.Specterpillar;
 import net.orcinus.galosphere.init.GModelLayers;
 
 @OnlyIn(Dist.CLIENT)
-public class SpecterpillarRenderer extends MobRenderer<SpecterpillarEntity, SpecterpillarModel<SpecterpillarEntity>> {
+public class SpecterpillarRenderer extends MobRenderer<Specterpillar, SpecterpillarModel<Specterpillar>> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/specterpillar/specterpillar.png");
 
     public SpecterpillarRenderer(EntityRendererProvider.Context context) {
@@ -19,7 +19,7 @@ public class SpecterpillarRenderer extends MobRenderer<SpecterpillarEntity, Spec
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SpecterpillarEntity entity) {
+    public ResourceLocation getTextureLocation(Specterpillar entity) {
         return TEXTURE;
     }
 }

@@ -22,7 +22,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.entities.ai.tasks.FindValidLandingPosition;
 import net.orcinus.galosphere.entities.ai.tasks.LaySpecterpillar;
 import net.orcinus.galosphere.init.GBlocks;
@@ -31,7 +31,7 @@ import net.orcinus.galosphere.init.GItemTags;
 
 public class SpectreAi {
 
-    public static Brain<?> makeBrain(Brain<SpectreEntity> brain) {
+    public static Brain<?> makeBrain(Brain<Spectre> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
         initLaySpawnActivity(brain);
@@ -41,7 +41,7 @@ public class SpectreAi {
         return brain;
     }
 
-    private static void initCoreActivity(Brain<SpectreEntity> brain) {
+    private static void initCoreActivity(Brain<Spectre> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(0.8F),
                 new MoveToTargetSink(),
@@ -49,7 +49,7 @@ public class SpectreAi {
         ));
     }
 
-    private static void initIdleActivity(Brain<SpectreEntity> brain) {
+    private static void initIdleActivity(Brain<Spectre> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, new AnimalMakeLove(GEntityTypes.SPECTRE.get(), 1.0F)),
                 Pair.of(1, new FollowTemptation(livingEntity -> 1.25F)),
@@ -63,7 +63,7 @@ public class SpectreAi {
         );
     }
 
-    private static void initLaySpawnActivity(Brain<SpectreEntity> brain) {
+    private static void initLaySpawnActivity(Brain<Spectre> brain) {
         brain.addActivityWithConditions(Activity.LAY_SPAWN, ImmutableList.of(
                         Pair.of(0, new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60))),
                         Pair.of(1, new FindValidLandingPosition(GBlocks.LICHEN_MOSS.get())),
@@ -79,7 +79,7 @@ public class SpectreAi {
                 ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
     }
 
-    public static void updateActivity(SpectreEntity entity) {
+    public static void updateActivity(Spectre entity) {
         entity.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.LAY_SPAWN, Activity.IDLE));
     }
 

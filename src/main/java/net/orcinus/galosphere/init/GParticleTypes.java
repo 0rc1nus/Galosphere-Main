@@ -20,6 +20,7 @@ public class GParticleTypes {
     public static final RegistryObject<SimpleParticleType> WARPED = registerParticle("warped", false);
     public static final RegistryObject<SimpleParticleType> ALLURITE_RAIN = registerParticle("allurite_rain", false);
     public static final RegistryObject<SimpleParticleType> LUMIERE_RAIN = registerParticle("lumiere_rain", false);
+    public static final RegistryObject<SimpleParticleType> SPECTATE_ORB = registerParticle("spectate_orb", false);
 
     public static RegistryObject<SimpleParticleType> registerParticle(String key, boolean alwaysShow) {
         return PARTICLES.register(key, () -> new SimpleParticleType(alwaysShow));

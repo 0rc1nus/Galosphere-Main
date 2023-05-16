@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
-import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.Sparkle;
 
 public class PickaxeDispenseItemBehavior extends OptionalDispenseItemBehavior {
 
@@ -29,9 +29,9 @@ public class PickaxeDispenseItemBehavior extends OptionalDispenseItemBehavior {
     }
 
     private static boolean extractItemFromEntity(ServerLevel world, BlockPos blockPos, ItemStack stack) {
-        for (SparkleEntity livingentity : world.getEntitiesOfClass(SparkleEntity.class, new AABB(blockPos), EntitySelector.NO_SPECTATORS)) {
+        for (Sparkle livingentity : world.getEntitiesOfClass(Sparkle.class, new AABB(blockPos), EntitySelector.NO_SPECTATORS)) {
             if (livingentity != null) {
-                if (livingentity.getCrystaltype() != SparkleEntity.CrystalType.NONE) {
+                if (livingentity.getCrystaltype() != Sparkle.CrystalType.NONE) {
                     livingentity.extractShard(stack);
                     world.gameEvent(null, GameEvent.SHEAR, blockPos);
                     return true;

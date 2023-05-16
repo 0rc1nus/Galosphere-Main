@@ -11,12 +11,14 @@ public class GalosphereConfig {
     public static ForgeConfigSpec COMMON;
     public static ForgeConfigSpec.BooleanValue SLOWED_BUDDING_AMETHYST_MINING_SPEED;
     public static ForgeConfigSpec.BooleanValue PILLAGER_DROP_SILVER_INGOT;
+    public static ForgeConfigSpec.BooleanValue SPECTRE_FLARE_ANCIENT_CITY_LOOT;
 
     static {
         BUILDER = new ForgeConfigSpec.Builder();
 
         SLOWED_BUDDING_AMETHYST_MINING_SPEED = BUILDER.comment("Slows the mining speed of budding amethyst").define("slowedBuddingAmethystMiningSpeed", true);
         PILLAGER_DROP_SILVER_INGOT = BUILDER.comment("Adds silver ingot to pillager drops").define("pillagerDropSilverIngot", true);
+        SPECTRE_FLARE_ANCIENT_CITY_LOOT = BUILDER.comment("Adds spectre flares to ancient city loot").define("spectreFlareAncientCityLoot", true);
 
         COMMON = BUILDER.build();
     }

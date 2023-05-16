@@ -50,11 +50,6 @@ public class SpectreFlare extends FireworkRocketEntity {
         this.lifetime = 100;
     }
 
-    public SpectreFlare(Level level, ItemStack itemStack, double d, double e, double f, boolean bl) {
-        this(level, d, e, f, itemStack);
-        this.entityData.set(DATA_SHOT_AT_ANGLE, bl);
-    }
-
     @Override
     public void tick() {
         super.tick();
@@ -72,7 +67,7 @@ public class SpectreFlare extends FireworkRocketEntity {
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) {
+    protected void onHitEntity(EntityHitResult entityHitResult) {
     }
 
     @Override

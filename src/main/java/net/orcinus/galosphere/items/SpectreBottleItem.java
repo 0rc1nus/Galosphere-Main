@@ -1,9 +1,7 @@
 package net.orcinus.galosphere.items;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -18,7 +16,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.orcinus.galosphere.api.BottlePickable;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 
@@ -54,7 +52,7 @@ public class SpectreBottleItem extends Item {
                     }
                 });
             } else {
-                SpectreEntity spectre = GEntityTypes.SPECTRE.get().create(world);
+                Spectre spectre = GEntityTypes.SPECTRE.get().create(world);
                 spectre.setPos(blockPos.getX() + 0.5D, blockPos.getY(), blockPos.getZ() + 0.5D);
                 spectre.setFromBottle(true);
                 Entity entity = spectre.getType().spawn(serverWorld, stack, null, blockPos, MobSpawnType.SPAWN_EGG, true, false);

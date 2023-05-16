@@ -43,6 +43,7 @@ import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.AuraParticle;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
 import net.orcinus.galosphere.client.particles.IndicatorParticle;
+import net.orcinus.galosphere.client.particles.SpectateOrbParticle;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
@@ -174,6 +175,7 @@ public class ClientEvents {
         event.register(GParticleTypes.ALLURITE_RAIN.get(), CrystalRainParticle.Provider::new);
         event.register(GParticleTypes.LUMIERE_RAIN.get(), CrystalRainParticle.Provider::new);
         event.register(GParticleTypes.AURA_RINGER_INDICATOR.get(), IndicatorParticle.Provider::new);
+        event.register(GParticleTypes.SPECTATE_ORB.get(), SpectateOrbParticle.Provider::new);
     }
 
 }

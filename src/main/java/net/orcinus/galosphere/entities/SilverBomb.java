@@ -37,19 +37,19 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.util.CompatUtil;
 
-public class SilverBombEntity extends ThrowableItemProjectile {
-    private static final EntityDataAccessor<Integer> TIME = SynchedEntityData.defineId(SilverBombEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> LAST_DURATION = SynchedEntityData.defineId(SilverBombEntity.class, EntityDataSerializers.INT);
+public class SilverBomb extends ThrowableItemProjectile {
+    private static final EntityDataAccessor<Integer> TIME = SynchedEntityData.defineId(SilverBomb.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> LAST_DURATION = SynchedEntityData.defineId(SilverBomb.class, EntityDataSerializers.INT);
     private boolean shrapnel;
     private int duration;
     private int explosion;
     private int bouncy;
 
-    public SilverBombEntity(EntityType<? extends SilverBombEntity> entity, Level world) {
+    public SilverBomb(EntityType<? extends SilverBomb> entity, Level world) {
         super(entity, world);
     }
 
-    public SilverBombEntity(Level world, LivingEntity entity, ItemStack stack) {
+    public SilverBomb(Level world, LivingEntity entity, ItemStack stack) {
         super(GEntityTypes.SIVLER_BOMB.get(), entity, world);
         if (!stack.isEmpty() && stack.hasTag()) {
             CompoundTag tag = stack.getTag();

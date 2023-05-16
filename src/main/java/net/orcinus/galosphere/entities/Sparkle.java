@@ -58,14 +58,14 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class SparkleEntity extends Animal {
-    private static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(SparkleEntity.class, EntityDataSerializers.INT);
-    protected static final ImmutableList<SensorType<? extends Sensor<? super SparkleEntity>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, GSensorTypes.SPARKLE_TEMPTATIONS.get(), GSensorTypes.NEAREST_POLLINATED_CLUSTER.get(), SensorType.IS_IN_WATER);
+public class Sparkle extends Animal {
+    private static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(Sparkle.class, EntityDataSerializers.INT);
+    protected static final ImmutableList<SensorType<? extends Sensor<? super Sparkle>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, GSensorTypes.SPARKLE_TEMPTATIONS.get(), GSensorTypes.NEAREST_POLLINATED_CLUSTER.get(), SensorType.IS_IN_WATER);
     protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, GMemoryModuleTypes.POLLINATED_COOLDOWN.get(), MemoryModuleType.IS_TEMPTED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, MemoryModuleType.IS_IN_WATER, MemoryModuleType.IS_PANICKING);
     private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
     private int growthTicks;
 
-    public SparkleEntity(EntityType<? extends SparkleEntity> type, Level world) {
+    public Sparkle(EntityType<? extends Sparkle> type, Level world) {
         super(type, world);
         this.setPathfindingMalus(BlockPathTypes.WATER, 4.0F);
         this.setPathfindingMalus(BlockPathTypes.TRAPDOOR, -1.0F);
@@ -78,7 +78,7 @@ public class SparkleEntity extends Animal {
     }
 
     @Override
-    protected Brain.Provider<SparkleEntity> brainProvider() {
+    protected Brain.Provider<Sparkle> brainProvider() {
         return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
     }
 
@@ -88,8 +88,8 @@ public class SparkleEntity extends Animal {
     }
 
     @Override
-    public Brain<SparkleEntity> getBrain() {
-        return (Brain<SparkleEntity>) super.getBrain();
+    public Brain<Sparkle> getBrain() {
+        return (Brain<Sparkle>) super.getBrain();
     }
 
     @Override
@@ -198,7 +198,7 @@ public class SparkleEntity extends Animal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mob) {
-        SparkleEntity sparkleEntity = GEntityTypes.SPARKLE.get().create(world);
+        Sparkle sparkleEntity = GEntityTypes.SPARKLE.get().create(world);
         if (sparkleEntity != null) {
             sparkleEntity.setCrystalType(CrystalType.NONE);
         }

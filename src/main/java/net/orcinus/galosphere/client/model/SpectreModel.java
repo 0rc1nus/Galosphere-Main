@@ -13,10 +13,10 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Spectre;
 
 @OnlyIn(Dist.CLIENT)
-public class SpectreModel<T extends SpectreEntity> extends EntityModel<T> {
+public class SpectreModel<T extends Spectre> extends EntityModel<T> {
     private final ModelPart head;
     private final ModelPart body;
 

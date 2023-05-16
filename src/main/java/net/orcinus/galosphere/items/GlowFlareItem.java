@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.entities.GlowFlareEntity;
+import net.orcinus.galosphere.entities.GlowFlare;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
 
 public class GlowFlareItem extends Item {
@@ -27,7 +27,7 @@ public class GlowFlareItem extends Item {
             ItemStack itemStack = useOnContext.getItemInHand();
             Vec3 vec3 = useOnContext.getClickLocation();
             Direction direction = useOnContext.getClickedFace();
-            GlowFlareEntity glowFlare = new GlowFlareEntity(level, useOnContext.getPlayer(), vec3.x + (double)direction.getStepX() * 0.15, vec3.y + (double)direction.getStepY() * 0.15, vec3.z + (double)direction.getStepZ() * 0.15, itemStack);
+            GlowFlare glowFlare = new GlowFlare(level, useOnContext.getPlayer(), vec3.x + (double)direction.getStepX() * 0.15, vec3.y + (double)direction.getStepY() * 0.15, vec3.z + (double)direction.getStepZ() * 0.15, itemStack);
             level.addFreshEntity(glowFlare);
             itemStack.shrink(1);
         }
