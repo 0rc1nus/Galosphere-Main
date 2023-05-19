@@ -86,7 +86,7 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
             }
             if (this.level.isClientSide) {
                 if (this.random.nextInt(5) == 0) {
-                    int count = UniformInt.of(6, 12).sample(this.random);
+                    int count = UniformInt.of(3, 6).sample(this.random);
                     BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
                     BlockPos blockPos = this.blockPosition();
                     int range = 3;

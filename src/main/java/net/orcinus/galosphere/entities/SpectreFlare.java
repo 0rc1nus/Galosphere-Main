@@ -18,6 +18,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 import net.orcinus.galosphere.api.Spectatable;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetworkHandler;
@@ -85,10 +86,11 @@ public class SpectreFlare extends FireworkRocketEntity {
 
     private void spawnSpectatorVision(Vec3 vec3) {
         if (this.getOwner() instanceof ServerPlayer serverPlayer) {
-            if (!this.isCameraEntitySpectatorVision()) {
+            if (!((SpectreBoundSpyglass)serverPlayer).isUsingSpectreBoundedSpyglass()) {
                 SpectatorVision spectatorVision = SpectatorVision.create(this.level, vec3, serverPlayer, 120);
                 serverPlayer.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_BEGIN.get(), getSoundSource(), 1, 1);
                 this.level.addFreshEntity(spectatorVision);
+                ((SpectreBoundSpyglass)serverPlayer).setUsingSpectreBoundedSpyglass(true);
                 GNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new SendPerspectivePacket(serverPlayer.getUUID(), spectatorVision.getId()));
             }
         }
