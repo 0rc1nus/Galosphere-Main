@@ -9,33 +9,32 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.entities.SpecterpillarEntity;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Specterpillar;
+import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
-import java.util.Comparator;
 import java.util.Optional;
 
-public class LaySpecterpillar extends Behavior<SpectreEntity> {
+public class LaySpecterpillar extends Behavior<Spectre> {
 
     public LaySpecterpillar() {
         super(ImmutableMap.of(GMemoryModuleTypes.NEAREST_LICHEN_MOSS.get(), MemoryStatus.VALUE_PRESENT, MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT));
     }
 
     @Override
-    protected boolean checkExtraStartConditions(ServerLevel serverLevel, SpectreEntity livingEntity) {
+    protected boolean checkExtraStartConditions(ServerLevel serverLevel, Spectre livingEntity) {
         return !livingEntity.getBlockStateOn().is(GBlocks.LICHEN_MOSS.get());
     }
 
     @Override
-    protected boolean canStillUse(ServerLevel serverLevel, SpectreEntity livingEntity, long l) {
+    protected boolean canStillUse(ServerLevel serverLevel, Spectre livingEntity, long l) {
         return this.checkExtraStartConditions(serverLevel, livingEntity);
     }
 
     @Override
-    protected void start(ServerLevel serverLevel, SpectreEntity livingEntity, long l) {
+    protected void start(ServerLevel serverLevel, Spectre livingEntity, long l) {
         this.getNearstLichenMoss(livingEntity).filter(blockPos -> serverLevel.getBlockState(blockPos.below()).is(GBlocks.LICHEN_MOSS.get())).ifPresent(blockPos -> {
             BehaviorUtils.setWalkAndLookTargetMemories(livingEntity, blockPos, 1.0F, 0);
             boolean flag = blockPos.distManhattan(livingEntity.blockPosition()) <= 0;
@@ -46,11 +45,11 @@ public class LaySpecterpillar extends Behavior<SpectreEntity> {
     }
 
     @Override
-    protected void stop(ServerLevel serverLevel, SpectreEntity livingEntity, long l) {
+    protected void stop(ServerLevel serverLevel, Spectre livingEntity, long l) {
         if (!livingEntity.getBlockStateOn().is(GBlocks.LICHEN_MOSS.get())) {
             livingEntity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_LICHEN_MOSS.get());
         } else {
-            SpecterpillarEntity specterpillar = GEntityTypes.SPECTERPILLAR.get().create(serverLevel);
+            Specterpillar specterpillar = GEntityTypes.SPECTERPILLAR.get().create(serverLevel);
             Vec3 pos = livingEntity.position();
             specterpillar.moveTo(pos.x(), pos.y() + 0.2D, pos.z(), 0.0F, 0.0f);
             specterpillar.setPersistenceRequired();
@@ -61,7 +60,7 @@ public class LaySpecterpillar extends Behavior<SpectreEntity> {
         }
     }
 
-    private Optional<BlockPos> getNearstLichenMoss(SpectreEntity livingEntity) {
+    private Optional<BlockPos> getNearstLichenMoss(Spectre livingEntity) {
         return livingEntity.getBrain().getMemory(GMemoryModuleTypes.NEAREST_LICHEN_MOSS.get());
     }
 

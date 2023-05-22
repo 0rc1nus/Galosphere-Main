@@ -1,4 +1,4 @@
-// 1.19.2	2023-04-24T12:55:08.5998178	Tags for minecraft:block
+// 1.19.2	2023-05-16T16:45:26.0705438	Tags for minecraft:block
 021e86d55679a27d4519fa177cd4425c51105d50 data/forge/tags/blocks/ores.json
 d22848f4f97f051b3ec5eefda7df36a01718e88a data/forge/tags/blocks/ores/silver.json
 97eb1b03810e22a976b10e158ad5eda01f2f6b3e data/forge/tags/blocks/storage_blocks.json
@@ -13,7 +13,7 @@ ae98940009770130b05859b32836d9dde0fdbb2a data/minecraft/tags/blocks/crystal_soun
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/minecraft/tags/blocks/dirt.json
 d85351e5edf223b9d47bf6085fd3f9b27520013d data/minecraft/tags/blocks/mineable/axe.json
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/minecraft/tags/blocks/mineable/hoe.json
-c132cc2e1ed917a5381a96537a75b980679c7008 data/minecraft/tags/blocks/mineable/pickaxe.json
+85659621a4b288cd908e4ea1ae8c4fd0cdec20f1 data/minecraft/tags/blocks/mineable/pickaxe.json
 8223b9cdd22e99a91f7b5784ba66aa4f9a371904 data/minecraft/tags/blocks/needs_stone_tool.json
 e0bc03738a7ab1931892bbe48205c993be0cad02 data/minecraft/tags/blocks/slabs.json
 2b8845331db2caeea2993c2aa9b35c551994290e data/minecraft/tags/blocks/stairs.json

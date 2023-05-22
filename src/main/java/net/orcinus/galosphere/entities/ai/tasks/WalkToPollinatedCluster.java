@@ -8,15 +8,16 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
-import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
 import java.util.Optional;
 
-public class WalkToPollinatedCluster extends Behavior<SparkleEntity> {
+public class WalkToPollinatedCluster extends Behavior<Sparkle> {
     private int sniffingTicks;
     private int stuckTicks;
     private boolean setCooldownOnly;
@@ -27,12 +28,12 @@ public class WalkToPollinatedCluster extends Behavior<SparkleEntity> {
     }
 
     @Override
-    protected boolean checkExtraStartConditions(ServerLevel world, SparkleEntity entity) {
+    protected boolean checkExtraStartConditions(ServerLevel world, Sparkle entity) {
         return !entity.isBaby() && this.getNearestCluster(entity).isPresent() && !entity.getBrain().hasMemoryValue(MemoryModuleType.BREED_TARGET) && !entity.getBrain().hasMemoryValue(MemoryModuleType.IS_PANICKING);
     }
 
     @Override
-    protected boolean canStillUse(ServerLevel world, SparkleEntity entity, long p_22547_) {
+    protected boolean canStillUse(ServerLevel world, Sparkle entity, long p_22547_) {
         if (this.stuckTicks > 60) {
             this.setCooldownOnly = true;
             return false;
@@ -46,12 +47,12 @@ public class WalkToPollinatedCluster extends Behavior<SparkleEntity> {
     }
 
     @Override
-    protected void start(ServerLevel world, SparkleEntity entity, long p_22542_) {
+    protected void start(ServerLevel world, Sparkle entity, long p_22542_) {
         this.sniffingTicks = 100;
     }
 
     @Override
-    protected void tick(ServerLevel p_22551_, SparkleEntity entity, long p_22553_) {
+    protected void tick(ServerLevel p_22551_, Sparkle entity, long p_22553_) {
         this.getNearestCluster(entity).ifPresent(blockPos -> {
             boolean flag = entity.blockPosition().distManhattan(blockPos) <= (entity.isInWaterOrBubble() ? 2.0F : 1.0F);
             Path path = entity.getNavigation().createPath(blockPos, 0);
@@ -68,12 +69,14 @@ public class WalkToPollinatedCluster extends Behavior<SparkleEntity> {
     }
 
     @Override
-    protected void stop(ServerLevel world, SparkleEntity entity, long p_22550_) {
+    protected void stop(ServerLevel world, Sparkle entity, long p_22550_) {
         this.getNearestCluster(entity).filter(blockPos -> this.isPollinatedCluster(world.getBlockState(blockPos))).ifPresent(blockPos -> {
             if (!this.setCooldownOnly) {
                 BlockState state = world.getBlockState(blockPos);
-                world.setBlock(blockPos, state.setValue(PollinatedClusterBlock.POLLINATED, true), 2);
-                world.playSound(null, blockPos, state.getBlock().getSoundType(state).getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                Block placeState = entity.getClustersToGlinted().get(state.getBlock());
+                world.setBlock(blockPos, placeState.withPropertiesOf(state), 2);
+                world.playSound(null, blockPos, placeState.defaultBlockState().getSoundType().getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                world.levelEvent(2005, blockPos, 0);
                 entity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_POLLINATED_CLUSTER.get());
             }
             entity.getBrain().setMemory(GMemoryModuleTypes.POLLINATED_COOLDOWN.get(), 100);
@@ -85,7 +88,7 @@ public class WalkToPollinatedCluster extends Behavior<SparkleEntity> {
         return false;
     }
 
-    private Optional<BlockPos> getNearestCluster(SparkleEntity entity) {
+    private Optional<BlockPos> getNearestCluster(Sparkle entity) {
         return entity.getBrain().getMemory(GMemoryModuleTypes.NEAREST_POLLINATED_CLUSTER.get());
     }
 }

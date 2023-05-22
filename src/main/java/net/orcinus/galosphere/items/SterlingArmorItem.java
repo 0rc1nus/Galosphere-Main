@@ -58,7 +58,7 @@ public class SterlingArmorItem extends ArmorItem {
         UUID defaultUUid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getIndex()];
         builder.put(Attributes.ARMOR, new AttributeModifier(defaultUUid, "Armor modifier", this.getMaterial().getDefenseForSlot(slot), AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(defaultUUid, "Armor toughness", this.getMaterial().getToughness(), AttributeModifier.Operation.ADDITION));
-        builder.put(GAttributes.INSURGENT_RESISTANCE.get(), new AttributeModifier(uuid, "Armor insurgent resistance", this.getInsurgentResistance(slot), AttributeModifier.Operation.ADDITION));
+        builder.put(GAttributes.ILLAGER_RESISTANCE.get(), new AttributeModifier(uuid, "Armor illager resistance", this.getInsurgentResistance(slot), AttributeModifier.Operation.ADDITION));
         return slot == this.slot ? builder.build() : super.getDefaultAttributeModifiers(slot);
     }
 

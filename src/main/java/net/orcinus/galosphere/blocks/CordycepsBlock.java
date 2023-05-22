@@ -89,7 +89,7 @@ public class CordycepsBlock extends GrowingPlantHeadBlock implements EntityBlock
 
     @Override
     public SoundType getSoundType(BlockState state) {
-        return state.getValue(BULB) ? GSoundEvents.LICHEN_CORDYCEPS_BULB : soundType;
+        return this.soundType;
     }
 
     @Override

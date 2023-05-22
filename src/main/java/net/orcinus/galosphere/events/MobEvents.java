@@ -40,10 +40,10 @@ import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.config.GalosphereConfig;
-import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.entities.SpectatorVision;
-import net.orcinus.galosphere.entities.SpecterpillarEntity;
-import net.orcinus.galosphere.entities.SpectreEntity;
+import net.orcinus.galosphere.entities.Specterpillar;
+import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypeTags;
@@ -61,15 +61,15 @@ public class MobEvents {
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
-        event.put(GEntityTypes.SPARKLE.get(), SparkleEntity.createAttributes().build());
-        event.put(GEntityTypes.SPECTRE.get(), SpectreEntity.createAttributes().build());
-        event.put(GEntityTypes.SPECTERPILLAR.get(), SpecterpillarEntity.createAttributes().build());
+        event.put(GEntityTypes.SPARKLE.get(), Sparkle.createAttributes().build());
+        event.put(GEntityTypes.SPECTRE.get(), Spectre.createAttributes().build());
+        event.put(GEntityTypes.SPECTERPILLAR.get(), Specterpillar.createAttributes().build());
         event.put(GEntityTypes.SPECTATOR_VISION.get(), SpectatorVision.createAttributes().build());
     }
 
     @SubscribeEvent
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
-        event.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SparkleEntity::checkSparkleSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sparkle::checkSparkleSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(GEntityTypes.SPECTRE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
     }
 
@@ -185,7 +185,7 @@ public class MobEvents {
         if (SpectreBoundSpyglass.canUseSpectreBoundedSpyglass(useItem) && useItem.getTag() != null) {
             if (!entity.level.isClientSide) {
                 Entity spectreBound = ((ServerLevel)entity.level).getEntity(useItem.getTag().getUUID("SpectreBoundUUID"));
-                Optional.ofNullable(spectreBound).filter(SpectreEntity.class::isInstance).map(SpectreEntity.class::cast).filter(SpectreEntity::isAlive).ifPresent(spectre -> {
+                Optional.ofNullable(spectreBound).filter(Spectre.class::isInstance).map(Spectre.class::cast).filter(Spectre::isAlive).ifPresent(spectre -> {
                     if (entity instanceof Player player && spectre.getManipulatorUUID() != player.getUUID()) {
                         boolean withinDistance = Math.sqrt(Math.pow((player.getX() - spectre.getX()), 2) + Math.pow((player.getZ() - spectre.getZ()), 2)) < 110;
                         if (withinDistance) {

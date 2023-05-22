@@ -10,15 +10,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.client.model.SparkleModel;
-import net.orcinus.galosphere.entities.SparkleEntity;
+import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.init.GModelLayers;
 
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
-public class SparkleRenderer extends MobRenderer<SparkleEntity, EntityModel<SparkleEntity>> {
-    private static final Map<SparkleEntity.CrystalType, ResourceLocation> TEXTURE_BY_TYPE = Util.make(Maps.newHashMap(), (map) -> {
-        for (SparkleEntity.CrystalType type : SparkleEntity.CrystalType.BY_ID) {
+public class SparkleRenderer extends MobRenderer<Sparkle, EntityModel<Sparkle>> {
+    private static final Map<Sparkle.CrystalType, ResourceLocation> TEXTURE_BY_TYPE = Util.make(Maps.newHashMap(), (map) -> {
+        for (Sparkle.CrystalType type : Sparkle.CrystalType.BY_ID) {
             map.put(type, new ResourceLocation(Galosphere.MODID, String.format("textures/entity/sparkle/%s_sparkle.png", type.getName())));
         }
     });
@@ -29,8 +29,8 @@ public class SparkleRenderer extends MobRenderer<SparkleEntity, EntityModel<Spar
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SparkleEntity entity) {
-        return entity.getCrystaltype() == SparkleEntity.CrystalType.NONE ? TEXTURE : TEXTURE_BY_TYPE.get(entity.getCrystaltype());
+    public ResourceLocation getTextureLocation(Sparkle entity) {
+        return entity.getCrystaltype() == Sparkle.CrystalType.NONE ? TEXTURE : TEXTURE_BY_TYPE.get(entity.getCrystaltype());
     }
 
 }

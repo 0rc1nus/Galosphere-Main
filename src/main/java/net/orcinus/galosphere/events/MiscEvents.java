@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ServerLevelData;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -80,7 +81,10 @@ public class MiscEvents {
         ResourceLocation name = event.getName();
         LootTable table = event.getTable();
         if (name.equals(new ResourceLocation("entities/pillager")) && GalosphereConfig.PILLAGER_DROP_SILVER_INGOT.get()) {
-            table.addPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_INGOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());
+            table.addPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_NUGGET.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());
+        }
+        if (name.equals(BuiltInLootTables.ANCIENT_CITY) && GalosphereConfig.SPECTRE_FLARE_ANCIENT_CITY_LOOT.get()) {
+            table.addPool(LootPool.lootPool().add(LootItem.lootTableItem(GItems.SPECTRE_FLARE.get()).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))).build());
         }
     }
 

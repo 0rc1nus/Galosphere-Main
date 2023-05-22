@@ -1,4 +1,4 @@
-// 1.19.2	2023-04-07T09:28:47.9390846	Block States: galosphere
+// 1.19.2	2023-05-16T14:57:44.057302	Block States: galosphere
 e8a6c48438ce60e5698f734f81a093310076a2f6 assets/galosphere/blockstates/allurite_block.json
 c4a5cfdbca2744348894311c402079e73dcd9c31 assets/galosphere/blockstates/allurite_bricks.json
 a303895830e08a7daf67085ebf76fb305e6fbede assets/galosphere/blockstates/allurite_brick_slab.json
@@ -20,6 +20,8 @@ b7b0a5a457df1f49f59c4047a6479210f0e7dbdb assets/galosphere/blockstates/chiseled_
 35b5156888c81e3a668ff3be8aec5c4d646898b7 assets/galosphere/blockstates/chiseled_lumiere.json
 4093b40ac8f23a37f640d0ee1e2c64989f02c5b5 assets/galosphere/blockstates/combustion_table.json
 7dcb3b26117485a3287a0cdb3fb3a8d244b396f4 assets/galosphere/blockstates/deepslate_silver_ore.json
+f47085f27518123645b9e9115440c4c4c9600de1 assets/galosphere/blockstates/glinted_allurite_cluster.json
+2b4d632d42d62dfef35ad98fd4270e569d752b8d assets/galosphere/blockstates/glinted_lumiere_cluster.json
 e8af8b2c39af8151796582f9c040fd52d0287f04 assets/galosphere/blockstates/lichen_cordyceps_plant.json
 81ba88e47eed8c3abf6287e9077acb05bec6b56a assets/galosphere/blockstates/lichen_moss.json
 bab7516ba9444490b0bd650d5d9d3b287b62d10c assets/galosphere/blockstates/lichen_roots.json

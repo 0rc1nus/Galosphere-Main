@@ -3,7 +3,6 @@ package net.orcinus.galosphere.entities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
@@ -24,27 +23,27 @@ import net.orcinus.galosphere.init.GSoundEvents;
 
 import javax.annotation.Nullable;
 
-public class GlowFlareEntity extends FireworkRocketEntity {
+public class GlowFlare extends FireworkRocketEntity {
 
-    public GlowFlareEntity(EntityType<? extends GlowFlareEntity> type, Level world) {
+    public GlowFlare(EntityType<? extends GlowFlare> type, Level world) {
         super(type, world);
     }
 
-    public GlowFlareEntity(Level world, ItemStack stack, Entity entity, double x, double y, double z, boolean shotAtAngle) {
+    public GlowFlare(Level world, ItemStack stack, Entity entity, double x, double y, double z, boolean shotAtAngle) {
         super(world, stack, entity, x, y, z, shotAtAngle);
     }
 
-    public GlowFlareEntity(Level level, @Nullable Entity entity, double d, double e, double f, ItemStack itemStack) {
+    public GlowFlare(Level level, @Nullable Entity entity, double d, double e, double f, ItemStack itemStack) {
         this(level, d, e, f, itemStack);
         this.setOwner(entity);
     }
 
-    public GlowFlareEntity(Level level, ItemStack itemStack, double d, double e, double f, boolean bl) {
+    public GlowFlare(Level level, ItemStack itemStack, double d, double e, double f, boolean bl) {
         this(level, d, e, f, itemStack);
         this.entityData.set(FireworkRocketEntity.DATA_SHOT_AT_ANGLE, bl);
     }
 
-    public GlowFlareEntity(Level level, double d, double e, double f, ItemStack itemStack) {
+    public GlowFlare(Level level, double d, double e, double f, ItemStack itemStack) {
         super(GEntityTypes.GLOW_FLARE.get(), level);
         this.life = 0;
         this.setPos(d, e, f);
