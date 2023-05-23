@@ -4,7 +4,8 @@
   "features": [
     "galosphere:bowl_lichen",
     "galosphere:lichen_caves_vegetation",
-    "galosphere:lichen_cordyceps_column"
+    "galosphere:lichen_cordyceps_column",
+    "galosphere:gravel_patch"
   ],
   "step": "vegetal_decoration"
 }

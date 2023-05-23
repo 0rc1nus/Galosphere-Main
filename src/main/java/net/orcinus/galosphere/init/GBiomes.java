@@ -24,10 +24,7 @@ import javax.annotation.Nullable;
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GBiomes {
 
-    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Galosphere.MODID);
-
-    public static final ResourceKey<Biome> CRYSTAL_CANYONS_KEY = registerResourceKey("crystal_canyons");
-    public static final ResourceKey<Biome> LICHEN_CAVES_KEY = registerResourceKey("lichen_caves");
+    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(Registry.BIOME_REGISTRY, Galosphere.MODID);
 
     public static final RegistryObject<Biome> CRYSTAL_CANYONS = BIOMES.register("crystal_canyons", GBiomes::crystalCanyons);
     public static final RegistryObject<Biome> LICHEN_CAVES = BIOMES.register("lichen_caves", GBiomes::lichenCaves);

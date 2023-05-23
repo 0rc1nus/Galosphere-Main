@@ -8,6 +8,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.util.BiomeReagentHandler;
 import terrablender.api.Region;
 import terrablender.api.RegionType;
@@ -23,8 +24,8 @@ public class GalosphereRegion extends Region {
 
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
-        mapper.accept(Pair.of(BiomeReagentHandler.CRYSTAL_CANYONS_PARAMETER, BiomeReagentHandler.CRYSTAL_CANYONS));
-        mapper.accept(Pair.of(BiomeReagentHandler.LICHEN_CAVES_PARAMETER, BiomeReagentHandler.LICHEN_CAVES));
+        mapper.accept(Pair.of(BiomeReagentHandler.CRYSTAL_CANYONS_PARAMETER, GBiomes.CRYSTAL_CANYONS.getKey()));
+        mapper.accept(Pair.of(BiomeReagentHandler.LICHEN_CAVES_PARAMETER, GBiomes.LICHEN_CAVES.getKey()));
     }
 
     public void init(ParallelDispatchEvent event) {

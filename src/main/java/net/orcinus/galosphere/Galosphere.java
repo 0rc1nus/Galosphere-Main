@@ -49,6 +49,7 @@ public class Galosphere {
         GBlocks.BLOCKS.register(modEventBus);
         GBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         GBiomes.BIOMES.register(modEventBus);
+        GConfiguredFeatures.CONFIGURED_FEATURES.register(modEventBus);
         GEntityTypes.ENTITY_TYPES.register(modEventBus);
         GFeatures.FEATURES.register(modEventBus);
         GItems.ITEMS.register(modEventBus);
@@ -66,10 +67,9 @@ public class Galosphere {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            GPlacedFeatures.init();
             GNetworkHandler.init();
             GVanillaIntegration.init();
-            GConfiguredFeatures.init();
-            GPlacedFeatures.init();
         });
     }
 
