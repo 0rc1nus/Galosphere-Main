@@ -1,8 +1,8 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "galosphere:crystal_canyons",
   "features": [
-    "galosphere:ore_silver_small"
+    "galosphere:ore_silver_large"
   ],
   "step": "underground_ores"
 }
