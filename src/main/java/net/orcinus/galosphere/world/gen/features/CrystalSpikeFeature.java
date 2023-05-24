@@ -19,7 +19,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
@@ -37,18 +36,18 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
         HashSet<BlockPos> trigList = Sets.newHashSet();
         HashSet<BlockPos> clusterPos = Sets.newHashSet();
         boolean flag = false;
-        int radiusCheck = config.xzRadius.sample(random) + 1;
+        int radiusCheck = config.xzRadius().sample(random) + 1;
         final int randomChance = random.nextInt(4);
         final int stepHeight = radiusCheck + 14 + Mth.nextInt(random, 10, 14);
-        if (world.isStateAtPosition(blockPos.relative(config.crystal_direction.getDirection().getOpposite()), DripstoneUtils::isEmptyOrWaterOrLava) && world.getBlockState(blockPos).is(BlockTags.BASE_STONE_OVERWORLD)) {
-            if (!world.isStateAtPosition(blockPos.relative(config.crystal_direction.getDirection().getOpposite(), 5), DripstoneUtils::isEmptyOrWaterOrLava)) {
+        if (world.isStateAtPosition(blockPos.relative(config.crystal_direction().getDirection().getOpposite()), DripstoneUtils::isEmptyOrWaterOrLava) && world.getBlockState(blockPos).is(BlockTags.BASE_STONE_OVERWORLD)) {
+            if (!world.isStateAtPosition(blockPos.relative(config.crystal_direction().getDirection().getOpposite(), 5), DripstoneUtils::isEmptyOrWaterOrLava)) {
                 if (radiusCheck < 4) {
                     radiusCheck /= 2;
                 } else {
                     return false;
                 }
             }
-            if (this.placeSpike(world, blockPos, radiusCheck, stepHeight, randomChance, trigList, config.crystal_direction.getDirection(), random)) {
+            if (this.placeSpike(world, blockPos, radiusCheck, stepHeight, randomChance, trigList, config.crystal_direction().getDirection(), random)) {
                 flag = placeCrystals(world, random, config, trigList, clusterPos, flag);
             }
         }
@@ -58,7 +57,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
     private boolean placeCrystals(WorldGenLevel world, RandomSource random, CrystalSpikeConfig config, HashSet<BlockPos> trigList, HashSet<BlockPos> clusterPos, boolean flag) {
         for (BlockPos pos : trigList) {
             if (world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
-                this.setBlock(world, pos, config.crystal_state);
+                this.setBlock(world, pos, config.crystal_state());
                 clusterPos.add(pos);
                 flag = true;
             }
@@ -67,8 +66,8 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
             if (random.nextInt(6) == 0) {
                 for (Direction direction : Direction.values()) {
                     BlockPos relative = pos.relative(direction);
-                    if (random.nextBoolean() && world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater) && world.getBlockState(pos).equals(config.crystal_state)) {
-                        BlockState blockState = random.nextBoolean() ? config.cluster_state : config.glinted_cluster;
+                    if (random.nextBoolean() && world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater) && world.getBlockState(pos).equals(config.crystal_state())) {
+                        BlockState blockState = random.nextBoolean() ? config.cluster_state() : config.glinted_cluster();
                         this.setBlock(world, relative, blockState.setValue(PollinatedClusterBlock.FACING, direction).setValue(PollinatedClusterBlock.WATERLOGGED, world.getFluidState(relative).getType() == Fluids.WATER));
                     }
                 }

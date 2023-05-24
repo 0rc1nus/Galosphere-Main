@@ -37,7 +37,7 @@ public class GBiomeModifier {
         addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.ALLURITE_FLOOR_CRYSTALS);
         addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_CEILING_CRYSTALS);
         addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.LUMIERE_FLOOR_CRYSTALS);
-        addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.ORE_SILVER_LARGE);
+        addFeature(GBiomes.CRYSTAL_CANYONS_KEY, GenerationStep.Decoration.UNDERGROUND_ORES, GPlacedFeatures.ORE_SILVER_LARGE);
     }
 
     public static void addCrystalCanyonsSpawns() {

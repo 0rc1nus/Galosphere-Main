@@ -1,7 +1,10 @@
 package net.orcinus.galosphere.entities;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -67,12 +70,15 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void aiStep() {
+        super.aiStep();
         if (this.getManipulatorUUID() == null) {
             this.discard();
         }
-        if (!this.isRemoved()) {
+        if (!this.level.isClientSide() || this.matchesClientPlayerUUID()) {
+            this.entityData.get(MANIPULATOR).ifPresent(this::spectateTick);
+        }
+        if (!this.level.isClientSide) {
             int spectatableTime = this.getSpectatableTime();
             if (spectatableTime > 0) {
                 this.setSpectatableTime(spectatableTime - 1);
@@ -80,23 +86,25 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
             if (this.getPhase() < 12 && this.tickCount % 5 == 0) {
                 this.setPhase(this.getPhase() + 1);
             }
-            if (!this.level.isClientSide() || this.matchesClientPlayerUUID()) {
-                this.entityData.get(MANIPULATOR).ifPresent(this::spectateTick);
-            }
-            if (this.level.isClientSide) {
-                if (this.random.nextInt(5) == 0) {
-                    int count = UniformInt.of(3, 6).sample(this.random);
-                    BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
-                    BlockPos blockPos = this.blockPosition();
-                    int range = 3;
-                    for (int i = 0; i < count; i++) {
-                        mutableBlockPos.setWithOffset(blockPos, Mth.nextInt(this.random, -range, range), Mth.nextInt(this.random, -range, range), Mth.nextInt(this.random, -range, range));
-                        if (!this.level.getBlockState(mutableBlockPos).isCollisionShapeFullBlock(this.level, mutableBlockPos)) {
-                            float velX = 0.06F * (blockPos.getX() - mutableBlockPos.getX());
-                            float velY = 0.06F * (blockPos.getY() - mutableBlockPos.getY());
-                            float velZ = 0.06F * (blockPos.getZ() - mutableBlockPos.getZ());
-                            this.level.addParticle(GParticleTypes.SPECTATE_ORB, mutableBlockPos.getX() + 0.5F, mutableBlockPos.getY(), mutableBlockPos.getZ() + 0.5F, velX, velY, velZ);
-                        }
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.level.isClientSide) {
+            if (this.random.nextInt(5) == 0) {
+                int count = UniformInt.of(3, 6).sample(this.random);
+                BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+                BlockPos blockPos = this.blockPosition();
+                int range = 3;
+                for (int i = 0; i < count; i++) {
+                    mutableBlockPos.setWithOffset(blockPos, Mth.nextInt(this.random, -range, range), Mth.nextInt(this.random, -range, range), Mth.nextInt(this.random, -range, range));
+                    if (!this.level.getBlockState(mutableBlockPos).isCollisionShapeFullBlock(this.level, mutableBlockPos)) {
+                        float velX = 0.06F * (blockPos.getX() - mutableBlockPos.getX());
+                        float velY = 0.06F * (blockPos.getY() - mutableBlockPos.getY());
+                        float velZ = 0.06F * (blockPos.getZ() - mutableBlockPos.getZ());
+                        this.level.addParticle(GParticleTypes.SPECTATE_ORB, mutableBlockPos.getX() + 0.5F, mutableBlockPos.getY(), mutableBlockPos.getZ() + 0.5F, velX, velY, velZ);
                     }
                 }
             }
@@ -174,20 +182,28 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
             player.xxa = 0.0F;
             player.zza = 0.0F;
             player.setJumping(false);
-            if (!this.level.isClientSide && (player.isShiftKeyDown() || this.getSpectatableTime() == 0)) {
-                ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(false);
-                player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_END, getSoundSource(), 1, 1);
+            ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(this.getSpectatableTime() > 0);
+            if (player.isDiscrete() || this.getSpectatableTime() == 0) {
                 this.setManipulatorUUID(null);
-                if (player instanceof ServerPlayer serverPlayer) {
-                    FriendlyByteBuf buf = PacketByteBufs.create();
-                    buf.writeUUID(player.getUUID());
-                    ServerPlayNetworking.send(serverPlayer, GNetwork.RESET_PERSPECTIVE, buf);
+                if (this.level.isClientSide) {
+                    this.stopUsingSpyglass(player);
+                } else {
+                    ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(false);
+                    player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_END, getSoundSource(), 1, 1);
+                    this.setManipulatorUUID(null);
                 }
-                this.discard();
             }
         }
         if (!this.level.isClientSide() && player == null) {
             this.entityData.set(MANIPULATOR, Optional.empty());
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public void stopUsingSpyglass(Player player) {
+        Minecraft client = Minecraft.getInstance();
+        if (client.player == player) {
+            client.setCameraEntity(player);
         }
     }
 
