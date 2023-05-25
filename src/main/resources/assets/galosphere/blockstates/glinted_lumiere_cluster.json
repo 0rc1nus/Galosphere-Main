@@ -1,28 +1,28 @@
 {
   "variants": {
     "facing=down": {
-      "model": "galosphere:block/lumiere_cluster",
+      "model": "galosphere:block/glinted_lumiere_cluster",
       "x": 180
     },
     "facing=east": {
-      "model": "galosphere:block/lumiere_cluster",
+      "model": "galosphere:block/glinted_lumiere_cluster",
       "x": 90,
       "y": 90
     },
     "facing=north": {
-      "model": "galosphere:block/lumiere_cluster",
+      "model": "galosphere:block/glinted_lumiere_cluster",
       "x": 90
     },
     "facing=south": {
-      "model": "galosphere:block/lumiere_cluster",
+      "model": "galosphere:block/glinted_lumiere_cluster",
       "x": 90,
       "y": 180
     },
     "facing=up": {
-      "model": "galosphere:block/lumiere_cluster"
+      "model": "galosphere:block/glinted_lumiere_cluster"
     },
     "facing=west": {
-      "model": "galosphere:block/lumiere_cluster",
+      "model": "galosphere:block/glinted_lumiere_cluster",
       "x": 90,
       "y": 270
     }

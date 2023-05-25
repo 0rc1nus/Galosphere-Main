@@ -46,6 +46,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -74,6 +75,7 @@ public class Sparkle extends Animal {
     private final Map<Block, Block> clustersToGlinted = Util.make(Maps.newHashMap(), map -> {
         map.put(GBlocks.ALLURITE_CLUSTER, GBlocks.GLINTED_ALLURITE_CLUSTER);
         map.put(GBlocks.LUMIERE_CLUSTER, GBlocks.GLINTED_LUMIERE_CLUSTER);
+        map.put(Blocks.AMETHYST_CLUSTER, GBlocks.GLINTED_AMETHYST_CLUSTER);
     });
     private int growthTicks;
 

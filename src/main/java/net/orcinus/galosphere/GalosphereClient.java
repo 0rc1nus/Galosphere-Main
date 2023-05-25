@@ -66,7 +66,8 @@ public class GalosphereClient implements ClientModInitializer {
                 GBlocks.CHANDELIER,
                 GBlocks.GLOW_BERRIES_SILVER_LATTICE,
                 GBlocks.GLINTED_ALLURITE_CLUSTER,
-                GBlocks.GLINTED_LUMIERE_CLUSTER
+                GBlocks.GLINTED_LUMIERE_CLUSTER,
+                GBlocks.GLINTED_AMETHYST_CLUSTER
         );
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE, CombustionTableScreen::new);
@@ -77,6 +78,7 @@ public class GalosphereClient implements ClientModInitializer {
         particleFactoryRegistry.register(GParticleTypes.WARPED, WarpedProvider::new);
         particleFactoryRegistry.register(GParticleTypes.ALLURITE_RAIN, CrystalRainParticle.Provider::new);
         particleFactoryRegistry.register(GParticleTypes.LUMIERE_RAIN, CrystalRainParticle.Provider::new);
+        particleFactoryRegistry.register(GParticleTypes.AMETHYST_RAIN, CrystalRainParticle.Provider::new);
         particleFactoryRegistry.register(GParticleTypes.SPECTATE_ORB, SpectateOrbParticle.Provider::new);
 
         EntityRendererRegistry.register(GEntityTypes.SIVLER_BOMB, context -> new ThrownItemRenderer<>(context, 1.5F, false));

@@ -3,6 +3,7 @@ package net.orcinus.galosphere.init;
 import com.google.common.collect.Maps;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AmethystBlock;
@@ -75,6 +76,7 @@ public class GBlocks {
 
     public static final Block GLINTED_ALLURITE_CLUSTER = registerBlock("glinted_allurite_cluster", new GlintedClusterBlock(() -> GParticleTypes.ALLURITE_RAIN, BlockBehaviour.Properties.of(GMaterials.ALLURITE).noOcclusion().randomTicks().sound(GSoundEvents.ALLURITE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
     public static final Block GLINTED_LUMIERE_CLUSTER = registerBlock("glinted_lumiere_cluster", new GlintedClusterBlock(() -> GParticleTypes.LUMIERE_RAIN, BlockBehaviour.Properties.of(GMaterials.LUMIERE).noOcclusion().randomTicks().sound(GSoundEvents.LUMIERE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
+    public static final Block GLINTED_AMETHYST_CLUSTER = registerBlock("glinted_amethyst_cluster", new GlintedClusterBlock(() -> GParticleTypes.AMETHYST_RAIN, BlockBehaviour.Properties.of(GMaterials.LUMIERE).noOcclusion().randomTicks().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
 
     public static final Block AMETHYST_STAIRS = registerBlock("amethyst_stairs", new CrystalStairsBlock(Blocks.AMETHYST_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
     public static final Block AMETHYST_SLAB = registerBlock("amethyst_slab", new CrystalSlabBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));

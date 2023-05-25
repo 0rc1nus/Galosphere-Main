@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
@@ -43,7 +44,7 @@ public class WalkToPollinatedCluster extends Behavior<Sparkle> {
     }
 
     private boolean isPollinatedCluster(BlockState state) {
-        return state.getBlock() instanceof PollinatedClusterBlock && !state.getValue(PollinatedClusterBlock.POLLINATED);
+        return state.is(Blocks.AMETHYST_CLUSTER) || (state.getBlock() instanceof PollinatedClusterBlock && !state.getValue(PollinatedClusterBlock.POLLINATED));
     }
 
     @Override

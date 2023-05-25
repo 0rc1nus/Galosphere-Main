@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "galosphere:block/allurite_cluster"
+    "layer0": "galosphere:block/glinted_allurite_cluster"
   },
   "display": {
     "head": {

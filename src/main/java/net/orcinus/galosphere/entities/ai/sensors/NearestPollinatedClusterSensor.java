@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.entities.Sparkle;
@@ -26,7 +27,7 @@ public class NearestPollinatedClusterSensor extends Sensor<Sparkle> {
                 for (int y = -range; y <= range; y++) {
                     BlockPos pos = new BlockPos(entity.getX() + x, entity.getY() + y, entity.getZ() + z);
                     BlockState state = world.getBlockState(pos);
-                    if (state.getBlock() instanceof PollinatedClusterBlock && !state.getValue(PollinatedClusterBlock.POLLINATED)) {
+                    if (state.is(Blocks.AMETHYST_CLUSTER) || (state.getBlock() instanceof PollinatedClusterBlock && !state.getValue(PollinatedClusterBlock.POLLINATED))) {
                         poses.add(pos);
                     }
                 }

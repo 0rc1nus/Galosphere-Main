@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "galosphere:block/glinted_amethyst_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "galosphere:block/glinted_amethyst_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "galosphere:block/glinted_amethyst_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "galosphere:block/glinted_amethyst_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "galosphere:block/glinted_amethyst_cluster"
+    },
+    "facing=west": {
+      "model": "galosphere:block/glinted_amethyst_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
