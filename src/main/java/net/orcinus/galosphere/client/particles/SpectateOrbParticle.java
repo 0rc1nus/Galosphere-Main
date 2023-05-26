@@ -23,6 +23,11 @@ public class SpectateOrbParticle extends SmokeParticle {
     }
 
     @Override
+    protected int getLightColor(float f) {
+        return 240;
+    }
+
+    @Override
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
