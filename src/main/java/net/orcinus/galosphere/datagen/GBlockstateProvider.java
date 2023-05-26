@@ -123,12 +123,15 @@ public class GBlockstateProvider extends BlockStateProvider {
                 rotationY *= 2;
             }
             String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+            if (state.hasProperty(PollinatedClusterBlock.POLLINATED) && state.getValue(PollinatedClusterBlock.POLLINATED)) {
+                path = "glinted_" + path;
+            }
             return ConfiguredModel.builder()
                     .modelFile(models().cross(path, new ResourceLocation(Galosphere.MODID, "block/" + path)).renderType("cutout"))
                     .rotationX(rotationX)
                     .rotationY(rotationY)
                     .build();
-        }, BlockStateProperties.WATERLOGGED, PollinatedClusterBlock.POLLINATED);
+        }, BlockStateProperties.WATERLOGGED);
     }
 
     private void crossBlock(RegistryObject<Block> block) {
