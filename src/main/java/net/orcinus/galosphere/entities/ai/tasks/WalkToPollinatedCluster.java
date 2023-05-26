@@ -11,7 +11,6 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.Path;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
@@ -72,7 +71,6 @@ public class WalkToPollinatedCluster extends Behavior<Sparkle> {
             if (!this.setCooldownOnly) {
                 BlockState state = world.getBlockState(blockPos);
                 Block placeState = entity.getClustersToGlinted().get(state.getBlock());
-                System.out.println(placeState + " WHAT");
                 world.setBlock(blockPos, placeState.withPropertiesOf(state), 2);
                 world.playSound(null, blockPos, placeState.defaultBlockState().getSoundType().getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 world.levelEvent(2005, blockPos, 0);
