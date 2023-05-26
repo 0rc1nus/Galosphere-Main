@@ -174,6 +174,7 @@ public class ClientEvents {
         event.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
         event.register(GParticleTypes.ALLURITE_RAIN.get(), CrystalRainParticle.Provider::new);
         event.register(GParticleTypes.LUMIERE_RAIN.get(), CrystalRainParticle.Provider::new);
+        event.register(GParticleTypes.AMETHYST_RAIN.get(), CrystalRainParticle.Provider::new);
         event.register(GParticleTypes.AURA_RINGER_INDICATOR.get(), IndicatorParticle.Provider::new);
         event.register(GParticleTypes.SPECTATE_ORB.get(), SpectateOrbParticle.Provider::new);
     }

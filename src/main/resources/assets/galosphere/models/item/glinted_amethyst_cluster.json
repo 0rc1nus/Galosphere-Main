@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "galosphere:block/glinted_lumiere_cluster"
+    "layer0": "galosphere:block/glinted_amethyst_cluster"
   },
   "display": {
     "head": {
