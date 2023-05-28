@@ -19,14 +19,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass {
     private static final EntityDataAccessor<ItemStack> BANNER_STACK = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Float> GOLDEN_AIR_SUPPLY = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Boolean> USING_FAY_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Inject(at = @At("HEAD"), method = "defineSynchedData")
     public void G$defineSynchedData(CallbackInfo ci) {
         SynchedEntityData data = ((LivingEntity) (Object) this).getEntityData();
         data.define(BANNER_STACK, ItemStack.EMPTY);
         data.define(GOLDEN_AIR_SUPPLY, 0.0F);
-        data.define(USING_FAY_BOUNDED_SPYGLASS, false);
+        data.define(USING_SPECTRE_BOUNDED_SPYGLASS, false);
     }
 
     @Inject(at = @At("RETURN"), method = "addAdditionalSaveData")
@@ -72,11 +72,11 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Override
     public boolean isUsingSpectreBoundedSpyglass() {
-        return ((LivingEntity)(Object)this).getEntityData().get(USING_FAY_BOUNDED_SPYGLASS);
+        return ((LivingEntity)(Object)this).getEntityData().get(USING_SPECTRE_BOUNDED_SPYGLASS);
     }
 
     @Override
     public void setUsingSpectreBoundedSpyglass(boolean usingSpectreBoundedSpyglass) {
-        ((LivingEntity)(Object)this).getEntityData().set(USING_FAY_BOUNDED_SPYGLASS, usingSpectreBoundedSpyglass);
+        ((LivingEntity)(Object)this).getEntityData().set(USING_SPECTRE_BOUNDED_SPYGLASS, usingSpectreBoundedSpyglass);
     }
 }
