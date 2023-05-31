@@ -7,8 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
-public record CrystalSpikeConfig(BlockState crystal_state, BlockState cluster_state, BlockState glinted_cluster,
-                                 IntProvider xzRadius, CaveSurface crystal_direction) implements FeatureConfiguration {
+public record CrystalSpikeConfig(BlockState crystal_state, BlockState cluster_state, BlockState glinted_cluster, IntProvider xzRadius, CaveSurface crystal_direction, float glinted_cluster_chance) implements FeatureConfiguration {
     public static final Codec<CrystalSpikeConfig> CODEC = RecordCodecBuilder.create(codec -> {
         return codec.group(BlockState.CODEC.fieldOf("crystal_state").forGetter(config -> {
             return config.crystal_state;
@@ -20,6 +19,8 @@ public record CrystalSpikeConfig(BlockState crystal_state, BlockState cluster_st
             return config.xzRadius;
         }), CaveSurface.CODEC.fieldOf("crystal_direction").forGetter(config -> {
             return config.crystal_direction;
+        }), Codec.floatRange(0.0f, 1.0f).fieldOf("glinted_cluster_chance").forGetter(config -> {
+            return config.glinted_cluster_chance;
         })).apply(codec, CrystalSpikeConfig::new);
     });
 

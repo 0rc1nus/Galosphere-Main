@@ -67,7 +67,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                 for (Direction direction : Direction.values()) {
                     BlockPos relative = pos.relative(direction);
                     if (random.nextBoolean() && world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater) && world.getBlockState(pos).equals(config.crystal_state())) {
-                        BlockState blockState = random.nextBoolean() ? config.cluster_state() : config.glinted_cluster();
+                        BlockState blockState = random.nextFloat() > config.glinted_cluster_chance() ? config.cluster_state() : config.glinted_cluster();
                         this.setBlock(world, relative, blockState.setValue(PollinatedClusterBlock.FACING, direction).setValue(PollinatedClusterBlock.WATERLOGGED, world.getFluidState(relative).getType() == Fluids.WATER));
                     }
                 }
