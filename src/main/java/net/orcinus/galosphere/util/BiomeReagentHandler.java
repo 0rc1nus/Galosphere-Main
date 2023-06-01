@@ -1,12 +1,9 @@
 package net.orcinus.galosphere.util;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
-import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.init.GBiomes;
 
 import java.util.function.Consumer;
@@ -59,10 +56,6 @@ public class BiomeReagentHandler {
     public static void init(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer) {
         consumer.accept(Pair.of(CRYSTAL_CANYONS_PARAMETER, GBiomes.CRYSTAL_CANYONS.getKey()));
         consumer.accept(Pair.of(LICHEN_CAVES_PARAMETER, GBiomes.LICHEN_CAVES.getKey()));
-    }
-
-    private static ResourceKey<Biome> registerResourceKey(String name) {
-        return ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Galosphere.MODID, name));
     }
 
 }
