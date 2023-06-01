@@ -23,10 +23,11 @@ public class GVanillaIntegration {
     public static void registerCompostables() {
         CompostingChanceRegistry instance = CompostingChanceRegistry.INSTANCE;
         Util.make(ImmutableMap.<Block, Float>builder(), map -> {
-            map.put(GBlocks.LICHEN_MOSS, 0.65F);
+            map.put(GBlocks.LICHEN_MOSS, 0.85F);
             map.put(GBlocks.BOWL_LICHEN, 0.65F);
             map.put(GBlocks.LICHEN_ROOTS, 0.3F);
             map.put(GBlocks.LICHEN_SHELF, 0.45F);
+            map.put(GBlocks.LICHEN_CORDYCEPS, 0.4F);
         }).build().forEach(instance::add);
     }
 
