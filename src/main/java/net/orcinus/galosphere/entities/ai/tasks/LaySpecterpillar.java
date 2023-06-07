@@ -2,7 +2,6 @@ package net.orcinus.galosphere.entities.ai.tasks;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.Specterpillar;
 import net.orcinus.galosphere.entities.Spectre;
@@ -54,9 +52,6 @@ public class LaySpecterpillar extends Behavior<Spectre> {
         } else {
             Vec3 pos = livingEntity.position();
             int count = UniformInt.of(1, 4).sample(livingEntity.getRandom());
-            for (Player player : serverLevel.players()) {
-                player.sendSystemMessage(Component.translatable("" + count));
-            }
             for (int i = 0; i < count; i++) {
                 Specterpillar specterpillar = GEntityTypes.SPECTERPILLAR.create(serverLevel);
                 specterpillar.moveTo(pos.x(), pos.y() + 0.2D, pos.z(), 0.0F, 0.0f);
