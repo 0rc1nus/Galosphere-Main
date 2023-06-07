@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -49,11 +50,14 @@ public class LaySpecterpillar extends Behavior<Spectre> {
         if (!livingEntity.getBlockStateOn().is(GBlocks.LICHEN_MOSS.get())) {
             livingEntity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_LICHEN_MOSS.get());
         } else {
-            Specterpillar specterpillar = GEntityTypes.SPECTERPILLAR.get().create(serverLevel);
             Vec3 pos = livingEntity.position();
-            specterpillar.moveTo(pos.x(), pos.y() + 0.2D, pos.z(), 0.0F, 0.0f);
-            specterpillar.setPersistenceRequired();
-            serverLevel.addFreshEntity(specterpillar);
+            int count = UniformInt.of(1, 4).sample(livingEntity.getRandom());
+            for (int i = 0; i < count; i++) {
+                Specterpillar specterpillar = GEntityTypes.SPECTERPILLAR.get().create(serverLevel);
+                specterpillar.moveTo(pos.x(), pos.y() + 0.2D, pos.z(), 0.0F, 0.0f);
+                specterpillar.setPersistenceRequired();
+                serverLevel.addFreshEntity(specterpillar);
+            }
             livingEntity.playSound(SoundEvents.FROG_LAY_SPAWN, 1.0F, 1.0F);
             livingEntity.getBrain().eraseMemory(MemoryModuleType.IS_PREGNANT);
             livingEntity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_LICHEN_MOSS.get());
