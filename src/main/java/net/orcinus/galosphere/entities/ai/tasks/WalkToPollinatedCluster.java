@@ -9,8 +9,8 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.Path;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
@@ -34,7 +34,7 @@ public class WalkToPollinatedCluster extends Behavior<Sparkle> {
 
     @Override
     protected boolean canStillUse(ServerLevel world, Sparkle entity, long p_22547_) {
-        if (this.stuckTicks > 60) {
+        if (this.stuckTicks > 200) {
             this.setCooldownOnly = true;
             return false;
         } else {
@@ -43,7 +43,7 @@ public class WalkToPollinatedCluster extends Behavior<Sparkle> {
     }
 
     private boolean isPollinatedCluster(BlockState state) {
-        return state.getBlock() instanceof PollinatedClusterBlock && !state.getValue(PollinatedClusterBlock.POLLINATED);
+        return state.is(Blocks.AMETHYST_CLUSTER) || (state.getBlock() instanceof PollinatedClusterBlock && !state.getValue(PollinatedClusterBlock.POLLINATED));
     }
 
     @Override
@@ -55,14 +55,11 @@ public class WalkToPollinatedCluster extends Behavior<Sparkle> {
     protected void tick(ServerLevel p_22551_, Sparkle entity, long p_22553_) {
         this.getNearestCluster(entity).ifPresent(blockPos -> {
             boolean flag = entity.blockPosition().distManhattan(blockPos) <= (entity.isInWaterOrBubble() ? 2.0F : 1.0F);
-            Path path = entity.getNavigation().createPath(blockPos, 0);
-            boolean flag2 = path != null && path.canReach();
-            if (!flag2) {
-                this.stuckTicks++;
-            }
             if (flag) {
                 entity.getNavigation().stop();
                 this.sniffingTicks--;
+            } else {
+                this.stuckTicks++;
             }
             BehaviorUtils.setWalkAndLookTargetMemories(entity, blockPos, 2.0F, 0);
         });
@@ -71,16 +68,19 @@ public class WalkToPollinatedCluster extends Behavior<Sparkle> {
     @Override
     protected void stop(ServerLevel world, Sparkle entity, long p_22550_) {
         this.getNearestCluster(entity).filter(blockPos -> this.isPollinatedCluster(world.getBlockState(blockPos))).ifPresent(blockPos -> {
+            entity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_POLLINATED_CLUSTER.get());
             if (!this.setCooldownOnly) {
                 BlockState state = world.getBlockState(blockPos);
                 Block placeState = entity.getClustersToGlinted().get(state.getBlock());
                 world.setBlock(blockPos, placeState.withPropertiesOf(state), 2);
                 world.playSound(null, blockPos, placeState.defaultBlockState().getSoundType().getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 world.levelEvent(2005, blockPos, 0);
-                entity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_POLLINATED_CLUSTER.get());
+                return;
             }
             entity.getBrain().setMemory(GMemoryModuleTypes.POLLINATED_COOLDOWN.get(), 100);
         });
+        this.stuckTicks = 0;
+        this.setCooldownOnly = false;
     }
 
     @Override

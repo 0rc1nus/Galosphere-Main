@@ -2,7 +2,6 @@
   "type": "forge:add_features",
   "biomes": "#minecraft:is_overworld",
   "features": [
-    "galosphere:ore_silver_large",
     "galosphere:ore_silver_small"
   ],
   "step": "underground_ores"

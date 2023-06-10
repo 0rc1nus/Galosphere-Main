@@ -1,11 +1,12 @@
-// 1.19.2	2023-05-16T16:45:26.0705438	Tags for minecraft:block
+// 1.19.2	2023-05-26T15:01:51.2906339	Tags for minecraft:block
 021e86d55679a27d4519fa177cd4425c51105d50 data/forge/tags/blocks/ores.json
 d22848f4f97f051b3ec5eefda7df36a01718e88a data/forge/tags/blocks/ores/silver.json
 97eb1b03810e22a976b10e158ad5eda01f2f6b3e data/forge/tags/blocks/storage_blocks.json
 eb2ffa9945e725ede9bd398e5699b69c647fc634 data/forge/tags/blocks/storage_blocks/raw_silver.json
 77953532df9dfaebb1305885a11df18f585acef3 data/forge/tags/blocks/storage_blocks/silver.json
 a4c38c691f57054d2c41ac4d23e34dc6b5502285 data/galosphere/tags/blocks/crystal_spikes_blocks.json
-6ada3bbca610daa905d21c2755644f9cc7d673d8 data/galosphere/tags/blocks/obfuscates_sound_waves.json
+da7e3a3aff636508080ebfd47741b3deb5e9a67c data/galosphere/tags/blocks/gravel_may_replace.json
+09fdde12678b6e3e74157b60e85d414950693787 data/galosphere/tags/blocks/obfuscates_sound_waves.json
 109b56330612fbb3bf3683cc569b0dd772e24f06 data/galosphere/tags/blocks/sparkles_spawn_on.json
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/galosphere/tags/blocks/spectres_spawn_on.json
 77953532df9dfaebb1305885a11df18f585acef3 data/minecraft/tags/blocks/beacon_base_blocks.json
@@ -13,7 +14,7 @@ ae98940009770130b05859b32836d9dde0fdbb2a data/minecraft/tags/blocks/crystal_soun
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/minecraft/tags/blocks/dirt.json
 d85351e5edf223b9d47bf6085fd3f9b27520013d data/minecraft/tags/blocks/mineable/axe.json
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/minecraft/tags/blocks/mineable/hoe.json
-85659621a4b288cd908e4ea1ae8c4fd0cdec20f1 data/minecraft/tags/blocks/mineable/pickaxe.json
+6376d18ab62f400e0ab7c1c97589fa603a52b504 data/minecraft/tags/blocks/mineable/pickaxe.json
 8223b9cdd22e99a91f7b5784ba66aa4f9a371904 data/minecraft/tags/blocks/needs_stone_tool.json
 e0bc03738a7ab1931892bbe48205c993be0cad02 data/minecraft/tags/blocks/slabs.json
 2b8845331db2caeea2993c2aa9b35c551994290e data/minecraft/tags/blocks/stairs.json

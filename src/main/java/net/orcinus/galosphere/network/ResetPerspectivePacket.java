@@ -2,6 +2,7 @@ package net.orcinus.galosphere.network;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -30,11 +31,10 @@ public class ResetPerspectivePacket {
             Minecraft client = Minecraft.getInstance();
             Level world = client.level;
             if (world != null) {
-                Optional.ofNullable(world.getPlayerByUUID(packet.uuid)).filter(player -> player.equals(client.player)).ifPresent(player -> {
-                    if (client.getCameraEntity() != player) {
-                        client.setCameraEntity(player);
-                    }
-                });
+                Player player = world.getPlayerByUUID(packet.uuid);
+                if (player != null && player.equals(client.player) && client.getCameraEntity() != player) {
+                    client.setCameraEntity(player);
+                }
             }
         });
         ctx.get().setPacketHandled(true);

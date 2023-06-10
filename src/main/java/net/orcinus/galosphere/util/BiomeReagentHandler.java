@@ -1,12 +1,10 @@
 package net.orcinus.galosphere.util;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
-import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.init.GBiomes;
 
 import java.util.function.Consumer;
 
@@ -18,9 +16,6 @@ public class BiomeReagentHandler {
     //460628901
     //1248939201
     //53285197, coords: 5237 23 -5750
-
-    public static final ResourceKey<Biome> CRYSTAL_CANYONS = registerResourceKey("crystal_canyons");
-    public static final ResourceKey<Biome> LICHEN_CAVES = registerResourceKey("lichen_caves");
 
     //temperature
     //humidity
@@ -43,8 +38,8 @@ public class BiomeReagentHandler {
     );
     public static final Climate.ParameterPoint LICHEN_CAVES_PARAMETER = Climate.parameters(
             Climate.Parameter.span(-1.0F, 1.0F),
-            Climate.Parameter.span(-1.0F, 1.0F),
-            Climate.Parameter.span(0.6F, 0.7F),
+            Climate.Parameter.span(-1.0F, -0.7F),
+            Climate.Parameter.span(-0.7F, -0.5F),
             Climate.Parameter.span(-0.9F, -0.7F),
             Climate.Parameter.span(0.2F, 0.9F),
             Climate.Parameter.span(-1.0F, 1.0F),
@@ -59,12 +54,8 @@ public class BiomeReagentHandler {
 //            0.0F);
 
     public static void init(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer) {
-        consumer.accept(Pair.of(CRYSTAL_CANYONS_PARAMETER, CRYSTAL_CANYONS));
-        consumer.accept(Pair.of(LICHEN_CAVES_PARAMETER, LICHEN_CAVES));
-    }
-
-    private static ResourceKey<Biome> registerResourceKey(String name) {
-        return ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Galosphere.MODID, name));
+        consumer.accept(Pair.of(CRYSTAL_CANYONS_PARAMETER, GBiomes.CRYSTAL_CANYONS.getKey()));
+        consumer.accept(Pair.of(LICHEN_CAVES_PARAMETER, GBiomes.LICHEN_CAVES.getKey()));
     }
 
 }

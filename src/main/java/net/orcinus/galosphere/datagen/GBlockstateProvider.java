@@ -92,6 +92,7 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.pollinatedCluster(GBlocks.LUMIERE_CLUSTER.get());
         this.pollinatedCluster(GBlocks.GLINTED_ALLURITE_CLUSTER.get());
         this.pollinatedCluster(GBlocks.GLINTED_LUMIERE_CLUSTER.get());
+        this.pollinatedCluster(GBlocks.GLINTED_AMETHYST_CLUSTER.get());
 
         this.simpleBlock(GBlocks.SILVER_TILES.get());
         this.slabBlock(GBlocks.SILVER_TILES_SLAB.get(), "silver_tiles");
@@ -122,15 +123,15 @@ public class GBlockstateProvider extends BlockStateProvider {
                 rotationY *= 2;
             }
             String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
-            if (path.contains("glinted_")) {
-                path = path.replace("glinted_", "");
+            if (state.hasProperty(PollinatedClusterBlock.POLLINATED) && state.getValue(PollinatedClusterBlock.POLLINATED)) {
+                path = "glinted_" + path;
             }
             return ConfiguredModel.builder()
                     .modelFile(models().cross(path, new ResourceLocation(Galosphere.MODID, "block/" + path)).renderType("cutout"))
                     .rotationX(rotationX)
                     .rotationY(rotationY)
                     .build();
-        }, BlockStateProperties.WATERLOGGED, PollinatedClusterBlock.POLLINATED);
+        }, BlockStateProperties.WATERLOGGED);
     }
 
     private void crossBlock(RegistryObject<Block> block) {

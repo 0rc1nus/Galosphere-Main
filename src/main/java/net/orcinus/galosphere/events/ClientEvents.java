@@ -1,10 +1,7 @@
 package net.orcinus.galosphere.events;
 
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.entity.HorseRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -29,8 +26,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.api.Spectatable;
-import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.client.SpectatorTickHandler;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.GoldenBreathOverlay;
@@ -87,7 +82,7 @@ public class ClientEvents {
                 @Override
                 public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
                     Entity entity = livingEntity != null ? livingEntity : itemStack.getEntityRepresentation();
-                    float[][] predicates = new float[][]{{0.15F, 0.13F, 0.21F, 0.28F, 0.36F, 0.44F, 0.52F, 0.59F, 0.70F, 0.75F, 0.82F, 0.9F}, {0.9F, 0.82F, 0.70F, 0.59F, 0.52F, 0.44F, 0.36F, 0.28F, 0.21F, 0.13F, 0.15F}};
+                    float[][] predicates = new float[][]{{0.15F, 0.13F, 0.21F, 0.28F, 0.36F, 0.44F, 0.52F, 0.59F, 0.70F, 0.75F, 0.82F, 0.9F}, {0.9F, 0.82F, 0.75F, 0.70F, 0.59F, 0.52F, 0.44F, 0.36F, 0.28F, 0.21F, 0.13F, 0.15F}};
                     if (entity == null) {
                         return 0.0f;
                     }
@@ -174,6 +169,7 @@ public class ClientEvents {
         event.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
         event.register(GParticleTypes.ALLURITE_RAIN.get(), CrystalRainParticle.Provider::new);
         event.register(GParticleTypes.LUMIERE_RAIN.get(), CrystalRainParticle.Provider::new);
+        event.register(GParticleTypes.AMETHYST_RAIN.get(), CrystalRainParticle.Provider::new);
         event.register(GParticleTypes.AURA_RINGER_INDICATOR.get(), IndicatorParticle.Provider::new);
         event.register(GParticleTypes.SPECTATE_ORB.get(), SpectateOrbParticle.Provider::new);
     }
