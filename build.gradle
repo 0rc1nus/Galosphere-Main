@@ -24,7 +24,28 @@ repositories {
 }
 
 loom {
+    runs {
+        datagenClient {
+            inherit client
+            name "Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.modid=galosphere"
+
+            runDir "build/datagen"
+        }
+    }
     accessWidenerPath = file("src/main/resources/galosphere.accesswidener")
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    'src/main/generated'
+            ]
+        }
+    }
 }
 
 dependencies {
@@ -33,11 +54,11 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+//    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     include "maven.modrinth:midnightlib:${project.midnightlib_version}"
 
-    modRuntimeOnly "maven.modrinth:lazydfu:${project.lazydfu_version}"
-    modRuntimeOnly "maven.modrinth:fastload:${project.fastload_version}"
+//    modRuntimeOnly "maven.modrinth:lazydfu:${project.lazydfu_version}"
+//    modRuntimeOnly "maven.modrinth:fastload:${project.fastload_version}"
 }
 
 processResources {
@@ -74,11 +95,6 @@ publishing {
         }
     }
 
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        // Add repositories to publish to here.
-        // Notice: This block does NOT have the same function as the block in the top level.
-        // The repositories here will be used for publishing your artifact, not for
-        // retrieving dependencies.
     }
 }

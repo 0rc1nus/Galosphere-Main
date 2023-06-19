@@ -25,8 +25,8 @@
     "client": [
       "net.orcinus.galosphere.GalosphereClient"
     ],
-    "modmenu": [
-      "net.orcinus.galosphere.config.GalosphereModMenu"
+    "fabric-datagen": [
+      "net.orcinus.galosphere.data.GDataGenerator"
     ]
   },
   "mixins": [
@@ -35,7 +35,7 @@
   "depends": {
     "fabricloader": ">=0.14.9",
     "fabric": "*",
-    "minecraft": ">=1.19",
+    "minecraft": ">=1.20",
     "java": ">=17"
   }
 }

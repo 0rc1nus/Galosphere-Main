@@ -19,7 +19,7 @@ public class ClientLevelMixin {
     private float G$playSound(float value, double d, double e, double f, SoundEvent soundEvent, SoundSource soundSource, float g, float h, boolean bl, long l) {
         boolean flag = false;
         Level $this = (ClientLevel) (Object) this;
-        BlockPos blockPos = new BlockPos(d, e, f);
+        BlockPos blockPos = BlockPos.containing(d, e, f);
         for (Direction direction : Direction.values()) {
             if ($this.getBlockState(blockPos).getRenderShape() == RenderShape.INVISIBLE || $this.getBlockState(blockPos).is(GBlockTags.OBFUSCATES_SOUND_WAVES) || !$this.getBlockState(blockPos.relative(direction)).is(GBlockTags.OBFUSCATES_SOUND_WAVES)) {
                 continue;

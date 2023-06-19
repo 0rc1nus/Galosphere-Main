@@ -2,8 +2,8 @@ package net.orcinus.galosphere.init;
 
 import com.google.common.collect.Maps;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AmethystBlock;
@@ -17,8 +17,7 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.blocks.ChandelierBlock;
 import net.orcinus.galosphere.blocks.CombustionTableBlock;
@@ -46,17 +45,17 @@ public class GBlocks {
     public static final Map<ResourceLocation, Block> BLOCKS = Maps.newLinkedHashMap();
     public static final Map<ResourceLocation, Item> BLOCK_ITEMS = Maps.newLinkedHashMap();
 
-    public static final Block MONSTROMETER = registerBlock("monstrometer", new MonstrometerBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).lightLevel(state -> MonstrometerBlock.isActive(state) ? 4 : 0).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(GSoundEvents.MONSTROMETER)));
-    public static final Block COMBUSTION_TABLE = registerBlock("combustion_table", new CombustionTableBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2.5F).sound(GSoundEvents.COMBUSTION_TABLE).requiresCorrectToolForDrops()));
-    public static final Block WARPED_ANCHOR = registerBlock("warped_anchor", new WarpedAnchorBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).lightLevel(state -> state.getValue(WarpedAnchorBlock.WARPED_CHARGE) * 3).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(GSoundEvents.SILVER)));
+    public static final Block MONSTROMETER = registerBlock("monstrometer", new MonstrometerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).lightLevel(state -> MonstrometerBlock.isActive(state) ? 4 : 0).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(GSoundEvents.MONSTROMETER)));
+    public static final Block COMBUSTION_TABLE = registerBlock("combustion_table", new CombustionTableBlock(BlockBehaviour.Properties.of().strength(2.5F).sound(GSoundEvents.COMBUSTION_TABLE).requiresCorrectToolForDrops()));
+    public static final Block WARPED_ANCHOR = registerBlock("warped_anchor", new WarpedAnchorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).lightLevel(state -> state.getValue(WarpedAnchorBlock.WARPED_CHARGE) * 3).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(GSoundEvents.SILVER)));
 
     public static final Block SILVER_ORE = registerBlock("silver_ore", new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
-    public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new DropExperienceBlock(BlockBehaviour.Properties.copy(SILVER_ORE).color(MaterialColor.DEEPSLATE).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE)));
-    public static final Block RAW_SILVER_BLOCK = registerBlock("raw_silver_block", new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_CYAN).requiresCorrectToolForDrops().strength(5.0F, 6.0F)));
-    public static final Block SILVER_BLOCK = registerBlock("silver_block", new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(GSoundEvents.SILVER)));
-    public static final Block CHANDELIER = registerNoTabBlock("chandelier", new ChandelierBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(3.5f).sound(SoundType.LANTERN).lightLevel(ChandelierBlock::getLightEmission).noOcclusion()));
+    public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new DropExperienceBlock(BlockBehaviour.Properties.copy(SILVER_ORE).mapColor(MapColor.DEEPSLATE).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE)));
+    public static final Block RAW_SILVER_BLOCK = registerBlock("raw_silver_block", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().strength(5.0F, 6.0F)));
+    public static final Block SILVER_BLOCK = registerBlock("silver_block", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(GSoundEvents.SILVER)));
+    public static final Block CHANDELIER = registerNoTabBlock("chandelier", new ChandelierBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5f).sound(SoundType.LANTERN).lightLevel(ChandelierBlock::getLightEmission).noOcclusion()));
 
-    public static final Block SILVER_TILES = registerBlock("silver_tiles", new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(GSoundEvents.SILVER).strength(3.0F, 6.0F)));
+    public static final Block SILVER_TILES = registerBlock("silver_tiles", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(GSoundEvents.SILVER).strength(3.0F, 6.0F)));
     public static final Block SILVER_TILES_STAIRS = registerBlock("silver_tiles_stairs", new StairBlock(SILVER_TILES.defaultBlockState(), BlockBehaviour.Properties.copy(SILVER_TILES)));
     public static final Block SILVER_TILES_SLAB = registerBlock("silver_tiles_slab", new SlabBlock(BlockBehaviour.Properties.copy(SILVER_TILES)));
 
@@ -67,16 +66,16 @@ public class GBlocks {
     public static final Block SILVER_LATTICE = registerBlock("silver_lattice", new SilverLatticeBlock(BlockBehaviour.Properties.copy(SILVER_TILES).sound(GSoundEvents.SILVER_LATTICE).noOcclusion()));
     public static final Block GLOW_BERRIES_SILVER_LATTICE = registerNoTabBlock("glow_berries_silver_lattice", new SilverLatticeVineBlock(BlockBehaviour.Properties.copy(SILVER_TILES).sound(GSoundEvents.SILVER_LATTICE).lightLevel(CaveVines.emission(14)).noOcclusion()));
 
-    public static final Block ALLURITE_BLOCK = registerBlock("allurite_block", new AmethystBlock(BlockBehaviour.Properties.of(GMaterials.ALLURITE, MaterialColor.COLOR_CYAN).strength(1.5F).sound(GSoundEvents.ALLURITE).requiresCorrectToolForDrops()));
-    public static final Block LUMIERE_BLOCK = registerBlock("lumiere_block", new LumiereBlock(false, BlockBehaviour.Properties.of(GMaterials.LUMIERE, MaterialColor.COLOR_YELLOW).lightLevel(state -> 0).strength(1.5F).sound(GSoundEvents.LUMIERE).requiresCorrectToolForDrops()));
+    public static final Block ALLURITE_BLOCK = registerBlock("allurite_block", new AmethystBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).strength(1.5F).sound(GSoundEvents.ALLURITE).requiresCorrectToolForDrops()));
+    public static final Block LUMIERE_BLOCK = registerBlock("lumiere_block", new LumiereBlock(false, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(state -> 0).strength(1.5F).sound(GSoundEvents.LUMIERE).requiresCorrectToolForDrops()));
     public static final Block CHARGED_LUMIERE_BLOCK = registerBlock("charged_lumiere_block", new LumiereBlock(true, BlockBehaviour.Properties.copy(LUMIERE_BLOCK).lightLevel(state -> 6).requiresCorrectToolForDrops()));
 
-    public static final Block ALLURITE_CLUSTER = registerBlock("allurite_cluster", new PollinatedClusterBlock(() -> GParticleTypes.ALLURITE_RAIN, BlockBehaviour.Properties.of(GMaterials.ALLURITE).noOcclusion().randomTicks().sound(GSoundEvents.ALLURITE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
-    public static final Block LUMIERE_CLUSTER = registerBlock("lumiere_cluster", new PollinatedClusterBlock(() -> GParticleTypes.LUMIERE_RAIN, BlockBehaviour.Properties.of(GMaterials.LUMIERE).noOcclusion().randomTicks().sound(GSoundEvents.LUMIERE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
+    public static final Block ALLURITE_CLUSTER = registerBlock("allurite_cluster", new PollinatedClusterBlock(() -> GParticleTypes.ALLURITE_RAIN, BlockBehaviour.Properties.of().noOcclusion().randomTicks().sound(GSoundEvents.ALLURITE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
+    public static final Block LUMIERE_CLUSTER = registerBlock("lumiere_cluster", new PollinatedClusterBlock(() -> GParticleTypes.LUMIERE_RAIN, BlockBehaviour.Properties.of().noOcclusion().randomTicks().sound(GSoundEvents.LUMIERE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
 
-    public static final Block GLINTED_ALLURITE_CLUSTER = registerBlock("glinted_allurite_cluster", new GlintedClusterBlock(() -> GParticleTypes.ALLURITE_RAIN, BlockBehaviour.Properties.of(GMaterials.ALLURITE).noOcclusion().randomTicks().sound(GSoundEvents.ALLURITE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
-    public static final Block GLINTED_LUMIERE_CLUSTER = registerBlock("glinted_lumiere_cluster", new GlintedClusterBlock(() -> GParticleTypes.LUMIERE_RAIN, BlockBehaviour.Properties.of(GMaterials.LUMIERE).noOcclusion().randomTicks().sound(GSoundEvents.LUMIERE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
-    public static final Block GLINTED_AMETHYST_CLUSTER = registerBlock("glinted_amethyst_cluster", new GlintedClusterBlock(() -> GParticleTypes.AMETHYST_RAIN, BlockBehaviour.Properties.of(GMaterials.LUMIERE).noOcclusion().randomTicks().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
+    public static final Block GLINTED_ALLURITE_CLUSTER = registerBlock("glinted_allurite_cluster", new GlintedClusterBlock(() -> GParticleTypes.ALLURITE_RAIN, BlockBehaviour.Properties.of().noOcclusion().randomTicks().sound(GSoundEvents.ALLURITE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
+    public static final Block GLINTED_LUMIERE_CLUSTER = registerBlock("glinted_lumiere_cluster", new GlintedClusterBlock(() -> GParticleTypes.LUMIERE_RAIN, BlockBehaviour.Properties.of().noOcclusion().randomTicks().sound(GSoundEvents.LUMIERE_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
+    public static final Block GLINTED_AMETHYST_CLUSTER = registerBlock("glinted_amethyst_cluster", new GlintedClusterBlock(() -> GParticleTypes.AMETHYST_RAIN, BlockBehaviour.Properties.of().noOcclusion().randomTicks().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).lightLevel((state) -> 7)));
 
     public static final Block AMETHYST_STAIRS = registerBlock("amethyst_stairs", new CrystalStairsBlock(Blocks.AMETHYST_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
     public static final Block AMETHYST_SLAB = registerBlock("amethyst_slab", new CrystalSlabBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
@@ -115,24 +114,24 @@ public class GBlocks {
     public static final Block CHISELED_ALLURITE = registerBlock("chiseled_allurite", new AmethystBlock(BlockBehaviour.Properties.copy(ALLURITE_BLOCK)));
     public static final Block CHISELED_LUMIERE = registerBlock("chiseled_lumiere", new AmethystBlock(BlockBehaviour.Properties.copy(LUMIERE_BLOCK)));
 
-    public static final Block AMETHYST_LAMP = registerBlock("amethyst_lamp", new Block(BlockBehaviour.Properties.of(Material.AMETHYST, MaterialColor.COLOR_PURPLE).lightLevel(state -> 15).strength(0.3F).sound(SoundType.AMETHYST)));
-    public static final Block ALLURITE_LAMP = registerBlock("allurite_lamp", new Block(BlockBehaviour.Properties.of(GMaterials.ALLURITE, MaterialColor.COLOR_LIGHT_BLUE).lightLevel(state -> 15).strength(0.3F).sound(GSoundEvents.ALLURITE)));
-    public static final Block LUMIERE_LAMP = registerBlock("lumiere_lamp", new Block(BlockBehaviour.Properties.of(GMaterials.LUMIERE, MaterialColor.COLOR_YELLOW).lightLevel(state -> 15).strength(0.3F).sound(GSoundEvents.LUMIERE)));
+    public static final Block AMETHYST_LAMP = registerBlock("amethyst_lamp", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).lightLevel(state -> 15).strength(0.3F).sound(SoundType.AMETHYST)));
+    public static final Block ALLURITE_LAMP = registerBlock("allurite_lamp", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).lightLevel(state -> 15).strength(0.3F).sound(GSoundEvents.ALLURITE)));
+    public static final Block LUMIERE_LAMP = registerBlock("lumiere_lamp", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(state -> 15).strength(0.3F).sound(GSoundEvents.LUMIERE)));
 
-    public static final Block LICHEN_MOSS = registerBlock("lichen_moss", new LichenMossBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_CYAN).strength(0.1f).sound(GSoundEvents.LICHEN_MOSS).lightLevel(state -> state.getValue(LichenMossBlock.LIT) ? 12 : 0)));
-    public static final Block LICHEN_ROOTS = registerBlock("lichen_roots", new LichenRootsBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT, MaterialColor.TERRACOTTA_CYAN).noCollission().instabreak().sound(GSoundEvents.LICHEN_ROOTS).offsetType(BlockBehaviour.OffsetType.XZ)));
-    public static final Block BOWL_LICHEN = registerBlock("bowl_lichen", new LichenMushroomBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_CYAN).instabreak().noCollission().sound(GSoundEvents.BOWL_LICHEN)));
+    public static final Block LICHEN_MOSS = registerBlock("lichen_moss", new LichenMossBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).strength(0.1f).sound(GSoundEvents.LICHEN_MOSS).lightLevel(state -> state.getValue(LichenMossBlock.LIT) ? 12 : 0)));
+    public static final Block LICHEN_ROOTS = registerBlock("lichen_roots", new LichenRootsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).noCollission().instabreak().sound(GSoundEvents.LICHEN_ROOTS).offsetType(BlockBehaviour.OffsetType.XZ)));
+    public static final Block BOWL_LICHEN = registerBlock("bowl_lichen", new LichenMushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instabreak().noCollission().sound(GSoundEvents.BOWL_LICHEN)));
     public static final Block LICHEN_SHELF = registerBlock("lichen_shelf", new BaseCoralWallFanBlock(BlockBehaviour.Properties.copy(Blocks.BRAIN_CORAL_WALL_FAN).noCollission().sound(GSoundEvents.LICHEN_SHELF)));
-    public static final Block LICHEN_CORDYCEPS = registerNoTabBlock("lichen_cordyceps", new CordycepsBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_CYAN).lightLevel(state -> state.getValue(CordycepsBlock.BULB) ? 15 : 0).instabreak().noCollission().sound(GSoundEvents.LICHEN_CORDYCEPS)));
-    public static final Block LICHEN_CORDYCEPS_PLANT = registerNoTabBlock("lichen_cordyceps_plant", new CordycepsPlantBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_CYAN).instabreak().noCollission().sound(GSoundEvents.LICHEN_CORDYCEPS)));
-    public static final Block GLOW_INK_CLUMPS = registerBlock("glow_ink_clumps", new GlowInkClumpsBlock(BlockBehaviour.Properties.of(Material.SCULK, MaterialColor.COLOR_LIGHT_BLUE).noCollission().strength(0.2F).sound(GSoundEvents.GLOW_INK_CLUMPS).lightLevel(GlowInkClumpsBlock.emission(15, 8))));
+    public static final Block LICHEN_CORDYCEPS = registerNoTabBlock("lichen_cordyceps", new CordycepsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).lightLevel(state -> state.getValue(CordycepsBlock.BULB) ? 15 : 0).instabreak().noCollission().sound(GSoundEvents.LICHEN_CORDYCEPS)));
+    public static final Block LICHEN_CORDYCEPS_PLANT = registerNoTabBlock("lichen_cordyceps_plant", new CordycepsPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instabreak().noCollission().sound(GSoundEvents.LICHEN_CORDYCEPS)));
+    public static final Block GLOW_INK_CLUMPS = registerBlock("glow_ink_clumps", new GlowInkClumpsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).noCollission().strength(0.2F).sound(GSoundEvents.GLOW_INK_CLUMPS).lightLevel(GlowInkClumpsBlock.emission(15, 8))));
 
     public static final Block LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
-    public static final Block POTTED_BOWL_LICHEN = registerNoTabBlock("potted_bowl_lichen", new FlowerPotBlock(BOWL_LICHEN, BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final Block POTTED_LICHEN_ROOTS = registerNoTabBlock("potted_lichen_roots", new FlowerPotBlock(LICHEN_ROOTS, BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    public static final Block POTTED_BOWL_LICHEN = registerNoTabBlock("potted_bowl_lichen", new FlowerPotBlock(BOWL_LICHEN, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final Block POTTED_LICHEN_ROOTS = registerNoTabBlock("potted_lichen_roots", new FlowerPotBlock(LICHEN_ROOTS, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
 
     public static <B extends Block> B registerBlock(String name, B block) {
-        GBlocks.BLOCK_ITEMS.put(Galosphere.id(name), new BlockItem(block, new Item.Properties().tab(Galosphere.GALOSPHERE)));
+        GBlocks.BLOCK_ITEMS.put(Galosphere.id(name), new BlockItem(block, new Item.Properties()));
         return GBlocks.registerNoTabBlock(name, block);
     }
 
@@ -142,7 +141,7 @@ public class GBlocks {
     }
 
     public static void init() {
-        GBlocks.BLOCKS.forEach((resourceLocation, block) -> Registry.register(Registry.BLOCK, resourceLocation, block));
+        GBlocks.BLOCKS.forEach((resourceLocation, block) -> Registry.register(BuiltInRegistries.BLOCK, resourceLocation, block));
     }
 
 }

@@ -2,6 +2,7 @@ package net.orcinus.galosphere.init;
 
 import com.google.common.collect.Maps;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
@@ -30,7 +31,7 @@ public class GSensorTypes {
     }
 
     public static void init() {
-        SENSOR_TYPES.forEach((resourceLocation, sensorType) -> Registry.register(Registry.SENSOR_TYPE, resourceLocation, sensorType));
+        SENSOR_TYPES.forEach((resourceLocation, sensorType) -> Registry.register(BuiltInRegistries.SENSOR_TYPE, resourceLocation, sensorType));
     }
 
 }

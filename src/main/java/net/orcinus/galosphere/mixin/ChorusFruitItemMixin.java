@@ -34,7 +34,7 @@ public class ChorusFruitItemMixin {
             for (int x = -radius; x <= radius; x++) {
                 for (int z = -radius; z <= radius; z++) {
                     for (int y = -radius; y <= radius; y++) {
-                        BlockPos blockPos = new BlockPos(livingEntity.getX() + x, livingEntity.getY() + y, livingEntity.getZ() + z);
+                        BlockPos blockPos = BlockPos.containing(livingEntity.getX() + x, livingEntity.getY() + y, livingEntity.getZ() + z);
                         BlockState blockState = world.getBlockState(blockPos);
                         if (blockState.is(GBlocks.WARPED_ANCHOR) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0 && blockPos.closerThan(pos, 16 * blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE))) {
                             poses.add(blockPos);

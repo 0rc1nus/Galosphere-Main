@@ -1,8 +1,7 @@
 package net.orcinus.galosphere.client.particles;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
@@ -17,14 +16,16 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.blocks.MonstrometerBlock;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
 public class IndicatorParticle extends TextureSheetParticle {
 
     private final SpriteSet sprites;
 
-    private static final Vector3f SAFE_COLOR = new Vector3f(Vec3.fromRGB24(0xFFB219));
-    private static final Vector3f UNSAFE_COLOR = new Vector3f(Vec3.fromRGB24(0x93B9FF));
+    private static final Vector3f SAFE_COLOR = Vec3.fromRGB24(0xFFB219).toVector3f();
+    private static final Vector3f UNSAFE_COLOR = Vec3.fromRGB24(0x93B9FF).toVector3f();
 
     public IndicatorParticle(ClientLevel world, double x, double y, double z, double pQuadSizeMulitiplier, SpriteSet sprites) {
         super(world, x, y, z);
@@ -41,7 +42,7 @@ public class IndicatorParticle extends TextureSheetParticle {
     }
 
     private Vector3f getColor() {
-        return MonstrometerBlock.isUnsafe(level, new BlockPos(x, y, z)) ? UNSAFE_COLOR : SAFE_COLOR;
+        return MonstrometerBlock.isUnsafe(level, BlockPos.containing(x, y, z)) ? UNSAFE_COLOR : SAFE_COLOR;
     }
 
     @Override
@@ -74,11 +75,11 @@ public class IndicatorParticle extends TextureSheetParticle {
 
     @Override
     public void render(VertexConsumer consumer, Camera camera, float delta) {
-        renderParticle(consumer, camera, delta, Vector3f.XP.rotation(Mth.PI / 2));
-        renderParticle(consumer, camera, delta, Vector3f.XN.rotation(Mth.PI / 2));
+        renderParticle(consumer, camera, delta, Axis.XP.rotation(Mth.PI / 2));
+        renderParticle(consumer, camera, delta, Axis.XN.rotation(Mth.PI / 2));
     }
 
-    private void renderParticle(VertexConsumer consumer, Camera camera, float delta, Quaternion quaternion) {
+    private void renderParticle(VertexConsumer consumer, Camera camera, float delta, Quaternionf quaternion) {
         Vec3 vec3 = camera.getPosition();
         if (vec3.distanceTo(new Vec3(x, y, z)) >= MonstrometerBlock.getParticleViewRange()) return;
 
@@ -86,7 +87,7 @@ public class IndicatorParticle extends TextureSheetParticle {
 
         for(int i = 0; i < 4; ++i) {
             Vector3f vec = veca[i];
-            vec.transform(quaternion);
+            quaternion.transform(vec);
             vec.mul(getQuadSize(delta));
             float f = (float) (Mth.lerp(delta, xo, x) - vec3.x());
             float f1 = (float) (Mth.lerp(delta, yo, y) - vec3.y());

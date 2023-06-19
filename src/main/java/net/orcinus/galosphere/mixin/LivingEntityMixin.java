@@ -65,8 +65,8 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     private void G$tick(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
         if (SpectreBoundSpyglass.canUseSpectreBoundSpyglass(this.useItem) && this.useItem.getTag() != null) {
-            if (!entity.level.isClientSide) {
-                Entity spectreBound = ((ServerLevel)entity.level).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
+            if (!entity.level().isClientSide) {
+                Entity spectreBound = ((ServerLevel)entity.level()).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
                 Optional.ofNullable(spectreBound).filter(Spectre.class::isInstance).map(Spectre.class::cast).filter(Spectre::isAlive).ifPresent(spectre -> {
                     if (entity instanceof Player player && spectre.getManipulatorUUID() != player.getUUID()) {
                         boolean withinDistance = Math.sqrt(Math.pow((player.getX() - spectre.getX()), 2) + Math.pow((player.getZ() - spectre.getZ()), 2)) < 110;

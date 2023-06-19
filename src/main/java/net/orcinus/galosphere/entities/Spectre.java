@@ -207,14 +207,14 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
 
     @Override
     public void spectateTick(UUID uuid) {
-        Player player = this.level.getPlayerByUUID(uuid);
+        Player player = this.level().getPlayerByUUID(uuid);
         if (player != null) {
             player.xxa = 0.0F;
             player.zza = 0.0F;
             player.setJumping(false);
             if (!player.isScoping() || this.isDeadOrDying()) {
                 this.setManipulatorUUID(null);
-                if (this.level.isClientSide) {
+                if (this.level().isClientSide) {
                     this.stopUsingSpyglass(player);
                 } else {
                     ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(false);
@@ -222,7 +222,7 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
                 }
             }
         }
-        if (!this.level.isClientSide() && player == null) {
+        if (!this.level().isClientSide() && player == null) {
             this.entityData.set(MANIPULATOR, Optional.empty());
         }
     }
@@ -249,7 +249,7 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
         super.tick();
         if (this.canBeManipulated() && this.random.nextFloat() < 0.05F) {
             for(int i = 0; i < this.random.nextInt(2) + 1; ++i) {
-                this.spawnFluidParticle(this.level, this.getX() - (double)0.3F, this.getX() + (double)0.3F, this.getZ() - (double)0.3F, this.getZ() + (double)0.3F, this.getY(0.5D), GParticleTypes.ALLURITE_RAIN);
+                this.spawnFluidParticle(this.level(), this.getX() - (double)0.3F, this.getX() + (double)0.3F, this.getZ() - (double)0.3F, this.getZ() + (double)0.3F, this.getY(0.5D), GParticleTypes.ALLURITE_RAIN);
             }
         }
     }
@@ -293,12 +293,12 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
 
     @Override
     protected void customServerAiStep() {
-        this.level.getProfiler().push("spectreBrain");
-        this.getBrain().tick((ServerLevel)this.level, this);
-        this.level.getProfiler().pop();
-        this.level.getProfiler().push("spectreActivityUpdate");
+        this.level().getProfiler().push("spectreBrain");
+        this.getBrain().tick((ServerLevel)this.level(), this);
+        this.level().getProfiler().pop();
+        this.level().getProfiler().push("spectreActivityUpdate");
         SpectreAi.updateActivity(this);
-        this.level.getProfiler().pop();
+        this.level().getProfiler().pop();
         super.customServerAiStep();
     }
 
@@ -309,7 +309,7 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide() || this.matchesClientPlayerUUID()) {
+        if (!this.level().isClientSide() || this.matchesClientPlayerUUID()) {
             this.entityData.get(MANIPULATOR).ifPresent(this::spectateTick);
         }
     }
@@ -335,7 +335,7 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
     @Override
     public void travel(Vec3 velocity) {
         if (this.getManipulatorUUID() != null) {
-            this.entityData.get(MANIPULATOR).map(this.level::getPlayerByUUID).ifPresent(uuid -> this.copyPlayerRotation(this, uuid));
+            this.entityData.get(MANIPULATOR).map(this.level()::getPlayerByUUID).ifPresent(uuid -> this.copyPlayerRotation(this, uuid));
         } else {
             super.travel(velocity);
         }
@@ -356,8 +356,8 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
             return InteractionResult.SUCCESS;
         }
         else if (stack.is(Items.GLASS_BOTTLE)) {
-            this.level.playSound(player, player.getX(), player.getY(), player.getZ(), GSoundEvents.SPECTRE_BOTTLE_FILL, SoundSource.NEUTRAL, 1.0f, 1.0f);
-            if (!this.level.isClientSide()) {
+            this.level().playSound(player, player.getX(), player.getY(), player.getZ(), GSoundEvents.SPECTRE_BOTTLE_FILL, SoundSource.NEUTRAL, 1.0f, 1.0f);
+            if (!this.level().isClientSide()) {
                 this.gameEvent(GameEvent.ENTITY_INTERACT);
                 ItemStack itemStack2 = new ItemStack(GItems.BOTTLE_OF_SPECTRE);
                 CompoundTag compoundTag = new CompoundTag();
@@ -380,7 +380,7 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
     }
 
     public void setCamera(Player player) {
-        if (!this.level.isClientSide()) {
+        if (!this.level().isClientSide()) {
             ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(true);
             this.setManipulatorUUID(player.getUUID());
             FriendlyByteBuf buf = PacketByteBufs.create();
@@ -393,7 +393,7 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
 
     @Override
     public boolean isFlying() {
-        return !this.onGround;
+        return !this.onGround();
     }
 
     @Override

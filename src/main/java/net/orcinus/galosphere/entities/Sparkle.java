@@ -2,18 +2,24 @@ package net.orcinus.galosphere.entities;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.mojang.logging.LogUtils;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -25,6 +31,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.VariantHolder;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -35,6 +42,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -63,14 +71,13 @@ import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Map;
+import java.util.function.IntFunction;
 
-public class Sparkle extends Animal {
+public class Sparkle extends Animal implements VariantHolder<Sparkle.CrystalType> {
     private static final EntityDataAccessor<Integer> CRYSTAL_TYPE = SynchedEntityData.defineId(Sparkle.class, EntityDataSerializers.INT);
-    protected static final ImmutableList<SensorType<? extends Sensor<? super Sparkle>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, GSensorTypes.SPARKLE_TEMPTATIONS, GSensorTypes.NEAREST_POLLINATED_CLUSTER, SensorType.IS_IN_WATER);
-    protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, GMemoryModuleTypes.POLLINATED_COOLDOWN, MemoryModuleType.IS_TEMPTED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, MemoryModuleType.IS_IN_WATER, MemoryModuleType.IS_PANICKING);
+    protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Sparkle>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, GSensorTypes.SPARKLE_TEMPTATIONS, GSensorTypes.NEAREST_POLLINATED_CLUSTER, SensorType.IS_IN_WATER);
+    protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, MemoryModuleType.IS_IN_WATER, MemoryModuleType.IS_PANICKING, GMemoryModuleTypes.NEAREST_POLLINATED_CLUSTER, GMemoryModuleTypes.POLLINATED_COOLDOWN);
     private static final UniformInt REGROWTH_TICKS = UniformInt.of(6000, 12000);
     private final Map<Block, Block> clustersToGlinted = Util.make(Maps.newHashMap(), map -> {
         map.put(GBlocks.ALLURITE_CLUSTER, GBlocks.GLINTED_ALLURITE_CLUSTER);
@@ -84,7 +91,11 @@ public class Sparkle extends Animal {
         this.setPathfindingMalus(BlockPathTypes.WATER, 4.0F);
         this.setPathfindingMalus(BlockPathTypes.TRAPDOOR, -1.0F);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-        this.maxUpStep = 1.0F;
+    }
+
+    @Override
+    public float maxUpStep() {
+        return 1.0F;
     }
 
     public Map<Block, Block> getClustersToGlinted() {
@@ -94,11 +105,6 @@ public class Sparkle extends Animal {
     @Override
     public float getWalkTargetValue(BlockPos blockPos, LevelReader levelReader) {
         return 0.0F;
-    }
-
-    @Override
-    public boolean canCutCorner(BlockPathTypes blockPathTypes) {
-        return super.canCutCorner(blockPathTypes) && blockPathTypes != BlockPathTypes.WATER_BORDER;
     }
 
     @Override
@@ -118,12 +124,12 @@ public class Sparkle extends Animal {
 
     @Override
     protected void customServerAiStep() {
-        this.level.getProfiler().push("sparkleBrain");
-        this.getBrain().tick((ServerLevel)this.level, this);
-        this.level.getProfiler().pop();
-        this.level.getProfiler().push("sparkleActivityUpdate");
+        this.level().getProfiler().push("sparkleBrain");
+        this.getBrain().tick((ServerLevel)this.level(), this);
+        this.level().getProfiler().pop();
+        this.level().getProfiler().push("sparkleActivityUpdate");
         SparkleAi.updateActivity(this);
-        this.level.getProfiler().pop();
+        this.level().getProfiler().pop();
         super.customServerAiStep();
     }
 
@@ -181,21 +187,21 @@ public class Sparkle extends Animal {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
         CrystalType type = this.getRandomType();
-        this.setCrystalType(type);
+        this.setVariant(type);
         return super.finalizeSpawn(world, difficulty, spawnReason, data, tag);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        this.setCrystalType(CrystalType.BY_ID[tag.getInt("CrystalType")]);
+        this.setVariant(CrystalType.byId(tag.getInt("CrystalType")));
         this.setGrowthTicks(tag.getInt("GrowthTicks"));
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        tag.putInt("CrystalType", this.getCrystaltype().getId());
+        tag.putInt("CrystalType", this.getVariant().getId());
         tag.putInt("GrowthTicks", this.getGrowthTicks());
     }
 
@@ -207,23 +213,30 @@ public class Sparkle extends Animal {
         return this.growthTicks;
     }
 
-    public void setCrystalType(CrystalType type) {
-        this.entityData.set(CRYSTAL_TYPE, type.getId());
-    }
-
-    public CrystalType getCrystaltype() {
-        return CrystalType.BY_ID[this.entityData.get(CRYSTAL_TYPE)];
-    }
-
     @Override
     protected PathNavigation createNavigation(Level world) {
         return new SparklePathNavigation(this, world);
+    }
+
+    @Override
+    public void setVariant(CrystalType crystalType) {
+        this.entityData.set(CRYSTAL_TYPE, crystalType.getId());
+    }
+
+    @Override
+    public CrystalType getVariant() {
+        return CrystalType.byId(this.entityData.get(CRYSTAL_TYPE));
     }
 
     static class SparklePathNavigation extends AmphibiousPathNavigation {
 
         public SparklePathNavigation(Sparkle sparkle, Level level) {
             super(sparkle, level);
+        }
+
+        @Override
+        public boolean canCutCorner(BlockPathTypes blockPathTypes) {
+            return blockPathTypes != BlockPathTypes.WATER_BORDER && super.canCutCorner(blockPathTypes);
         }
 
         @Override
@@ -258,7 +271,7 @@ public class Sparkle extends Animal {
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mob) {
         Sparkle sparkleEntity = GEntityTypes.SPARKLE.create(world);
         if (sparkleEntity != null) {
-            sparkleEntity.setCrystalType(CrystalType.NONE);
+            sparkleEntity.setVariant(CrystalType.NONE);
         }
         return sparkleEntity;
     }
@@ -266,13 +279,13 @@ public class Sparkle extends Animal {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide()) {
+        if (!this.level().isClientSide()) {
             if (this.getGrowthTicks() > 0) {
                 this.setGrowthTicks(this.getGrowthTicks() - 1);
             }
-            CrystalType type = this.getCrystaltype();
+            CrystalType type = this.getVariant();
             if (this.getGrowthTicks() == 0 && type == CrystalType.NONE) {
-                this.setCrystalType(type);
+                this.setVariant(type);
             }
         }
     }
@@ -284,7 +297,7 @@ public class Sparkle extends Animal {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (this.getCrystaltype() != CrystalType.NONE && stack.getItem() instanceof PickaxeItem && !this.isBaby()) {
+        if (this.getVariant() != CrystalType.NONE && stack.getItem() instanceof PickaxeItem && !this.isBaby()) {
             this.extractShard(stack);
             stack.hurtAndBreak(1, player, (entity) -> {
                 entity.broadcastBreakEvent(hand);
@@ -292,7 +305,7 @@ public class Sparkle extends Animal {
             this.gameEvent(GameEvent.SHEAR, player);
             return InteractionResult.SUCCESS;
         }
-        else if (this.getCrystaltype() == CrystalType.NONE && stack.is(GItemTags.SPARKLE_TEMPT_ITEMS)) {
+        else if (this.getVariant() == CrystalType.NONE && stack.is(GItemTags.SPARKLE_TEMPT_ITEMS)) {
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
@@ -305,24 +318,24 @@ public class Sparkle extends Animal {
     public void extractShard(ItemStack stack) {
         this.spawnShard(stack);
         this.playSound(SoundEvents.CALCITE_HIT, 1.0F, 1.0F);
-        this.setCrystalType(CrystalType.NONE);
+        this.setVariant(CrystalType.NONE);
         this.setGrowthTicks(REGROWTH_TICKS.sample(this.getRandom()));
     }
 
     private void spawnShard(ItemStack stack) {
-        Item item = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0 ? this.getCrystaltype().getSilktouchItem() : this.getCrystaltype().getItem();
+        Item item = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0 ? this.getVariant().getSilktouchItem() : this.getVariant().getItem();
         int rolls = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack) > 0 ? 1 + EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack) : 1;
         for (int i = 0; i < rolls; i++) {
             this.spawnAtLocation(item);
         }
     }
 
-    public enum CrystalType {
+    public enum CrystalType implements StringRepresentable {
         NONE(0, "none", null, null),
         ALLURITE(1, "allurite", GItems.ALLURITE_SHARD, GBlocks.ALLURITE_CLUSTER.asItem()),
         LUMIERE(2, "lumiere", GItems.LUMIERE_SHARD, GBlocks.LUMIERE_CLUSTER.asItem());
 
-        public static final CrystalType[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(CrystalType::getId)).toArray(CrystalType[]::new);
+        public static final IntFunction<CrystalType> BY_ID = ByIdMap.continuous(CrystalType::getId, CrystalType.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
         private final int id;
         private final String name;
         private final Item item;
@@ -339,6 +352,10 @@ public class Sparkle extends Animal {
             return this.id;
         }
 
+        public static CrystalType byId(int i) {
+            return BY_ID.apply(i);
+        }
+
         public String getName() {
             return this.name;
         }
@@ -349,6 +366,11 @@ public class Sparkle extends Animal {
 
         public Item getSilktouchItem() {
             return this.silktouchItem;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name;
         }
     }
 

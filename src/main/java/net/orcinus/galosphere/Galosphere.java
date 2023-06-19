@@ -2,13 +2,11 @@ package net.orcinus.galosphere;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.crafting.LumiereReformingManager;
@@ -16,15 +14,15 @@ import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GAttributes;
 import net.orcinus.galosphere.init.GBiomeModifier;
-import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.GConfiguredFeatures;
+import net.orcinus.galosphere.init.GCreativeModeTabs;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GEvents;
 import net.orcinus.galosphere.init.GFeatures;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
@@ -37,7 +35,6 @@ public class Galosphere implements ModInitializer {
     
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "galosphere";
-    public static final CreativeModeTab GALOSPHERE = FabricItemGroupBuilder.create(Galosphere.id(MODID)).icon(() -> new ItemStack(GItems.ICON_ITEM)).build();
 
     @Override
     public void onInitialize() {
@@ -46,17 +43,17 @@ public class Galosphere implements ModInitializer {
         GBlocks.init();
         GSoundEvents.init();
         GAttributes.init();
-        GBiomes.init();
         GBiomeModifier.init();
         GCriteriaTriggers.init();
+        GCreativeModeTabs.init();
         GBlockEntityTypes.init();
         GEntityTypes.init();
         GEvents.init();
         GFeatures.init();
-        GConfiguredFeatures.init();
         GParticleTypes.init();
         GPlacedFeatures.init();
         GMenuTypes.init();
+        GMemoryModuleTypes.init();
         GVanillaIntegration.init();
 
         SpawnPlacements.register(GEntityTypes.SPARKLE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sparkle::checkSparkleSpawnRules);

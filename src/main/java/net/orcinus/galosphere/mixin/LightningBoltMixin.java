@@ -22,7 +22,7 @@ public class LightningBoltMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LightningBolt;clearCopperOnLightningStrike(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"), method = "tick")
     private void G$tick(CallbackInfo ci) {
         LightningBolt $this = (LightningBolt)(Object)this;
-        chargeLumiereOnLightningStrike(((LightningBolt)(Object)this).level, ((LightningBoltAccessor)$this).callGetStrikePosition());
+        chargeLumiereOnLightningStrike(((LightningBolt)(Object)this).level(), ((LightningBoltAccessor)$this).callGetStrikePosition());
     }
 
     private static void chargeLumiereOnLightningStrike(Level world, BlockPos pos) {

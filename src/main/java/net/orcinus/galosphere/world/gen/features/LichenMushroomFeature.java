@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -137,7 +138,7 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     private static boolean canGenerate(BlockState state) {
-        return state.getMaterial().isReplaceable() || state.isAir() || state.is(Blocks.WATER) || state.is(GBlocks.BOWL_LICHEN);
+        return state.is(BlockTags.REPLACEABLE) || state.isAir() || state.is(Blocks.WATER) || state.is(GBlocks.BOWL_LICHEN);
     }
 
     private static void generateDefaultLichenMushroom(WorldGenLevel world, BlockPos blockPos, int radius, int stemHeight, HashSet<BlockPos> set) {

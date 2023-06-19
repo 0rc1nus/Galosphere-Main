@@ -3,6 +3,7 @@ package net.orcinus.galosphere.init;
 import com.google.common.collect.Maps;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,7 +20,7 @@ public class GBlockEntityTypes {
 
     public static final BlockEntityType<MonstrometerBlockEntity> MONSTROMETER = registerBlockEntityType("monstrometer", FabricBlockEntityTypeBuilder.create(MonstrometerBlockEntity::new, GBlocks.MONSTROMETER).build(null));
     public static final BlockEntityType<GlowInkClumpsBlockEntity> GLOW_INK_CLUMPS = registerBlockEntityType("glow_ink_clumps", FabricBlockEntityTypeBuilder.create(GlowInkClumpsBlockEntity::new, GBlocks.GLOW_INK_CLUMPS).build(null));
-    public static final BlockEntityType<CordycepsBlockEntity> CORDYCEPS = registerBlockEntityType("cordyceps", FabricBlockEntityTypeBuilder.create(CordycepsBlockEntity::new, GBlocks.LICHEN_CORDYCEPS).build(null));
+    public static final BlockEntityType<CordycepsBlockEntity> CORDYCEPS = registerBlockEntityType("cordyceps", BlockEntityType.Builder.of(CordycepsBlockEntity::new, GBlocks.LICHEN_CORDYCEPS).build(null));
 
     public static <T extends BlockEntity, B extends BlockEntityType<T>> B registerBlockEntityType(String name, B type) {
         BLOCK_ENTITIES.put(Galosphere.id(name), type);
@@ -28,7 +29,7 @@ public class GBlockEntityTypes {
 
     public static void init() {
         for (ResourceLocation id : BLOCK_ENTITIES.keySet()) {
-            Registry.register(Registry.BLOCK_ENTITY_TYPE, id, BLOCK_ENTITIES.get(id));
+            Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, id, BLOCK_ENTITIES.get(id));
         }
     }
 

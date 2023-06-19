@@ -14,8 +14,7 @@ import net.minecraft.world.entity.ai.behavior.LookAtTargetSink;
 import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
 import net.minecraft.world.entity.ai.behavior.RandomStroll;
 import net.minecraft.world.entity.ai.behavior.RunOne;
-import net.minecraft.world.entity.ai.behavior.RunSometimes;
-import net.minecraft.world.entity.ai.behavior.SetEntityLookTarget;
+import net.minecraft.world.entity.ai.behavior.SetEntityLookTargetSometimes;
 import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromLookTarget;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
@@ -48,12 +47,12 @@ public class SpecterpillarAi {
 
     private static void initIdleActivity(Brain<Specterpillar> brain) {
         brain.addActivityWithConditions(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0f), UniformInt.of(30, 60))),
+                Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
                 Pair.of(1, new FollowTemptation(livingEntity -> 0.25F)),
                 Pair.of(2, new RunOne<>(
                         ImmutableList.of(
-                                Pair.of(new RandomStroll(0.25F), 2),
-                                Pair.of(new SetWalkTargetFromLookTarget(0.25F, 3), 2),
+                                Pair.of(RandomStroll.stroll(0.25F), 2),
+                                Pair.of(SetWalkTargetFromLookTarget.create(0.25F, 3), 2),
                                 Pair.of(new DoNothing(30, 60), 1))))
         ), ImmutableSet.of(Pair.of(GMemoryModuleTypes.CAN_BURY, MemoryStatus.VALUE_ABSENT)));
     }

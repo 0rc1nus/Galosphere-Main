@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -38,7 +40,7 @@ public class GVanillaIntegration {
 
         DispenserBlock.registerBehavior(GItems.GLOW_FLARE, new GlowFlareDispenseItemBehavior());
 
-        Registry.ITEM.getTagOrEmpty(ItemTags.CLUSTER_MAX_HARVESTABLES).iterator().forEachRemaining(holder -> DispenserBlock.registerBehavior(holder.value(), new PickaxeDispenseItemBehavior()));
+        BuiltInRegistries.ITEM.getTagOrEmpty(ItemTags.CLUSTER_MAX_HARVESTABLES).iterator().forEachRemaining(holder -> DispenserBlock.registerBehavior(holder.value(), new PickaxeDispenseItemBehavior()));
     }
 
 }

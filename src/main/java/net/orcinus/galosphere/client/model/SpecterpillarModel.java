@@ -37,7 +37,7 @@ public class SpecterpillarModel<T extends Specterpillar> extends HierarchicalMod
     public void setupAnim(T entity, float swing, float swingAmount, float age, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.animate(entity.burrowAnimationState, SpecterpillarAnimations.SPECTERPILLAR_BURROW, age);
-        body.zScale = 1 + (Mth.sin(age * (0.2F + (swing / 600))) * (0.07F + (swingAmount / 3)));
+        body.zScale = 1 + (Mth.sin((age * 0.2F + (swing / 600))) * (0.07F + (swingAmount / 3)));
     }
 
     @Override

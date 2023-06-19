@@ -1,6 +1,8 @@
 package net.orcinus.galosphere.init;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.SoundType;
@@ -8,8 +10,8 @@ import net.orcinus.galosphere.Galosphere;
 
 public class GSoundEvents {
 
-    public static final SoundEvent MUSIC_CRYSTAL_CANYONS = register("music.biome.crystal_canyons");
-    public static final SoundEvent MUSIC_LICHEN_CAVES = register("music.biome.lichen_caves");
+    public static final Holder.Reference<SoundEvent> MUSIC_CRYSTAL_CANYONS = registerForHolder("music.biome.crystal_canyons");
+    public static final Holder.Reference<SoundEvent> MUSIC_LICHEN_CAVES = registerForHolder("music.biome.lichen_caves");
 
     public static final SoundEvent LUMIERE_COMPOST = register("block.lumiere.compost");
 
@@ -50,7 +52,12 @@ public class GSoundEvents {
 
     private static SoundEvent register(String string) {
         ResourceLocation id = Galosphere.id(string);
-        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id));
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
+    }
+
+    private static Holder.Reference<SoundEvent> registerForHolder(String string) {
+        ResourceLocation id = Galosphere.id(string);
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 
     private static String block(String name, String append) {

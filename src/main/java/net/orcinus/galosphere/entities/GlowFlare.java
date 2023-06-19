@@ -2,6 +2,8 @@ package net.orcinus.galosphere.entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
@@ -10,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
@@ -54,8 +55,9 @@ public class GlowFlare extends FireworkRocketEntity {
     @Override
     public void tick() {
         super.tick();
-        if (this.level.isClientSide && ((FireworkRocketEntityAccessor)this).getLife() % 2 < 2) {
-            this.level.addParticle(ParticleTypes.GLOW, this.getX(), this.getY(), this.getZ(), this.random.nextGaussian() * 0.05D, -this.getDeltaMovement().y * 0.5D, this.random.nextGaussian() * 0.05D);
+        Level world = this.level();
+        if (world.isClientSide && ((FireworkRocketEntityAccessor)this).getLife() % 2 < 2) {
+            world.addParticle(ParticleTypes.GLOW, this.getX(), this.getY(), this.getZ(), this.random.nextGaussian() * 0.05D, -this.getDeltaMovement().y * 0.5D, this.random.nextGaussian() * 0.05D);
         }
     }
 
@@ -70,12 +72,12 @@ public class GlowFlare extends FireworkRocketEntity {
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        if (!this.level.isClientSide()) {
+        Level world = this.level();
+        if (!world.isClientSide()) {
             BlockPos hitPos = result.getBlockPos();
             BlockPos placePos = hitPos.relative(result.getDirection());
-            Material material = this.level.getBlockState(placePos).getMaterial();
-            if (this.level.getBlockState(hitPos).isSolidRender(this.level, hitPos) && ((material != Material.LAVA && material.isReplaceable()) || this.level.isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
-                this.level.setBlock(placePos, GBlocks.GLOW_INK_CLUMPS.defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(result.getDirection().getOpposite()), true).setValue(BlockStateProperties.AGE_15, 15).setValue(BlockStateProperties.WATERLOGGED, this.level.getBlockState(placePos).is(Blocks.WATER)), 2);
+            if (world.getBlockState(hitPos).isSolidRender(world, hitPos) && ((world.getBlockState(placePos).is(BlockTags.REPLACEABLE) && !world.getFluidState(placePos).is(FluidTags.LAVA)) || world.isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
+                world.setBlock(placePos, GBlocks.GLOW_INK_CLUMPS.defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(result.getDirection().getOpposite()), true).setValue(BlockStateProperties.AGE_15, 15).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(placePos).is(Blocks.WATER)), 2);
             }
             this.playSound(GSoundEvents.GLOW_FLARE_SPREAD, 1.0F, 1.0F);
             this.discard();

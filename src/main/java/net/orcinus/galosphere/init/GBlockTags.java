@@ -1,6 +1,7 @@
 package net.orcinus.galosphere.init;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.orcinus.galosphere.Galosphere;
@@ -14,7 +15,7 @@ public class GBlockTags {
     public static final TagKey<Block> OBFUSCATES_SOUND_WAVES = create("obfuscates_sound_waves");
 
     private static TagKey<Block> create(String id) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, Galosphere.id(id));
+        return TagKey.create(Registries.BLOCK, Galosphere.id(id));
     }
 
 }

@@ -110,7 +110,7 @@ public class GalosphereClient implements ClientModInitializer {
                 if (entity == null) {
                     return 0.0f;
                 }
-                if (clientLevel == null && entity.level instanceof ClientLevel clientWorld) {
+                if (clientLevel == null && entity.level() instanceof ClientLevel clientWorld) {
                     clientLevel = clientWorld;
                 }
                 if (clientLevel == null) {

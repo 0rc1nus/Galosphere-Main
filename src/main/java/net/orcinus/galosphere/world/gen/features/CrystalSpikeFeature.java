@@ -118,7 +118,7 @@ public class CrystalSpikeFeature extends Feature<CrystalSpikeConfig> {
                         float xx = direction == Direction.UP ? -q : q;
                         float yy = direction == Direction.UP ? -k : k;
                         float zz = direction == Direction.UP ? -l : l;
-                        BlockPos trigPos = pos.offset(xx, yy, zz);
+                        BlockPos trigPos = BlockPos.containing(pos.getX() + xx, pos.getY() + yy, pos.getZ() + zz);
                         if (world.isStateAtPosition(trigPos, DripstoneUtils::isEmptyOrWaterOrLava)) {
                             crystalPos.add(trigPos);
                             flag = true;

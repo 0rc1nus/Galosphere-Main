@@ -12,7 +12,6 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.init.GAttributes;
 import net.orcinus.galosphere.init.GItems;
 
@@ -21,8 +20,8 @@ import java.util.UUID;
 public class SterlingArmorItem extends ArmorItem {
     private static final SterlingArmorMaterial material = new SterlingArmorMaterial();
 
-    public SterlingArmorItem(EquipmentSlot slot, Properties properties) {
-        super(material, slot, properties);
+    public SterlingArmorItem(Type type, Properties properties) {
+        super(material, type, properties);
     }
 
     @Override
@@ -31,10 +30,10 @@ public class SterlingArmorItem extends ArmorItem {
         UUID uuid = UUID.fromString("fb112e48-f201-4a6f-ae86-0f11df4f8e79");
         UUID[] ARMOR_MODIFIER_UUID_PER_SLOT = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
         UUID defaultUUid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getIndex()];
-        builder.put(Attributes.ARMOR, new AttributeModifier(defaultUUid, "Armor modifier", this.getMaterial().getDefenseForSlot(slot), AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ARMOR, new AttributeModifier(defaultUUid, "Armor modifier", this.getMaterial().getDefenseForType(this.type), AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(defaultUUid, "Armor toughness", this.getMaterial().getToughness(), AttributeModifier.Operation.ADDITION));
         builder.put(GAttributes.ILLAGER_RESISTANCE, new AttributeModifier(uuid, "Armor illager resistance", this.getInsurgentResistance(slot), AttributeModifier.Operation.ADDITION));
-        return slot == this.slot ? builder.build() : super.getDefaultAttributeModifiers(slot);
+        return slot == this.type.getSlot() ? builder.build() : super.getDefaultAttributeModifiers(slot);
     }
 
     public float getInsurgentResistance(EquipmentSlot slot) {
@@ -46,14 +45,14 @@ public class SterlingArmorItem extends ArmorItem {
         private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
 
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
-            return HEALTH_PER_SLOT[slot.getIndex()] * 12;
+        public int getDurabilityForType(Type type) {
+            return HEALTH_PER_SLOT[type.getSlot().getIndex()] * 12;
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
+        public int getDefenseForType(Type type) {
             int[] slots = new int[]{1, 3, 4, 1};
-            return slots[slot.getIndex()];
+            return slots[type.getSlot().getIndex()];
         }
 
         @Override

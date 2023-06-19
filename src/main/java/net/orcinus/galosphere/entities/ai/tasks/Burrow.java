@@ -23,7 +23,7 @@ public class Burrow extends Behavior<Specterpillar> {
 
     @Override
     protected boolean checkExtraStartConditions(ServerLevel serverLevel, Specterpillar livingEntity) {
-        return livingEntity.isOnGround() && this.getTargetPos(livingEntity).isPresent() && this.getTargetPos(livingEntity).get().distManhattan(livingEntity.blockPosition()) <= 0;
+        return livingEntity.onGround() && this.getTargetPos(livingEntity).isPresent() && this.getTargetPos(livingEntity).get().distManhattan(livingEntity.blockPosition()) <= 0;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Burrow extends Behavior<Specterpillar> {
         this.getTargetPos(livingEntity).ifPresent(blockPos -> {
             boolean flag = blockPos.distManhattan(livingEntity.blockPosition()) <= 0;
             if (flag) {
-                if (livingEntity.isOnGround()) {
+                if (livingEntity.onGround()) {
                     livingEntity.setPose(Pose.DIGGING);
                 } else {
                     this.stop(serverLevel, livingEntity, l);

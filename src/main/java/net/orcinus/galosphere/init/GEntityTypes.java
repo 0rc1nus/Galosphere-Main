@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,7 +30,7 @@ public class GEntityTypes {
     public static final EntityType<SpectatorVision> SPECTATOR_VISION = register("spectator_vision", EntityType.Builder.<SpectatorVision>of(SpectatorVision::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(5).build(Galosphere.id("spectator_vision").toString()));
 
     private static <T extends Entity> EntityType<T> register(String id, EntityType<T> builder) {
-        return Registry.register(Registry.ENTITY_TYPE, Galosphere.id(id), builder);
+        return Registry.register(BuiltInRegistries.ENTITY_TYPE, Galosphere.id(id), builder);
     }
 
     public static void init() {

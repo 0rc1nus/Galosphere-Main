@@ -9,13 +9,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
-import net.minecraft.world.level.material.Material;
 import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
@@ -48,7 +49,7 @@ public class GlowInkClumpsBlockEntity  extends BlockEntity {
                             BlockState state = world.getBlockState(relative);
                             BlockState placeState = GBlocks.GLOW_INK_CLUMPS.defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(direction), true);
                             world.setBlock(pos, originState.setValue(BlockStateProperties.AGE_15, Math.max(0, originState.getValue(BlockStateProperties.AGE_15) - (originState.getValue(BlockStateProperties.AGE_15) <= 4 ? 3 : 1))), 2);
-                            if (world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater) || (world.getBlockState(relative).getMaterial().isReplaceable() && world.getBlockState(relative).getMaterial() != Material.LAVA)) {
+                            if (world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater) || (world.getBlockState(relative).is(BlockTags.REPLACEABLE) && !world.getFluidState(relative).is(FluidTags.LAVA))) {
                                 if (state.getBlock() instanceof GlowInkClumpsBlock && state.getValue(GlowInkClumpsBlock.getFaceProperty(direction))) continue;
                                 for (Direction dir : Direction.values()) {
                                     if (world.getBlockState(relative.relative(dir)).isSolidRender(world, relative.relative(dir))) {

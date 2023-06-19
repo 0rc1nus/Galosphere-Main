@@ -24,18 +24,18 @@ import java.util.List;
 @Mixin(ThrownEnderpearl.class)
 public class ThrownEnderpearlMixin {
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/network/Connection;isConnected()Z", shift = At.Shift.AFTER), method = "onHit", cancellable = true)
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerGamePacketListenerImpl;isAcceptingMessages()Z", shift = At.Shift.AFTER), method = "onHit", cancellable = true)
     private void G$onHit(HitResult hitResult, CallbackInfo ci) {
         ThrownEnderpearl $this = (ThrownEnderpearl) (Object) this;
         List<BlockPos> poses = Lists.newArrayList();
         ServerPlayer player = (ServerPlayer) $this.getOwner();
-        Level world = player.getLevel();
+        Level world = player.level();
         BlockPos pos = $this.blockPosition();
         int radius = 64;
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 for (int y = -radius; y <= radius; y++) {
-                    BlockPos blockPos = new BlockPos($this.getX() + x, $this.getY() + y, $this.getZ() + z);
+                    BlockPos blockPos = BlockPos.containing($this.getX() + x, $this.getY() + y, $this.getZ() + z);
                     BlockState blockState = world.getBlockState(blockPos);
                     if (blockState.is(GBlocks.WARPED_ANCHOR) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0 && blockPos.closerThan(pos, 16 * blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE))) {
                         poses.add(blockPos);
@@ -48,11 +48,11 @@ public class ThrownEnderpearlMixin {
             for (BlockPos blockPos : poses) {
                 ci.cancel();
                 GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
-                $this.level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
-                $this.level.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+                $this.level().gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+                $this.level().playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
                 player.teleportTo(blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D);
                 player.resetFallDistance();
-                $this.level.setBlock(blockPos, $this.level.getBlockState(blockPos).setValue(WarpedAnchorBlock.WARPED_CHARGE, $this.level.getBlockState(blockPos).getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1), 2);
+                $this.level().setBlock(blockPos, $this.level().getBlockState(blockPos).setValue(WarpedAnchorBlock.WARPED_CHARGE, $this.level().getBlockState(blockPos).getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1), 2);
                 $this.discard();
                 break;
             }

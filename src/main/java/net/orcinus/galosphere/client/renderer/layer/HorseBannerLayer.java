@@ -1,13 +1,12 @@
 package net.orcinus.galosphere.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -15,6 +14,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.init.GItems;
@@ -37,14 +37,14 @@ public class HorseBannerLayer extends RenderLayer<Horse, HorseModel<Horse>> {
                         Item item = itemstack.getItem();
                         poseStack.pushPose();
                         poseStack.scale(1.0F, 1.0F, 1.0F);
-                        if (!(item instanceof ArmorItem) || ((ArmorItem) item).getSlot() != EquipmentSlot.HEAD) {
+                        if (!(item instanceof ArmorItem) || ((ArmorItem) item).getEquipmentSlot() != EquipmentSlot.HEAD) {
                             poseStack.translate(0.0D, 0.35D, 0.3D);
                             if (((AbstractHorseAccessor)entity).getStandAnimO() > 0.0F) {
                                 poseStack.translate(0.0D, 0.35D, 0.35D);
                             }
-                            poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+                            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
                             poseStack.scale(0.625F, -0.625F, -0.625F);
-                            Minecraft.getInstance().getItemRenderer().renderStatic(entity, itemstack, ItemTransforms.TransformType.HEAD, false, poseStack, source, entity.level, packedLight, OverlayTexture.NO_OVERLAY, entity.getId() + ItemTransforms.TransformType.HEAD.ordinal());
+                            Minecraft.getInstance().getItemRenderer().renderStatic(entity, itemstack, ItemDisplayContext.HEAD, false, poseStack, source, entity.level(), packedLight, OverlayTexture.NO_OVERLAY, entity.getId() + ItemDisplayContext.HEAD.ordinal());
                         }
                         poseStack.popPose();
                     }

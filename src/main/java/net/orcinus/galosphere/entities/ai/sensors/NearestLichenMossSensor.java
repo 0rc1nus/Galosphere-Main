@@ -25,7 +25,7 @@ public class NearestLichenMossSensor extends Sensor<Specterpillar> {
         for (int x = -range; x <= range; x++) {
             for (int z = -range; z <= range; z++) {
                 for (int y = -range; y <= range; y++) {
-                    BlockPos pos = new BlockPos(entity.getX() + x, entity.getY() + y, entity.getZ() + z);
+                    BlockPos pos = BlockPos.containing(entity.getX() + x, entity.getY() + y, entity.getZ() + z);
                     BlockState state = world.getBlockState(pos);
                     BlockState belowState = world.getBlockState(pos.below());
                     if (state.isAir() && belowState.is(GBlocks.LICHEN_MOSS)) {

@@ -109,8 +109,8 @@ public class SilverBomb extends ThrowableItemProjectile {
     public void tick() {
         super.tick();
         if (!this.isRemoved()) {
-            if (this.level.isClientSide() && !this.isInWater()) {
-                this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.3D, this.getZ(), 0.0D, 0.0D, 0.0D);
+            if (this.level().isClientSide() && !this.isInWater()) {
+                this.level().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.3D, this.getZ(), 0.0D, 0.0D, 0.0D);
             }
             int i = this.getTime();
             int k = -this.getLastDuration();
@@ -119,7 +119,7 @@ public class SilverBomb extends ThrowableItemProjectile {
             }
             if (!this.isInWater()) {
                 if (i == k) {
-                    if (!this.level.isClientSide()) {
+                    if (!this.level().isClientSide()) {
                         this.bombExplode();
                     }
                 }
@@ -130,19 +130,19 @@ public class SilverBomb extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         CompatUtil compatUtil = new CompatUtil();
-        if (!this.level.isClientSide()) {
+        if (!this.level().isClientSide()) {
             this.bombExplode();
         }
     }
 
     private void bombExplode() {
-        boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
-        this.level.explode(this, null, new ExplosionDamageCalculator() {
+        boolean flag = this.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
+        this.level().explode(this, null, new ExplosionDamageCalculator() {
             @Override
             public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
                 return world.getBlockState(pos).getBlock().defaultDestroyTime() < 3.0D;
             }
-        }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
+        }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE);
         this.remove(RemovalReason.DISCARDED);
     }
 
@@ -151,7 +151,7 @@ public class SilverBomb extends ThrowableItemProjectile {
         if (id == 3) {
             ItemStack itemstack = this.getItemRaw();
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle((itemstack.isEmpty() ? GParticleTypes.SILVER_BOMB : new ItemParticleOption(ParticleTypes.ITEM, itemstack)), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle((itemstack.isEmpty() ? GParticleTypes.SILVER_BOMB : new ItemParticleOption(ParticleTypes.ITEM, itemstack)), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -172,8 +172,8 @@ public class SilverBomb extends ThrowableItemProjectile {
         if (direction.getAxis() == Direction.Axis.Z) {
             this.setDeltaMovement(vec3.x, vec3.y, vec3.z < 0.65D ? -vec3.z * booster * Mth.sin(3 * Mth.PI / 4) : 0.0D);
         }
-        if (!this.level.isClientSide() && this.isInWater()) {
-            this.level.broadcastEntityEvent(this, (byte)3);
+        if (!this.level().isClientSide() && this.isInWater()) {
+            this.level().broadcastEntityEvent(this, (byte)3);
             this.discard();
         }
     }

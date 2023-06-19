@@ -65,7 +65,7 @@ public class GEvents {
 
     private static void registerServerTickEvents() {
         ServerTickEvents.START_WORLD_TICK.register(Galosphere.id("send_barometer_info"), (level) -> {
-            level.getPlayers((player) -> player.getLevel() != null).forEach((player) -> {
+            level.getPlayers((player) -> player.level() != null).forEach((player) -> {
                 FriendlyByteBuf buf = PacketByteBufs.create();
                 ServerLevelData levelData = (ServerLevelData) level.getLevelData();
                 int rainTime = levelData.getClearWeatherTime() > 0 ? levelData.getClearWeatherTime() : levelData.getRainTime();

@@ -1,9 +1,6 @@
 package net.orcinus.galosphere.client.renderer;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.Util;
@@ -16,10 +13,12 @@ import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.init.GModelLayers;
 
+import java.util.Map;
+
 @Environment(EnvType.CLIENT)
 public class SparkleRenderer extends MobRenderer<Sparkle, EntityModel<Sparkle>> {
     private static final Map<Sparkle.CrystalType, ResourceLocation> TEXTURE_BY_TYPE = Util.make(Maps.newHashMap(), (map) -> {
-        for (Sparkle.CrystalType type : Sparkle.CrystalType.BY_ID) {
+        for (Sparkle.CrystalType type : Sparkle.CrystalType.values()) {
             map.put(type, Galosphere.id(String.format("textures/entity/sparkle/%s_sparkle.png", type.getName())));
         }
     });
@@ -31,7 +30,7 @@ public class SparkleRenderer extends MobRenderer<Sparkle, EntityModel<Sparkle>> 
 
     @Override
     public ResourceLocation getTextureLocation(Sparkle entity) {
-        return entity.getCrystaltype() == Sparkle.CrystalType.NONE ? TEXTURE : TEXTURE_BY_TYPE.get(entity.getCrystaltype());
+        return entity.getVariant() == Sparkle.CrystalType.NONE ? TEXTURE : TEXTURE_BY_TYPE.get(entity.getVariant());
     }
 
 }

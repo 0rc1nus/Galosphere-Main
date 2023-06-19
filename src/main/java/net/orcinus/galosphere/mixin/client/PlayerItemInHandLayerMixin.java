@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.layers.PlayerItemInHandLayer;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.mixin.access.PlayerItemInHandLayerAccessor;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PlayerItemInHandLayerMixin {
 
     @Inject(at = @At("HEAD"), method = "renderArmWithItem", cancellable = true)
-    private void GE$renderArmWithItem(LivingEntity livingEntity, ItemStack itemStack, ItemTransforms.TransformType transformType, HumanoidArm humanoidArm, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, CallbackInfo ci) {
+    private void GE$renderArmWithItem(LivingEntity livingEntity, ItemStack itemStack, ItemDisplayContext itemDisplayContext, HumanoidArm humanoidArm, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, CallbackInfo ci) {
         if (itemStack.is(GItems.SPECTRE_BOUND_SPYGLASS) && livingEntity.getUseItem() == itemStack && livingEntity.swingTime == 0) {
             ci.cancel();
             ((PlayerItemInHandLayerAccessor)this).callRenderArmWithSpyglass(livingEntity, itemStack, humanoidArm, poseStack, multiBufferSource, i);

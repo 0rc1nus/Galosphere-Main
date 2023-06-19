@@ -63,13 +63,13 @@ public class PlayerMixin {
             if (horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
                 if (((BannerAttachable) horse).getBanner().isEmpty()) {
                     if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
-                        if (!horse.level.isClientSide()) {
+                        if (!horse.level().isClientSide()) {
                             ItemStack copy = stack.copy();
                             if (!player.getAbilities().instabuild) {
                                 stack.shrink(1);
                             }
                             copy.setCount(1);
-                            horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            horse.level().playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
                             horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
                             ((BannerAttachable) horse).setBanner(copy);
                             player.swing(interactionHand);
@@ -80,7 +80,7 @@ public class PlayerMixin {
                     if (player.isShiftKeyDown() && stack.isEmpty()) {
                         ItemStack copy = ((BannerAttachable) horse).getBanner();
                         player.setItemInHand(interactionHand, copy);
-                        horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
+                        horse.level().playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
                         horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
                         ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
                         cir.setReturnValue(InteractionResult.SUCCESS);
