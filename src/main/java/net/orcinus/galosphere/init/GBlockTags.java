@@ -13,6 +13,9 @@ public class GBlockTags {
     public static final TagKey<Block> SPARKLES_SPAWNABLE_ON = create("sparkles_spawn_on");
     public static final TagKey<Block> SPECTRES_SPAWNABLE_ON = create("spectres_spawn_on");
     public static final TagKey<Block> OBFUSCATES_SOUND_WAVES = create("obfuscates_sound_waves");
+    public static final TagKey<Block> PINK_SALT_BLOCKS = create("pink_salt_blocks");
+    public static final TagKey<Block> PINK_SALT_HEATED_BLOCKS = create("pink_salt_heated_blocks");
+    public static final TagKey<Block> OASIS_REPLACE = create("oasis_replace");
 
     private static TagKey<Block> create(String id) {
         return TagKey.create(Registries.BLOCK, Galosphere.id(id));

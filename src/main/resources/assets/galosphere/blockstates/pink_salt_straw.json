@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "straw_shape=bottom,vertical_direction=down": {
+      "model": "galosphere:block/pink_salt_straw_down_bottom"
+    },
+    "straw_shape=bottom,vertical_direction=up": {
+      "model": "galosphere:block/pink_salt_straw_up_bottom"
+    },
+    "straw_shape=middle,vertical_direction=down": {
+      "model": "galosphere:block/pink_salt_straw_down_middle"
+    },
+    "straw_shape=middle,vertical_direction=up": {
+      "model": "galosphere:block/pink_salt_straw_up_middle"
+    },
+    "straw_shape=top,vertical_direction=down": {
+      "model": "galosphere:block/pink_salt_straw_down_top"
+    },
+    "straw_shape=top,vertical_direction=up": {
+      "model": "galosphere:block/pink_salt_straw_up_top"
+    }
+  }
+}

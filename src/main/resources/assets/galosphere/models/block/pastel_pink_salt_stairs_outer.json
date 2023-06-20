@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "galosphere:block/pastel_pink_salt",
+    "side": "galosphere:block/pastel_pink_salt",
+    "top": "galosphere:block/pastel_pink_salt"
+  }
+}

@@ -1,5 +1,6 @@
 package net.orcinus.galosphere.mixin;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -21,6 +22,7 @@ import net.orcinus.galosphere.util.BannerRendererUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
@@ -31,6 +33,27 @@ public class PlayerMixin {
         Player $this = (Player) (Object) this;
         if ($this.isUsingItem() && $this.getUseItem().is(GItems.SPECTRE_BOUND_SPYGLASS)) {
             cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "dropEquipment", cancellable = true)
+    private void G$dropEquipment(CallbackInfo ci) {
+        Player $this = (Player) (Object) this;
+        if (!$this.level().isClientSide) {
+            for (ItemStack stack : $this.getArmorSlots()) {
+                CompoundTag tag = stack.getTag();
+                boolean flag = !stack.isEmpty() && tag != null && tag.contains("Persevered");
+                if (!flag) {
+                    continue;
+                }
+                for (ItemStack itemStack : $this.getInventory().items) {
+                    boolean stackFlag = itemStack.getTag() != null && itemStack.getTag().contains("Persevered");
+                    if (!stackFlag) {
+                        continue;
+                    }
+                    ci.cancel();
+                }
+            }
         }
     }
 

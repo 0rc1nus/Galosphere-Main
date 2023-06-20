@@ -25,6 +25,7 @@ import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
 import net.orcinus.galosphere.client.particles.IndicatorParticle;
 import net.orcinus.galosphere.client.particles.SpectateOrbParticle;
+import net.orcinus.galosphere.client.particles.providers.PinkSaltFallingDustProvider;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
@@ -67,7 +68,11 @@ public class GalosphereClient implements ClientModInitializer {
                 GBlocks.GLOW_BERRIES_SILVER_LATTICE,
                 GBlocks.GLINTED_ALLURITE_CLUSTER,
                 GBlocks.GLINTED_LUMIERE_CLUSTER,
-                GBlocks.GLINTED_AMETHYST_CLUSTER
+                GBlocks.GLINTED_AMETHYST_CLUSTER,
+                GBlocks.PINK_SALT_STRAW,
+                GBlocks.PINK_SALT_CLUSTER,
+                GBlocks.SHADOW_FRAME,
+                GBlocks.SUCCULENT
         );
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE, CombustionTableScreen::new);
@@ -80,6 +85,7 @@ public class GalosphereClient implements ClientModInitializer {
         particleFactoryRegistry.register(GParticleTypes.LUMIERE_RAIN, CrystalRainParticle.Provider::new);
         particleFactoryRegistry.register(GParticleTypes.AMETHYST_RAIN, CrystalRainParticle.Provider::new);
         particleFactoryRegistry.register(GParticleTypes.SPECTATE_ORB, SpectateOrbParticle.Provider::new);
+        particleFactoryRegistry.register(GParticleTypes.PINK_SALT_FALLING_DUST, PinkSaltFallingDustProvider::new);
 
         EntityRendererRegistry.register(GEntityTypes.SIVLER_BOMB, context -> new ThrownItemRenderer<>(context, 1.5F, false));
         EntityRendererRegistry.register(GEntityTypes.GLOW_FLARE, GlowFlareEntityRenderer::new);

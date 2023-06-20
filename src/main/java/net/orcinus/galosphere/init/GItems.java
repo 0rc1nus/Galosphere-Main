@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.items.ChandelierItem;
@@ -35,6 +36,7 @@ public class GItems {
     public static final Item BOTTLE_OF_SPECTRE = register("bottle_of_spectre", new SpectreBottleItem(new Item.Properties().stacksTo(1)));
     public static final Item ALLURITE_SHARD = registerBaseItem("allurite_shard");
     public static final Item LUMIERE_SHARD = registerBaseItem("lumiere_shard");
+    public static final Item PINK_SALT_SHARD = registerBaseItem("pink_salt_shard");
     public static final Item RAW_SILVER = registerBaseItem("raw_silver");
     public static final Item SILVER_INGOT = registerBaseItem("silver_ingot");
     public static final Item SILVER_NUGGET = registerBaseItem("silver_nugget");
@@ -45,12 +47,16 @@ public class GItems {
     public static final Item STERLING_LEGGINGS = register("sterling_leggings", new SterlingArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
     public static final Item STERLING_BOOTS = register("sterling_boots", new SterlingArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
     public static final Item STERLING_HORSE_ARMOR = register("sterling_horse_armor", new HorseArmorItem(4, "sterling", new Item.Properties().stacksTo(1)));
+    public static final Item SALTED_JERKY = register("salted_jerky", new Item(new Item.Properties().food(GFoods.SALTED_JERKY)));
+    public static final Item CURED_MEMBRANE = registerBaseItem("cured_membrane");
     public static final Item LICHEN_CORDYCEPS = register("lichen_cordyceps", new LichenCordycepsItem(GBlocks.LICHEN_CORDYCEPS, new Item.Properties().food(GFoods.LICHEN_CORDYCEPS)));
     public static final Item GOLDEN_LICHEN_CORDYCEPS = register("golden_lichen_cordyceps", new GoldenLichenCordycepsItem(new Item.Properties().food(GFoods.GOLDEN_LICHEN_CORDYCEPS)));
     public static final Item GLOW_FLARE = register("glow_flare", new GlowFlareItem(new Item.Properties()));
     public static final Item SPECTRE_FLARE = register("spectre_flare", new SpectreFlareItem(new Item.Properties()));
     public static final Item SPECTRE_BOUND_SPYGLASS = register("spectre_bound_spyglass", new SpectreBoundSpyglassItem(new Item.Properties().stacksTo(1)));
     public static final Item CHANDELIER = register("chandelier", new ChandelierItem(GBlocks.CHANDELIER, new Item.Properties()));
+
+    public static final Item PRESERVING_TEMPLATE = register("preserving_template", SmithingTemplateItem.createNetheriteUpgradeTemplate());
 
     public static Item registerBaseItem(String name) {
         return register(name, new Item(new Item.Properties()));

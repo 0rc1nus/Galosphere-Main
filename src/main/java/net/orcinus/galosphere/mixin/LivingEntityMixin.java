@@ -25,6 +25,7 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -38,6 +39,8 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     private static final EntityDataAccessor<ItemStack> BANNER_STACK = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.ITEM_STACK );
     private static final EntityDataAccessor<Float> GOLDEN_AIR_SUPPLY = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
+    @Unique
+    private boolean persevered;
 
     @Inject(at = @At("HEAD"), method = "defineSynchedData")
     public void G$defineSynchedData(CallbackInfo ci) {
@@ -52,6 +55,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         tag.put("BannerStack", ((LivingEntity)(Object)this).getEntityData().get(BANNER_STACK).save(new CompoundTag()));
         tag.putFloat("GoldenAirSupply", this.getGoldenAirSupply());
         tag.putBoolean("UsingSpectreBoundedSpyglass", this.isUsingSpectreBoundedSpyglass());
+        tag.putBoolean("Persevered", this.persevered);
     }
 
     @Inject(at = @At("RETURN"), method = "readAdditionalSaveData")
@@ -59,6 +63,9 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         this.setBanner(ItemStack.of(tag.getCompound("BannerStack")));
         this.setGoldenAirSupply(tag.getFloat("GoldenAirSupply"));
         this.setUsingSpectreBoundedSpyglass(tag.getBoolean("UsingSpectreBoundedSpyglass"));
+        if (this.persevered) {
+            this.persevered = tag.getBoolean("Persevered");
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
@@ -182,4 +189,5 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     public void setUsingSpectreBoundedSpyglass(boolean usingSpectreBoundedSpyglass) {
         ((LivingEntity)(Object)this).getEntityData().set(USING_SPECTRE_BOUNDED_SPYGLASS, usingSpectreBoundedSpyglass);
     }
+
 }

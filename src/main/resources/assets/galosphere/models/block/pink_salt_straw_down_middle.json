@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pointed_dripstone",
+  "textures": {
+    "cross": "galosphere:block/pink_salt_straw_down_middle"
+  }
+}

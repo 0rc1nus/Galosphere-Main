@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "filled=false": {
+      "model": "galosphere:block/shadow_frame"
+    },
+    "filled=true": {
+      "model": "galosphere:block/shadow_frame_filled"
+    }
+  }
+}

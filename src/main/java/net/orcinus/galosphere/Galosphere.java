@@ -26,6 +26,7 @@ import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
+import net.orcinus.galosphere.init.GRecipeSerializers;
 import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.init.GVanillaIntegration;
 import org.apache.logging.log4j.LogManager;
@@ -54,6 +55,7 @@ public class Galosphere implements ModInitializer {
         GPlacedFeatures.init();
         GMenuTypes.init();
         GMemoryModuleTypes.init();
+        GRecipeSerializers.init();
         GVanillaIntegration.init();
 
         SpawnPlacements.register(GEntityTypes.SPARKLE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sparkle::checkSparkleSpawnRules);

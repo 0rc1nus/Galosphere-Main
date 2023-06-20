@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "galosphere:block/polished_rose_pink_salt_slab"
+    },
+    "type=double": {
+      "model": "galosphere:block/polished_rose_pink_salt"
+    },
+    "type=top": {
+      "model": "galosphere:block/polished_rose_pink_salt_slab_top"
+    }
+  }
+}

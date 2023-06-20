@@ -1,0 +1,17 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/composter"
+      }
+    },
+    {
+      "when": {
+        "level": "0"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter"
+      }
+    }
+  ]
+}

@@ -27,12 +27,14 @@ public class GCreativeModeTabs {
                 .icon(GItems.ICON_ITEM::getDefaultInstance)
                 .title(Component.translatable("itemGroup.galosphere.galosphere"))
                 .displayItems((itemDisplayParameters, output) -> {
+                    output.accept(GItems.PRESERVING_TEMPLATE);
                     output.accept(GItems.SPARKLE_SPAWN_EGG);
                     output.accept(GItems.SPECTRE_SPAWN_EGG);
                     output.accept(GItems.SPECTERPILLAR_SPAWN_EGG);
                     output.accept(GItems.BOTTLE_OF_SPECTRE);
                     output.accept(GItems.ALLURITE_SHARD);
                     output.accept(GItems.LUMIERE_SHARD);
+                    output.accept(GItems.PINK_SALT_SHARD);
                     output.accept(GItems.RAW_SILVER);
                     output.accept(GItems.SILVER_INGOT);
                     output.accept(GItems.SILVER_NUGGET);
@@ -45,6 +47,8 @@ public class GCreativeModeTabs {
                     output.accept(GItems.STERLING_HORSE_ARMOR);
                     output.accept(GItems.LICHEN_CORDYCEPS);
                     output.accept(GItems.GOLDEN_LICHEN_CORDYCEPS);
+                    output.accept(GItems.SALTED_JERKY);
+                    output.accept(GItems.CURED_MEMBRANE);
                     output.accept(GItems.GLOW_FLARE);
                     output.accept(GItems.SPECTRE_FLARE);
                     output.accept(GItems.CHANDELIER);
@@ -58,6 +62,7 @@ public class GCreativeModeTabs {
                     output.accept(GBlocks.SILVER_PANEL_STAIRS);
                     output.accept(GBlocks.SILVER_PANEL_SLAB);
                     output.accept(GBlocks.SILVER_LATTICE);
+                    output.accept(GBlocks.SHADOW_FRAME);
                     output.accept(GBlocks.SILVER_ORE);
                     output.accept(GBlocks.DEEPSLATE_SILVER_ORE);
                     output.accept(GBlocks.SILVER_BLOCK);
@@ -104,7 +109,51 @@ public class GCreativeModeTabs {
                     output.accept(GBlocks.LICHEN_ROOTS);
                     output.accept(GBlocks.BOWL_LICHEN);
                     output.accept(GBlocks.LICHEN_SHELF);
+                    output.accept(GBlocks.SUCCULENT);
                     output.accept(GBlocks.GLOW_INK_CLUMPS);
+                    output.accept(GBlocks.PINK_SALT);
+                    output.accept(GBlocks.ROSE_PINK_SALT);
+                    output.accept(GBlocks.PASTEL_PINK_SALT);
+                    output.accept(GBlocks.PINK_SALT_STAIRS);
+                    output.accept(GBlocks.ROSE_PINK_SALT_STAIRS);
+                    output.accept(GBlocks.PASTEL_PINK_SALT_STAIRS);
+                    output.accept(GBlocks.PINK_SALT_SLAB);
+                    output.accept(GBlocks.ROSE_PINK_SALT_SLAB);
+                    output.accept(GBlocks.PASTEL_PINK_SALT_SLAB);
+                    output.accept(GBlocks.PINK_SALT_WALL);
+                    output.accept(GBlocks.ROSE_PINK_SALT_WALL);
+                    output.accept(GBlocks.PASTEL_PINK_SALT_WALL);
+                    output.accept(GBlocks.POLISHED_PINK_SALT);
+                    output.accept(GBlocks.POLISHED_ROSE_PINK_SALT);
+                    output.accept(GBlocks.POLISHED_PASTEL_PINK_SALT);
+                    output.accept(GBlocks.POLISHED_PINK_SALT_STAIRS);
+                    output.accept(GBlocks.POLISHED_ROSE_PINK_SALT_STAIRS);
+                    output.accept(GBlocks.POLISHED_PASTEL_PINK_SALT_STAIRS);
+                    output.accept(GBlocks.POLISHED_PINK_SALT_SLAB);
+                    output.accept(GBlocks.POLISHED_ROSE_PINK_SALT_SLAB);
+                    output.accept(GBlocks.POLISHED_PASTEL_PINK_SALT_SLAB);
+                    output.accept(GBlocks.POLISHED_PINK_SALT_WALL);
+                    output.accept(GBlocks.POLISHED_ROSE_PINK_SALT_WALL);
+                    output.accept(GBlocks.POLISHED_PASTEL_PINK_SALT_WALL);
+                    output.accept(GBlocks.PINK_SALT_BRICKS);
+                    output.accept(GBlocks.ROSE_PINK_SALT_BRICKS);
+                    output.accept(GBlocks.PASTEL_PINK_SALT_BRICKS);
+                    output.accept(GBlocks.PINK_SALT_BRICK_STAIRS);
+                    output.accept(GBlocks.ROSE_PINK_SALT_BRICK_STAIRS);
+                    output.accept(GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS);
+                    output.accept(GBlocks.PINK_SALT_BRICK_SLAB);
+                    output.accept(GBlocks.ROSE_PINK_SALT_BRICK_SLAB);
+                    output.accept(GBlocks.PASTEL_PINK_SALT_BRICK_SLAB);
+                    output.accept(GBlocks.PINK_SALT_BRICK_WALL);
+                    output.accept(GBlocks.ROSE_PINK_SALT_BRICK_WALL);
+                    output.accept(GBlocks.PASTEL_PINK_SALT_BRICK_WALL);
+                    output.accept(GBlocks.CHISELED_PINK_SALT);
+                    output.accept(GBlocks.CHISELED_ROSE_PINK_SALT);
+                    output.accept(GBlocks.CHISELED_PASTEL_PINK_SALT);
+                    output.accept(GBlocks.PINK_SALT_LAMP);
+                    output.accept(GBlocks.PINK_SALT_STRAW);
+                    output.accept(GBlocks.PINK_SALT_CLUSTER);
+                    output.accept(GBlocks.CURED_MEMBRANE_BLOCK);
                 })
                 .build());
     }
