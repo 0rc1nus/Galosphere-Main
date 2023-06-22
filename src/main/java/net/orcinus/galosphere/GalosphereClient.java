@@ -3,11 +3,13 @@ package net.orcinus.galosphere;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -34,7 +36,9 @@ import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
 import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
+import net.orcinus.galosphere.client.renderer.block.ShadowFrameBlockRenderer;
 import net.orcinus.galosphere.entities.SpectatorVision;
+import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GEvents;
@@ -74,6 +78,7 @@ public class GalosphereClient implements ClientModInitializer {
                 GBlocks.SHADOW_FRAME,
                 GBlocks.SUCCULENT
         );
+        BlockEntityRenderers.register(GBlockEntityTypes.SHADOW_FRAME, ShadowFrameBlockRenderer::new);
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE, CombustionTableScreen::new);
 

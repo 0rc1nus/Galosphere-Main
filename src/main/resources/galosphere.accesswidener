@@ -1,2 +1,3 @@
 accessWidener	v1	named
 accessible    class    net/minecraft/world/entity/SpawnPlacements$Data
+accessible    class    net/minecraft/client/renderer/block/ModelBlockRenderer$AmbientOcclusionFace

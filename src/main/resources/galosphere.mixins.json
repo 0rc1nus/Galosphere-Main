@@ -22,10 +22,12 @@
     "access.LivingEntityAccessor"
   ],
   "client": [
+    "access.AmbientOcclusionFaceAccessor",
     "access.BreakingItemParticleAccessor",
     "access.FallingDustParticleAccessor",
     "access.GameRendererAccessor",
     "access.GuiAccessor",
+    "access.ModelBlockRendererAccessor",
     "access.PlayerItemInHandLayerAccessor",
     "access.SpellParticleAccessor",
     "client.ArmorStandRendererMixin",
