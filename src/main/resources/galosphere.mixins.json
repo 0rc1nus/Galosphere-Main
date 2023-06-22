@@ -8,6 +8,7 @@
     "ComposterBlockMixin",
     "CrossbowItemMixin",
     "EntityMixin",
+    "InventoryMixin",
     "ItemMixin",
     "LightningBoltMixin",
     "LivingEntityMixin",
