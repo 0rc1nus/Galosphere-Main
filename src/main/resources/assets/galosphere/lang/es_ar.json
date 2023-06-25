@@ -16,7 +16,7 @@
   "advancements.galosphere.light_spread.description": "Desplegar una Bengala Luminosa",
   "advancements.galosphere.light_spread.title": "¡Difunde la Luz!",
   "attribute.name.generic.explosion_resistance": "Resistencia a explosiones",
-  "itemGroup.galosphere": "Galosphere",
+  "itemGroup.galosphere.galosphere": "Galosphere",
   "biome.galosphere.crystal_canyons": "Cañones de Cristal",
   "biome.galosphere.lichen_caves": "Cuevas de Líquen",
   "block.galosphere.amethyst_stairs": "Escaleras de Amatista",

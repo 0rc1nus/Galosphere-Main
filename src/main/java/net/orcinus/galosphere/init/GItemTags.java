@@ -1,6 +1,7 @@
 package net.orcinus.galosphere.init;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -16,7 +17,7 @@ public class GItemTags {
     public static final TagKey<Item> BOMB_BOUNCY_MODIFIERS = bind("bomb_bouncy_modifiers");
 
     private static TagKey<Item> bind(String name) {
-        return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Galosphere.MODID, name));
+        return TagKey.create(Registries.ITEM, new ResourceLocation(Galosphere.MODID, name));
     }
 
 }

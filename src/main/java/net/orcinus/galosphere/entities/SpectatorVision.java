@@ -71,10 +71,10 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
         if (this.getManipulatorUUID() == null) {
             this.discard();
         }
-        if (!this.level.isClientSide() || this.matchesClientPlayerUUID()) {
+        if (!this.level().isClientSide() || this.matchesClientPlayerUUID()) {
             this.entityData.get(MANIPULATOR).ifPresent(this::spectateTick);
         }
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             int spectatableTime = this.getSpectatableTime();
             if (spectatableTime > 0) {
                 this.setSpectatableTime(spectatableTime - 1);
@@ -88,7 +88,7 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
     @Override
     public void tick() {
         super.tick();
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             if (this.random.nextInt(5) == 0) {
                 int count = UniformInt.of(3, 6).sample(this.random);
                 BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
@@ -96,11 +96,11 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
                 int range = 3;
                 for (int i = 0; i < count; i++) {
                     mutableBlockPos.setWithOffset(blockPos, Mth.nextInt(this.random, -range, range), Mth.nextInt(this.random, -range, range), Mth.nextInt(this.random, -range, range));
-                    if (!this.level.getBlockState(mutableBlockPos).isCollisionShapeFullBlock(this.level, mutableBlockPos)) {
+                    if (!this.level().getBlockState(mutableBlockPos).isCollisionShapeFullBlock(this.level(), mutableBlockPos)) {
                         float velX = 0.06F * (blockPos.getX() - mutableBlockPos.getX());
                         float velY = 0.06F * (blockPos.getY() - mutableBlockPos.getY());
                         float velZ = 0.06F * (blockPos.getZ() - mutableBlockPos.getZ());
-                        this.level.addParticle(GParticleTypes.SPECTATE_ORB.get(), mutableBlockPos.getX() + 0.5F, mutableBlockPos.getY(), mutableBlockPos.getZ() + 0.5F, velX, velY, velZ);
+                        this.level().addParticle(GParticleTypes.SPECTATE_ORB.get(), mutableBlockPos.getX() + 0.5F, mutableBlockPos.getY(), mutableBlockPos.getZ() + 0.5F, velX, velY, velZ);
                     }
                 }
             }
@@ -142,7 +142,7 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
     @Override
     public void travel(Vec3 vec3) {
         if (this.getManipulatorUUID() != null) {
-            this.entityData.get(MANIPULATOR).map(this.level::getPlayerByUUID).ifPresent(uuid -> this.copyPlayerRotation(this, uuid));
+            this.entityData.get(MANIPULATOR).map(this.level()::getPlayerByUUID).ifPresent(uuid -> this.copyPlayerRotation(this, uuid));
         } else {
             super.travel(vec3);
         }
@@ -173,7 +173,7 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
 
     @Override
     public void spectateTick(UUID uuid) {
-        Player player = this.level.getPlayerByUUID(uuid);
+        Player player = this.level().getPlayerByUUID(uuid);
         if (player != null) {
             player.xxa = 0.0F;
             player.zza = 0.0F;
@@ -181,7 +181,7 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
             ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(this.getSpectatableTime() > 0);
             if (player.isDiscrete() || this.getSpectatableTime() == 0) {
                 this.setManipulatorUUID(null);
-                if (this.level.isClientSide) {
+                if (this.level().isClientSide) {
                     this.stopUsingSpyglass(player);
                 } else {
                     ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(false);
@@ -190,7 +190,7 @@ public class SpectatorVision extends AmbientCreature implements Spectatable {
                 }
             }
         }
-        if (!this.level.isClientSide() && player == null) {
+        if (!this.level().isClientSide() && player == null) {
             this.entityData.set(MANIPULATOR, Optional.empty());
         }
     }

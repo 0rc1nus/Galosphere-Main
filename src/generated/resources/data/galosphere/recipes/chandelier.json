@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "#": {
       "tag": "forge:ingots/copper"
@@ -18,5 +19,6 @@
   ],
   "result": {
     "item": "galosphere:chandelier"
-  }
+  },
+  "show_notification": true
 }

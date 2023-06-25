@@ -1,12 +1,13 @@
 package net.orcinus.galosphere.datagen;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
@@ -15,14 +16,16 @@ import net.orcinus.galosphere.init.GBlockTags;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class GBlockTagsProvider extends BlockTagsProvider {
 
-    public GBlockTagsProvider(DataGenerator pGenerator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(pGenerator, Galosphere.MODID, existingFileHelper);
+    public GBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, Galosphere.MODID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(GBlocks.SILVER_ORE.get(), GBlocks.SILVER_BLOCK.get(), GBlocks.DEEPSLATE_SILVER_ORE.get(), GBlocks.AMETHYST_SLAB.get(), GBlocks.AMETHYST_STAIRS.get(), GBlocks.ALLURITE_BLOCK.get(), GBlocks.ALLURITE_SLAB.get(), GBlocks.ALLURITE_STAIRS.get(), GBlocks.LUMIERE_BLOCK.get(), GBlocks.LUMIERE_SLAB.get(), GBlocks.LUMIERE_STAIRS.get(), GBlocks.SMOOTH_AMETHYST.get(), GBlocks.SMOOTH_AMETHYST_SLAB.get(), GBlocks.SMOOTH_AMETHYST_STAIRS.get(), GBlocks.AMETHYST_BRICKS.get(), GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.AMETHYST_BRICK_STAIRS.get(), GBlocks.CHISELED_AMETHYST.get(), GBlocks.SMOOTH_ALLURITE.get(), GBlocks.SMOOTH_ALLURITE_SLAB.get(), GBlocks.SMOOTH_ALLURITE_STAIRS.get(), GBlocks.ALLURITE_BRICKS.get(), GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.CHISELED_ALLURITE.get(), GBlocks.SMOOTH_LUMIERE.get(), GBlocks.SMOOTH_LUMIERE_SLAB.get(), GBlocks.SMOOTH_LUMIERE_STAIRS.get(), GBlocks.LUMIERE_BRICKS.get(), GBlocks.LUMIERE_BRICK_SLAB.get(), GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.CHISELED_LUMIERE.get(), GBlocks.MONSTROMETER.get(), GBlocks.WARPED_ANCHOR.get(), GBlocks.ALLURITE_CLUSTER.get(), GBlocks.LUMIERE_CLUSTER.get(), GBlocks.RAW_SILVER_BLOCK.get(), GBlocks.COMBUSTION_TABLE.get(), GBlocks.CHARGED_LUMIERE_BLOCK.get(), GBlocks.AMETHYST_LAMP.get(), GBlocks.ALLURITE_LAMP.get(), GBlocks.LUMIERE_LAMP.get(), GBlocks.CHANDELIER.get(), GBlocks.SILVER_TILES.get(), GBlocks.SILVER_TILES_SLAB.get(), GBlocks.SILVER_TILES_STAIRS.get(), GBlocks.SILVER_PANEL.get(), GBlocks.SILVER_PANEL_SLAB.get(), GBlocks.SILVER_PANEL_STAIRS.get(), GBlocks.SILVER_LATTICE.get(), GBlocks.GLOW_BERRIES_SILVER_LATTICE.get(), GBlocks.GLINTED_ALLURITE_CLUSTER.get(), GBlocks.GLINTED_LUMIERE_CLUSTER.get(), GBlocks.GLINTED_AMETHYST_CLUSTER.get());
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(GBlocks.LUMIERE_COMPOSTER.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(GBlocks.LICHEN_MOSS.get());

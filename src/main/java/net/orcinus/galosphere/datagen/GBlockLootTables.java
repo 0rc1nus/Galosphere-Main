@@ -5,8 +5,9 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
@@ -30,13 +31,18 @@ import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class GBlockLootTables extends BlockLoot {
+public class GBlockLootTables extends BlockLootSubProvider {
     private static final LootItemCondition.Builder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))));
 
+    public GBlockLootTables() {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+    }
+
     @Override
-    protected void addTables() {
+    protected void generate() {
         this.add(GBlocks.SILVER_ORE.get(), (block) -> createOreDrop(block, GItems.RAW_SILVER.get()));
         this.add(GBlocks.DEEPSLATE_SILVER_ORE.get(), (block) -> createOreDrop(block, GItems.RAW_SILVER.get()));
         this.dropSelf(GBlocks.CHARGED_LUMIERE_BLOCK.get());
@@ -90,7 +96,7 @@ public class GBlockLootTables extends BlockLoot {
         this.dropSelf(GBlocks.CHANDELIER.get());
         this.add(GBlocks.CHANDELIER.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
         this.addVinesDroptable(GBlocks.LICHEN_CORDYCEPS.get(), GBlocks.LICHEN_CORDYCEPS_PLANT.get());
-        this.add(GBlocks.GLOW_INK_CLUMPS.get(), GBlockLootTables::createMultifaceBlockDrops);
+        this.add(GBlocks.GLOW_INK_CLUMPS.get(), this::createMultifaceBlockDrops);
         this.dropPottedContents(GBlocks.POTTED_BOWL_LICHEN.get());
         this.dropPottedContents(GBlocks.POTTED_LICHEN_ROOTS.get());
         this.dropSelf(GBlocks.SILVER_TILES.get());
@@ -122,7 +128,7 @@ public class GBlockLootTables extends BlockLoot {
         return LootTable.lootTable().withPool(lootPool);
     }
 
-    public static LootTable.Builder createMultifaceBlockDrops(Block block) {
+    public LootTable.Builder createMultifaceBlockDrops(Block block) {
         return LootTable.lootTable().withPool(LootPool.lootPool().add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(Direction.values(), direction -> SetItemCountFunction.setCount(ConstantValue.exactly(1.0f), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MultifaceBlock.getFaceProperty(direction), true)))).apply(SetItemCountFunction.setCount(ConstantValue.exactly(-1.0f), true)))));
     }
 
@@ -133,7 +139,7 @@ public class GBlockLootTables extends BlockLoot {
     }
 
     private void dropSlab(RegistryObject<Block> slab) {
-        this.add(slab.get(), BlockLoot::createSlabItemTable);
+        this.add(slab.get(), this::createSlabItemTable);
     }
 
     @Override

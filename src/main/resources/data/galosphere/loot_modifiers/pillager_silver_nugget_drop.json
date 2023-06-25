@@ -1,0 +1,13 @@
+{
+  "type": "galosphere:inject_loot",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/pillager"
+    }
+  ],
+  "item": {
+    "id": "galosphere:silver_nugget",
+    "Count": 1
+  }
+}

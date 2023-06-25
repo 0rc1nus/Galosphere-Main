@@ -108,12 +108,12 @@ public class Sparkle extends Animal {
 
     @Override
     protected void customServerAiStep() {
-        this.level.getProfiler().push("sparkleBrain");
-        this.getBrain().tick((ServerLevel)this.level, this);
-        this.level.getProfiler().pop();
-        this.level.getProfiler().push("sparkleActivityUpdate");
+        this.level().getProfiler().push("sparkleBrain");
+        this.getBrain().tick((ServerLevel)this.level(), this);
+        this.level().getProfiler().pop();
+        this.level().getProfiler().push("sparkleActivityUpdate");
         SparkleAi.updateActivity(this);
-        this.level.getProfiler().pop();
+        this.level().getProfiler().pop();
         super.customServerAiStep();
     }
 
@@ -131,11 +131,6 @@ public class Sparkle extends Animal {
         } else {
             super.travel(deltaMovement);
         }
-    }
-
-    @Override
-    public boolean canCutCorner(BlockPathTypes pathTypes) {
-        return super.canCutCorner(pathTypes) && pathTypes != BlockPathTypes.WATER_BORDER;
     }
 
     @Override
@@ -201,7 +196,7 @@ public class Sparkle extends Animal {
 
     @Override
     protected PathNavigation createNavigation(Level world) {
-        return new AmphibiousPathNavigation(this, world);
+        return new SparklePathNavigation(this, world);
     }
 
     @Override
@@ -222,7 +217,7 @@ public class Sparkle extends Animal {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide()) {
+        if (!this.level().isClientSide()) {
             if (this.getGrowthTicks() > 0) {
                 this.setGrowthTicks(this.getGrowthTicks() - 1);
             }
@@ -306,6 +301,19 @@ public class Sparkle extends Animal {
         public Item getSilktouchItem() {
             return this.silktouchItem;
         }
+    }
+
+    static class SparklePathNavigation extends AmphibiousPathNavigation {
+
+        SparklePathNavigation(Sparkle sparkle, Level world) {
+            super(sparkle, world);
+        }
+
+        @Override
+        public boolean canCutCorner(BlockPathTypes blockPathTypes) {
+            return blockPathTypes != BlockPathTypes.WATER_BORDER && super.canCutCorner(blockPathTypes);
+        }
+
     }
 
 }

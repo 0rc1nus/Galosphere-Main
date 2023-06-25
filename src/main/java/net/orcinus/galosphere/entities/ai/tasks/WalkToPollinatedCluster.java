@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -77,7 +78,7 @@ public class WalkToPollinatedCluster extends Behavior<Sparkle> {
                 world.levelEvent(2005, blockPos, 0);
                 return;
             }
-            entity.getBrain().setMemory(GMemoryModuleTypes.POLLINATED_COOLDOWN.get(), 100);
+            entity.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.POLLINATED_COOLDOWN.get(), Unit.INSTANCE, 100);
         });
         this.stuckTicks = 0;
         this.setCooldownOnly = false;

@@ -16,7 +16,7 @@
   "advancements.story.light_spread.description": "Запустите светоерверк",
   "advancements.story.light_spread.title": "Распростронять Свет!",
   "attribute.name.generic.explosion_resistance": "Взрывоустойчивость",
-  "itemGroup.galosphere": "Galosphere",
+  "itemGroup.galosphere.galosphere": "Galosphere",
   "biome.galosphere.crystal_canyons": "Кристальные каньоны",
   "biome.galosphere.lichen_caves": "Лишайниковые пещеры",
   "block.galosphere.amethyst_stairs": "Аметистовые ступеньки",

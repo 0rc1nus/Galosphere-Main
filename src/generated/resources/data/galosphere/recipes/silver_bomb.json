@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "key": {
     "G": {
       "item": "minecraft:gunpowder"
@@ -16,5 +17,6 @@
   "result": {
     "count": 2,
     "item": "galosphere:silver_bomb"
-  }
+  },
+  "show_notification": true
 }

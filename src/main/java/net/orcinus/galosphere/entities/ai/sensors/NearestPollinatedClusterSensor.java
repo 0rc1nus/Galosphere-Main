@@ -25,7 +25,7 @@ public class NearestPollinatedClusterSensor extends Sensor<Sparkle> {
         for (int x = -range; x <= range; x++) {
             for (int z = -range; z <= range; z++) {
                 for (int y = -range; y <= range; y++) {
-                    BlockPos pos = new BlockPos(entity.getX() + x, entity.getY() + y, entity.getZ() + z);
+                    BlockPos pos = BlockPos.containing(entity.getX() + x, entity.getY() + y, entity.getZ() + z);
                     BlockState state = world.getBlockState(pos);
                     if (state.is(Blocks.AMETHYST_CLUSTER) || state.getBlock() instanceof PollinatedClusterBlock && !state.getValue(PollinatedClusterBlock.POLLINATED)) {
                         poses.add(pos);

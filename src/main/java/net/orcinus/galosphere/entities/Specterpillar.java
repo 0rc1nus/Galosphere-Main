@@ -100,12 +100,12 @@ public class Specterpillar extends PathfinderMob {
 
     @Override
     protected void customServerAiStep() {
-        this.level.getProfiler().push("specterpillarBrain");
-        this.getBrain().tick((ServerLevel)this.level, this);
-        this.level.getProfiler().pop();
-        this.level.getProfiler().push("specterpillarActivityUpdate");
+        this.level().getProfiler().push("specterpillarBrain");
+        this.getBrain().tick((ServerLevel)this.level(), this);
+        this.level().getProfiler().pop();
+        this.level().getProfiler().push("specterpillarActivityUpdate");
         SpecterpillarAi.updateActivity(this);
-        this.level.getProfiler().pop();
+        this.level().getProfiler().pop();
         super.customServerAiStep();
     }
 
@@ -121,14 +121,14 @@ public class Specterpillar extends PathfinderMob {
     protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         ItemStack stack = player.getItemInHand(interactionHand);
         MemoryModuleType<Boolean> moduleType = GMemoryModuleTypes.CAN_BURY.get();
-        if (!this.level.isClientSide && stack.is(GItemTags.SPECTRE_TEMPT_ITEMS) && !this.getBrain().hasMemoryValue(moduleType)) {
+        if (!this.level().isClientSide && stack.is(GItemTags.SPECTRE_TEMPT_ITEMS) && !this.getBrain().hasMemoryValue(moduleType)) {
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
             if (this.getRandom().nextInt(5) == 0) {
                 this.getBrain().setMemory(moduleType, true);
             }
-            this.level.broadcastEntityEvent(this, (byte) 4);
+            this.level().broadcastEntityEvent(this, (byte) 4);
             return InteractionResult.SUCCESS;
         }
         return super.mobInteract(player, interactionHand);
@@ -137,7 +137,7 @@ public class Specterpillar extends PathfinderMob {
     @Override
     public void handleEntityEvent(byte b) {
         if (b == 4) {
-            this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0), this.getRandomY() + 0.5, this.getRandomZ(1.0), 0.0, 0.0, 0.0);
+            this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0), this.getRandomY() + 0.5, this.getRandomZ(1.0), 0.0, 0.0, 0.0);
         } else {
             super.handleEntityEvent(b);
         }

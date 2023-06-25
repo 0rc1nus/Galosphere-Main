@@ -1,31 +1,34 @@
 package net.orcinus.galosphere.datagen;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.compat.init.ForgeBlockTags;
 import net.orcinus.galosphere.compat.init.ForgeItemTags;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItemTags;
 import net.orcinus.galosphere.init.GItems;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class GItemTagsProvider extends ItemTagsProvider {
 
-    public GItemTagsProvider(DataGenerator dataGenerator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(dataGenerator, new GBlockTagsProvider(dataGenerator, existingFileHelper), Galosphere.MODID, existingFileHelper);
+    public GItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagLookup<Block>> blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, provider, blockTagsProvider, Galosphere.MODID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider p_256380_) {
         GItems.ITEMS.getEntries().stream().map(RegistryObject::get).filter(BlockItem.class::isInstance).map(BlockItem.class::cast).map(BlockItem::getBlock).filter(StairBlock.class::isInstance).forEach(block -> this.tag(ItemTags.STAIRS).add(block.asItem()));
         GItems.ITEMS.getEntries().stream().map(RegistryObject::get).filter(BlockItem.class::isInstance).map(BlockItem.class::cast).map(BlockItem::getBlock).filter(SlabBlock.class::isInstance).forEach(block -> this.tag(ItemTags.SLABS).add(block.asItem()));
         this.tag(GItemTags.BOMB_BOUNCY_MODIFIERS).add(Items.SLIME_BALL);

@@ -2,12 +2,11 @@ package net.orcinus.galosphere.criterion;
 
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.DeserializationContext;
-import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
 import net.orcinus.galosphere.Galosphere;
 
 public class GCriterion extends SimpleCriterionTrigger<GCriterion.TriggerInstance> {
@@ -18,7 +17,7 @@ public class GCriterion extends SimpleCriterionTrigger<GCriterion.TriggerInstanc
     }
 
     @Override
-    protected TriggerInstance createInstance(JsonObject jsonObject, EntityPredicate.Composite composite, DeserializationContext deserializationContext) {
+    protected TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate composite, DeserializationContext deserializationContext) {
         return new GCriterion.TriggerInstance(ID, composite);
     }
 
@@ -33,7 +32,7 @@ public class GCriterion extends SimpleCriterionTrigger<GCriterion.TriggerInstanc
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
 
-        public TriggerInstance(ResourceLocation resourceLocation, EntityPredicate.Composite composite) {
+        public TriggerInstance(ResourceLocation resourceLocation, ContextAwarePredicate composite) {
             super(resourceLocation, composite);
         }
 

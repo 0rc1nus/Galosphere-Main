@@ -127,14 +127,14 @@ public class MobEvents {
             if (horse.getArmor().is(GItems.STERLING_HORSE_ARMOR.get())) {
                 if (((BannerAttachable) horse).getBanner().isEmpty()) {
                     if (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem) {
-                        if (!horse.level.isClientSide()) {
+                        if (!horse.level().isClientSide()) {
                             event.setCanceled(true);
                             ItemStack copy = stack.copy();
                             if (!player.getAbilities().instabuild) {
                                 stack.shrink(1);
                             }
                             copy.setCount(1);
-                            horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            horse.level().playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
                             horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
                             ((BannerAttachable) horse).setBanner(copy);
                             player.swing(hand);
@@ -142,11 +142,11 @@ public class MobEvents {
                     }
                 } else {
                     if (player.isShiftKeyDown() && stack.isEmpty()) {
-                        if (!horse.level.isClientSide()) {
+                        if (!horse.level().isClientSide()) {
                             event.setCanceled(true);
                             ItemStack copy = ((BannerAttachable) horse).getBanner();
                             player.setItemInHand(hand, copy);
-                            horse.level.playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            horse.level().playSound(null, horse, SoundEvents.HORSE_ARMOR, SoundSource.PLAYERS, 1.0F, 1.0F);
                             horse.gameEvent(GameEvent.ENTITY_INTERACT, player);
                             ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
                         }
@@ -183,8 +183,8 @@ public class MobEvents {
             }
         }
         if (SpectreBoundSpyglass.canUseSpectreBoundedSpyglass(useItem) && useItem.getTag() != null) {
-            if (!entity.level.isClientSide) {
-                Entity spectreBound = ((ServerLevel)entity.level).getEntity(useItem.getTag().getUUID("SpectreBoundUUID"));
+            if (!entity.level().isClientSide) {
+                Entity spectreBound = ((ServerLevel)entity.level()).getEntity(useItem.getTag().getUUID("SpectreBoundUUID"));
                 Optional.ofNullable(spectreBound).filter(Spectre.class::isInstance).map(Spectre.class::cast).filter(Spectre::isAlive).ifPresent(spectre -> {
                     if (entity instanceof Player player && spectre.getManipulatorUUID() != player.getUUID()) {
                         boolean withinDistance = Math.sqrt(Math.pow((player.getX() - spectre.getX()), 2) + Math.pow((player.getZ() - spectre.getZ()), 2)) < 110;
@@ -202,13 +202,13 @@ public class MobEvents {
         ThrownEnderpearl pearl = event.getPearlEntity();
         List<BlockPos> poses = Lists.newArrayList();
         ServerPlayer player = event.getPlayer();
-        Level world = player.getLevel();
+        Level world = player.level();
         BlockPos pearlPos = pearl.blockPosition();
         int radius = 16;
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 for (int y = -radius; y <= radius; y++) {
-                    BlockPos blockPos = new BlockPos(pearl.getX() + x, pearl.getY() + y, pearl.getZ() + z);
+                    BlockPos blockPos = BlockPos.containing(pearl.getX() + x, pearl.getY() + y, pearl.getZ() + z);
                     BlockState blockState = world.getBlockState(blockPos);
                     if (blockState.is(GBlocks.WARPED_ANCHOR.get()) && blockState.getValue(WarpedAnchorBlock.WARPED_CHARGE) > 0) {
                         poses.add(blockPos);
@@ -221,11 +221,11 @@ public class MobEvents {
             for (BlockPos blockPos : poses) {
                 event.setCanceled(true);
                 GCriteriaTriggers.WARPED_TELEPORT.trigger(player);
-                pearl.level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
-                pearl.level.playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+                pearl.level().gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
+                pearl.level().playSound(null, blockPos, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
                 player.teleportTo(blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D);
                 player.resetFallDistance();
-                pearl.level.setBlock(blockPos, pearl.level.getBlockState(blockPos).setValue(WarpedAnchorBlock.WARPED_CHARGE, pearl.level.getBlockState(blockPos).getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1), 2);
+                pearl.level().setBlock(blockPos, pearl.level().getBlockState(blockPos).setValue(WarpedAnchorBlock.WARPED_CHARGE, pearl.level().getBlockState(blockPos).getValue(WarpedAnchorBlock.WARPED_CHARGE) - 1), 2);
                 pearl.discard();
                 break;
             }

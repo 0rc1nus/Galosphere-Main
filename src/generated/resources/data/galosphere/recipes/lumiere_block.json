@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "S": {
       "item": "galosphere:lumiere_shard"
@@ -11,5 +12,6 @@
   ],
   "result": {
     "item": "galosphere:lumiere_block"
-  }
+  },
+  "show_notification": true
 }

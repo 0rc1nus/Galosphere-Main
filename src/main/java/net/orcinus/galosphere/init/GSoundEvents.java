@@ -1,5 +1,8 @@
 package net.orcinus.galosphere.init;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.SoundType;
@@ -56,7 +59,7 @@ public class GSoundEvents {
     public static final SoundType SILVER_LATTICE = soundType("silver_lattice");
 
     private static RegistryObject<SoundEvent> register(String string) {
-        return SOUND_EVENTS.register(string, () -> new SoundEvent(new ResourceLocation(Galosphere.MODID, string)));
+        return SOUND_EVENTS.register(string, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Galosphere.MODID, string)));
     }
 
     private static String block(String name, String append) {
@@ -69,6 +72,11 @@ public class GSoundEvents {
 
     private static SoundType register(String name, float volume, float pitch) {
         return new ForgeSoundType(volume, pitch, register(block(name, "break")), register(block(name, "step")), register(block(name, "place")), register(block(name, "hit")), register(block(name, "fall")));
+    }
+
+    private static Holder.Reference<SoundEvent> registerForHolder(String name) {
+        ResourceLocation id = new ResourceLocation(Galosphere.MODID, name);
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 
 }

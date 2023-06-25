@@ -35,7 +35,6 @@ import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SpecterpillarModel;
 import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
-import net.orcinus.galosphere.client.particles.AuraParticle;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
 import net.orcinus.galosphere.client.particles.IndicatorParticle;
 import net.orcinus.galosphere.client.particles.SpectateOrbParticle;
@@ -86,7 +85,7 @@ public class ClientEvents {
                     if (entity == null) {
                         return 0.0f;
                     }
-                    if (clientLevel == null && entity.level instanceof ClientLevel clientWorld) {
+                    if (clientLevel == null && entity.level() instanceof ClientLevel clientWorld) {
                         clientLevel = clientWorld;
                     }
                     if (clientLevel == null) {
@@ -164,14 +163,13 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.register(GParticleTypes.AURA_LISTENER.get(), AuraParticle.Provider::new);
-        event.register(GParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
-        event.register(GParticleTypes.WARPED.get(), WarpedProvider::new);
-        event.register(GParticleTypes.ALLURITE_RAIN.get(), CrystalRainParticle.Provider::new);
-        event.register(GParticleTypes.LUMIERE_RAIN.get(), CrystalRainParticle.Provider::new);
-        event.register(GParticleTypes.AMETHYST_RAIN.get(), CrystalRainParticle.Provider::new);
-        event.register(GParticleTypes.AURA_RINGER_INDICATOR.get(), IndicatorParticle.Provider::new);
-        event.register(GParticleTypes.SPECTATE_ORB.get(), SpectateOrbParticle.Provider::new);
+        event.registerSpecial(GParticleTypes.SILVER_BOMB.get(), new SilverBombProvider());
+        event.registerSpriteSet(GParticleTypes.WARPED.get(), WarpedProvider::new);
+        event.registerSpriteSet(GParticleTypes.ALLURITE_RAIN.get(), CrystalRainParticle.Provider::new);
+        event.registerSpriteSet(GParticleTypes.LUMIERE_RAIN.get(), CrystalRainParticle.Provider::new);
+        event.registerSpriteSet(GParticleTypes.AMETHYST_RAIN.get(), CrystalRainParticle.Provider::new);
+        event.registerSpriteSet(GParticleTypes.AURA_RINGER_INDICATOR.get(), IndicatorParticle.Provider::new);
+        event.registerSpriteSet(GParticleTypes.SPECTATE_ORB.get(), SpectateOrbParticle.Provider::new);
     }
 
 }

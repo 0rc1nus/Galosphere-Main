@@ -24,8 +24,8 @@ public class GalosphereRegion extends Region {
 
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
-        mapper.accept(Pair.of(BiomeReagentHandler.CRYSTAL_CANYONS_PARAMETER, GBiomes.CRYSTAL_CANYONS.getKey()));
-        mapper.accept(Pair.of(BiomeReagentHandler.LICHEN_CAVES_PARAMETER, GBiomes.LICHEN_CAVES.getKey()));
+        mapper.accept(Pair.of(BiomeReagentHandler.CRYSTAL_CANYONS_PARAMETER, GBiomes.CRYSTAL_CANYONS));
+        mapper.accept(Pair.of(BiomeReagentHandler.LICHEN_CAVES_PARAMETER, GBiomes.LICHEN_CAVES));
     }
 
     public void init(ParallelDispatchEvent event) {

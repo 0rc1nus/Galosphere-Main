@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "S": {
       "item": "galosphere:silver_panel"
@@ -12,5 +13,6 @@
   "result": {
     "count": 4,
     "item": "galosphere:silver_tiles"
-  }
+  },
+  "show_notification": true
 }

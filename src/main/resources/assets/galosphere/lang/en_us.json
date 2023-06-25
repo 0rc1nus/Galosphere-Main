@@ -18,7 +18,7 @@
   "advancements.galosphere.light_spread.description": "Deploy a Glow Flare",
   "advancements.galosphere.light_spread.title": "Spread the Light!",
   "attribute.name.generic.illager_resistance": "Illager Resistance",
-  "itemGroup.galosphere": "Galosphere",
+  "itemGroup.galosphere.galosphere": "Galosphere",
   "biome.galosphere.crystal_canyons": "Crystal Canyons",
   "biome.galosphere.lichen_caves": "Lichen Caves",
   "block.galosphere.amethyst_stairs": "Amethyst Stairs",

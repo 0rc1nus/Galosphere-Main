@@ -11,6 +11,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -71,7 +72,7 @@ public class LichenMushroomBlock extends BushBlock implements BonemealableBlock,
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean p_50900_) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean p_50900_) {
         return true;
     }
 

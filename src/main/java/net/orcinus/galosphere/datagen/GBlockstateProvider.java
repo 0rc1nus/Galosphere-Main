@@ -2,6 +2,7 @@ package net.orcinus.galosphere.datagen;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
@@ -31,8 +32,8 @@ import java.util.Objects;
 
 public class GBlockstateProvider extends BlockStateProvider {
 
-    public GBlockstateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, Galosphere.MODID, exFileHelper);
+    public GBlockstateProvider(PackOutput packOutput, ExistingFileHelper exFileHelper) {
+        super(packOutput, Galosphere.MODID, exFileHelper);
     }
 
     @Override

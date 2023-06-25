@@ -154,7 +154,7 @@ public class CombustionTableMenu extends AbstractContainerMenu {
             ItemStack itemstack4 = this.container.getItem(2);
             ItemStack itemstack5 = this.container.getItem(3);
             if (id == 4) {
-                slotStack.getItem().onCraftedBy(slotStack, player.level, player);
+                slotStack.getItem().onCraftedBy(slotStack, player.level(), player);
                 if (!this.moveItemStackTo(slotStack, 5, 41, true)) {
                     return ItemStack.EMPTY;
                 }

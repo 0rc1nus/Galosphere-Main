@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "galosphere:smooth_amethyst"
@@ -13,5 +14,6 @@
   "result": {
     "count": 4,
     "item": "galosphere:smooth_amethyst_stairs"
-  }
+  },
+  "show_notification": true
 }

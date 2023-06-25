@@ -1,6 +1,7 @@
 package net.orcinus.galosphere.compat.init;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -16,7 +17,7 @@ public class ForgeItemTags {
     public static final TagKey<Item> STORAGE_BLOCKS_RAW_SILVER = bind("storage_blocks/raw_silver");
 
     private static TagKey<Item> bind(String path) {
-        return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", path));
+        return TagKey.create(Registries.ITEM, new ResourceLocation("forge", path));
     }
 
 }

@@ -1,18 +1,14 @@
 package net.orcinus.galosphere.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -30,22 +26,19 @@ public class GoldenBreathOverlay {
 
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
-        PoseStack matrixStack = event.getPoseStack();
+        GuiGraphics guiGraphics = event.getGuiGraphics();
         if (player == null) return;
 
         if (event.getOverlay().id().equals(VanillaGuiOverlay.PLAYER_HEALTH.id())) {
             if (!Minecraft.getInstance().options.hideGui && Minecraft.getInstance().gameMode.canHurtPlayer() && Minecraft.getInstance().getCameraEntity() instanceof Player) {
-                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-                RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                RenderSystem.setShaderTexture(0, GALOSPHERE_ICONS);
                 RenderSystem.enableBlend();
-                this.renderGoldenAirSupply(matrixStack, mc.gui, mc.player, mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
+                this.renderGoldenAirSupply(guiGraphics, mc.player, mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
                 RenderSystem.disableBlend();
             }
         }
     }
 
-    private void renderGoldenAirSupply(PoseStack poseStack, Gui gui, Player player, int width, int height) {
+    private void renderGoldenAirSupply(GuiGraphics guiGraphics, Player player, int width, int height) {
         if (player == null) return;
 
         int n = width / 2 + 91;
@@ -59,10 +52,10 @@ public class GoldenBreathOverlay {
             int ac = Mth.ceil((double)z * 4.0 / (double)y) - ab;
             for (int ad = 0; ad < ab + ac; ++ad) {
                 if (ad < ab) {
-                    gui.blit(poseStack, n - ad * 8 - 9, t, 16, 18, 9, 9);
+                    guiGraphics.blit(GALOSPHERE_ICONS, n - ad * 8 - 9, t, 16, 18, 9, 9);
                     continue;
                 }
-                gui.blit(poseStack, n - ad * 8 - 9, t, 25, 18, 9, 9);
+                guiGraphics.blit(GALOSPHERE_ICONS, n - ad * 8 - 9, t, 25, 18, 9, 9);
             }
         }
     }

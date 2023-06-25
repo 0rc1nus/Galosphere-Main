@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "C": {
       "item": "galosphere:allurite_block"
@@ -14,5 +15,6 @@
   ],
   "result": {
     "item": "galosphere:warped_anchor"
-  }
+  },
+  "show_notification": true
 }

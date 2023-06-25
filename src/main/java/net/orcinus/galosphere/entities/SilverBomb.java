@@ -6,13 +6,11 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -31,7 +29,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GParticleTypes;
@@ -119,17 +116,12 @@ public class SilverBomb extends ThrowableItemProjectile {
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @Override
     public void tick() {
         super.tick();
         CompatUtil compatUtil = new CompatUtil();
         if (!this.isRemoved()) {
-            if (this.level.isClientSide() && !this.isInWater()) {
-                this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.3D, this.getZ(), 0.0D, 0.0D, 0.0D);
+            if (this.level().isClientSide() && !this.isInWater()) {
+                this.level().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.3D, this.getZ(), 0.0D, 0.0D, 0.0D);
             }
             int i = this.getTime();
             int k = -this.getLastDuration();
@@ -138,7 +130,7 @@ public class SilverBomb extends ThrowableItemProjectile {
             }
             if (!this.isInWater()) {
                 if (i == k) {
-                    if (!this.level.isClientSide()) {
+                    if (!this.level().isClientSide()) {
                         bombExplode(compatUtil);
                     }
                 }
@@ -149,7 +141,7 @@ public class SilverBomb extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         CompatUtil compatUtil = new CompatUtil();
-        if (!this.level.isClientSide()) {
+        if (!this.level().isClientSide()) {
             this.bombExplode(compatUtil);
         }
     }
@@ -158,13 +150,13 @@ public class SilverBomb extends ThrowableItemProjectile {
         if (this.shrapnel && compatUtil.isModInstalled("oreganized")) {
             this.shrapnelExplode(compatUtil);
         } else {
-            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
-            this.level.explode(this, null, new ExplosionDamageCalculator() {
+            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this.getOwner());
+            this.level().explode(this, null, new ExplosionDamageCalculator() {
                 @Override
                 public boolean shouldBlockExplode(Explosion explosion, BlockGetter world, BlockPos pos, BlockState state, float p_46098_) {
                     return world.getBlockState(pos).getBlock().defaultDestroyTime() < 3.0D;
                 }
-            }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
+            }, this.getX(), this.getY(), this.getZ(), 2.0F + this.explosion, false, flag ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE);
         }
         this.remove(RemovalReason.DISCARDED);
     }
@@ -172,14 +164,14 @@ public class SilverBomb extends ThrowableItemProjectile {
     public void shrapnelExplode(CompatUtil compatUtil) {
         String modid = "oreganized";
         SimpleParticleType LEAD_SHRAPNEL = compatUtil.getCompatParticle(modid, "lead_shrapnel");
-        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 6.0F, Explosion.BlockInteraction.NONE);
+        this.level().explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 6.0F, Level.ExplosionInteraction.NONE);
 
         //Source: https://github.com/GL33P-0R4NG3/oreganized/blob/1.0.0-release-1.18.x/src/main/java/me/gleep/oreganized/entities/PrimedShrapnelBomb.java
 
-        if (!this.level.isClientSide()) ((ServerLevel) this.level).sendParticles(LEAD_SHRAPNEL, this.getX(), this.getY(0.0625D),                 this.getZ(), 100, 0.0D, 0.0D, 0.0D, 5);
+        if (!this.level().isClientSide()) ((ServerLevel) this.level()).sendParticles(LEAD_SHRAPNEL, this.getX(), this.getY(0.0625D),                 this.getZ(), 100, 0.0D, 0.0D, 0.0D, 5);
             int primedShrapnelBombRadius = 30;
             int radius = (primedShrapnelBombRadius / 4) + explosion;
-        for (Entity entity : this.level.getEntities(this, new AABB(this.getX() - radius, this.getY() - 4, this.getZ() - radius, this.getX() + radius, this.getY() + 4, this.getZ() + radius))) {
+        for (Entity entity : this.level().getEntities(this, new AABB(this.getX() - radius, this.getY() - 4, this.getZ() - radius, this.getX() + radius, this.getY() + 4, this.getZ() + radius))) {
             int random = (int) (Math.random() * 100);
             boolean shouldPoison = false;
             if (entity.distanceToSqr(this) <= 4 * 4) {
@@ -194,7 +186,7 @@ public class SilverBomb extends ThrowableItemProjectile {
             if (shouldPoison) {
                 if (entity instanceof LivingEntity livingEntity) {
                     MobEffect STUNNED = compatUtil.getCompatEffect(modid, "stunned");
-                    livingEntity.hurt(DamageSource.MAGIC, 2);
+                    livingEntity.hurt(this.level().damageSources().magic(), 2);
                     livingEntity.addEffect(new MobEffectInstance(STUNNED, 40 * 20));
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 260));
                 }
@@ -207,7 +199,7 @@ public class SilverBomb extends ThrowableItemProjectile {
         if (id == 3) {
             ItemStack itemstack = this.getItemRaw();
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle((itemstack.isEmpty() ? GParticleTypes.SILVER_BOMB.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack)), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle((itemstack.isEmpty() ? GParticleTypes.SILVER_BOMB.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack)), this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -228,8 +220,8 @@ public class SilverBomb extends ThrowableItemProjectile {
         if (direction == Direction.NORTH || direction == Direction.SOUTH) {
             this.setDeltaMovement(vec3.x, vec3.y, vec3.z < 0.65D ? -vec3.z * booster * Mth.sin(3 * Mth.PI / 4) : 0.0D);
         }
-        if (!this.level.isClientSide() && this.isInWater()) {
-            this.level.broadcastEntityEvent(this, (byte)3);
+        if (!this.level().isClientSide() && this.isInWater()) {
+            this.level().broadcastEntityEvent(this, (byte)3);
             this.discard();
         }
     }

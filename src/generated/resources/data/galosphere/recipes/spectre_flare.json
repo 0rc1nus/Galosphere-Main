@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "key": {
     "#": {
       "tag": "forge:ingots/silver"
@@ -14,5 +15,6 @@
   ],
   "result": {
     "item": "galosphere:spectre_flare"
-  }
+  },
+  "show_notification": true
 }

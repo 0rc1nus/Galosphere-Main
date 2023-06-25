@@ -74,5 +74,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "galosphere:blocks/glinted_amethyst_cluster"
 }

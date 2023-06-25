@@ -3,6 +3,7 @@ package net.orcinus.galosphere.entities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -54,9 +54,9 @@ public class SpectreFlare extends FireworkRocketEntity {
     @Override
     public void tick() {
         super.tick();
-        if (!this.level.isClientSide && this.life > this.lifetime) {
+        if (!this.level().isClientSide && this.life > this.lifetime) {
             this.spawnSpectatorVision(this.position());
-            this.level.broadcastEntityEvent(this, (byte)17);
+            this.level().broadcastEntityEvent(this, (byte)17);
             this.gameEvent(GameEvent.EXPLODE, this.getOwner());
             this.discard();
         }
@@ -73,11 +73,10 @@ public class SpectreFlare extends FireworkRocketEntity {
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        if (!this.level.isClientSide()) {
+        if (!this.level().isClientSide()) {
             BlockPos hitPos = result.getBlockPos();
             BlockPos placePos = hitPos.relative(result.getDirection());
-            Material material = this.level.getBlockState(placePos).getMaterial();
-            if (this.level.getBlockState(hitPos).isCollisionShapeFullBlock(this.level, hitPos) && (material != Material.LAVA || this.level.isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
+            if (this.level().getBlockState(hitPos).isCollisionShapeFullBlock(this.level(), hitPos) && (!this.level().getFluidState(placePos).is(FluidTags.LAVA) || this.level().isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
                 this.spawnSpectatorVision(Vec3.atCenterOf(placePos));
             }
             this.discard();
@@ -87,9 +86,9 @@ public class SpectreFlare extends FireworkRocketEntity {
     private void spawnSpectatorVision(Vec3 vec3) {
         if (this.getOwner() instanceof ServerPlayer serverPlayer) {
             if (!((SpectreBoundSpyglass)serverPlayer).isUsingSpectreBoundedSpyglass()) {
-                SpectatorVision spectatorVision = SpectatorVision.create(this.level, vec3, serverPlayer, 120);
+                SpectatorVision spectatorVision = SpectatorVision.create(this.level(), vec3, serverPlayer, 120);
                 serverPlayer.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_BEGIN.get(), getSoundSource(), 1, 1);
-                this.level.addFreshEntity(spectatorVision);
+                this.level().addFreshEntity(spectatorVision);
                 ((SpectreBoundSpyglass)serverPlayer).setUsingSpectreBoundedSpyglass(true);
                 GNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new SendPerspectivePacket(serverPlayer.getUUID(), spectatorVision.getId()));
             }

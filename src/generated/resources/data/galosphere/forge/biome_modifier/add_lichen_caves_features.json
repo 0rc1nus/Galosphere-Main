@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "galosphere:lichen_caves",
+  "spawners": {
+    "type": "galosphere:spectre",
+    "maxCount": 8,
+    "minCount": 8,
+    "weight": 20
+  }
+}

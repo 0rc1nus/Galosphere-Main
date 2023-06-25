@@ -12,19 +12,16 @@ import net.minecraft.world.entity.ai.behavior.AnimalMakeLove;
 import net.minecraft.world.entity.ai.behavior.AnimalPanic;
 import net.minecraft.world.entity.ai.behavior.BabyFollowAdult;
 import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
-import net.minecraft.world.entity.ai.behavior.DoNothing;
 import net.minecraft.world.entity.ai.behavior.FollowTemptation;
 import net.minecraft.world.entity.ai.behavior.GateBehavior;
 import net.minecraft.world.entity.ai.behavior.LookAtTargetSink;
 import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
 import net.minecraft.world.entity.ai.behavior.RandomStroll;
-import net.minecraft.world.entity.ai.behavior.RandomSwim;
-import net.minecraft.world.entity.ai.behavior.RunIf;
 import net.minecraft.world.entity.ai.behavior.RunOne;
-import net.minecraft.world.entity.ai.behavior.RunSometimes;
-import net.minecraft.world.entity.ai.behavior.SetEntityLookTarget;
+import net.minecraft.world.entity.ai.behavior.SetEntityLookTargetSometimes;
 import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromLookTarget;
 import net.minecraft.world.entity.ai.behavior.TryFindLand;
+import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.schedule.Activity;
@@ -33,7 +30,6 @@ import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.entities.ai.tasks.WalkToPollinatedCluster;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItemTags;
-import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
 public class SparkleAi {
 
@@ -52,25 +48,23 @@ public class SparkleAi {
                 new AnimalPanic(2.0F),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
-                new CountDownCooldownTicks(GMemoryModuleTypes.POLLINATED_COOLDOWN.get()),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
     }
 
     private static void initIdleActivity(Brain<Sparkle> brain) {
         brain.addActivityWithConditions(Activity.IDLE, ImmutableList.of(
-                        Pair.of(0, new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60))),
                         Pair.of(0, new AnimalMakeLove(GEntityTypes.SPARKLE.get(), 1.0F)),
                         Pair.of(1, new FollowTemptation((entity) -> 2.0F)),
-                        Pair.of(2, new BabyFollowAdult<>(UniformInt.of(5, 16), 1.25F)),
+                        Pair.of(2, BabyFollowAdult.create(UniformInt.of(5, 16), 1.25f)),
                         Pair.of(3, new WalkToPollinatedCluster()),
-                        Pair.of(4, new TryFindLand(6, 1.0F)),
+                        Pair.of(4, TryFindLand.create(6, 1.0F)),
                         Pair.of(5, new RunOne<>(
                                 ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                                 ImmutableList.of(
-                                        Pair.of(new RandomStroll(1.5F), 1),
-                                        Pair.of(new SetWalkTargetFromLookTarget(1.5F, 3), 1),
-                                        Pair.of(new RunIf<>(Entity::isOnGround, new DoNothing(5, 20)), 2)
+                                        Pair.of(RandomStroll.stroll(1.5F), 1),
+                                        Pair.of(SetWalkTargetFromLookTarget.create(1.5F, 3), 1),
+                                        Pair.of(BehaviorBuilder.triggerIf(Entity::onGround), 2)
                                 )))
                 ),
                 ImmutableSet.of(Pair.of(MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_ABSENT)));
@@ -78,20 +72,20 @@ public class SparkleAi {
 
     private static void initSwimActivity(Brain<Sparkle> brain) {
         brain.addActivityWithConditions(Activity.SWIM, ImmutableList.of(
-                        Pair.of(0, new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60))),
+                        Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
                         Pair.of(1, new FollowTemptation((entity) -> 2.0F)),
                         Pair.of(2, new WalkToPollinatedCluster()),
-                        Pair.of(2, new TryFindLand(8, 1.5F)),
-                        Pair.of(3, new GateBehavior<>(
+                        Pair.of(3, TryFindLand.create(8, 1.5F)),
+                        Pair.of(4, new GateBehavior<>(
                                 ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                                 ImmutableSet.of(),
                                 GateBehavior.OrderPolicy.ORDERED,
                                 GateBehavior.RunningPolicy.TRY_ALL,
                                 ImmutableList.of(
-                                        Pair.of(new RandomSwim(0.75F), 1),
-                                        Pair.of(new RandomStroll(1.0F, true), 1),
-                                        Pair.of(new SetWalkTargetFromLookTarget(1.0F, 3), 1),
-                                        Pair.of(new RunIf<>(Entity::isInWaterOrBubble, new DoNothing(30, 60)), 5)
+                                        Pair.of(RandomStroll.swim(0.75F), 1),
+                                        Pair.of(RandomStroll.stroll(1.0F, true), 1),
+                                        Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 1),
+                                        Pair.of(BehaviorBuilder.triggerIf(Entity::isInWaterOrBubble), 5)
                                 )))),
                 ImmutableSet.of(Pair.of(MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_PRESENT)));
     }

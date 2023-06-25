@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "#": {
       "tag": "forge:nuggets/gold"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "galosphere:golden_lichen_cordyceps"
-  }
+  },
+  "show_notification": true
 }

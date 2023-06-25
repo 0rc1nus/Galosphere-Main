@@ -1,6 +1,0 @@
-// 1.19.2	2023-04-07T09:00:05.2441921	Tags for minecraft:worldgen/biome
-aa86b3b673675a7bdc843bf15852883944f66c10 data/forge/tags/worldgen/biome/is_underground.json
-aa86b3b673675a7bdc843bf15852883944f66c10 data/minecraft/tags/worldgen/biome/has_structure/mineshaft.json
-aa86b3b673675a7bdc843bf15852883944f66c10 data/minecraft/tags/worldgen/biome/has_structure/ruined_portal_standard.json
-aa86b3b673675a7bdc843bf15852883944f66c10 data/minecraft/tags/worldgen/biome/is_overworld.json
-aa86b3b673675a7bdc843bf15852883944f66c10 data/minecraft/tags/worldgen/biome/stronghold_biased_to.json

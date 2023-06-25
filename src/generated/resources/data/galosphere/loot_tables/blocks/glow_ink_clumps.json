@@ -105,5 +105,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "galosphere:blocks/glow_ink_clumps"
 }

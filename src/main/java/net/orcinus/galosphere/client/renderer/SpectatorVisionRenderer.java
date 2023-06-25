@@ -2,9 +2,7 @@ package net.orcinus.galosphere.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -17,6 +15,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.entities.SpectatorVision;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import java.util.function.Function;
 
@@ -35,7 +35,7 @@ public class SpectatorVisionRenderer extends EntityRenderer<SpectatorVision> {
         float sin = Mth.sin(entity.tickCount / 4.0F) / 16.0F;
         poseStack.translate(0, sin, 0);
         poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0f));
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0f));
         PoseStack.Pose pose = poseStack.last();
         Matrix4f matrix4f = pose.pose();
         Matrix3f matrix3f = pose.normal();

@@ -1,16 +1,15 @@
 package net.orcinus.galosphere.datagen;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.orcinus.galosphere.Galosphere;
 
 public class GItemModelProvider extends ItemModelProvider {
 
-    public GItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, Galosphere.MODID, existingFileHelper);
+    public GItemModelProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
+        super(packOutput, Galosphere.MODID, existingFileHelper);
     }
 
     @Override

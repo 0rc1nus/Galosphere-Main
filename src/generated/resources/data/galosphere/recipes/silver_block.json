@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "S": {
       "item": "galosphere:silver_ingot"
@@ -12,5 +13,6 @@
   ],
   "result": {
     "item": "galosphere:silver_block"
-  }
+  },
+  "show_notification": true
 }

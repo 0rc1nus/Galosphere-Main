@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "galosphere:allurite_slab"
@@ -11,5 +12,6 @@
   ],
   "result": {
     "item": "galosphere:chiseled_allurite"
-  }
+  },
+  "show_notification": true
 }

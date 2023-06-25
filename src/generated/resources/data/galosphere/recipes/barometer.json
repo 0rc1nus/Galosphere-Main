@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "key": {
     "#": {
       "item": "galosphere:silver_ingot"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "galosphere:barometer"
-  }
+  },
+  "show_notification": true
 }

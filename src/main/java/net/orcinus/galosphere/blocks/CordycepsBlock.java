@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -26,7 +25,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.blocks.blockentities.CordycepsBlockEntity;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.init.GSoundEvents;
 import org.jetbrains.annotations.Nullable;
 
 public class CordycepsBlock extends GrowingPlantHeadBlock implements EntityBlock {
@@ -77,7 +75,7 @@ public class CordycepsBlock extends GrowingPlantHeadBlock implements EntityBlock
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader blockGetter, BlockPos blockPos, BlockState blockState, boolean bl) {
         return !blockState.getValue(ALIVE);
     }
 
