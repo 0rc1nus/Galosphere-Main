@@ -1,5 +1,6 @@
 package net.orcinus.galosphere.events;
 
+import com.google.common.collect.Lists;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.entity.HorseRenderer;
@@ -7,19 +8,26 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterEntitySpectatorShadersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.MutableHashedLinkedMap;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,6 +56,7 @@ import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMenuTypes;
@@ -55,8 +64,14 @@ import net.orcinus.galosphere.init.GModelLayers;
 import net.orcinus.galosphere.init.GParticleTypes;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
+    private static final Function<ItemLike, ItemStack> FUNCTION = ItemStack::new;
     public static int clearWeatherTime;
 
     @SubscribeEvent 
@@ -121,6 +136,94 @@ public class ClientEvents {
 
             });
         });
+
+    }
+
+    private static void addAfter(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, ItemLike after, ItemLike... block) {
+        List<ItemLike> stream = Lists.newArrayList(Arrays.stream(block).toList());
+        Collections.reverse(stream);
+        stream.forEach(blk -> addAfter(map, after, blk));
+    }
+
+    private static void addBefore(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, ItemLike before, ItemLike... block) {
+        List<ItemLike> stream = Lists.newArrayList(Arrays.stream(block).toList());
+        Collections.reverse(stream);
+        stream.forEach(blk -> addBefore(map, before, blk));
+    }
+
+    private static void addAfter(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, ItemLike after, ItemLike block) {
+        map.putAfter(FUNCTION.apply(after), FUNCTION.apply(block), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+    }
+
+    private static void addBefore(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, ItemLike before, ItemLike block) {
+        map.putBefore(FUNCTION.apply(before), FUNCTION.apply(block), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+    }
+
+    private static void accept(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, ItemLike block) {
+        map.put(new ItemStack(block), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+    }
+
+    @SubscribeEvent
+    public static void buildCreativeModeTabContents(BuildCreativeModeTabContentsEvent event) {
+        MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries = event.getEntries();
+        ResourceKey<CreativeModeTab> tabKey = event.getTabKey();
+        if (tabKey.equals(CreativeModeTabs.BUILDING_BLOCKS)) {
+            addAfter(entries, Blocks.AMETHYST_BLOCK, GBlocks.AMETHYST_STAIRS.get(), GBlocks.AMETHYST_SLAB.get(), GBlocks.CHISELED_AMETHYST.get(), GBlocks.AMETHYST_LAMP.get(), GBlocks.SMOOTH_AMETHYST.get(), GBlocks.SMOOTH_AMETHYST_STAIRS.get(), GBlocks.SMOOTH_AMETHYST_SLAB.get(), GBlocks.AMETHYST_BRICKS.get(), GBlocks.AMETHYST_BRICK_STAIRS.get(), GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.ALLURITE_BLOCK.get(), GBlocks.ALLURITE_STAIRS.get(), GBlocks.ALLURITE_SLAB.get(), GBlocks.CHISELED_ALLURITE.get(), GBlocks.ALLURITE_LAMP.get(), GBlocks.SMOOTH_ALLURITE.get(), GBlocks.SMOOTH_ALLURITE_STAIRS.get(), GBlocks.SMOOTH_ALLURITE_SLAB.get(), GBlocks.ALLURITE_BRICKS.get(), GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.LUMIERE_BLOCK.get(), GBlocks.LUMIERE_STAIRS.get(), GBlocks.LUMIERE_SLAB.get(), GBlocks.CHISELED_LUMIERE.get(), GBlocks.LUMIERE_LAMP.get(), GBlocks.SMOOTH_LUMIERE.get(), GBlocks.SMOOTH_LUMIERE_STAIRS.get(), GBlocks.SMOOTH_LUMIERE_SLAB.get(), GBlocks.LUMIERE_BRICKS.get(), GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.LUMIERE_BRICK_SLAB.get());
+            accept(entries, GBlocks.SILVER_BLOCK.get());
+            accept(entries, GBlocks.SILVER_PANEL.get());
+            accept(entries, GBlocks.SILVER_PANEL_STAIRS.get());
+            accept(entries, GBlocks.SILVER_PANEL_SLAB.get());
+            accept(entries, GBlocks.SILVER_TILES.get());
+            accept(entries, GBlocks.SILVER_TILES_STAIRS.get());
+            accept(entries, GBlocks.SILVER_TILES_SLAB.get());
+            accept(entries, GBlocks.SILVER_LATTICE.get());
+        }
+
+        if (tabKey.equals(CreativeModeTabs.NATURAL_BLOCKS)) {
+            addAfter(entries, Blocks.DEEPSLATE_IRON_ORE, GBlocks.SILVER_ORE.get(), GBlocks.DEEPSLATE_SILVER_ORE.get());
+            addAfter(entries, Blocks.RAW_GOLD_BLOCK, GBlocks.RAW_SILVER_BLOCK.get());
+            addAfter(entries, Blocks.AMETHYST_CLUSTER, GBlocks.GLINTED_AMETHYST_CLUSTER.get(), GBlocks.ALLURITE_BLOCK.get(), GBlocks.ALLURITE_CLUSTER.get(), GBlocks.GLINTED_ALLURITE_CLUSTER.get(), GBlocks.LUMIERE_BLOCK.get(), GBlocks.LUMIERE_CLUSTER.get(), GBlocks.GLINTED_LUMIERE_CLUSTER.get());
+            addAfter(entries, Blocks.GLOW_LICHEN, GBlocks.GLOW_INK_CLUMPS.get());
+            addAfter(entries, Blocks.PEARLESCENT_FROGLIGHT, GBlocks.AMETHYST_LAMP.get(), GBlocks.ALLURITE_LAMP.get(), GBlocks.LUMIERE_LAMP.get());
+        }
+
+        if (tabKey.equals(CreativeModeTabs.INGREDIENTS)) {
+            addAfter(entries, Items.RAW_GOLD, GItems.RAW_SILVER.get());
+            addAfter(entries, Items.GOLD_INGOT, GItems.SILVER_INGOT.get());
+            addAfter(entries, Items.GOLD_NUGGET, GItems.SILVER_NUGGET.get());
+            addAfter(entries, Items.AMETHYST_SHARD, GItems.ALLURITE_SHARD.get(), GItems.LUMIERE_SHARD.get());
+        }
+
+        if (tabKey.equals(CreativeModeTabs.FUNCTIONAL_BLOCKS)) {
+            addAfter(entries, Blocks.END_ROD, GBlocks.CHANDELIER.get());
+            addAfter(entries, Blocks.SMITHING_TABLE, GBlocks.COMBUSTION_TABLE.get());
+            addAfter(entries, Blocks.RESPAWN_ANCHOR, GBlocks.MONSTROMETER.get(), GBlocks.WARPED_ANCHOR.get());
+        }
+
+        if (tabKey.equals(CreativeModeTabs.NATURAL_BLOCKS)) {
+            addAfter(entries, Blocks.SNOW, GBlocks.LICHEN_MOSS.get());
+            addAfter(entries, Blocks.RED_MUSHROOM, GBlocks.BOWL_LICHEN.get());
+            addAfter(entries, Blocks.CACTUS, GBlocks.LICHEN_SHELF.get(), GBlocks.LICHEN_ROOTS.get());
+        }
+
+        if (tabKey.equals(CreativeModeTabs.FOOD_AND_DRINKS)) {
+            addAfter(entries, Items.GLOW_BERRIES, GItems.LICHEN_CORDYCEPS.get(), GItems.GOLDEN_LICHEN_CORDYCEPS.get());
+        }
+
+        if (tabKey.equals(CreativeModeTabs.SPAWN_EGGS)) {
+            addAfter(entries, Items.SHEEP_SPAWN_EGG, GItems.SPARKLE_SPAWN_EGG.get(), GItems.SPECTRE_SPAWN_EGG.get(), GItems.SPECTERPILLAR_SPAWN_EGG.get());
+        }
+
+        if (tabKey.equals(CreativeModeTabs.TOOLS_AND_UTILITIES)) {
+            addAfter(entries, Items.CLOCK, GItems.BAROMETER.get());
+            addBefore(entries, Items.SADDLE, GItems.GLOW_FLARE.get(), GItems.SPECTRE_FLARE.get());
+        }
+
+        if (tabKey.equals(CreativeModeTabs.COMBAT)) {
+            addAfter(entries, Items.CHAINMAIL_BOOTS, GItems.STERLING_HELMET.get(), GItems.STERLING_CHESTPLATE.get(), GItems.STERLING_LEGGINGS.get(), GItems.STERLING_BOOTS.get());
+            addAfter(entries, Items.LEATHER_HORSE_ARMOR, GItems.STERLING_HORSE_ARMOR.get());
+            addAfter(entries, Items.TNT, GItems.SILVER_BOMB.get());
+        }
 
     }
 

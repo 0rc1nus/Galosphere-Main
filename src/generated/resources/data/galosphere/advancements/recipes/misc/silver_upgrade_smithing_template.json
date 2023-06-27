@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_silver_ingot": {
+    "has_silver_upgrade_smithing_template": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:netherite_ingot"
+              "galosphere:silver_upgrade_smithing_template"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "galosphere:sterling_leggings_smithing"
+        "recipe": "galosphere:silver_upgrade_smithing_template"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_silver_ingot",
+      "has_silver_upgrade_smithing_template",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "galosphere:sterling_leggings_smithing"
+      "galosphere:silver_upgrade_smithing_template"
     ]
   },
   "sends_telemetry_event": false

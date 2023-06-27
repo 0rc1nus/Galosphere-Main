@@ -1,7 +1,6 @@
 package net.orcinus.galosphere.events;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -13,6 +12,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -23,7 +23,9 @@ import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunction;
 import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -42,18 +44,21 @@ import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.compat.integration.terrablender.GalosphereRegion;
 import net.orcinus.galosphere.config.GalosphereConfig;
-import net.orcinus.galosphere.crafting.MonstrometerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.GlowFlareDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereComposterDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.LumiereReformingManager;
+import net.orcinus.galosphere.crafting.MonstrometerDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.PickaxeDispenseItemBehavior;
 import net.orcinus.galosphere.crafting.WarpedAnchorDispenseItemBehavior;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetworkHandler;
 import net.orcinus.galosphere.init.GSoundEvents;
+import net.orcinus.galosphere.mixin.LootTableAccessor;
 import net.orcinus.galosphere.network.BarometerPacket;
 import net.orcinus.galosphere.util.BannerRendererUtil;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MiscEvents {
@@ -77,17 +82,21 @@ public class MiscEvents {
         });
     }
 
-//    @SubscribeEvent
-//    public void onLoottableLoad(LootTableLoadEvent event) {
-//        ResourceLocation name = event.getName();
-//        LootTable table = event.getTable();
-//        if (name.equals(new ResourceLocation("entities/pillager")) && GalosphereConfig.PILLAGER_DROP_SILVER_INGOT.get()) {
-//            table.addPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_NUGGET.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());
-//        }
-//        if (name.equals(BuiltInLootTables.ANCIENT_CITY) && GalosphereConfig.SPECTRE_FLARE_ANCIENT_CITY_LOOT.get()) {
-//            table.addPool(LootPool.lootPool().add(LootItem.lootTableItem(GItems.SPECTRE_FLARE.get()).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))).build());
-//        }
-//    }
+    @SubscribeEvent
+    public void onLootTableLoad(LootTableLoadEvent event) {
+        ResourceLocation name = event.getName();
+        LootTable table = event.getTable();
+        List<LootPool> pools = ((LootTableAccessor)table).getPools();
+        if (name.equals(new ResourceLocation("entities/pillager")) && GalosphereConfig.PILLAGER_DROP_SILVER_INGOT.get()) {
+            pools.add(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.SILVER_NUGGET.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).build());
+        }
+        if (name.equals(BuiltInLootTables.ANCIENT_CITY) && GalosphereConfig.SPECTRE_FLARE_ANCIENT_CITY_LOOT.get()) {
+            pools.add(LootPool.lootPool().add(LootItem.lootTableItem(GItems.SPECTRE_FLARE.get()).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))).build());
+        }
+        if (name.equals(BuiltInLootTables.PILLAGER_OUTPOST) || name.equals(BuiltInLootTables.ABANDONED_MINESHAFT)) {
+            pools.add(LootPool.lootPool().add(LootItem.lootTableItem(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get()).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))).build());
+        }
+    }
 
     @SubscribeEvent
     public void onWorldTick(TickEvent.LevelTickEvent event) {

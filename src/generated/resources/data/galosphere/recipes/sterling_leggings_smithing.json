@@ -10,6 +10,6 @@
     "item": "galosphere:sterling_leggings"
   },
   "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
+    "item": "galosphere:silver_upgrade_smithing_template"
   }
 }

@@ -2,6 +2,7 @@ package net.orcinus.galosphere.init;
 
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,6 +16,7 @@ import net.orcinus.galosphere.items.GoldenLichenCordycepsItem;
 import net.orcinus.galosphere.items.IconItem;
 import net.orcinus.galosphere.items.LichenCordycepsItem;
 import net.orcinus.galosphere.items.SilverBombItem;
+import net.orcinus.galosphere.items.SilverSmithingTemplateItem;
 import net.orcinus.galosphere.items.SpectreBottleItem;
 import net.orcinus.galosphere.items.SpectreBoundSpyglassItem;
 import net.orcinus.galosphere.items.SpectreFlareItem;
@@ -36,6 +38,7 @@ public class GItems {
     public static final RegistryObject<Item> RAW_SILVER = registerBaseItem("raw_silver");
     public static final RegistryObject<Item> SILVER_INGOT = registerBaseItem("silver_ingot");
     public static final RegistryObject<Item> SILVER_NUGGET = registerBaseItem("silver_nugget");
+    public static final RegistryObject<Item> SILVER_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("silver_upgrade_smithing_template", SilverSmithingTemplateItem::new);
     public static final RegistryObject<Item> BAROMETER = registerBaseItem("barometer");
     public static final RegistryObject<Item> SILVER_BOMB = ITEMS.register("silver_bomb", () -> new SilverBombItem(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> STERLING_HELMET = ITEMS.register("sterling_helmet", () -> new SterlingArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));

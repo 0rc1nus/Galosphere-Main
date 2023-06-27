@@ -79,6 +79,7 @@ public class GItemModelProvider extends ItemModelProvider {
         item("golden_lichen_cordyceps");
         item("glow_flare");
         item("chandelier");
+        item("silver_upgrade_smithing_template");
         itemWithBlockDirectory("silver_lattice");
         itemWithBlockDirectory("lichen_roots");
         itemWithBlockDirectory("bowl_lichen");

@@ -87,6 +87,16 @@ public class GRecipeProvider extends RecipeProvider {
         shaplessOne(consumer, GItems.SILVER_INGOT.get(), GBlocks.SILVER_BLOCK.get().asItem(), 9);
         shaplessOne(consumer, GItems.RAW_SILVER.get(), GBlocks.RAW_SILVER_BLOCK.get().asItem(), 9);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get(), 2)
+                .define('#', GItems.SILVER_INGOT.get())
+                .define('C', Items.DIAMOND)
+                .define('S', GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get())
+                .pattern("#S#")
+                .pattern("#C#")
+                .pattern("###")
+                .unlockedBy("has_silver_upgrade_smithing_template", has(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get()))
+                .save(consumer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, GItems.BAROMETER.get())
                 .define('#', GItems.SILVER_INGOT.get())
                 .define('@', Items.REDSTONE)
@@ -385,7 +395,7 @@ public class GRecipeProvider extends RecipeProvider {
     }
 
     private static void smithing(Consumer<FinishedRecipe> consumer, Item armorItem, Item result, TagKey<Item> ingotItem) {
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(armorItem), Ingredient.of(ingotItem), RecipeCategory.COMBAT, result).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, new ResourceLocation(Galosphere.MODID, getItemName(result) + "_smithing"));
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get()), Ingredient.of(armorItem), Ingredient.of(ingotItem), RecipeCategory.COMBAT, result).unlocks("has_silver_ingot", has(Items.NETHERITE_INGOT)).save(consumer, new ResourceLocation(Galosphere.MODID, getItemName(result) + "_smithing"));
     }
 
     protected static String getHasName(ItemLike p_176603_) {

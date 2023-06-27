@@ -10,6 +10,7 @@
     "EntityMixin",
     "LightningBoltMixin",
     "LivingEntityMixin",
+    "LootTableAccessor",
     "OverworldBiomeBuilderMixin",
     "PlayerMixin",
     "PowderSnowBlockMixin"
