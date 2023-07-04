@@ -22,6 +22,7 @@ import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,6 +42,8 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
     @Unique
     private boolean persevered;
+    @Unique
+    private final LivingEntity $this = (LivingEntity) (Object) this;
 
     @Inject(at = @At("HEAD"), method = "defineSynchedData")
     public void G$defineSynchedData(CallbackInfo ci) {
@@ -70,12 +73,11 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void G$tick(CallbackInfo ci) {
-        LivingEntity entity = (LivingEntity) (Object) this;
         if (SpectreBoundSpyglass.canUseSpectreBoundSpyglass(this.useItem) && this.useItem.getTag() != null) {
-            if (!entity.level().isClientSide) {
-                Entity spectreBound = ((ServerLevel)entity.level()).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
+            if (!$this.level().isClientSide) {
+                Entity spectreBound = ((ServerLevel)$this.level()).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
                 Optional.ofNullable(spectreBound).filter(Spectre.class::isInstance).map(Spectre.class::cast).filter(Spectre::isAlive).ifPresent(spectre -> {
-                    if (entity instanceof Player player && spectre.getManipulatorUUID() != player.getUUID()) {
+                    if ($this instanceof Player player && spectre.getManipulatorUUID() != player.getUUID()) {
                         boolean withinDistance = Math.sqrt(Math.pow((player.getX() - spectre.getX()), 2) + Math.pow((player.getZ() - spectre.getZ()), 2)) < 110;
                         if (withinDistance) {
                             spectre.setCamera(player);
@@ -84,18 +86,18 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
                 });
             }
         }
-        if (entity instanceof BannerAttachable bannerEntity) {
+        if ($this instanceof BannerAttachable bannerEntity) {
             if (!bannerEntity.getBanner().isEmpty()) {
-                if (entity instanceof Horse horse) {
+                if ($this instanceof Horse horse) {
                     if (!((BannerAttachable)horse).getBanner().isEmpty() && !horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
                         ItemStack copy = ((BannerAttachable) horse).getBanner();
                         horse.spawnAtLocation(copy);
                         ((BannerAttachable) horse).setBanner(ItemStack.EMPTY);
                     }
                 } else {
-                    if (!entity.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET)) {
+                    if (!$this.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET)) {
                         ItemStack copy = bannerEntity.getBanner();
-                        entity.spawnAtLocation(copy);
+                        $this.spawnAtLocation(copy);
                         bannerEntity.setBanner(ItemStack.EMPTY);
                     }
                 }
@@ -129,7 +131,6 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At("HEAD"), method = "die")
     private void G$die(DamageSource damageSource, CallbackInfo ci) {
-        LivingEntity $this = (LivingEntity)(Object)this;
         if ($this instanceof Horse horse && horse instanceof BannerAttachable bannerAttachable) {
             if (!bannerAttachable.getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
                 ItemStack copy = bannerAttachable.getBanner();
@@ -139,17 +140,23 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         }
     }
 
+    @Inject(at = @At("HEAD"), method = "isInWall", cancellable = true)
+    private void G$isInWall(CallbackInfoReturnable<Boolean> cir) {
+        if ($this.hasEffect(GMobEffects.TRANSIT)) {
+            cir.setReturnValue(false);
+        }
+    }
+
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F", shift = At.Shift.AFTER), method = "getDamageAfterArmorAbsorb", cancellable = true)
     private void G$getDamageAfterArmorAbsorb(DamageSource damageSource, float f, CallbackInfoReturnable<Float> cir) {
-        LivingEntity entity = (LivingEntity) (Object) this;
         boolean flag = damageSource.getEntity() instanceof Mob mob && (mob.getMobType() == MobType.ILLAGER || mob.getType().is(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES));
         if (flag) {
-            if (entity instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
+            if ($this instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
                 cir.setReturnValue(f - 4.0F);
             }
             float illagerReduction = 0.0F;
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
-                if (entity.getItemBySlot(equipmentSlot).getItem() instanceof SterlingArmorItem sterlingArmorItem && equipmentSlot.getType() == EquipmentSlot.Type.ARMOR) {
+                if ($this.getItemBySlot(equipmentSlot).getItem() instanceof SterlingArmorItem sterlingArmorItem && equipmentSlot.getType() == EquipmentSlot.Type.ARMOR) {
                     illagerReduction+=sterlingArmorItem.getInsurgentResistance(equipmentSlot);
                 }
             }

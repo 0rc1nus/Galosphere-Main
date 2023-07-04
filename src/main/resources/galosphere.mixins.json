@@ -4,6 +4,7 @@
   "package": "net.orcinus.galosphere.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BlockStateBaseMixin",
     "ChorusFruitItemMixin",
     "ComposterBlockMixin",
     "CrossbowItemMixin",
@@ -33,6 +34,7 @@
     "access.SpellParticleAccessor",
     "client.ArmorStandRendererMixin",
     "client.ClientLevelMixin",
+    "client.FogRendererMixin",
     "client.GameRendererMixin",
     "client.GuiMixin",
     "client.HorseRendererMixin",
@@ -43,7 +45,8 @@
     "client.LevelRendererMixin",
     "client.MultiPlayerGameModeMixin",
     "client.PlayerItemInHandLayerMixin",
-    "client.PlayerRendererMixin"
+    "client.PlayerRendererMixin",
+    "client.ScreenEffectRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

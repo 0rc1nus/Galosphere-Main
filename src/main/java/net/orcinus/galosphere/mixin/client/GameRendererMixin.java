@@ -19,4 +19,5 @@ public class GameRendererMixin {
             ((GameRendererAccessor)this).callLoadEffect(Galosphere.id("shaders/post/spectre.json"));
         }
     }
+
 }
