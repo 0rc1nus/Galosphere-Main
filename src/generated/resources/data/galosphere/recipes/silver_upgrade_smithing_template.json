@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "galosphere:silver_ingot"
+      "tag": "minecraft:planks"
     },
     "C": {
-      "item": "minecraft:diamond"
+      "item": "galosphere:silver_ingot"
     },
     "S": {
       "item": "galosphere:silver_upgrade_smithing_template"

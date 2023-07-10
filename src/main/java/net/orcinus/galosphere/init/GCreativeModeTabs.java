@@ -17,6 +17,7 @@ public class GCreativeModeTabs {
             .icon(GItems.ICON_ITEM.get()::getDefaultInstance)
             .title(Component.translatable("itemGroup.galosphere.galosphere"))
             .displayItems((itemDisplayParameters, output) -> {
+                output.accept(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get());
                 output.accept(GItems.SPARKLE_SPAWN_EGG.get());
                 output.accept(GItems.SPECTRE_SPAWN_EGG.get());
                 output.accept(GItems.SPECTERPILLAR_SPAWN_EGG.get());
@@ -28,7 +29,6 @@ public class GCreativeModeTabs {
                 output.accept(GItems.SILVER_NUGGET.get());
                 output.accept(GItems.BAROMETER.get());
                 output.accept(GItems.SILVER_BOMB.get());
-                output.accept(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get());
                 output.accept(GItems.STERLING_HELMET.get());
                 output.accept(GItems.STERLING_CHESTPLATE.get());
                 output.accept(GItems.STERLING_LEGGINGS.get());

@@ -88,8 +88,8 @@ public class GRecipeProvider extends RecipeProvider {
         shaplessOne(consumer, GItems.RAW_SILVER.get(), GBlocks.RAW_SILVER_BLOCK.get().asItem(), 9);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get(), 2)
-                .define('#', GItems.SILVER_INGOT.get())
-                .define('C', Items.DIAMOND)
+                .define('#', ItemTags.PLANKS)
+                .define('C', GItems.SILVER_INGOT.get())
                 .define('S', GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get())
                 .pattern("#S#")
                 .pattern("#C#")
