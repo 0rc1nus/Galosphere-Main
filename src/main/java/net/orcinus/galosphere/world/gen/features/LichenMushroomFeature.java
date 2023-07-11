@@ -76,7 +76,7 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
             set.forEach(mossPos -> {
                 if (random.nextInt(3) == 0) {
                     if (world.isStateAtPosition(mossPos.above(), DripstoneUtils::isEmptyOrWater)) {
-                        Block block = random.nextInt(10) == 0 ? GBlocks.BOWL_LICHEN .get(): GBlocks.LICHEN_ROOTS.get();
+                        Block block = random.nextBoolean() ? GBlocks.BOWL_LICHEN .get(): GBlocks.LICHEN_ROOTS.get();
                         world.setBlock(mossPos.above(), block.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(mossPos.above()).is(Blocks.WATER)), 2);
                     }
                 }
