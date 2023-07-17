@@ -39,7 +39,11 @@ public class Specterpillar extends PathfinderMob {
 
     public Specterpillar(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
-        this.maxUpStep = 1.0F;
+    }
+
+    @Override
+    public float maxUpStep() {
+        return 1.0F;
     }
 
     @Override
