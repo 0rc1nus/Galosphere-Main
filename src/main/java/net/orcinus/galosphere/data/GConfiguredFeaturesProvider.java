@@ -7,6 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.orcinus.galosphere.init.GConfiguredFeatures;
+import net.orcinus.galosphere.init.GPlacedFeatures;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -34,6 +35,11 @@ public class GConfiguredFeaturesProvider extends FabricDynamicRegistryProvider {
         add(registries, entries, GConfiguredFeatures.LICHEN_PATCH);
         add(registries, entries, GConfiguredFeatures.GRAVEL_PATCH);
         add(registries, entries, GConfiguredFeatures.LICHEN_CORDYCEPS);
+        add(registries, entries, GConfiguredFeatures.PINK_SALT_GROUND_NOISE_PATCH);
+        add(registries, entries, GConfiguredFeatures.PINK_SALT_CEILING_NOISE_PATCH);
+        add(registries, entries, GConfiguredFeatures.PINK_SALT_STRAW_CEILING_PATCH);
+        add(registries, entries, GConfiguredFeatures.PINK_SALT_STRAW_FLOOR_PATCH);
+        add(registries, entries, GConfiguredFeatures.OASIS);
     }
 
     private void add(HolderLookup.Provider registries, Entries entries, ResourceKey<ConfiguredFeature<?, ?>> resourceKey) {

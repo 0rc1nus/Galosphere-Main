@@ -16,6 +16,7 @@ public class GBlockTags {
     public static final TagKey<Block> PINK_SALT_BLOCKS = create("pink_salt_blocks");
     public static final TagKey<Block> PINK_SALT_HEATED_BLOCKS = create("pink_salt_heated_blocks");
     public static final TagKey<Block> OASIS_REPLACE = create("oasis_replace");
+    public static final TagKey<Block> OMIT_TRANSIT = create("omit_transit");
 
     private static TagKey<Block> create(String id) {
         return TagKey.create(Registries.BLOCK, Galosphere.id(id));

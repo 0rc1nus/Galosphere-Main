@@ -17,6 +17,7 @@ import net.orcinus.galosphere.items.GoldenLichenCordycepsItem;
 import net.orcinus.galosphere.items.IconItem;
 import net.orcinus.galosphere.items.LichenCordycepsItem;
 import net.orcinus.galosphere.items.SilverBombItem;
+import net.orcinus.galosphere.items.SilverSmithingTemplateItem;
 import net.orcinus.galosphere.items.SpectreBottleItem;
 import net.orcinus.galosphere.items.SpectreBoundSpyglassItem;
 import net.orcinus.galosphere.items.SpectreFlareItem;
@@ -40,6 +41,7 @@ public class GItems {
     public static final Item RAW_SILVER = registerBaseItem("raw_silver");
     public static final Item SILVER_INGOT = registerBaseItem("silver_ingot");
     public static final Item SILVER_NUGGET = registerBaseItem("silver_nugget");
+    public static final Item SILVER_UPGRADE_SMITHING_TEMPLATE = register("silver_upgrade_smithing_template", new SilverSmithingTemplateItem());
     public static final Item SILVER_BOMB = register("silver_bomb", new SilverBombItem(new Item.Properties().stacksTo(16)));
     public static final Item BAROMETER = registerBaseItem("barometer");
     public static final Item STERLING_HELMET = register("sterling_helmet", new SterlingArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));

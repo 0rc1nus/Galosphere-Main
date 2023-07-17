@@ -29,47 +29,33 @@ public class Burrow extends Behavior<Specterpillar> {
     @Override
     protected boolean canStillUse(ServerLevel serverLevel, Specterpillar livingEntity, long l) {
         Optional<BlockPos> targetPos = this.getTargetPos(livingEntity);
-        if (targetPos.isEmpty() || !serverLevel.getBlockState(targetPos.get()).isAir() || livingEntity.getBrain().hasMemoryValue(MemoryModuleType.HURT_BY)) {
-            livingEntity.setPose(Pose.STANDING);
-            return false;
+        if (targetPos.isEmpty()) return false;
+        BlockPos blockPos = targetPos.get();
+        if (serverLevel.getBlockState(blockPos).isAir() && serverLevel.getBlockState(blockPos.below()).is(GBlocks.LICHEN_MOSS)) {
+            return true;
         } else {
-            boolean air = serverLevel.getBlockState(targetPos.get()).isAir();
-            boolean flag1 = !air;
-            boolean flag2 = air && !serverLevel.getBlockState(targetPos.get().below()).is(GBlocks.LICHEN_MOSS);
-            if (flag1 || flag2) {
-                livingEntity.setPose(Pose.STANDING);
-                livingEntity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_LICHEN_MOSS);
-                return false;
-            }
+            livingEntity.setPose(Pose.STANDING);
+            livingEntity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_LICHEN_MOSS);
+            return false;
         }
-        return livingEntity.getRemovalReason() == null;
     }
 
     @Override
     protected void start(ServerLevel serverLevel, Specterpillar livingEntity, long l) {
         this.getTargetPos(livingEntity).ifPresent(blockPos -> {
-            boolean flag = blockPos.distManhattan(livingEntity.blockPosition()) <= 0;
-            if (flag) {
-                if (livingEntity.onGround()) {
-                    livingEntity.setPose(Pose.DIGGING);
-                } else {
-                    this.stop(serverLevel, livingEntity, l);
-                }
+            if (blockPos.distManhattan(livingEntity.blockPosition()) <= 0 && livingEntity.onGround()) {
+                livingEntity.setPose(Pose.DIGGING);
             }
         });
     }
 
     @Override
     protected void stop(ServerLevel serverLevel, Specterpillar livingEntity, long l) {
-        if (livingEntity.getRemovalReason() == null && livingEntity.getBlockStateOn().is(GBlocks.LICHEN_MOSS)) {
-            this.getTargetPos(livingEntity).ifPresent(pos -> {
-                if (serverLevel.getBlockState(pos).isAir()) {
-                    serverLevel.setBlock(pos, GBlocks.LICHEN_CORDYCEPS.defaultBlockState().setValue(CordycepsBlock.ALIVE_STAGE, 1).setValue(CordycepsBlock.ALIVE, true), 2);
-                    livingEntity.discard();
-                } else {
-                    livingEntity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_LICHEN_MOSS);
-                }
-            });
+        if (this.timedOut(l)) {
+            this.getTargetPos(livingEntity).filter(blockPos -> serverLevel.getBlockState(blockPos).isAir()).ifPresentOrElse(pos -> {
+                serverLevel.setBlock(pos, GBlocks.LICHEN_CORDYCEPS.defaultBlockState().setValue(CordycepsBlock.ALIVE_STAGE, 1).setValue(CordycepsBlock.ALIVE, true), 2);
+                livingEntity.discard();
+            }, () -> livingEntity.getBrain().eraseMemory(GMemoryModuleTypes.NEAREST_LICHEN_MOSS));
         }
     }
 

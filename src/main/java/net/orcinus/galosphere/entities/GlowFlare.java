@@ -76,7 +76,7 @@ public class GlowFlare extends FireworkRocketEntity {
         if (!world.isClientSide()) {
             BlockPos hitPos = result.getBlockPos();
             BlockPos placePos = hitPos.relative(result.getDirection());
-            if (world.getBlockState(hitPos).isSolidRender(world, hitPos) && ((world.getBlockState(placePos).is(BlockTags.REPLACEABLE) && !world.getFluidState(placePos).is(FluidTags.LAVA)) || world.isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
+            if (world.getBlockState(hitPos).isSolidRender(world, hitPos) && ((world.getBlockState(placePos).canBeReplaced() && !world.getFluidState(placePos).is(FluidTags.LAVA)) || world.isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
                 world.setBlock(placePos, GBlocks.GLOW_INK_CLUMPS.defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(result.getDirection().getOpposite()), true).setValue(BlockStateProperties.AGE_15, 15).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(placePos).is(Blocks.WATER)), 2);
             }
             this.playSound(GSoundEvents.GLOW_FLARE_SPREAD, 1.0F, 1.0F);

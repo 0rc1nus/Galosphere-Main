@@ -3,16 +3,18 @@ package net.orcinus.galosphere.mixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
+import net.orcinus.galosphere.blocks.ShadowFrameBlock;
+import net.orcinus.galosphere.blocks.blockentities.ShadowFrameBlockEntity;
 import net.orcinus.galosphere.entities.Spectre;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public class EntityMixin {
@@ -36,6 +38,16 @@ public class EntityMixin {
     @Environment(EnvType.CLIENT)
     private boolean isFirstPerspective() {
         return Minecraft.getInstance().options.getCameraType().isFirstPerson() && Minecraft.getInstance().getCameraEntity() instanceof Spectre;
+    }
+
+    @ModifyVariable(at = @At("STORE"), method = "spawnSprintParticle")
+    private BlockState G$spawnSprintParticle(BlockState value) {
+        Entity $this = (Entity) (Object) this;
+        BlockPos blockPos = $this.getOnPosLegacy();
+        if ($this.level().getBlockEntity(blockPos) instanceof ShadowFrameBlockEntity shadowFrameBlockEntity && value.getValue(ShadowFrameBlock.FILLED)) {
+            return shadowFrameBlockEntity.getCopiedState();
+        }
+        return value;
     }
 
 }

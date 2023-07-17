@@ -61,8 +61,7 @@ public class SpecterpillarAi {
         brain.addActivityWithConditions(Activity.DIG, ImmutableList.of(
                 Pair.of(0, new PathfindBurrowSpot()),
                 Pair.of(1, new Burrow())
-                ),
-                ImmutableSet.of(Pair.of(GMemoryModuleTypes.CAN_BURY, MemoryStatus.VALUE_PRESENT)));
+        ), ImmutableSet.of(Pair.of(GMemoryModuleTypes.CAN_BURY, MemoryStatus.VALUE_PRESENT)));
     }
 
     public static void updateActivity(Specterpillar specterpillar) {

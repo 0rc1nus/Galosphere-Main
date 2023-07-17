@@ -25,14 +25,36 @@ public class GBiomes {
 
     public static final ResourceKey<Biome> CRYSTAL_CANYONS = register("crystal_canyons");
     public static final ResourceKey<Biome> LICHEN_CAVES = register("lichen_caves");
+    public static final ResourceKey<Biome> PINK_SALT_CAVES = register("pink_salt_caves");
 
     public static void bootstrap(BootstapContext<Biome> bootstapContext) {
         HolderGetter<PlacedFeature> holderGetter = bootstapContext.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> holderGetter2 = bootstapContext.lookup(Registries.CONFIGURED_CARVER);
         bootstapContext.register(CRYSTAL_CANYONS, crystalCanyons(holderGetter, holderGetter2));
         bootstapContext.register(LICHEN_CAVES, lichenCaves(holderGetter, holderGetter2));
+        bootstapContext.register(PINK_SALT_CAVES, pinkSaltCaves(holderGetter, holderGetter2));
     }
 
+    public static Biome pinkSaltCaves(HolderGetter<PlacedFeature> holderGetter, HolderGetter<ConfiguredWorldCarver<?>> holderGetter2) {
+        MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mobBuilder);
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(holderGetter, holderGetter2);
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
+        BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
+        BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_NOISE_GROUND_PATCH);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_NOISE_CEILING_PATCH);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_STRAW_CEILING_PATCH);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_STRAW_FLOOR_PATCH);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.OASIS);
+        Music music = Musics.createGameMusic(GSoundEvents.MUSIC_LICHEN_CAVES);
+        return biome(true, 0.5f, 0.5f, mobBuilder, biomeBuilder, music);
+    }
 
     public static Biome lichenCaves(HolderGetter<PlacedFeature> holderGetter, HolderGetter<ConfiguredWorldCarver<?>> holderGetter2) {
         MobSpawnSettings.Builder mobBuilder = new MobSpawnSettings.Builder();

@@ -1,12 +1,15 @@
 {
-  "type": "minecraft:smithing",
+  "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "galosphere:silver_ingot"
+    "tag": "c:silver_ingots"
   },
   "base": {
     "item": "minecraft:leather_leggings"
   },
   "result": {
     "item": "galosphere:sterling_leggings"
+  },
+  "template": {
+    "item": "galosphere:silver_upgrade_smithing_template"
   }
 }

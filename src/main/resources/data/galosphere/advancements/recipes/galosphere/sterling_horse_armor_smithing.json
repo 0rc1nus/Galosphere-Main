@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_netherite_ingot": {
+    "has_silver_ingot": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/silver"
+            "items": [
+              "galosphere:silver_ingot"
+            ]
           }
         ]
       },
@@ -20,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_netherite_ingot",
+      "has_silver_ingot",
       "has_the_recipe"
     ]
   ],
@@ -28,5 +30,6 @@
     "recipes": [
       "galosphere:sterling_horse_armor_smithing"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

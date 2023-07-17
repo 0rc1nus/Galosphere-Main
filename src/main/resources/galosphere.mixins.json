@@ -43,6 +43,7 @@
     "client.ItemModelShaperMixin",
     "client.ItemRendererMixin",
     "client.LevelRendererMixin",
+    "client.LivingEntityRendererMixin",
     "client.MultiPlayerGameModeMixin",
     "client.PlayerItemInHandLayerMixin",
     "client.PlayerRendererMixin",

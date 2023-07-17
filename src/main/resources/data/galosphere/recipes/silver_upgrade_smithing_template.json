@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "galosphere:silver_ingot"
+    },
+    "C": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "item": "galosphere:silver_upgrade_smithing_template"
+    }
+  },
+  "pattern": [
+    "CSC",
+    "C#C",
+    "CCC"
+  ],
+  "result": {
+    "count": 2,
+    "item": "galosphere:silver_upgrade_smithing_template"
+  },
+  "show_notification": true
+}

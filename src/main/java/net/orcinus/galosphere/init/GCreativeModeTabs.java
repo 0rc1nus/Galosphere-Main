@@ -27,6 +27,7 @@ public class GCreativeModeTabs {
                 .icon(GItems.ICON_ITEM::getDefaultInstance)
                 .title(Component.translatable("itemGroup.galosphere.galosphere"))
                 .displayItems((itemDisplayParameters, output) -> {
+                    output.accept(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE);
                     output.accept(GItems.PRESERVING_TEMPLATE);
                     output.accept(GItems.SPARKLE_SPAWN_EGG);
                     output.accept(GItems.SPECTRE_SPAWN_EGG);
@@ -180,6 +181,7 @@ public class GCreativeModeTabs {
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
+            entries.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, GItems.SILVER_UPGRADE_SMITHING_TEMPLATE);
             entries.addAfter(Items.RAW_GOLD, GItems.RAW_SILVER);
             entries.addAfter(Items.GOLD_INGOT, GItems.SILVER_INGOT);
             entries.addAfter(Items.GOLD_NUGGET, GItems.SILVER_NUGGET);

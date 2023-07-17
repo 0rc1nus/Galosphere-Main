@@ -49,7 +49,7 @@ public class GlowInkClumpsBlockEntity  extends BlockEntity {
                             BlockState state = world.getBlockState(relative);
                             BlockState placeState = GBlocks.GLOW_INK_CLUMPS.defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(direction), true);
                             world.setBlock(pos, originState.setValue(BlockStateProperties.AGE_15, Math.max(0, originState.getValue(BlockStateProperties.AGE_15) - (originState.getValue(BlockStateProperties.AGE_15) <= 4 ? 3 : 1))), 2);
-                            if (world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater) || (world.getBlockState(relative).is(BlockTags.REPLACEABLE) && !world.getFluidState(relative).is(FluidTags.LAVA))) {
+                            if (world.isStateAtPosition(relative, DripstoneUtils::isEmptyOrWater) || (world.getBlockState(relative).canBeReplaced() && !world.getFluidState(relative).is(FluidTags.LAVA))) {
                                 if (state.getBlock() instanceof GlowInkClumpsBlock && state.getValue(GlowInkClumpsBlock.getFaceProperty(direction))) continue;
                                 for (Direction dir : Direction.values()) {
                                     if (world.getBlockState(relative.relative(dir)).isSolidRender(world, relative.relative(dir))) {

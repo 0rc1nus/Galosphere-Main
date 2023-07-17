@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "galosphere:item/silver_upgrade_smithing_template"
+  }
+}

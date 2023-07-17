@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -75,7 +74,7 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
             set.forEach(mossPos -> {
                 if (random.nextInt(3) == 0) {
                     if (world.isStateAtPosition(mossPos.above(), DripstoneUtils::isEmptyOrWater)) {
-                        Block block = random.nextInt(10) == 0 ? GBlocks.BOWL_LICHEN : GBlocks.LICHEN_ROOTS;
+                        Block block = random.nextBoolean() ? GBlocks.BOWL_LICHEN : GBlocks.LICHEN_ROOTS;
                         world.setBlock(mossPos.above(), block.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(mossPos.above()).is(Blocks.WATER)), 2);
                     }
                 }
@@ -138,7 +137,7 @@ public class LichenMushroomFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     private static boolean canGenerate(BlockState state) {
-        return state.is(BlockTags.REPLACEABLE) || state.isAir() || state.is(Blocks.WATER) || state.is(GBlocks.BOWL_LICHEN);
+        return state.canBeReplaced() || state.isAir() || state.is(Blocks.WATER) || state.is(GBlocks.BOWL_LICHEN);
     }
 
     private static void generateDefaultLichenMushroom(WorldGenLevel world, BlockPos blockPos, int radius, int stemHeight, HashSet<BlockPos> set) {

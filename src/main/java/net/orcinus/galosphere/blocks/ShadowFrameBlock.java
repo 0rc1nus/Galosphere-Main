@@ -34,6 +34,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.blocks.blockentities.ShadowFrameBlockEntity;
 import org.jetbrains.annotations.Nullable;
@@ -44,16 +45,27 @@ public class ShadowFrameBlock extends BaseEntityBlock {
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public ShadowFrameBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FILLED, false).setValue(WATERLOGGED, false).setValue(LEVEL, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FILLED, false).setValue(WATERLOGGED, false).setValue(LEVEL, 0).setValue(POWERED, false));
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return super.getStateForPlacement(blockPlaceContext).setValue(WATERLOGGED, blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos()).getType() == Fluids.WATER);
+        Level world = blockPlaceContext.getLevel();
+        BlockPos pos = blockPlaceContext.getClickedPos();
+        return this.defaultBlockState().setValue(POWERED, world.hasNeighborSignal(pos)).setValue(WATERLOGGED, world.getFluidState(pos).getType() == Fluids.WATER);
+    }
+
+    @Override
+    public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl) {
+        if (level.isClientSide) {
+            return;
+        }
+        level.setBlock(blockPos, blockState.setValue(POWERED, level.hasNeighborSignal(blockPos)), 2);
     }
 
     @Override
@@ -155,7 +167,7 @@ public class ShadowFrameBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FILLED, WATERLOGGED, LEVEL);
+        builder.add(FILLED, WATERLOGGED, LEVEL, POWERED);
     }
 
     @Nullable
@@ -170,6 +182,11 @@ public class ShadowFrameBlock extends BaseEntityBlock {
             return shadowFrameBlockEntity.getCopiedState().getShape(blockGetter, blockPos, collisionContext);
         }
         return super.getShape(blockState, blockGetter, blockPos, collisionContext);
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return !blockState.getValue(POWERED) ? Shapes.empty() : blockState.getShape(blockGetter, blockPos);
     }
 
     @Override
