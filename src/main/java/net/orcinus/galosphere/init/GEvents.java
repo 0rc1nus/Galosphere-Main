@@ -4,6 +4,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -19,6 +21,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -38,7 +41,9 @@ import net.orcinus.galosphere.api.Spectatable;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.config.GalosphereConfig;
+import net.orcinus.galosphere.effects.GMobEffect;
 import net.orcinus.galosphere.util.BannerRendererUtil;
+import org.apache.commons.lang3.function.FailableIntToLongFunction;
 
 public class GEvents {
 
@@ -97,6 +102,9 @@ public class GEvents {
 
     private static void registerBlockUseEvents() {
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+            if (player.getItemInHand(hand).getItem() instanceof BlockItem && player.hasEffect(GMobEffects.LAXITY)) {
+                return InteractionResult.FAIL;
+            }
             BlockPos pos = hitResult.getBlockPos();
             BlockState state = world.getBlockState(pos);
             if (player.isShiftKeyDown() && !((BannerAttachable)player).getBanner().isEmpty() && player.getItemInHand(hand).isEmpty()) {

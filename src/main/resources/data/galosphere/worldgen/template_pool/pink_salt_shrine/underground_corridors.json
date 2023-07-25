@@ -1,0 +1,50 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/pink_salt_shrine_ritual",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 6
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/pink_salt_shrine_underground_corridor",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 7
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/pink_salt_shrine_underground_corridor_corner",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 6
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/pink_salt_shrine_underground_corridor_parkour",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/pink_salt_shrine_underground_corridor_dead_end",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

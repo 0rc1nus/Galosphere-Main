@@ -134,7 +134,7 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         int bound = blockState.getValue(FALLABLE) ? 3 : 6;
-        if (randomSource.nextInt(bound) == 0) {
+        if (randomSource.nextInt(bound) == 0  && blockState.getValue(TIP_DIRECTION) == Direction.DOWN) {
             double d = (double)blockPos.getX() + randomSource.nextDouble();
             double e = (double)blockPos.getY() - 0.05;
             double f = (double)blockPos.getZ() + randomSource.nextDouble();

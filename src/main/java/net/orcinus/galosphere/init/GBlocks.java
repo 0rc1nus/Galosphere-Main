@@ -28,6 +28,7 @@ import net.orcinus.galosphere.blocks.CordycepsPlantBlock;
 import net.orcinus.galosphere.blocks.CrystalSlabBlock;
 import net.orcinus.galosphere.blocks.CrystalStairsBlock;
 import net.orcinus.galosphere.blocks.CuredMembraneBlock;
+import net.orcinus.galosphere.blocks.GildedBeadsBlock;
 import net.orcinus.galosphere.blocks.GlintedClusterBlock;
 import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
 import net.orcinus.galosphere.blocks.LichenMossBlock;
@@ -200,6 +201,7 @@ public class GBlocks {
 
     public static final Block CURED_MEMBRANE_BLOCK = registerBlock("cured_membrane_block", new CuredMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK)));
     public static final Block SHADOW_FRAME = registerBlock("shadow_frame", new ShadowFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).lightLevel(state -> state.getValue(ShadowFrameBlock.LEVEL)).noCollission().sound(SoundType.SCAFFOLDING)));
+    public static final Block GILDED_BEADS = registerBlock("gilded_beads", new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(SoundType.SCAFFOLDING)));
     public static final Block SUCCULENT = registerBlock("succulent", new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));
 
     public static final Block LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));

@@ -9,5 +9,6 @@ public class GModelLayers {
     public static final ModelLayerLocation SPECTRE = new ModelLayerLocation(Galosphere.id("spectre"), "main");
     public static final ModelLayerLocation SPECTERPILLAR = new ModelLayerLocation(Galosphere.id("specterpillar"), "main");
     public static final ModelLayerLocation STERLING_HELMET = new ModelLayerLocation(Galosphere.id("sterling_helmet"), "main");
+    public static final ModelLayerLocation GILDED_BEADS = new ModelLayerLocation(Galosphere.id("gilded_beads"), "main");
 
 }

@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -36,6 +37,7 @@ import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
 import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
+import net.orcinus.galosphere.client.renderer.block.GildedBeadsRenderer;
 import net.orcinus.galosphere.client.renderer.block.ShadowFrameBlockRenderer;
 import net.orcinus.galosphere.entities.SpectatorVision;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
@@ -78,7 +80,9 @@ public class GalosphereClient implements ClientModInitializer {
                 GBlocks.SHADOW_FRAME,
                 GBlocks.SUCCULENT
         );
+
         BlockEntityRenderers.register(GBlockEntityTypes.SHADOW_FRAME, ShadowFrameBlockRenderer::new);
+        BlockEntityRenderers.register(GBlockEntityTypes.GILDED_BEADS, GildedBeadsRenderer::new);
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE, CombustionTableScreen::new);
 
@@ -104,6 +108,7 @@ public class GalosphereClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTERPILLAR, SpecterpillarModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(GModelLayers.GILDED_BEADS, GildedBeadsRenderer::createBodyLayer);
 
         GEvents.clientInit();
         GNetwork.init();
