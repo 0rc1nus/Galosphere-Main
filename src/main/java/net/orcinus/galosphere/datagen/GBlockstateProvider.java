@@ -29,6 +29,7 @@ import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 public class GBlockstateProvider extends BlockStateProvider {
 
@@ -87,7 +88,9 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.stairsBlock(GBlocks.ALLURITE_BRICK_STAIRS.get(), "allurite_bricks");
         this.stairsBlock(GBlocks.LUMIERE_BRICK_STAIRS.get(), "lumiere_bricks");
 
-        this.getVariantBuilder(GBlocks.COMBUSTION_TABLE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(models().cubeBottomTop("combustion_table", new ResourceLocation(Galosphere.MODID, "block/combustion_table_side"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_bottom"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_top"))).build());
+        this.getVariantBuilder(GBlocks.COMBUSTION_TABLE.get()).forAllStates(state -> {
+            return ConfiguredModel.builder().modelFile(models().cube("combustion_table", new ResourceLocation(Galosphere.MODID, "block/combustion_table_bottom"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_top"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_side2"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_side2"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_side1"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_side0")).texture("particle", new ResourceLocation(Galosphere.MODID, "block/combustion_table_side2"))).build();
+        });
 
         this.pollinatedCluster(GBlocks.ALLURITE_CLUSTER.get());
         this.pollinatedCluster(GBlocks.LUMIERE_CLUSTER.get());

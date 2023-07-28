@@ -48,7 +48,7 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem("chiseled_allurite");
         blockItem("chiseled_lumiere");
         blockItem("charged_lumiere_block");
-        blockItem("warped_anchor");
+        withExistingParent("warped_anchor", modLoc("block/" + "template_warped_anchor"));
         blockItem("combustion_table");
         blockItem("amethyst_lamp");
         blockItem("allurite_lamp");

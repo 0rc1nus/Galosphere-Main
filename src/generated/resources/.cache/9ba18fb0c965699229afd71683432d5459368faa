@@ -1,4 +1,4 @@
-// 1.20	2023-06-24T22:32:10.1016668	Block States: galosphere
+// 1.20.1	2023-07-28T16:23:32.2939366	Block States: galosphere
 e8a6c48438ce60e5698f734f81a093310076a2f6 assets/galosphere/blockstates/allurite_block.json
 c4a5cfdbca2744348894311c402079e73dcd9c31 assets/galosphere/blockstates/allurite_bricks.json
 a303895830e08a7daf67085ebf76fb305e6fbede assets/galosphere/blockstates/allurite_brick_slab.json
@@ -83,7 +83,7 @@ a1446bb0f85b6b43fb8c7a96b2d84568a220d600 assets/galosphere/models/block/bowl_lic
 c72df9f4189ff697a2407caa140df438f782b744 assets/galosphere/models/block/chiseled_allurite.json
 45ae3fe83ec72cd63554dbf69dcba7fb60b86783 assets/galosphere/models/block/chiseled_amethyst.json
 12ea609f71db4b7094613f0b7fdbe2a71ec97742 assets/galosphere/models/block/chiseled_lumiere.json
-d3525beb0b4ea21d18aa4f3b4348c26efb9f87fc assets/galosphere/models/block/combustion_table.json
+3b7b51103c0a08fe30225b3274c138d306e28810 assets/galosphere/models/block/combustion_table.json
 c9d2f6fdc17f388cc4ab20be94f39fa78ce770b5 assets/galosphere/models/block/deepslate_silver_ore.json
 03bf9f0426c49dd14bb2a26b57e1a8f66481810f assets/galosphere/models/block/glinted_allurite_cluster.json
 47745c5f649f259a3d0082238a4032a06a02e77c assets/galosphere/models/block/glinted_amethyst_cluster.json

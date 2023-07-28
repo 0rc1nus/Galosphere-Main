@@ -1,4 +1,4 @@
-// 1.20	2023-06-25T15:58:35.6546379	Item Models: galosphere
+// 1.20.1	2023-07-28T16:23:32.2976205	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -72,4 +72,4 @@ faf6706e6b97024e8429b5b3f9f52ec252ee1143 assets/galosphere/models/item/sterling_
 de5714b280554e334e447e90db23fc64c7e5da74 assets/galosphere/models/item/sterling_helmet.json
 2e5eb349e1c35dc03a4d83cd7eb0408569f024a1 assets/galosphere/models/item/sterling_horse_armor.json
 4ed487a565bc585e97f313421289dca073ff03f8 assets/galosphere/models/item/sterling_leggings.json
-3abc8769c3b4e0b7378b1de7d507ad6c0bbd07b7 assets/galosphere/models/item/warped_anchor.json
+cbf082f3fd171eeee5bd5cb67da28693f49b9241 assets/galosphere/models/item/warped_anchor.json
