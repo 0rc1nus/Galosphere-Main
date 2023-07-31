@@ -142,7 +142,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At("HEAD"), method = "isInWall", cancellable = true)
     private void G$isInWall(CallbackInfoReturnable<Boolean> cir) {
-        if ($this.hasEffect(GMobEffects.TRANSIT)) {
+        if ($this.hasEffect(GMobEffects.ASTRAL)) {
             cir.setReturnValue(false);
         }
     }

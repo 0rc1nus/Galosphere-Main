@@ -19,7 +19,7 @@ public class ScreenEffectRendererMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ScreenEffectRenderer;renderTex(Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lcom/mojang/blaze3d/vertex/PoseStack;)V", shift = At.Shift.BEFORE), method = "renderScreenEffect", cancellable = true)
     private static void G$renderScreenEffect(Minecraft minecraft, PoseStack poseStack, CallbackInfo ci) {
         LocalPlayer localPlayer = minecraft.player;
-        if (localPlayer != null && localPlayer.hasEffect(GMobEffects.TRANSIT)) {
+        if (localPlayer != null && localPlayer.hasEffect(GMobEffects.ASTRAL)) {
             ci.cancel();
         }
     }

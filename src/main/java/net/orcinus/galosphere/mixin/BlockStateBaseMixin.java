@@ -32,7 +32,7 @@ public class BlockStateBaseMixin {
         if (collisionContext instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof LivingEntity livingEntity) {
             boolean above = livingEntity.getY() > blockPos.getY() + cir.getReturnValue().max(Direction.Axis.Y) - (livingEntity.onGround() ? 0.5F : 0.001F);
             boolean flag = !above || livingEntity.isShiftKeyDown();
-            if (livingEntity.hasEffect(GMobEffects.TRANSIT) && flag && !blockGetter.getBlockState(blockPos).is(GBlockTags.OMIT_TRANSIT)) {
+            if (livingEntity.hasEffect(GMobEffects.ASTRAL) && flag && !blockGetter.getBlockState(blockPos).is(GBlockTags.OMIT_ASTRAL)) {
                 cir.setReturnValue(Shapes.empty());
             }
         }
@@ -40,7 +40,7 @@ public class BlockStateBaseMixin {
 
     @Inject(at = @At("RETURN"), method = "entityInside", cancellable = true)
     private void G$entityInside(Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
-        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(GMobEffects.TRANSIT) && !level.getBlockState(blockPos).is(GBlockTags.OMIT_TRANSIT)) {
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(GMobEffects.ASTRAL) && !level.getBlockState(blockPos).is(GBlockTags.OMIT_ASTRAL)) {
             ci.cancel();
             if (level instanceof ServerLevel serverLevel) {
                 boolean bl = entity.xOld != entity.getX() || entity.zOld != entity.getZ();

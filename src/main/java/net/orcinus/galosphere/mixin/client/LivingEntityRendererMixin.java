@@ -18,7 +18,7 @@ public class LivingEntityRendererMixin<T extends LivingEntity> {
 
     @ModifyArgs(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V"), method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V")
     private void G$render(Args args, T livingEntity, float f, float g, PoseStack poseStack, MultiBufferSource multiBufferSource, int i) {
-        if (livingEntity.hasEffect(GMobEffects.TRANSIT)) {
+        if (livingEntity.hasEffect(GMobEffects.ASTRAL)) {
             args.set(7, 0.35F);
         }
     }

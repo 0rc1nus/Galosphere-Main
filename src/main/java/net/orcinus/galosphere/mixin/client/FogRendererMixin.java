@@ -67,7 +67,7 @@ public class FogRendererMixin {
 
     @Unique
     private static boolean renderShadowPhase(Entity entity) {
-        return entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(GMobEffects.TRANSIT);
+        return entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(GMobEffects.ASTRAL);
     }
 
     @Unique

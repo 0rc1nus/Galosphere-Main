@@ -102,9 +102,6 @@ public class GEvents {
 
     private static void registerBlockUseEvents() {
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-            if (player.getItemInHand(hand).getItem() instanceof BlockItem && player.hasEffect(GMobEffects.LAXITY)) {
-                return InteractionResult.FAIL;
-            }
             BlockPos pos = hitResult.getBlockPos();
             BlockState state = world.getBlockState(pos);
             if (player.isShiftKeyDown() && !((BannerAttachable)player).getBanner().isEmpty() && player.getItemInHand(hand).isEmpty()) {

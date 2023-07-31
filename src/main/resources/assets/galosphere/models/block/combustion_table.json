@@ -1,8 +1,12 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "top": "galosphere:block/combustion_table_top",
-    "bottom": "galosphere:block/combustion_table_bottom",
-    "side": "galosphere:block/combustion_table_side"
+    "down": "galosphere:block/combustion_table_bottom",
+    "east": "galosphere:block/combustion_table_side1",
+    "north": "galosphere:block/combustion_table_side2",
+    "particle": "galosphere:block/combustion_table_side2",
+    "south": "galosphere:block/combustion_table_side2",
+    "up": "galosphere:block/combustion_table_top",
+    "west": "galosphere:block/combustion_table_side0"
   }
 }
