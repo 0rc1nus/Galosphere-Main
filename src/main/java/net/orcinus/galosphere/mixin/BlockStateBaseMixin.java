@@ -29,7 +29,7 @@ public class BlockStateBaseMixin {
 
     @Inject(at = @At("RETURN"), method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", cancellable = true)
     private void G$getCollisionShape(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        if (collisionContext instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof LivingEntity livingEntity) {
+        if (collisionContext instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof LivingEntity livingEntity && ((BlockBehaviour.BlockStateBase)(Object)this).isSolid()) {
             boolean above = livingEntity.getY() > blockPos.getY() + cir.getReturnValue().max(Direction.Axis.Y) - (livingEntity.onGround() ? 0.5F : 0.001F);
             boolean flag = !above || livingEntity.isShiftKeyDown();
             if (livingEntity.hasEffect(GMobEffects.ASTRAL) && flag && !blockGetter.getBlockState(blockPos).is(GBlockTags.OMIT_ASTRAL)) {
@@ -42,7 +42,7 @@ public class BlockStateBaseMixin {
     private void G$entityInside(Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
         if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(GMobEffects.ASTRAL) && !level.getBlockState(blockPos).is(GBlockTags.OMIT_ASTRAL)) {
             ci.cancel();
-            if (level instanceof ServerLevel serverLevel) {
+            if (level instanceof ServerLevel serverLevel && ((BlockBehaviour.BlockStateBase)(Object)this).isSolid()) {
                 boolean bl = entity.xOld != entity.getX() || entity.zOld != entity.getZ();
                 RandomSource randomSource = level.getRandom();
                 if (bl && randomSource.nextBoolean()) {

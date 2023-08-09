@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "galosphere:pastel_pink_salt"
+    }
+  },
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "result": {
+    "item": "galosphere:polished_pastel_pink_salt",
+    "count": 4
+  }
+}
