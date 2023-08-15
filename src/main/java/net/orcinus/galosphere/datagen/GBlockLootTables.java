@@ -45,6 +45,7 @@ public class GBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         this.add(GBlocks.SILVER_ORE.get(), (block) -> createOreDrop(block, GItems.RAW_SILVER.get()));
         this.add(GBlocks.DEEPSLATE_SILVER_ORE.get(), (block) -> createOreDrop(block, GItems.RAW_SILVER.get()));
+        this.dropSelf(GBlocks.CAPTIVATED_MEMBRANE_BLOCK.get());
         this.dropSelf(GBlocks.CHARGED_LUMIERE_BLOCK.get());
         this.dropSelf(GBlocks.LUMIERE_BLOCK.get());
         this.dropSelf(GBlocks.ALLURITE_BLOCK.get());
@@ -73,7 +74,8 @@ public class GBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(GBlocks.ALLURITE_LAMP.get());
         this.dropSelf(GBlocks.AMETHYST_LAMP.get());
         this.dropSelf(GBlocks.WARPED_ANCHOR.get());
-        this.add(GBlocks.LUMIERE_COMPOSTER.get(), LootTable.lootTable().withPool(applyExplosionCondition(Blocks.COMPOSTER, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Blocks.COMPOSTER)))));
+        this.dropOther(GBlocks.LUMIERE_COMPOSTER.get(), Blocks.COMPOSTER);
+        this.dropOther(GBlocks.SALINE_COMPOSTER.get(), Blocks.COMPOSTER);
         this.dropSelf(GBlocks.COMBUSTION_TABLE.get());
         this.dropSelf(GBlocks.SMOOTH_ALLURITE.get());
         this.dropSlab(GBlocks.SMOOTH_ALLURITE_SLAB);
@@ -107,6 +109,54 @@ public class GBlockLootTables extends BlockLootSubProvider {
         this.dropSlab(GBlocks.SILVER_PANEL_SLAB);
         this.dropSelf(GBlocks.SILVER_LATTICE.get());
         this.dropOther(GBlocks.GLOW_BERRIES_SILVER_LATTICE.get(), GBlocks.SILVER_LATTICE.get());
+        this.dropSelf(GBlocks.PINK_SALT.get());
+        this.dropSelf(GBlocks.ROSE_PINK_SALT.get());
+        this.dropSelf(GBlocks.PASTEL_PINK_SALT.get());
+        this.dropSelf(GBlocks.POLISHED_PINK_SALT.get());
+        this.dropSelf(GBlocks.POLISHED_ROSE_PINK_SALT.get());
+        this.dropSelf(GBlocks.POLISHED_PASTEL_PINK_SALT.get());
+        this.dropSelf(GBlocks.PINK_SALT_BRICKS.get());
+        this.dropSelf(GBlocks.ROSE_PINK_SALT_BRICKS.get());
+        this.dropSelf(GBlocks.PASTEL_PINK_SALT_BRICKS.get());
+        this.dropSlab(GBlocks.PINK_SALT_SLAB);
+        this.dropSlab(GBlocks.ROSE_PINK_SALT_SLAB);
+        this.dropSlab(GBlocks.PASTEL_PINK_SALT_SLAB);
+        this.dropSlab(GBlocks.POLISHED_PINK_SALT_SLAB);
+        this.dropSlab(GBlocks.POLISHED_ROSE_PINK_SALT_SLAB);
+        this.dropSlab(GBlocks.POLISHED_PASTEL_PINK_SALT_SLAB);
+        this.dropSlab(GBlocks.PINK_SALT_BRICK_SLAB);
+        this.dropSlab(GBlocks.ROSE_PINK_SALT_BRICK_SLAB);
+        this.dropSlab(GBlocks.PASTEL_PINK_SALT_BRICK_SLAB);
+        this.dropSelf(GBlocks.PINK_SALT_STAIRS.get());
+        this.dropSelf(GBlocks.ROSE_PINK_SALT_STAIRS.get());
+        this.dropSelf(GBlocks.PASTEL_PINK_SALT_STAIRS.get());
+        this.dropSelf(GBlocks.POLISHED_PINK_SALT_STAIRS.get());
+        this.dropSelf(GBlocks.POLISHED_ROSE_PINK_SALT_STAIRS.get());
+        this.dropSelf(GBlocks.POLISHED_PASTEL_PINK_SALT_STAIRS.get());
+        this.dropSelf(GBlocks.PINK_SALT_BRICK_STAIRS.get());
+        this.dropSelf(GBlocks.ROSE_PINK_SALT_BRICK_STAIRS.get());
+        this.dropSelf(GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get());
+        this.dropSelf(GBlocks.PINK_SALT_WALL.get());
+        this.dropSelf(GBlocks.ROSE_PINK_SALT_WALL.get());
+        this.dropSelf(GBlocks.PASTEL_PINK_SALT_WALL.get());
+        this.dropSelf(GBlocks.POLISHED_PINK_SALT_WALL.get());
+        this.dropSelf(GBlocks.POLISHED_ROSE_PINK_SALT_WALL.get());
+        this.dropSelf(GBlocks.POLISHED_PASTEL_PINK_SALT_WALL.get());
+        this.dropSelf(GBlocks.PINK_SALT_BRICK_WALL.get());
+        this.dropSelf(GBlocks.ROSE_PINK_SALT_BRICK_WALL.get());
+        this.dropSelf(GBlocks.PASTEL_PINK_SALT_BRICK_WALL.get());
+        this.dropSelf(GBlocks.CHISELED_PINK_SALT.get());
+        this.dropSelf(GBlocks.CHISELED_ROSE_PINK_SALT.get());
+        this.dropSelf(GBlocks.CHISELED_PASTEL_PINK_SALT.get());
+        this.dropSelf(GBlocks.SHADOW_FRAME.get());
+        this.dropSelf(GBlocks.PINK_SALT_LAMP.get());
+        this.dropSelf(GBlocks.SUCCULENT.get());
+        this.dropSelf(GBlocks.PINK_SALT_STRAW.get());
+        this.dropSelf(GBlocks.CURED_MEMBRANE_BLOCK.get());
+        this.add(GBlocks.PINK_SALT_CLUSTER.get(), (block) -> {
+            return createSilkTouchDispatchTable(block, LootItem.lootTableItem(GItems.PINK_SALT_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(GItems.PINK_SALT_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))))));
+        });
+        this.dropSelf(GBlocks.GILDED_BEADS.get());
     }
 
     protected static LootTable.Builder dropAlternativeWithSilkTouch(Block block, Block alternative, LootPoolEntryContainer.Builder<?> builder) {

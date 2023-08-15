@@ -46,6 +46,7 @@ import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
 import net.orcinus.galosphere.client.particles.IndicatorParticle;
 import net.orcinus.galosphere.client.particles.SpectateOrbParticle;
+import net.orcinus.galosphere.client.particles.providers.PinkSaltFallingDustProvider;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
@@ -54,8 +55,11 @@ import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
 import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
+import net.orcinus.galosphere.client.renderer.block.GildedBeadsRenderer;
+import net.orcinus.galosphere.client.renderer.block.ShadowFrameBlockRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
 import net.orcinus.galosphere.client.renderer.layer.HorseBannerLayer;
+import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
@@ -83,6 +87,7 @@ public class ClientEvents {
         eventBus.register(new GoldenBreathOverlay());
         eventBus.register(new SpectreOverlay());
         eventBus.register(new SpectatorVisionOverlay());
+        eventBus.register(new CameraEvents());
 
         eventBus.addListener((TickEvent.ClientTickEvent clientTickEvent) -> SpectatorTickHandler.tick());
 
@@ -251,6 +256,7 @@ public class ClientEvents {
         event.registerLayerDefinition(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
         event.registerLayerDefinition(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
         event.registerLayerDefinition(GModelLayers.SPECTERPILLAR, SpecterpillarModel::createBodyLayer);
+        event.registerLayerDefinition(GModelLayers.GILDED_BEADS, GildedBeadsRenderer::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -262,6 +268,8 @@ public class ClientEvents {
         event.registerEntityRenderer(GEntityTypes.SPECTRE_FLARE.get(), SpectreFlareRenderer::new);
         event.registerEntityRenderer(GEntityTypes.SPECTERPILLAR.get(), SpecterpillarRenderer::new);
         event.registerEntityRenderer(GEntityTypes.SPECTATOR_VISION.get(), SpectatorVisionRenderer::new);
+        event.registerBlockEntityRenderer(GBlockEntityTypes.SHADOW_FRAME.get(), ShadowFrameBlockRenderer::new);
+        event.registerBlockEntityRenderer(GBlockEntityTypes.GILDED_BEADS.get(), GildedBeadsRenderer::new);
     }
 
     @SubscribeEvent
@@ -273,6 +281,7 @@ public class ClientEvents {
         event.registerSpriteSet(GParticleTypes.AMETHYST_RAIN.get(), CrystalRainParticle.Provider::new);
         event.registerSpriteSet(GParticleTypes.AURA_RINGER_INDICATOR.get(), IndicatorParticle.Provider::new);
         event.registerSpriteSet(GParticleTypes.SPECTATE_ORB.get(), SpectateOrbParticle.Provider::new);
+        event.registerSpriteSet(GParticleTypes.PINK_SALT_FALLING_DUST.get(), PinkSaltFallingDustProvider::new);
     }
 
 }

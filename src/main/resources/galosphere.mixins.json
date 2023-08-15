@@ -5,6 +5,7 @@
   "minVersion": "0.8",
   "refmap": "galosphere.refmap.json",
   "mixins": [
+    "BlockStateBaseMixin",
     "ChorusFruitItemMixin",
     "CrossbowItemMixin",
     "EntityMixin",
@@ -17,6 +18,7 @@
   ],
   "client": [
     "client.ClientLevelMixin",
+    "client.FogRendererMixin",
     "client.ItemModelShaperMixin",
     "client.ItemRendererMixin",
     "client.PlayerItemInHandLayerMixin"

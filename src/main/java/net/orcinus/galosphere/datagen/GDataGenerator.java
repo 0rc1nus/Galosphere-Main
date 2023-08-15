@@ -37,6 +37,7 @@ public class GDataGenerator {
         dataGenerator.addProvider(server, new GEntityTypeTagsProvider(packOutput, lookupProvider, helper));
         dataGenerator.addProvider(server, new GDatapackBuiltinEntriesProvider(packOutput, lookupProvider));
         dataGenerator.addProvider(server, new GBiomeTagsProvider(packOutput, lookupProvider, helper));
+        dataGenerator.addProvider(server, new GLanguageProvider(packOutput));
     }
 
 }

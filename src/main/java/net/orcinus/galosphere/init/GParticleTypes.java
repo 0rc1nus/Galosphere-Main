@@ -3,6 +3,7 @@ package net.orcinus.galosphere.init;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +22,7 @@ public class GParticleTypes {
     public static final RegistryObject<SimpleParticleType> LUMIERE_RAIN = registerParticle("lumiere_rain", false);
     public static final RegistryObject<SimpleParticleType> AMETHYST_RAIN = registerParticle("amethyst_rain", false);
     public static final RegistryObject<SimpleParticleType> SPECTATE_ORB = registerParticle("spectate_orb", false);
+    public static final RegistryObject<SimpleParticleType> PINK_SALT_FALLING_DUST = registerParticle("pink_salt_falling_dust", false);
 
     public static RegistryObject<SimpleParticleType> registerParticle(String key, boolean alwaysShow) {
         return PARTICLES.register(key, () -> new SimpleParticleType(alwaysShow));

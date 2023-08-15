@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "galosphere:block/chiseled_rose_pink_salt"
+  }
+}

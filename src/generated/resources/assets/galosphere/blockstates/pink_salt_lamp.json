@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "galosphere:block/pink_salt_lamp",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "galosphere:block/pink_salt_lamp",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "galosphere:block/pink_salt_lamp",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "galosphere:block/pink_salt_lamp",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "galosphere:block/pink_salt_lamp"
+    },
+    "facing=west": {
+      "model": "galosphere:block/pink_salt_lamp",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

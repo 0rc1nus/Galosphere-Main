@@ -2,9 +2,12 @@ package net.orcinus.galosphere.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.init.GBlocks;
 
 public class GItemModelProvider extends ItemModelProvider {
 
@@ -14,6 +17,7 @@ public class GItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        blockItem(GBlocks.CAPTIVATED_MEMBRANE_BLOCK.get());
         blockItem("silver_block");
         blockItem("raw_silver_block");
         blockItem("silver_ore");
@@ -60,6 +64,40 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem("silver_panel");
         blockItem("silver_panel_stairs");
         blockItem("silver_panel_slab");
+        blockItem(GBlocks.PINK_SALT.get());
+        blockItem(GBlocks.ROSE_PINK_SALT.get());
+        blockItem(GBlocks.PASTEL_PINK_SALT.get());
+        blockItem(GBlocks.PINK_SALT_STAIRS.get());
+        blockItem(GBlocks.ROSE_PINK_SALT_STAIRS.get());
+        blockItem(GBlocks.PASTEL_PINK_SALT_STAIRS.get());
+        blockItem(GBlocks.PINK_SALT_SLAB.get());
+        blockItem(GBlocks.ROSE_PINK_SALT_SLAB.get());
+        blockItem(GBlocks.PASTEL_PINK_SALT_SLAB.get());
+        blockItem(GBlocks.POLISHED_PINK_SALT.get());
+        blockItem(GBlocks.POLISHED_ROSE_PINK_SALT.get());
+        blockItem(GBlocks.POLISHED_PASTEL_PINK_SALT.get());
+        blockItem(GBlocks.POLISHED_PINK_SALT_SLAB.get());
+        blockItem(GBlocks.POLISHED_ROSE_PINK_SALT_SLAB.get());
+        blockItem(GBlocks.POLISHED_PASTEL_PINK_SALT_SLAB.get());
+        blockItem(GBlocks.POLISHED_PINK_SALT_STAIRS.get());
+        blockItem(GBlocks.POLISHED_ROSE_PINK_SALT_STAIRS.get());
+        blockItem(GBlocks.POLISHED_PASTEL_PINK_SALT_STAIRS.get());
+        blockItem(GBlocks.PINK_SALT_BRICKS.get());
+        blockItem(GBlocks.ROSE_PINK_SALT_BRICKS.get());
+        blockItem(GBlocks.PASTEL_PINK_SALT_BRICKS.get());
+        blockItem(GBlocks.PINK_SALT_BRICK_SLAB.get());
+        blockItem(GBlocks.ROSE_PINK_SALT_BRICK_SLAB.get());
+        blockItem(GBlocks.PASTEL_PINK_SALT_BRICK_SLAB.get());
+        blockItem(GBlocks.PINK_SALT_BRICK_STAIRS.get());
+        blockItem(GBlocks.ROSE_PINK_SALT_BRICK_STAIRS.get());
+        blockItem(GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get());
+        blockItem(GBlocks.CHISELED_PINK_SALT.get());
+        blockItem(GBlocks.CHISELED_ROSE_PINK_SALT.get());
+        blockItem(GBlocks.CHISELED_PASTEL_PINK_SALT.get());
+        blockItem(GBlocks.PINK_SALT_LAMP.get());
+        blockItem(GBlocks.CURED_MEMBRANE_BLOCK.get());
+        item("pink_salt_cluster");
+        itemWithBlockDirectory("pink_salt_straw", "pink_salt_straw_up_top");
         withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", new ResourceLocation(Galosphere.MODID, "block/monstrometer_top")).texture("bottom", new ResourceLocation(Galosphere.MODID, "block/monstrometer_bottom")).texture("side", new ResourceLocation(Galosphere.MODID, "block/monstrometer_side"));
         item("silver_ingot");
         item("allurite_shard");
@@ -80,6 +118,10 @@ public class GItemModelProvider extends ItemModelProvider {
         item("glow_flare");
         item("chandelier");
         item("silver_upgrade_smithing_template");
+        item("preserving_template");
+        item("pink_salt_shard");
+        item("salted_jerky");
+        item("cured_membrane");
         itemWithBlockDirectory("silver_lattice");
         itemWithBlockDirectory("lichen_roots");
         itemWithBlockDirectory("bowl_lichen");
@@ -97,12 +139,20 @@ public class GItemModelProvider extends ItemModelProvider {
         withExistingParent(entityName + "_spawn_egg", new ResourceLocation("item/template_spawn_egg"));
     }
 
+    private void blockItem(Block block) {
+        blockItem(ForgeRegistries.BLOCKS.getKey(block).getPath());
+    }
+
     private void blockItem(String parent) {
         withExistingParent(parent, modLoc("block/" + parent));
     }
 
     private void itemWithBlockDirectory(String parent) {
-        withExistingParent(parent, new ResourceLocation("item/generated")).texture("layer0", new ResourceLocation(Galosphere.MODID, "block/" + parent));
+        itemWithBlockDirectory(parent, parent);
+    }
+
+    private void itemWithBlockDirectory(String parent, String direct) {
+        withExistingParent(parent, new ResourceLocation("item/generated")).texture("layer0", new ResourceLocation(Galosphere.MODID, "block/" + direct));
     }
 
     private void item(String parent) {

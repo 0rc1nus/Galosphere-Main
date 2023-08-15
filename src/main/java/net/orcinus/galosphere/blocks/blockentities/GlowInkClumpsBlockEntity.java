@@ -53,7 +53,11 @@ public class GlowInkClumpsBlockEntity extends BlockEntity {
                                 }
                                 if (delay == 0) {
                                     GNetworkHandler.sendToAllInRangeClients(offset, (ServerLevel) world, 16, new SendParticlesPacket(offset));
-                                    world.setBlock(relative, placeState.setValue(BlockStateProperties.AGE_15, 0).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(relative).is(Blocks.WATER)), 2);
+                                    int age = 0;
+                                    if (x == 1 || x == -1 && z == 1 || z == -1) {
+                                        age = Math.max(0, originState.getValue(BlockStateProperties.AGE_15) - 3);
+                                    }
+                                    world.setBlock(relative, placeState.setValue(BlockStateProperties.AGE_15, age).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(relative).is(Blocks.WATER)), 2);
                                     delay = 2;
                                 }
                             }

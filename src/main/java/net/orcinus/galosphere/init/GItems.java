@@ -35,10 +35,12 @@ public class GItems {
     public static final RegistryObject<Item> BOTTLE_OF_SPECTRE = ITEMS.register("bottle_of_spectre", () -> new SpectreBottleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ALLURITE_SHARD = registerBaseItem("allurite_shard");
     public static final RegistryObject<Item> LUMIERE_SHARD = registerBaseItem("lumiere_shard");
+    public static final RegistryObject<Item> PINK_SALT_SHARD = registerBaseItem("pink_salt_shard");
     public static final RegistryObject<Item> RAW_SILVER = registerBaseItem("raw_silver");
     public static final RegistryObject<Item> SILVER_INGOT = registerBaseItem("silver_ingot");
     public static final RegistryObject<Item> SILVER_NUGGET = registerBaseItem("silver_nugget");
     public static final RegistryObject<Item> SILVER_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("silver_upgrade_smithing_template", SilverSmithingTemplateItem::new);
+    public static final RegistryObject<Item> PRESERVING_TEMPLATE = ITEMS.register("preserving_template", SmithingTemplateItem::createNetheriteUpgradeTemplate);
     public static final RegistryObject<Item> BAROMETER = registerBaseItem("barometer");
     public static final RegistryObject<Item> SILVER_BOMB = ITEMS.register("silver_bomb", () -> new SilverBombItem(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> STERLING_HELMET = ITEMS.register("sterling_helmet", () -> new SterlingArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
@@ -46,6 +48,8 @@ public class GItems {
     public static final RegistryObject<Item> STERLING_LEGGINGS = ITEMS.register("sterling_leggings", () -> new SterlingArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> STERLING_BOOTS = ITEMS.register("sterling_boots", () -> new SterlingArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> STERLING_HORSE_ARMOR = ITEMS.register("sterling_horse_armor", () -> new GHorseArmorItem(4, "sterling"));
+    public static final RegistryObject<Item> SALTED_JERKY = ITEMS.register("salted_jerky", () -> new Item(new Item.Properties().food(GFoods.SALTED_JERKY)));
+    public static final RegistryObject<Item> CURED_MEMBRANE = registerBaseItem("cured_membrane");
     public static final RegistryObject<Item> LICHEN_CORDYCEPS = ITEMS.register("lichen_cordyceps", () -> new LichenCordycepsItem(GBlocks.LICHEN_CORDYCEPS.get(), new Item.Properties().food(GFoods.LICHEN_CORDYCEPS)));
     public static final RegistryObject<Item> GOLDEN_LICHEN_CORDYCEPS = ITEMS.register("golden_lichen_cordyceps", () -> new GoldenLichenCordycepsItem(new Item.Properties().food(GFoods.GOLDEN_LICHEN_CORDYCEPS)));
     public static final RegistryObject<Item> GLOW_FLARE = ITEMS.register("glow_flare", () -> new GlowFlareItem(new Item.Properties()));

@@ -8,6 +8,7 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -45,6 +46,11 @@ public class GPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GRAVEL_PATCH = registerPlacedFeature("gravel_patch");
     public static final ResourceKey<PlacedFeature> LICHEN_CORDYCEPS_COLUMN = registerPlacedFeature("lichen_cordyceps_column");
     public static final ResourceKey<PlacedFeature> ORE_SILVER_LARGE = registerPlacedFeature("ore_silver_large");
+    public static final ResourceKey<PlacedFeature> PINK_SALT_NOISE_GROUND_PATCH = registerPlacedFeature("pink_salt_noise_ground_patch");
+    public static final ResourceKey<PlacedFeature> PINK_SALT_NOISE_CEILING_PATCH = registerPlacedFeature("pink_salt_noise_ceiling_patch");
+    public static final ResourceKey<PlacedFeature> PINK_SALT_STRAW_CEILING_PATCH = registerPlacedFeature("pink_salt_straw_ceiling_patch");
+    public static final ResourceKey<PlacedFeature> PINK_SALT_STRAW_FLOOR_PATCH = registerPlacedFeature("pink_salt_straw_floor_patch");
+    public static final ResourceKey<PlacedFeature> OASIS = registerPlacedFeature("oasis");
 
     public static void bootstrap(BootstapContext<PlacedFeature> bootstapContext) {
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstapContext.lookup(Registries.CONFIGURED_FEATURE);
@@ -62,6 +68,11 @@ public class GPlacedFeatures {
         PlacementUtils.register(bootstapContext, GRAVEL_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.GRAVEL_PATCH), CountPlacement.of(20), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(1)), BiomeFilter.biome());
         PlacementUtils.register(bootstapContext, LICHEN_CORDYCEPS_COLUMN, holderGetter.getOrThrow(GConfiguredFeatures.LICHEN_CORDYCEPS), NoiseBasedCountPlacement.of(200, 4, -0.12), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12), RandomOffsetPlacement.vertical(ConstantInt.of(1)), BiomeFilter.biome());
         PlacementUtils.register(bootstapContext, ORE_SILVER_LARGE, holderGetter.getOrThrow(GConfiguredFeatures.ORE_SILVER_LARGE), commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112))));
+        PlacementUtils.register(bootstapContext, PINK_SALT_NOISE_GROUND_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_GROUND_NOISE_PATCH), CountPlacement.of(125), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
+        PlacementUtils.register(bootstapContext, PINK_SALT_NOISE_CEILING_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_CEILING_NOISE_PATCH), CountPlacement.of(125), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
+        PlacementUtils.register(bootstapContext, PINK_SALT_STRAW_CEILING_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_STRAW_CEILING_PATCH), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f, 3.0f, -10, 10), ClampedNormalInt.of(0.0f, 0.6f, -2, 2)), BiomeFilter.biome());
+        PlacementUtils.register(bootstapContext, PINK_SALT_STRAW_FLOOR_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_STRAW_FLOOR_PATCH), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f, 3.0f, -10, 10), ClampedNormalInt.of(0.0f, 0.6f, -2, 2)), BiomeFilter.biome());
+        PlacementUtils.register(bootstapContext, OASIS, holderGetter.getOrThrow(GConfiguredFeatures.OASIS), CountPlacement.of(50), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12), BiomeFilter.biome());
     }
 
     public static ResourceKey<PlacedFeature> registerPlacedFeature(String id) {

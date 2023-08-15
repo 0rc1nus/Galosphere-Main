@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "galosphere:block/pink_salt_slab"
+    },
+    "type=double": {
+      "model": "galosphere:block/pink_salt"
+    },
+    "type=top": {
+      "model": "galosphere:block/pink_salt_slab_top"
+    }
+  }
+}

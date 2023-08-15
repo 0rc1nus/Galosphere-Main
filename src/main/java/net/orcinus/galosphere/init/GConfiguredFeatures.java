@@ -1,5 +1,6 @@
 package net.orcinus.galosphere.init;
 
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -25,6 +26,8 @@ import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
+import net.orcinus.galosphere.world.gen.features.config.NoisePatchConfig;
+import net.orcinus.galosphere.world.gen.features.config.PinkSaltStrawPatchConfig;
 
 import java.util.List;
 
@@ -45,6 +48,11 @@ public class GConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LICHEN_PATCH = registerConfiguredFeature("lichen_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRAVEL_PATCH = registerConfiguredFeature("gravel_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LICHEN_CORDYCEPS = registerConfiguredFeature("lichen_cordyceps");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PINK_SALT_GROUND_NOISE_PATCH = registerConfiguredFeature("pink_salt_ground_noise_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PINK_SALT_CEILING_NOISE_PATCH = registerConfiguredFeature("pink_salt_ceiling_noise_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PINK_SALT_STRAW_CEILING_PATCH = registerConfiguredFeature("pink_salt_straw_ceiling_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PINK_SALT_STRAW_FLOOR_PATCH = registerConfiguredFeature("pink_salt_straw_floor_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OASIS = registerConfiguredFeature("oasis");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext) {
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstapContext.lookup(Registries.CONFIGURED_FEATURE);
@@ -63,6 +71,11 @@ public class GConfiguredFeatures {
         FeatureUtils.register(bootstapContext, LICHEN_PATCH, GFeatures.LICHEN_PATCH.get(), new VegetationPatchConfiguration(BlockTags.MOSS_REPLACEABLE, BlockStateProvider.simple(GBlocks.LICHEN_MOSS.get()), PlacementUtils.inlinePlaced(holderGetter.getOrThrow(LICHEN_VEGETATION)), CaveSurface.FLOOR, ConstantInt.of(1), 0.0F, 5, 0.8F, UniformInt.of(4, 7), 0.3F));
         FeatureUtils.register(bootstapContext, GRAVEL_PATCH, Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(GBlockTags.GRAVEL_MAY_REPLACE, BlockStateProvider.simple(Blocks.GRAVEL), PlacementUtils.inlinePlaced(holderGetter.getOrThrow(LICHEN_VEGETATION)), CaveSurface.FLOOR, ConstantInt.of(3), 0.8f, 2, 0.05f, UniformInt.of(4, 7), 0.7f));
         FeatureUtils.register(bootstapContext, LICHEN_CORDYCEPS, GFeatures.LICHEN_CORDYCEPS_COLUMN.get(), FeatureConfiguration.NONE);
+        FeatureUtils.register(bootstapContext, PINK_SALT_GROUND_NOISE_PATCH, GFeatures.NOISE_PATCH.get(), new NoisePatchConfig(CaveSurface.FLOOR));
+        FeatureUtils.register(bootstapContext, PINK_SALT_CEILING_NOISE_PATCH, GFeatures.NOISE_PATCH.get(), new NoisePatchConfig(CaveSurface.CEILING));
+        FeatureUtils.register(bootstapContext, PINK_SALT_STRAW_CEILING_PATCH, GFeatures.PINK_SALT_STRAW_PATCH.get(), new PinkSaltStrawPatchConfig(UniformInt.of(2, 8), UniformInt.of(1, 4), UniformInt.of(1, 3), Direction.UP));
+        FeatureUtils.register(bootstapContext, PINK_SALT_STRAW_FLOOR_PATCH, GFeatures.PINK_SALT_STRAW_PATCH.get(), new PinkSaltStrawPatchConfig(UniformInt.of(2, 8), UniformInt.of(1, 4), UniformInt.of(1, 3), Direction.DOWN));
+        FeatureUtils.register(bootstapContext, OASIS, GFeatures.OASIS.get(), FeatureConfiguration.NONE);
     }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {

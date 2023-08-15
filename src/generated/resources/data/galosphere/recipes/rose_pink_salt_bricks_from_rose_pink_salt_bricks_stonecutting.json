@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "galosphere:rose_pink_salt_bricks"
+  },
+  "result": "galosphere:rose_pink_salt_bricks"
+}

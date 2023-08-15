@@ -1,0 +1,73 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/composter"
+      }
+    },
+    {
+      "when": {
+        "level": "1"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter_contents1"
+      }
+    },
+    {
+      "when": {
+        "level": "2"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter_contents2"
+      }
+    },
+    {
+      "when": {
+        "level": "3"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter_contents3"
+      }
+    },
+    {
+      "when": {
+        "level": "4"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter_contents4"
+      }
+    },
+    {
+      "when": {
+        "level": "5"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter_contents5"
+      }
+    },
+    {
+      "when": {
+        "level": "6"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter_contents6"
+      }
+    },
+    {
+      "when": {
+        "level": "7"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter_contents7"
+      }
+    },
+    {
+      "when": {
+        "level": "8"
+      },
+      "apply": {
+        "model": "galosphere:block/saline_composter_contents_ready"
+      }
+    }
+  ]
+}

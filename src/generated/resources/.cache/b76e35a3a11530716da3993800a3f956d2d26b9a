@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-28T16:11:18.5795748	Tags for minecraft:block mod id galosphere
+// 1.20.1	2023-08-14T08:12:17.3485426	Tags for minecraft:block mod id galosphere
 021e86d55679a27d4519fa177cd4425c51105d50 data/forge/tags/blocks/ores.json
 d22848f4f97f051b3ec5eefda7df36a01718e88a data/forge/tags/blocks/ores/silver.json
 97eb1b03810e22a976b10e158ad5eda01f2f6b3e data/forge/tags/blocks/storage_blocks.json
@@ -6,15 +6,19 @@ eb2ffa9945e725ede9bd398e5699b69c647fc634 data/forge/tags/blocks/storage_blocks/r
 77953532df9dfaebb1305885a11df18f585acef3 data/forge/tags/blocks/storage_blocks/silver.json
 a4c38c691f57054d2c41ac4d23e34dc6b5502285 data/galosphere/tags/blocks/crystal_spikes_blocks.json
 da7e3a3aff636508080ebfd47741b3deb5e9a67c data/galosphere/tags/blocks/gravel_may_replace.json
+83ca7e1e1763ade96beb51911060d0bdf3c6c916 data/galosphere/tags/blocks/oasis_replace.json
 09fdde12678b6e3e74157b60e85d414950693787 data/galosphere/tags/blocks/obfuscates_sound_waves.json
+cfab2ab481bf476a645d326b87627918009b9e50 data/galosphere/tags/blocks/omit_astral.json
+b037357c8ac7af3a6e55f5b28aab5bb4a50a211e data/galosphere/tags/blocks/pink_salt_blocks.json
+e23dc49b60203dbd5c3ba8de2114ba7833ed07b8 data/galosphere/tags/blocks/pink_salt_heated_blocks.json
 109b56330612fbb3bf3683cc569b0dd772e24f06 data/galosphere/tags/blocks/sparkles_spawn_on.json
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/galosphere/tags/blocks/spectres_spawn_on.json
 77953532df9dfaebb1305885a11df18f585acef3 data/minecraft/tags/blocks/beacon_base_blocks.json
 ae98940009770130b05859b32836d9dde0fdbb2a data/minecraft/tags/blocks/crystal_sound_blocks.json
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/minecraft/tags/blocks/dirt.json
-d85351e5edf223b9d47bf6085fd3f9b27520013d data/minecraft/tags/blocks/mineable/axe.json
+c2d098223dfc23cdd8619a8bb8f67cfc17785ba5 data/minecraft/tags/blocks/mineable/axe.json
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/minecraft/tags/blocks/mineable/hoe.json
-6376d18ab62f400e0ab7c1c97589fa603a52b504 data/minecraft/tags/blocks/mineable/pickaxe.json
+4e4e4d559a00637365425bb6a4d029831ca1a5b4 data/minecraft/tags/blocks/mineable/pickaxe.json
 8223b9cdd22e99a91f7b5784ba66aa4f9a371904 data/minecraft/tags/blocks/needs_stone_tool.json
-e0bc03738a7ab1931892bbe48205c993be0cad02 data/minecraft/tags/blocks/slabs.json
-2b8845331db2caeea2993c2aa9b35c551994290e data/minecraft/tags/blocks/stairs.json
+43cc66a9f7564650279024fc79dd99b577ea5a2b data/minecraft/tags/blocks/slabs.json
+a47d0ae81eecc475b4596c6e0dc03f6b16e0218a data/minecraft/tags/blocks/stairs.json

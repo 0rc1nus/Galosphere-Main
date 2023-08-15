@@ -56,6 +56,7 @@ public class BiomeReagentHandler {
     public static void init(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer) {
         consumer.accept(Pair.of(CRYSTAL_CANYONS_PARAMETER, GBiomes.CRYSTAL_CANYONS));
         consumer.accept(Pair.of(LICHEN_CAVES_PARAMETER, GBiomes.LICHEN_CAVES));
+        consumer.accept(Pair.of(Climate.parameters(Climate.Parameter.span(-1.0F, 1.0F), Climate.Parameter.span(0.3F, 1.0F), Climate.Parameter.span(-1.0F, 1.0F), Climate.Parameter.span(-0.8F, -0.7F), Climate.Parameter.span(0.2F, 1.1F), Climate.Parameter.span(-1.0F, 1.0F), 0.0F), GBiomes.PINK_SALT_CAVES));
     }
 
 }

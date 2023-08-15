@@ -53,6 +53,18 @@
     "galosphere:glow_berries_silver_lattice",
     "galosphere:glinted_allurite_cluster",
     "galosphere:glinted_lumiere_cluster",
-    "galosphere:glinted_amethyst_cluster"
+    "galosphere:glinted_amethyst_cluster",
+    "galosphere:pink_salt",
+    "galosphere:rose_pink_salt",
+    "galosphere:pastel_pink_salt",
+    "galosphere:pink_salt_stairs",
+    "galosphere:rose_pink_salt_stairs",
+    "galosphere:pastel_pink_salt_stairs",
+    "galosphere:pink_salt_slab",
+    "galosphere:rose_pink_salt_slab",
+    "galosphere:pastel_pink_salt_slab",
+    "galosphere:pink_salt_wall",
+    "galosphere:rose_pink_salt_wall",
+    "galosphere:pastel_pink_salt_wall"
   ]
 }

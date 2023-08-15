@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "S": {
+      "item": "galosphere:pink_salt_shard"
+    }
+  },
+  "pattern": [
+    " S ",
+    "S#S",
+    " S "
+  ],
+  "result": {
+    "item": "galosphere:cured_membrane"
+  },
+  "show_notification": true
+}

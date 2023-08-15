@@ -10,6 +10,15 @@
     "galosphere:smooth_lumiere_stairs",
     "galosphere:amethyst_brick_stairs",
     "galosphere:allurite_brick_stairs",
-    "galosphere:lumiere_brick_stairs"
+    "galosphere:lumiere_brick_stairs",
+    "galosphere:pink_salt_stairs",
+    "galosphere:rose_pink_salt_stairs",
+    "galosphere:pastel_pink_salt_stairs",
+    "galosphere:polished_pink_salt_stairs",
+    "galosphere:polished_rose_pink_salt_stairs",
+    "galosphere:polished_pastel_pink_salt_stairs",
+    "galosphere:pink_salt_brick_stairs",
+    "galosphere:rose_pink_salt_brick_stairs",
+    "galosphere:pastel_pink_salt_brick_stairs"
   ]
 }

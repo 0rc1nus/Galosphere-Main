@@ -2,6 +2,7 @@ package net.orcinus.galosphere.events;
 
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.item.BannerItem;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -78,6 +81,17 @@ public class MobEvents {
         BlockState state = event.getState();
         if (state.getBlock() == Blocks.BUDDING_AMETHYST && GalosphereConfig.SLOWED_BUDDING_AMETHYST_MINING_SPEED.get()) {
             event.setNewSpeed(2.0F);
+        }
+    }
+
+    @SubscribeEvent
+    public void onItemExpire(ItemExpireEvent event) {
+        ItemEntity entity = event.getEntity();
+        if (!entity.level().isClientSide) {
+            BlockState blockState = entity.level().getBlockState(BlockPos.containing(entity.getEyePosition().x, entity.getEyePosition().y, entity.getEyePosition().z));
+            if (blockState.is(GBlocks.CAPTIVATED_MEMBRANE_BLOCK.get())) {
+                event.setExtraLife(6000);
+            }
         }
     }
 

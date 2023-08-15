@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "galosphere:block/cured_membrane_block"
+    }
+  }
+}

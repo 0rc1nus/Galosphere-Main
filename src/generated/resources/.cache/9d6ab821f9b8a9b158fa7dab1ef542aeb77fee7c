@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-28T16:11:18.5753553	Tags for minecraft:item mod id galosphere
+// 1.20.1	2023-08-10T14:10:56.3384869	Tags for minecraft:item mod id galosphere
 bf2ad799074f5c44acee490bdf3d3ae81d56997b data/forge/tags/items/ingots.json
 0ceaaec06992eb7173faa9cc1f1b2a05ad3c7cab data/forge/tags/items/ingots/silver.json
 f9a637e96c99d2b17b5183761d2dbcc66f1e2a62 data/forge/tags/items/nuggets.json
@@ -17,5 +17,5 @@ eb2ffa9945e725ede9bd398e5699b69c647fc634 data/forge/tags/items/storage_blocks/ra
 81db4915f4f80c962cdeb4281b6ee49cff4bea7d data/galosphere/tags/items/sparkle_tempt_items.json
 131a9d399371fb7f94f24cc942d6f7ae5ed16883 data/galosphere/tags/items/spectre_tempt_items.json
 646c83f2ad68cb9b8b2ed243377ab1c3f75fab3e data/minecraft/tags/items/freeze_immune_wearables.json
-e0bc03738a7ab1931892bbe48205c993be0cad02 data/minecraft/tags/items/slabs.json
-2b8845331db2caeea2993c2aa9b35c551994290e data/minecraft/tags/items/stairs.json
+43cc66a9f7564650279024fc79dd99b577ea5a2b data/minecraft/tags/items/slabs.json
+a47d0ae81eecc475b4596c6e0dc03f6b16e0218a data/minecraft/tags/items/stairs.json

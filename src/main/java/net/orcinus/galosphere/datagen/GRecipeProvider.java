@@ -2,6 +2,7 @@ package net.orcinus.galosphere.datagen;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -25,6 +26,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.compat.init.ForgeItemTags;
+import net.orcinus.galosphere.init.GBlockFamilies;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
 
@@ -41,6 +43,23 @@ public class GRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        GBlockFamilies.getAllFamilies().forEach((blockFamily) -> {
+            generateRecipes(consumer, blockFamily);
+        });
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.SHADOW_FRAME.get())
+                .define('S', GItems.SILVER_INGOT.get())
+                .define('#', GItems.CURED_MEMBRANE.get())
+                .pattern("S#S")
+                .pattern("#S#")
+                .pattern("S#S")
+                .unlockedBy("has_cured_membrane", has(GItems.CURED_MEMBRANE.get())).save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.PINK_SALT_LAMP.get()).define('#', GBlocks.PINK_SALT_CLUSTER.get()).define('S', GItems.SILVER_INGOT.get()).pattern("#").pattern("S").unlockedBy("has_pink_salt_cluster", has(GBlocks.PINK_SALT_CLUSTER.get())).save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GItems.SALTED_JERKY.get()).define('S', GItems.PINK_SALT_SHARD.get()).define('#', Items.ROTTEN_FLESH).pattern(" S ").pattern("S#S").pattern(" S ").unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD.get())).save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GItems.CURED_MEMBRANE.get()).define('S', GItems.PINK_SALT_SHARD.get()).define('#', Items.PHANTOM_MEMBRANE).pattern(" S ").pattern("S#S").pattern(" S ").unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD.get())).save(consumer);
+        threeXthree(consumer, GBlocks.CURED_MEMBRANE_BLOCK.get(), GItems.CURED_MEMBRANE.get());
+        twoXtwo(consumer, GBlocks.PINK_SALT_BRICKS.get(), GBlocks.POLISHED_PINK_SALT.get().asItem(), 4);
+        twoXtwo(consumer, GBlocks.ROSE_PINK_SALT_BRICKS.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get().asItem(), 4);
+        twoXtwo(consumer, GBlocks.PASTEL_PINK_SALT_BRICKS.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get().asItem(), 4);
         twoXtwo(consumer, GBlocks.ALLURITE_BLOCK.get(), GItems.ALLURITE_SHARD.get(), 1);
         twoXtwo(consumer, GBlocks.LUMIERE_BLOCK.get(), GItems.LUMIERE_SHARD.get(), 1);
         twoXtwo(consumer, GBlocks.SMOOTH_AMETHYST.get(), Items.AMETHYST_BLOCK, 4);
@@ -219,6 +238,78 @@ public class GRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_allurite_block", has(GBlocks.ALLURITE_BLOCK.get()))
                 .unlockedBy("has_silver_block", has(ForgeItemTags.SILVER_STORAGE_BLOCKS)).save(consumer);
 
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_STAIRS.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_SLAB.get(), GBlocks.PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_WALL.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PINK_SALT.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PINK_SALT_STAIRS.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PINK_SALT_SLAB.get(), GBlocks.PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PINK_SALT_WALL.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICKS.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_STAIRS.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_SLAB.get(), GBlocks.PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_WALL.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.CHISELED_PINK_SALT.get(), GBlocks.PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PINK_SALT_STAIRS.get(), GBlocks.POLISHED_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PINK_SALT_SLAB.get(), GBlocks.POLISHED_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PINK_SALT_WALL.get(), GBlocks.POLISHED_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICKS.get(), GBlocks.POLISHED_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_STAIRS.get(), GBlocks.POLISHED_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_SLAB.get(), GBlocks.POLISHED_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_WALL.get(), GBlocks.POLISHED_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICKS.get(), GBlocks.PINK_SALT_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_STAIRS.get(), GBlocks.PINK_SALT_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_SLAB.get(), GBlocks.PINK_SALT_BRICKS.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.PINK_SALT_BRICK_WALL.get(), GBlocks.PINK_SALT_BRICKS.get());
+
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_STAIRS.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_SLAB.get(), GBlocks.ROSE_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_WALL.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_ROSE_PINK_SALT.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_ROSE_PINK_SALT_STAIRS.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_ROSE_PINK_SALT_SLAB.get(), GBlocks.ROSE_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_ROSE_PINK_SALT_WALL.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICKS.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_STAIRS.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_SLAB.get(), GBlocks.ROSE_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_WALL.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.CHISELED_ROSE_PINK_SALT.get(), GBlocks.ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_ROSE_PINK_SALT_STAIRS.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_ROSE_PINK_SALT_SLAB.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_ROSE_PINK_SALT_WALL.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICKS.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_STAIRS.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_SLAB.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_WALL.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICKS.get(), GBlocks.ROSE_PINK_SALT_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_STAIRS.get(), GBlocks.ROSE_PINK_SALT_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_SLAB.get(), GBlocks.ROSE_PINK_SALT_BRICKS.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.ROSE_PINK_SALT_BRICK_WALL.get(), GBlocks.ROSE_PINK_SALT_BRICKS.get());
+
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_STAIRS.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_SLAB.get(), GBlocks.PASTEL_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_WALL.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PASTEL_PINK_SALT.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PASTEL_PINK_SALT_STAIRS.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PASTEL_PINK_SALT_SLAB.get(), GBlocks.PASTEL_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PASTEL_PINK_SALT_WALL.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICKS.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_SLAB.get(), GBlocks.PASTEL_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_WALL.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.CHISELED_PASTEL_PINK_SALT.get(), GBlocks.PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PASTEL_PINK_SALT_STAIRS.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PASTEL_PINK_SALT_SLAB.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.POLISHED_PASTEL_PINK_SALT_WALL.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICKS.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_SLAB.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_WALL.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICKS.get(), GBlocks.PASTEL_PINK_SALT_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get(), GBlocks.PASTEL_PINK_SALT_BRICKS.get());
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_SLAB.get(), GBlocks.PASTEL_PINK_SALT_BRICKS.get(), 2);
+        stonecutterResultFromBase(consumer, GBlocks.PASTEL_PINK_SALT_BRICK_WALL.get(), GBlocks.PASTEL_PINK_SALT_BRICKS.get());
+
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_AMETHYST.get(), Blocks.AMETHYST_BLOCK);
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_ALLURITE.get(), GBlocks.ALLURITE_BLOCK.get());
         stonecutterResultFromBase(consumer, GBlocks.SMOOTH_LUMIERE.get(), GBlocks.LUMIERE_BLOCK.get());
@@ -341,6 +432,10 @@ public class GRecipeProvider extends RecipeProvider {
                 shapeless(RecipeCategory.MISC, result, count)
                 .requires(item)
                 .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(item).getPath(), has(item)).save(consumer);
+    }
+
+    private void twoXtwo(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike item) {
+        twoXtwo(consumer, result, item.asItem(), 4);
     }
 
     private void twoXtwo(Consumer<FinishedRecipe> consumer, ItemLike result, Item item, int count) {

@@ -1,20 +1,14 @@
 package net.orcinus.galosphere.datagen;
 
 import net.minecraft.core.Direction;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -22,14 +16,13 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.blocks.CordycepsBlock;
 import net.orcinus.galosphere.blocks.LichenMossBlock;
+import net.orcinus.galosphere.blocks.PinkSaltStrawBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import java.util.function.Function;
 
 public class GBlockstateProvider extends BlockStateProvider {
 
@@ -106,6 +99,122 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.slabBlock(GBlocks.SILVER_PANEL_SLAB.get(), "silver_panel");
         this.stairsBlock(GBlocks.SILVER_PANEL_STAIRS.get(), "silver_panel");
 
+        this.simpleBlock(GBlocks.PINK_SALT.get());
+        this.simpleBlock(GBlocks.ROSE_PINK_SALT.get());
+        this.simpleBlock(GBlocks.PASTEL_PINK_SALT.get());
+
+        this.slabBlock(GBlocks.PINK_SALT_SLAB.get(), "pink_salt");
+        this.slabBlock(GBlocks.ROSE_PINK_SALT_SLAB.get(), "rose_pink_salt");
+        this.slabBlock(GBlocks.PASTEL_PINK_SALT_SLAB.get(), "pastel_pink_salt");
+
+        this.stairsBlock(GBlocks.PINK_SALT_STAIRS.get(), "pink_salt");
+        this.stairsBlock(GBlocks.ROSE_PINK_SALT_STAIRS.get(), "rose_pink_salt");
+        this.stairsBlock(GBlocks.PASTEL_PINK_SALT_STAIRS.get(), "pastel_pink_salt");
+
+        this.simpleBlock(GBlocks.POLISHED_PINK_SALT.get());
+        this.simpleBlock(GBlocks.POLISHED_ROSE_PINK_SALT.get());
+        this.simpleBlock(GBlocks.POLISHED_PASTEL_PINK_SALT.get());
+
+        this.slabBlock(GBlocks.POLISHED_PINK_SALT_SLAB.get(), "polished_pink_salt");
+        this.slabBlock(GBlocks.POLISHED_ROSE_PINK_SALT_SLAB.get(), "polished_rose_pink_salt");
+        this.slabBlock(GBlocks.POLISHED_PASTEL_PINK_SALT_SLAB.get(), "polished_pastel_pink_salt");
+
+        this.stairsBlock(GBlocks.POLISHED_PINK_SALT_STAIRS.get(), "polished_pink_salt");
+        this.stairsBlock(GBlocks.POLISHED_ROSE_PINK_SALT_STAIRS.get(), "polished_rose_pink_salt");
+        this.stairsBlock(GBlocks.POLISHED_PASTEL_PINK_SALT_STAIRS.get(), "polished_pastel_pink_salt");
+
+        this.simpleBlock(GBlocks.PINK_SALT_BRICKS.get());
+        this.simpleBlock(GBlocks.ROSE_PINK_SALT_BRICKS.get());
+        this.simpleBlock(GBlocks.PASTEL_PINK_SALT_BRICKS.get());
+
+        this.slabBlock(GBlocks.PINK_SALT_BRICK_SLAB.get(), "pink_salt_bricks");
+        this.slabBlock(GBlocks.ROSE_PINK_SALT_BRICK_SLAB.get(), "rose_pink_salt_bricks");
+        this.slabBlock(GBlocks.PASTEL_PINK_SALT_BRICK_SLAB.get(), "pastel_pink_salt_bricks");
+
+        this.stairsBlock(GBlocks.PINK_SALT_BRICK_STAIRS.get(), "pink_salt_bricks");
+        this.stairsBlock(GBlocks.ROSE_PINK_SALT_BRICK_STAIRS.get(), "rose_pink_salt_bricks");
+        this.stairsBlock(GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get(), "pastel_pink_salt_bricks");
+
+        this.simpleBlock(GBlocks.CHISELED_PINK_SALT.get());
+        this.simpleBlock(GBlocks.CHISELED_ROSE_PINK_SALT.get());
+        this.simpleBlock(GBlocks.CHISELED_PASTEL_PINK_SALT.get());
+
+        this.simpleBlock(GBlocks.CURED_MEMBRANE_BLOCK.get());
+        this.simpleBlock(GBlocks.SHADOW_FRAME.get());
+
+        this.wallBlock(GBlocks.PINK_SALT_WALL.get(), "pink_salt");
+        this.wallBlock(GBlocks.ROSE_PINK_SALT_WALL.get(), "rose_pink_salt");
+        this.wallBlock(GBlocks.PASTEL_PINK_SALT_WALL.get(), "pastel_pink_salt");
+        this.wallBlock(GBlocks.POLISHED_PINK_SALT_WALL.get(), "polished_pink_salt");
+        this.wallBlock(GBlocks.POLISHED_ROSE_PINK_SALT_WALL.get(), "polished_rose_pink_salt");
+        this.wallBlock(GBlocks.POLISHED_PASTEL_PINK_SALT_WALL.get(), "polished_pastel_pink_salt");
+        this.wallBlock(GBlocks.PINK_SALT_BRICK_WALL.get(), "pink_salt_bricks");
+        this.wallBlock(GBlocks.ROSE_PINK_SALT_BRICK_WALL.get(), "rose_pink_salt_bricks");
+        this.wallBlock(GBlocks.PASTEL_PINK_SALT_BRICK_WALL.get(), "pastel_pink_salt_bricks");
+        this.getVariantBuilder(GBlocks.GILDED_BEADS.get()).forAllStatesExcept(state -> {
+            return ConfiguredModel.builder().modelFile(models().sign("gilded_beads", new ResourceLocation("block/gold_block"))).build();
+        }, BlockStateProperties.ROTATION_16, BlockStateProperties.WATERLOGGED, BlockStateProperties.BOTTOM);
+        this.getVariantBuilder(GBlocks.PINK_SALT_STRAW.get()).forAllStatesExcept(state -> {
+            String name = "pink_salt_straw_" + state.getValue(PinkSaltStrawBlock.TIP_DIRECTION).getName() + "_" + state.getValue(PinkSaltStrawBlock.STRAW_SHAPE);
+            return ConfiguredModel.builder().modelFile(models().withExistingParent(name, "block/pointed_dripstone").renderType("cutout").texture("cross", "block/" + name)).build();
+        }, BlockStateProperties.WATERLOGGED, PinkSaltStrawBlock.FALLABLE);
+        this.getVariantBuilder(GBlocks.PINK_SALT_CLUSTER.get()).forAllStatesExcept(state -> {
+            Direction facing = state.getValue(BlockStateProperties.FACING);
+            int rotationX = 90;
+            int rotationY = 90;
+            if (facing == Direction.UP) {
+                rotationX = 0;
+                rotationY = 0;
+            } else if (facing == Direction.DOWN) {
+                rotationX = 180;
+                rotationY = 0;
+            } else if (facing == Direction.WEST) {
+                rotationY *= 3;
+            } else if (facing == Direction.NORTH) {
+                rotationY = 0;
+            } else if (facing == Direction.SOUTH) {
+                rotationY *= 2;
+            }
+            return ConfiguredModel.builder().modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/pink_salt_cluster"))).rotationX(rotationX).rotationY(rotationY).build();
+        }, BlockStateProperties.WATERLOGGED);
+        this.getVariantBuilder(GBlocks.PINK_SALT_LAMP.get()).forAllStatesExcept(state -> {
+            Direction facing = state.getValue(BlockStateProperties.FACING);
+            int rotationX = 90;
+            int rotationY = 90;
+            if (facing == Direction.UP) {
+                rotationX = 0;
+                rotationY = 0;
+            } else if (facing == Direction.DOWN) {
+                rotationX = 180;
+                rotationY = 0;
+            } else if (facing == Direction.WEST) {
+                rotationY *= 3;
+            } else if (facing == Direction.NORTH) {
+                rotationY = 0;
+            } else if (facing == Direction.SOUTH) {
+                rotationY *= 2;
+            }
+            return ConfiguredModel.builder().modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/pink_salt_lamp"))).rotationX(rotationX).rotationY(rotationY).build();
+        }, BlockStateProperties.WATERLOGGED);
+        this.getVariantBuilder(GBlocks.CAPTIVATED_MEMBRANE_BLOCK.get()).forAllStates(state -> {
+            Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            int rotationX = 90;
+            int rotationY = 90;
+            if (facing == Direction.WEST) {
+                rotationY *= 3;
+            } else if (facing == Direction.NORTH) {
+                rotationY = 0;
+            } else if (facing == Direction.SOUTH) {
+                rotationY *= 2;
+            }
+            return ConfiguredModel.builder().modelFile(models().cubeBottomTop("captivated_membrane_block", modLoc("block/captivated_membrane_block_side"), modLoc("block/captivated_membrane_block_bottom"), modLoc("block/captivated_membrane_block_top")).renderType("translucent")).rotationX(rotationX).rotationY(rotationY).build();
+        });
+    }
+
+    private void wallBlock(Block block, String name) {
+        String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        this.wallBlock((WallBlock) block, new ResourceLocation(Galosphere.MODID, "block/" + name));
+        this.itemModels().getBuilder(path).parent(this.models().wallInventory(path + "_inventory", blockTexture(ForgeRegistries.BLOCKS.getValue(modLoc(name)))));
     }
 
     private void pollinatedCluster(@NotNull Block block) {
