@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "galosphere:lumiere_block"
+    },
+    "S": {
+      "tag": "c:silver_blocks"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "CCC",
+    "SSS"
+  ],
+  "result": {
+    "item": "galosphere:monstrometer"
+  },
+  "show_notification": true
+}

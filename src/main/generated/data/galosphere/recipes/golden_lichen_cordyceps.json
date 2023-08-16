@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:gold_nugget"
+    },
+    "@": {
+      "item": "galosphere:lichen_cordyceps"
+    }
+  },
+  "pattern": [
+    "###",
+    "#@#",
+    "###"
+  ],
+  "result": {
+    "item": "galosphere:golden_lichen_cordyceps"
+  },
+  "show_notification": true
+}

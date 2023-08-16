@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "R": {
+      "item": "galosphere:lumiere_shard"
+    }
+  },
+  "pattern": [
+    " R ",
+    "RGR",
+    " R "
+  ],
+  "result": {
+    "item": "galosphere:lumiere_lamp"
+  },
+  "show_notification": true
+}

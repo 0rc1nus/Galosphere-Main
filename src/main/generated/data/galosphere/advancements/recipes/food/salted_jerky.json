@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pink_salt_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "galosphere:pink_salt_shard"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "galosphere:salted_jerky"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_salt_shard",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "galosphere:salted_jerky"
+    ]
+  },
+  "sends_telemetry_event": false
+}

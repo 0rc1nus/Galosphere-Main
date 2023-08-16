@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "c:copper_ingots"
+    },
+    "@": {
+      "item": "galosphere:bottle_of_spectre"
+    },
+    "C": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "pattern": [
+    "@",
+    "C",
+    "#"
+  ],
+  "result": {
+    "item": "galosphere:chandelier"
+  },
+  "show_notification": true
+}

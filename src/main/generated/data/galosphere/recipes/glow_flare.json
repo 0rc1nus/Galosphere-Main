@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "F": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "tag": "c:copper_ingots"
+    }
+  },
+  "pattern": [
+    " # ",
+    " S ",
+    " F "
+  ],
+  "result": {
+    "count": 4,
+    "item": "galosphere:glow_flare"
+  },
+  "show_notification": true
+}

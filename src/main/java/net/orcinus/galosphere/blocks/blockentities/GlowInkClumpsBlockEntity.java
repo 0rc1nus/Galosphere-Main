@@ -9,7 +9,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -64,7 +63,11 @@ public class GlowInkClumpsBlockEntity  extends BlockEntity {
                                             ServerPlayNetworking.send(serverPlayer, GNetwork.SEND_PARTICLES, buf);
                                         }
                                     }
-                                    world.setBlock(relative, placeState.setValue(BlockStateProperties.AGE_15, 0).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(relative).is(Blocks.WATER)), 2);
+                                    int age = 0;
+                                    if (x == 1 || x == -1 && z == 1 || z == -1) {
+                                        age = Math.max(0, originState.getValue(BlockStateProperties.AGE_15) - 3);
+                                    }
+                                    world.setBlock(relative, placeState.setValue(BlockStateProperties.AGE_15, age).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(relative).is(Blocks.WATER)), 2);
                                     delay = 2;
                                 }
                             }

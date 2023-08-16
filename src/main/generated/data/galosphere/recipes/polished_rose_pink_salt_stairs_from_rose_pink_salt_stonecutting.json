@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "galosphere:rose_pink_salt"
+  },
+  "result": "galosphere:polished_rose_pink_salt_stairs"
+}

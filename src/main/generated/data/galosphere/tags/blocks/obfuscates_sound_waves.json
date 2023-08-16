@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "galosphere:allurite_block",
+    "galosphere:allurite_cluster",
+    "galosphere:glinted_allurite_cluster",
+    "galosphere:smooth_allurite",
+    "galosphere:allurite_bricks",
+    "galosphere:allurite_lamp"
+  ]
+}

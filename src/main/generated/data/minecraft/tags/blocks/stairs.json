@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "galosphere:silver_tiles_stairs",
+    "galosphere:silver_panel_stairs",
+    "galosphere:amethyst_stairs",
+    "galosphere:allurite_stairs",
+    "galosphere:lumiere_stairs",
+    "galosphere:smooth_amethyst_stairs",
+    "galosphere:smooth_allurite_stairs",
+    "galosphere:smooth_lumiere_stairs",
+    "galosphere:amethyst_brick_stairs",
+    "galosphere:allurite_brick_stairs",
+    "galosphere:lumiere_brick_stairs",
+    "galosphere:pink_salt_stairs",
+    "galosphere:rose_pink_salt_stairs",
+    "galosphere:pastel_pink_salt_stairs",
+    "galosphere:polished_pink_salt_stairs",
+    "galosphere:polished_rose_pink_salt_stairs",
+    "galosphere:polished_pastel_pink_salt_stairs",
+    "galosphere:pink_salt_brick_stairs",
+    "galosphere:rose_pink_salt_brick_stairs",
+    "galosphere:pastel_pink_salt_brick_stairs"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "bottom": "galosphere:block/captivated_membrane_block_bottom",
+    "side": "galosphere:block/captivated_membrane_block_side",
+    "top": "galosphere:block/captivated_membrane_block_top"
+  }
+}

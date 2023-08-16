@@ -1,11 +1,13 @@
 package net.orcinus.galosphere.init;
 
+import com.google.common.collect.Maps;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.world.entity.EntityType;
@@ -21,7 +23,11 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.orcinus.galosphere.Galosphere;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.Map;
+
 public class GBiomes {
+    private static final Map<ResourceKey<Biome>, ResourceLocation> VALUES = Maps.newLinkedHashMap();
 
     public static final ResourceKey<Biome> CRYSTAL_CANYONS = register("crystal_canyons");
     public static final ResourceKey<Biome> LICHEN_CAVES = register("lichen_caves");
@@ -119,7 +125,14 @@ public class GBiomes {
         return new Biome.BiomeBuilder().hasPrecipitation(bl).temperature(f).downfall(g).specialEffects(builder3.build()).mobSpawnSettings(builder.build()).generationSettings(builder2.build()).build();
     }
 
-    private static ResourceKey<Biome> register(String string) {
-        return ResourceKey.create(Registries.BIOME, Galosphere.id(string));
+    private static ResourceKey<Biome> register(String name) {
+        ResourceLocation id = new ResourceLocation(Galosphere.MODID, name);
+        ResourceKey<Biome> biomeResourceKey = ResourceKey.create(Registries.BIOME, id);
+        VALUES.put(biomeResourceKey, id);
+        return biomeResourceKey;
+    }
+
+    public static Collection<ResourceLocation> getIds() {
+        return VALUES.values();
     }
 }

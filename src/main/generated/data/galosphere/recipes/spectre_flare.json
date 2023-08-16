@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:silver_ingots"
+    },
+    "S": {
+      "item": "galosphere:bottle_of_spectre"
+    }
+  },
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "result": {
+    "item": "galosphere:spectre_flare"
+  },
+  "show_notification": true
+}

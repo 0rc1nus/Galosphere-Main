@@ -15,6 +15,13 @@ public class GDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(GConfiguredFeaturesProvider::new);
         pack.addProvider(GPlacedFeaturesProvider::new);
         pack.addProvider(GBiomesProvider::new);
+        pack.addProvider(GRecipeProvider::new);
+        pack.addProvider(GBlockTagsProvider::new);
+        pack.addProvider(GItemTagsProvider::new);
+        pack.addProvider(GEntityTypeTagsProvider::new);
+        pack.addProvider(GBiomeTagsProvider::new);
+        pack.addProvider(GBlockLootTableProvider::new);
+        pack.addProvider(GLanguageProvider::new);
     }
 
     @Override

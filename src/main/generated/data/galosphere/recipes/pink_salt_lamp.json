@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "galosphere:pink_salt_cluster"
+    },
+    "S": {
+      "item": "galosphere:silver_ingot"
+    }
+  },
+  "pattern": [
+    "#",
+    "S"
+  ],
+  "result": {
+    "item": "galosphere:pink_salt_lamp"
+  },
+  "show_notification": true
+}
