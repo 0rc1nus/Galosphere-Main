@@ -71,6 +71,7 @@ public class GLanguageProvider extends LanguageProvider {
         this.add("item.minecraft.potion.effect.astral", "Potion of Astral");
         this.add("item.minecraft.splash_potion.effect.astral", "Splash Potion of Astral");
         this.add("item.minecraft.lingering_potion.effect.astral", "Lingering Potion of Astral");
+        this.add("item.minecraft.lingering_potion.tipped_arrow.astral", "Arrow of Astral");
         this.add("itemGroup.galosphere.galosphere", "Galosphere");
         this.add("upgrade.galosphere.silver_upgrade", "Silver Upgrade");
         this.add("item.galosphere.smithing_template.silver_upgrade.applies_to", "Leather Equipment");
