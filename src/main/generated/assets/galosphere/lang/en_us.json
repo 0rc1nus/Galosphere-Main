@@ -176,6 +176,7 @@
   "item.minecraft.lingering_potion.effect.astral": "Lingering Potion of Astral",
   "item.minecraft.potion.effect.astral": "Potion of Astral",
   "item.minecraft.splash_potion.effect.astral": "Splash Potion of Astral",
+  "item.minecraft.tipped_arrow.effect.astral": "Arrow of Astral",
   "itemGroup.galosphere.galosphere": "Galosphere",
   "upgrade.galosphere.silver_upgrade": "Silver Upgrade"
 }

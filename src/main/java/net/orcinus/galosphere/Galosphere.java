@@ -26,6 +26,7 @@ import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
+import net.orcinus.galosphere.init.GPotions;
 import net.orcinus.galosphere.init.GRecipeSerializers;
 import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.init.GVanillaIntegration;
@@ -51,6 +52,7 @@ public class Galosphere implements ModInitializer {
         GEntityTypes.init();
         GEvents.init();
         GFeatures.init();
+        GPotions.init();
         GParticleTypes.init();
         GPlacedFeatures.init();
         GMobEffects.init();

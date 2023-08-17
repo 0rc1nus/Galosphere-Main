@@ -1,12 +1,17 @@
 package net.orcinus.galosphere.init;
 
 import com.google.common.collect.ImmutableMap;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.orcinus.galosphere.crafting.MonstrometerDispenseItemBehavior;
@@ -20,6 +25,12 @@ public class GVanillaIntegration {
     public static void init() {
         GVanillaIntegration.registerCompostables();
         GVanillaIntegration.registerDispenserBehaviors();
+        GVanillaIntegration.registerBrewables();
+    }
+
+    public static void registerBrewables() {
+        FabricBrewingRecipeRegistry.registerPotionRecipe(Potions.AWKWARD, Ingredient.of(GItems.CURED_MEMBRANE), GPotions.ASTRAL);
+        FabricBrewingRecipeRegistry.registerPotionRecipe(GPotions.ASTRAL, Ingredient.of(Items.REDSTONE), GPotions.LONG_ASTRAL);
     }
 
     public static void registerCompostables() {

@@ -67,6 +67,7 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("item.minecraft.potion.effect.astral", "Potion of Astral");
         translationBuilder.add("item.minecraft.splash_potion.effect.astral", "Splash Potion of Astral");
         translationBuilder.add("item.minecraft.lingering_potion.effect.astral", "Lingering Potion of Astral");
+        translationBuilder.add("item.minecraft.tipped_arrow.effect.astral", "Arrow of Astral");
         translationBuilder.add("itemGroup.galosphere.galosphere", "Galosphere");
         translationBuilder.add("upgrade.galosphere.silver_upgrade", "Silver Upgrade");
         translationBuilder.add("item.galosphere.smithing_template.silver_upgrade.applies_to", "Leather Equipment");
