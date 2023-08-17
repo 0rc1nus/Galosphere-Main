@@ -56,7 +56,7 @@ public class GRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.PINK_SALT_LAMP.get()).define('#', GBlocks.PINK_SALT_CLUSTER.get()).define('S', GItems.SILVER_INGOT.get()).pattern("#").pattern("S").unlockedBy("has_pink_salt_cluster", has(GBlocks.PINK_SALT_CLUSTER.get())).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GItems.SALTED_JERKY.get()).define('S', GItems.PINK_SALT_SHARD.get()).define('#', Items.ROTTEN_FLESH).pattern(" S ").pattern("S#S").pattern(" S ").unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD.get())).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GItems.CURED_MEMBRANE.get()).define('S', GItems.PINK_SALT_SHARD.get()).define('#', Items.PHANTOM_MEMBRANE).pattern(" S ").pattern("S#S").pattern(" S ").unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD.get())).save(consumer);
-        threeXthree(consumer, GBlocks.CURED_MEMBRANE_BLOCK.get(), GItems.CURED_MEMBRANE.get());
+        twoXtwo(consumer, GBlocks.CURED_MEMBRANE_BLOCK.get(), GItems.CURED_MEMBRANE.get());
         twoXtwo(consumer, GBlocks.PINK_SALT_BRICKS.get(), GBlocks.POLISHED_PINK_SALT.get().asItem(), 4);
         twoXtwo(consumer, GBlocks.ROSE_PINK_SALT_BRICKS.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get().asItem(), 4);
         twoXtwo(consumer, GBlocks.PASTEL_PINK_SALT_BRICKS.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get().asItem(), 4);
