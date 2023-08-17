@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "building",
   "key": {
     "S": {
       "item": "galosphere:cured_membrane"
     }
   },
   "pattern": [
-    "SSS",
-    "SSS",
-    "SSS"
+    "SS",
+    "SS"
   ],
   "result": {
+    "count": 4,
     "item": "galosphere:cured_membrane_block"
   },
   "show_notification": true
