@@ -97,7 +97,7 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
 
     @Nullable
     private BlockPos findFillableComposterBelowStalactiteTip(Level level, BlockPos blockPos2) {
-        Predicate<BlockState> predicate = blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) == 8;
+        Predicate<BlockState> predicate = blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) > 0;
         BiPredicate<BlockPos, BlockState> biPredicate = (blockPos, blockState) -> canDripThrough(level, blockPos, blockState);
         return findBlockVertical(level, blockPos2, Direction.DOWN.getAxisDirection(), biPredicate, predicate, 11).orElse(null);
     }

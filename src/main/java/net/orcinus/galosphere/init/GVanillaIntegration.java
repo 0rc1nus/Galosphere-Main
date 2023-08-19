@@ -38,6 +38,7 @@ public class GVanillaIntegration {
             map.put(GBlocks.LICHEN_ROOTS.asItem(), 0.3F);
             map.put(GBlocks.LICHEN_SHELF.asItem(), 0.45F);
             map.put(GBlocks.LICHEN_CORDYCEPS.asItem(), 0.4F);
+            map.put(GItems.SALTED_JERKY, 0.5F);
         }).build().forEach(instance::add);
     }
 
