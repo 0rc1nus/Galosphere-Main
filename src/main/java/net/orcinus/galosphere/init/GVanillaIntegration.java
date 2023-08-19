@@ -10,6 +10,7 @@ public class GVanillaIntegration {
         ComposterBlock.COMPOSTABLES.put(GBlocks.LICHEN_ROOTS.get().asItem(), 0.3F);
         ComposterBlock.COMPOSTABLES.put(GBlocks.LICHEN_SHELF.get().asItem(), 0.45F);
         ComposterBlock.COMPOSTABLES.put(GBlocks.LICHEN_CORDYCEPS.get().asItem(), 0.4F);
+        ComposterBlock.COMPOSTABLES.put(GItems.SALTED_JERKY.get(), 0.5F);
     }
 
 }
