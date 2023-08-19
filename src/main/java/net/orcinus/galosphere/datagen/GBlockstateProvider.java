@@ -196,7 +196,7 @@ public class GBlockstateProvider extends BlockStateProvider {
             }
             return ConfiguredModel.builder().modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/pink_salt_lamp"))).rotationX(rotationX).rotationY(rotationY).build();
         }, BlockStateProperties.WATERLOGGED);
-        this.getVariantBuilder(GBlocks.CAPTIVATED_MEMBRANE_BLOCK.get()).forAllStates(state -> {
+        this.getVariantBuilder(GBlocks.STRANDED_MEMBRANE_BLOCK.get()).forAllStates(state -> {
             Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
             int rotationX = 90;
             int rotationY = 90;
@@ -207,7 +207,7 @@ public class GBlockstateProvider extends BlockStateProvider {
             } else if (facing == Direction.SOUTH) {
                 rotationY *= 2;
             }
-            return ConfiguredModel.builder().modelFile(models().cubeBottomTop("captivated_membrane_block", modLoc("block/captivated_membrane_block_side"), modLoc("block/captivated_membrane_block_bottom"), modLoc("block/captivated_membrane_block_top")).renderType("translucent")).rotationX(rotationX).rotationY(rotationY).build();
+            return ConfiguredModel.builder().modelFile(models().cubeBottomTop("stranded_membrane_block", modLoc("block/stranded_membrane_block_side"), modLoc("block/stranded_membrane_block_bottom"), modLoc("block/stranded_membrane_block_top")).renderType("translucent")).rotationX(rotationX).rotationY(rotationY).build();
         });
     }
 

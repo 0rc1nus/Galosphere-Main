@@ -1,40 +1,40 @@
 {
   "variants": {
     "facing=east,waterlogged=false": {
-      "model": "galosphere:block/captivated_membrane_block",
+      "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 90
     },
     "facing=east,waterlogged=true": {
-      "model": "galosphere:block/captivated_membrane_block",
+      "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 90
     },
     "facing=north,waterlogged=false": {
-      "model": "galosphere:block/captivated_membrane_block",
+      "model": "galosphere:block/stranded_membrane_block",
       "x": 90
     },
     "facing=north,waterlogged=true": {
-      "model": "galosphere:block/captivated_membrane_block",
+      "model": "galosphere:block/stranded_membrane_block",
       "x": 90
     },
     "facing=south,waterlogged=false": {
-      "model": "galosphere:block/captivated_membrane_block",
+      "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 180
     },
     "facing=south,waterlogged=true": {
-      "model": "galosphere:block/captivated_membrane_block",
+      "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 180
     },
     "facing=west,waterlogged=false": {
-      "model": "galosphere:block/captivated_membrane_block",
+      "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 270
     },
     "facing=west,waterlogged=true": {
-      "model": "galosphere:block/captivated_membrane_block",
+      "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 270
     }

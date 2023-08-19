@@ -89,7 +89,7 @@ public class MobEvents {
         ItemEntity entity = event.getEntity();
         if (!entity.level().isClientSide) {
             BlockState blockState = entity.level().getBlockState(BlockPos.containing(entity.getEyePosition().x, entity.getEyePosition().y, entity.getEyePosition().z));
-            if (blockState.is(GBlocks.CAPTIVATED_MEMBRANE_BLOCK.get())) {
+            if (blockState.is(GBlocks.STRANDED_MEMBRANE_BLOCK.get())) {
                 event.setExtraLife(6000);
             }
         }

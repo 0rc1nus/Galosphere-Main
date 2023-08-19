@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-15T05:57:57.8572519	Item Models: galosphere
+// 1.20.1	2023-08-19T09:48:40.125571	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -15,7 +15,6 @@ f59faed84ee792287ad751de555fb8b637f1b51d assets/galosphere/models/item/amethyst_
 9c251dc6c06ce06496d79ae35e7341f037e63d55 assets/galosphere/models/item/amethyst_stairs.json
 737d07be7fa70b3d2bbaf13a5e7ac20c45f930bc assets/galosphere/models/item/bottle_of_spectre.json
 f07e01d1fde4d91096693930382a59951365ed6d assets/galosphere/models/item/bowl_lichen.json
-46bd2de10c59f1b3a46f425fba81be8635486c90 assets/galosphere/models/item/captivated_membrane_block.json
 88fcef04b5dd79042e57b448d7e59c83d791b0d7 assets/galosphere/models/item/chandelier.json
 48bcc121a24e028f40bce6b7e65b9d8ae04ab4f4 assets/galosphere/models/item/charged_lumiere_block.json
 074e62dc1f287f61526d750e15a5a05bcb98dcdc assets/galosphere/models/item/chiseled_allurite.json
@@ -111,4 +110,5 @@ faf6706e6b97024e8429b5b3f9f52ec252ee1143 assets/galosphere/models/item/sterling_
 de5714b280554e334e447e90db23fc64c7e5da74 assets/galosphere/models/item/sterling_helmet.json
 2e5eb349e1c35dc03a4d83cd7eb0408569f024a1 assets/galosphere/models/item/sterling_horse_armor.json
 4ed487a565bc585e97f313421289dca073ff03f8 assets/galosphere/models/item/sterling_leggings.json
+69eb8bf10cdd29c78e250e772c4e5a99cc13c9ef assets/galosphere/models/item/stranded_membrane_block.json
 cbf082f3fd171eeee5bd5cb67da28693f49b9241 assets/galosphere/models/item/warped_anchor.json

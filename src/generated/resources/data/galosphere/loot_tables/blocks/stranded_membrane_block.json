@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "galosphere:captivated_membrane_block"
+          "name": "galosphere:stranded_membrane_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "galosphere:blocks/captivated_membrane_block"
+  "random_sequence": "galosphere:blocks/stranded_membrane_block"
 }

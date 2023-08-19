@@ -20,7 +20,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.blocks.CaptivatedMembraneBlock;
+import net.orcinus.galosphere.blocks.StrandedMembraneBlock;
 import net.orcinus.galosphere.blocks.ChandelierBlock;
 import net.orcinus.galosphere.blocks.CombustionTableBlock;
 import net.orcinus.galosphere.blocks.CordycepsBlock;
@@ -199,7 +199,7 @@ public class GBlocks {
     public static final RegistryObject<Block> PINK_SALT_CLUSTER = registerBlock("pink_salt_cluster", () -> new PinkSaltClusterBlock(BlockBehaviour.Properties.of().lightLevel(state -> 6).sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(1.0F)));
 
     public static final RegistryObject<Block> CURED_MEMBRANE_BLOCK = registerBlock("cured_membrane_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK)));
-    public static final RegistryObject<Block> CAPTIVATED_MEMBRANE_BLOCK = registerBlock("captivated_membrane_block", () -> new CaptivatedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(SoundType.SLIME_BLOCK).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));
+    public static final RegistryObject<Block> STRANDED_MEMBRANE_BLOCK = registerBlock("stranded_membrane_block", () -> new StrandedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(SoundType.SLIME_BLOCK).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));
     public static final RegistryObject<Block> SHADOW_FRAME = registerBlock("shadow_frame", () -> new ShadowFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).lightLevel(state -> state.getValue(ShadowFrameBlock.LEVEL)).noCollission().sound(GSoundEvents.SILVER)));
     public static final RegistryObject<Block> GILDED_BEADS = registerBlock("gilded_beads", () -> new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(SoundType.SCAFFOLDING)));
     public static final RegistryObject<Block> SUCCULENT = registerBlock("succulent", () -> new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));
