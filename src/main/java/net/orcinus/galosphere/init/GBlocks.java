@@ -1,7 +1,6 @@
 package net.orcinus.galosphere.init;
 
 import com.google.common.collect.Maps;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -21,14 +20,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.blocks.CaptivatedMembraneBlock;
+import net.orcinus.galosphere.blocks.StrandedMembraneBlock;
 import net.orcinus.galosphere.blocks.ChandelierBlock;
 import net.orcinus.galosphere.blocks.CombustionTableBlock;
 import net.orcinus.galosphere.blocks.CordycepsBlock;
 import net.orcinus.galosphere.blocks.CordycepsPlantBlock;
 import net.orcinus.galosphere.blocks.CrystalSlabBlock;
 import net.orcinus.galosphere.blocks.CrystalStairsBlock;
-import net.orcinus.galosphere.blocks.CuredMembraneBlock;
 import net.orcinus.galosphere.blocks.GildedBeadsBlock;
 import net.orcinus.galosphere.blocks.GlintedClusterBlock;
 import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
@@ -201,7 +199,7 @@ public class GBlocks {
     public static final Block PINK_SALT_CLUSTER = registerBlock("pink_salt_cluster", new PinkSaltClusterBlock(BlockBehaviour.Properties.of().lightLevel(state -> 6).sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(1.0F)));
 
     public static final Block CURED_MEMBRANE_BLOCK = registerBlock("cured_membrane_block", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK)));
-    public static final Block CAPTIVATED_MEMBRANE_BLOCK = registerBlock("captivated_membrane_block", new CaptivatedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(SoundType.SLIME_BLOCK).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));
+    public static final Block STRANDED_MEMBRANE_BLOCK = registerBlock("stranded_membrane_block", new StrandedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(SoundType.SLIME_BLOCK).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));
     public static final Block SHADOW_FRAME = registerBlock("shadow_frame", new ShadowFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).lightLevel(state -> state.getValue(ShadowFrameBlock.LEVEL)).noCollission().sound(GSoundEvents.SILVER)));
     public static final Block GILDED_BEADS = registerBlock("gilded_beads", new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(SoundType.SCAFFOLDING)));
     public static final Block SUCCULENT = registerBlock("succulent", new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));

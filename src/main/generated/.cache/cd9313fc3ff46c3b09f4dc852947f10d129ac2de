@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-17T16:05:47.2179219	Galosphere/Block Loot Tables
+// 1.20.1	2023-08-19T10:11:53.974491	Galosphere/Block Loot Tables
 d1a29044dba21ead7aa86a35525deeb16092d4a7 data\galosphere\loot_tables\blocks\smooth_allurite.json
 812708cd8594f3e11afafc490f788f6913eb81bb data\galosphere\loot_tables\blocks\lumiere_block.json
 379b68fcde70762d0c1559ca46c2fa2ebaedd051 data\galosphere\loot_tables\blocks\chiseled_lumiere.json
@@ -51,7 +51,6 @@ eae2b88af3e4fe225597d5ec609ec7d03f58960c data\galosphere\loot_tables\blocks\poli
 32c5485cfdb3462de2a3f9b9a9ed7344cdfc95fe data\galosphere\loot_tables\blocks\silver_panel_stairs.json
 83fb14e13ab50a8625d47a099ddc3b44a41bee0e data\galosphere\loot_tables\blocks\rose_pink_salt_brick_wall.json
 0c2003e636577f6ce96693324c6596d1fdf7c64e data\galosphere\loot_tables\blocks\amethyst_bricks.json
-6f705297e98ff39724d6f275d8b7e2b7753f0699 data\galosphere\loot_tables\blocks\captivated_membrane_block.json
 d3d8a9c62770ef8f13ad4b81d7545ba7fc827ef2 data\galosphere\loot_tables\blocks\lichen_roots.json
 f65545871b7babf27c92c932af691ad1098785ad data\galosphere\loot_tables\blocks\pink_salt_stairs.json
 3c43d0705c2904acda94aded7d374bae01324f63 data\galosphere\loot_tables\blocks\rose_pink_salt_bricks.json
@@ -77,6 +76,7 @@ bf3026ac5822e44019bb0e114ee4866e27056421 data\galosphere\loot_tables\blocks\raw_
 34df8a95eee403eb68358da7f9217e54d3d82e60 data\galosphere\loot_tables\blocks\combustion_table.json
 122481c8c41f01abbb1426501c9c3ef3ba2c1f7d data\galosphere\loot_tables\blocks\silver_panel_slab.json
 217f4e0d6a856dbf903ba3d0b6f16d84c204e423 data\galosphere\loot_tables\blocks\polished_pink_salt_stairs.json
+0118a8feca8ba775bf122891dfd14b43a6480977 data\galosphere\loot_tables\blocks\stranded_membrane_block.json
 dce6755b58af2bad7577aa331c7c158e619796cb data\galosphere\loot_tables\blocks\smooth_lumiere_slab.json
 b873be8271196ce47a46400a670054e273159784 data\galosphere\loot_tables\blocks\glinted_allurite_cluster.json
 9e7d9e772f094a4cf86de473d5456e9916245b20 data\galosphere\loot_tables\blocks\silver_block.json

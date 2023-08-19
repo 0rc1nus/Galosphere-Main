@@ -37,7 +37,7 @@ public class GBlockLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         this.add(GBlocks.SILVER_ORE, (block) -> createOreDrop(block, GItems.RAW_SILVER));
         this.add(GBlocks.DEEPSLATE_SILVER_ORE, (block) -> createOreDrop(block, GItems.RAW_SILVER));
-        this.dropSelf(GBlocks.CAPTIVATED_MEMBRANE_BLOCK);
+        this.dropSelf(GBlocks.STRANDED_MEMBRANE_BLOCK);
         this.dropSelf(GBlocks.CHARGED_LUMIERE_BLOCK);
         this.dropSelf(GBlocks.LUMIERE_BLOCK);
         this.dropSelf(GBlocks.ALLURITE_BLOCK);

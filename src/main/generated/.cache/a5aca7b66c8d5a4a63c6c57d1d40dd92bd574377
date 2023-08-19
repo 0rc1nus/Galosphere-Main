@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-17T16:05:47.2228852	Galosphere/Tags for minecraft:block
+// 1.20.1	2023-08-19T10:11:53.9800062	Galosphere/Tags for minecraft:block
 f9dd4175c19ab7775a324051f554d38d08996f55 data\minecraft\tags\blocks\stairs.json
 b9023cd1a4b4eeb616dcc588d68c1fab2eaaccc7 data\minecraft\tags\blocks\slabs.json
 eaf289bb79dfe85ade7fa5030fd555b1e0bd61f9 data\galosphere\tags\blocks\crystal_spikes_blocks.json
@@ -11,8 +11,8 @@ cbe1d3db11593579c9e86930833a27b827679d12 data\minecraft\tags\blocks\mineable\pic
 df9b777d83fd56ebda33467adf3600ba06f04311 data\minecraft\tags\blocks\needs_stone_tool.json
 c69a29b6326d29d20be8824450e8b6272955637a data\galosphere\tags\blocks\sparkles_spawn_on.json
 fe01cd5ff6ba0911c2bce9081ce29c02a3f64719 data\galosphere\tags\blocks\gravel_may_replace.json
-10598a85b0b258672549eb1cff4a26bad17a80b6 data\minecraft\tags\blocks\beacon_base_blocks.json
 dfa5aa869383be99c94ca44e9611055116a211dc data\minecraft\tags\blocks\replaceable.json
+10598a85b0b258672549eb1cff4a26bad17a80b6 data\minecraft\tags\blocks\beacon_base_blocks.json
 7c8681b31d8fa5c9fd65c944db80c8142a7bad57 data\minecraft\tags\blocks\walls.json
 770c4b15dc9565f14a65705f5da5899379e9179c data\galosphere\tags\blocks\oasis_replace.json
 2140935cd3efac833ba3e008eea479779bdca748 data\galosphere\tags\blocks\obfuscates_sound_waves.json

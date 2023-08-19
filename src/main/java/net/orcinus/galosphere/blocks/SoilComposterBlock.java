@@ -35,8 +35,11 @@ public class SoilComposterBlock extends ComposterBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        SoilComposterBlock.extractGlowstoneDust(state, world, pos);
-        return InteractionResult.sidedSuccess(world.isClientSide);
+        if (state.getValue(LEVEL) == 8) {
+            SoilComposterBlock.extractGlowstoneDust(state, world, pos);
+            return InteractionResult.sidedSuccess(world.isClientSide);
+        }
+        return super.use(state, world, pos, player, hand, hit);
     }
 
     public static BlockState extractGlowstoneDust(BlockState state, Level world, BlockPos pos) {

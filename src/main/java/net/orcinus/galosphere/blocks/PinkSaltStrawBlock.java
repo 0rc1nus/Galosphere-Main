@@ -78,7 +78,7 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
             return;
         }
         serverLevel.levelEvent(1504, blockPos2, 0);
-        serverLevel.setBlockAndUpdate(blockPos3, GBlocks.SALINE_COMPOSTER.defaultBlockState());
+        serverLevel.setBlockAndUpdate(blockPos3, GBlocks.SALINE_COMPOSTER.defaultBlockState().setValue(SoilComposterBlock.LEVEL, serverLevel.getBlockState(blockPos3).getValue(SoilComposterBlock.LEVEL)));
     }
 
     @Nullable

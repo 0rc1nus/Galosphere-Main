@@ -80,7 +80,7 @@ public class GalosphereClient implements ClientModInitializer {
                 GBlocks.SHADOW_FRAME,
                 GBlocks.SUCCULENT
         );
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), GBlocks.CAPTIVATED_MEMBRANE_BLOCK);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), GBlocks.STRANDED_MEMBRANE_BLOCK);
 
         BlockEntityRenderers.register(GBlockEntityTypes.SHADOW_FRAME, ShadowFrameBlockRenderer::new);
         BlockEntityRenderers.register(GBlockEntityTypes.GILDED_BEADS, GildedBeadsRenderer::new);

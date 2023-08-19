@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "galosphere:captivated_membrane_block"
+          "name": "galosphere:stranded_membrane_block"
         }
       ],
       "rolls": 1.0

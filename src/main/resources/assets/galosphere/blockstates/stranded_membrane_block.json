@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "galosphere:block/stranded_membrane_block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "galosphere:block/stranded_membrane_block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "galosphere:block/stranded_membrane_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "galosphere:block/stranded_membrane_block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
