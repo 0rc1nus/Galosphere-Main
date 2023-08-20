@@ -34,6 +34,16 @@ public class FogRendererMixin {
     @Unique
     private static float distance = 24.0F;
 
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/DimensionSpecialEffects;getSunriseColor(FF)[F"), method = "setupColor", cancellable = true)
+    private static void G$modifySunriseColor(Camera camera, float f, ClientLevel clientLevel, int i, float g, CallbackInfo ci) {
+        if (renderShadowPhase(camera.getEntity()) && getViewBlockingState((LivingEntity) camera.getEntity()) != null) {
+            fogRed = 0.0F;
+            fogGreen = 0.0F;
+            fogBlue = 0.0F;
+            ci.cancel();
+        }
+    }
+
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/FogRenderer;getPriorityFogFunction(Lnet/minecraft/world/entity/Entity;F)Lnet/minecraft/client/renderer/FogRenderer$MobEffectFogFunction;"), method = "setupColor", cancellable = true)
     private static void G$setupColor(Camera camera, float f, ClientLevel clientLevel, int i, float g, CallbackInfo ci) {
         if (renderShadowPhase(camera.getEntity()) && getViewBlockingState((LivingEntity) camera.getEntity()) != null) {
