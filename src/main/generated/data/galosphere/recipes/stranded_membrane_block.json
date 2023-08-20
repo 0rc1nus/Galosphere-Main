@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "galosphere:allurite_shard"
+    },
+    "C": {
+      "item": "galosphere:cured_membrane_block"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#C#",
+    " # "
+  ],
+  "result": {
+    "item": "galosphere:stranded_membrane_block"
+  },
+  "show_notification": true
+}
