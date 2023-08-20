@@ -66,6 +66,9 @@
     "galosphere:pastel_pink_salt_slab",
     "galosphere:pink_salt_wall",
     "galosphere:rose_pink_salt_wall",
-    "galosphere:pastel_pink_salt_wall"
+    "galosphere:pastel_pink_salt_wall",
+    "galosphere:pink_salt_cluster",
+    "galosphere:pink_salt_straw",
+    "galosphere:pink_salt_lamp"
   ]
 }
