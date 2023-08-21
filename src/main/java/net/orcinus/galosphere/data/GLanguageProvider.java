@@ -30,6 +30,9 @@ public class GLanguageProvider extends FabricLanguageProvider {
                 translationBuilder.add(item, reformat(BuiltInRegistries.ITEM.getKey(item).getPath()));
             }
         });
+        translationBuilder.add("item.galosphere.silver_bomb.duration", "Duration");
+        translationBuilder.add("item.galosphere.silver_bomb.explosion", "Explosion");
+        translationBuilder.add("item.galosphere.silver_bomb.bouncy", "Bouncy");
         translationBuilder.add(GEntityTypes.SPARKLE, "Sparkle");
         translationBuilder.add(GEntityTypes.SPECTRE, "Spectre");
         translationBuilder.add(GEntityTypes.SIVLER_BOMB, "Silver Bomb");

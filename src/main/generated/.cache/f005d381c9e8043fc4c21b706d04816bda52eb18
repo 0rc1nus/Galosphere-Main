@@ -1,8 +1,8 @@
-// 1.20.1	2023-08-20T20:42:56.6022892	Galosphere/worldgen/placed_features
+// 1.20.1	2023-08-20T21:02:41.414408	Galosphere/worldgen/placed_features
 e25326efb02335fd9d962541c61c6fde47802a41 data\galosphere\worldgen\placed_feature\pink_salt_straw_floor_patch.json
 92d06583e9462cd558cccf546e89e899f2889f30 data\galosphere\worldgen\placed_feature\ore_silver_small.json
-925f30b0b07fc2964ddf0abdc72666a395b74ebb data\galosphere\worldgen\placed_feature\large_floor_lumiere_crystals.json
 4f5242befd0cc8cdaa4160d16ce78609a2a62ef4 data\galosphere\worldgen\placed_feature\allurite_floor_crystals.json
+925f30b0b07fc2964ddf0abdc72666a395b74ebb data\galosphere\worldgen\placed_feature\large_floor_lumiere_crystals.json
 f615e13fb771f9c7f5976821ed86191d3eb59602 data\galosphere\worldgen\placed_feature\lichen_caves_vegetation.json
 f088d8b932e1c24e63dbec379d5e3449131b3a9f data\galosphere\worldgen\placed_feature\gravel_patch.json
 b4d3c0931c19d6b2535b35060a504014b858127a data\galosphere\worldgen\placed_feature\large_ceiling_allurite_crystals.json
