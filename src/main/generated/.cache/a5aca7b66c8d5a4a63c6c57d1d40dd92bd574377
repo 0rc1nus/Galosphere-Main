@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-20T21:02:41.4193962	Galosphere/Tags for minecraft:block
+// 1.20.1	2023-08-22T13:13:03.948923	Galosphere/Tags for minecraft:block
 f9dd4175c19ab7775a324051f554d38d08996f55 data\minecraft\tags\blocks\stairs.json
 b9023cd1a4b4eeb616dcc588d68c1fab2eaaccc7 data\minecraft\tags\blocks\slabs.json
 eaf289bb79dfe85ade7fa5030fd555b1e0bd61f9 data\galosphere\tags\blocks\crystal_spikes_blocks.json
@@ -18,4 +18,5 @@ dfa5aa869383be99c94ca44e9611055116a211dc data\minecraft\tags\blocks\replaceable.
 2140935cd3efac833ba3e008eea479779bdca748 data\galosphere\tags\blocks\obfuscates_sound_waves.json
 1414850141fbf7b4d097b5203c969e17007c9a26 data\minecraft\tags\blocks\mineable\axe.json
 988a8966f8786981bbba969d356ff6867214430f data\minecraft\tags\blocks\mineable\hoe.json
+f1f8cb4917c36e6573f1cc73b6b2c08b37dff496 data\galosphere\tags\blocks\oasis_generate_on.json
 e79c2e92efdad7fe61207288a8e88436353fe6b9 data\galosphere\tags\blocks\spectres_spawn_on.json

@@ -8,6 +8,7 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -71,7 +72,7 @@ public class GPlacedFeatures {
         PlacementUtils.register(bootstapContext, PINK_SALT_NOISE_CEILING_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_CEILING_NOISE_PATCH), CountPlacement.of(125), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
         PlacementUtils.register(bootstapContext, PINK_SALT_STRAW_CEILING_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_STRAW_CEILING_PATCH), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f, 3.0f, -10, 10), ClampedNormalInt.of(0.0f, 0.6f, -2, 2)), BiomeFilter.biome());
         PlacementUtils.register(bootstapContext, PINK_SALT_STRAW_FLOOR_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_STRAW_FLOOR_PATCH), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f, 3.0f, -10, 10), ClampedNormalInt.of(0.0f, 0.6f, -2, 2)), BiomeFilter.biome());
-        PlacementUtils.register(bootstapContext, OASIS, holderGetter.getOrThrow(GConfiguredFeatures.OASIS), CountPlacement.of(50), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12), BiomeFilter.biome());
+        PlacementUtils.register(bootstapContext, OASIS, holderGetter.getOrThrow(GConfiguredFeatures.OASIS), CountPlacement.of(50), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(GBlockTags.OASIS_GENERATE_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12), BiomeFilter.biome());
     }
 
     public static ResourceKey<PlacedFeature> registerPlacedFeature(String id) {

@@ -4,7 +4,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "galosphere:pink_salt_shrine/common_room",
-        "processors": "minecraft:empty",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
         "projection": "rigid"
       },
       "weight": 1

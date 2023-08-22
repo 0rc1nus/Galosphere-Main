@@ -11,9 +11,11 @@ import net.orcinus.galosphere.effects.GMobEffect;
 public class GMobEffects {
 
     public static final MobEffect ASTRAL = new GMobEffect(MobEffectCategory.BENEFICIAL, 12891319);
+    public static final MobEffect BLOCK_BANE = new GMobEffect(MobEffectCategory.HARMFUL, 7612935);
 
     public static void init() {
         Registry.register(BuiltInRegistries.MOB_EFFECT, Galosphere.id("astral"), ASTRAL);
+        Registry.register(BuiltInRegistries.MOB_EFFECT, Galosphere.id("block_bane"), BLOCK_BANE);
     }
 
 }
