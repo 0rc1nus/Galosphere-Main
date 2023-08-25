@@ -39,6 +39,7 @@ import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
 import net.orcinus.galosphere.client.renderer.block.GildedBeadsRenderer;
 import net.orcinus.galosphere.client.renderer.block.ShadowFrameBlockRenderer;
+import net.orcinus.galosphere.client.renderer.block.SilverBalanceRenderer;
 import net.orcinus.galosphere.entities.SpectatorVision;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
@@ -84,6 +85,7 @@ public class GalosphereClient implements ClientModInitializer {
 
         BlockEntityRenderers.register(GBlockEntityTypes.SHADOW_FRAME, ShadowFrameBlockRenderer::new);
         BlockEntityRenderers.register(GBlockEntityTypes.GILDED_BEADS, GildedBeadsRenderer::new);
+        BlockEntityRenderers.register(GBlockEntityTypes.SILVER_BALANCE, SilverBalanceRenderer::new);
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE, CombustionTableScreen::new);
 

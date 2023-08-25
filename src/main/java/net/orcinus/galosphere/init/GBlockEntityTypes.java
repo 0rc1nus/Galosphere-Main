@@ -13,6 +13,7 @@ import net.orcinus.galosphere.blocks.blockentities.GildedBeadsBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.GlowInkClumpsBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.MonstrometerBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.ShadowFrameBlockEntity;
+import net.orcinus.galosphere.blocks.blockentities.SilverBalanceBlockEntity;
 
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class GBlockEntityTypes {
     public static final BlockEntityType<CordycepsBlockEntity> CORDYCEPS = registerBlockEntityType("cordyceps", BlockEntityType.Builder.of(CordycepsBlockEntity::new, GBlocks.LICHEN_CORDYCEPS).build(null));
     public static final BlockEntityType<ShadowFrameBlockEntity> SHADOW_FRAME = registerBlockEntityType("shadow_frame", FabricBlockEntityTypeBuilder.create(ShadowFrameBlockEntity::new, GBlocks.SHADOW_FRAME).build(null));
     public static final BlockEntityType<GildedBeadsBlockEntity> GILDED_BEADS = registerBlockEntityType("gilded_beads", FabricBlockEntityTypeBuilder.create(GildedBeadsBlockEntity::new, GBlocks.GILDED_BEADS).build(null));
+    public static final BlockEntityType<SilverBalanceBlockEntity> SILVER_BALANCE = registerBlockEntityType("silver_balance", FabricBlockEntityTypeBuilder.create(SilverBalanceBlockEntity::new, GBlocks.SILVER_BALANCE).build(null));
 
     public static <T extends BlockEntity, B extends BlockEntityType<T>> B registerBlockEntityType(String name, B type) {
         BLOCK_ENTITIES.put(Galosphere.id(name), type);
