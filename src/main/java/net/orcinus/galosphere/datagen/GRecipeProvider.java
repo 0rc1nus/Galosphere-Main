@@ -2,7 +2,6 @@ package net.orcinus.galosphere.datagen;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
