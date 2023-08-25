@@ -96,6 +96,7 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem(GBlocks.CHISELED_PASTEL_PINK_SALT.get());
         blockItem(GBlocks.PINK_SALT_LAMP.get());
         blockItem(GBlocks.CURED_MEMBRANE_BLOCK.get());
+        blockItem(GBlocks.SHADOW_FRAME.get());
         item("pink_salt_cluster");
         itemWithBlockDirectory("pink_salt_straw", "pink_salt_straw_up_top");
         withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", new ResourceLocation(Galosphere.MODID, "block/monstrometer_top")).texture("bottom", new ResourceLocation(Galosphere.MODID, "block/monstrometer_bottom")).texture("side", new ResourceLocation(Galosphere.MODID, "block/monstrometer_side"));

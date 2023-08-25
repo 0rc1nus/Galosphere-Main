@@ -52,6 +52,7 @@ public class GCreativeModeTabs {
                 output.accept(GBlocks.SILVER_PANEL_STAIRS.get());
                 output.accept(GBlocks.SILVER_PANEL_SLAB.get());
                 output.accept(GBlocks.SILVER_LATTICE.get());
+                output.accept(GBlocks.SHADOW_FRAME.get());
                 output.accept(GBlocks.SILVER_ORE.get());
                 output.accept(GBlocks.DEEPSLATE_SILVER_ORE.get());
                 output.accept(GBlocks.SILVER_BLOCK.get());

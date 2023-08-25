@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-19T09:48:40.125571	Item Models: galosphere
+// 1.20.1	2023-08-25T16:13:57.6369706	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -80,6 +80,7 @@ a009747e40799f32c423548aec52fd25c1e4cd13 assets/galosphere/models/item/rose_pink
 0ab13adf5910a03b6f84eeba625d161d87e9aa7c assets/galosphere/models/item/rose_pink_salt_slab.json
 a19f84feb8fd0d03a7088e1f55b5e430766ade23 assets/galosphere/models/item/rose_pink_salt_stairs.json
 ed1fd6dfe15ff01251d25a5839dbc85fb8980e39 assets/galosphere/models/item/salted_jerky.json
+ed915e75093ef38c69886048aeeae279644ad153 assets/galosphere/models/item/shadow_frame.json
 61d810d6c73ac39876ee1b9eebadcfd80730f2a8 assets/galosphere/models/item/silver_block.json
 559c16fb7f0c4797196b302e3c2de1fba550c23e assets/galosphere/models/item/silver_bomb.json
 c405b98892a51f58be5d5233962ab1d79987367b assets/galosphere/models/item/silver_ingot.json

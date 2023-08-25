@@ -46,6 +46,13 @@ public class GRecipeProvider extends RecipeProvider {
         GBlockFamilies.getAllFamilies().forEach((blockFamily) -> {
             generateRecipes(consumer, blockFamily);
         });
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GBlocks.STRANDED_MEMBRANE_BLOCK.get())
+                .define('#', GItems.ALLURITE_SHARD.get())
+                .define('C', GBlocks.CURED_MEMBRANE_BLOCK.get())
+                .pattern(" # ")
+                .pattern("#C#")
+                .pattern(" # ")
+                .unlockedBy("has_cured_membrane_block", has(GBlocks.CURED_MEMBRANE_BLOCK.get())).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.SHADOW_FRAME.get())
                 .define('S', GItems.SILVER_INGOT.get())
                 .define('#', GItems.CURED_MEMBRANE.get())

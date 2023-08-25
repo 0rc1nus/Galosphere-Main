@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-17T16:12:03.6077708	Recipes
+// 1.20.1	2023-08-25T16:13:57.6410006	Recipes
 b621945d455d6c65fd48151c51cd6ae056d70389 data/galosphere/advancements/recipes/building_blocks/allurite_block.json
 bb69c356e6b80c41720e5e90e68d2f081c72967c data/galosphere/advancements/recipes/building_blocks/allurite_bricks.json
 e13e3ee76a3d6fd798be850943c467cbdd4ce7c4 data/galosphere/advancements/recipes/building_blocks/allurite_bricks_from_allurite_block_stonecutting.json
@@ -222,6 +222,7 @@ f4b4a69948f4ceade4fadb3d7e3c5c2a56ba5874 data/galosphere/advancements/recipes/de
 86a0eab18e7ddb500f230f97f87873f3979fe44c data/galosphere/advancements/recipes/decorations/rose_pink_salt_brick_wall.json
 a209f8c64d72bc0e7e0276759a0fb5df064efc71 data/galosphere/advancements/recipes/decorations/rose_pink_salt_wall.json
 f7bc36021d29671bc28b114d1fd64f18bae6018e data/galosphere/advancements/recipes/decorations/silver_lattice.json
+4f0959ed191452ff7b2ec39eb925c6cd6cb9de9e data/galosphere/advancements/recipes/decorations/stranded_membrane_block.json
 da523140d560d942914e3ad7d29e600b6ee9573b data/galosphere/advancements/recipes/decorations/warped_anchor.json
 93e008bdbc29b2e2eac60b0736750ae57797c1ce data/galosphere/advancements/recipes/food/golden_lichen_cordyceps.json
 6a7f6cc2c3c5606310a62f51766fddb63e58f047 data/galosphere/advancements/recipes/food/salted_jerky.json
@@ -484,4 +485,5 @@ d1ac718f14da853aacacc7c3fd0a206c1804d5ab data/galosphere/recipes/sterling_chestp
 3630be5fbab6730c85e1e890295b9c3e350dd5b9 data/galosphere/recipes/sterling_helmet_smithing.json
 94bbc9fc5134b5c6cf22c63304a35bd0ca2400f9 data/galosphere/recipes/sterling_horse_armor_smithing.json
 1a852f7ffc8336d62fa1ceefaf5aad16a3c717ad data/galosphere/recipes/sterling_leggings_smithing.json
+0c90d3051f373a15a60b13c43262da5a4981773b data/galosphere/recipes/stranded_membrane_block.json
 0b4a72a6f2a2440e2fd9a8d0845c5df745eebb4d data/galosphere/recipes/warped_anchor.json
