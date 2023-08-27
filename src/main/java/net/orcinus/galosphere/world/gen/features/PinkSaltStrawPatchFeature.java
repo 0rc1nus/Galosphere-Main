@@ -42,15 +42,16 @@ public class PinkSaltStrawPatchFeature extends Feature<PinkSaltStrawPatchConfig>
                             if (world.getBlockState(pos).is(GBlockTags.PINK_SALT_BLOCKS) && world.isStateAtPosition(pos.relative(direction), DripstoneUtils::isEmptyOrWater)) {
                                 if (x == 0 && z == 0) {
                                     world.setBlock(pos.relative(direction), GBlocks.PINK_SALT_CLUSTER.defaultBlockState().setValue(PinkSaltLampBlock.WATERLOGGED, world.getBlockState(pos.relative(direction)).is(Blocks.WATER)).setValue(PinkSaltLampBlock.FACING, direction), 2);
+                                } else {
+                                    if (random.nextInt(3) == 0) {
+                                        continue;
+                                    }
+                                    int sample = config.additionHeight().sample(random);
+                                    if (random.nextInt(5) == 0) {
+                                        sample *= 2;
+                                    }
+                                    this.addSaltStraw(world, pos.relative(direction), sample, direction);
                                 }
-                                if (random.nextInt(3) == 0) {
-                                    continue;
-                                }
-                                int sample = config.additionHeight().sample(random);
-                                if (random.nextInt(5) == 0) {
-                                    sample *= 2;
-                                }
-                                this.addSaltStraw(world, pos.relative(direction), sample, direction);
                             }
                         }
                     }
@@ -63,12 +64,21 @@ public class PinkSaltStrawPatchFeature extends Feature<PinkSaltStrawPatchConfig>
     public void addSaltStraw(WorldGenLevel world, BlockPos blockPos, int height, Direction direction) {
         for (int i = 0; i <= height; i++) {
             BlockPos pos = blockPos.relative(direction, i);
-            if (!world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWater)) {
+            if (!world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
+                world.setBlock(pos.relative(direction.getOpposite()), GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction.getOpposite()).setValue(PinkSaltStrawBlock.STRAW_SHAPE, PinkSaltStrawBlock.StrawShape.BOTTOM).setValue(PinkSaltStrawBlock.WATERLOGGED, world.getBlockState(pos).is(Blocks.WATER)), 2);
                 break;
             }
-            PinkSaltStrawBlock.StrawShape strawShape = i == height ? PinkSaltStrawBlock.StrawShape.TOP : (i == 0 ? PinkSaltStrawBlock.StrawShape.BOTTOM : PinkSaltStrawBlock.StrawShape.MIDDLE);
+            PinkSaltStrawBlock.StrawShape strawShape;
+            if (i == height) {
+                strawShape = PinkSaltStrawBlock.StrawShape.TOP;
+            } else if (i == 0) {
+                strawShape = PinkSaltStrawBlock.StrawShape.BOTTOM;
+            } else {
+                strawShape = PinkSaltStrawBlock.StrawShape.MIDDLE;
+            }
             world.setBlock(pos, GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, strawShape).setValue(PinkSaltStrawBlock.WATERLOGGED, world.getBlockState(pos).is(Blocks.WATER)), 2);
         }
     }
+
 
 }
