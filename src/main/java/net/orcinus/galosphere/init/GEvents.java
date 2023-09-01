@@ -85,9 +85,6 @@ public class GEvents {
         UseItemCallback.EVENT.register((player, world, hand) -> {
             BannerRendererUtil util = new BannerRendererUtil();
             ItemStack stack = player.getItemInHand(hand);
-            if (!world.isClientSide && player.hasEffect(GMobEffects.BLOCK_BANE)) {
-                player.hurt(world.damageSources().magic(), 10.0F);
-            }
             if (((BannerAttachable) player).getBanner().isEmpty() && player.getItemBySlot(EquipmentSlot.HEAD).is(GItems.STERLING_HELMET) && (util.isTapestryStack(stack) || stack.getItem() instanceof BannerItem)) {
                 player.gameEvent(GameEvent.EQUIP, player);
                 ItemStack copy = stack.copy();
