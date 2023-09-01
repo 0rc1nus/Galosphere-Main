@@ -15,7 +15,6 @@ import net.orcinus.galosphere.init.GBlocks;
 import java.util.concurrent.CompletableFuture;
 
 public class GBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
-
     public GBlockTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }

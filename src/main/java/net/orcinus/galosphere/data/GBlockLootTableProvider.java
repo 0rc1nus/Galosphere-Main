@@ -28,7 +28,6 @@ import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
 
 public class GBlockLootTableProvider extends FabricBlockLootTableProvider {
-
     public GBlockLootTableProvider(FabricDataOutput dataOutput) {
         super(dataOutput);
     }

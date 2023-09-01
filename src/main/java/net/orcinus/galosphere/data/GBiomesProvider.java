@@ -14,7 +14,6 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("UnstableApiUsage")
 public class GBiomesProvider extends FabricDynamicRegistryProvider {
-
     public GBiomesProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }

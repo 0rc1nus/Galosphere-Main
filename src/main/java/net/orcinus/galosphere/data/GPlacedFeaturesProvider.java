@@ -12,7 +12,6 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("UnstableApiUsage")
 public class GPlacedFeaturesProvider extends FabricDynamicRegistryProvider {
-
     public GPlacedFeaturesProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }

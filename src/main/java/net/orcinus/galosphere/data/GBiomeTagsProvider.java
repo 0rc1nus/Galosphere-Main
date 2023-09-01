@@ -12,7 +12,6 @@ import net.orcinus.galosphere.init.GBiomes;
 import java.util.concurrent.CompletableFuture;
 
 public class GBiomeTagsProvider extends FabricTagProvider<Biome> {
-
     public GBiomeTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, Registries.BIOME, registriesFuture);
     }

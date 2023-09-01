@@ -15,7 +15,6 @@ import net.orcinus.galosphere.items.SilverSmithingTemplateItem;
 import java.util.function.Predicate;
 
 public class GLanguageProvider extends FabricLanguageProvider {
-
     public GLanguageProvider(FabricDataOutput dataOutput) {
         super(dataOutput);
     }

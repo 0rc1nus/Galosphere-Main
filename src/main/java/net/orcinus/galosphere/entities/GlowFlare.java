@@ -22,7 +22,6 @@ import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.mixin.access.FireworkRocketEntityAccessor;
 
 public class GlowFlare extends FireworkRocketEntity {
-
     public GlowFlare(EntityType<? extends GlowFlare> type, Level world) {
         super(type, world);
     }

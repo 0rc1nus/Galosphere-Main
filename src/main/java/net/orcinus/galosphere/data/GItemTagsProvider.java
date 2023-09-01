@@ -13,7 +13,6 @@ import net.orcinus.galosphere.init.GItems;
 import java.util.concurrent.CompletableFuture;
 
 public class GItemTagsProvider extends FabricTagProvider.ItemTagProvider {
-
     public GItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
         super(output, completableFuture, new GBlockTagsProvider(output, completableFuture));
     }

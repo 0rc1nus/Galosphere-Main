@@ -11,7 +11,6 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import java.util.concurrent.CompletableFuture;
 
 public class GEntityTypeTagsProvider extends FabricTagProvider.EntityTypeTagProvider {
-
     public GEntityTypeTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
         super(output, completableFuture);
     }
