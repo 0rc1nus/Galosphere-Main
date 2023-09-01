@@ -40,6 +40,18 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(GEntityTypes.GLOW_FLARE, "Glow Flare");
         translationBuilder.add(GEntityTypes.SPECTRE_FLARE, "Spectre Flare");
         translationBuilder.add(GMobEffects.ASTRAL, "Astral");
+        translationBuilder.add(GMobEffects.BLOCK_BANE, "Block Bane");
+        translationBuilder.add("subtitles.block.monstrometer.activate", "Monstrometer activates");
+        translationBuilder.add("subtitles.block.monstrometer.charge", "Monstrometer is charged");
+        translationBuilder.add("subtitles.block.monstrometer.deactivate", "Monstrometer deactivates");
+        translationBuilder.add("subtitles.block.lumiere.compost", "Composter filled with Lumiere Shard");
+        translationBuilder.add("subtitles.entity.specterpillar.death", "Specterpillar dies");
+        translationBuilder.add("subtitles.entity.specterpillar.hurt", "Specterpillar hurts");
+        translationBuilder.add("subtitles.entity.spectre.ambient", "Spectre chirps");
+        translationBuilder.add("subtitles.entity.spectre.death", "Spectre dies");
+        translationBuilder.add("subtitles.entity.spectre.hurt", "Spectre hurts");
+        translationBuilder.add("subtitles.entity.spectre.lock_to_spyglass", "Spyglass locks to Spectre");
+        translationBuilder.add("subtitles.entity.spectre.receive_item", "Spectre receives Item");
         GBiomes.getIds().forEach(resourceLocation -> {
             translationBuilder.add("biome.galosphere." + resourceLocation.getPath(), reformat(resourceLocation.getPath()));
         });

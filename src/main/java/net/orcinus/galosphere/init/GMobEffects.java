@@ -1,21 +1,29 @@
 package net.orcinus.galosphere.init;
 
+import com.google.common.collect.Maps;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffects;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.effects.GMobEffect;
 
-public class GMobEffects {
+import java.util.Map;
 
-    public static final MobEffect ASTRAL = new GMobEffect(MobEffectCategory.BENEFICIAL, 12891319);
-    public static final MobEffect BLOCK_BANE = new GMobEffect(MobEffectCategory.HARMFUL, 7612935);
+public class GMobEffects {
+    public static final Map<MobEffect, ResourceLocation> MOB_EFFECTS = Maps.newLinkedHashMap();
+
+    public static final MobEffect ASTRAL = register("astral", new GMobEffect(MobEffectCategory.BENEFICIAL, 12891319));
+    public static final MobEffect BLOCK_BANE = register("block_bane", new GMobEffect(MobEffectCategory.HARMFUL, 7612935));
+
+    public static <M extends MobEffect> M register(String name, M effect) {
+        MOB_EFFECTS.put(effect, Galosphere.id(name));
+        return effect;
+    }
 
     public static void init() {
-        Registry.register(BuiltInRegistries.MOB_EFFECT, Galosphere.id("astral"), ASTRAL);
-        Registry.register(BuiltInRegistries.MOB_EFFECT, Galosphere.id("block_bane"), BLOCK_BANE);
+        MOB_EFFECTS.forEach((mobEffect, resourceLocation) -> Registry.register(BuiltInRegistries.MOB_EFFECT, resourceLocation, mobEffect));
     }
 
 }

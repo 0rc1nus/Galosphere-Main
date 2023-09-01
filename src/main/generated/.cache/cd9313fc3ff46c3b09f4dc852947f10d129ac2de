@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-24T15:33:52.7032713	Galosphere/Block Loot Tables
+// 1.20.1	2023-09-01T20:45:38.2966194	Galosphere/Block Loot Tables
 d1a29044dba21ead7aa86a35525deeb16092d4a7 data\galosphere\loot_tables\blocks\smooth_allurite.json
 812708cd8594f3e11afafc490f788f6913eb81bb data\galosphere\loot_tables\blocks\lumiere_block.json
 379b68fcde70762d0c1559ca46c2fa2ebaedd051 data\galosphere\loot_tables\blocks\chiseled_lumiere.json
@@ -70,8 +70,8 @@ fb0be3710b9b4ebec83bc85e4f191a33d45aa1f0 data\galosphere\loot_tables\blocks\pink
 7f4192166e4c33d9cee39ea874139d65f9da33f6 data\galosphere\loot_tables\blocks\amethyst_stairs.json
 b0f2a92cc5191ce594ac6280a2c8a291bcfb86c6 data\galosphere\loot_tables\blocks\warped_anchor.json
 c27a28b14e33b6452d95e6f0407df10c23ad2973 data\galosphere\loot_tables\blocks\allurite_lamp.json
-6bdc900fd429dc1a43b4af74138f40d4562c23bc data\galosphere\loot_tables\blocks\pink_salt.json
 006b4d8b99e72dec04e3a76a419be308108fac6c data\galosphere\loot_tables\blocks\pastel_pink_salt_brick_wall.json
+6bdc900fd429dc1a43b4af74138f40d4562c23bc data\galosphere\loot_tables\blocks\pink_salt.json
 bf3026ac5822e44019bb0e114ee4866e27056421 data\galosphere\loot_tables\blocks\raw_silver_block.json
 34df8a95eee403eb68358da7f9217e54d3d82e60 data\galosphere\loot_tables\blocks\combustion_table.json
 122481c8c41f01abbb1426501c9c3ef3ba2c1f7d data\galosphere\loot_tables\blocks\silver_panel_slab.json
@@ -94,8 +94,8 @@ c137576efb09bfdeabf343b24febc2c297679fcc data\galosphere\loot_tables\blocks\chis
 01c4db185e984df2237e957d76873a4f3b682954 data\galosphere\loot_tables\blocks\amethyst_slab.json
 6423e5645fc0a8ef7f30166aecca0ceafbcce9b8 data\galosphere\loot_tables\blocks\pink_salt_wall.json
 45aff81c283f0cfb18d7d0154989fc209b7c4ecc data\galosphere\loot_tables\blocks\shadow_frame.json
-bf0c25a6cea5a90a92041d3592590c76ded0fb85 data\galosphere\loot_tables\blocks\smooth_amethyst_slab.json
 4fa1426a5797dd825ee98a9f5087797a1b8df693 data\galosphere\loot_tables\blocks\lumiere_brick_slab.json
+bf0c25a6cea5a90a92041d3592590c76ded0fb85 data\galosphere\loot_tables\blocks\smooth_amethyst_slab.json
 75a95ecce3b0969bafe4f11af1e163995be8928f data\galosphere\loot_tables\blocks\rose_pink_salt_slab.json
 66642bdb34cf00476410f61049fc44441630170a data\galosphere\loot_tables\blocks\monstrometer.json
 787d620f56ec45440a339a3b27f2949cd72315c3 data\galosphere\loot_tables\blocks\polished_rose_pink_salt_stairs.json
