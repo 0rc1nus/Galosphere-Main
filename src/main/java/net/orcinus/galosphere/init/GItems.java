@@ -34,6 +34,7 @@ public class GItems {
     public static final Item SPARKLE_SPAWN_EGG = register("sparkle_spawn_egg", new SpawnEggItem(GEntityTypes.SPARKLE, 0xF0F5F4, 0x24F6D8, new Item.Properties()));
     public static final Item SPECTRE_SPAWN_EGG = register("spectre_spawn_egg", new SpawnEggItem(GEntityTypes.SPECTRE, 0xFFF3DD, 0x9CCDB6, new Item.Properties()));
     public static final Item SPECTERPILLAR_SPAWN_EGG = register("specterpillar_spawn_egg", new SpawnEggItem(GEntityTypes.SPECTERPILLAR, 0xFFF3DD, 0xF7CF7B, new Item.Properties()));
+    public static final Item BLIGHTED_SPAWN_EGG = register("blighted_spawn_egg", new SpawnEggItem(GEntityTypes.BLIGHTED, 15568753, 6057047, new Item.Properties()));
     public static final Item BOTTLE_OF_SPECTRE = register("bottle_of_spectre", new SpectreBottleItem(new Item.Properties().stacksTo(1)));
     public static final Item ALLURITE_SHARD = registerBaseItem("allurite_shard");
     public static final Item LUMIERE_SHARD = registerBaseItem("lumiere_shard");

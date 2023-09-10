@@ -1,5 +1,7 @@
 package net.orcinus.galosphere.blocks;
 
+import com.google.common.collect.Maps;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -17,13 +19,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -36,8 +38,10 @@ import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GParticleTypes;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock {
@@ -49,6 +53,10 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     private static final VoxelShape SHAPE = Block.box(4, 0.0, 4, 12, 16.0, 12);
     private static final VoxelShape TOP_UP_SHAPE = Block.box(4, 0.0, 4, 12, 11.0, 12);
     private static final VoxelShape TOP_DOWN_SHAPE = Block.box(4, 5.0, 4, 12, 16.0, 12);
+    private static final Map<Predicate<BlockState>, Function<BlockState, Block>> REACTIONS = Util.make(Maps.newHashMap(), map -> {
+        map.put(blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) > 0, blockState -> GBlocks.SALINE_COMPOSTER);
+        map.put(blockState -> WeatheringCopper.NEXT_BY_BLOCK.get().containsKey(blockState.getBlock()), blockState -> WeatheringCopper.getNext(blockState.getBlock()).orElseThrow());
+    });
 
     public PinkSaltStrawBlock(Properties properties) {
         super(properties);
@@ -70,15 +78,18 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
         if (blockPos2 == null) {
             return;
         }
-        BlockPos blockPos3 = findFillableComposterBelowStalactiteTip(serverLevel, blockPos2);
-        if (f > 0.5F || !isStalactiteStartPos(blockState, serverLevel, blockPos)) {
+        if (f > 0.35F || !isStalactiteStartPos(blockState, serverLevel, blockPos)) {
             return;
         }
-        if (blockPos3 == null) {
-            return;
+        for (Predicate<BlockState> predicate : REACTIONS.keySet()) {
+            BlockPos target = this.findTarget(serverLevel, blockPos2, predicate);
+            if (target == null) {
+                continue;
+            }
+            BlockState result = REACTIONS.get(predicate).apply(serverLevel.getBlockState(target)).withPropertiesOf(serverLevel.getBlockState(target));
+            serverLevel.levelEvent(3005, target, 0);
+            serverLevel.setBlockAndUpdate(target, result);
         }
-        serverLevel.levelEvent(1504, blockPos2, 0);
-        serverLevel.setBlockAndUpdate(blockPos3, GBlocks.SALINE_COMPOSTER.defaultBlockState().setValue(SoilComposterBlock.LEVEL, serverLevel.getBlockState(blockPos3).getValue(SoilComposterBlock.LEVEL)));
     }
 
     @Nullable
@@ -96,10 +107,9 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     }
 
     @Nullable
-    private BlockPos findFillableComposterBelowStalactiteTip(Level level, BlockPos blockPos2) {
-        Predicate<BlockState> predicate = blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) > 0;
+    private BlockPos findTarget(Level level, BlockPos blockPos2, Predicate<BlockState> blockStatePredicate) {
         BiPredicate<BlockPos, BlockState> biPredicate = (blockPos, blockState) -> canDripThrough(level, blockPos, blockState);
-        return findBlockVertical(level, blockPos2, Direction.DOWN.getAxisDirection(), biPredicate, predicate, 11).orElse(null);
+        return findBlockVertical(level, blockPos2, Direction.DOWN.getAxisDirection(), biPredicate, blockStatePredicate, 11).orElse(null);
     }
 
     private boolean canDripThrough(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
@@ -164,14 +174,13 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
             }
             mutableBlockPos.set(pos.getX() + Mth.nextInt(level.getRandom(), -radius, radius), pos.getY() + Mth.nextInt(level.getRandom(), -2, 2), pos.getZ() + Mth.nextInt(level.getRandom(), -radius, radius));
             BlockState chosenStates = level.getBlockState(mutableBlockPos);
-            if (!chosenStates.is(this)) {
-                continue;
+            boolean flag = chosenStates.is(this) && chosenStates.getValue(TIP_DIRECTION) == Direction.DOWN && chosenStates.getValue(STRAW_SHAPE) == StrawShape.BOTTOM;
+            if (flag) {
+                level.setBlockAndUpdate(mutableBlockPos, chosenStates.getBlock().withPropertiesOf(chosenStates).setValue(FALLABLE, true));
+                double distance = projectile.distanceToSqr(mutableBlockPos.getX(), mutableBlockPos.getY(), mutableBlockPos.getZ());
+                int ticks = Math.max(1, (int)distance);
+                level.scheduleTick(mutableBlockPos, this, ticks);
             }
-            if (chosenStates.getValue(TIP_DIRECTION) != Direction.DOWN) {
-                continue;
-            }
-            level.setBlockAndUpdate(mutableBlockPos, chosenStates.getBlock().withPropertiesOf(chosenStates).setValue(FALLABLE, true));
-            level.scheduleTick(mutableBlockPos, this, 2);
         }
     }
 
@@ -327,7 +336,7 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
         }
     }
 
-    record FluidInfo(BlockPos pos, Fluid fluid, BlockState sourceState) {
+    record Reaction(Predicate<BlockState> predicate, BlockState result) {
     }
 
 }

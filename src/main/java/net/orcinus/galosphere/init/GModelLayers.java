@@ -10,5 +10,8 @@ public class GModelLayers {
     public static final ModelLayerLocation SPECTERPILLAR = new ModelLayerLocation(Galosphere.id("specterpillar"), "main");
     public static final ModelLayerLocation STERLING_HELMET = new ModelLayerLocation(Galosphere.id("sterling_helmet"), "main");
     public static final ModelLayerLocation GILDED_BEADS = new ModelLayerLocation(Galosphere.id("gilded_beads"), "main");
+    public static final ModelLayerLocation BLIGHTED = new ModelLayerLocation(Galosphere.id("blighted"), "main");
+    public static final ModelLayerLocation PINK_SALT_PILLAR = new ModelLayerLocation(Galosphere.id("pink_salt_pillar"), "main");
+    public static final ModelLayerLocation IMPACT = new ModelLayerLocation(Galosphere.id("impact"), "main");
 
 }

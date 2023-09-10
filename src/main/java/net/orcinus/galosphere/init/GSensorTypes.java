@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.sensing.TemptingSensor;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.entities.ai.SparkleAi;
 import net.orcinus.galosphere.entities.ai.SpectreAi;
+import net.orcinus.galosphere.entities.ai.sensors.BlightedEntitySensor;
 import net.orcinus.galosphere.entities.ai.sensors.NearestLichenMossSensor;
 import net.orcinus.galosphere.entities.ai.sensors.NearestPollinatedClusterSensor;
 
@@ -23,6 +24,7 @@ public class GSensorTypes {
     public static final SensorType<TemptingSensor> SPECTRE_TEMPTATIONS = register("spectre_temptations", () -> new TemptingSensor(SpectreAi.getTemptations()));
     public static final SensorType<NearestPollinatedClusterSensor> NEAREST_POLLINATED_CLUSTER = register("nearest_pollinated_cluster", NearestPollinatedClusterSensor::new);
     public static final SensorType<NearestLichenMossSensor> NEAREST_LICHEN_MOSS = register("nearest_lichen_moss", NearestLichenMossSensor::new);
+    public static final SensorType<BlightedEntitySensor> BLIGHTED_ENTITY_SENSOR = register("blighted_entity_sensor", BlightedEntitySensor::new);
 
     private static <U extends Sensor<?>> SensorType<U> register(String string, Supplier<U> supplier) {
         SensorType<U> sensorType = new SensorType<>(supplier);

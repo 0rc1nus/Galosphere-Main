@@ -3,13 +3,11 @@ package net.orcinus.galosphere;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -21,17 +19,23 @@ import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.orcinus.galosphere.client.gui.CombustionTableScreen;
+import net.orcinus.galosphere.client.model.BlightedModel;
+import net.orcinus.galosphere.client.model.ImpactModel;
+import net.orcinus.galosphere.client.model.PinkSaltPillarModel;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SpecterpillarModel;
 import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
+import net.orcinus.galosphere.client.particles.ImpactParticle;
 import net.orcinus.galosphere.client.particles.IndicatorParticle;
 import net.orcinus.galosphere.client.particles.SpectateOrbParticle;
 import net.orcinus.galosphere.client.particles.providers.PinkSaltFallingDustProvider;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
+import net.orcinus.galosphere.client.renderer.BlightedRenderer;
 import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
+import net.orcinus.galosphere.client.renderer.PinkSaltPillarRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
 import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
 import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
@@ -39,8 +43,6 @@ import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
 import net.orcinus.galosphere.client.renderer.block.GildedBeadsRenderer;
 import net.orcinus.galosphere.client.renderer.block.ShadowFrameBlockRenderer;
-import net.orcinus.galosphere.client.renderer.block.SilverBalanceRenderer;
-import net.orcinus.galosphere.entities.SpectatorVision;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
@@ -85,7 +87,6 @@ public class GalosphereClient implements ClientModInitializer {
 
         BlockEntityRenderers.register(GBlockEntityTypes.SHADOW_FRAME, ShadowFrameBlockRenderer::new);
         BlockEntityRenderers.register(GBlockEntityTypes.GILDED_BEADS, GildedBeadsRenderer::new);
-        BlockEntityRenderers.register(GBlockEntityTypes.SILVER_BALANCE, SilverBalanceRenderer::new);
 
         MenuScreens.register(GMenuTypes.COMBUSTION_TABLE, CombustionTableScreen::new);
 
@@ -98,6 +99,7 @@ public class GalosphereClient implements ClientModInitializer {
         particleFactoryRegistry.register(GParticleTypes.AMETHYST_RAIN, CrystalRainParticle.Provider::new);
         particleFactoryRegistry.register(GParticleTypes.SPECTATE_ORB, SpectateOrbParticle.Provider::new);
         particleFactoryRegistry.register(GParticleTypes.PINK_SALT_FALLING_DUST, PinkSaltFallingDustProvider::new);
+        particleFactoryRegistry.register(GParticleTypes.IMPACT, new ImpactParticle.Provider());
 
         EntityRendererRegistry.register(GEntityTypes.SIVLER_BOMB, context -> new ThrownItemRenderer<>(context, 1.5F, false));
         EntityRendererRegistry.register(GEntityTypes.GLOW_FLARE, GlowFlareEntityRenderer::new);
@@ -106,12 +108,17 @@ public class GalosphereClient implements ClientModInitializer {
         EntityRendererRegistry.register(GEntityTypes.SPECTRE, SpectreRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.SPECTERPILLAR, SpecterpillarRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.SPECTATOR_VISION, SpectatorVisionRenderer::new);
+        EntityRendererRegistry.register(GEntityTypes.BLIGHTED, BlightedRenderer::new);
+        EntityRendererRegistry.register(GEntityTypes.PINK_SALT_PILLAR, PinkSaltPillarRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTERPILLAR, SpecterpillarModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(GModelLayers.BLIGHTED, BlightedModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.GILDED_BEADS, GildedBeadsRenderer::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(GModelLayers.PINK_SALT_PILLAR, PinkSaltPillarModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(GModelLayers.IMPACT, ImpactModel::createBodyLayer);
 
         GEvents.clientInit();
         GNetwork.init();

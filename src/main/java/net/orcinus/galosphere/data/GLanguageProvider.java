@@ -29,16 +29,12 @@ public class GLanguageProvider extends FabricLanguageProvider {
                 translationBuilder.add(item, reformat(BuiltInRegistries.ITEM.getKey(item).getPath()));
             }
         });
+        GEntityTypes.ENTITY_TYPES.values().forEach(entityType -> {
+            translationBuilder.add(entityType, reformat(BuiltInRegistries.ENTITY_TYPE.getKey(entityType).getPath()));
+        });
         translationBuilder.add("item.galosphere.silver_bomb.duration", "Duration");
         translationBuilder.add("item.galosphere.silver_bomb.explosion", "Explosion");
         translationBuilder.add("item.galosphere.silver_bomb.bouncy", "Bouncy");
-        translationBuilder.add(GEntityTypes.SPARKLE, "Sparkle");
-        translationBuilder.add(GEntityTypes.SPECTRE, "Spectre");
-        translationBuilder.add(GEntityTypes.SIVLER_BOMB, "Silver Bomb");
-        translationBuilder.add(GEntityTypes.SPECTATOR_VISION, "Spectator Vision");
-        translationBuilder.add(GEntityTypes.SPECTERPILLAR, "Specterpillar");
-        translationBuilder.add(GEntityTypes.GLOW_FLARE, "Glow Flare");
-        translationBuilder.add(GEntityTypes.SPECTRE_FLARE, "Spectre Flare");
         translationBuilder.add(GMobEffects.ASTRAL, "Astral");
         translationBuilder.add(GMobEffects.BLOCK_BANE, "Block Bane");
         translationBuilder.add("subtitles.block.monstrometer.activate", "Monstrometer activates");
