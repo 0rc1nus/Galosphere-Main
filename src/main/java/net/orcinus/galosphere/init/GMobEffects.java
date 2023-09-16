@@ -12,18 +12,19 @@ import net.orcinus.galosphere.effects.GMobEffect;
 import java.util.Map;
 
 public class GMobEffects {
-    public static final Map<MobEffect, ResourceLocation> MOB_EFFECTS = Maps.newLinkedHashMap();
+    public static final Map<ResourceLocation, MobEffect> MOB_EFFECTS = Maps.newLinkedHashMap();
 
     public static final MobEffect ASTRAL = register("astral", new GMobEffect(MobEffectCategory.BENEFICIAL, 12891319));
     public static final MobEffect BLOCK_BANE = register("block_bane", new GMobEffect(MobEffectCategory.HARMFUL, 7612935));
+    public static final MobEffect STIMULATION = register("stimulation", new GMobEffect(MobEffectCategory.NEUTRAL, 7752755));
 
     public static <M extends MobEffect> M register(String name, M effect) {
-        MOB_EFFECTS.put(effect, Galosphere.id(name));
+        MOB_EFFECTS.put(Galosphere.id(name), effect);
         return effect;
     }
 
     public static void init() {
-        MOB_EFFECTS.forEach((mobEffect, resourceLocation) -> Registry.register(BuiltInRegistries.MOB_EFFECT, resourceLocation, mobEffect));
+        MOB_EFFECTS.forEach((resourceLocation, mobEffect) -> Registry.register(BuiltInRegistries.MOB_EFFECT, resourceLocation, mobEffect));
     }
 
 }

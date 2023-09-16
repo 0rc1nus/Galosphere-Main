@@ -32,11 +32,12 @@ public class GLanguageProvider extends FabricLanguageProvider {
         GEntityTypes.ENTITY_TYPES.values().forEach(entityType -> {
             translationBuilder.add(entityType, reformat(BuiltInRegistries.ENTITY_TYPE.getKey(entityType).getPath()));
         });
+        GMobEffects.MOB_EFFECTS.values().forEach(mobEffect -> {
+            translationBuilder.add(mobEffect, reformat(BuiltInRegistries.MOB_EFFECT.getKey(mobEffect).getPath()));
+        });
         translationBuilder.add("item.galosphere.silver_bomb.duration", "Duration");
         translationBuilder.add("item.galosphere.silver_bomb.explosion", "Explosion");
         translationBuilder.add("item.galosphere.silver_bomb.bouncy", "Bouncy");
-        translationBuilder.add(GMobEffects.ASTRAL, "Astral");
-        translationBuilder.add(GMobEffects.BLOCK_BANE, "Block Bane");
         translationBuilder.add("subtitles.block.monstrometer.activate", "Monstrometer activates");
         translationBuilder.add("subtitles.block.monstrometer.charge", "Monstrometer is charged");
         translationBuilder.add("subtitles.block.monstrometer.deactivate", "Monstrometer deactivates");

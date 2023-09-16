@@ -49,6 +49,7 @@ public class GCreativeModeTabs {
                     output.accept(GItems.LICHEN_CORDYCEPS);
                     output.accept(GItems.GOLDEN_LICHEN_CORDYCEPS);
                     output.accept(GItems.SALTED_JERKY);
+                    output.accept(GItems.CURED_SUCCULENT);
                     output.accept(GItems.CURED_MEMBRANE);
                     output.accept(GItems.GLOW_FLARE);
                     output.accept(GItems.SPECTRE_FLARE);

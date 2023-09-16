@@ -52,6 +52,7 @@ import net.orcinus.galosphere.blocks.SilverLatticeBlock;
 import net.orcinus.galosphere.blocks.SilverLatticeVineBlock;
 import net.orcinus.galosphere.blocks.SoilComposterBlock;
 import net.orcinus.galosphere.blocks.SucculentBlock;
+import net.orcinus.galosphere.blocks.SucculentCropBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 
 import java.util.Map;
@@ -211,6 +212,7 @@ public class GBlocks {
     public static final Block SALINE_COMPOSTER = registerNoTabBlock("saline_composter", new SoilComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final Block POTTED_BOWL_LICHEN = registerNoTabBlock("potted_bowl_lichen", new FlowerPotBlock(BOWL_LICHEN, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
     public static final Block POTTED_LICHEN_ROOTS = registerNoTabBlock("potted_lichen_roots", new FlowerPotBlock(LICHEN_ROOTS, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final Block SUCCULENT_CROP = registerNoTabBlock("succulent_crop", new SucculentCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 
     public static <B extends Block> B registerBlock(String name, B block) {
         GBlocks.BLOCK_ITEMS.put(Galosphere.id(name), new BlockItem(block, new Item.Properties()));

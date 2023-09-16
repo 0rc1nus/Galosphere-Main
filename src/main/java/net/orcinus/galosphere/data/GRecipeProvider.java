@@ -45,6 +45,7 @@ public class GRecipeProvider extends FabricRecipeProvider {
             generateRecipes(consumer, blockFamily);
         });
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER).requires(Items.COAL).requires(GItems.PINK_SALT_SHARD).unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GItems.CURED_SUCCULENT).requires(GItems.PINK_SALT_SHARD).requires(GBlocks.SUCCULENT).unlockedBy("has_succulent", has(GBlocks.SUCCULENT)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GBlocks.STRANDED_MEMBRANE_BLOCK)
                         .define('#', GItems.ALLURITE_SHARD)
                         .define('C', GBlocks.CURED_MEMBRANE_BLOCK)

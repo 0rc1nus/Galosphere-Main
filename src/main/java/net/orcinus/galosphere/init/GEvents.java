@@ -138,6 +138,9 @@ public class GEvents {
             if (id.equals(BuiltInLootTables.ABANDONED_MINESHAFT) || id.equals(BuiltInLootTables.PILLAGER_OUTPOST)) {
                 tableBuilder.pool(LootPool.lootPool().add(LootItem.lootTableItem(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))).build());
             }
+            if (id.equals(BuiltInLootTables.SNIFFER_DIGGING)) {
+                tableBuilder.pool(LootPool.lootPool().add(LootItem.lootTableItem(GItems.SUCCULENT_POD)).build());
+            }
         });
     }
 

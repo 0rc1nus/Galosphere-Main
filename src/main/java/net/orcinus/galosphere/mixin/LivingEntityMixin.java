@@ -1,5 +1,6 @@
 package net.orcinus.galosphere.mixin;
 
+import com.google.common.collect.Lists;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -7,6 +8,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,6 +27,7 @@ import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.items.SterlingArmorItem;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -32,18 +36,27 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass {
     @Shadow protected ItemStack useItem;
+    @Shadow @Final private Map<MobEffect, MobEffectInstance> activeEffects;
+
+    @Unique
     private static final EntityDataAccessor<ItemStack> BANNER_STACK = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.ITEM_STACK );
+    @Unique
     private static final EntityDataAccessor<Float> GOLDEN_AIR_SUPPLY = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.FLOAT);
+    @Unique
     private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
     @Unique
     private boolean persevered;
     @Unique
     private final LivingEntity $this = (LivingEntity) (Object) this;
+    @Unique
+    private List<MobEffect> upgradedEffects = Lists.newArrayList();
 
     @Inject(at = @At("HEAD"), method = "defineSynchedData")
     public void G$defineSynchedData(CallbackInfo ci) {
@@ -142,7 +155,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At("HEAD"), method = "isInWall", cancellable = true)
     private void G$isInWall(CallbackInfoReturnable<Boolean> cir) {
-        if ($this.hasEffect(GMobEffects.ASTRAL)) {
+        if ($this != null && $this.hasEffect(GMobEffects.ASTRAL)) {
             cir.setReturnValue(false);
         }
     }

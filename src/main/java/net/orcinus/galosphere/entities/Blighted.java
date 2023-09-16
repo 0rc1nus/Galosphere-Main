@@ -76,7 +76,10 @@ public class Blighted extends Monster {
     @Override
     public void readAdditionalSaveData(CompoundTag compoundTag) {
         super.readAdditionalSaveData(compoundTag);
-        this.setPhase(Phase.valueOf(compoundTag.getString("Phase")));
+        String phase = compoundTag.getString("Phase");
+        if (!phase.isEmpty()) {
+            this.setPhase(Phase.valueOf(phase));
+        }
     }
 
     @Override
