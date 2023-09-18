@@ -18,9 +18,11 @@ public class CuredSucculentItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
         Predicate<MobEffectInstance> mobEffectInstancePredicate = mobEffectInstance -> mobEffectInstance.getEffect() != GMobEffects.STIMULATION && mobEffectInstance.getAmplifier() < 1;
-        livingEntity.getActiveEffects().stream().filter(mobEffectInstancePredicate).forEach(mobEffectInstance -> {
-            livingEntity.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier() + 1, mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon(), null, mobEffectInstance.getFactorData()));
-        });
+        if (!livingEntity.hasEffect(GMobEffects.STIMULATION)) {
+            livingEntity.getActiveEffects().stream().filter(mobEffectInstancePredicate).forEach(mobEffectInstance -> {
+                livingEntity.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier() + 1, mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon(), null, mobEffectInstance.getFactorData()));
+            });
+        }
         return super.finishUsingItem(itemStack, level, livingEntity);
     }
 }
