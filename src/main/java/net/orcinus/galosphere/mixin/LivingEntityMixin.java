@@ -44,7 +44,6 @@ import java.util.Optional;
 public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass {
     @Shadow protected ItemStack useItem;
     @Shadow @Final private Map<MobEffect, MobEffectInstance> activeEffects;
-
     @Unique
     private static final EntityDataAccessor<ItemStack> BANNER_STACK = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.ITEM_STACK );
     @Unique
@@ -53,8 +52,6 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
     @Unique
     private boolean persevered;
-    @Unique
-    private final LivingEntity $this = (LivingEntity) (Object) this;
     @Unique
     private List<MobEffect> upgradedEffects = Lists.newArrayList();
 
@@ -86,6 +83,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void G$tick(CallbackInfo ci) {
+        LivingEntity $this = (LivingEntity) (Object) this;
         if (SpectreBoundSpyglass.canUseSpectreBoundSpyglass(this.useItem) && this.useItem.getTag() != null) {
             if (!$this.level().isClientSide) {
                 Entity spectreBound = ((ServerLevel)$this.level()).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
@@ -144,6 +142,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At("HEAD"), method = "die")
     private void G$die(DamageSource damageSource, CallbackInfo ci) {
+        LivingEntity $this = (LivingEntity) (Object) this;
         if ($this instanceof Horse horse && horse instanceof BannerAttachable bannerAttachable) {
             if (!bannerAttachable.getBanner().isEmpty() && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {
                 ItemStack copy = bannerAttachable.getBanner();
@@ -155,6 +154,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At("HEAD"), method = "isInWall", cancellable = true)
     private void G$isInWall(CallbackInfoReturnable<Boolean> cir) {
+        LivingEntity $this = (LivingEntity) (Object) this;
         if ($this != null && $this.hasEffect(GMobEffects.ASTRAL)) {
             cir.setReturnValue(false);
         }
@@ -162,6 +162,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F", shift = At.Shift.AFTER), method = "getDamageAfterArmorAbsorb", cancellable = true)
     private void G$getDamageAfterArmorAbsorb(DamageSource damageSource, float f, CallbackInfoReturnable<Float> cir) {
+        LivingEntity $this = (LivingEntity) (Object) this;
         boolean flag = damageSource.getEntity() instanceof Mob mob && (mob.getMobType() == MobType.ILLAGER || mob.getType().is(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES));
         if (flag) {
             if ($this instanceof Horse horse && horse.getArmor().is(GItems.STERLING_HORSE_ARMOR)) {

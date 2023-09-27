@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.block.Blocks;
@@ -46,7 +47,7 @@ public class PlayerMixin {
 
     @Inject(at = @At("HEAD"), method = "getProjectile", cancellable = true)
     private void GE$getProjectile(ItemStack itemStack, CallbackInfoReturnable<ItemStack> cir) {
-        if ($this != null) {
+        if ($this != null && itemStack.getItem() instanceof CrossbowItem) {
             if (!ProjectileWeaponItem.getHeldProjectile($this, stack -> stack.is(GItems.GLOW_FLARE)).isEmpty()) {
                 cir.setReturnValue(new ItemStack(GItems.GLOW_FLARE));
             }

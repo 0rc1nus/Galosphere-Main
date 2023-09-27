@@ -34,6 +34,10 @@ import net.orcinus.galosphere.init.GVanillaIntegration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+//TODO:
+// Textures for block bane and stimulation
+// Item Texture for curred succulent
+// Pink salt sounds
 public class Galosphere implements ModInitializer {
     
     public static final Logger LOGGER = LogManager.getLogger();

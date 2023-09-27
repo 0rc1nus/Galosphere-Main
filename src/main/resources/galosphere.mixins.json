@@ -19,11 +19,12 @@
     "PowderSnowBlockMixin",
     "ServerPlayerMixin",
     "ThrownEnderpearlMixin",
-    "access.WorldGenRegionAccessor",
     "access.AbstractHorseAccessor",
     "access.FireworkRocketEntityAccessor",
     "access.LightningBoltAccessor",
-    "access.LivingEntityAccessor"
+    "access.LivingEntityAccessor",
+    "access.ProjectileAccessor",
+    "access.WorldGenRegionAccessor"
   ],
   "client": [
     "access.AmbientOcclusionFaceAccessor",

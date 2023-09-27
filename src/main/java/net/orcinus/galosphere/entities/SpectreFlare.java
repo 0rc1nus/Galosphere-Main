@@ -8,13 +8,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.init.GEntityTypes;
@@ -24,7 +23,8 @@ import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.mixin.access.FireworkRocketEntityAccessor;
 import org.jetbrains.annotations.Nullable;
 
-public class SpectreFlare extends FireworkRocketEntity {
+public class SpectreFlare extends ThrowableLaunchedProjectile {
+
     public SpectreFlare(EntityType<? extends SpectreFlare> type, Level world) {
         super(type, world);
     }
@@ -33,25 +33,17 @@ public class SpectreFlare extends FireworkRocketEntity {
         super(world, stack, entity, x, y, z, shotAtAngle);
     }
 
-    public SpectreFlare(Level level, @Nullable Entity entity, double d, double e, double f, ItemStack itemStack) {
-        this(level, d, e, f, itemStack);
-        this.setOwner(entity);
-    }
-
-    public SpectreFlare(Level level, double d, double e, double f, ItemStack itemStack) {
+    public SpectreFlare(Level level, @Nullable Entity entity, ItemStack itemStack) {
         super(GEntityTypes.SPECTRE_FLARE, level);
-        ((FireworkRocketEntityAccessor)this).setLife(0);
-        this.setPos(d, e, f);
         if (!itemStack.isEmpty() && itemStack.hasTag()) {
             this.entityData.set(FireworkRocketEntityAccessor.getDATA_ID_FIREWORKS_ITEM(), itemStack.copy());
         }
-        this.setDeltaMovement(this.random.triangle(0.0, 0.002297), 0.05, this.random.triangle(0.0, 0.002297));
-        ((FireworkRocketEntityAccessor)this).setLifeTime(100);
+        this.entityData.set(THROWN, true);
+        this.setOwner(entity);
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void handleLaunchedProjectile() {
         Level world = this.level();
         if (!world.isClientSide && ((FireworkRocketEntityAccessor)this).getLife() > ((FireworkRocketEntityAccessor)this).getLifetime()) {
             this.spawnSpectatorVision(this.position());
@@ -62,12 +54,8 @@ public class SpectreFlare extends FireworkRocketEntity {
     }
 
     @Override
-    public EntityType<?> getType() {
-        return GEntityTypes.SPECTRE_FLARE;
-    }
-
-    @Override
-    protected void onHitEntity(EntityHitResult entityHitResult) {
+    protected Item getDefaultItem() {
+        return GItems.SPECTRE_FLARE;
     }
 
     @Override

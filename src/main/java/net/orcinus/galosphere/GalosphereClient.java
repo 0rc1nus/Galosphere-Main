@@ -41,6 +41,7 @@ import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
 import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
+import net.orcinus.galosphere.client.renderer.ThrowableLaunchedProjectileRenderer;
 import net.orcinus.galosphere.client.renderer.block.GildedBeadsRenderer;
 import net.orcinus.galosphere.client.renderer.block.ShadowFrameBlockRenderer;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
@@ -102,8 +103,8 @@ public class GalosphereClient implements ClientModInitializer {
         particleFactoryRegistry.register(GParticleTypes.IMPACT, new ImpactParticle.Provider());
 
         EntityRendererRegistry.register(GEntityTypes.SIVLER_BOMB, context -> new ThrownItemRenderer<>(context, 1.5F, false));
-        EntityRendererRegistry.register(GEntityTypes.GLOW_FLARE, GlowFlareEntityRenderer::new);
-        EntityRendererRegistry.register(GEntityTypes.SPECTRE_FLARE, SpectreFlareRenderer::new);
+        EntityRendererRegistry.register(GEntityTypes.GLOW_FLARE, ThrowableLaunchedProjectileRenderer::new);
+        EntityRendererRegistry.register(GEntityTypes.SPECTRE_FLARE, ThrowableLaunchedProjectileRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.SPARKLE, SparkleRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.SPECTRE, SpectreRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.SPECTERPILLAR, SpecterpillarRenderer::new);
