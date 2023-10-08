@@ -67,6 +67,86 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"block.pink_salt.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block/pink_salt/break1",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/pink_salt/break2",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/pink_salt/break3",
+				"volume": 0.55
+			},
+			{
+				"name": "galosphere:block/pink_salt/break4",
+				"volume": 0.55
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.pink_salt.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.pink_salt.place1",
+				"type": "event"
+			}
+		]
+	},
+	"block.pink_salt.hit": {
+		"sounds": [
+			{
+				"name": "block.calcite.hit",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.pink_salt.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/pink_salt/place1",
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/pink_salt/place2",
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:block/pink_salt/place3",
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/pink_salt/place4",
+				"volume": 0.9
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.pink_salt.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block/pink_salt/step1",
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/pink_salt/step2",
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:block/pink_salt/step3",
+				"volume": 0.9
+			},
+			{
+				"name": "galosphere:block/pink_salt/step4",
+				"volume": 0.9
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"block.allurite_cluster.break": {
 		"sounds": [
 			{

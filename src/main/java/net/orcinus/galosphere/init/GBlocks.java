@@ -144,63 +144,63 @@ public class GBlocks {
     public static final Block LICHEN_CORDYCEPS_PLANT = registerNoTabBlock("lichen_cordyceps_plant", new CordycepsPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instabreak().noCollission().sound(GSoundEvents.LICHEN_CORDYCEPS)));
     public static final Block GLOW_INK_CLUMPS = registerBlock("glow_ink_clumps", new GlowInkClumpsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).noCollission().strength(0.2F).sound(GSoundEvents.GLOW_INK_CLUMPS).lightLevel(GlowInkClumpsBlock.emission(15, 8))));
 
-    public static final Block PINK_SALT = registerBlock("pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block ROSE_PINK_SALT = registerBlock("rose_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block PASTEL_PINK_SALT = registerBlock("pastel_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT = registerBlock("pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block ROSE_PINK_SALT = registerBlock("rose_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PASTEL_PINK_SALT = registerBlock("pastel_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_STAIRS = registerBlock("pink_salt_stairs", new PinkSaltStairsBlock(PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block ROSE_PINK_SALT_STAIRS = registerBlock("rose_pink_salt_stairs", new PinkSaltStairsBlock(ROSE_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block PASTEL_PINK_SALT_STAIRS = registerBlock("pastel_pink_salt_stairs", new PinkSaltStairsBlock(PASTEL_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT_STAIRS = registerBlock("pink_salt_stairs", new PinkSaltStairsBlock(PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block ROSE_PINK_SALT_STAIRS = registerBlock("rose_pink_salt_stairs", new PinkSaltStairsBlock(ROSE_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PASTEL_PINK_SALT_STAIRS = registerBlock("pastel_pink_salt_stairs", new PinkSaltStairsBlock(PASTEL_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_SLAB = registerBlock("pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block ROSE_PINK_SALT_SLAB = registerBlock("rose_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block PASTEL_PINK_SALT_SLAB = registerBlock("pastel_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT_SLAB = registerBlock("pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block ROSE_PINK_SALT_SLAB = registerBlock("rose_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PASTEL_PINK_SALT_SLAB = registerBlock("pastel_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_WALL = registerBlock("pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block ROSE_PINK_SALT_WALL = registerBlock("rose_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block PASTEL_PINK_SALT_WALL = registerBlock("pastel_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT_WALL = registerBlock("pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block ROSE_PINK_SALT_WALL = registerBlock("rose_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PASTEL_PINK_SALT_WALL = registerBlock("pastel_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block POLISHED_PINK_SALT = registerBlock("polished_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block POLISHED_ROSE_PINK_SALT = registerBlock("polished_rose_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block POLISHED_PASTEL_PINK_SALT = registerBlock("polished_pastel_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_PINK_SALT = registerBlock("polished_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_ROSE_PINK_SALT = registerBlock("polished_rose_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_PASTEL_PINK_SALT = registerBlock("polished_pastel_pink_salt", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block POLISHED_PINK_SALT_STAIRS = registerBlock("polished_pink_salt_stairs", new PinkSaltStairsBlock(PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block POLISHED_ROSE_PINK_SALT_STAIRS = registerBlock("polished_rose_pink_salt_stairs", new PinkSaltStairsBlock(ROSE_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block POLISHED_PASTEL_PINK_SALT_STAIRS = registerBlock("polished_pastel_pink_salt_stairs", new PinkSaltStairsBlock(PASTEL_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_PINK_SALT_STAIRS = registerBlock("polished_pink_salt_stairs", new PinkSaltStairsBlock(PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_ROSE_PINK_SALT_STAIRS = registerBlock("polished_rose_pink_salt_stairs", new PinkSaltStairsBlock(ROSE_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_PASTEL_PINK_SALT_STAIRS = registerBlock("polished_pastel_pink_salt_stairs", new PinkSaltStairsBlock(PASTEL_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block POLISHED_PINK_SALT_SLAB = registerBlock("polished_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block POLISHED_ROSE_PINK_SALT_SLAB = registerBlock("polished_rose_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block POLISHED_PASTEL_PINK_SALT_SLAB = registerBlock("polished_pastel_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_PINK_SALT_SLAB = registerBlock("polished_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_ROSE_PINK_SALT_SLAB = registerBlock("polished_rose_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_PASTEL_PINK_SALT_SLAB = registerBlock("polished_pastel_pink_salt_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block POLISHED_PINK_SALT_WALL = registerBlock("polished_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block POLISHED_ROSE_PINK_SALT_WALL = registerBlock("polished_rose_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block POLISHED_PASTEL_PINK_SALT_WALL = registerBlock("polished_pastel_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_PINK_SALT_WALL = registerBlock("polished_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_ROSE_PINK_SALT_WALL = registerBlock("polished_rose_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block POLISHED_PASTEL_PINK_SALT_WALL = registerBlock("polished_pastel_pink_salt_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_BRICKS = registerBlock("pink_salt_bricks", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block ROSE_PINK_SALT_BRICKS = registerBlock("rose_pink_salt_bricks", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block PASTEL_PINK_SALT_BRICKS = registerBlock("pastel_pink_salt_bricks", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT_BRICKS = registerBlock("pink_salt_bricks", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block ROSE_PINK_SALT_BRICKS = registerBlock("rose_pink_salt_bricks", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PASTEL_PINK_SALT_BRICKS = registerBlock("pastel_pink_salt_bricks", new PinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_BRICK_STAIRS = registerBlock("pink_salt_brick_stairs", new PinkSaltStairsBlock(PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block ROSE_PINK_SALT_BRICK_STAIRS = registerBlock("rose_pink_salt_brick_stairs", new PinkSaltStairsBlock(ROSE_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block PASTEL_PINK_SALT_BRICK_STAIRS = registerBlock("pastel_pink_salt_brick_stairs", new PinkSaltStairsBlock(PASTEL_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT_BRICK_STAIRS = registerBlock("pink_salt_brick_stairs", new PinkSaltStairsBlock(PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block ROSE_PINK_SALT_BRICK_STAIRS = registerBlock("rose_pink_salt_brick_stairs", new PinkSaltStairsBlock(ROSE_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PASTEL_PINK_SALT_BRICK_STAIRS = registerBlock("pastel_pink_salt_brick_stairs", new PinkSaltStairsBlock(PASTEL_PINK_SALT.defaultBlockState(), BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_BRICK_SLAB = registerBlock("pink_salt_brick_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block ROSE_PINK_SALT_BRICK_SLAB = registerBlock("rose_pink_salt_brick_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block PASTEL_PINK_SALT_BRICK_SLAB = registerBlock("pastel_pink_salt_brick_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT_BRICK_SLAB = registerBlock("pink_salt_brick_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block ROSE_PINK_SALT_BRICK_SLAB = registerBlock("rose_pink_salt_brick_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PASTEL_PINK_SALT_BRICK_SLAB = registerBlock("pastel_pink_salt_brick_slab", new PinkSaltSlabBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_BRICK_WALL = registerBlock("pink_salt_brick_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block ROSE_PINK_SALT_BRICK_WALL = registerBlock("rose_pink_salt_brick_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block PASTEL_PINK_SALT_BRICK_WALL = registerBlock("pastel_pink_salt_brick_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT_BRICK_WALL = registerBlock("pink_salt_brick_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block ROSE_PINK_SALT_BRICK_WALL = registerBlock("rose_pink_salt_brick_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PASTEL_PINK_SALT_BRICK_WALL = registerBlock("pastel_pink_salt_brick_wall", new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block CHISELED_PINK_SALT = registerBlock("chiseled_pink_salt", new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block CHISELED_ROSE_PINK_SALT = registerBlock("chiseled_rose_pink_salt", new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final Block CHISELED_PASTEL_PINK_SALT = registerBlock("chiseled_pastel_pink_salt", new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block CHISELED_PINK_SALT = registerBlock("chiseled_pink_salt", new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block CHISELED_ROSE_PINK_SALT = registerBlock("chiseled_rose_pink_salt", new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block CHISELED_PASTEL_PINK_SALT = registerBlock("chiseled_pastel_pink_salt", new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_LAMP = registerBlock("pink_salt_lamp", new PinkSaltLampBlock(BlockBehaviour.Properties.of().noOcclusion().lightLevel(state -> 11).sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(3.5f).pushReaction(PushReaction.DESTROY)));
+    public static final Block PINK_SALT_LAMP = registerBlock("pink_salt_lamp", new PinkSaltLampBlock(BlockBehaviour.Properties.of().noOcclusion().lightLevel(state -> 11).sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(3.5f).pushReaction(PushReaction.DESTROY)));
 
-    public static final Block PINK_SALT_STRAW = registerBlock("pink_salt_straw", new PinkSaltStrawBlock(BlockBehaviour.Properties.of().offsetType(BlockBehaviour.OffsetType.XZ).randomTicks().dynamicShape().sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final Block PINK_SALT_STRAW = registerBlock("pink_salt_straw", new PinkSaltStrawBlock(BlockBehaviour.Properties.of().offsetType(BlockBehaviour.OffsetType.XZ).randomTicks().dynamicShape().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_CLUSTER = registerBlock("pink_salt_cluster", new PinkSaltClusterBlock(BlockBehaviour.Properties.of().lightLevel(state -> 6).sound(SoundType.CALCITE).requiresCorrectToolForDrops().strength(1.0F)));
+    public static final Block PINK_SALT_CLUSTER = registerBlock("pink_salt_cluster", new PinkSaltClusterBlock(BlockBehaviour.Properties.of().lightLevel(state -> 6).sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(1.0F)));
 
     public static final Block CURED_MEMBRANE_BLOCK = registerBlock("cured_membrane_block", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK)));
     public static final Block STRANDED_MEMBRANE_BLOCK = registerBlock("stranded_membrane_block", new StrandedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(SoundType.SLIME_BLOCK).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));

@@ -55,6 +55,7 @@ public class GSoundEvents {
     public static final SoundType LUMIERE_CLUSTER = soundType("lumiere_cluster");
     public static final SoundType SILVER = soundType("silver");
     public static final SoundType SILVER_LATTICE = soundType("silver_lattice");
+    public static final SoundType PINK_SALT = soundType("pink_salt");
 
     private static SoundEvent register(String string) {
         ResourceLocation id = Galosphere.id(string);
