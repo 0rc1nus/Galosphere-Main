@@ -1,7 +1,6 @@
 package net.orcinus.galosphere.entities.ai.tasks;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -11,13 +10,14 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.entities.Blighted;
+import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 import java.util.Optional;
 
-public class Smash extends Behavior<Blighted> {
+public class Smash extends Behavior<Berserker> {
     private static final int DURATION = Mth.ceil(27.0F);
 
     public Smash() {
@@ -25,35 +25,36 @@ public class Smash extends Behavior<Blighted> {
     }
 
     @Override
-    protected boolean checkExtraStartConditions(ServerLevel serverLevel, Blighted livingEntity) {
+    protected boolean checkExtraStartConditions(ServerLevel serverLevel, Berserker livingEntity) {
         Optional<LivingEntity> memory = livingEntity.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
-        if (livingEntity.getPhase() != Blighted.Phase.IDLING) {
+        if (livingEntity.getPhase() != Berserker.Phase.IDLING) {
             return false;
         }
         return memory.filter(livingEntity::isWithinMeleeAttackRange).isPresent();
     }
 
     @Override
-    protected boolean canStillUse(ServerLevel serverLevel, Blighted livingEntity, long l) {
+    protected boolean canStillUse(ServerLevel serverLevel, Berserker livingEntity, long l) {
         return true;
     }
 
     @Override
-    protected void start(ServerLevel serverLevel, Blighted livingEntity, long l) {
+    protected void start(ServerLevel serverLevel, Berserker livingEntity, long l) {
         livingEntity.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, DURATION);
         serverLevel.broadcastEntityEvent(livingEntity, (byte)4);
-        livingEntity.setPhase(Blighted.Phase.SMASH);
+        livingEntity.setPhase(Berserker.Phase.SMASH);
+        livingEntity.playSound(GSoundEvents.BERSERKER_SMASH, 10.0f, 1.0F);
     }
 
     @Override
-    protected void tick(ServerLevel serverLevel, Blighted livingEntity, long l) {
+    protected void tick(ServerLevel serverLevel, Berserker livingEntity, long l) {
         livingEntity.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).ifPresent(target -> livingEntity.getLookControl().setLookAt(target.position()));
         livingEntity.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
         if (livingEntity.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_COOLING_DOWN)) {
             return;
         }
         for (LivingEntity mob : serverLevel.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(4.5D))) {
-            if (mob.isAlive() && mob != livingEntity && mob.getType() != GEntityTypes.BLIGHTED) {
+            if (mob.isAlive() && mob != livingEntity && mob.getType() != GEntityTypes.BERSERKER) {
                 Vec3 vec3 = livingEntity.position().add(0.0, 1.6f, 0.0);
                 Vec3 vec32 = mob.getEyePosition().subtract(vec3);
                 Vec3 vec33 = vec32.normalize();
@@ -67,11 +68,10 @@ public class Smash extends Behavior<Blighted> {
         Vec3 eyeVec = livingEntity.getViewVector(1.0F).scale(2.0D);
         serverLevel.sendParticles(GParticleTypes.IMPACT, vec34.x + eyeVec.x + 0.5D, vec34.y - 1.0D, vec34.z + eyeVec.z + 0.5D, 1, 0.0, 0.0, 0.0, 0.0);
         livingEntity.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, 60 - DURATION);
-        livingEntity.playSound(SoundEvents.WARDEN_ATTACK_IMPACT, 10.0f, -1.0F);
     }
 
     @Override
-    protected void stop(ServerLevel serverLevel, Blighted livingEntity, long l) {
-        livingEntity.setPhase(Blighted.Phase.IDLING);
+    protected void stop(ServerLevel serverLevel, Berserker livingEntity, long l) {
+        livingEntity.setPhase(Berserker.Phase.IDLING);
     }
 }

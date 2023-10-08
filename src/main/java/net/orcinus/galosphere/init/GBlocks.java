@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.blocks.PotpourriBlock;
 import net.orcinus.galosphere.blocks.SilverBalanceBlock;
 import net.orcinus.galosphere.blocks.StrandedMembraneBlock;
 import net.orcinus.galosphere.blocks.ChandelierBlock;
@@ -205,8 +206,9 @@ public class GBlocks {
     public static final Block STRANDED_MEMBRANE_BLOCK = registerBlock("stranded_membrane_block", new StrandedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(SoundType.SLIME_BLOCK).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));
     public static final Block SHADOW_FRAME = registerBlock("shadow_frame", new ShadowFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).lightLevel(state -> state.getValue(ShadowFrameBlock.LEVEL)).noCollission().sound(GSoundEvents.SILVER)));
     public static final Block GILDED_BEADS = registerBlock("gilded_beads", new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(SoundType.SCAFFOLDING)));
-    public static final Block SILVER_BALANCE = registerBlock("silver_balance", new SilverBalanceBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.CYAN).noOcclusion().pushReaction(PushReaction.DESTROY).sound(GSoundEvents.SILVER)));
+    public static final Block SILVER_BALANCE = registerBlock("silver_balance", new SilverBalanceBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.CYAN).strength(3.0F, 6.0F).noOcclusion().sound(GSoundEvents.SILVER)));
     public static final Block SUCCULENT = registerBlock("succulent", new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));
+    public static final Block POTPOURRI = registerBlock("potpourri", new PotpourriBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.GLASS)));
 
     public static final Block LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final Block SALINE_COMPOSTER = registerNoTabBlock("saline_composter", new SoilComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));

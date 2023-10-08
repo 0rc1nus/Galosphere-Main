@@ -28,10 +28,11 @@ public class GCreativeModeTabs {
                 .title(Component.translatable("itemGroup.galosphere.galosphere"))
                 .displayItems((itemDisplayParameters, output) -> {
                     output.accept(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE);
+                    output.accept(GItems.PRESERVING_TEMPLATE);
                     output.accept(GItems.SPARKLE_SPAWN_EGG);
                     output.accept(GItems.SPECTRE_SPAWN_EGG);
                     output.accept(GItems.SPECTERPILLAR_SPAWN_EGG);
-                    output.accept(GItems.BLIGHTED_SPAWN_EGG);
+                    output.accept(GItems.BERSERKER_SPAWN_EGG);
                     output.accept(GItems.BOTTLE_OF_SPECTRE);
                     output.accept(GItems.ALLURITE_SHARD);
                     output.accept(GItems.LUMIERE_SHARD);
@@ -49,14 +50,18 @@ public class GCreativeModeTabs {
                     output.accept(GItems.LICHEN_CORDYCEPS);
                     output.accept(GItems.GOLDEN_LICHEN_CORDYCEPS);
                     output.accept(GItems.SALTED_JERKY);
+                    output.accept(GItems.PRESERVED_FLESH);
                     output.accept(GItems.CURED_SUCCULENT);
                     output.accept(GItems.CURED_MEMBRANE);
                     output.accept(GItems.GLOW_FLARE);
                     output.accept(GItems.SPECTRE_FLARE);
+                    output.accept(GBlocks.POTPOURRI);
                     output.accept(GItems.CHANDELIER);
+                    output.accept(GBlocks.GILDED_BEADS);
                     output.accept(GBlocks.MONSTROMETER);
                     output.accept(GBlocks.COMBUSTION_TABLE);
                     output.accept(GBlocks.WARPED_ANCHOR);
+                    output.accept(GBlocks.SILVER_BALANCE);
                     output.accept(GBlocks.SILVER_TILES);
                     output.accept(GBlocks.SILVER_TILES_STAIRS);
                     output.accept(GBlocks.SILVER_TILES_SLAB);

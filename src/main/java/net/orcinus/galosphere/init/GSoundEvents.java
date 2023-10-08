@@ -31,6 +31,12 @@ public class GSoundEvents {
     public static final SoundEvent SPECTRE_MANIPULATE_BEGIN = register("entity.spectre.manipulate.begin");
     public static final SoundEvent SPECTRE_MANIPULATE_END = register("entity.spectre.manipulate.end");
 
+    public static final SoundEvent BERSERKER_DEATH = register("entity.berserker.death");
+    public static final SoundEvent BERSERKER_HURT = register("entity.berserker.hurt");
+    public static final SoundEvent BERSERKER_IDLE = register("entity.berserker.idle");
+    public static final SoundEvent BERSERKER_DUO_SMASH = register("entity.berserker.duo_smash");
+    public static final SoundEvent BERSERKER_SMASH = register("entity.berserker.smash");
+
     public static final SoundEvent SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
     public static final SoundEvent SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
 

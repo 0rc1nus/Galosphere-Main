@@ -7,7 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.NearestLivingEntitySensor;
-import net.orcinus.galosphere.entities.Blighted;
+import net.orcinus.galosphere.entities.Berserker;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class BlightedEntitySensor extends NearestLivingEntitySensor<Blighted> {
+public class BlightedEntitySensor extends NearestLivingEntitySensor<Berserker> {
 
     @Override
     public Set<MemoryModuleType<?>> requires() {
@@ -23,12 +23,12 @@ public class BlightedEntitySensor extends NearestLivingEntitySensor<Blighted> {
     }
 
     @Override
-    protected void doTick(ServerLevel serverLevel, Blighted blighted) {
+    protected void doTick(ServerLevel serverLevel, Berserker blighted) {
         super.doTick(serverLevel, blighted);
-        getClosest(blighted, livingEntity -> livingEntity.getType() == EntityType.PLAYER).or(() -> getClosest(blighted, livingEntity -> livingEntity.getType() != EntityType.PLAYER)).ifPresentOrElse(livingEntity -> blighted.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, livingEntity), () -> blighted.getBrain().eraseMemory(MemoryModuleType.NEAREST_ATTACKABLE));
+        getClosest(blighted, livingEntity -> livingEntity.getType() == EntityType.PLAYER).ifPresentOrElse(livingEntity -> blighted.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, livingEntity), () -> blighted.getBrain().eraseMemory(MemoryModuleType.NEAREST_ATTACKABLE));
     }
 
-    private static Optional<LivingEntity> getClosest(Blighted blighted, Predicate<LivingEntity> predicate) {
+    private static Optional<LivingEntity> getClosest(Berserker blighted, Predicate<LivingEntity> predicate) {
         return blighted.getBrain().getMemory(MemoryModuleType.NEAREST_LIVING_ENTITIES).stream().flatMap(Collection::stream).filter(blighted::canTargetEntity).filter(predicate).findFirst();
     }
 

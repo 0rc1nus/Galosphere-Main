@@ -15,17 +15,6 @@ public interface FireworkRocketEntityAccessor {
     }
 
     @Accessor
-    static EntityDataAccessor<Boolean> getDATA_SHOT_AT_ANGLE() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Accessor("life")
-    void setLife(int life);
-
-    @Accessor("lifetime")
-    void setLifeTime(int lifeTime);
-
-    @Accessor
     int getLife();
 
     @Accessor

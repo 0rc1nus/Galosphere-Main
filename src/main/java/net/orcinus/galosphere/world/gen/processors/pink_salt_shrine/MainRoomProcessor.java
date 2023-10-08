@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.orcinus.galosphere.blocks.PinkSaltStrawBlock;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GStructureProcessorTypes;
 import org.jetbrains.annotations.Nullable;
 
 public class MainRoomProcessor extends StructureProcessor {
@@ -26,7 +27,7 @@ public class MainRoomProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader, BlockPos blockPos, BlockPos blockPos2, StructureTemplate.StructureBlockInfo structureBlockInfo, StructureTemplate.StructureBlockInfo structureBlockInfo2, StructurePlaceSettings structurePlaceSettings) {
         BlockState state = structureBlockInfo2.state();
         RandomSource randomSource = structurePlaceSettings.getRandom(structureBlockInfo2.pos());
-        if (state.is(Blocks.BLUE_CANDLE)) {
+        if (state.getBlock() instanceof CandleBlock) {
             return new StructureTemplate.StructureBlockInfo(structureBlockInfo2.pos(), state.setValue(CandleBlock.CANDLES, Mth.nextInt(randomSource, 1, 4)), structureBlockInfo2.nbt());
         }
         if (state.is(GBlocks.PINK_SALT_STRAW)) {
@@ -57,6 +58,6 @@ public class MainRoomProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return null;
+        return GStructureProcessorTypes.PINK_SALT_MAIN_ROOM;
     }
 }

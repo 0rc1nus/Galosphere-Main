@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "galosphere:pink_salt_shrine/pink_salt_shrine_top",
+        "location": "galosphere:pink_salt_shrine/temple_top",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },

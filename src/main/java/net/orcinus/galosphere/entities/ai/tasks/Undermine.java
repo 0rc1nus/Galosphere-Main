@@ -14,14 +14,15 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.projectile.EvokerFangs;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.orcinus.galosphere.entities.Blighted;
+import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 import java.util.List;
 import java.util.Optional;
 
-public class Undermine extends Behavior<Blighted> {
+public class Undermine extends Behavior<Berserker> {
     private static final int DURATION = Mth.ceil(22.4F);
 
     public Undermine() {
@@ -29,13 +30,13 @@ public class Undermine extends Behavior<Blighted> {
     }
 
     @Override
-    protected boolean checkExtraStartConditions(ServerLevel serverLevel, Blighted livingEntity) {
+    protected boolean checkExtraStartConditions(ServerLevel serverLevel, Berserker livingEntity) {
         List<LivingEntity> list = serverLevel.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox());
-        if (livingEntity.getPhase() != Blighted.Phase.IDLING) {
+        if (livingEntity.getPhase() != Berserker.Phase.IDLING) {
             return false;
         }
         for (LivingEntity nearby : list) {
-            if (nearby.isAlive() && nearby.getType() != GEntityTypes.BLIGHTED) {
+            if (nearby.isAlive() && nearby.getType() != GEntityTypes.BERSERKER) {
                 return false;
             }
         }
@@ -43,20 +44,21 @@ public class Undermine extends Behavior<Blighted> {
     }
 
     @Override
-    protected boolean canStillUse(ServerLevel serverLevel, Blighted livingEntity, long l) {
+    protected boolean canStillUse(ServerLevel serverLevel, Berserker livingEntity, long l) {
         return true;
     }
 
     @Override
-    protected void start(ServerLevel serverLevel, Blighted livingEntity, long l) {
+    protected void start(ServerLevel serverLevel, Berserker livingEntity, long l) {
         livingEntity.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, DURATION);
-        livingEntity.setPhase(Blighted.Phase.UNDERMINE);
+        livingEntity.setPhase(Berserker.Phase.UNDERMINE);
+        livingEntity.getBrain().setMemory(GMemoryModuleTypes.UNDERMINE_COUNT, livingEntity.getBrain().getMemory(GMemoryModuleTypes.UNDERMINE_COUNT).orElse(0) + 1);
         serverLevel.broadcastEntityEvent(livingEntity, (byte)62);
-        livingEntity.playSound(SoundEvents.WARDEN_SONIC_CHARGE, 3.0f, 1.0f);
+        livingEntity.playSound(GSoundEvents.BERSERKER_DUO_SMASH, 3.0f, 1.0f);
     }
 
     @Override
-    protected void tick(ServerLevel serverLevel, Blighted livingEntity, long l) {
+    protected void tick(ServerLevel serverLevel, Berserker livingEntity, long l) {
         Optional<LivingEntity> memory = livingEntity.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
         memory.ifPresent(target -> livingEntity.getLookControl().setLookAt(target.position()));
         livingEntity.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
@@ -90,7 +92,7 @@ public class Undermine extends Behavior<Blighted> {
         livingEntity.heal(20.0F);
     }
 
-    private void createPillar(Blighted blighted, double d, double e, double f, double g, float h, int i) {
+    private void createPillar(Berserker blighted, double d, double e, double f, double g, float h, int i) {
         BlockPos blockPos = BlockPos.containing(d, g, e);
         boolean bl = false;
         double j = 0.0;
@@ -111,10 +113,14 @@ public class Undermine extends Behavior<Blighted> {
     }
 
     @Override
-    protected void stop(ServerLevel serverLevel, Blighted livingEntity, long l) {
-        livingEntity.setPhase(Blighted.Phase.IDLING);
+    protected void stop(ServerLevel serverLevel, Berserker livingEntity, long l) {
+        livingEntity.setPhase(Berserker.Phase.IDLING);
         Optional<LivingEntity> memory = livingEntity.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
-        if (memory.isPresent() && memory.get().distanceTo(livingEntity) < 4.0D) {
+        Optional<Integer> undermine = livingEntity.getBrain().getMemory(GMemoryModuleTypes.UNDERMINE_COUNT);
+        if (undermine.isPresent() && undermine.get() == 3) {
+            livingEntity.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.UNDERMINE_COOLDOWN, Unit.INSTANCE, 500);
+            livingEntity.getBrain().setMemory(GMemoryModuleTypes.UNDERMINE_COUNT, 0);
+        } else if (memory.isPresent() && memory.get().distanceTo(livingEntity) < 4.0D) {
             livingEntity.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.UNDERMINE_COOLDOWN, Unit.INSTANCE, 400);
         }
     }

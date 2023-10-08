@@ -22,6 +22,7 @@ public class GMemoryModuleTypes {
     public static final MemoryModuleType<BlockPos> NEAREST_LICHEN_MOSS = register("nearest_lichen_moss");
     public static final MemoryModuleType<Unit> IS_ROARING = register("roaring", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> UNDERMINE_COOLDOWN = register("undermine_cooldown", Codec.unit(Unit.INSTANCE));
+    public static final MemoryModuleType<Integer> UNDERMINE_COUNT = register("undermine_count", Codec.INT);
 
     private static <U> MemoryModuleType<U> register(String string, Codec<U> codec) {
         MemoryModuleType<U> memoryModuleType = new MemoryModuleType<>(Optional.of(codec));

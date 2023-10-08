@@ -88,7 +88,7 @@ public class SilverBalanceBlock extends Block implements SimpleWaterloggedBlock 
     private int calculateOutputSignal(BlockState blockState) {
         Block block = blockState.getBlock();
         float destroyTime = block.defaultDestroyTime();
-        boolean flag = !blockState.isAir() || blockState.getFluidState().isEmpty();
+        boolean flag = !blockState.isAir() && blockState.getFluidState().isEmpty();
         int output = destroyTime < 0 ? 0 : (int) Math.min(15, Math.max(1, destroyTime) * 2);
         return flag ? output : 0;
     }

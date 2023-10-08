@@ -1110,6 +1110,106 @@
 		],
 		"subtitle": "subtitles.entity.spectre.receive_item"
 	},
+	"entity.berserker.death": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/death",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.death"
+	},
+	"entity.berserker.hurt": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/hurt1",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/hurt2",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.hurt"
+	},
+	"entity.berserker.idle": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/idle1",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle2",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle3",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle4",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle5",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle6",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle7",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle8",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle9",
+				"pitch": 1.4,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/idle10",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.idle"
+	},
+	"entity.berserker.duo_smash": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/smash_both_arms",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.smash"
+	},
+	"entity.berserker.smash": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/smash_one_arm",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.smash"
+	},
 	"music.biome.crystal_canyons": {
 		"sounds": [
 			{

@@ -13,7 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.entities.Blighted;
+import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.entities.GlowFlare;
 import net.orcinus.galosphere.entities.PinkSaltPillar;
 import net.orcinus.galosphere.entities.SilverBomb;
@@ -35,7 +35,7 @@ public class GEntityTypes {
     public static final EntityType<Spectre> SPECTRE = register("spectre", EntityType.Builder.of(Spectre::new, MobCategory.MONSTER).sized(0.5F, 0.5F).clientTrackingRange(8).updateInterval(2).build(Galosphere.id("spectre").toString()));
     public static final EntityType<Specterpillar> SPECTERPILLAR = register("specterpillar", EntityType.Builder.of(Specterpillar::new, MobCategory.CREATURE).sized(0.4F, 0.3F).clientTrackingRange(8).updateInterval(2).build(Galosphere.id("specterpillar").toString()));
     public static final EntityType<SpectatorVision> SPECTATOR_VISION = register("spectator_vision", EntityType.Builder.<SpectatorVision>of(SpectatorVision::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(5).build(Galosphere.id("spectator_vision").toString()));
-    public static final EntityType<Blighted> BLIGHTED = register("blighted", EntityType.Builder.of(Blighted::new, MobCategory.MONSTER).sized(1.4F, 2.2F).clientTrackingRange(16).fireImmune().build(Galosphere.id("blighted").toString()));
+    public static final EntityType<Berserker> BERSERKER = register("berserker", EntityType.Builder.of(Berserker::new, MobCategory.MONSTER).sized(1.4F, 2.2F).clientTrackingRange(16).fireImmune().build(Galosphere.id("berserker").toString()));
     public static final EntityType<PinkSaltPillar> PINK_SALT_PILLAR = register("pink_salt_pillar", EntityType.Builder.<PinkSaltPillar>of(PinkSaltPillar::new, MobCategory.MISC).sized(0.7F, 1.0F).clientTrackingRange(16).fireImmune().build(Galosphere.id("pink_salt_pillar").toString()));
 
     private static <T extends Entity> EntityType<T> register(String id, EntityType<T> builder) {
@@ -50,7 +50,7 @@ public class GEntityTypes {
             map.put(GEntityTypes.SPECTRE, Spectre.createAttributes());
             map.put(GEntityTypes.SPECTERPILLAR, Specterpillar.createAttributes());
             map.put(GEntityTypes.SPECTATOR_VISION, SpectatorVision.createAttributes());
-            map.put(GEntityTypes.BLIGHTED, Blighted.createAttributes());
+            map.put(GEntityTypes.BERSERKER, Berserker.createAttributes());
         }).build().forEach(FabricDefaultAttributeRegistry::register);
     }
 

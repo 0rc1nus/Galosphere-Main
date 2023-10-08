@@ -9,6 +9,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.world.gen.processors.pink_salt_shrine.MainRoomProcessor;
+import net.orcinus.galosphere.world.gen.processors.pink_salt_shrine.NoWaterloggedProcessor;
 
 import java.util.Map;
 
@@ -16,6 +17,7 @@ public class GStructureProcessorTypes {
     private static final Map<ResourceLocation, StructureProcessorType<?>> STRUCTURE_PROCESSORS = Maps.newLinkedHashMap();
 
     public static final StructureProcessorType<MainRoomProcessor> PINK_SALT_MAIN_ROOM = register("pink_salt_main_room", MainRoomProcessor.CODEC);
+    public static final StructureProcessorType<NoWaterloggedProcessor> NO_WATERLOGGED = register("no_waterlogged", NoWaterloggedProcessor.CODEC);
 
     public static <P extends StructureProcessor> StructureProcessorType<P> register(String string, Codec<P> codec) {
         StructureProcessorType<P> type = () -> codec;

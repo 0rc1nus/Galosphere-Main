@@ -54,7 +54,7 @@ public class GildedBeadsRenderer implements BlockEntityRenderer<GildedBeadsBlock
         poseStack.mulPose(Axis.YP.rotationDegrees(-RotationSegment.convertToDegrees(blockEntity.getBlockState().getValue(GildedBeadsBlock.ROTATION))));
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
         VertexConsumer vertexConsumer = FUNCTION.apply(blockEntity.getBlockState()).buffer(multiBufferSource, RenderType::entityCutoutNoCull);
-        this.gilded_beads.render(poseStack, vertexConsumer, 0xF000F0, j);
+        this.gilded_beads.render(poseStack, vertexConsumer, i, j);
         poseStack.popPose();
     }
 

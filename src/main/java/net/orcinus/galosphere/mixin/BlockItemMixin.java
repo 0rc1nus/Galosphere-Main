@@ -20,7 +20,7 @@ public class BlockItemMixin {
     private void G$placeBlock(BlockPlaceContext blockPlaceContext, CallbackInfoReturnable<InteractionResult> cir) {
         Player player = blockPlaceContext.getPlayer();
         if (player != null && player.hasEffect(GMobEffects.BLOCK_BANE) && !player.getAbilities().instabuild) {
-            player.hurt(blockPlaceContext.getLevel().damageSources().magic(), 6.0F);
+            player.hurt(blockPlaceContext.getLevel().damageSources().magic(), 3.0F);
             player.getCooldowns().addCooldown(blockPlaceContext.getItemInHand().getItem(), 100);
         }
     }

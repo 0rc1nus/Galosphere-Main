@@ -53,9 +53,9 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     private static final VoxelShape SHAPE = Block.box(4, 0.0, 4, 12, 16.0, 12);
     private static final VoxelShape TOP_UP_SHAPE = Block.box(4, 0.0, 4, 12, 11.0, 12);
     private static final VoxelShape TOP_DOWN_SHAPE = Block.box(4, 5.0, 4, 12, 16.0, 12);
-    private static final Map<Predicate<BlockState>, Function<BlockState, BlockState>> REACTIONS = Util.make(Maps.newHashMap(), map -> {
-        map.put(blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) > 0, blockState -> GBlocks.SALINE_COMPOSTER.withPropertiesOf(blockState));
-        map.put(blockState -> WeatheringCopper.NEXT_BY_BLOCK.get().containsKey(blockState.getBlock()), blockState -> WeatheringCopper.getNext(blockState.getBlock()).orElseThrow().withPropertiesOf(blockState));
+    private static final Map<Predicate<BlockState>, SaltReaction> REACTIONS = Util.make(Maps.newHashMap(), map -> {
+        map.put(blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) > 0, new SaltReaction(blockState -> GBlocks.SALINE_COMPOSTER.withPropertiesOf(blockState), 0.5F));
+        map.put(blockState -> WeatheringCopper.NEXT_BY_BLOCK.get().containsKey(blockState.getBlock()), new SaltReaction(blockState -> WeatheringCopper.getNext(blockState.getBlock()).orElseThrow().withPropertiesOf(blockState), 0.0015F));
     });
 
     public PinkSaltStrawBlock(Properties properties) {
@@ -78,7 +78,7 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
         if (blockPos2 == null) {
             return;
         }
-        if (f > 0.35F || !isStalactiteStartPos(blockState, serverLevel, blockPos)) {
+        if (!isStalactiteStartPos(blockState, serverLevel, blockPos)) {
             return;
         }
         for (Predicate<BlockState> predicate : REACTIONS.keySet()) {
@@ -86,7 +86,11 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
             if (target == null) {
                 continue;
             }
-            BlockState result = REACTIONS.get(predicate).apply(serverLevel.getBlockState(target));
+            SaltReaction saltReaction = REACTIONS.get(predicate);
+            BlockState result = saltReaction.function.apply(serverLevel.getBlockState(target));
+            if (f > saltReaction.chance()) {
+                return;
+            }
             serverLevel.levelEvent(3005, target, 0);
             serverLevel.setBlockAndUpdate(target, result);
         }
@@ -154,7 +158,6 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
         builder.add(WATERLOGGED, STRAW_SHAPE, TIP_DIRECTION, FALLABLE);
     }
 
@@ -310,8 +313,10 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
         if (!blockState.is(GBlocks.PINK_SALT_STRAW)) {
             return false;
         }
-        StrawShape strawShape = blockState.getValue(STRAW_SHAPE);
-        return strawShape == StrawShape.TOP;
+        return blockState.getValue(STRAW_SHAPE) == StrawShape.TOP;
+    }
+
+    record SaltReaction(Function<BlockState, BlockState> function, float chance) {
     }
 
     public enum StrawShape implements StringRepresentable {

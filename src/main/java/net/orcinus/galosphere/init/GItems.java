@@ -4,6 +4,9 @@ import com.google.common.collect.Maps;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
@@ -16,7 +19,7 @@ import net.orcinus.galosphere.items.GlowFlareItem;
 import net.orcinus.galosphere.items.GoldenLichenCordycepsItem;
 import net.orcinus.galosphere.items.IconItem;
 import net.orcinus.galosphere.items.LichenCordycepsItem;
-import net.orcinus.galosphere.items.CuredSucculentItem;
+import net.orcinus.galosphere.items.PreservedFleshItem;
 import net.orcinus.galosphere.items.SilverBombItem;
 import net.orcinus.galosphere.items.SilverSmithingTemplateItem;
 import net.orcinus.galosphere.items.SpectreBottleItem;
@@ -35,7 +38,7 @@ public class GItems {
     public static final Item SPARKLE_SPAWN_EGG = register("sparkle_spawn_egg", new SpawnEggItem(GEntityTypes.SPARKLE, 0xF0F5F4, 0x24F6D8, new Item.Properties()));
     public static final Item SPECTRE_SPAWN_EGG = register("spectre_spawn_egg", new SpawnEggItem(GEntityTypes.SPECTRE, 0xFFF3DD, 0x9CCDB6, new Item.Properties()));
     public static final Item SPECTERPILLAR_SPAWN_EGG = register("specterpillar_spawn_egg", new SpawnEggItem(GEntityTypes.SPECTERPILLAR, 0xFFF3DD, 0xF7CF7B, new Item.Properties()));
-    public static final Item BLIGHTED_SPAWN_EGG = register("blighted_spawn_egg", new SpawnEggItem(GEntityTypes.BLIGHTED, 15568753, 6057047, new Item.Properties()));
+    public static final Item BERSERKER_SPAWN_EGG = register("berserker_spawn_egg", new SpawnEggItem(GEntityTypes.BERSERKER, 15568753, 6057047, new Item.Properties()));
     public static final Item BOTTLE_OF_SPECTRE = register("bottle_of_spectre", new SpectreBottleItem(new Item.Properties().stacksTo(1)));
     public static final Item ALLURITE_SHARD = registerBaseItem("allurite_shard");
     public static final Item LUMIERE_SHARD = registerBaseItem("lumiere_shard");
@@ -53,7 +56,7 @@ public class GItems {
     public static final Item STERLING_HORSE_ARMOR = register("sterling_horse_armor", new HorseArmorItem(4, "sterling", new Item.Properties().stacksTo(1)));
     public static final Item SALTED_JERKY = register("salted_jerky", new Item(new Item.Properties().food(GFoods.SALTED_JERKY)));
     public static final Item CURED_MEMBRANE = registerBaseItem("cured_membrane");
-    public static final Item CURED_SUCCULENT = register("cured_succulent", new CuredSucculentItem(new Item.Properties().food(GFoods.CURED_SUCCULENT)));
+    public static final Item CURED_SUCCULENT = register("cured_succulent", new Item(new Item.Properties().food(GFoods.CURED_SUCCULENT)));
     public static final Item LICHEN_CORDYCEPS = register("lichen_cordyceps", new LichenCordycepsItem(GBlocks.LICHEN_CORDYCEPS, new Item.Properties().food(GFoods.LICHEN_CORDYCEPS)));
     public static final Item GOLDEN_LICHEN_CORDYCEPS = register("golden_lichen_cordyceps", new GoldenLichenCordycepsItem(new Item.Properties().food(GFoods.GOLDEN_LICHEN_CORDYCEPS)));
     public static final Item GLOW_FLARE = register("glow_flare", new GlowFlareItem(new Item.Properties()));
@@ -63,6 +66,7 @@ public class GItems {
     public static final Item SUCCULENT_POD = register("succulent_pod", new ItemNameBlockItem(GBlocks.SUCCULENT_CROP, new Item.Properties()));
 
     public static final Item PRESERVING_TEMPLATE = register("preserving_template", SmithingTemplateItem.createNetheriteUpgradeTemplate());
+    public static final Item PRESERVED_FLESH = register("preserved_flesh", new PreservedFleshItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.1f).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.8f).meat().build())));
 
     public static Item registerBaseItem(String name) {
         return register(name, new Item(new Item.Properties()));

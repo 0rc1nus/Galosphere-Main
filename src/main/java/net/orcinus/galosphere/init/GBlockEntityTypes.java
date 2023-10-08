@@ -12,6 +12,7 @@ import net.orcinus.galosphere.blocks.blockentities.CordycepsBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.GildedBeadsBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.GlowInkClumpsBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.MonstrometerBlockEntity;
+import net.orcinus.galosphere.blocks.blockentities.PotpourriBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.ShadowFrameBlockEntity;
 
 import java.util.Map;
@@ -25,6 +26,7 @@ public class GBlockEntityTypes {
     public static final BlockEntityType<CordycepsBlockEntity> CORDYCEPS = registerBlockEntityType("cordyceps", BlockEntityType.Builder.of(CordycepsBlockEntity::new, GBlocks.LICHEN_CORDYCEPS).build(null));
     public static final BlockEntityType<ShadowFrameBlockEntity> SHADOW_FRAME = registerBlockEntityType("shadow_frame", FabricBlockEntityTypeBuilder.create(ShadowFrameBlockEntity::new, GBlocks.SHADOW_FRAME).build(null));
     public static final BlockEntityType<GildedBeadsBlockEntity> GILDED_BEADS = registerBlockEntityType("gilded_beads", FabricBlockEntityTypeBuilder.create(GildedBeadsBlockEntity::new, GBlocks.GILDED_BEADS).build(null));
+    public static final BlockEntityType<PotpourriBlockEntity> POTPOURRI = registerBlockEntityType("potpourri", FabricBlockEntityTypeBuilder.create(PotpourriBlockEntity::new, GBlocks.POTPOURRI).build(null));
 
     public static <T extends BlockEntity, B extends BlockEntityType<T>> B registerBlockEntityType(String name, B type) {
         BLOCK_ENTITIES.put(Galosphere.id(name), type);
