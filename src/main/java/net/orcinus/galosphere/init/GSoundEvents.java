@@ -56,6 +56,9 @@ public class GSoundEvents {
     public static final SoundType SILVER = soundType("silver");
     public static final SoundType SILVER_LATTICE = soundType("silver_lattice");
     public static final SoundType PINK_SALT = soundType("pink_salt");
+    public static final SoundType PINK_SALT_CLUSTER = soundType("pink_salt_cluster");
+    public static final SoundType PINK_SALT_LAMP = soundType("pink_salt_lamp");
+    public static final SoundType GILDED_BEADS = soundType("gilded_beads");
 
     private static SoundEvent register(String string) {
         ResourceLocation id = Galosphere.id(string);

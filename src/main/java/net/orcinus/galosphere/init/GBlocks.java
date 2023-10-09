@@ -196,16 +196,16 @@ public class GBlocks {
     public static final Block CHISELED_ROSE_PINK_SALT = registerBlock("chiseled_rose_pink_salt", new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
     public static final Block CHISELED_PASTEL_PINK_SALT = registerBlock("chiseled_pastel_pink_salt", new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_LAMP = registerBlock("pink_salt_lamp", new PinkSaltLampBlock(BlockBehaviour.Properties.of().noOcclusion().lightLevel(state -> 11).sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(3.5f).pushReaction(PushReaction.DESTROY)));
+    public static final Block PINK_SALT_LAMP = registerBlock("pink_salt_lamp", new PinkSaltLampBlock(BlockBehaviour.Properties.of().noOcclusion().lightLevel(state -> 11).sound(GSoundEvents.PINK_SALT_LAMP).requiresCorrectToolForDrops().strength(3.5f).pushReaction(PushReaction.DESTROY)));
 
     public static final Block PINK_SALT_STRAW = registerBlock("pink_salt_straw", new PinkSaltStrawBlock(BlockBehaviour.Properties.of().offsetType(BlockBehaviour.OffsetType.XZ).randomTicks().dynamicShape().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final Block PINK_SALT_CLUSTER = registerBlock("pink_salt_cluster", new PinkSaltClusterBlock(BlockBehaviour.Properties.of().lightLevel(state -> 6).sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(1.0F)));
+    public static final Block PINK_SALT_CLUSTER = registerBlock("pink_salt_cluster", new PinkSaltClusterBlock(BlockBehaviour.Properties.of().lightLevel(state -> 6).sound(GSoundEvents.PINK_SALT_CLUSTER).requiresCorrectToolForDrops().strength(1.0F)));
 
     public static final Block CURED_MEMBRANE_BLOCK = registerBlock("cured_membrane_block", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK)));
     public static final Block STRANDED_MEMBRANE_BLOCK = registerBlock("stranded_membrane_block", new StrandedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(SoundType.SLIME_BLOCK).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));
     public static final Block SHADOW_FRAME = registerBlock("shadow_frame", new ShadowFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).lightLevel(state -> state.getValue(ShadowFrameBlock.LEVEL)).noCollission().sound(GSoundEvents.SILVER)));
-    public static final Block GILDED_BEADS = registerBlock("gilded_beads", new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(SoundType.SCAFFOLDING)));
+    public static final Block GILDED_BEADS = registerBlock("gilded_beads", new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(GSoundEvents.GILDED_BEADS)));
     public static final Block SILVER_BALANCE = registerBlock("silver_balance", new SilverBalanceBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.CYAN).strength(3.0F, 6.0F).noOcclusion().sound(GSoundEvents.SILVER)));
     public static final Block SUCCULENT = registerBlock("succulent", new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));
     public static final Block POTPOURRI = registerBlock("potpourri", new PotpourriBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.GLASS)));
