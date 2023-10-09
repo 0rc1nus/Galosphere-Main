@@ -25,7 +25,12 @@ public class BlightedEntitySensor extends NearestLivingEntitySensor<Berserker> {
     @Override
     protected void doTick(ServerLevel serverLevel, Berserker blighted) {
         super.doTick(serverLevel, blighted);
-        getClosest(blighted, livingEntity -> livingEntity.getType() == EntityType.PLAYER).ifPresentOrElse(livingEntity -> blighted.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, livingEntity), () -> blighted.getBrain().eraseMemory(MemoryModuleType.NEAREST_ATTACKABLE));
+        getClosest(blighted, livingEntity -> livingEntity.getType() == EntityType.PLAYER)
+                .or(() -> getClosest(blighted, livingEntity -> {
+                    Optional<LivingEntity> memory = blighted.getBrain().getMemory(MemoryModuleType.HURT_BY_ENTITY);
+                    return memory.filter(entity -> entity == livingEntity).isPresent();
+                }))
+                .ifPresentOrElse(livingEntity -> blighted.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, livingEntity), () -> blighted.getBrain().eraseMemory(MemoryModuleType.NEAREST_ATTACKABLE));
     }
 
     private static Optional<LivingEntity> getClosest(Berserker blighted, Predicate<LivingEntity> predicate) {

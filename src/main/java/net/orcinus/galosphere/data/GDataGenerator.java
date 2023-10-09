@@ -21,6 +21,7 @@ public class GDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(GEntityTypeTagsProvider::new);
         pack.addProvider(GBiomeTagsProvider::new);
         pack.addProvider(GBlockLootTableProvider::new);
+        pack.addProvider(GEntityLootTableProvider::new);
         pack.addProvider(GLanguageProvider::new);
     }
 

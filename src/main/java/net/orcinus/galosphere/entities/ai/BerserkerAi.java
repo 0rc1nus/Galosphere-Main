@@ -30,10 +30,10 @@ import java.util.function.Predicate;
 
 public class BerserkerAi {
 
-    public static Brain<?> makeBrain(Brain<Berserker> brain) {
+    public static Brain<?> makeBrain(Berserker berserker, Brain<Berserker> brain) {
         BerserkerAi.initCoreActivity(brain);
         BerserkerAi.initIdleActivity(brain);
-        BerserkerAi.initFightActivity(brain);
+        BerserkerAi.initFightActivity(berserker, brain);
         BerserkerAi.initRoarActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
@@ -61,13 +61,13 @@ public class BerserkerAi {
         ));
     }
 
-    private static void initFightActivity(Brain<Berserker> brain) {
+    private static void initFightActivity(Berserker berserker, Brain<Berserker> brain) {
         Predicate<LivingEntity> predicate = livingEntity -> livingEntity instanceof Berserker blighted && blighted.getPhase() != Berserker.Phase.UNDERMINE;
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
                 new Smash(),
                 BehaviorBuilder.triggerIf(predicate, ConditionalWalkIfTargetOutOfReach.create(1.2F)),
                 new Undermine(),
-                StopAttackingIfTargetInvalid.create()
+                StopAttackingIfTargetInvalid.create(livingEntity -> !berserker.canTargetEntity(livingEntity), (mob, livingEntity) -> {}, false)
         ), MemoryModuleType.ATTACK_TARGET);
     }
 

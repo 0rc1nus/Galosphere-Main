@@ -96,9 +96,13 @@ public class OasisFeature extends Feature<NoneFeatureConfiguration> {
                 mutable3.setWithOffset(mutable2, value);
                 if (!world.getBlockState(mutable3).is(Blocks.WATER)) {
                     world.setBlock(mutable3, PinkSaltUtil.getBlock(world.getSeed(), mutable3).defaultBlockState(), 2);
+                    postFeature(world, mutable3);
                 }
             }
         }
+    }
+
+    public void postFeature(WorldGenLevel world, BlockPos.MutableBlockPos mutableBlockPos) {
     }
 
 }

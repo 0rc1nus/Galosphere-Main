@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Unit;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -101,6 +102,7 @@ public class Berserker extends Monster {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
         this.setPose(Pose.ROARING);
         this.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.IS_ROARING, Unit.INSTANCE, 52);
+        this.playSound(GSoundEvents.BERSERKER_ROAR, 3.0f, 1.0f);
         return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, compoundTag);
     }
 
@@ -191,7 +193,7 @@ public class Berserker extends Monster {
 
     @Override
     protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return BerserkerAi.makeBrain(this.brainProvider().makeBrain(dynamic));
+        return BerserkerAi.makeBrain(this, this.brainProvider().makeBrain(dynamic));
     }
 
     @Override
@@ -211,6 +213,9 @@ public class Berserker extends Monster {
                 MobEffectInstance mobEffectInstance = new MobEffectInstance(mobEffect, 6000, 2);
                 MobEffectUtil.addEffectToPlayersAround((ServerLevel) this.level(), this, this.position(), 50.0, mobEffectInstance, 1200);
             });
+        }
+        if (this.getBrain().getMemory(MemoryModuleType.HURT_BY_ENTITY).isEmpty() && this.getPhase() != Phase.IDLING) {
+            this.setPhase(Phase.IDLING);
         }
     }
 

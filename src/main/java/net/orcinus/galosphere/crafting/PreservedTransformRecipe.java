@@ -32,7 +32,7 @@ public class PreservedTransformRecipe implements SmithingRecipe {
         if (tag != null && tag.contains("Persevered")) {
             return false;
         }
-        return itemStack.getCount() == 1 && tag == null;
+        return itemStack.getCount() == 1 && !(tag != null && tag.contains("Persevered"));
     }
 
     @Override
@@ -42,7 +42,10 @@ public class PreservedTransformRecipe implements SmithingRecipe {
 
     @Override
     public boolean matches(Container container, Level level) {
-        return this.isTemplateIngredient(container.getItem(0)) && this.isBaseIngredient(container.getItem(1)) && this.isAdditionIngredient(container.getItem(2));
+        boolean templateIngredient = this.isTemplateIngredient(container.getItem(0));
+        boolean baseIngredient = this.isBaseIngredient(container.getItem(1));
+        boolean additionIngredient = this.isAdditionIngredient(container.getItem(2));
+        return templateIngredient && baseIngredient && additionIngredient;
     }
 
     @Override

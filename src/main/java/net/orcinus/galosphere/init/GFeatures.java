@@ -16,6 +16,7 @@ import net.orcinus.galosphere.world.gen.features.LichenPatchFeature;
 import net.orcinus.galosphere.world.gen.features.NoisePatchFeature;
 import net.orcinus.galosphere.world.gen.features.OasisFeature;
 import net.orcinus.galosphere.world.gen.features.PinkSaltStrawPatchFeature;
+import net.orcinus.galosphere.world.gen.features.SurfaceOasisFeature;
 import net.orcinus.galosphere.world.gen.features.config.CrystalSpikeConfig;
 import net.orcinus.galosphere.world.gen.features.config.NoisePatchConfig;
 import net.orcinus.galosphere.world.gen.features.config.PinkSaltStrawPatchConfig;
@@ -33,6 +34,7 @@ public class GFeatures {
     public static final Feature<NoisePatchConfig> NOISE_PATCH = registerFeature("noise_patch", new NoisePatchFeature(NoisePatchConfig.CODEC));
     public static final Feature<PinkSaltStrawPatchConfig> PINK_SALT_STRAW_PATCH = registerFeature("pink_salt_straw_patch", new PinkSaltStrawPatchFeature(PinkSaltStrawPatchConfig.CODEC));
     public static final Feature<NoneFeatureConfiguration> OASIS = registerFeature("oasis", new OasisFeature(NoneFeatureConfiguration.CODEC));
+    public static final Feature<NoneFeatureConfiguration> SURFACE_OASIS = registerFeature("surface_oasis", new SurfaceOasisFeature(NoneFeatureConfiguration.CODEC));
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> F registerFeature(String name, F feature) {
         FEATURES.put(Galosphere.id(name), feature);

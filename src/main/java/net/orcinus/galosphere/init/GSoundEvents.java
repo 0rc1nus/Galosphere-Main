@@ -36,6 +36,7 @@ public class GSoundEvents {
     public static final SoundEvent BERSERKER_IDLE = register("entity.berserker.idle");
     public static final SoundEvent BERSERKER_DUO_SMASH = register("entity.berserker.duo_smash");
     public static final SoundEvent BERSERKER_SMASH = register("entity.berserker.smash");
+    public static final SoundEvent BERSERKER_ROAR = register("entity.berserker.roar");
 
     public static final SoundEvent SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
     public static final SoundEvent SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
@@ -47,7 +48,6 @@ public class GSoundEvents {
     public static final SoundType COMBUSTION_TABLE = soundType("combustion_table");
     public static final SoundType GLOW_INK_CLUMPS = soundType("glow_ink_clumps");
     public static final SoundType LICHEN_CORDYCEPS = soundType("lichen_cordyceps");
-    public static final SoundType LICHEN_CORDYCEPS_BULB = soundType("lichen_cordyceps_bulb");
     public static final SoundType LICHEN_MOSS = soundType("lichen_moss");
     public static final SoundType LICHEN_ROOTS = soundType("lichen_roots");
     public static final SoundType LICHEN_SHELF = soundType("lichen_shelf");

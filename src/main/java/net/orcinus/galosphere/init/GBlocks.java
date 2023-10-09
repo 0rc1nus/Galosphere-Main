@@ -208,7 +208,7 @@ public class GBlocks {
     public static final Block GILDED_BEADS = registerBlock("gilded_beads", new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(GSoundEvents.GILDED_BEADS)));
     public static final Block SILVER_BALANCE = registerBlock("silver_balance", new SilverBalanceBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.CYAN).strength(3.0F, 6.0F).noOcclusion().sound(GSoundEvents.SILVER)));
     public static final Block SUCCULENT = registerBlock("succulent", new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));
-    public static final Block POTPOURRI = registerBlock("potpourri", new PotpourriBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.GLASS)));
+    public static final Block POTPOURRI = registerBlock("potpourri", new PotpourriBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
     public static final Block LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final Block SALINE_COMPOSTER = registerNoTabBlock("saline_composter", new SoilComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));

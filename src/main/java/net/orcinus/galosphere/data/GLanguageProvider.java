@@ -35,6 +35,7 @@ public class GLanguageProvider extends FabricLanguageProvider {
         GMobEffects.MOB_EFFECTS.values().forEach(mobEffect -> {
             translationBuilder.add(mobEffect, reformat(BuiltInRegistries.MOB_EFFECT.getKey(mobEffect).getPath()));
         });
+        translationBuilder.add("item.galosphere.persevered", "Persevered");
         translationBuilder.add("item.galosphere.silver_bomb.duration", "Duration");
         translationBuilder.add("item.galosphere.silver_bomb.explosion", "Explosion");
         translationBuilder.add("item.galosphere.silver_bomb.bouncy", "Bouncy");

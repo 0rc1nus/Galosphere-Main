@@ -100,6 +100,7 @@ public class GBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.dropSlab(GBlocks.SILVER_PANEL_SLAB);
         this.dropSelf(GBlocks.SILVER_LATTICE);
         this.dropOther(GBlocks.GLOW_BERRIES_SILVER_LATTICE, GBlocks.SILVER_LATTICE);
+        this.dropSelf(GBlocks.POTPOURRI);
         this.dropSelf(GBlocks.PINK_SALT);
         this.dropSelf(GBlocks.ROSE_PINK_SALT);
         this.dropSelf(GBlocks.PASTEL_PINK_SALT);

@@ -37,6 +37,7 @@ public class GPlacedFeaturesProvider extends FabricDynamicRegistryProvider {
         add(registries, entries, GPlacedFeatures.PINK_SALT_STRAW_CEILING_PATCH);
         add(registries, entries, GPlacedFeatures.PINK_SALT_STRAW_FLOOR_PATCH);
         add(registries, entries, GPlacedFeatures.OASIS);
+        add(registries, entries, GPlacedFeatures.SURFACE_OASIS);
     }
 
     private void add(HolderLookup.Provider registries, Entries entries, ResourceKey<PlacedFeature> resourceKey) {

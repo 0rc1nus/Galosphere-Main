@@ -1,4 +1,4 @@
-// 1.20.1	2023-10-06T13:24:22.1202372	Galosphere/Block Loot Tables
+// 1.20.1	2023-10-10T09:14:44.8746031	Galosphere/Block Loot Tables
 d1a29044dba21ead7aa86a35525deeb16092d4a7 data\galosphere\loot_tables\blocks\smooth_allurite.json
 812708cd8594f3e11afafc490f788f6913eb81bb data\galosphere\loot_tables\blocks\lumiere_block.json
 379b68fcde70762d0c1559ca46c2fa2ebaedd051 data\galosphere\loot_tables\blocks\chiseled_lumiere.json
@@ -87,6 +87,7 @@ ce1a6bc00168689c1c22a4d6621bda096ad68c7a data\galosphere\loot_tables\blocks\amet
 825919909a08f3c86e97b0c2ee642e5db031de5c data\galosphere\loot_tables\blocks\pastel_pink_salt_brick_stairs.json
 34e8f20d584efb863b9ba7eb090bd985f2366d07 data\galosphere\loot_tables\blocks\allurite_brick_slab.json
 36210dbfdb72d5f4e6ba49fd1c12d70a7f8e76c1 data\galosphere\loot_tables\blocks\pink_salt_straw.json
+dd1a8271d7daa7bb5c874fbb66521a210780648d data\galosphere\loot_tables\blocks\potpourri.json
 9febf5e910a3267eafad9d36b23fb5c87712edd0 data\galosphere\loot_tables\blocks\rose_pink_salt_wall.json
 14cd12b9cfcce8cde36f78e600933dcc7cbcd70e data\galosphere\loot_tables\blocks\amethyst_lamp.json
 ac296f07a10317f3763b3967789dec1428ef39f2 data\galosphere\loot_tables\blocks\chiseled_allurite.json

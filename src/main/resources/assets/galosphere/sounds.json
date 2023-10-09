@@ -1322,6 +1322,16 @@
 		],
 		"subtitle": "subtitles.entity.berserker.smash"
 	},
+	"entity.berserker.roar": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/roar",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.roar"
+	},
 	"entity.glow_flare.spread": {
 		"sounds": [
 			{

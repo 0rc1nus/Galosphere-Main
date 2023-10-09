@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/stairs_inner",
+  "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "galosphere:block/rose_pink_salt_bricks",
     "side": "galosphere:block/rose_pink_salt_bricks",

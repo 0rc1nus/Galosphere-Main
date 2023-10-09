@@ -24,6 +24,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.compat.init.CItemTags;
+import net.orcinus.galosphere.crafting.PreservedTransformRecipe;
 import net.orcinus.galosphere.init.GBlockFamilies;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GItems;
