@@ -59,6 +59,7 @@ public class GSoundEvents {
     public static final SoundType PINK_SALT_CLUSTER = soundType("pink_salt_cluster");
     public static final SoundType PINK_SALT_LAMP = soundType("pink_salt_lamp");
     public static final SoundType GILDED_BEADS = soundType("gilded_beads");
+    public static final SoundType CURED_MEMBRANE = soundType("cured_membrane");
 
     private static SoundEvent register(String string) {
         ResourceLocation id = Galosphere.id(string);

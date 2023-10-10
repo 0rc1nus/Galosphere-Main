@@ -51,7 +51,6 @@ public class GCreativeModeTabs {
                     output.accept(GItems.GOLDEN_LICHEN_CORDYCEPS);
                     output.accept(GItems.SALTED_JERKY);
                     output.accept(GItems.PRESERVED_FLESH);
-                    output.accept(GItems.CURED_SUCCULENT);
                     output.accept(GItems.CURED_MEMBRANE);
                     output.accept(GItems.GLOW_FLARE);
                     output.accept(GItems.SPECTRE_FLARE);
@@ -61,6 +60,7 @@ public class GCreativeModeTabs {
                     output.accept(GBlocks.MONSTROMETER);
                     output.accept(GBlocks.COMBUSTION_TABLE);
                     output.accept(GBlocks.WARPED_ANCHOR);
+                    output.accept(GBlocks.SHADOW_FRAME);
                     output.accept(GBlocks.SILVER_BALANCE);
                     output.accept(GBlocks.SILVER_TILES);
                     output.accept(GBlocks.SILVER_TILES_STAIRS);
@@ -69,7 +69,6 @@ public class GCreativeModeTabs {
                     output.accept(GBlocks.SILVER_PANEL_STAIRS);
                     output.accept(GBlocks.SILVER_PANEL_SLAB);
                     output.accept(GBlocks.SILVER_LATTICE);
-                    output.accept(GBlocks.SHADOW_FRAME);
                     output.accept(GBlocks.SILVER_ORE);
                     output.accept(GBlocks.DEEPSLATE_SILVER_ORE);
                     output.accept(GBlocks.SILVER_BLOCK);
@@ -117,6 +116,7 @@ public class GCreativeModeTabs {
                     output.accept(GBlocks.BOWL_LICHEN);
                     output.accept(GBlocks.LICHEN_SHELF);
                     output.accept(GBlocks.SUCCULENT);
+                    output.accept(GItems.SUCCULENT_PETALS);
                     output.accept(GBlocks.GLOW_INK_CLUMPS);
                     output.accept(GBlocks.PINK_SALT);
                     output.accept(GBlocks.ROSE_PINK_SALT);

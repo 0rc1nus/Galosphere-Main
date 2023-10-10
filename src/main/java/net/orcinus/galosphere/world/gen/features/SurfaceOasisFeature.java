@@ -23,12 +23,15 @@ public class SurfaceOasisFeature extends OasisFeature {
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
         BlockPos.MutableBlockPos mutableBlockPos = featurePlaceContext.origin().mutable();
         WorldGenLevel world = featurePlaceContext.level();
+        if (!world.getBlockState(featurePlaceContext.origin()).isAir()) {
+            return false;
+        }
         for (int i = 0; i < 100; i++) {
             mutableBlockPos.move(Direction.UP);
             BlockPos blockPos2 = mutableBlockPos.below();
-            if (world.getFluidState(blockPos2).is(FluidTags.LAVA) || !world.getBlockState(blockPos2).isSolid()) {
+             if (world.getFluidState(blockPos2).is(FluidTags.LAVA) || !world.getBlockState(blockPos2).isSolid()) {
                 return false;
-            }
+             }
             boolean place = super.place(new FeaturePlaceContext<>(Optional.empty(), world, featurePlaceContext.chunkGenerator(), featurePlaceContext.random(), mutableBlockPos, featurePlaceContext.config()));
             if (!place) {
                 continue;

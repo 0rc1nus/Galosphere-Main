@@ -46,6 +46,14 @@ public class GRecipeProvider extends FabricRecipeProvider {
             generateRecipes(consumer, blockFamily);
         });
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER).requires(Items.COAL).requires(GItems.PINK_SALT_SHARD).unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GItems.SUCCULENT_PETALS, 3).requires(GBlocks.SUCCULENT.asItem()).unlockedBy("has_succulent", has(GBlocks.SUCCULENT.asItem())).save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GBlocks.GILDED_BEADS, 8)
+                        .define('#', Items.GOLD_NUGGET)
+                        .define('G', Items.GOLD_INGOT)
+                        .pattern("GGG")
+                        .pattern("###")
+                        .pattern("GGG")
+                        .unlockedBy("has_gold_ingot", has(Items.GOLD_INGOT)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GBlocks.STRANDED_MEMBRANE_BLOCK)
                         .define('#', GItems.ALLURITE_SHARD)
                         .define('C', GBlocks.CURED_MEMBRANE_BLOCK)
@@ -62,7 +70,6 @@ public class GRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_cured_membrane", has(GItems.CURED_MEMBRANE)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.PINK_SALT_LAMP).define('#', GBlocks.PINK_SALT_CLUSTER).define('S', GItems.SILVER_INGOT).pattern("#").pattern("S").unlockedBy("has_pink_salt_cluster", has(GBlocks.PINK_SALT_CLUSTER)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GItems.SALTED_JERKY).define('S', GItems.PINK_SALT_SHARD).define('#', Items.ROTTEN_FLESH).pattern(" S ").pattern("S#S").pattern(" S ").unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
-        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GItems.CURED_SUCCULENT).define('S', GItems.PINK_SALT_SHARD).define('#', GBlocks.SUCCULENT).pattern(" S ").pattern("S#S").pattern(" S ").unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GItems.CURED_MEMBRANE).define('S', GItems.PINK_SALT_SHARD).define('#', Items.PHANTOM_MEMBRANE).pattern(" S ").pattern("S#S").pattern(" S ").unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
         twoXtwo(consumer, GBlocks.CURED_MEMBRANE_BLOCK, GItems.CURED_MEMBRANE);
         twoXtwo(consumer, GBlocks.PINK_SALT_BRICKS, GBlocks.POLISHED_PINK_SALT.asItem(), 4);

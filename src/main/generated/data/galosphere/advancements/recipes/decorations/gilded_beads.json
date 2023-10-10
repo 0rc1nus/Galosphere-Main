@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pink_salt_shard": {
+    "has_gold_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "galosphere:pink_salt_shard"
+              "minecraft:gold_ingot"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "galosphere:cured_succulent"
+        "recipe": "galosphere:gilded_beads"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_pink_salt_shard",
+      "has_gold_ingot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "galosphere:cured_succulent"
+      "galosphere:gilded_beads"
     ]
   },
   "sends_telemetry_event": false

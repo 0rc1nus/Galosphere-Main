@@ -38,7 +38,7 @@ public class SucculentCropBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return GItems.SUCCULENT_POD;
+        return GItems.SUCCULENT_PETALS;
     }
 
     @Override

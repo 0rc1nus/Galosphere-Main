@@ -13,6 +13,24 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "galosphere:pink_salt_shrine/forge_room",
+        "processors": "galosphere:pink_salt_shrine/forge_room",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/potion_lab",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/ritual",
         "processors": "galosphere:pink_salt_shrine/main_rooms",
         "projection": "rigid"
       },
