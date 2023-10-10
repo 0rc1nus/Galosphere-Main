@@ -285,23 +285,23 @@
 		"sounds": [
 			{
 				"name": "galosphere:block/gilded_beads/place1",
-				"pitch": 1.2,
-				"volume": 0.4
+				"pitch": 1.4,
+				"volume": 0.6
 			},
 			{
 				"name": "galosphere:block/gilded_beads/place2",
-				"pitch": 1.2,
-				"volume": 0.4
+				"pitch": 1.4,
+				"volume": 0.6
 			},
 			{
 				"name": "galosphere:block/gilded_beads/place3",
-				"pitch": 1.2,
-				"volume": 0.4
+				"pitch": 1.4,
+				"volume": 0.6
 			},
 			{
 				"name": "galosphere:block/gilded_beads/place4",
-				"pitch": 1.2,
-				"volume": 0.4
+				"pitch": 1.4,
+				"volume": 0.6
 			}
 		],
 		"subtitle": "subtitles.block.generic.place"
