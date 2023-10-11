@@ -255,6 +255,175 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"block.cured_membrane.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block/cured_membrane/break1",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/cured_membrane/break2",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/cured_membrane/break3",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/cured_membrane/break4",
+				"pitch": 1.4,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.stranded_membrane.break": {
+		"sounds": [
+			{
+				"name": "galosphere:block/stranded_membrane/break1",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/stranded_membrane/break2",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/stranded_membrane/break3",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/stranded_membrane/break4",
+				"pitch": 1.4,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.stranded_membrane.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.cured_membrane.fall",
+				"type": "event"
+			}
+		]
+	},
+	"block.stranded_membrane.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.cured_membrane.hit",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.stranded_membrane.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/stranded_membrane/place1",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/stranded_membrane/place2",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/stranded_membrane/place3",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/stranded_membrane/place4",
+				"pitch": 1.4,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.stranded_membrane.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block.cured_membrane.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.cured_membrane.fall": {
+		"sounds": [
+			{
+				"name": "galosphere:block.cured_membrane.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.cured_membrane.hit": {
+		"sounds": [
+			{
+				"name": "galosphere:block.cured_membrane.step",
+				"type": "event",
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.cured_membrane.place": {
+		"sounds": [
+			{
+				"name": "galosphere:block/cured_membrane/place1",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/cured_membrane/place2",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/cured_membrane/place3",
+				"pitch": 1.4,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:block/cured_membrane/place4",
+				"pitch": 1.4,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.cured_membrane.step": {
+		"sounds": [
+			{
+				"name": "galosphere:block/cured_membrane/step1",
+				"pitch": 1.3,
+				"volume": 0.35
+			},
+			{
+				"name": "galosphere:block/cured_membrane/step2",
+				"pitch": 1.3,
+				"volume": 0.35
+			},
+			{
+				"name": "galosphere:block/cured_membrane/step3",
+				"pitch": 1.3,
+				"volume": 0.35
+			},
+			{
+				"name": "galosphere:block/cured_membrane/step4",
+				"pitch": 1.3,
+				"volume": 0.35
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"block.gilded_beads.break": {
 		"sounds": [
 			{
@@ -893,7 +1062,7 @@
 	"block.pink_salt.fall": {
 		"sounds": [
 			{
-				"name": "galosphere:block.pink_salt.place1",
+				"name": "galosphere:block.pink_salt.place",
 				"type": "event"
 			}
 		]
@@ -1029,63 +1198,6 @@
 		"sounds": [
 			{
 				"name": "galosphere:block.pink_salt.step",
-				"type": "event"
-			}
-		],
-		"subtitle": "subtitles.block.generic.footsteps"
-	},
-	"block.cured_membrane.break": {
-		"sounds": [
-			{
-				"name": "galosphere:block/cured_membrane/break1",
-				"pitch": 1.2,
-				"volume": 0.8
-			},
-			{
-				"name": "galosphere:block/cured_membrane/break2",
-				"pitch": 1.2,
-				"volume": 0.8
-			}
-		],
-		"subtitle": "subtitles.block.generic.break"
-	},
-	"block.cured_membrane.place": {
-		"sounds": [
-			{
-				"name": "galosphere:block/cured_membrane/break3",
-				"pitch": 1.2,
-				"volume": 0.8
-			},
-			{
-				"name": "galosphere:block/cured_membrane/break4",
-				"pitch": 1.2,
-				"volume": 0.8
-			}
-		],
-		"subtitle": "subtitles.block.generic.break"
-	},
-	"block.cured_membrane.fall": {
-		"sounds": [
-			{
-				"name": "galosphere:block.cured_membrane.place1",
-				"type": "event"
-			}
-		]
-	},
-	"block.cured_membrane.hit": {
-		"sounds": [
-			{
-				"name": "galosphere:block.cured_membrane.step",
-				"type": "event",
-				"volume": 0.5
-			}
-		],
-		"subtitle": "subtitles.block.generic.hit"
-	},
-	"block.cured_membrane.step": {
-		"sounds": [
-			{
-				"name": "galosphere:block/cured_membrane/step1",
 				"type": "event"
 			}
 		],
@@ -1369,16 +1481,6 @@
 		],
 		"subtitle": "subtitles.entity.berserker.idle"
 	},
-	"entity.berserker.smash": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/berserker/smash_one_arm",
-				"pitch": 1.4,
-				"volume": 0.4
-			}
-		],
-		"subtitle": "subtitles.entity.berserker.smash"
-	},
 	"entity.berserker.roar": {
 		"sounds": [
 			{
@@ -1388,6 +1490,16 @@
 			}
 		],
 		"subtitle": "subtitles.entity.berserker.roar"
+	},
+	"entity.berserker.smash": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/smash_one_arm",
+				"pitch": 1.4,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.smash"
 	},
 	"entity.glow_flare.spread": {
 		"sounds": [
