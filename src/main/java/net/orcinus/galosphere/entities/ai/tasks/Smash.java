@@ -43,7 +43,7 @@ public class Smash extends Behavior<Berserker> {
         livingEntity.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, DURATION);
         serverLevel.broadcastEntityEvent(livingEntity, (byte)4);
         livingEntity.setPhase(Berserker.Phase.SMASH);
-        livingEntity.playSound(GSoundEvents.BERSERKER_SMASH, 10.0f, 1.0F);
+        livingEntity.playSound(GSoundEvents.BERSERKER_DUO_SMASH, 10.0f, 1.0F);
     }
 
     @Override

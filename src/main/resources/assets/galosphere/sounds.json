@@ -1394,9 +1394,14 @@
 	"entity.berserker.death": {
 		"sounds": [
 			{
-				"name": "galosphere:entity/berserker/death",
-				"pitch": 1.4,
-				"volume": 0.4
+				"name": "galosphere:entity/berserker/death1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/death2",
+				"pitch": 1,
+				"volume": 1
 			}
 		],
 		"subtitle": "subtitles.entity.berserker.death"
@@ -1404,9 +1409,24 @@
 	"entity.berserker.duo_smash": {
 		"sounds": [
 			{
-				"name": "galosphere:entity/berserker/smash_both_arms",
-				"pitch": 1.4,
-				"volume": 0.4
+				"name": "galosphere:entity/berserker/smash_both1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/smash_both2",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/smash_both3",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/smash_both4",
+				"pitch": 1,
+				"volume": 1
 			}
 		],
 		"subtitle": "subtitles.entity.berserker.smash"
@@ -1415,13 +1435,18 @@
 		"sounds": [
 			{
 				"name": "galosphere:entity/berserker/hurt1",
-				"pitch": 1.4,
-				"volume": 0.4
+				"pitch": 1,
+				"volume": 1.5
 			},
 			{
 				"name": "galosphere:entity/berserker/hurt2",
-				"pitch": 1.4,
-				"volume": 0.4
+				"pitch": 1,
+				"volume": 1.5
+			},
+			{
+				"name": "galosphere:entity/berserker/hurt3",
+				"pitch": 1,
+				"volume": 1.5
 			}
 		],
 		"subtitle": "subtitles.entity.berserker.hurt"
@@ -1430,53 +1455,18 @@
 		"sounds": [
 			{
 				"name": "galosphere:entity/berserker/idle1",
-				"pitch": 1.4,
-				"volume": 0.4
-			},
-			{
-				"name": "galosphere:entity/berserker/idle10",
-				"pitch": 1.4,
-				"volume": 0.4
+				"pitch": 1,
+				"volume": 0.6
 			},
 			{
 				"name": "galosphere:entity/berserker/idle2",
-				"pitch": 1.4,
-				"volume": 0.4
+				"pitch": 1,
+				"volume": 0.6
 			},
 			{
 				"name": "galosphere:entity/berserker/idle3",
-				"pitch": 1.4,
-				"volume": 0.4
-			},
-			{
-				"name": "galosphere:entity/berserker/idle4",
-				"pitch": 1.4,
-				"volume": 0.4
-			},
-			{
-				"name": "galosphere:entity/berserker/idle5",
-				"pitch": 1.4,
-				"volume": 0.4
-			},
-			{
-				"name": "galosphere:entity/berserker/idle6",
-				"pitch": 1.4,
-				"volume": 0.4
-			},
-			{
-				"name": "galosphere:entity/berserker/idle7",
-				"pitch": 1.4,
-				"volume": 0.4
-			},
-			{
-				"name": "galosphere:entity/berserker/idle8",
-				"pitch": 1.4,
-				"volume": 0.4
-			},
-			{
-				"name": "galosphere:entity/berserker/idle9",
-				"pitch": 1.4,
-				"volume": 0.4
+				"pitch": 1,
+				"volume": 0.6
 			}
 		],
 		"subtitle": "subtitles.entity.berserker.idle"
@@ -1484,9 +1474,19 @@
 	"entity.berserker.roar": {
 		"sounds": [
 			{
-				"name": "galosphere:entity/berserker/roar",
-				"pitch": 1.4,
-				"volume": 0.4
+				"name": "galosphere:entity/berserker/roar1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/roar2",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/roar3",
+				"pitch": 1,
+				"volume": 1
 			}
 		],
 		"subtitle": "subtitles.entity.berserker.roar"
@@ -1494,9 +1494,24 @@
 	"entity.berserker.smash": {
 		"sounds": [
 			{
-				"name": "galosphere:entity/berserker/smash_one_arm",
-				"pitch": 1.4,
-				"volume": 0.4
+				"name": "galosphere:entity/berserker/smash1",
+				"pitch": 0.9,
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:entity/berserker/smash2",
+				"pitch": 0.9,
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:entity/berserker/smash3",
+				"pitch": 0.9,
+				"volume": 0.8
+			},
+			{
+				"name": "galosphere:entity/berserker/smash4",
+				"pitch": 0.9,
+				"volume": 0.8
 			}
 		],
 		"subtitle": "subtitles.entity.berserker.smash"

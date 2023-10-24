@@ -1,10 +1,13 @@
 package net.orcinus.galosphere.entities.ai.tasks;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.google.common.collect.ImmutableMap;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,9 +21,6 @@ import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
-
-import java.util.List;
-import java.util.Optional;
 
 public class Undermine extends Behavior<Berserker> {
     private static final int DURATION = Mth.ceil(22.4F);
@@ -54,7 +54,7 @@ public class Undermine extends Behavior<Berserker> {
         livingEntity.setPhase(Berserker.Phase.UNDERMINE);
         livingEntity.getBrain().setMemory(GMemoryModuleTypes.UNDERMINE_COUNT, livingEntity.getBrain().getMemory(GMemoryModuleTypes.UNDERMINE_COUNT).orElse(0) + 1);
         serverLevel.broadcastEntityEvent(livingEntity, (byte)62);
-        livingEntity.playSound(GSoundEvents.BERSERKER_DUO_SMASH, 3.0f, 1.0f);
+        livingEntity.playSound(GSoundEvents.BERSERKER_SMASH, 3.0f, 1.0f);
     }
 
     @Override
