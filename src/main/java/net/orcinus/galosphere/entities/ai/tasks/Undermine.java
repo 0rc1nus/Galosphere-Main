@@ -32,7 +32,7 @@ public class Undermine extends Behavior<Berserker> {
     @Override
     protected boolean checkExtraStartConditions(ServerLevel serverLevel, Berserker livingEntity) {
         List<LivingEntity> list = serverLevel.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox());
-        if (livingEntity.getPhase() != Berserker.Phase.IDLING) {
+        if (livingEntity.getPhase() != Berserker.Phase.IDLING || livingEntity.isStationary()) {
             return false;
         }
         for (LivingEntity nearby : list) {

@@ -13,5 +13,6 @@ public class GModelLayers {
     public static final ModelLayerLocation BLIGHTED = new ModelLayerLocation(Galosphere.id("blighted"), "main");
     public static final ModelLayerLocation PINK_SALT_PILLAR = new ModelLayerLocation(Galosphere.id("pink_salt_pillar"), "main");
     public static final ModelLayerLocation IMPACT = new ModelLayerLocation(Galosphere.id("impact"), "main");
+    public static final ModelLayerLocation ELEMENTAL = new ModelLayerLocation(Galosphere.id("elemental"), "main");
 
 }

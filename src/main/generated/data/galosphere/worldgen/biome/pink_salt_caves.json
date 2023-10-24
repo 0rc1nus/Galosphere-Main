@@ -33,8 +33,7 @@
     ],
     [
       "minecraft:amethyst_geode",
-      "galosphere:oasis",
-      "galosphere:surface_oasis"
+      "galosphere:oasis"
     ],
     [
       "minecraft:monster_room",

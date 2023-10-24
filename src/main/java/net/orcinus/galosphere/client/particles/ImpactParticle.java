@@ -1,73 +1,110 @@
 package net.orcinus.galosphere.client.particles;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.client.model.ImpactModel;
-import net.orcinus.galosphere.init.GModelLayers;
+import net.orcinus.galosphere.blocks.MonstrometerBlock;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
-public class ImpactParticle extends Particle {
-    private final Model model;
-    private static final ResourceLocation TEXTURE = Galosphere.id("textures/particle/impact.png");
-    private final RenderType renderType = RenderType.entityTranslucent(TEXTURE);
+@Environment(EnvType.CLIENT)
+public class ImpactParticle extends TextureSheetParticle {
+    private final SpriteSet sprites;
 
-    public ImpactParticle(ClientLevel clientLevel, double d, double e, double f) {
+    public ImpactParticle(ClientLevel clientLevel, double d, double e, double f, SpriteSet sprites) {
         super(clientLevel, d, e, f);
-        this.model = new ImpactModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GModelLayers.IMPACT));
-        this.gravity = 0.0f;
-        this.lifetime = 14;
+        this.alpha = 1;
+        this.quadSize = 1.3F;
+        this.lifetime = 48;
+        this.sprites = sprites;
+        this.rCol = 1.0F;
+        this.gCol = 1.0F;
+        this.bCol = 1.0F;
+        this.setSpriteFromAge(sprites);
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.CUSTOM;
-    }
-
-    @Override
-    protected int getLightColor(float f) {
-        return 240;
+    public void tick() {
+        this.quadSize = Mth.lerp(0.25F, this.quadSize, 2.0F);
+        if (this.age++ >= this.lifetime) {
+            this.remove();
+        } else {
+            if (this.age > (this.lifetime / 2)) {
+                this.alpha -= 0.04F;
+            }
+        }
+        this.setSpriteFromAge(this.sprites);
     }
 
     @Override
     public void render(VertexConsumer consumer, Camera camera, float delta) {
-        PoseStack poseStack = new PoseStack();
+        renderParticle(consumer, camera, delta, Axis.XP.rotation(Mth.PI / 2));
+        renderParticle(consumer, camera, delta, Axis.XN.rotation(Mth.PI / 2));
+    }
+
+    private void renderParticle(VertexConsumer consumer, Camera camera, float delta, Quaternionf quaternion) {
         Vec3 vec3 = camera.getPosition();
-        float g = (float)(Mth.lerp(delta, this.xo, this.x) - vec3.x());
-        float h = (float)(Mth.lerp(delta, this.yo, this.y) - vec3.y());
-        float i = (float)(Mth.lerp(delta, this.zo, this.z) - vec3.z());
-        float size = (this.age / 7.0F) * 1.75F;
-        poseStack.translate(g, h - 0.5F, i);
-        poseStack.scale(size, 1.0F, size);
-        MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-        VertexConsumer vertexConsumer2 = bufferSource.getBuffer(this.renderType);
-        this.model.renderToBuffer(poseStack, vertexConsumer2, 0xF000F0, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0F);
-        bufferSource.endBatch();
+        if (vec3.distanceTo(new Vec3(x, y, z)) >= MonstrometerBlock.getParticleViewRange()) return;
+
+        Vector3f[] veca = new Vector3f[]{new Vector3f(-1, -1, 0), new Vector3f(-1, 1, 0), new Vector3f(1, 1, 0), new Vector3f(1, -1, 0)};
+
+        for(int i = 0; i < 4; ++i) {
+            Vector3f vec = veca[i];
+            quaternion.transform(vec);
+            vec.mul(getQuadSize(delta));
+            float f = (float) (Mth.lerp(delta, xo, x) - vec3.x());
+            float f1 = (float) (Mth.lerp(delta, yo, y) - vec3.y());
+            float f2 = (float) (Mth.lerp(delta, zo, z) - vec3.z());
+            vec.add(f, f1, f2);
+        }
+
+        float u0 = getU0();
+        float u1 = getU1();
+        float v0 = getV0();
+        float v1 = getV1();
+
+        int j = getLightColor(delta);
+
+        consumer.vertex(veca[0].x(), veca[0].y(), veca[0].z()).uv(u1, v1).color(rCol, gCol, bCol, this.alpha).uv2(j).endVertex();
+        consumer.vertex(veca[1].x(), veca[1].y(), veca[1].z()).uv(u1, v0).color(rCol, gCol, bCol, this.alpha).uv2(j).endVertex();
+        consumer.vertex(veca[2].x(), veca[2].y(), veca[2].z()).uv(u0, v0).color(rCol, gCol, bCol, this.alpha).uv2(j).endVertex();
+        consumer.vertex(veca[3].x(), veca[3].y(), veca[3].z()).uv(u0, v1).color(rCol, gCol, bCol, this.alpha).uv2(j).endVertex();
+    }
+
+    @Override
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    }
+
+    @Override
+    protected int getLightColor(float tint) {
+        return Math.max(50, super.getLightColor(tint));
     }
 
     @Environment(EnvType.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprites;
+
+        public Provider(SpriteSet sprites) {
+            this.sprites = sprites;
+        }
 
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType particleOptions, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
-            return new ImpactParticle(clientLevel, d, e, f);
+            return new ImpactParticle(clientLevel, d, e, f, this.sprites);
         }
     }
 

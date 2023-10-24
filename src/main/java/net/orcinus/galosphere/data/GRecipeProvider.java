@@ -47,6 +47,12 @@ public class GRecipeProvider extends FabricRecipeProvider {
         });
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER).requires(Items.COAL).requires(GItems.PINK_SALT_SHARD).unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GItems.SUCCULENT_PETALS, 3).requires(GBlocks.SUCCULENT.asItem()).unlockedBy("has_succulent", has(GBlocks.SUCCULENT.asItem())).save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.PINK_SALT)
+                .define('#', GBlocks.PINK_SALT_STRAW.asItem())
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_pink_salt_straw", has(GBlocks.PINK_SALT_STRAW))
+                .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GBlocks.GILDED_BEADS, 8)
                         .define('#', Items.GOLD_NUGGET)
                         .define('G', Items.GOLD_INGOT)

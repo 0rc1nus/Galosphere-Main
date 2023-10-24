@@ -72,7 +72,11 @@ public class BerserkerAi {
     }
 
     private static RunOne<Berserker> createIdleMovementBehaviors() {
-        return new RunOne<>(ImmutableList.of(Pair.of(RandomStroll.stroll(0.3F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.2F, 3), 2), Pair.of(new DoNothing(30, 60), 1)));
+        return new RunOne<>(ImmutableList.of(
+                Pair.of(RandomStroll.stroll(0.3F), 2),
+                Pair.of(SetWalkTargetFromLookTarget.create(1.2F, 3), 2),
+                Pair.of(new DoNothing(30, 60), 1)
+        ));
     }
 
     private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Berserker blighted) {

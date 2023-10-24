@@ -27,7 +27,7 @@ public class Smash extends Behavior<Berserker> {
     @Override
     protected boolean checkExtraStartConditions(ServerLevel serverLevel, Berserker livingEntity) {
         Optional<LivingEntity> memory = livingEntity.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
-        if (livingEntity.getPhase() != Berserker.Phase.IDLING) {
+        if (livingEntity.getPhase() != Berserker.Phase.IDLING || livingEntity.isStationary()) {
             return false;
         }
         return memory.filter(livingEntity::isWithinMeleeAttackRange).isPresent();
@@ -64,9 +64,8 @@ public class Smash extends Behavior<Berserker> {
                 mob.push(vec33.x() * e, vec33.y() * d, vec33.z() * e);
             }
         }
-        Vec3 vec34 = livingEntity.blockPosition().getCenter();
-        Vec3 eyeVec = livingEntity.getViewVector(1.0F).scale(2.0D);
-        serverLevel.sendParticles(GParticleTypes.IMPACT, vec34.x + eyeVec.x + 0.5D, vec34.y - 1.0D, vec34.z + eyeVec.z + 0.5D, 1, 0.0, 0.0, 0.0, 0.0);
+        livingEntity.heal(5.0F);
+        livingEntity.level().broadcastEntityEvent(livingEntity, (byte)32);
         livingEntity.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, 60 - DURATION);
     }
 

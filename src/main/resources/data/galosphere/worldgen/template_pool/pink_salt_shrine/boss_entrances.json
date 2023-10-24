@@ -3,6 +3,15 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/boss_entrance_2",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
         "location": "galosphere:pink_salt_shrine/boss_entrance",
         "processors": "galosphere:pink_salt_shrine/main_rooms",
         "projection": "rigid"

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_succulent": {
+    "has_pink_salt_straw": {
       "conditions": {
         "items": [
           {
             "items": [
-              "galosphere:succulent"
+              "galosphere:pink_salt_straw"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "galosphere:succulent_pod"
+        "recipe": "galosphere:pink_salt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_succulent",
+      "has_pink_salt_straw",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "galosphere:succulent_pod"
+      "galosphere:pink_salt"
     ]
   },
   "sends_telemetry_event": false

@@ -143,7 +143,9 @@ public class GBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.dropSelf(GBlocks.SHADOW_FRAME);
         this.dropSelf(GBlocks.PINK_SALT_LAMP);
         this.dropSelf(GBlocks.SUCCULENT);
-        this.dropSelf(GBlocks.PINK_SALT_STRAW);
+        this.add(GBlocks.PINK_SALT_STRAW, block -> {
+            return createSilkTouchDispatchTable(block, LootItem.lootTableItem(GBlocks.PINK_SALT_STRAW.asItem()).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.1f, 0.14285715f, 0.25f, 1.0f)));
+        });
         this.dropSelf(GBlocks.CURED_MEMBRANE_BLOCK);
         this.add(GBlocks.PINK_SALT_CLUSTER, (block) -> {
             return createSilkTouchDispatchTable(block, LootItem.lootTableItem(GItems.PINK_SALT_SHARD).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(GItems.PINK_SALT_SHARD).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))))));

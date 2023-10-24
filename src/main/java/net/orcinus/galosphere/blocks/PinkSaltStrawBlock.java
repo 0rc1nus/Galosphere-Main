@@ -5,6 +5,7 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -66,7 +67,12 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         this.maybeTransferFluid(blockState, serverLevel, blockPos, randomSource.nextFloat());
-        super.randomTick(blockState, serverLevel, blockPos, randomSource);
+        if (serverLevel.getBlockState(blockPos.below(2)).is(Blocks.LAVA) && blockState.getValue(WATERLOGGED) && blockState.getValue(TIP_DIRECTION) == Direction.UP) {
+            BlockPos tip = findTip(blockState, serverLevel, blockPos, 7);
+            if (tip != null && serverLevel.getFluidState(tip.above()).is(FluidTags.WATER)) {
+                serverLevel.setBlockAndUpdate(tip.above(), GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(WATERLOGGED, true));
+            }
+        }
     }
 
     private boolean isStalactiteStartPos(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
