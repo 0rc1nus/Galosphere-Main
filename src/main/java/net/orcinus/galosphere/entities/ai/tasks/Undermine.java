@@ -18,6 +18,7 @@ import net.minecraft.world.entity.projectile.EvokerFangs;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.entities.Berserker;
+import net.orcinus.galosphere.entities.PinkSaltPillar;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
@@ -108,7 +109,7 @@ public class Undermine extends Behavior<Berserker> {
             break;
         } while ((blockPos = blockPos.below()).getY() >= Mth.floor(f) - 1);
         if (bl) {
-            blighted.level().addFreshEntity(new EvokerFangs(blighted.level(), d, (double)blockPos.getY() + j, e, h, i, blighted));
+            blighted.level().addFreshEntity(new PinkSaltPillar(blighted.level(), d, (double)blockPos.getY() + j, e, h, i, blighted));
         }
     }
 

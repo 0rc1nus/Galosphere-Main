@@ -27,14 +27,11 @@ public class PinkSaltPillarRenderer extends EntityRenderer<PinkSaltPillar> {
 
     @Override
     public void render(PinkSaltPillar entity, float f, float g, PoseStack poseStack, MultiBufferSource multiBufferSource, int i) {
-        float j = 2.0f;
+        float ticks = entity.tickCount + g;
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(90.0f - entity.getYRot()));
-        poseStack.scale(-j, -j, j);
-        float k = 0.03125f;
-        poseStack.translate(0.0, -0.626, 0.0);
-        poseStack.scale(0.5f, 0.5f, 0.5f);
-        this.model.setupAnim(entity, 0.0F, 0.0f, 0.0f, entity.getYRot(), entity.getXRot());
+        poseStack.scale(1.0F, -1.0F, 1.0F);
+        poseStack.translate(0.0F, -1.0F, 0.0F);
+        this.model.setupAnim(entity, 0.0F, 0.0f, ticks, entity.getYRot(), entity.getXRot());
         VertexConsumer vertexConsumer = multiBufferSource.getBuffer(this.model.renderType(TEXTURE));
         this.model.renderToBuffer(poseStack, vertexConsumer, i, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f);
         poseStack.popPose();

@@ -3,6 +3,7 @@ package net.orcinus.galosphere.entities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +23,8 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     private int warmupDelayTicks;
     private boolean sentSpikeEvent;
     private int lifeTicks = 22;
+    public AnimationState emergeAnimationState = new AnimationState();
+    public AnimationState retractAnimationState = new AnimationState();
 
     public PinkSaltPillar(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -80,10 +83,13 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
                     for (LivingEntity livingEntity : list) {
                         this.dealDamageTo(livingEntity);
                     }
+                    this.level().broadcastEntityEvent(this, (byte) 4);
                 }
                 if (!this.sentSpikeEvent) {
-                    this.level().broadcastEntityEvent(this, (byte) 4);
                     this.sentSpikeEvent = true;
+                }
+                if (this.lifeTicks == 1) {
+                    this.level().broadcastEntityEvent(this, (byte) 6);
                 }
                 if (--this.lifeTicks < 0) {
                     this.discard();
@@ -111,9 +117,12 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     public void handleEntityEvent(byte b) {
         super.handleEntityEvent(b);
         if (b == 4) {
+            this.emergeAnimationState.start(this.tickCount);
             if (!this.isSilent()) {
                 this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.EVOKER_FANGS_ATTACK, this.getSoundSource(), 1.0f, this.random.nextFloat() * 0.2f + 0.85f, false);
             }
+        } else if (b == 6) {
+            this.retractAnimationState.start(this.tickCount);
         }
     }
 }

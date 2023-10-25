@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -13,6 +12,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.orcinus.galosphere.client.animations.PinkSaltPillarAnimations;
 import net.orcinus.galosphere.entities.PinkSaltPillar;
 
 @Environment(EnvType.CLIENT)
@@ -27,13 +27,16 @@ public class PinkSaltPillarModel<T extends PinkSaltPillar> extends HierarchicalM
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create().texOffs(-8, -8).addBox(-5.0F, -21.0F, -5.0F, 10.0F, 21.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+        PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -32.0F, -5.0F, 10.0F, 32.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        return LayerDefinition.create(meshdefinition, 16, 16);
+        return LayerDefinition.create(meshdefinition, 48, 48);
     }
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        this.animate(entity.emergeAnimationState, PinkSaltPillarAnimations.PINK_SALT_PILLAR_EMERGE, ageInTicks);
+        this.animate(entity.retractAnimationState, PinkSaltPillarAnimations.PINK_SALT_PILLAR_RETRACT, ageInTicks);
     }
 
     @Override
@@ -45,5 +48,4 @@ public class PinkSaltPillarModel<T extends PinkSaltPillar> extends HierarchicalM
     public ModelPart root() {
         return this.root;
     }
-
 }
