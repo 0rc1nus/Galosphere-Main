@@ -1391,6 +1391,36 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"entity.berserker.step": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/step1",
+				"pitch": 1,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/step2",
+				"pitch": 1,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/step3",
+				"pitch": 1,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/step4",
+				"pitch": 1,
+				"volume": 0.4
+			},
+			{
+				"name": "galosphere:entity/berserker/step5",
+				"pitch": 1,
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.death"
+	},
 	"entity.berserker.death": {
 		"sounds": [
 			{

@@ -1,8 +1,14 @@
 package net.orcinus.galosphere.entities;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Dynamic;
+
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -39,6 +45,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BerserkerAi;
 import net.orcinus.galosphere.init.GEntityTypes;
@@ -47,10 +54,6 @@ import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Optional;
 
 public class Berserker extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Berserker>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.BLIGHTED_ENTITY_SENSOR);
@@ -177,6 +180,15 @@ public class Berserker extends Monster {
     @Override
     protected SoundEvent getDeathSound() {
         return GSoundEvents.BERSERKER_DEATH;
+    }
+
+    protected SoundEvent getStepSound() {
+        return GSoundEvents.BERSERKER_STEP;
+    }
+    
+    @Override
+    protected void playStepSound(BlockPos blockPos, BlockState blockState) {
+        playSound(getStepSound(), 1, 1);
     }
 
     public boolean canTargetEntity(@Nullable Entity entity) {
