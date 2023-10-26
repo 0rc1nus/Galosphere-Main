@@ -58,7 +58,7 @@ public class GBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_STRAW_CEILING_PATCH);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_STRAW_FLOOR_PATCH);
         biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, GPlacedFeatures.OASIS);
-        Music music = Musics.createGameMusic(GSoundEvents.MUSIC_LICHEN_CAVES);
+        Music music = Musics.createGameMusic(GSoundEvents.MUSIC_PINK_SALT_CAVES);
         return biome(true, 0.5f, 0.5f, mobBuilder, biomeBuilder, music);
     }
 

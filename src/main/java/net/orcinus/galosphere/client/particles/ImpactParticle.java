@@ -25,7 +25,7 @@ public class ImpactParticle extends TextureSheetParticle {
 
     public ImpactParticle(ClientLevel clientLevel, double d, double e, double f, SpriteSet sprites) {
         super(clientLevel, d, e, f);
-        this.alpha = 1;
+        this.alpha = 0.8F;
         this.quadSize = 1.3F;
         this.lifetime = 48;
         this.sprites = sprites;
@@ -37,15 +37,14 @@ public class ImpactParticle extends TextureSheetParticle {
 
     @Override
     public void tick() {
-        this.quadSize = Mth.lerp(0.25F, this.quadSize, 2.0F);
-        if (this.age++ >= this.lifetime) {
-            this.remove();
+        quadSize = Mth.lerp(0.25F, quadSize, 6);
+        if (age++ >= lifetime) {
+            remove();
         } else {
-            if (this.age > (this.lifetime / 2)) {
-                this.alpha -= 0.04F;
-            }
+            alpha = Mth.lerp(0.08F, alpha, 0);
         }
-        this.setSpriteFromAge(this.sprites);
+        if (alpha <= 0.01F) remove();
+        setSpriteFromAge(sprites);
     }
 
     @Override

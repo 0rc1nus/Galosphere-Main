@@ -12,6 +12,7 @@ public class GSoundEvents {
 
     public static final Holder.Reference<SoundEvent> MUSIC_CRYSTAL_CANYONS = registerForHolder("music.biome.crystal_canyons");
     public static final Holder.Reference<SoundEvent> MUSIC_LICHEN_CAVES = registerForHolder("music.biome.lichen_caves");
+    public static final Holder.Reference<SoundEvent> MUSIC_PINK_SALT_CAVES = registerForHolder("music.biome.pink_salt_caves");
 
     public static final SoundEvent LUMIERE_COMPOST = register("block.lumiere.compost");
 
@@ -38,6 +39,8 @@ public class GSoundEvents {
     public static final SoundEvent BERSERKER_SMASH = register("entity.berserker.smash");
     public static final SoundEvent BERSERKER_ROAR = register("entity.berserker.roar");
     public static final SoundEvent BERSERKER_STEP = register("entity.berserker.step");
+
+    public static final SoundEvent PINK_SALT_PILLAR_EMERGE = register("entity.pink_salt_pillar.emerge");
 
     public static final SoundEvent SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
     public static final SoundEvent SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
