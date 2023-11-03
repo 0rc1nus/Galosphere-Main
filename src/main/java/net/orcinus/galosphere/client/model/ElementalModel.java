@@ -59,9 +59,9 @@ public class ElementalModel<T extends Elemental> extends HierarchicalModel<T> {
         this.getPart("body").xRot = 1.0f * j * l;
         this.getPart("right_leg").xRot = Mth.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount;
         this.getPart("left_leg").xRot = Mth.cos(limbSwing * 0.6662f + (float)Math.PI) * 1.4f * limbSwingAmount;
-        this.getPart("left_arm").xRot = -(0.8f * j * h);
+        this.getPart("left_arm").xRot = -Mth.HALF_PI + -(0.4f * j * h);
         this.getPart("left_arm").zRot = 0.0f;
-        this.getPart("right_arm").xRot = -(0.8f * k * h);
+        this.getPart("right_arm").xRot = -Mth.HALF_PI + -(0.4f * k * h);
         this.getPart("right_arm").zRot = 0.0f;
     }
 

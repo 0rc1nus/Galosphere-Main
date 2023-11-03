@@ -1,10 +1,10 @@
 package net.orcinus.galosphere.entities.ai.tasks;
 
+import java.util.Optional;
+
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
+
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -13,11 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.Berserker;
-import net.orcinus.galosphere.init.GEntityTypes;
-import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
-
-import java.util.Optional;
 
 public class Smash extends Behavior<Berserker> {
     private static final int DURATION = Mth.ceil(27.0F);

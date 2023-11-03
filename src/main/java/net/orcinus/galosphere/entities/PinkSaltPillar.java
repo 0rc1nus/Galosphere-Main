@@ -1,11 +1,15 @@
 package net.orcinus.galosphere.entities;
 
+import java.util.List;
+import java.util.UUID;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -13,10 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TraceableEntity;
 import net.minecraft.world.level.Level;
 import net.orcinus.galosphere.init.GEntityTypes;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.UUID;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 public class PinkSaltPillar extends Entity implements TraceableEntity {
     private static final EntityDataAccessor<Boolean> ACTIVE = SynchedEntityData.defineId(PinkSaltPillar.class, EntityDataSerializers.BOOLEAN);
@@ -91,13 +92,11 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     @Override
     public void tick() {
         super.tick();
-        if (!this.level().isClientSide) {
+        if (!level().isClientSide()) {
             if (--this.warmupDelayTicks < 0) {
-                if (this.warmupDelayTicks == -8) {
-                    List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2, 0.0, 0.2));
-                    for (LivingEntity livingEntity : list) {
-                        this.dealDamageTo(livingEntity);
-                    }
+                List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2, 0.0, 0.2));
+                for (LivingEntity livingEntity : list) {
+                    this.dealDamageTo(livingEntity);
                 }
                 if (!this.sentSpikeEvent) {
                     this.setActive(true);
@@ -135,7 +134,7 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
         if (b == 4) {
             this.emergeAnimationState.start(this.tickCount);
             if (!this.isSilent()) {
-                this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.EVOKER_FANGS_ATTACK, this.getSoundSource(), 1.0f, this.random.nextFloat() * 0.2f + 0.85f, false);
+                this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), GSoundEvents.PINK_SALT_PILLAR_EMERGE, this.getSoundSource(), 1.0f, this.random.nextFloat() * 0.2f + 0.85f, false);
             }
         } else if (b == 6) {
             this.retractAnimationState.start(this.tickCount);

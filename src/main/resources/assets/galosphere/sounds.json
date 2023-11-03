@@ -1431,6 +1431,21 @@
 		],
 		"subtitle": "subtitles.entity.berserker.smash"
 	},
+	"entity.elemental.hurt": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/elemental/hurt1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/elemental/hurt2",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.entity.elemental.hurt"
+	},
 	"entity.berserker.hurt": {
 		"sounds": [
 			{
@@ -1544,7 +1559,7 @@
 				"volume": 0.4
 			}
 		],
-		"subtitle": "subtitles.entity.berserker.death"
+		"subtitle": "subtitles.entity.berserker.step"
 	},
 	"entity.glow_flare.spread": {
 		"sounds": [

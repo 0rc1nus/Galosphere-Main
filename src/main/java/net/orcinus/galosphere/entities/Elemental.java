@@ -80,7 +80,7 @@ public class Elemental extends Monster {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return GSoundEvents.PINK_SALT_CLUSTER.getBreakSound();
+        return GSoundEvents.ELEMENTAL_HURT;
     }
 
     @Override
