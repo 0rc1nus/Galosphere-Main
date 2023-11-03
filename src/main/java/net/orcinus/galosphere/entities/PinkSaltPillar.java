@@ -1,6 +1,9 @@
 package net.orcinus.galosphere.entities;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.AnimationState;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class PinkSaltPillar extends Entity implements TraceableEntity {
+    private static final EntityDataAccessor<Boolean> ACTIVE = SynchedEntityData.defineId(PinkSaltPillar.class, EntityDataSerializers.BOOLEAN);
     @Nullable
     private LivingEntity owner;
     @Nullable
@@ -40,6 +44,7 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
 
     @Override
     protected void defineSynchedData() {
+        this.entityData.define(ACTIVE, false);
     }
 
     public void setOwner(@Nullable LivingEntity livingEntity) {
@@ -60,6 +65,7 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     @Override
     protected void readAdditionalSaveData(CompoundTag compoundTag) {
         this.warmupDelayTicks = compoundTag.getInt("Warmup");
+        this.setActive(compoundTag.getBoolean("Active"));
         if (compoundTag.hasUUID("Owner")) {
             this.ownerUUID = compoundTag.getUUID("Owner");
         }
@@ -68,9 +74,18 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {
         compoundTag.putInt("Warmup", this.warmupDelayTicks);
+        compoundTag.putBoolean("Active", this.isActive());
         if (this.ownerUUID != null) {
             compoundTag.putUUID("Owner", this.ownerUUID);
         }
+    }
+
+    private void setActive(boolean active) {
+        this.entityData.set(ACTIVE, active);
+    }
+
+    public boolean isActive() {
+        return this.entityData.get(ACTIVE);
     }
 
     @Override
@@ -83,12 +98,13 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
                     for (LivingEntity livingEntity : list) {
                         this.dealDamageTo(livingEntity);
                     }
-                    this.level().broadcastEntityEvent(this, (byte) 4);
                 }
                 if (!this.sentSpikeEvent) {
+                    this.setActive(true);
+                    this.level().broadcastEntityEvent(this, (byte)4);
                     this.sentSpikeEvent = true;
                 }
-                if (this.lifeTicks == 1) {
+                if (this.lifeTicks == 4) {
                     this.level().broadcastEntityEvent(this, (byte) 6);
                 }
                 if (--this.lifeTicks < 0) {

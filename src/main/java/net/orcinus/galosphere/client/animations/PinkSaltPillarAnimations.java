@@ -11,7 +11,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
 public class PinkSaltPillarAnimations {
 
     public static final AnimationDefinition PINK_SALT_PILLAR_EMERGE = AnimationDefinition.Builder.withLength(0.125f)
-            .addAnimation("spike",
+            .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.SCALE,
                             new Keyframe(0f, KeyframeAnimations.scaleVec(0.5f, 0f, 0.5f),
                                     AnimationChannel.Interpolations.LINEAR),
@@ -21,7 +21,7 @@ public class PinkSaltPillarAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM))).build();
 
     public static final AnimationDefinition PINK_SALT_PILLAR_RETRACT = AnimationDefinition.Builder.withLength(0.16766666f)
-            .addAnimation("spike",
+            .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.SCALE,
                             new Keyframe(0f, KeyframeAnimations.scaleVec(1f, 1f, 1f),
                                     AnimationChannel.Interpolations.LINEAR),

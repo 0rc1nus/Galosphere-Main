@@ -38,7 +38,7 @@ public class GEntityTypes {
     public static final EntityType<SpectatorVision> SPECTATOR_VISION = register("spectator_vision", EntityType.Builder.<SpectatorVision>of(SpectatorVision::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(5).build(Galosphere.id("spectator_vision").toString()));
     public static final EntityType<Berserker> BERSERKER = register("berserker", EntityType.Builder.of(Berserker::new, MobCategory.MONSTER).sized(1.4F, 2.2F).clientTrackingRange(16).fireImmune().build(Galosphere.id("berserker").toString()));
     public static final EntityType<Elemental> ELEMENTAL = register("elemental", EntityType.Builder.of(Elemental::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build(Galosphere.id("elemental").toString()));
-    public static final EntityType<PinkSaltPillar> PINK_SALT_PILLAR = register("pink_salt_pillar", EntityType.Builder.<PinkSaltPillar>of(PinkSaltPillar::new, MobCategory.MISC).sized(0.7F, 1.0F).clientTrackingRange(16).fireImmune().build(Galosphere.id("pink_salt_pillar").toString()));
+    public static final EntityType<PinkSaltPillar> PINK_SALT_PILLAR = register("pink_salt_pillar", EntityType.Builder.<PinkSaltPillar>of(PinkSaltPillar::new, MobCategory.MISC).sized(0.7F, 1.5F).clientTrackingRange(16).fireImmune().build(Galosphere.id("pink_salt_pillar").toString()));
 
     private static <T extends Entity> EntityType<T> register(String id, EntityType<T> builder) {
         EntityType<T> type = Registry.register(BuiltInRegistries.ENTITY_TYPE, Galosphere.id(id), builder);

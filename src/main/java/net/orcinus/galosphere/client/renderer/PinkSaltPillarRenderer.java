@@ -27,6 +27,9 @@ public class PinkSaltPillarRenderer extends EntityRenderer<PinkSaltPillar> {
 
     @Override
     public void render(PinkSaltPillar entity, float f, float g, PoseStack poseStack, MultiBufferSource multiBufferSource, int i) {
+        if (!entity.isActive()) {
+            return;
+        }
         float ticks = entity.tickCount + g;
         poseStack.pushPose();
         poseStack.scale(1.0F, -1.0F, 1.0F);
