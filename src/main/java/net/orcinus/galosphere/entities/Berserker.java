@@ -74,6 +74,11 @@ public class Berserker extends Monster {
     }
 
     @Override
+    public boolean isInvulnerable() {
+        return this.getStationaryTicks() > 0;
+    }
+
+    @Override
     public float maxUpStep() {
         return 1.0F;
     }
@@ -100,6 +105,19 @@ public class Berserker extends Monster {
         super.addAdditionalSaveData(compoundTag);
         compoundTag.putString("Phase", this.getPhase().name());
         compoundTag.putInt("StationaryTicks", this.getStationaryTicks());
+    }
+
+    public int getStage() {
+        float health = this.getHealth() / this.getMaxHealth();
+        if (this.getStationaryTicks() > 0) {
+            return 3;
+        } else if (health > 0.66F) {
+            return 0;
+        } else if (health <= 0.66F && health > 0.33F) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
     public void setStationaryTicks(int stationaryTicks) {
