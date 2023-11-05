@@ -40,7 +40,7 @@ public class GSoundEvents {
     public static final SoundEvent BERSERKER_ROAR = register("entity.berserker.roar");
     public static final SoundEvent BERSERKER_STEP = register("entity.berserker.step");
 
-    public static final SoundEvent ELEMENTAL_HURT = register("entity.elemental.hurt");
+    public static final SoundEvent PRESERVED_HURT = register("entity.preserved.hurt");
 
     public static final SoundEvent PINK_SALT_PILLAR_EMERGE = register("entity.pink_salt_pillar.emerge");
 

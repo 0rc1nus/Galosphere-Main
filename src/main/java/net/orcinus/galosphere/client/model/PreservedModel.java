@@ -16,13 +16,13 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
-import net.orcinus.galosphere.entities.Elemental;
+import net.orcinus.galosphere.entities.Preserved;
 
 @Environment(EnvType.CLIENT)
-public class ElementalModel<T extends Elemental> extends HierarchicalModel<T> {
+public class PreservedModel<T extends Preserved> extends HierarchicalModel<T> {
     private final ModelPart root;
 
-    public ElementalModel(ModelPart root) {
+    public PreservedModel(ModelPart root) {
         this.root = root.getChild("root");
     }
 

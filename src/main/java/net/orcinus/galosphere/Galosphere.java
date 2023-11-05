@@ -34,6 +34,13 @@ import net.orcinus.galosphere.init.GVanillaIntegration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+//TODO:
+// Missing subtitles for preserved and berserker
+// Revamp Succulent
+// Renewable Pink Salt Clusters
+// Make succulents generate naturally
+// Fix the preserved smithing template
+// Block bane texture
 public class Galosphere implements ModInitializer {
     
     public static final Logger LOGGER = LogManager.getLogger();

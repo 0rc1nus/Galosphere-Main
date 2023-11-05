@@ -1431,20 +1431,20 @@
 		],
 		"subtitle": "subtitles.entity.berserker.smash"
 	},
-	"entity.elemental.hurt": {
+	"entity.preserved.hurt": {
 		"sounds": [
 			{
-				"name": "galosphere:entity/elemental/hurt1",
+				"name": "galosphere:entity/preserved/hurt1",
 				"pitch": 1,
 				"volume": 1
 			},
 			{
-				"name": "galosphere:entity/elemental/hurt2",
+				"name": "galosphere:entity/preserved/hurt2",
 				"pitch": 1,
 				"volume": 1
 			}
 		],
-		"subtitle": "subtitles.entity.elemental.hurt"
+		"subtitle": "subtitles.entity.preserved.hurt"
 	},
 	"entity.berserker.hurt": {
 		"sounds": [

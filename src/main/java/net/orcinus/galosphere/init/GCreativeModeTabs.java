@@ -33,7 +33,7 @@ public class GCreativeModeTabs {
                     output.accept(GItems.SPECTRE_SPAWN_EGG);
                     output.accept(GItems.SPECTERPILLAR_SPAWN_EGG);
                     output.accept(GItems.BERSERKER_SPAWN_EGG);
-                    output.accept(GItems.ELEMENTAL_SPAWN_EGG);
+                    output.accept(GItems.PRESERVED_SPAWN_EGG);
                     output.accept(GItems.BOTTLE_OF_SPECTRE);
                     output.accept(GItems.ALLURITE_SHARD);
                     output.accept(GItems.LUMIERE_SHARD);

@@ -7,7 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.NearestLivingEntitySensor;
-import net.orcinus.galosphere.entities.Elemental;
+import net.orcinus.galosphere.entities.Preserved;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class ElementalEntitySensor extends NearestLivingEntitySensor<Elemental> {
+public class PreservedEntitySensor extends NearestLivingEntitySensor<Preserved> {
 
     @Override
     public Set<MemoryModuleType<?>> requires() {
@@ -23,7 +23,7 @@ public class ElementalEntitySensor extends NearestLivingEntitySensor<Elemental> 
     }
 
     @Override
-    protected void doTick(ServerLevel serverLevel, Elemental elemental) {
+    protected void doTick(ServerLevel serverLevel, Preserved elemental) {
         super.doTick(serverLevel, elemental);
         getClosest(elemental, livingEntity -> livingEntity.getType() == EntityType.PLAYER)
                 .or(() -> getClosest(elemental, livingEntity -> {
@@ -33,8 +33,8 @@ public class ElementalEntitySensor extends NearestLivingEntitySensor<Elemental> 
                 .ifPresentOrElse(livingEntity -> elemental.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, livingEntity), () -> elemental.getBrain().eraseMemory(MemoryModuleType.NEAREST_ATTACKABLE));
     }
 
-    private static Optional<LivingEntity> getClosest(Elemental elemental, Predicate<LivingEntity> predicate) {
-        return elemental.getBrain().getMemory(MemoryModuleType.NEAREST_LIVING_ENTITIES).stream().flatMap(Collection::stream).filter(elemental::canTargetEntity).filter(predicate).findFirst();
+    private static Optional<LivingEntity> getClosest(Preserved preserved, Predicate<LivingEntity> predicate) {
+        return preserved.getBrain().getMemory(MemoryModuleType.NEAREST_LIVING_ENTITIES).stream().flatMap(Collection::stream).filter(preserved::canTargetEntity).filter(predicate).findFirst();
     }
 
     @Override

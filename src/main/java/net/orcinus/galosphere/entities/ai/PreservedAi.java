@@ -19,38 +19,38 @@ import net.minecraft.world.entity.ai.behavior.StartAttacking;
 import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.schedule.Activity;
-import net.orcinus.galosphere.entities.Elemental;
+import net.orcinus.galosphere.entities.Preserved;
 
 import java.util.Optional;
 
-public class ElementalAi {
+public class PreservedAi {
 
-    public static Brain<?> makeBrain(Brain<Elemental>  brain) {
-        ElementalAi.initCoreActivity(brain);
-        ElementalAi.initIdleActivity(brain);
-        ElementalAi.initFightActivity(brain);
+    public static Brain<?> makeBrain(Brain<Preserved>  brain) {
+        PreservedAi.initCoreActivity(brain);
+        PreservedAi.initIdleActivity(brain);
+        PreservedAi.initFightActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
         brain.useDefaultActivity();
         return brain;
     }
 
-    private static void initCoreActivity(Brain<Elemental> brain) {
+    private static void initCoreActivity(Brain<Preserved> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink()
         ));
     }
 
-    private static void initIdleActivity(Brain<Elemental> brain) {
+    private static void initIdleActivity(Brain<Preserved> brain) {
         brain.addActivity(Activity.IDLE, 10, ImmutableList.of(
-                StartAttacking.create(ElementalAi::findNearestValidAttackTarget),
+                StartAttacking.create(PreservedAi::findNearestValidAttackTarget),
                 SetEntityLookTargetSometimes.create(8.0f, UniformInt.of(30, 60)),
-                ElementalAi.createIdleMovementBehaviors()
+                PreservedAi.createIdleMovementBehaviors()
         ));
     }
 
-    private static void initFightActivity(Brain<Elemental> brain) {
+    private static void initFightActivity(Brain<Preserved> brain) {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
                 SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(1.5F),
                 MeleeAttack.create(40),
@@ -58,7 +58,7 @@ public class ElementalAi {
         ), MemoryModuleType.ATTACK_TARGET);
     }
 
-    private static RunOne<Elemental> createIdleMovementBehaviors() {
+    private static RunOne<Preserved> createIdleMovementBehaviors() {
         return new RunOne<>(ImmutableList.of(
                 Pair.of(RandomStroll.stroll(1.0F), 2),
                 Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2),
@@ -66,11 +66,11 @@ public class ElementalAi {
         ));
     }
 
-    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Elemental elemental) {
+    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Preserved elemental) {
         return elemental.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE);
     }
 
-    public static void updateActivity(Elemental elemental) {
+    public static void updateActivity(Preserved elemental) {
         elemental.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
     }
 

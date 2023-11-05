@@ -51,9 +51,11 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     public static final BooleanProperty FALLABLE = BooleanProperty.create("fallable");
     public static final EnumProperty<StrawShape> STRAW_SHAPE = EnumProperty.create("straw_shape", StrawShape.class);
     private static final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
-    private static final VoxelShape SHAPE = Block.box(4, 0.0, 4, 12, 16.0, 12);
     private static final VoxelShape TOP_UP_SHAPE = Block.box(4, 0.0, 4, 12, 11.0, 12);
     private static final VoxelShape TOP_DOWN_SHAPE = Block.box(4, 5.0, 4, 12, 16.0, 12);
+    private static final VoxelShape MIDDLE_SHAPE = Block.box(3, 0.0, 3, 13, 16.0, 13);
+    private static final VoxelShape BOTTOM_UP_SHAPE = Block.box(2, 0.0, 2, 14, 16.0, 14);
+    private static final VoxelShape BOTTOM_DOWN_SHAPE = Block.box(2, 0.0, 2, 14, 16.0, 14);
     private static final Map<Predicate<BlockState>, SaltReaction> REACTIONS = Util.make(Maps.newHashMap(), map -> {
         map.put(blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) > 0, new SaltReaction(blockState -> GBlocks.SALINE_COMPOSTER.withPropertiesOf(blockState), 0.5F));
         map.put(blockState -> WeatheringCopper.NEXT_BY_BLOCK.get().containsKey(blockState.getBlock()), new SaltReaction(blockState -> WeatheringCopper.getNext(blockState.getBlock()).orElseThrow().withPropertiesOf(blockState), 0.0015F));
@@ -285,10 +287,14 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         Vec3 vec3 = blockState.getOffset(blockGetter, blockPos);
         VoxelShape voxelShape;
-        if (blockState.getValue(STRAW_SHAPE) == StrawShape.TOP) {
-            voxelShape = blockState.getValue(TIP_DIRECTION) == Direction.UP ? TOP_UP_SHAPE : TOP_DOWN_SHAPE;
+        StrawShape value = blockState.getValue(STRAW_SHAPE);
+        boolean up = blockState.getValue(TIP_DIRECTION) == Direction.UP;
+        if (value == StrawShape.TOP) {
+            voxelShape = up ? TOP_UP_SHAPE : TOP_DOWN_SHAPE;
+        } else if (value == StrawShape.BOTTOM) {
+            voxelShape = up ? BOTTOM_UP_SHAPE : BOTTOM_DOWN_SHAPE;
         } else {
-            voxelShape = SHAPE;
+            voxelShape = MIDDLE_SHAPE;
         }
         return voxelShape.move(vec3.x, 0.0, vec3.z);
     }

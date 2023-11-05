@@ -25,19 +25,19 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.orcinus.galosphere.entities.ai.ElementalAi;
+import net.orcinus.galosphere.entities.ai.PreservedAi;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 import org.jetbrains.annotations.Nullable;
 
-public class Elemental extends Monster {
-    protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Elemental>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.ELEMENTAL_ENTITY_SENSOR);
+public class Preserved extends Monster {
+    protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Preserved>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.PRESERVED_ENTITY_SENSOR);
     protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.HURT_BY_ENTITY);
     public AnimationState digAnimationState = new AnimationState();
     public AnimationState attackAnimationState = new AnimationState();
 
-    public Elemental(EntityType<? extends Monster> entityType, Level level) {
+    public Preserved(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -80,30 +80,30 @@ public class Elemental extends Monster {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return GSoundEvents.ELEMENTAL_HURT;
+        return GSoundEvents.PRESERVED_HURT;
     }
 
     @Override
-    protected Brain.Provider<Elemental> brainProvider() {
+    protected Brain.Provider<Preserved> brainProvider() {
         return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
     }
 
     @Override
     protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return ElementalAi.makeBrain(this.brainProvider().makeBrain(dynamic));
+        return PreservedAi.makeBrain(this.brainProvider().makeBrain(dynamic));
     }
 
     @Override
-    public Brain<Elemental> getBrain() {
-        return (Brain<Elemental>) super.getBrain();
+    public Brain<Preserved> getBrain() {
+        return (Brain<Preserved>) super.getBrain();
     }
 
     @Override
     protected void customServerAiStep() {
-        this.level().getProfiler().push("elementalBrain");
+        this.level().getProfiler().push("preservedBrain");
         this.getBrain().tick((ServerLevel)this.level(), this);
         this.level().getProfiler().pop();
-        ElementalAi.updateActivity(this);
+        PreservedAi.updateActivity(this);
         super.customServerAiStep();
     }
 
