@@ -97,6 +97,7 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem(GBlocks.PINK_SALT_LAMP.get());
         blockItem(GBlocks.CURED_MEMBRANE_BLOCK.get());
         blockItem(GBlocks.SHADOW_FRAME.get());
+        blockItem(GBlocks.SILVER_BALANCE.get());
         item("pink_salt_cluster");
         itemWithBlockDirectory("pink_salt_straw", "pink_salt_straw_up_top");
         withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", new ResourceLocation(Galosphere.MODID, "block/monstrometer_top")).texture("bottom", new ResourceLocation(Galosphere.MODID, "block/monstrometer_bottom")).texture("side", new ResourceLocation(Galosphere.MODID, "block/monstrometer_side"));
@@ -123,6 +124,8 @@ public class GItemModelProvider extends ItemModelProvider {
         item("pink_salt_shard");
         item("salted_jerky");
         item("cured_membrane");
+        item("potpourri");
+        item("gilded_beads");
         itemWithBlockDirectory("silver_lattice");
         itemWithBlockDirectory("lichen_roots");
         itemWithBlockDirectory("bowl_lichen");
@@ -132,6 +135,8 @@ public class GItemModelProvider extends ItemModelProvider {
         spawnEggItem("sparkle");
         spawnEggItem("spectre");
         spawnEggItem("specterpillar");
+        spawnEggItem("berserker");
+        spawnEggItem("preserved");
 
         withExistingParent("crossbow_glow_flare", new ResourceLocation("item/crossbow")).texture("layer0", new ResourceLocation(Galosphere.MODID, "item/crossbow_glow_flare"));
     }

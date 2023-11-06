@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-19T09:48:40.1273611	Loot Tables
+// 1.20.1	2023-11-07T10:10:21.1362519	Loot Tables
 f28731c142d5b3520fc07e63422491f1ce2068d6 data/galosphere/loot_tables/blocks/allurite_block.json
 83f72ea2d96be537d239b9c8558ec4d1da3ed691 data/galosphere/loot_tables/blocks/allurite_bricks.json
 876b84fa924c591dfb30a7da892bb371566f8eee data/galosphere/loot_tables/blocks/allurite_brick_slab.json
@@ -77,6 +77,7 @@ d14dcb33cb152ac34407155d5871917b56c74837 data/galosphere/loot_tables/blocks/poli
 ae3ad1e4afcc65a210c57b5c6b51cdf8e691afa7 data/galosphere/loot_tables/blocks/polished_rose_pink_salt_slab.json
 902efa41e2c54576cdf83edabca36eb0927c0441 data/galosphere/loot_tables/blocks/polished_rose_pink_salt_stairs.json
 c5a1ede50f6de422bc1bd52522e32076fed616a4 data/galosphere/loot_tables/blocks/polished_rose_pink_salt_wall.json
+8ffa0cf1d216036b4fec616321c1af9e8f4cc6db data/galosphere/loot_tables/blocks/potpourri.json
 59ed1ea7b0fdddda6da7a5a1b545a9a1b641314f data/galosphere/loot_tables/blocks/potted_bowl_lichen.json
 163eec0c8607ee6696dce6d2f36a6e0684ccebe8 data/galosphere/loot_tables/blocks/potted_lichen_roots.json
 e1a720788b3960c986b1935b071efa0309814f27 data/galosphere/loot_tables/blocks/raw_silver_block.json
@@ -90,6 +91,7 @@ f531a7eb6e706955520f17b834f6589b38fcb664 data/galosphere/loot_tables/blocks/rose
 2be6f579621ed3d064ede0a1d88d52e82a0451de data/galosphere/loot_tables/blocks/rose_pink_salt_wall.json
 dc6d1172922244a968ff9218b985be43cdeba0b5 data/galosphere/loot_tables/blocks/saline_composter.json
 e99ffb376e3657aa1bce663e6eb6f0e41f02ce00 data/galosphere/loot_tables/blocks/shadow_frame.json
+5653d2d4b279d58902ea39f78e45a36cd483537a data/galosphere/loot_tables/blocks/silver_balance.json
 30e1992da63b62f747d6331f2ac078f5557f89d8 data/galosphere/loot_tables/blocks/silver_block.json
 ab985f7d18aca00794abde5adfecb5bb2bc69eaa data/galosphere/loot_tables/blocks/silver_lattice.json
 cf0deeaba5185e9461164bce10901729facaf906 data/galosphere/loot_tables/blocks/silver_ore.json
@@ -110,4 +112,5 @@ fd8aa87444dbfa8d97c07078e69ba486267065a9 data/galosphere/loot_tables/blocks/smoo
 2aaf8f310d1dd921a6994e7005e6cecd78fa5244 data/galosphere/loot_tables/blocks/smooth_lumiere_stairs.json
 0a74d4338ed6f5bef7ee4e969a750d8d4363565b data/galosphere/loot_tables/blocks/stranded_membrane_block.json
 cad39f66a8862011430147618e35c110e8b8c419 data/galosphere/loot_tables/blocks/succulent.json
+2ecf1616cd8cf43e392f8cd1ca69eb6391edfddf data/galosphere/loot_tables/blocks/succulent_crop.json
 d71807962ac773df7a95e10e2f1cad53a0f03833 data/galosphere/loot_tables/blocks/warped_anchor.json

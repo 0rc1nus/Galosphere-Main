@@ -11,6 +11,7 @@ import net.orcinus.galosphere.blocks.blockentities.CordycepsBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.GildedBeadsBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.MonstrometerBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.GlowInkClumpsBlockEntity;
+import net.orcinus.galosphere.blocks.blockentities.PotpourriBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.ShadowFrameBlockEntity;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -23,6 +24,7 @@ public class GBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<CordycepsBlockEntity>> CORDYCEPS = BLOCK_ENTITIES.register("cordyceps", () -> BlockEntityType.Builder.of(CordycepsBlockEntity::new, GBlocks.LICHEN_CORDYCEPS.get()).build(null));
     public static final RegistryObject<BlockEntityType<ShadowFrameBlockEntity>> SHADOW_FRAME = BLOCK_ENTITIES.register("shadow_frame", () -> BlockEntityType.Builder.of(ShadowFrameBlockEntity::new, GBlocks.SHADOW_FRAME.get()).build(null));
     public static final RegistryObject<BlockEntityType<GildedBeadsBlockEntity>> GILDED_BEADS = BLOCK_ENTITIES.register("gilded_beads", () -> BlockEntityType.Builder.of(GildedBeadsBlockEntity::new, GBlocks.GILDED_BEADS.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PotpourriBlockEntity>> POTPOURRI = BLOCK_ENTITIES.register("potpourri", () -> BlockEntityType.Builder.of(PotpourriBlockEntity::new, GBlocks.POTPOURRI.get()).build(null));
 
 }
 

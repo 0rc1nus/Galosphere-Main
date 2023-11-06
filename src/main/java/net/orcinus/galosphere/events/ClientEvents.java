@@ -39,22 +39,28 @@ import net.orcinus.galosphere.client.gui.CombustionTableScreen;
 import net.orcinus.galosphere.client.gui.GoldenBreathOverlay;
 import net.orcinus.galosphere.client.gui.SpectatorVisionOverlay;
 import net.orcinus.galosphere.client.gui.SpectreOverlay;
+import net.orcinus.galosphere.client.model.BerserkerModel;
+import net.orcinus.galosphere.client.model.PinkSaltPillarModel;
+import net.orcinus.galosphere.client.model.PreservedModel;
 import net.orcinus.galosphere.client.model.SparkleModel;
 import net.orcinus.galosphere.client.model.SpecterpillarModel;
 import net.orcinus.galosphere.client.model.SpectreModel;
 import net.orcinus.galosphere.client.model.SterlingArmorModel;
 import net.orcinus.galosphere.client.particles.CrystalRainParticle;
+import net.orcinus.galosphere.client.particles.ImpactParticle;
 import net.orcinus.galosphere.client.particles.IndicatorParticle;
 import net.orcinus.galosphere.client.particles.SpectateOrbParticle;
 import net.orcinus.galosphere.client.particles.providers.PinkSaltFallingDustProvider;
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
-import net.orcinus.galosphere.client.renderer.GlowFlareEntityRenderer;
+import net.orcinus.galosphere.client.renderer.BerserkerRenderer;
+import net.orcinus.galosphere.client.renderer.PinkSaltPillarRenderer;
+import net.orcinus.galosphere.client.renderer.PreservedRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
 import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
 import net.orcinus.galosphere.client.renderer.SpecterpillarRenderer;
-import net.orcinus.galosphere.client.renderer.SpectreFlareRenderer;
 import net.orcinus.galosphere.client.renderer.SpectreRenderer;
+import net.orcinus.galosphere.client.renderer.ThrowableLaunchedProjectileRenderer;
 import net.orcinus.galosphere.client.renderer.block.GildedBeadsRenderer;
 import net.orcinus.galosphere.client.renderer.block.ShadowFrameBlockRenderer;
 import net.orcinus.galosphere.client.renderer.layer.BannerLayer;
@@ -257,17 +263,23 @@ public class ClientEvents {
         event.registerLayerDefinition(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
         event.registerLayerDefinition(GModelLayers.SPECTERPILLAR, SpecterpillarModel::createBodyLayer);
         event.registerLayerDefinition(GModelLayers.GILDED_BEADS, GildedBeadsRenderer::createBodyLayer);
+        event.registerLayerDefinition(GModelLayers.BERSERKER, BerserkerModel::createBodyLayer);
+        event.registerLayerDefinition(GModelLayers.PRESERVED, PreservedModel::createBodyLayer);
+        event.registerLayerDefinition(GModelLayers.PINK_SALT_PILLAR, PinkSaltPillarModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(GEntityTypes.SPARKLE.get(), SparkleRenderer::new);
-        event.registerEntityRenderer(GEntityTypes.SIVLER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
+        event.registerEntityRenderer(GEntityTypes.SILVER_BOMB.get(), context -> new ThrownItemRenderer<>(context, 1.5F, false));
         event.registerEntityRenderer(GEntityTypes.SPECTRE.get(), SpectreRenderer::new);
-        event.registerEntityRenderer(GEntityTypes.GLOW_FLARE.get(), GlowFlareEntityRenderer::new);
-        event.registerEntityRenderer(GEntityTypes.SPECTRE_FLARE.get(), SpectreFlareRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.GLOW_FLARE.get(), ThrowableLaunchedProjectileRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.SPECTRE_FLARE.get(), ThrowableLaunchedProjectileRenderer::new);
         event.registerEntityRenderer(GEntityTypes.SPECTERPILLAR.get(), SpecterpillarRenderer::new);
         event.registerEntityRenderer(GEntityTypes.SPECTATOR_VISION.get(), SpectatorVisionRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.BERSERKER.get(), BerserkerRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.PRESERVED.get(), PreservedRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.PINK_SALT_PILLAR.get(), PinkSaltPillarRenderer::new);
         event.registerBlockEntityRenderer(GBlockEntityTypes.SHADOW_FRAME.get(), ShadowFrameBlockRenderer::new);
         event.registerBlockEntityRenderer(GBlockEntityTypes.GILDED_BEADS.get(), GildedBeadsRenderer::new);
     }
@@ -282,6 +294,7 @@ public class ClientEvents {
         event.registerSpriteSet(GParticleTypes.AURA_RINGER_INDICATOR.get(), IndicatorParticle.Provider::new);
         event.registerSpriteSet(GParticleTypes.SPECTATE_ORB.get(), SpectateOrbParticle.Provider::new);
         event.registerSpriteSet(GParticleTypes.PINK_SALT_FALLING_DUST.get(), PinkSaltFallingDustProvider::new);
+        event.registerSpriteSet(GParticleTypes.IMPACT.get(), ImpactParticle.Provider::new);
     }
 
 }

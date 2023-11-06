@@ -15,5 +15,7 @@ public class GMobEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Galosphere.MODID);
 
     public static final RegistryObject<MobEffect> ASTRAL = MOB_EFFECTS.register("astral", () -> new GMobEffect(MobEffectCategory.BENEFICIAL, 12891319));
+    public static final RegistryObject<MobEffect> BLOCK_BANE = MOB_EFFECTS.register("block_bane", () -> new GMobEffect(MobEffectCategory.HARMFUL, 7612935));
+    public static final RegistryObject<MobEffect> HARMONY = MOB_EFFECTS.register("harmony", () -> new GMobEffect(MobEffectCategory.BENEFICIAL, 7752755));
 
 }

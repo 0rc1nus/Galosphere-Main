@@ -9,8 +9,10 @@ import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.entities.ai.SparkleAi;
 import net.orcinus.galosphere.entities.ai.SpectreAi;
+import net.orcinus.galosphere.entities.ai.sensors.BlightedEntitySensor;
 import net.orcinus.galosphere.entities.ai.sensors.NearestLichenMossSensor;
 import net.orcinus.galosphere.entities.ai.sensors.NearestPollinatedClusterSensor;
+import net.orcinus.galosphere.entities.ai.sensors.PreservedEntitySensor;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GSensorTypes {
@@ -21,5 +23,7 @@ public class GSensorTypes {
     public static final RegistryObject<SensorType<TemptingSensor>> SPECTRE_TEMPTATIONS = SENSOR_TYPES.register("spectre_temptations", () -> new SensorType<>(() -> new TemptingSensor(SpectreAi.getTemptations())));
     public static final RegistryObject<SensorType<NearestPollinatedClusterSensor>> NEAREST_POLLINATED_CLUSTER = SENSOR_TYPES.register("nearest_pollinated_cluster", () -> new SensorType<>(NearestPollinatedClusterSensor::new));
     public static final RegistryObject<SensorType<NearestLichenMossSensor>> NEAREST_LICHEN_MOSS = SENSOR_TYPES.register("nearest_lichen_moss", () -> new SensorType<>(NearestLichenMossSensor::new));
+    public static final RegistryObject<SensorType<BlightedEntitySensor>> BLIGHTED_ENTITY_SENSOR = SENSOR_TYPES.register("blighted_entity_sensor", () -> new SensorType<>(BlightedEntitySensor::new));
+    public static final RegistryObject<SensorType<PreservedEntitySensor>> PRESERVED_ENTITY_SENSOR = SENSOR_TYPES.register("preserved_entity_sensor", () -> new SensorType<>(PreservedEntitySensor::new));
 
 }

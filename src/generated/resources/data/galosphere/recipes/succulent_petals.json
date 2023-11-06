@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "galosphere:succulent"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "galosphere:succulent_petals"
+  }
+}

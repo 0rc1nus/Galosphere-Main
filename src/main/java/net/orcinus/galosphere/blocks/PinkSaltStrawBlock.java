@@ -1,8 +1,11 @@
 package net.orcinus.galosphere.blocks;
 
+import com.google.common.collect.Maps;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -17,13 +20,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -36,8 +39,10 @@ import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GParticleTypes;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock {
@@ -46,9 +51,15 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     public static final BooleanProperty FALLABLE = BooleanProperty.create("fallable");
     public static final EnumProperty<StrawShape> STRAW_SHAPE = EnumProperty.create("straw_shape", StrawShape.class);
     private static final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
-    private static final VoxelShape SHAPE = Block.box(4, 0.0, 4, 12, 16.0, 12);
     private static final VoxelShape TOP_UP_SHAPE = Block.box(4, 0.0, 4, 12, 11.0, 12);
     private static final VoxelShape TOP_DOWN_SHAPE = Block.box(4, 5.0, 4, 12, 16.0, 12);
+    private static final VoxelShape MIDDLE_SHAPE = Block.box(3, 0.0, 3, 13, 16.0, 13);
+    private static final VoxelShape BOTTOM_UP_SHAPE = Block.box(2, 0.0, 2, 14, 16.0, 14);
+    private static final VoxelShape BOTTOM_DOWN_SHAPE = Block.box(2, 0.0, 2, 14, 16.0, 14);
+    private static final Map<Predicate<BlockState>, SaltReaction> REACTIONS = Util.make(Maps.newHashMap(), map -> {
+        map.put(blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) > 0, new SaltReaction(blockState -> GBlocks.SALINE_COMPOSTER.get().withPropertiesOf(blockState), 0.5F));
+        map.put(blockState -> WeatheringCopper.NEXT_BY_BLOCK.get().containsKey(blockState.getBlock()), new SaltReaction(blockState -> WeatheringCopper.getNext(blockState.getBlock()).orElseThrow().withPropertiesOf(blockState), 0.0015F));
+    });
 
     public PinkSaltStrawBlock(Properties properties) {
         super(properties);
@@ -58,7 +69,12 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         this.maybeTransferFluid(blockState, serverLevel, blockPos, randomSource.nextFloat());
-        super.randomTick(blockState, serverLevel, blockPos, randomSource);
+        if (serverLevel.getBlockState(blockPos.below(2)).is(Blocks.LAVA) && blockState.getValue(WATERLOGGED) && blockState.getValue(TIP_DIRECTION) == Direction.UP) {
+            BlockPos tip = findTip(blockState, serverLevel, blockPos, 7);
+            if (tip != null && serverLevel.getFluidState(tip.above()).is(FluidTags.WATER)) {
+                serverLevel.setBlockAndUpdate(tip.above(), GBlocks.PINK_SALT_STRAW.get().defaultBlockState().setValue(WATERLOGGED, true));
+            }
+        }
     }
 
     private boolean isStalactiteStartPos(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
@@ -70,15 +86,22 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
         if (blockPos2 == null) {
             return;
         }
-        BlockPos blockPos3 = findFillableComposterBelowStalactiteTip(serverLevel, blockPos2);
-        if (f > 0.5F || !isStalactiteStartPos(blockState, serverLevel, blockPos)) {
+        if (!isStalactiteStartPos(blockState, serverLevel, blockPos)) {
             return;
         }
-        if (blockPos3 == null) {
-            return;
+        for (Predicate<BlockState> predicate : REACTIONS.keySet()) {
+            BlockPos target = this.findTarget(serverLevel, blockPos2, predicate);
+            if (target == null) {
+                continue;
+            }
+            SaltReaction saltReaction = REACTIONS.get(predicate);
+            BlockState result = saltReaction.function.apply(serverLevel.getBlockState(target));
+            if (f > saltReaction.chance()) {
+                return;
+            }
+            serverLevel.levelEvent(3005, target, 0);
+            serverLevel.setBlockAndUpdate(target, result);
         }
-        serverLevel.levelEvent(1504, blockPos2, 0);
-        serverLevel.setBlockAndUpdate(blockPos3, GBlocks.SALINE_COMPOSTER.get().defaultBlockState().setValue(SoilComposterBlock.LEVEL, serverLevel.getBlockState(blockPos3).getValue(SoilComposterBlock.LEVEL)));
     }
 
     @Nullable
@@ -96,10 +119,9 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     }
 
     @Nullable
-    private BlockPos findFillableComposterBelowStalactiteTip(Level level, BlockPos blockPos2) {
-        Predicate<BlockState> predicate = blockState -> blockState.is(Blocks.COMPOSTER) && blockState.getValue(ComposterBlock.LEVEL) > 0;
+    private BlockPos findTarget(Level level, BlockPos blockPos2, Predicate<BlockState> blockStatePredicate) {
         BiPredicate<BlockPos, BlockState> biPredicate = (blockPos, blockState) -> canDripThrough(level, blockPos, blockState);
-        return findBlockVertical(level, blockPos2, Direction.DOWN.getAxisDirection(), biPredicate, predicate, 11).orElse(null);
+        return findBlockVertical(level, blockPos2, Direction.DOWN.getAxisDirection(), biPredicate, blockStatePredicate, 11).orElse(null);
     }
 
     private boolean canDripThrough(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
@@ -144,7 +166,6 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
         builder.add(WATERLOGGED, STRAW_SHAPE, TIP_DIRECTION, FALLABLE);
     }
 
@@ -164,14 +185,13 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
             }
             mutableBlockPos.set(pos.getX() + Mth.nextInt(level.getRandom(), -radius, radius), pos.getY() + Mth.nextInt(level.getRandom(), -2, 2), pos.getZ() + Mth.nextInt(level.getRandom(), -radius, radius));
             BlockState chosenStates = level.getBlockState(mutableBlockPos);
-            if (!chosenStates.is(this)) {
-                continue;
+            boolean flag = chosenStates.is(this) && chosenStates.getValue(TIP_DIRECTION) == Direction.DOWN && chosenStates.getValue(STRAW_SHAPE) == StrawShape.BOTTOM;
+            if (flag) {
+                level.setBlockAndUpdate(mutableBlockPos, chosenStates.getBlock().withPropertiesOf(chosenStates).setValue(FALLABLE, true));
+                double distance = Math.sqrt(projectile.distanceToSqr(mutableBlockPos.getX(), mutableBlockPos.getY(), mutableBlockPos.getZ()));
+                int ticks = Math.max(1, (int)distance);
+                level.scheduleTick(mutableBlockPos, this, ticks);
             }
-            if (chosenStates.getValue(TIP_DIRECTION) != Direction.DOWN) {
-                continue;
-            }
-            level.setBlockAndUpdate(mutableBlockPos, chosenStates.getBlock().withPropertiesOf(chosenStates).setValue(FALLABLE, true));
-            level.scheduleTick(mutableBlockPos, this, 2);
         }
     }
 
@@ -267,10 +287,14 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         Vec3 vec3 = blockState.getOffset(blockGetter, blockPos);
         VoxelShape voxelShape;
-        if (blockState.getValue(STRAW_SHAPE) == StrawShape.TOP) {
-            voxelShape = blockState.getValue(TIP_DIRECTION) == Direction.UP ? TOP_UP_SHAPE : TOP_DOWN_SHAPE;
+        StrawShape value = blockState.getValue(STRAW_SHAPE);
+        boolean up = blockState.getValue(TIP_DIRECTION) == Direction.UP;
+        if (value == StrawShape.TOP) {
+            voxelShape = up ? TOP_UP_SHAPE : TOP_DOWN_SHAPE;
+        } else if (value == StrawShape.BOTTOM) {
+            voxelShape = up ? BOTTOM_UP_SHAPE : BOTTOM_DOWN_SHAPE;
         } else {
-            voxelShape = SHAPE;
+            voxelShape = MIDDLE_SHAPE;
         }
         return voxelShape.move(vec3.x, 0.0, vec3.z);
     }
@@ -301,8 +325,10 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
         if (!blockState.is(GBlocks.PINK_SALT_STRAW.get())) {
             return false;
         }
-        StrawShape strawShape = blockState.getValue(STRAW_SHAPE);
-        return strawShape == StrawShape.TOP;
+        return blockState.getValue(STRAW_SHAPE) == StrawShape.TOP;
+    }
+
+    record SaltReaction(Function<BlockState, BlockState> function, float chance) {
     }
 
     public enum StrawShape implements StringRepresentable {
@@ -325,9 +351,6 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
         public String getSerializedName() {
             return this.name;
         }
-    }
-
-    record FluidInfo(BlockPos pos, Fluid fluid, BlockState sourceState) {
     }
 
 }

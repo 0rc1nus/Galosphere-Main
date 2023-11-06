@@ -35,6 +35,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.orcinus.galosphere.Galosphere;
@@ -43,6 +44,8 @@ import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 import net.orcinus.galosphere.config.GalosphereConfig;
+import net.orcinus.galosphere.entities.Berserker;
+import net.orcinus.galosphere.entities.Preserved;
 import net.orcinus.galosphere.entities.Sparkle;
 import net.orcinus.galosphere.entities.SpectatorVision;
 import net.orcinus.galosphere.entities.Specterpillar;
@@ -52,6 +55,7 @@ import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
+import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.items.SterlingArmorItem;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 
@@ -68,12 +72,24 @@ public class MobEvents {
         event.put(GEntityTypes.SPECTRE.get(), Spectre.createAttributes().build());
         event.put(GEntityTypes.SPECTERPILLAR.get(), Specterpillar.createAttributes().build());
         event.put(GEntityTypes.SPECTATOR_VISION.get(), SpectatorVision.createAttributes().build());
+        event.put(GEntityTypes.BERSERKER.get(), Berserker.createAttributes().build());
+        event.put(GEntityTypes.PRESERVED.get(), Preserved.createAttributes().build());
     }
 
     @SubscribeEvent
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
         event.register(GEntityTypes.SPARKLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sparkle::checkSparkleSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(GEntityTypes.SPECTRE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+    }
+
+    @SubscribeEvent
+    public void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            if (player.hasEffect(GMobEffects.BLOCK_BANE.get()) && !player.getAbilities().instabuild) {
+                player.hurt(player.level().damageSources().magic(), 3.0F);
+                player.getCooldowns().addCooldown(player.getItemInHand(player.getUsedItemHand()).getItem(), 100);
+            }
+        }
     }
 
     @SubscribeEvent

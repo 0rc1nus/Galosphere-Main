@@ -21,6 +21,8 @@ public class GCreativeModeTabs {
                 output.accept(GItems.SPARKLE_SPAWN_EGG.get());
                 output.accept(GItems.SPECTRE_SPAWN_EGG.get());
                 output.accept(GItems.SPECTERPILLAR_SPAWN_EGG.get());
+                output.accept(GItems.BERSERKER_SPAWN_EGG.get());
+                output.accept(GItems.PRESERVED_SPAWN_EGG.get());
                 output.accept(GItems.BOTTLE_OF_SPECTRE.get());
                 output.accept(GItems.ALLURITE_SHARD.get());
                 output.accept(GItems.LUMIERE_SHARD.get());
@@ -41,7 +43,9 @@ public class GCreativeModeTabs {
                 output.accept(GItems.CURED_MEMBRANE.get());
                 output.accept(GItems.GLOW_FLARE.get());
                 output.accept(GItems.SPECTRE_FLARE.get());
+                output.accept(GBlocks.POTPOURRI.get());
                 output.accept(GItems.CHANDELIER.get());
+                output.accept(GBlocks.GILDED_BEADS.get());
                 output.accept(GBlocks.MONSTROMETER.get());
                 output.accept(GBlocks.COMBUSTION_TABLE.get());
                 output.accept(GBlocks.WARPED_ANCHOR.get());
@@ -53,6 +57,7 @@ public class GCreativeModeTabs {
                 output.accept(GBlocks.SILVER_PANEL_SLAB.get());
                 output.accept(GBlocks.SILVER_LATTICE.get());
                 output.accept(GBlocks.SHADOW_FRAME.get());
+                output.accept(GBlocks.SILVER_BALANCE.get());
                 output.accept(GBlocks.SILVER_ORE.get());
                 output.accept(GBlocks.DEEPSLATE_SILVER_ORE.get());
                 output.accept(GBlocks.SILVER_BLOCK.get());

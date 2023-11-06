@@ -1,0 +1,10 @@
+{
+  "processors": [
+    {
+      "processor_type": "galosphere:pink_salt_main_room"
+    },
+    {
+      "processor_type": "galosphere:no_waterlogged"
+    }
+  ]
+}

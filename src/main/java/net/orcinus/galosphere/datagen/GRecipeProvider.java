@@ -45,6 +45,22 @@ public class GRecipeProvider extends RecipeProvider {
         GBlockFamilies.getAllFamilies().forEach((blockFamily) -> {
             generateRecipes(consumer, blockFamily);
         });
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, GBlocks.SILVER_BALANCE.get()).pattern("#R#").pattern(" # ").pattern(" # ").define('#', GItems.SILVER_INGOT.get()).define('R', Items.REDSTONE).unlockedBy("has_silver_ingot", has(GItems.SILVER_INGOT.get())).save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER).requires(Items.COAL).requires(GItems.PINK_SALT_SHARD.get()).unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD.get())).save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GItems.SUCCULENT_PETALS.get(), 3).requires(GBlocks.SUCCULENT.get().asItem()).unlockedBy("has_succulent", has(GBlocks.SUCCULENT.get().asItem())).save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.PINK_SALT.get())
+                .define('#', GBlocks.PINK_SALT_STRAW.get().asItem())
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_pink_salt_straw", has(GBlocks.PINK_SALT_STRAW.get()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GBlocks.GILDED_BEADS.get(), 8)
+                .define('#', Items.GOLD_NUGGET)
+                .define('G', Items.GOLD_INGOT)
+                .pattern("GGG")
+                .pattern("###")
+                .pattern("GGG")
+                .unlockedBy("has_gold_ingot", has(Items.GOLD_INGOT)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GBlocks.STRANDED_MEMBRANE_BLOCK.get())
                 .define('#', GItems.ALLURITE_SHARD.get())
                 .define('C', GBlocks.CURED_MEMBRANE_BLOCK.get())

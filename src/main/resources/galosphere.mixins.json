@@ -14,7 +14,8 @@
     "LootTableAccessor",
     "OverworldBiomeBuilderMixin",
     "PlayerMixin",
-    "PowderSnowBlockMixin"
+    "PowderSnowBlockMixin",
+    "ProjectileAccessor"
   ],
   "client": [
     "client.ClientLevelMixin",

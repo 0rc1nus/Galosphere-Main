@@ -22,7 +22,7 @@ public class GEntityTypeTagsProvider extends EntityTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.tag(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES).add(EntityType.VEX).add(EntityType.EVOKER_FANGS).add(EntityType.RAVAGER);
-        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(GEntityTypes.SIVLER_BOMB.get());
+        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(GEntityTypes.SILVER_BOMB.get());
         this.tag(EntityTypeTags.FROG_FOOD).add(GEntityTypes.SPECTERPILLAR.get());
     }
 

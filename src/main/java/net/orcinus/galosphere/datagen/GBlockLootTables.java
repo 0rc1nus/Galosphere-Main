@@ -157,6 +157,11 @@ public class GBlockLootTables extends BlockLootSubProvider {
             return createSilkTouchDispatchTable(block, LootItem.lootTableItem(GItems.PINK_SALT_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(block, LootItem.lootTableItem(GItems.PINK_SALT_SHARD.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))))));
         });
         this.dropSelf(GBlocks.GILDED_BEADS.get());
+        this.dropSelf(GBlocks.SILVER_BALANCE.get());
+        this.dropSelf(GBlocks.POTPOURRI.get());
+        this.add(GBlocks.SUCCULENT_CROP.get(), block -> {
+            return LootTable.lootTable();
+        });
     }
 
     protected static LootTable.Builder dropAlternativeWithSilkTouch(Block block, Block alternative, LootPoolEntryContainer.Builder<?> builder) {

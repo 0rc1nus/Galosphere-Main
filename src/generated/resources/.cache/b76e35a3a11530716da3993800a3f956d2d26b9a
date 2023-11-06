@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-14T08:12:17.3485426	Tags for minecraft:block mod id galosphere
+// 1.20.1	2023-11-07T10:10:21.1461569	Tags for minecraft:block mod id galosphere
 021e86d55679a27d4519fa177cd4425c51105d50 data/forge/tags/blocks/ores.json
 d22848f4f97f051b3ec5eefda7df36a01718e88a data/forge/tags/blocks/ores/silver.json
 97eb1b03810e22a976b10e158ad5eda01f2f6b3e data/forge/tags/blocks/storage_blocks.json
@@ -18,7 +18,7 @@ ae98940009770130b05859b32836d9dde0fdbb2a data/minecraft/tags/blocks/crystal_soun
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/minecraft/tags/blocks/dirt.json
 c2d098223dfc23cdd8619a8bb8f67cfc17785ba5 data/minecraft/tags/blocks/mineable/axe.json
 36a3c26fb109bb3f0d2b59c3e33c16c2b406fdca data/minecraft/tags/blocks/mineable/hoe.json
-4e4e4d559a00637365425bb6a4d029831ca1a5b4 data/minecraft/tags/blocks/mineable/pickaxe.json
+a4b8a6f8096c4d9bb26e2d5fa22d94483abb4194 data/minecraft/tags/blocks/mineable/pickaxe.json
 8223b9cdd22e99a91f7b5784ba66aa4f9a371904 data/minecraft/tags/blocks/needs_stone_tool.json
 43cc66a9f7564650279024fc79dd99b577ea5a2b data/minecraft/tags/blocks/slabs.json
 a47d0ae81eecc475b4596c6e0dc03f6b16e0218a data/minecraft/tags/blocks/stairs.json

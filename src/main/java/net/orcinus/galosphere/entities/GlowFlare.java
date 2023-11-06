@@ -5,23 +5,21 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
 import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GSoundEvents;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
-
-public class GlowFlare extends FireworkRocketEntity {
+public class GlowFlare extends ThrowableLaunchedProjectile {
 
     public GlowFlare(EntityType<? extends GlowFlare> type, Level world) {
         super(type, world);
@@ -31,60 +29,47 @@ public class GlowFlare extends FireworkRocketEntity {
         super(world, stack, entity, x, y, z, shotAtAngle);
     }
 
-    public GlowFlare(Level level, @Nullable Entity entity, double d, double e, double f, ItemStack itemStack) {
-        this(level, d, e, f, itemStack);
-        this.setOwner(entity);
+    public GlowFlare(Level world, double x, double y, double z) {
+        super(GEntityTypes.GLOW_FLARE.get(), world);
+        this.setPos(x, y, z);
+        this.entityData.set(THROWN, true);
     }
 
-    public GlowFlare(Level level, ItemStack itemStack, double d, double e, double f, boolean bl) {
-        this(level, d, e, f, itemStack);
-        this.entityData.set(FireworkRocketEntity.DATA_SHOT_AT_ANGLE, bl);
-    }
-
-    public GlowFlare(Level level, double d, double e, double f, ItemStack itemStack) {
+    public GlowFlare(Level level, @Nullable Entity entity, ItemStack itemStack) {
         super(GEntityTypes.GLOW_FLARE.get(), level);
-        this.life = 0;
-        this.setPos(d, e, f);
         if (!itemStack.isEmpty() && itemStack.hasTag()) {
-            this.entityData.set(FireworkRocketEntity.DATA_ID_FIREWORKS_ITEM, itemStack.copy());
+            this.entityData.set(DATA_ID_FIREWORKS_ITEM, itemStack.copy());
         }
-        this.setDeltaMovement(this.random.triangle(0.0, 0.002297), 0.05, this.random.triangle(0.0, 0.002297));
-        this.lifetime = 200;
+        this.entityData.set(THROWN, true);
+        this.setOwner(entity);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (this.level().isClientSide && this.life % 2 < 2) {
-            this.level().addParticle(ParticleTypes.GLOW, this.getX(), this.getY(), this.getZ(), this.random.nextGaussian() * 0.05D, -this.getDeltaMovement().y * 0.5D, this.random.nextGaussian() * 0.05D);
+        Level world = this.level();
+        if (world.isClientSide && this.life % 2 < 2) {
+            world.addParticle(ParticleTypes.GLOW, this.getX(), this.getY(), this.getZ(), this.random.nextGaussian() * 0.05D, -this.getDeltaMovement().y * 0.5D, this.random.nextGaussian() * 0.05D);
         }
     }
 
     @Override
-    public EntityType<?> getType() {
-        return GEntityTypes.GLOW_FLARE.get();
-    }
-
-    @Override
-    protected void onHitEntity(EntityHitResult result) {
+    protected Item getDefaultItem() {
+        return GItems.GLOW_FLARE.get();
     }
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        if (!this.level().isClientSide()) {
+        Level world = this.level();
+        if (!world.isClientSide()) {
             BlockPos hitPos = result.getBlockPos();
             BlockPos placePos = hitPos.relative(result.getDirection());
-            if (this.level().getBlockState(hitPos).isSolidRender(this.level(), hitPos) && ((!this.level().getFluidState(placePos).is(FluidTags.LAVA) && this.level().getBlockState(placePos).canBeReplaced()) || this.level().isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
-                this.level().setBlock(placePos, GBlocks.GLOW_INK_CLUMPS.get().defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(result.getDirection().getOpposite()), true).setValue(BlockStateProperties.AGE_15, 15).setValue(BlockStateProperties.WATERLOGGED, this.level().getBlockState(placePos).is(Blocks.WATER)), 2);
+            if (world.getBlockState(hitPos).isSolidRender(world, hitPos) && ((world.getBlockState(placePos).canBeReplaced() && !world.getFluidState(placePos).is(FluidTags.LAVA)) || world.isStateAtPosition(placePos, DripstoneUtils::isEmptyOrWater))) {
+                world.setBlock(placePos, GBlocks.GLOW_INK_CLUMPS.get().defaultBlockState().setValue(GlowInkClumpsBlock.getFaceProperty(result.getDirection().getOpposite()), true).setValue(BlockStateProperties.AGE_15, 15).setValue(BlockStateProperties.WATERLOGGED, world.getBlockState(placePos).is(Blocks.WATER)), 2);
             }
             this.playSound(GSoundEvents.GLOW_FLARE_SPREAD.get(), 1.0F, 1.0F);
             this.discard();
         }
-    }
-
-    @Override
-    public ItemStack getItem() {
-        return new ItemStack(GItems.GLOW_FLARE.get());
     }
 
 }

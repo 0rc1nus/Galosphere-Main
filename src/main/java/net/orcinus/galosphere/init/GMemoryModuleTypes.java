@@ -21,5 +21,8 @@ public class GMemoryModuleTypes {
     public static final RegistryObject<MemoryModuleType<Unit>> POLLINATED_COOLDOWN = MEMORY_MODULE_TYPES.register("pollinated_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<Boolean>> CAN_BURY = MEMORY_MODULE_TYPES.register("can_bury", () -> new MemoryModuleType<>(Optional.empty()));
     public static final RegistryObject<MemoryModuleType<BlockPos>> NEAREST_LICHEN_MOSS = MEMORY_MODULE_TYPES.register("nearest_lichen_moss", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<Unit>> IS_ROARING = MEMORY_MODULE_TYPES.register("roaring", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Unit>> UNDERMINE_COOLDOWN = MEMORY_MODULE_TYPES.register("undermine_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Integer>> UNDERMINE_COUNT = MEMORY_MODULE_TYPES.register("undermine_count", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
 
 }

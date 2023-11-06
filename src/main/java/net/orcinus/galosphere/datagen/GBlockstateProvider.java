@@ -19,6 +19,7 @@ import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.blocks.LichenMossBlock;
 import net.orcinus.galosphere.blocks.PinkSaltStrawBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
+import net.orcinus.galosphere.blocks.ShadowFrameBlock;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,6 +55,10 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.getVariantBuilder(GBlocks.LICHEN_MOSS.get()).forAllStatesExcept(blockState -> {
             String name = blockState.getValue(LichenMossBlock.LIT) ? "lichen_moss_lit" : "lichen_moss";
             ModelFile modelFile = models().cubeAll(name, new ResourceLocation(Galosphere.MODID, "block/" + name));
+            return ConfiguredModel.builder().modelFile(modelFile).build();
+        });
+        this.getVariantBuilder(GBlocks.POTPOURRI.get()).forAllStates(blockState -> {
+            ModelFile modelFile = models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/potpourri"));
             return ConfiguredModel.builder().modelFile(modelFile).build();
         });
 
@@ -140,7 +145,7 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(GBlocks.CHISELED_PASTEL_PINK_SALT.get());
 
         this.simpleBlock(GBlocks.CURED_MEMBRANE_BLOCK.get());
-        this.simpleBlock(GBlocks.SHADOW_FRAME.get());
+        this.simpleBlock(GBlocks.SHADOW_FRAME.get(), models().cubeAll("shadow_frame", new ResourceLocation(Galosphere.MODID, "block/shadow_frame")).renderType("cutout"));
 
         this.wallBlock(GBlocks.PINK_SALT_WALL.get(), "pink_salt");
         this.wallBlock(GBlocks.ROSE_PINK_SALT_WALL.get(), "rose_pink_salt");
@@ -154,6 +159,9 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.getVariantBuilder(GBlocks.GILDED_BEADS.get()).forAllStatesExcept(state -> {
             return ConfiguredModel.builder().modelFile(models().sign("gilded_beads", new ResourceLocation("block/gold_block"))).build();
         }, BlockStateProperties.ROTATION_16, BlockStateProperties.WATERLOGGED, BlockStateProperties.BOTTOM);
+        this.getVariantBuilder(GBlocks.SILVER_BALANCE.get()).forAllStatesExcept(state -> {
+            return ConfiguredModel.builder().modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/silver_balance"))).build();
+        }, BlockStateProperties.WATERLOGGED);
         this.getVariantBuilder(GBlocks.PINK_SALT_STRAW.get()).forAllStatesExcept(state -> {
             String name = "pink_salt_straw_" + state.getValue(PinkSaltStrawBlock.TIP_DIRECTION).getName() + "_" + state.getValue(PinkSaltStrawBlock.STRAW_SHAPE);
             return ConfiguredModel.builder().modelFile(models().withExistingParent(name, "block/pointed_dripstone").renderType("cutout").texture("cross", "block/" + name)).build();

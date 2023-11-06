@@ -24,8 +24,10 @@ import net.orcinus.galosphere.init.GNetworkHandler;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
 import net.orcinus.galosphere.init.GPotions;
+import net.orcinus.galosphere.init.GRecipeSerializers;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
+import net.orcinus.galosphere.init.GStructureProcessorTypes;
 import net.orcinus.galosphere.init.GVanillaIntegration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,6 +57,8 @@ public class Galosphere {
         GMenuTypes.MENU_TYPES.register(modEventBus);
         GPotions.POTIONS.register(modEventBus);
         GParticleTypes.PARTICLES.register(modEventBus);
+        GRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        GStructureProcessorTypes.STRUCTURE_PROCESSOR_TYPES.register(modEventBus);
         GSensorTypes.SENSOR_TYPES.register(modEventBus);
         GSoundEvents.SOUND_EVENTS.register(modEventBus);
 

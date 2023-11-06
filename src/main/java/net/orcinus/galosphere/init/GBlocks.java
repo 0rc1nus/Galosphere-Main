@@ -1,6 +1,7 @@
 package net.orcinus.galosphere.init;
 
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AmethystBlock;
 import net.minecraft.world.level.block.BaseCoralWallFanBlock;
@@ -20,7 +21,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.blocks.StrandedMembraneBlock;
 import net.orcinus.galosphere.blocks.ChandelierBlock;
 import net.orcinus.galosphere.blocks.CombustionTableBlock;
 import net.orcinus.galosphere.blocks.CordycepsBlock;
@@ -44,12 +44,16 @@ import net.orcinus.galosphere.blocks.PinkSaltStairsBlock;
 import net.orcinus.galosphere.blocks.PinkSaltStrawBlock;
 import net.orcinus.galosphere.blocks.PinkSaltWallBlock;
 import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
+import net.orcinus.galosphere.blocks.PotpourriBlock;
 import net.orcinus.galosphere.blocks.RotatablePinkSaltBlock;
 import net.orcinus.galosphere.blocks.ShadowFrameBlock;
+import net.orcinus.galosphere.blocks.SilverBalanceBlock;
 import net.orcinus.galosphere.blocks.SilverLatticeBlock;
 import net.orcinus.galosphere.blocks.SilverLatticeVineBlock;
 import net.orcinus.galosphere.blocks.SoilComposterBlock;
+import net.orcinus.galosphere.blocks.StrandedMembraneBlock;
 import net.orcinus.galosphere.blocks.SucculentBlock;
+import net.orcinus.galosphere.blocks.SucculentCropBlock;
 import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
 
 import java.util.function.Supplier;
@@ -202,12 +206,15 @@ public class GBlocks {
     public static final RegistryObject<Block> STRANDED_MEMBRANE_BLOCK = registerBlock("stranded_membrane_block", () -> new StrandedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(SoundType.SLIME_BLOCK).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));
     public static final RegistryObject<Block> SHADOW_FRAME = registerBlock("shadow_frame", () -> new ShadowFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).lightLevel(state -> state.getValue(ShadowFrameBlock.LEVEL)).noCollission().sound(GSoundEvents.SILVER)));
     public static final RegistryObject<Block> GILDED_BEADS = registerBlock("gilded_beads", () -> new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(SoundType.SCAFFOLDING)));
+    public static final RegistryObject<Block> SILVER_BALANCE = registerBlock("silver_balance", () -> new SilverBalanceBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.CYAN).strength(3.0F, 6.0F).noOcclusion().sound(GSoundEvents.SILVER)));
     public static final RegistryObject<Block> SUCCULENT = registerBlock("succulent", () -> new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));
+    public static final RegistryObject<Block> POTPOURRI = registerBlock("potpourri", () -> new PotpourriBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
     public static final RegistryObject<Block> LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> SALINE_COMPOSTER = registerNoTabBlock("saline_composter", () -> new SoilComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> POTTED_BOWL_LICHEN = registerNoTabBlock("potted_bowl_lichen", () -> new FlowerPotBlock(BOWL_LICHEN.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_LICHEN_ROOTS = registerNoTabBlock("potted_lichen_roots", () -> new FlowerPotBlock(LICHEN_ROOTS.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final RegistryObject<Block> SUCCULENT_CROP = registerNoTabBlock("succulent_crop", () -> new SucculentCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier) {
         RegistryObject<B> block = BLOCKS.register(name, supplier);

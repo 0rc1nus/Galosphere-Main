@@ -47,7 +47,7 @@ public class SilverBomb extends ThrowableItemProjectile {
     }
 
     public SilverBomb(Level world, LivingEntity entity, ItemStack stack) {
-        super(GEntityTypes.SIVLER_BOMB.get(), entity, world);
+        super(GEntityTypes.SILVER_BOMB.get(), entity, world);
         if (!stack.isEmpty() && stack.hasTag()) {
             CompoundTag tag = stack.getTag();
             if (tag != null) {

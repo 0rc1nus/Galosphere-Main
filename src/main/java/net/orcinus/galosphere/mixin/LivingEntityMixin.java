@@ -6,9 +6,9 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.orcinus.galosphere.api.SpectreBoundSpyglass;
-import net.orcinus.galosphere.api.GoldenBreath;
 import net.orcinus.galosphere.api.BannerAttachable;
+import net.orcinus.galosphere.api.GoldenBreath;
+import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.init.GMobEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -61,6 +61,12 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         }
     }
 
+    @Inject(at = @At("TAIL"), method = "canBeSeenAsEnemy", cancellable = true)
+    private void G$canAttack(CallbackInfoReturnable<Boolean> cir) {
+        if ($this.hasEffect(GMobEffects.HARMONY.get())) {
+            cir.setReturnValue(false);
+        }
+    }
     @Override
     public void setBanner(ItemStack stack) {
         $this.getEntityData().set(BANNER_STACK, stack);

@@ -39,6 +39,18 @@ public class GSoundEvents {
     public static final RegistryObject<SoundEvent> SPECTRE_MANIPULATE_BEGIN = register("entity.spectre.manipulate.begin");
     public static final RegistryObject<SoundEvent> SPECTRE_MANIPULATE_END = register("entity.spectre.manipulate.end");
 
+    public static final RegistryObject<SoundEvent> BERSERKER_DEATH = register("entity.berserker.death");
+    public static final RegistryObject<SoundEvent> BERSERKER_HURT = register("entity.berserker.hurt");
+    public static final RegistryObject<SoundEvent> BERSERKER_IDLE = register("entity.berserker.idle");
+    public static final RegistryObject<SoundEvent> BERSERKER_DUO_SMASH = register("entity.berserker.duo_smash");
+    public static final RegistryObject<SoundEvent> BERSERKER_SMASH = register("entity.berserker.smash");
+    public static final RegistryObject<SoundEvent> BERSERKER_ROAR = register("entity.berserker.roar");
+    public static final RegistryObject<SoundEvent> BERSERKER_STEP = register("entity.berserker.step");
+
+    public static final RegistryObject<SoundEvent> PRESERVED_HURT = register("entity.preserved.hurt");
+
+    public static final RegistryObject<SoundEvent> PINK_SALT_PILLAR_EMERGE = register("entity.pink_salt_pillar.emerge");
+
     public static final RegistryObject<SoundEvent> SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
     public static final RegistryObject<SoundEvent> SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
 
@@ -57,6 +69,12 @@ public class GSoundEvents {
     public static final SoundType LUMIERE_CLUSTER = soundType("lumiere_cluster");
     public static final SoundType SILVER = soundType("silver");
     public static final SoundType SILVER_LATTICE = soundType("silver_lattice");
+    public static final SoundType PINK_SALT = soundType("pink_salt");
+    public static final SoundType PINK_SALT_CLUSTER = soundType("pink_salt_cluster");
+    public static final SoundType PINK_SALT_LAMP = soundType("pink_salt_lamp");
+    public static final SoundType GILDED_BEADS = soundType("gilded_beads");
+    public static final SoundType CURED_MEMBRANE = soundType("cured_membrane");
+    public static final SoundType STRANDED_MEMBRANE = soundType("stranded_membrane");
 
     private static RegistryObject<SoundEvent> register(String string) {
         return SOUND_EVENTS.register(string, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Galosphere.MODID, string)));

@@ -91,7 +91,7 @@ public class ShadowFrameBlock extends BaseEntityBlock {
 
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
-        return RenderShape.MODEL;
+        return !blockState.getValue(FILLED) ? RenderShape.MODEL : RenderShape.INVISIBLE;
     }
 
     @Override
