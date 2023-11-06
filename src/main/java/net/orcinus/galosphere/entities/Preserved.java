@@ -114,6 +114,7 @@ public class Preserved extends Monster {
         if (this.isAlliedTo(entity)) return false;
         if (livingEntity.getType() == EntityType.ARMOR_STAND) return false;
         if (livingEntity.getType() == GEntityTypes.BERSERKER) return false;
+        if (livingEntity.getType() == GEntityTypes.PRESERVED) return false;
         if (livingEntity.isInvulnerable()) return false;
         if (livingEntity.isDeadOrDying()) return false;
         return this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox());

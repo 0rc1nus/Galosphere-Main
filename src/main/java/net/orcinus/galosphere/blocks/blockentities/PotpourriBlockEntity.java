@@ -26,7 +26,7 @@ public class PotpourriBlockEntity extends BlockEntity {
             return;
         }
         if (potpourriBlockEntity.tickCount % 65 == 0) {
-            list.forEach(monster -> monster.addEffect(new MobEffectInstance(GMobEffects.HARMONY, 260, 0, true, true)));
+            list.forEach(monster -> monster.addEffect(new MobEffectInstance(GMobEffects.HARMONY, 260, 0, false, true)));
         }
     }
 

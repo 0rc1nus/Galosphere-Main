@@ -56,7 +56,7 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("subtitles.entity.berserker.step", "Berserker steps");
         translationBuilder.add("subtitles.entity.berserker.hurt", "Berserker hurts");
         translationBuilder.add("subtitles.entity.berserker.death", "Berserker dies");
-        translationBuilder.add("subtitles.entity.preserved.hurt", "Berserker hurts");
+        translationBuilder.add("subtitles.entity.preserved.hurt", "Preserved hurts");
         GBiomes.getIds().forEach(resourceLocation -> {
             translationBuilder.add("biome.galosphere." + resourceLocation.getPath(), reformat(resourceLocation.getPath()));
         });
