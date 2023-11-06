@@ -1,8 +1,6 @@
 package net.orcinus.galosphere.datagen;
 
-import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -13,9 +11,7 @@ import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
-import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GMobEffects;
-import net.orcinus.galosphere.init.GPotions;
 import net.orcinus.galosphere.items.SilverSmithingTemplateItem;
 
 import java.util.function.Predicate;
@@ -42,6 +38,28 @@ public class GLanguageProvider extends LanguageProvider {
         GMobEffects.MOB_EFFECTS.getEntries().stream().map(RegistryObject::get).forEach(mobEffect -> {
             this.add(mobEffect, reformat(ForgeRegistries.MOB_EFFECTS.getKey(mobEffect).getPath()));
         });
+        this.add("item.galosphere.persevered", "Persevered");
+        this.add("item.galosphere.silver_bomb.duration", "Duration");
+        this.add("item.galosphere.silver_bomb.explosion", "Explosion");
+        this.add("item.galosphere.silver_bomb.bouncy", "Bouncy");
+        this.add("subtitles.block.monstrometer.activate", "Monstrometer activates");
+        this.add("subtitles.block.monstrometer.charge", "Monstrometer is charged");
+        this.add("subtitles.block.monstrometer.deactivate", "Monstrometer deactivates");
+        this.add("subtitles.block.lumiere.compost", "Composter filled with Lumiere Shard");
+        this.add("subtitles.entity.specterpillar.death", "Specterpillar dies");
+        this.add("subtitles.entity.specterpillar.hurt", "Specterpillar hurts");
+        this.add("subtitles.entity.spectre.ambient", "Spectre chirps");
+        this.add("subtitles.entity.spectre.death", "Spectre dies");
+        this.add("subtitles.entity.spectre.hurt", "Spectre hurts");
+        this.add("subtitles.entity.spectre.lock_to_spyglass", "Spyglass locks to Spectre");
+        this.add("subtitles.entity.spectre.receive_item", "Spectre receives Item");
+        this.add("subtitles.entity.berserker.roar", "Berserker roars");
+        this.add("subtitles.entity.berserker.idle", "Berserker grunts");
+        this.add("subtitles.entity.berserker.smash", "Berserker smashes");
+        this.add("subtitles.entity.berserker.step", "Berserker steps");
+        this.add("subtitles.entity.berserker.hurt", "Berserker hurts");
+        this.add("subtitles.entity.berserker.death", "Berserker dies");
+        this.add("subtitles.entity.preserved.hurt", "Preserved hurts");
         GBiomes.getIds().forEach(resourceLocation -> {
             this.add("biome.galosphere." + resourceLocation.getPath(), reformat(resourceLocation.getPath()));
         });
