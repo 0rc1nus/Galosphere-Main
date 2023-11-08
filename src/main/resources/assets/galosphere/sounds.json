@@ -1431,21 +1431,6 @@
 		],
 		"subtitle": "subtitles.entity.berserker.smash"
 	},
-	"entity.preserved.hurt": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/preserved/hurt1",
-				"pitch": 1,
-				"volume": 1
-			},
-			{
-				"name": "galosphere:entity/preserved/hurt2",
-				"pitch": 1,
-				"volume": 1
-			}
-		],
-		"subtitle": "subtitles.entity.preserved.hurt"
-	},
 	"entity.berserker.hurt": {
 		"sounds": [
 			{
@@ -1588,6 +1573,51 @@
 			}
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"entity.preserved.death": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/preserved/death",
+				"pitch": 1,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.entity.preserved.death"
+	},
+	"entity.preserved.hurt": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/preserved/hurt1",
+				"pitch": 1,
+				"volume": 0.6
+			},
+			{
+				"name": "galosphere:entity/preserved/hurt2",
+				"pitch": 1,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.entity.preserved.hurt"
+	},
+	"entity.preserved.idle": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/preserved/idle1",
+				"pitch": 1,
+				"volume": 0.1
+			},
+			{
+				"name": "galosphere:entity/preserved/idle2",
+				"pitch": 1,
+				"volume": 0.1
+			},
+			{
+				"name": "galosphere:entity/preserved/idle3",
+				"pitch": 1,
+				"volume": 0.1
+			}
+		],
+		"subtitle": "subtitles.entity.preserved.idle"
 	},
 	"entity.specterpillar.death": {
 		"sounds": [

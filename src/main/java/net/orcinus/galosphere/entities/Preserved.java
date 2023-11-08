@@ -1,7 +1,10 @@
 package net.orcinus.galosphere.entities;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.server.level.ServerLevel;
@@ -29,7 +32,6 @@ import net.orcinus.galosphere.entities.ai.PreservedAi;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
-import org.jetbrains.annotations.Nullable;
 
 public class Preserved extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Preserved>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.PRESERVED_ENTITY_SENSOR);
@@ -74,8 +76,13 @@ public class Preserved extends Monster {
     }
 
     @Override
+    protected SoundEvent getAmbientSound() {
+        return GSoundEvents.PRESERVED_IDLE;
+    }
+
+    @Override
     protected SoundEvent getDeathSound() {
-        return GSoundEvents.PINK_SALT.getBreakSound();
+        return GSoundEvents.PRESERVED_DEATH;
     }
 
     @Override
