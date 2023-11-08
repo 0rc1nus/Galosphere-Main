@@ -91,6 +91,13 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("upgrade.galosphere.silver_upgrade", "Silver Upgrade");
         translationBuilder.add("item.galosphere.smithing_template.silver_upgrade.applies_to", "Leather Equipment");
         translationBuilder.add("item.galosphere.smithing_template.silver_upgrade.ingredients", "Silver Ingot");
+        translationBuilder.add("item.galosphere.smithing_template.silver_upgrade.base_slot_description", "Add Leather Armor");
+        translationBuilder.add("item.galosphere.smithing_template.silver_upgrade.additions_slot_description", "Add Silver Ingot");
+        translationBuilder.add("upgrade.galosphere.preserved_upgrade", "Preserved Upgrade");
+        translationBuilder.add("item.galosphere.smithing_template.preserved_upgrade.applies_to", "Everything");
+        translationBuilder.add("item.galosphere.smithing_template.preserved_upgrade.ingredients", "Pink Salt Shard");
+        translationBuilder.add("item.galosphere.smithing_template.preserved_upgrade.base_slot_description", "Add an item");
+        translationBuilder.add("item.galosphere.smithing_template.preserved_upgrade.additions_slot_description", "Add Pink Salt Shard");
         translationBuilder.add("container.galosphere.combustion_table", "Combustion Table");
     }
 

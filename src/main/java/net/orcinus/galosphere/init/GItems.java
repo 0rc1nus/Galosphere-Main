@@ -20,6 +20,7 @@ import net.orcinus.galosphere.items.GoldenLichenCordycepsItem;
 import net.orcinus.galosphere.items.IconItem;
 import net.orcinus.galosphere.items.LichenCordycepsItem;
 import net.orcinus.galosphere.items.PreservedFleshItem;
+import net.orcinus.galosphere.items.PreservedSmithingTemplateItem;
 import net.orcinus.galosphere.items.SilverBombItem;
 import net.orcinus.galosphere.items.SilverSmithingTemplateItem;
 import net.orcinus.galosphere.items.SpectreBottleItem;
@@ -65,7 +66,7 @@ public class GItems {
     public static final Item CHANDELIER = register("chandelier", new ChandelierItem(GBlocks.CHANDELIER, new Item.Properties()));
     public static final Item SUCCULENT_PETALS = register("succulent_petals", new ItemNameBlockItem(GBlocks.SUCCULENT_CROP, new Item.Properties()));
 
-    public static final Item PRESERVING_TEMPLATE = register("preserving_template", SmithingTemplateItem.createNetheriteUpgradeTemplate());
+    public static final Item PRESERVING_TEMPLATE = register("preserving_template", new PreservedSmithingTemplateItem());
     public static final Item PRESERVED_FLESH = register("preserved_flesh", new PreservedFleshItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.1f).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.8f).meat().build())));
 
     public static Item registerBaseItem(String name) {
