@@ -44,7 +44,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     @Unique
     private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
     @Unique
-    private boolean persevered;
+    private boolean preserved;
 
     @Inject(at = @At("TAIL"), method = "canBeSeenAsEnemy", cancellable = true)
     private void G$canAttack(CallbackInfoReturnable<Boolean> cir) {
@@ -66,7 +66,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         tag.put("BannerStack", ((LivingEntity)(Object)this).getEntityData().get(BANNER_STACK).save(new CompoundTag()));
         tag.putFloat("GoldenAirSupply", this.getGoldenAirSupply());
         tag.putBoolean("UsingSpectreBoundedSpyglass", this.isUsingSpectreBoundedSpyglass());
-        tag.putBoolean("Persevered", this.persevered);
+        tag.putBoolean("Preserved", this.preserved);
     }
 
     @Inject(at = @At("RETURN"), method = "readAdditionalSaveData")
@@ -74,8 +74,8 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         this.setBanner(ItemStack.of(tag.getCompound("BannerStack")));
         this.setGoldenAirSupply(tag.getFloat("GoldenAirSupply"));
         this.setUsingSpectreBoundedSpyglass(tag.getBoolean("UsingSpectreBoundedSpyglass"));
-        if (this.persevered) {
-            this.persevered = tag.getBoolean("Persevered");
+        if (this.preserved) {
+            this.preserved = tag.getBoolean("Preserved");
         }
     }
 

@@ -4,31 +4,34 @@ import java.util.Optional;
 
 import com.google.common.collect.ImmutableMap;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.Berserker;
+import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 
 public class Smash extends Behavior<Berserker> {
     private static final int DURATION = Mth.ceil(27.0F);
+    private static final int MAX_DURATION = 60;
 
     public Smash() {
-        super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT), 60);
+        super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT, GMemoryModuleTypes.IS_SMASHING, MemoryStatus.REGISTERED, GMemoryModuleTypes.IS_IMPALING, MemoryStatus.VALUE_ABSENT), MAX_DURATION);
     }
 
     @Override
     protected boolean checkExtraStartConditions(ServerLevel serverLevel, Berserker livingEntity) {
         Optional<LivingEntity> memory = livingEntity.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
-        if (livingEntity.getPhase() != Berserker.Phase.IDLING || livingEntity.isStationary()) {
-            return false;
-        }
-        return memory.filter(livingEntity::isWithinMeleeAttackRange).isPresent();
+        return livingEntity.shouldAttack() && memory.filter(livingEntity::isWithinMeleeAttackRange).isPresent();
     }
 
     @Override
@@ -38,7 +41,9 @@ public class Smash extends Behavior<Berserker> {
 
     @Override
     protected void start(ServerLevel serverLevel, Berserker livingEntity, long l) {
-        livingEntity.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, DURATION);
+        Brain<Berserker> brain = livingEntity.getBrain();
+        brain.setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, DURATION);
+        brain.setMemoryWithExpiry(GMemoryModuleTypes.IS_SMASHING, Unit.INSTANCE, MAX_DURATION);
         serverLevel.broadcastEntityEvent(livingEntity, (byte)4);
         livingEntity.setPhase(Berserker.Phase.SMASH);
         livingEntity.playSound(GSoundEvents.BERSERKER_DUO_SMASH, 10.0f, 1.0F);
@@ -68,7 +73,7 @@ public class Smash extends Behavior<Berserker> {
         }
 
         self.level().broadcastEntityEvent(self, (byte) 32);
-        self.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, 60 - DURATION);
+        self.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, MAX_DURATION - DURATION);
     }
 
     @Override

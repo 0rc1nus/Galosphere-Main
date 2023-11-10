@@ -3,6 +3,7 @@ package net.orcinus.galosphere.data;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.orcinus.galosphere.init.GBiomes;
@@ -35,7 +36,7 @@ public class GLanguageProvider extends FabricLanguageProvider {
         GMobEffects.MOB_EFFECTS.values().forEach(mobEffect -> {
             translationBuilder.add(mobEffect, reformat(BuiltInRegistries.MOB_EFFECT.getKey(mobEffect).getPath()));
         });
-        translationBuilder.add("item.galosphere.persevered", "Persevered");
+        translationBuilder.add("item.galosphere.preserved", "Preserved");
         translationBuilder.add("item.galosphere.silver_bomb.duration", "Duration");
         translationBuilder.add("item.galosphere.silver_bomb.explosion", "Explosion");
         translationBuilder.add("item.galosphere.silver_bomb.bouncy", "Bouncy");
@@ -56,9 +57,11 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("subtitles.entity.berserker.step", "Berserker steps");
         translationBuilder.add("subtitles.entity.berserker.hurt", "Berserker hurts");
         translationBuilder.add("subtitles.entity.berserker.death", "Berserker dies");
+        translationBuilder.add("subtitles.entity.preserved.idle", "Preserved groans");
         translationBuilder.add("subtitles.entity.preserved.hurt", "Preserved hurts");
-        GBiomes.getIds().forEach(resourceLocation -> {
-            translationBuilder.add("biome.galosphere." + resourceLocation.getPath(), reformat(resourceLocation.getPath()));
+        translationBuilder.add("subtitles.entity.preserved.death", "Preserved dies");
+        GBiomes.getIds().stream().map(ResourceLocation::getPath).forEach(path -> {
+            translationBuilder.add("biome.galosphere." + path, reformat(path));
         });
         translationBuilder.add("galosphere.midnightconfig.title", "Galosphere Config");
         translationBuilder.add("galosphere.midnightconfig.slowBuddingAmethystDestroySpeed", "Slowed Budding Amethyst Destroy Speed");

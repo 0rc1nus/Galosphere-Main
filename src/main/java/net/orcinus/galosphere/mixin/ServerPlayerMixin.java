@@ -16,12 +16,12 @@ public class ServerPlayerMixin {
         ServerPlayer $this = (ServerPlayer) (Object) this;
         for (ItemStack itemStack : serverPlayer.getInventory().items) {
             CompoundTag tag = itemStack.getTag();
-            boolean stackFlag = tag != null && tag.contains("Persevered");
+            boolean stackFlag = tag != null && tag.contains("Preserved");
             if (!stackFlag) {
                 continue;
             }
-            if (tag.contains("Persevered")) {
-                tag.remove("Persevered");
+            if (tag.contains("Preserved")) {
+                tag.remove("Preserved");
             }
             $this.getInventory().add(itemStack);
         }

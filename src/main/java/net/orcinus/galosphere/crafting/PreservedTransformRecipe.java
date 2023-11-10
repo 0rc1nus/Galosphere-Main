@@ -6,11 +6,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmithingRecipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GRecipeSerializers;
@@ -29,10 +31,12 @@ public class PreservedTransformRecipe implements SmithingRecipe {
     @Override
     public boolean isBaseIngredient(ItemStack itemStack) {
         CompoundTag tag = itemStack.getTag();
-        if (tag != null && tag.contains("Persevered")) {
+        if (tag != null && tag.contains("Preserved")) {
             return false;
         }
-        return itemStack.getCount() == 1 && !(tag != null && tag.contains("Persevered"));
+        boolean notPreserved = !(tag != null && tag.contains("Preserved"));
+        boolean blockItem = notPreserved && itemStack.getItem() instanceof BlockItem dummy && dummy.getBlock() instanceof ShulkerBoxBlock;
+        return blockItem || itemStack.getCount() == 1 && notPreserved;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class PreservedTransformRecipe implements SmithingRecipe {
     @Override
     public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         ItemStack itemStack = container.getItem(1).copy();
-        itemStack.getOrCreateTag().putBoolean("Persevered", true);
+        itemStack.getOrCreateTag().putBoolean("Preserved", true);
         return itemStack;
     }
 

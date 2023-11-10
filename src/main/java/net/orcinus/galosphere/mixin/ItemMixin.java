@@ -19,8 +19,8 @@ public class ItemMixin {
     
     @Inject(at = @At("HEAD"), method = "appendHoverText")
     private void G$appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag, CallbackInfo ci) {
-        if (itemStack.getTag() != null && itemStack.getTag().contains("Persevered")) {
-            list.add(Component.translatable("item.galosphere.persevered").withStyle(ChatFormatting.GRAY));
+        if (itemStack.getTag() != null && itemStack.getTag().contains("Preserved")) {
+            list.add(Component.translatable("item.galosphere.preserved").withStyle(ChatFormatting.GRAY));
         }
     }
     

@@ -116,7 +116,7 @@ public class GalosphereClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTERPILLAR, SpecterpillarModel::createBodyLayer);
-        EntityModelLayerRegistry.registerModelLayer(GModelLayers.BLIGHTED, BerserkerModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(GModelLayers.BERSERKER, BerserkerModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.STERLING_HELMET, SterlingArmorModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.GILDED_BEADS, GildedBeadsRenderer::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.PINK_SALT_PILLAR, PinkSaltPillarModel::createBodyLayer);

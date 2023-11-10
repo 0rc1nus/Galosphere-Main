@@ -17,9 +17,11 @@ import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromAttackTargetIfTar
 import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromLookTarget;
 import net.minecraft.world.entity.ai.behavior.StartAttacking;
 import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
+import net.minecraft.world.entity.ai.behavior.warden.Emerging;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.orcinus.galosphere.entities.Preserved;
+import net.orcinus.galosphere.entities.ai.tasks.Rise;
 
 import java.util.Optional;
 
@@ -27,6 +29,7 @@ public class PreservedAi {
 
     public static Brain<?> makeBrain(Brain<Preserved>  brain) {
         PreservedAi.initCoreActivity(brain);
+        PreservedAi.initEmergeActivity(brain);
         PreservedAi.initIdleActivity(brain);
         PreservedAi.initFightActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
@@ -40,6 +43,12 @@ public class PreservedAi {
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink()
         ));
+    }
+
+    private static void initEmergeActivity(Brain<Preserved> brain) {
+        brain.addActivityAndRemoveMemoryWhenStopped(Activity.EMERGE, 5, ImmutableList.of(
+                new Rise(40)
+        ), MemoryModuleType.IS_EMERGING);
     }
 
     private static void initIdleActivity(Brain<Preserved> brain) {
@@ -71,7 +80,7 @@ public class PreservedAi {
     }
 
     public static void updateActivity(Preserved elemental) {
-        elemental.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
+        elemental.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.EMERGE, Activity.FIGHT, Activity.IDLE));
     }
 
 }

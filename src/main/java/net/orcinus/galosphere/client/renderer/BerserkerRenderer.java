@@ -25,7 +25,7 @@ public class BerserkerRenderer extends MobRenderer<Berserker, BerserkerModel<Ber
     });
 
     public BerserkerRenderer(EntityRendererProvider.Context context) {
-        super(context, new BerserkerModel<>(context.bakeLayer(GModelLayers.BLIGHTED)), 0.9F);
+        super(context, new BerserkerModel<>(context.bakeLayer(GModelLayers.BERSERKER)), 0.9F);
     }
 
     @Override

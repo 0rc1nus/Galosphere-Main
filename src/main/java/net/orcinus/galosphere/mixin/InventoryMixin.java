@@ -12,7 +12,7 @@ public class InventoryMixin {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"), method = "dropAll")
     private boolean G$isEmpty(ItemStack instance) {
-        return instance.getTag() != null && instance.getTag().contains("Persevered");
+        return instance.getTag() != null && instance.getTag().contains("Preserved");
     }
 
 }
