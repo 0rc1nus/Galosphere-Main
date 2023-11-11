@@ -1471,26 +1471,6 @@
 		],
 		"subtitle": "subtitles.entity.berserker.idle"
 	},
-	"entity.berserker.roar": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/berserker/roar1",
-				"pitch": 1,
-				"volume": 1
-			},
-			{
-				"name": "galosphere:entity/berserker/roar2",
-				"pitch": 1,
-				"volume": 1
-			},
-			{
-				"name": "galosphere:entity/berserker/roar3",
-				"pitch": 1,
-				"volume": 1
-			}
-		],
-		"subtitle": "subtitles.entity.berserker.roar"
-	},
 	"entity.berserker.punch": {
 		"sounds": [
 			{
@@ -1511,15 +1491,25 @@
 		],
 		"subtitle": "subtitles.entity.berserker.punch"
 	},
-	"entity.berserker.summoning": {
+	"entity.berserker.roar": {
 		"sounds": [
 			{
-				"name": "galosphere:entity/berserker/summon",
+				"name": "galosphere:entity/berserker/roar1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/roar2",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/roar3",
 				"pitch": 1,
 				"volume": 1
 			}
 		],
-		"subtitle": "subtitles.entity.berserker.summoning"
+		"subtitle": "subtitles.entity.berserker.roar"
 	},
 	"entity.berserker.smash": {
 		"sounds": [
@@ -1576,6 +1566,16 @@
 		],
 		"subtitle": "subtitles.entity.berserker.step"
 	},
+	"entity.berserker.summoning": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/summon",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.summoning"
+	},
 	"entity.glow_flare.spread": {
 		"sounds": [
 			{
@@ -1613,6 +1613,31 @@
 			}
 		],
 		"subtitle": "subtitles.entity.preserved.death"
+	},
+	"entity.preserved.emerge": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/preserved/emerge1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/preserved/emerge2",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/preserved/emerge3",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/preserved/emerge4",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.entity.preserved.emerge"
 	},
 	"entity.preserved.hurt": {
 		"sounds": [
