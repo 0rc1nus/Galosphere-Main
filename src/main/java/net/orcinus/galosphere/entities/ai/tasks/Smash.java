@@ -25,7 +25,7 @@ public class Smash extends Behavior<Berserker> {
     private static final int MAX_DURATION = 60;
 
     public Smash() {
-        super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT, GMemoryModuleTypes.IS_SMASHING, MemoryStatus.REGISTERED, GMemoryModuleTypes.IS_IMPALING, MemoryStatus.VALUE_ABSENT), MAX_DURATION);
+        super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT, GMemoryModuleTypes.IS_SMASHING, MemoryStatus.REGISTERED, GMemoryModuleTypes.IS_IMPALING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.IS_SUMMONING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.SMASHING_COOLDOWN, MemoryStatus.VALUE_ABSENT), MAX_DURATION);
     }
 
     @Override
@@ -44,7 +44,6 @@ public class Smash extends Behavior<Berserker> {
         Brain<Berserker> brain = livingEntity.getBrain();
         brain.setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, DURATION);
         brain.setMemoryWithExpiry(GMemoryModuleTypes.IS_SMASHING, Unit.INSTANCE, MAX_DURATION);
-        serverLevel.broadcastEntityEvent(livingEntity, (byte)4);
         livingEntity.setPhase(Berserker.Phase.SMASH);
         livingEntity.playSound(GSoundEvents.BERSERKER_DUO_SMASH, 10.0f, 1.0F);
     }
@@ -79,5 +78,6 @@ public class Smash extends Behavior<Berserker> {
     @Override
     protected void stop(ServerLevel serverLevel, Berserker livingEntity, long l) {
         livingEntity.setPhase(Berserker.Phase.IDLING);
+        livingEntity.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.SMASHING_COOLDOWN, Unit.INSTANCE, 100);
     }
 }

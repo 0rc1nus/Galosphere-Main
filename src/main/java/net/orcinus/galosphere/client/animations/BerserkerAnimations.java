@@ -311,7 +311,7 @@ public class BerserkerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1.625f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM))).build();
-    public static final AnimationDefinition BERSERKER_SMASH = AnimationDefinition.Builder.withLength(2.5f)
+    public static final AnimationDefinition BERSERKER_IMPALING = AnimationDefinition.Builder.withLength(2.5f)
             .addAnimation("head",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
@@ -1054,7 +1054,7 @@ public class BerserkerAnimations {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(0.2916767f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
-    public static final AnimationDefinition BERSERKER_PUNCH = AnimationDefinition.Builder.withLength(0.7083434f).looping()
+    public static final AnimationDefinition BERSERKER_PUNCH = AnimationDefinition.Builder.withLength(0.7083434f)
             .addAnimation("rightArm",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),

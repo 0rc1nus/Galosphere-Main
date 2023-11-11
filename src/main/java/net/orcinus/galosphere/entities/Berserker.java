@@ -1,14 +1,8 @@
 package net.orcinus.galosphere.entities;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.jetbrains.annotations.Nullable;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Dynamic;
-
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -17,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Unit;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -54,10 +49,14 @@ import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Optional;
 
 public class Berserker extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Berserker>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.BLIGHTED_ENTITY_SENSOR);
-    protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.BREED_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.AVOID_TARGET, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, GMemoryModuleTypes.IS_ROARING, GMemoryModuleTypes.IMPALING_COOLDOWN, GMemoryModuleTypes.IMPALING_COUNT, GMemoryModuleTypes.IS_SMASHING, GMemoryModuleTypes.IS_IMPALING);
+    protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.BREED_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.AVOID_TARGET, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, GMemoryModuleTypes.IS_ROARING, GMemoryModuleTypes.IMPALING_COOLDOWN, GMemoryModuleTypes.IMPALING_COUNT, GMemoryModuleTypes.IS_SMASHING, GMemoryModuleTypes.IS_IMPALING, GMemoryModuleTypes.IS_SUMMONING, GMemoryModuleTypes.SUMMONING_COOLDOWN, GMemoryModuleTypes.SUMMON_COUNT, GMemoryModuleTypes.SMASHING_COOLDOWN);
     private static final EntityDataAccessor<String> PHASE = SynchedEntityData.defineId(Berserker.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> STATIONARY_TICKS = SynchedEntityData.defineId(Berserker.class, EntityDataSerializers.INT);
     private final List<MobEffect> selectedEffects = Util.make(Lists.newArrayList(), list -> {
@@ -66,7 +65,8 @@ public class Berserker extends Monster {
     });
     public AnimationState roarAnimationState = new AnimationState();
     public AnimationState attackAnimationState = new AnimationState();
-    public AnimationState undermineAnimationState = new AnimationState();
+    public AnimationState punchAnimationState = new AnimationState();
+    public AnimationState impalingAnimationState = new AnimationState();
     public AnimationState summoningAnimationState = new AnimationState();
 
     public Berserker(EntityType<? extends Monster> entityType, Level level) {
@@ -139,8 +139,32 @@ public class Berserker extends Monster {
     public void setPhase(Phase phase) {
         if (phase == Phase.IDLING) {
             this.setPose(Pose.STANDING);
+        } else if (phase == Phase.SMASH) {
+            this.level().broadcastEntityEvent(this, (byte)4);
+        } else if (phase == Phase.UNDERMINE) {
+            this.level().broadcastEntityEvent(this, (byte)6);
+        } else if (phase == Phase.SUMMONING) {
+            this.level().broadcastEntityEvent(this, (byte)7);
         }
         this.entityData.set(PHASE, phase.name());
+    }
+
+    @Override
+    public void handleEntityEvent(byte b) {
+        if (b == 4) {
+            this.attackAnimationState.start(this.tickCount);
+        } else if (b == 5) {
+            this.punchAnimationState.start(this.tickCount);
+        } else if (b == 6) {
+            this.impalingAnimationState.start(this.tickCount);
+        } else if (b == 7) {
+            this.summoningAnimationState.start(this.tickCount);
+        } else if (b == 32) {
+            BlockPos blockPos = this.getOnPos();
+            this.level().addParticle(GParticleTypes.IMPACT, blockPos.getX() + 0.5D, blockPos.getY() + 1.15, blockPos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
+        }else {
+            super.handleEntityEvent(b);
+        }
     }
 
     public Phase getPhase() {
@@ -156,7 +180,7 @@ public class Berserker extends Monster {
         double threshold = range - 0.6D;
         double increment = 0.2D;
         if (!this.level().isClientSide) {
-            if (this.tickCount % 200 == 0) {
+            if (this.tickCount % 500 == 0) {
                 this.heal(10.0f);
             }
             Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
@@ -217,7 +241,7 @@ public class Berserker extends Monster {
     protected SoundEvent getStepSound() {
         return GSoundEvents.BERSERKER_STEP;
     }
-    
+
     @Override
     protected void playStepSound(BlockPos blockPos, BlockState blockState) {
         playSound(getStepSound(), 1, 1);
@@ -247,31 +271,19 @@ public class Berserker extends Monster {
         if (DATA_POSE.equals(entityDataAccessor)) {
             if (this.getPose() == Pose.ROARING) {
                 this.roarAnimationState.start(this.tickCount);
-            } else if (this.getPose() == Pose.CROAKING) {
-                this.summoningAnimationState.start(this.tickCount);
             }
         }
         super.onSyncedDataUpdated(entityDataAccessor);
     }
 
     @Override
-    public void handleEntityEvent(byte b) {
-        if (b == 4) {
-            this.attackAnimationState.start(this.tickCount);
-        } else if (b == 62) {
-            this.undermineAnimationState.start(this.tickCount);
-        } else if (b == 32) {
-            BlockPos blockPos = this.getOnPos();
-            this.level().addParticle(GParticleTypes.IMPACT, blockPos.getX() + 0.5D, blockPos.getY() + 1.15, blockPos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
-        }else {
-            super.handleEntityEvent(b);
-        }
-    }
-
-    @Override
     public boolean doHurtTarget(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
+        }
+        if (this.getPhase() != Phase.SMASH) {
+            this.level().broadcastEntityEvent(this, (byte) 5);
+            this.playSound(SoundEvents.WARDEN_ATTACK_IMPACT, 1.0f, this.getVoicePitch());
         }
         return super.doHurtTarget(entity);
     }
@@ -283,14 +295,14 @@ public class Berserker extends Monster {
 
     @Override
     public boolean hurt(DamageSource damageSource, float f) {
-        if (damageSource.getDirectEntity() instanceof AbstractArrow) {
+        if (damageSource.getDirectEntity() instanceof AbstractArrow && this.getPhase() != Phase.IDLING) {
             return false;
         }
         return super.hurt(damageSource, f);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Berserker.createMonsterAttributes().add(Attributes.MAX_HEALTH, 155.0).add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.ATTACK_DAMAGE, 15.0D).add(Attributes.KNOCKBACK_RESISTANCE, 1.0D).add(Attributes.ATTACK_KNOCKBACK, 1.5D);
+        return Berserker.createMonsterAttributes().add(Attributes.MAX_HEALTH, 155.0).add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.ATTACK_DAMAGE, 10.0D).add(Attributes.KNOCKBACK_RESISTANCE, 1.0D).add(Attributes.ATTACK_KNOCKBACK, 1.5D);
     }
 
     @Override

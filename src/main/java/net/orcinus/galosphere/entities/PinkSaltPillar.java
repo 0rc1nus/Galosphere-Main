@@ -96,6 +96,7 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
             if (--this.warmupDelayTicks < 0) {
                 List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2, 0.0, 0.2));
                 for (LivingEntity livingEntity : list) {
+                    if (livingEntity instanceof Preserved) continue;
                     this.dealDamageTo(livingEntity);
                 }
                 if (!this.sentSpikeEvent) {
@@ -119,12 +120,12 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
             return;
         }
         if (livingEntity2 == null) {
-            livingEntity.hurt(this.damageSources().magic(), 6.0f);
+            livingEntity.hurt(this.damageSources().magic(), 3.0F);
         } else {
             if (livingEntity2.isAlliedTo(livingEntity)) {
                 return;
             }
-            livingEntity.hurt(this.damageSources().indirectMagic(this, livingEntity2), 6.0f);
+            livingEntity.hurt(this.damageSources().indirectMagic(this, livingEntity2), 3.0F);
         }
     }
 

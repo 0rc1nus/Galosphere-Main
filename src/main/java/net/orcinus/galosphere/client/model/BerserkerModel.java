@@ -64,8 +64,9 @@ public class BerserkerModel<T extends Berserker> extends HierarchicalModel<T> {
         head.yRot = netHeadYaw * ((float)Math.PI / 180);
         this.animateWalk(BerserkerAnimations.BERSERKER_WALK, limbSwing, limbSwingAmount, 3.0F, 4.5F);
         this.animate(entity.attackAnimationState, BerserkerAnimations.BERSERKER_ATTACK, ageInTicks, 1.0F);
-        this.animate(entity.undermineAnimationState, BerserkerAnimations.BERSERKER_SMASH, ageInTicks, 1.0F);
+        this.animate(entity.impalingAnimationState, BerserkerAnimations.BERSERKER_IMPALING, ageInTicks, 1.0F);
         this.animate(entity.roarAnimationState, BerserkerAnimations.BERSERKER_ROAR, ageInTicks, 1.0F);
+        this.animate(entity.punchAnimationState, BerserkerAnimations.BERSERKER_PUNCH, ageInTicks, 1.0F);
         this.animate(entity.summoningAnimationState, BerserkerAnimations.BERSERKER_SPAWN_MINIONS, ageInTicks, 1.0F);
     }
 

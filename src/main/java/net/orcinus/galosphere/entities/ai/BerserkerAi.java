@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.DoNothing;
 import net.minecraft.world.entity.ai.behavior.LookAtTargetSink;
+import net.minecraft.world.entity.ai.behavior.MeleeAttack;
 import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
 import net.minecraft.world.entity.ai.behavior.RandomStroll;
 import net.minecraft.world.entity.ai.behavior.RunOne;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.schedule.Activity;
 import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.entities.ai.tasks.ConditionalWalkIfTargetOutOfReach;
 import net.orcinus.galosphere.entities.ai.tasks.Smash;
+import net.orcinus.galosphere.entities.ai.tasks.Summon;
 import net.orcinus.galosphere.entities.ai.tasks.Undermine;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
@@ -67,6 +69,8 @@ public class BerserkerAi {
                 new Smash(),
                 BehaviorBuilder.triggerIf(predicate, ConditionalWalkIfTargetOutOfReach.create(1.2F)),
                 new Undermine(),
+                new Summon(),
+                BehaviorBuilder.triggerIf(Berserker::shouldAttack, MeleeAttack.create(30)),
                 StopAttackingIfTargetInvalid.create(livingEntity -> !berserker.canTargetEntity(livingEntity), (mob, livingEntity) -> {}, false)
         ), MemoryModuleType.ATTACK_TARGET);
     }

@@ -23,8 +23,12 @@ public class GMemoryModuleTypes {
     public static final MemoryModuleType<Unit> IS_ROARING = register("roaring", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> IS_SMASHING = register("smashing", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> IS_IMPALING = register("impaling", Codec.unit(Unit.INSTANCE));
+    public static final MemoryModuleType<Unit> IS_SUMMONING = register("summoning", Codec.unit(Unit.INSTANCE));
+    public static final MemoryModuleType<Unit> SUMMONING_COOLDOWN = register("summoning_cooldown", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> IMPALING_COOLDOWN = register("impaling_cooldown", Codec.unit(Unit.INSTANCE));
+    public static final MemoryModuleType<Unit> SMASHING_COOLDOWN = register("smashing_cooldown", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Integer> IMPALING_COUNT = register("impaling_count", Codec.INT);
+    public static final MemoryModuleType<Integer> SUMMON_COUNT = register("summon_count", Codec.INT);
 
     private static <U> MemoryModuleType<U> register(String string, Codec<U> codec) {
         MemoryModuleType<U> memoryModuleType = new MemoryModuleType<>(Optional.of(codec));
