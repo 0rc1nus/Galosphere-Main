@@ -283,7 +283,7 @@ public class Berserker extends Monster {
         }
         if (this.getPhase() != Phase.SMASH) {
             this.level().broadcastEntityEvent(this, (byte) 5);
-            this.playSound(SoundEvents.WARDEN_ATTACK_IMPACT, 1.0f, this.getVoicePitch());
+            this.playSound(GSoundEvents.BERSERKER_PUNCH, 1, 1);
         }
         return super.doHurtTarget(entity);
     }

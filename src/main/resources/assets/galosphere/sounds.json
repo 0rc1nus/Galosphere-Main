@@ -1491,6 +1491,36 @@
 		],
 		"subtitle": "subtitles.entity.berserker.roar"
 	},
+	"entity.berserker.punch": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/punch1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/punch2",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/punch3",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.punch"
+	},
+	"entity.berserker.summoning": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/summon",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.summoning"
+	},
 	"entity.berserker.smash": {
 		"sounds": [
 			{

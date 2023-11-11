@@ -53,7 +53,7 @@ public class Summon extends Behavior<Berserker> {
         brain.setMemoryWithExpiry(GMemoryModuleTypes.IS_SUMMONING, Unit.INSTANCE, MAX_DURATION);
         brain.eraseMemory(MemoryModuleType.WALK_TARGET);
         livingEntity.setPhase(Berserker.Phase.SUMMONING);
-        livingEntity.playSound(GSoundEvents.BERSERKER_SMASH, 10.0f, 1.0F);
+        livingEntity.playSound(GSoundEvents.BERSERKER_SUMMONING, 10.0f, 1.0F);
     }
 
     @Override

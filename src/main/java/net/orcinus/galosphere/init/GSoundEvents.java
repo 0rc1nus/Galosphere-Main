@@ -37,6 +37,8 @@ public class GSoundEvents {
     public static final SoundEvent BERSERKER_IDLE = register("entity.berserker.idle");
     public static final SoundEvent BERSERKER_DUO_SMASH = register("entity.berserker.duo_smash");
     public static final SoundEvent BERSERKER_SMASH = register("entity.berserker.smash");
+    public static final SoundEvent BERSERKER_SUMMONING = register("entity.berserker.summoning");
+    public static final SoundEvent BERSERKER_PUNCH = register("entity.berserker.punch");
     public static final SoundEvent BERSERKER_ROAR = register("entity.berserker.roar");
     public static final SoundEvent BERSERKER_STEP = register("entity.berserker.step");
 
