@@ -2,6 +2,7 @@ package net.orcinus.galosphere.entities.ai.tasks;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.MobSpawnType;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
+import net.minecraft.world.entity.player.Player;
 import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.entities.Preserved;
 import net.orcinus.galosphere.init.GEntityTypes;
@@ -26,6 +28,7 @@ public class Summon extends Behavior<Berserker> {
 
     public Summon() {
         super(ImmutableMap.of(
+                GMemoryModuleTypes.RAMPAGE_TICKS, MemoryStatus.VALUE_ABSENT,
                 MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED,
                 MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT,
                 MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT,
@@ -60,7 +63,7 @@ public class Summon extends Behavior<Berserker> {
     protected void tick(ServerLevel serverLevel, Berserker livingEntity, long l) {
         Brain<Berserker> brain = livingEntity.getBrain();
         brain.setMemory(GMemoryModuleTypes.SUMMON_COUNT, brain.getMemory(GMemoryModuleTypes.SUMMON_COUNT).orElse(0) + 1);
-        int max = 4;
+        int max = (int) (Math.max(3, (livingEntity.getMaxHealth() / livingEntity.getHealth()) / 3));
         if (brain.hasMemoryValue(GMemoryModuleTypes.SUMMON_COUNT) && brain.getMemory(GMemoryModuleTypes.SUMMON_COUNT).get() > max) {
             return;
         }

@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -25,7 +26,7 @@ public class Smash extends Behavior<Berserker> {
     private static final int MAX_DURATION = 60;
 
     public Smash() {
-        super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT, GMemoryModuleTypes.IS_SMASHING, MemoryStatus.REGISTERED, GMemoryModuleTypes.IS_IMPALING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.IS_SUMMONING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.SMASHING_COOLDOWN, MemoryStatus.VALUE_ABSENT), MAX_DURATION);
+        super(ImmutableMap.of(GMemoryModuleTypes.RAMPAGE_TICKS, MemoryStatus.VALUE_ABSENT, MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT, GMemoryModuleTypes.IS_SMASHING, MemoryStatus.REGISTERED, GMemoryModuleTypes.IS_IMPALING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.IS_SUMMONING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.SMASHING_COOLDOWN, MemoryStatus.VALUE_ABSENT), MAX_DURATION);
     }
 
     @Override
@@ -78,6 +79,8 @@ public class Smash extends Behavior<Berserker> {
     @Override
     protected void stop(ServerLevel serverLevel, Berserker livingEntity, long l) {
         livingEntity.setPhase(Berserker.Phase.IDLING);
-        livingEntity.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.SMASHING_COOLDOWN, Unit.INSTANCE, 100);
+        if (livingEntity.shouldUseMeleeAttack()) {
+            livingEntity.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.SMASHING_COOLDOWN, Unit.INSTANCE, 100);
+        }
     }
 }

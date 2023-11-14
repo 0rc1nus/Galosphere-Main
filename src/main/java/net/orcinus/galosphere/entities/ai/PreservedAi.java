@@ -61,7 +61,7 @@ public class PreservedAi {
 
     private static void initFightActivity(Brain<Preserved> brain) {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
-                SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(1.5F),
+                SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(1.2F),
                 MeleeAttack.create(40),
                 StopAttackingIfTargetInvalid.create()
         ), MemoryModuleType.ATTACK_TARGET);
@@ -75,12 +75,12 @@ public class PreservedAi {
         ));
     }
 
-    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Preserved elemental) {
-        return elemental.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE);
+    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Preserved preserved) {
+        return preserved.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE);
     }
 
-    public static void updateActivity(Preserved elemental) {
-        elemental.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.EMERGE, Activity.FIGHT, Activity.IDLE));
+    public static void updateActivity(Preserved preserved) {
+        preserved.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.EMERGE, Activity.FIGHT, Activity.IDLE));
     }
 
 }

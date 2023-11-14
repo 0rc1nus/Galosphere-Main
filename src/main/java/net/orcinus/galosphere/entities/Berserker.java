@@ -11,8 +11,9 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Unit;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -56,7 +57,7 @@ import java.util.Optional;
 
 public class Berserker extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Berserker>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.BLIGHTED_ENTITY_SENSOR);
-    protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.BREED_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.AVOID_TARGET, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, GMemoryModuleTypes.IS_ROARING, GMemoryModuleTypes.IMPALING_COOLDOWN, GMemoryModuleTypes.IMPALING_COUNT, GMemoryModuleTypes.IS_SMASHING, GMemoryModuleTypes.IS_IMPALING, GMemoryModuleTypes.IS_SUMMONING, GMemoryModuleTypes.SUMMONING_COOLDOWN, GMemoryModuleTypes.SUMMON_COUNT, GMemoryModuleTypes.SMASHING_COOLDOWN);
+    protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.BREED_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.AVOID_TARGET, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, GMemoryModuleTypes.IS_ROARING, GMemoryModuleTypes.IMPALING_COOLDOWN, GMemoryModuleTypes.IMPALING_COUNT, GMemoryModuleTypes.IS_SMASHING, GMemoryModuleTypes.IS_IMPALING, GMemoryModuleTypes.IS_SUMMONING, GMemoryModuleTypes.SUMMONING_COOLDOWN, GMemoryModuleTypes.SUMMON_COUNT, GMemoryModuleTypes.SMASHING_COOLDOWN, GMemoryModuleTypes.HURT_COUNT, GMemoryModuleTypes.RAMPAGE_TICKS);
     private static final EntityDataAccessor<String> PHASE = SynchedEntityData.defineId(Berserker.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> STATIONARY_TICKS = SynchedEntityData.defineId(Berserker.class, EntityDataSerializers.INT);
     private final List<MobEffect> selectedEffects = Util.make(Lists.newArrayList(), list -> {
@@ -76,7 +77,7 @@ public class Berserker extends Monster {
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        if (this.getStationaryTicks() > 0) {
+        if (damageSource.getEntity() instanceof Player player && !player.getAbilities().instabuild && this.getStationaryTicks() > 0) {
             return true;
         }
         return super.isInvulnerableTo(damageSource);
@@ -180,7 +181,7 @@ public class Berserker extends Monster {
         double threshold = range - 0.6D;
         double increment = 0.2D;
         if (!this.level().isClientSide) {
-            if (this.tickCount % 500 == 0) {
+            if (this.tickCount % 250 == 0) {
                 this.heal(10.0f);
             }
             Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
@@ -216,9 +217,13 @@ public class Berserker extends Monster {
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
-        this.setPose(Pose.ROARING);
-        this.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.IS_ROARING, Unit.INSTANCE, 52);
-        this.playSound(GSoundEvents.BERSERKER_ROAR, 3.0f, 1.0f);
+        if (mobSpawnType == MobSpawnType.STRUCTURE) {
+            this.setStationaryTicks(200);
+        } else {
+            this.setPose(Pose.ROARING);
+            this.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.IS_ROARING, Unit.INSTANCE, 52);
+            this.playSound(GSoundEvents.BERSERKER_ROAR, 3.0f, 1.0f);
+        }
         return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, compoundTag);
     }
 
@@ -276,12 +281,24 @@ public class Berserker extends Monster {
         super.onSyncedDataUpdated(entityDataAccessor);
     }
 
+    public boolean shouldUseMeleeAttack() {
+        Optional<LivingEntity> memory = this.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
+        if (memory.isEmpty()) {
+            return false;
+        }
+        return this.isWithinMeleeAttackRange(memory.get()) && this.getPhase() != Phase.SMASH && this.shouldAttack() && this.isInHardMode() && this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS).isPresent();
+    }
+
+    public boolean isInHardMode() {
+        return this.level().getDifficulty() == Difficulty.HARD;
+    }
+
     @Override
     public boolean doHurtTarget(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
         }
-        if (this.getPhase() != Phase.SMASH) {
+        if (this.shouldUseMeleeAttack()) {
             this.level().broadcastEntityEvent(this, (byte) 5);
             this.playSound(GSoundEvents.BERSERKER_PUNCH, 1, 1);
         }
@@ -295,6 +312,18 @@ public class Berserker extends Monster {
 
     @Override
     public boolean hurt(DamageSource damageSource, float f) {
+        if (!this.level().isClientSide && this.getPhase() != Phase.IDLING && this.isInHardMode()) {
+            if (this.getBrain().getMemory(GMemoryModuleTypes.HURT_COUNT).isEmpty()) {
+                this.getBrain().setMemory(GMemoryModuleTypes.HURT_COUNT, 0);
+            } else {
+                int i = this.getBrain().getMemory(GMemoryModuleTypes.HURT_COUNT).get() + 1;
+                if (i > 2) {
+                    i = 0;
+                    this.getBrain().setMemory(GMemoryModuleTypes.RAMPAGE_TICKS, UniformInt.of(30, 150).sample(this.getRandom()));
+                }
+                this.getBrain().setMemory(GMemoryModuleTypes.HURT_COUNT, i);
+            }
+        }
         if (damageSource.getDirectEntity() instanceof AbstractArrow && this.getPhase() != Phase.IDLING) {
             return false;
         }

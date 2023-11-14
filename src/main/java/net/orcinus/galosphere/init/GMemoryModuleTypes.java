@@ -29,6 +29,8 @@ public class GMemoryModuleTypes {
     public static final MemoryModuleType<Unit> SMASHING_COOLDOWN = register("smashing_cooldown", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Integer> IMPALING_COUNT = register("impaling_count", Codec.INT);
     public static final MemoryModuleType<Integer> SUMMON_COUNT = register("summon_count", Codec.INT);
+    public static final MemoryModuleType<Integer> HURT_COUNT = register("hurt_count", Codec.INT);
+    public static final MemoryModuleType<Integer> RAMPAGE_TICKS = register("rampage_ticks", Codec.INT);
 
     private static <U> MemoryModuleType<U> register(String string, Codec<U> codec) {
         MemoryModuleType<U> memoryModuleType = new MemoryModuleType<>(Optional.of(codec));

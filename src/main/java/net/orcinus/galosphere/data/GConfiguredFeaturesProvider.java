@@ -39,6 +39,7 @@ public class GConfiguredFeaturesProvider extends FabricDynamicRegistryProvider {
         add(registries, entries, GConfiguredFeatures.PINK_SALT_STRAW_CEILING_PATCH);
         add(registries, entries, GConfiguredFeatures.PINK_SALT_STRAW_FLOOR_PATCH);
         add(registries, entries, GConfiguredFeatures.OASIS);
+        add(registries, entries, GConfiguredFeatures.BERSERKER);
     }
 
     private void add(HolderLookup.Provider registries, Entries entries, ResourceKey<ConfiguredFeature<?, ?>> resourceKey) {
