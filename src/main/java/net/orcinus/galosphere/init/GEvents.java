@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -18,10 +19,14 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ServerLevelData;
@@ -39,6 +44,7 @@ import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.util.BannerRendererUtil;
+import net.orcinus.galosphere.util.PreservedShulkerBox;
 
 public class GEvents {
 
@@ -96,6 +102,23 @@ public class GEvents {
     }
 
     private static void registerBlockUseEvents() {
+        PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity) -> {
+            if (blockEntity instanceof ShulkerBoxBlockEntity shulkerBoxBlockEntity && ((PreservedShulkerBox)shulkerBoxBlockEntity).isPreserved()) {
+                ItemStack stack = new ItemStack(ShulkerBoxBlock.getBlockByColor(((ShulkerBoxBlock) state.getBlock()).getColor()));
+                shulkerBoxBlockEntity.saveToItem(stack);
+                if (shulkerBoxBlockEntity.hasCustomName()) {
+                    stack.setHoverName(shulkerBoxBlockEntity.getCustomName());
+                }
+                stack.getOrCreateTag().putBoolean("Preserved", true);
+                ItemEntity itementity = new ItemEntity(player.level(), (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, stack);
+                itementity.setDefaultPickUpDelay();
+                world.addFreshEntity(itementity);
+                world.removeBlock(pos, false);
+                state.getBlock().playerWillDestroy(player.level(), pos, state, player);
+                return false;
+            }
+            return true;
+        });
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
             BlockPos pos = hitResult.getBlockPos();
             BlockState state = world.getBlockState(pos);

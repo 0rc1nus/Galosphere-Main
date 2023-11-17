@@ -45,8 +45,9 @@ public class GRecipeProvider extends FabricRecipeProvider {
         GBlockFamilies.getAllFamilies().forEach((blockFamily) -> {
             generateRecipes(consumer, blockFamily);
         });
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER).requires(Items.COAL).requires(GItems.PINK_SALT_SHARD).unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER).requires(Items.BONE_MEAL).requires(Items.COAL).requires(GItems.PINK_SALT_SHARD).unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GItems.SUCCULENT_PETALS, 3).requires(GBlocks.SUCCULENT.asItem()).unlockedBy("has_succulent", has(GBlocks.SUCCULENT.asItem())).save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, GBlocks.POTPOURRI).requires(Items.BOWL).requires(GItems.SUCCULENT_PETALS, 3).unlockedBy("has_succulent_petals", has(GItems.SUCCULENT_PETALS)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.PINK_SALT)
                 .define('#', GBlocks.PINK_SALT_STRAW.asItem())
                 .pattern("##")

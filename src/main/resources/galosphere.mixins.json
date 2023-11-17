@@ -18,6 +18,7 @@
     "PlayerMixin",
     "PowderSnowBlockMixin",
     "ServerPlayerMixin",
+    "ShulkerBoxBlockEntityMixin",
     "ThrownEnderpearlMixin",
     "access.AbstractHorseAccessor",
     "access.FireworkRocketEntityAccessor",

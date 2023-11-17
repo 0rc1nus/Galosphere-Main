@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "galosphere:succulent_petals"
+    },
+    {
+      "item": "galosphere:succulent_petals"
+    },
+    {
+      "item": "galosphere:succulent_petals"
+    }
+  ],
+  "result": {
+    "item": "galosphere:potpourri"
+  }
+}
