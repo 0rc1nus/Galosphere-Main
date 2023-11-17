@@ -27,8 +27,8 @@ public class GLanguageProvider extends LanguageProvider {
         GBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
             this.add(block, reformat(ForgeRegistries.BLOCKS.getKey(block).getPath()));
         });
-        GItems.ITEMS.getEntries().stream().map(RegistryObject::get).filter(Predicate.not(BlockItem.class::isInstance).or(ItemNameBlockItem.class::isInstance)).filter(Predicate.not(SilverSmithingTemplateItem.class::isInstance).and(Predicate.not(GItems.PRESERVING_TEMPLATE.get()::equals))).forEach(item -> {
-            if (item != GItems.PRESERVING_TEMPLATE.get() || item != GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get()) {
+        GItems.ITEMS.getEntries().stream().map(RegistryObject::get).filter(Predicate.not(BlockItem.class::isInstance).or(ItemNameBlockItem.class::isInstance)).filter(Predicate.not(SilverSmithingTemplateItem.class::isInstance).and(Predicate.not(GItems.PRESERVED_TEMPLATE.get()::equals))).forEach(item -> {
+            if (item != GItems.PRESERVED_TEMPLATE.get() || item != GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get()) {
                 this.add(item, reformat(ForgeRegistries.ITEMS.getKey(item).getPath()));
             }
         });

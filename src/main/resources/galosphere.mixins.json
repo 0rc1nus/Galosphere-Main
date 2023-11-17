@@ -17,7 +17,8 @@
     "PlayerMixin",
     "PowderSnowBlockMixin",
     "ProjectileAccessor",
-    "ShulkerBoxBlockEntityMixin"
+    "ShulkerBoxBlockEntityMixin",
+    "WorldGenRegionAccessor"
   ],
   "client": [
     "client.ClientLevelMixin",

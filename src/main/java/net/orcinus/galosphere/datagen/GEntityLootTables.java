@@ -21,7 +21,7 @@ public class GEntityLootTables extends VanillaEntityLoot {
         this.add(GEntityTypes.SPECTRE.get(), LootTable.lootTable());
         this.add(GEntityTypes.SPECTERPILLAR.get(), LootTable.lootTable());
         this.add(GEntityTypes.PRESERVED.get(), LootTable.lootTable());
-        this.add(GEntityTypes.BERSERKER.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.PRESERVING_TEMPLATE.get())).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.PRESERVED_FLESH.get()))));
+        this.add(GEntityTypes.BERSERKER.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.PRESERVED_TEMPLATE.get())).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.PRESERVED_FLESH.get()))));
     }
 
     @Override

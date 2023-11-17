@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "galosphere:item/preserving_template"
+    "layer0": "galosphere:item/preserved_template"
   }
 }

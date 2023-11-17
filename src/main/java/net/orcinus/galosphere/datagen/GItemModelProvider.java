@@ -120,7 +120,7 @@ public class GItemModelProvider extends ItemModelProvider {
         item("glow_flare");
         item("chandelier");
         item("silver_upgrade_smithing_template");
-        item("preserving_template");
+        item("preserved_template");
         item("pink_salt_shard");
         item("salted_jerky");
         item("cured_membrane");

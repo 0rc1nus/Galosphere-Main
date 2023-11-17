@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "galosphere:preserving_template"
+          "name": "galosphere:preserved_template"
         }
       ],
       "functions": [

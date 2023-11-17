@@ -25,6 +25,7 @@ import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -116,10 +117,11 @@ public class MobEvents {
     public void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
         Entity entity = event.getEntity();
         BlockEntity blockEntity = entity.level().getBlockEntity(event.getPos());
-        if (blockEntity instanceof ShulkerBoxBlockEntity shulkerBoxBlock) {
-            ((PreservedShulkerBox)shulkerBoxBlock).setPreserved(true);
-        }
         if (entity instanceof Player player) {
+            CompoundTag tag = player.getMainHandItem().getTag();
+            if (tag != null && tag.contains("Preserved") && blockEntity instanceof ShulkerBoxBlockEntity shulkerBoxBlock) {
+                ((PreservedShulkerBox) shulkerBoxBlock).setPreserved(true);
+            }
             if (player.hasEffect(GMobEffects.BLOCK_BANE.get()) && !player.getAbilities().instabuild) {
                 player.hurt(player.level().damageSources().magic(), 3.0F);
                 player.getCooldowns().addCooldown(player.getItemInHand(player.getUsedItemHand()).getItem(), 100);

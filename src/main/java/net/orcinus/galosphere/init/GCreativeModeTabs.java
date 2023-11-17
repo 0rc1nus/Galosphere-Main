@@ -18,7 +18,7 @@ public class GCreativeModeTabs {
             .title(Component.translatable("itemGroup.galosphere.galosphere"))
             .displayItems((itemDisplayParameters, output) -> {
                 output.accept(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get());
-                output.accept(GItems.PRESERVING_TEMPLATE.get());
+                output.accept(GItems.PRESERVED_TEMPLATE.get());
                 output.accept(GItems.SPARKLE_SPAWN_EGG.get());
                 output.accept(GItems.SPECTRE_SPAWN_EGG.get());
                 output.accept(GItems.SPECTERPILLAR_SPAWN_EGG.get());
