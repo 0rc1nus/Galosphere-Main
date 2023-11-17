@@ -20,9 +20,6 @@ public class ServerPlayerMixin {
             if (!stackFlag) {
                 continue;
             }
-            if (tag.contains("Preserved")) {
-                tag.remove("Preserved");
-            }
             $this.getInventory().add(itemStack);
         }
     }
