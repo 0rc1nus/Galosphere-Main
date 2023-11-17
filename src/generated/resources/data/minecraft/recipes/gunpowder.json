@@ -3,6 +3,9 @@
   "category": "misc",
   "ingredients": [
     {
+      "item": "minecraft:bone_meal"
+    },
+    {
       "item": "minecraft:coal"
     },
     {
