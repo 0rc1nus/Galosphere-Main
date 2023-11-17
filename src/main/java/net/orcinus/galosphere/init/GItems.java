@@ -66,7 +66,7 @@ public class GItems {
     public static final Item CHANDELIER = register("chandelier", new ChandelierItem(GBlocks.CHANDELIER, new Item.Properties()));
     public static final Item SUCCULENT_PETALS = register("succulent_petals", new ItemNameBlockItem(GBlocks.SUCCULENT_CROP, new Item.Properties()));
 
-    public static final Item PRESERVING_TEMPLATE = register("preserving_template", new PreservedSmithingTemplateItem());
+    public static final Item PRESERVED_TEMPLATE = register("preserved_template", new PreservedSmithingTemplateItem());
     public static final Item PRESERVED_FLESH = register("preserved_flesh", new PreservedFleshItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.1f).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.8f).meat().build())));
 
     public static Item registerBaseItem(String name) {

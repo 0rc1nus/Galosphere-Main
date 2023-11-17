@@ -26,7 +26,7 @@ public class GEntityLootTableProvider extends SimpleFabricLootTableProvider {
         biConsumer.accept(GEntityTypes.SPARKLE.getDefaultLootTable(), LootTable.lootTable());
         biConsumer.accept(GEntityTypes.SPECTRE.getDefaultLootTable(), LootTable.lootTable());
         biConsumer.accept(GEntityTypes.SPECTERPILLAR.getDefaultLootTable(), LootTable.lootTable());
-        biConsumer.accept(GEntityTypes.BERSERKER.getDefaultLootTable(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.PRESERVING_TEMPLATE)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.PRESERVED_FLESH))));
+        biConsumer.accept(GEntityTypes.BERSERKER.getDefaultLootTable(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.PRESERVED_TEMPLATE)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(GItems.PRESERVED_FLESH))));
     }
 
 }

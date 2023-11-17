@@ -25,7 +25,7 @@ public class PreservedTransformRecipe implements SmithingRecipe {
 
     @Override
     public boolean isTemplateIngredient(ItemStack itemStack) {
-        return itemStack.is(GItems.PRESERVING_TEMPLATE);
+        return itemStack.is(GItems.PRESERVED_TEMPLATE);
     }
 
     @Override

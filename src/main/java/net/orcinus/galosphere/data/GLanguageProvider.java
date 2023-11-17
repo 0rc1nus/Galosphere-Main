@@ -25,8 +25,8 @@ public class GLanguageProvider extends FabricLanguageProvider {
         GBlocks.BLOCKS.values().forEach(block -> {
             translationBuilder.add(block, reformat(BuiltInRegistries.BLOCK.getKey(block).getPath()));
         });
-        GItems.ITEMS.values().stream().filter(Predicate.not(BlockItem.class::isInstance).or(ItemNameBlockItem.class::isInstance)).filter(Predicate.not(SilverSmithingTemplateItem.class::isInstance).and(Predicate.not(GItems.PRESERVING_TEMPLATE::equals))).forEach(item -> {
-            if (item != GItems.PRESERVING_TEMPLATE || item != GItems.SILVER_UPGRADE_SMITHING_TEMPLATE) {
+        GItems.ITEMS.values().stream().filter(Predicate.not(BlockItem.class::isInstance).or(ItemNameBlockItem.class::isInstance)).filter(Predicate.not(SilverSmithingTemplateItem.class::isInstance).and(Predicate.not(GItems.PRESERVED_TEMPLATE::equals))).forEach(item -> {
+            if (item != GItems.PRESERVED_TEMPLATE || item != GItems.SILVER_UPGRADE_SMITHING_TEMPLATE) {
                 translationBuilder.add(item, reformat(BuiltInRegistries.ITEM.getKey(item).getPath()));
             }
         });
