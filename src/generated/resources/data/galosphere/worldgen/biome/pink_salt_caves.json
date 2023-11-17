@@ -19,7 +19,7 @@
       "max_delay": 24000,
       "min_delay": 12000,
       "replace_current_music": false,
-      "sound": "galosphere:music.biome.lichen_caves"
+      "sound": "galosphere:music.biome.pink_salt_caves"
     },
     "sky_color": 8103167,
     "water_color": 4159204,

@@ -9,13 +9,15 @@
     "ChorusFruitItemMixin",
     "CrossbowItemMixin",
     "EntityMixin",
+    "InventoryMixin",
     "LightningBoltMixin",
     "LivingEntityMixin",
     "LootTableAccessor",
     "OverworldBiomeBuilderMixin",
     "PlayerMixin",
     "PowderSnowBlockMixin",
-    "ProjectileAccessor"
+    "ProjectileAccessor",
+    "ShulkerBoxBlockEntityMixin"
   ],
   "client": [
     "client.ClientLevelMixin",

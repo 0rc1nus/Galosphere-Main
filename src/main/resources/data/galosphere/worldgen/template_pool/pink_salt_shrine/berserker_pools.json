@@ -1,0 +1,13 @@
+{
+  "elements": [
+    {
+      "element": {
+        "feature": "galosphere:mobs/berserker",
+        "projection": "rigid",
+        "element_type": "minecraft:feature_pool_element"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

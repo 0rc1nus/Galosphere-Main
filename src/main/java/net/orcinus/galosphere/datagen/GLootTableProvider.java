@@ -20,7 +20,7 @@ public class GLootTableProvider extends LootTableProvider {
 
     @Override
     public List<SubProviderEntry> getTables() {
-        return ImmutableList.of(new SubProviderEntry(GBlockLootTables::new, LootContextParamSets.BLOCK));
+        return ImmutableList.of(new SubProviderEntry(GBlockLootTables::new, LootContextParamSets.BLOCK), new SubProviderEntry(GEntityLootTables::new, LootContextParamSets.ENTITY));
     }
 
     @Override

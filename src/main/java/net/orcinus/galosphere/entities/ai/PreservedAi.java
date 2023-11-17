@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.orcinus.galosphere.entities.Preserved;
+import net.orcinus.galosphere.entities.ai.tasks.Rise;
 
 import java.util.Optional;
 
@@ -27,6 +28,7 @@ public class PreservedAi {
 
     public static Brain<?> makeBrain(Brain<Preserved>  brain) {
         PreservedAi.initCoreActivity(brain);
+        PreservedAi.initEmergeActivity(brain);
         PreservedAi.initIdleActivity(brain);
         PreservedAi.initFightActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
@@ -42,6 +44,12 @@ public class PreservedAi {
         ));
     }
 
+    private static void initEmergeActivity(Brain<Preserved> brain) {
+        brain.addActivityAndRemoveMemoryWhenStopped(Activity.EMERGE, 5, ImmutableList.of(
+                new Rise(40)
+        ), MemoryModuleType.IS_EMERGING);
+    }
+
     private static void initIdleActivity(Brain<Preserved> brain) {
         brain.addActivity(Activity.IDLE, 10, ImmutableList.of(
                 StartAttacking.create(PreservedAi::findNearestValidAttackTarget),
@@ -52,7 +60,7 @@ public class PreservedAi {
 
     private static void initFightActivity(Brain<Preserved> brain) {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
-                SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(1.5F),
+                SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(1.2F),
                 MeleeAttack.create(40),
                 StopAttackingIfTargetInvalid.create()
         ), MemoryModuleType.ATTACK_TARGET);
@@ -66,12 +74,12 @@ public class PreservedAi {
         ));
     }
 
-    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Preserved elemental) {
-        return elemental.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE);
+    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Preserved preserved) {
+        return preserved.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE);
     }
 
-    public static void updateActivity(Preserved elemental) {
-        elemental.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
+    public static void updateActivity(Preserved preserved) {
+        preserved.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.EMERGE, Activity.FIGHT, Activity.IDLE));
     }
 
 }

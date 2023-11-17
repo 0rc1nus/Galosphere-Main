@@ -6,8 +6,10 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
 import net.minecraft.world.entity.ai.behavior.DoNothing;
 import net.minecraft.world.entity.ai.behavior.LookAtTargetSink;
+import net.minecraft.world.entity.ai.behavior.MeleeAttack;
 import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
 import net.minecraft.world.entity.ai.behavior.RandomStroll;
 import net.minecraft.world.entity.ai.behavior.RunOne;
@@ -22,6 +24,7 @@ import net.minecraft.world.entity.schedule.Activity;
 import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.entities.ai.tasks.ConditionalWalkIfTargetOutOfReach;
 import net.orcinus.galosphere.entities.ai.tasks.Smash;
+import net.orcinus.galosphere.entities.ai.tasks.Summon;
 import net.orcinus.galosphere.entities.ai.tasks.Undermine;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
@@ -45,7 +48,8 @@ public class BerserkerAi {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(0.8F),
                 new LookAtTargetSink(45, 90),
-                new MoveToTargetSink()
+                new MoveToTargetSink(),
+                new CountDownCooldownTicks(GMemoryModuleTypes.RAMPAGE_TICKS.get())
         ));
     }
 
@@ -64,9 +68,11 @@ public class BerserkerAi {
     private static void initFightActivity(Berserker berserker, Brain<Berserker> brain) {
         Predicate<LivingEntity> predicate = livingEntity -> livingEntity instanceof Berserker blighted && blighted.getPhase() != Berserker.Phase.UNDERMINE;
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
+                BehaviorBuilder.triggerIf(Berserker::shouldUseMeleeAttack, MeleeAttack.create(30)),
                 new Smash(),
                 BehaviorBuilder.triggerIf(predicate, ConditionalWalkIfTargetOutOfReach.create(1.2F)),
                 new Undermine(),
+                new Summon(),
                 StopAttackingIfTargetInvalid.create(livingEntity -> !berserker.canTargetEntity(livingEntity), (mob, livingEntity) -> {}, false)
         ), MemoryModuleType.ATTACK_TARGET);
     }

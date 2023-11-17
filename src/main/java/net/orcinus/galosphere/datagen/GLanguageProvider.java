@@ -38,7 +38,7 @@ public class GLanguageProvider extends LanguageProvider {
         GMobEffects.MOB_EFFECTS.getEntries().stream().map(RegistryObject::get).forEach(mobEffect -> {
             this.add(mobEffect, reformat(ForgeRegistries.MOB_EFFECTS.getKey(mobEffect).getPath()));
         });
-        this.add("item.galosphere.persevered", "Persevered");
+        this.add("item.galosphere.preserved", "Preserved");
         this.add("item.galosphere.silver_bomb.duration", "Duration");
         this.add("item.galosphere.silver_bomb.explosion", "Explosion");
         this.add("item.galosphere.silver_bomb.bouncy", "Bouncy");
@@ -59,7 +59,13 @@ public class GLanguageProvider extends LanguageProvider {
         this.add("subtitles.entity.berserker.step", "Berserker steps");
         this.add("subtitles.entity.berserker.hurt", "Berserker hurts");
         this.add("subtitles.entity.berserker.death", "Berserker dies");
+        this.add("subtitles.entity.berserker.summoning", "Berserker summons");
+        this.add("subtitles.entity.berserker.punch", "Berserker hits");
+        this.add("subtitles.entity.preserved.death", "Preserved dies");
+        this.add("subtitles.entity.preserved.idle", "Preserved groans");
         this.add("subtitles.entity.preserved.hurt", "Preserved hurts");
+        this.add("subtitles.entity.preserved.emerge", "Preserved emerges");
+        this.add("subtitles.entity.pink_salt_pillar.emerge", "Pink salt pillar pierces");
         GBiomes.getIds().forEach(resourceLocation -> {
             this.add("biome.galosphere." + resourceLocation.getPath(), reformat(resourceLocation.getPath()));
         });
@@ -94,6 +100,13 @@ public class GLanguageProvider extends LanguageProvider {
         this.add("upgrade.galosphere.silver_upgrade", "Silver Upgrade");
         this.add("item.galosphere.smithing_template.silver_upgrade.applies_to", "Leather Equipment");
         this.add("item.galosphere.smithing_template.silver_upgrade.ingredients", "Silver Ingot");
+        this.add("item.galosphere.smithing_template.silver_upgrade.base_slot_description", "Add Leather Armor");
+        this.add("item.galosphere.smithing_template.silver_upgrade.additions_slot_description", "Add Silver Ingot");
+        this.add("upgrade.galosphere.preserved_upgrade", "Preserved Upgrade");
+        this.add("item.galosphere.smithing_template.preserved_upgrade.applies_to", "Everything");
+        this.add("item.galosphere.smithing_template.preserved_upgrade.ingredients", "Pink Salt Shard");
+        this.add("item.galosphere.smithing_template.preserved_upgrade.base_slot_description", "Add an item");
+        this.add("item.galosphere.smithing_template.preserved_upgrade.additions_slot_description", "Add Pink Salt Shard");
         this.add("container.galosphere.combustion_table", "Combustion Table");
     }
 

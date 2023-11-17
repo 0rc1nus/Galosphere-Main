@@ -64,7 +64,7 @@ public class PinkSaltStrawPatchFeature extends Feature<PinkSaltStrawPatchConfig>
     public void addSaltStraw(WorldGenLevel world, BlockPos blockPos, int height, Direction direction) {
         for (int i = 0; i <= height; i++) {
             BlockPos pos = blockPos.relative(direction, i);
-            if (!world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWaterOrLava)) {
+            if (!world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWater)) {
                 world.setBlock(pos.relative(direction.getOpposite()), GBlocks.PINK_SALT_STRAW.get().defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction.getOpposite()).setValue(PinkSaltStrawBlock.STRAW_SHAPE, PinkSaltStrawBlock.StrawShape.BOTTOM).setValue(PinkSaltStrawBlock.WATERLOGGED, world.getBlockState(pos).is(Blocks.WATER)), 2);
                 break;
             }

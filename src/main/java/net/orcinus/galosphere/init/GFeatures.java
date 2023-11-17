@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.world.gen.features.BerserkerFeature;
 import net.orcinus.galosphere.world.gen.features.CrystalSpikeFeature;
 import net.orcinus.galosphere.world.gen.features.LichenCordycepsColumnFeature;
 import net.orcinus.galosphere.world.gen.features.LichenMushroomFeature;
@@ -31,5 +32,6 @@ public class GFeatures {
     public static final RegistryObject<Feature<NoisePatchConfig>> NOISE_PATCH = FEATURES.register("noise_patch", () -> new NoisePatchFeature(NoisePatchConfig.CODEC));
     public static final RegistryObject<Feature<PinkSaltStrawPatchConfig>> PINK_SALT_STRAW_PATCH = FEATURES.register("pink_salt_straw_patch", () -> new PinkSaltStrawPatchFeature(PinkSaltStrawPatchConfig.CODEC));
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> OASIS = FEATURES.register("oasis", () -> new OasisFeature(NoneFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> BERSERKER = FEATURES.register("berserker", () -> new BerserkerFeature(NoneFeatureConfiguration.CODEC));
 
 }

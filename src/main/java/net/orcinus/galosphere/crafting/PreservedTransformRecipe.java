@@ -6,17 +6,19 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmithingRecipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GRecipeSerializers;
 
 public class PreservedTransformRecipe implements SmithingRecipe {
-    private final ResourceLocation ID = new ResourceLocation(Galosphere.MODID, "persevered_transform_recipe");
+    private final ResourceLocation ID = new ResourceLocation(Galosphere.MODID, "preserved_transform_recipe");
 
     public PreservedTransformRecipe() {
     }
@@ -29,10 +31,14 @@ public class PreservedTransformRecipe implements SmithingRecipe {
     @Override
     public boolean isBaseIngredient(ItemStack itemStack) {
         CompoundTag tag = itemStack.getTag();
-        if (tag != null && tag.contains("Persevered")) {
+        boolean flag = tag != null && tag.contains("Preserved");
+        if (flag) {
             return false;
         }
-        return itemStack.getCount() == 1 && !(tag != null && tag.contains("Persevered"));
+        if (itemStack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof ShulkerBoxBlock) {
+            return true;
+        }
+        return itemStack.getCount() == 1 && !(itemStack.getItem() instanceof BlockItem);
     }
 
     @Override
@@ -51,7 +57,7 @@ public class PreservedTransformRecipe implements SmithingRecipe {
     @Override
     public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         ItemStack itemStack = container.getItem(1).copy();
-        itemStack.getOrCreateTag().putBoolean("Persevered", true);
+        itemStack.getOrCreateTag().putBoolean("Preserved", true);
         return itemStack;
     }
 

@@ -4,6 +4,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -91,7 +92,7 @@ public class ShadowFrameBlock extends BaseEntityBlock {
 
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
-        return !blockState.getValue(FILLED) ? RenderShape.MODEL : RenderShape.INVISIBLE;
+        return blockState.getValue(FILLED) ? RenderShape.INVISIBLE : RenderShape.MODEL;
     }
 
     @Override

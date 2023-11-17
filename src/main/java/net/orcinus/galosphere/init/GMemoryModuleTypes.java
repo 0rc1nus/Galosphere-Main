@@ -22,7 +22,15 @@ public class GMemoryModuleTypes {
     public static final RegistryObject<MemoryModuleType<Boolean>> CAN_BURY = MEMORY_MODULE_TYPES.register("can_bury", () -> new MemoryModuleType<>(Optional.empty()));
     public static final RegistryObject<MemoryModuleType<BlockPos>> NEAREST_LICHEN_MOSS = MEMORY_MODULE_TYPES.register("nearest_lichen_moss", () -> new MemoryModuleType<>(Optional.empty()));
     public static final RegistryObject<MemoryModuleType<Unit>> IS_ROARING = MEMORY_MODULE_TYPES.register("roaring", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
-    public static final RegistryObject<MemoryModuleType<Unit>> UNDERMINE_COOLDOWN = MEMORY_MODULE_TYPES.register("undermine_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
-    public static final RegistryObject<MemoryModuleType<Integer>> UNDERMINE_COUNT = MEMORY_MODULE_TYPES.register("undermine_count", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
+    public static final RegistryObject<MemoryModuleType<Unit>> IS_SMASHING = MEMORY_MODULE_TYPES.register("smashing", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Unit>> IS_IMPALING = MEMORY_MODULE_TYPES.register("impaling", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Unit>> IS_SUMMONING = MEMORY_MODULE_TYPES.register("summoning", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Unit>> SUMMONING_COOLDOWN  = MEMORY_MODULE_TYPES.register("summoning_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Unit>> IMPALING_COOLDOWN = MEMORY_MODULE_TYPES.register("impaling_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Unit>> SMASHING_COOLDOWN = MEMORY_MODULE_TYPES.register("smashing_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Integer>> IMPALING_COUNT = MEMORY_MODULE_TYPES.register("impaling_count", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
+    public static final RegistryObject<MemoryModuleType<Integer>> SUMMON_COUNT = MEMORY_MODULE_TYPES.register("summon_count", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
+    public static final RegistryObject<MemoryModuleType<Integer>> HURT_COUNT = MEMORY_MODULE_TYPES.register("hurt_count", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
+    public static final RegistryObject<MemoryModuleType<Integer>> RAMPAGE_TICKS = MEMORY_MODULE_TYPES.register("rampage_ticks", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
 
 }

@@ -126,6 +126,9 @@ public class GItemModelProvider extends ItemModelProvider {
         item("cured_membrane");
         item("potpourri");
         item("gilded_beads");
+        item("preserved_flesh");
+        item("succulent");
+        item("succulent_petals");
         itemWithBlockDirectory("silver_lattice");
         itemWithBlockDirectory("lichen_roots");
         itemWithBlockDirectory("bowl_lichen");

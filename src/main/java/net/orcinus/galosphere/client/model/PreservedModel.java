@@ -13,6 +13,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.orcinus.galosphere.client.animations.PreservedAnimations;
 import net.orcinus.galosphere.entities.Preserved;
 
 @OnlyIn(Dist.CLIENT)
@@ -34,10 +35,10 @@ public class PreservedModel<T extends Preserved> extends HierarchicalModel<T> {
         PartDefinition left_leg = root.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-1.9F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(1.9F, -12.0F, 0.0F));
 
         PartDefinition right_arm = root.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(40, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(40, 16).addBox(-3.0F, -4.0F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -22.0F, 0.0F));
+                .texOffs(40, 16).addBox(-3.0F, -4.0F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.0F, -22.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
 
         PartDefinition left_arm = root.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(40, 0).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false)
-                .texOffs(40, 16).mirror().addBox(-1.0F, -4.0F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, -22.0F, 0.0F));
+                .texOffs(40, 16).mirror().addBox(-1.0F, -4.0F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(5.0F, -22.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
 
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 16).addBox(-4.0F, -5.0F, -2.0F, 8.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -24.0F, 0.0F));
@@ -47,6 +48,8 @@ public class PreservedModel<T extends Preserved> extends HierarchicalModel<T> {
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        this.animate(entity.digAnimationState, PreservedAnimations.PRESERVED_EMERGING_FLOOR, ageInTicks);
         float h = Math.min(0.5f, 3.0f * limbSwingAmount);
         float i = limbSwing * 0.8662f;
         float j = Mth.cos(i);
@@ -66,6 +69,7 @@ public class PreservedModel<T extends Preserved> extends HierarchicalModel<T> {
         return this.root.getChild(name);
     }
 
+
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         this.root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
@@ -75,5 +79,4 @@ public class PreservedModel<T extends Preserved> extends HierarchicalModel<T> {
     public ModelPart root() {
         return this.root;
     }
-
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-07T10:10:21.1342569	Item Models: galosphere
+// 1.20.1	2023-11-17T17:24:27.9682577	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -73,6 +73,7 @@ d8405c73a6b710aa7738716c857aca1874409bfe assets/galosphere/models/item/polished_
 43d71bca3e0e7c50b48168a23d06d04ff3e683fa assets/galosphere/models/item/polished_rose_pink_salt_slab.json
 655377a5b68ab387bddef33ccf8fb586942e6feb assets/galosphere/models/item/polished_rose_pink_salt_stairs.json
 f6ba6db27ba5e55824c4e98d2b547c9fc6725dfc assets/galosphere/models/item/potpourri.json
+4bb07cff300ffcba1da3384e569e621337110e25 assets/galosphere/models/item/preserved_flesh.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/galosphere/models/item/preserved_spawn_egg.json
 ba1ee3ea6db6f30791a68aee49d0982b3988f9d1 assets/galosphere/models/item/preserving_template.json
 7db8655dce9c1151b5455cfd3b10e40ee3879fc9 assets/galosphere/models/item/raw_silver.json
@@ -117,4 +118,6 @@ de5714b280554e334e447e90db23fc64c7e5da74 assets/galosphere/models/item/sterling_
 2e5eb349e1c35dc03a4d83cd7eb0408569f024a1 assets/galosphere/models/item/sterling_horse_armor.json
 4ed487a565bc585e97f313421289dca073ff03f8 assets/galosphere/models/item/sterling_leggings.json
 69eb8bf10cdd29c78e250e772c4e5a99cc13c9ef assets/galosphere/models/item/stranded_membrane_block.json
+77980b6f2a2eac60fefcde8bfbc0e86fdf4f52a4 assets/galosphere/models/item/succulent.json
+e581428b769bd5783b49a0f7c73d742dec12b5f3 assets/galosphere/models/item/succulent_petals.json
 cbf082f3fd171eeee5bd5cb67da28693f49b9241 assets/galosphere/models/item/warped_anchor.json

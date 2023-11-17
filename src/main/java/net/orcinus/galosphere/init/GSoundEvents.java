@@ -1,8 +1,5 @@
 package net.orcinus.galosphere.init;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.SoundType;
@@ -20,6 +17,7 @@ public class GSoundEvents {
 
     public static final RegistryObject<SoundEvent> MUSIC_CRYSTAL_CANYONS = register("music.biome.crystal_canyons");
     public static final RegistryObject<SoundEvent> MUSIC_LICHEN_CAVES = register("music.biome.lichen_caves");
+    public static final RegistryObject<SoundEvent> MUSIC_PINK_SALT_CAVES = register("music.biome.pink_salt_caves");
 
     public static final RegistryObject<SoundEvent> LUMIERE_COMPOST = register("block.lumiere.compost");
 
@@ -44,10 +42,15 @@ public class GSoundEvents {
     public static final RegistryObject<SoundEvent> BERSERKER_IDLE = register("entity.berserker.idle");
     public static final RegistryObject<SoundEvent> BERSERKER_DUO_SMASH = register("entity.berserker.duo_smash");
     public static final RegistryObject<SoundEvent> BERSERKER_SMASH = register("entity.berserker.smash");
+    public static final RegistryObject<SoundEvent> BERSERKER_SUMMONING = register("entity.berserker.summoning");
+    public static final RegistryObject<SoundEvent> BERSERKER_PUNCH = register("entity.berserker.punch");
     public static final RegistryObject<SoundEvent> BERSERKER_ROAR = register("entity.berserker.roar");
     public static final RegistryObject<SoundEvent> BERSERKER_STEP = register("entity.berserker.step");
 
+    public static final RegistryObject<SoundEvent> PRESERVED_DEATH = register("entity.preserved.death");
     public static final RegistryObject<SoundEvent> PRESERVED_HURT = register("entity.preserved.hurt");
+    public static final RegistryObject<SoundEvent> PRESERVED_IDLE = register("entity.preserved.idle");
+    public static final RegistryObject<SoundEvent> PRESERVED_EMERGE = register("entity.preserved.emerge");
 
     public static final RegistryObject<SoundEvent> PINK_SALT_PILLAR_EMERGE = register("entity.pink_salt_pillar.emerge");
 
@@ -90,11 +93,6 @@ public class GSoundEvents {
 
     private static SoundType register(String name, float volume, float pitch) {
         return new ForgeSoundType(volume, pitch, register(block(name, "break")), register(block(name, "step")), register(block(name, "place")), register(block(name, "hit")), register(block(name, "fall")));
-    }
-
-    private static Holder.Reference<SoundEvent> registerForHolder(String name) {
-        ResourceLocation id = new ResourceLocation(Galosphere.MODID, name);
-        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 
 }
