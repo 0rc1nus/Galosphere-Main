@@ -27,6 +27,8 @@ public class GBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_CRYSTAL_CANYONS_SPAWNS = register("add_crystal_canyons_spawns");
     public static final ResourceKey<BiomeModifier> ADD_LICHEN_CAVES_FEATURES = register("add_lichen_caves_spawns");
     public static final ResourceKey<BiomeModifier> ADD_LICHEN_CAVES_SPAWNS = register("add_lichen_caves_features");
+    public static final ResourceKey<BiomeModifier> ADD_PINK_SALT_CAVES_FEATURES = register("add_pink_salt_caves_features");
+    public static final ResourceKey<BiomeModifier> ADD_PINK_SALT_CAVES_MODIFICATIONS = register("add_pink_salt_caves_modifications");
     public static final ResourceKey<BiomeModifier> ADD_SILVER_ORES = register("add_silver_ores");
     public static final ResourceKey<BiomeModifier> ADD_LARGE_SILVER_ORES = register("add_large_silver_ores");
 
@@ -37,6 +39,8 @@ public class GBiomeModifiers {
         bootstapContext.register(ADD_LICHEN_CAVES_SPAWNS, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(getBiome(bootstapContext, GBiomes.LICHEN_CAVES), List.of(new MobSpawnSettings.SpawnerData(GEntityTypes.SPECTRE.get(), 20, 8, 8))));
         bootstapContext.register(ADD_SILVER_ORES, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(getBiome(bootstapContext, BiomeTags.IS_OVERWORLD), getPlacedFeature(bootstapContext, GPlacedFeatures.ORE_SILVER_SMALL), GenerationStep.Decoration.UNDERGROUND_ORES));
         bootstapContext.register(ADD_LARGE_SILVER_ORES, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(getBiome(bootstapContext, GBiomes.CRYSTAL_CANYONS), getPlacedFeature(bootstapContext, GPlacedFeatures.ORE_SILVER_LARGE), GenerationStep.Decoration.UNDERGROUND_ORES));
+        bootstapContext.register(ADD_PINK_SALT_CAVES_FEATURES, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(getBiome(bootstapContext, GBiomes.PINK_SALT_CAVES), getPlacedFeature(bootstapContext, GPlacedFeatures.PINK_SALT_NOISE_CEILING_PATCH, GPlacedFeatures.PINK_SALT_NOISE_GROUND_PATCH, GPlacedFeatures.PINK_SALT_STRAW_CEILING_PATCH, GPlacedFeatures.PINK_SALT_STRAW_FLOOR_PATCH), GenerationStep.Decoration.VEGETAL_DECORATION));
+        bootstapContext.register(ADD_PINK_SALT_CAVES_MODIFICATIONS, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(getBiome(bootstapContext, GBiomes.PINK_SALT_CAVES), getPlacedFeature(bootstapContext, GPlacedFeatures.OASIS), GenerationStep.Decoration.LOCAL_MODIFICATIONS));
     }
 
     @NotNull

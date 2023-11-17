@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "galosphere:pink_salt_caves",
+  "features": "galosphere:oasis",
+  "step": "local_modifications"
+}

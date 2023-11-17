@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_features",
+  "biomes": "galosphere:pink_salt_caves",
+  "features": [
+    "galosphere:pink_salt_noise_ceiling_patch",
+    "galosphere:pink_salt_noise_ground_patch",
+    "galosphere:pink_salt_straw_ceiling_patch",
+    "galosphere:pink_salt_straw_floor_patch"
+  ],
+  "step": "vegetal_decoration"
+}

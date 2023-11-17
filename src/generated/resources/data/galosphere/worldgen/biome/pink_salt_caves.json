@@ -32,8 +32,7 @@
       "minecraft:lake_lava_surface"
     ],
     [
-      "minecraft:amethyst_geode",
-      "galosphere:oasis"
+      "minecraft:amethyst_geode"
     ],
     [
       "minecraft:monster_room",
@@ -75,11 +74,7 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:patch_tall_grass_2",
-      "galosphere:pink_salt_noise_ground_patch",
-      "galosphere:pink_salt_noise_ceiling_patch",
-      "galosphere:pink_salt_straw_ceiling_patch",
-      "galosphere:pink_salt_straw_floor_patch"
+      "minecraft:patch_tall_grass_2"
     ],
     [
       "minecraft:freeze_top_layer"

@@ -51,11 +51,6 @@ public class GBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(biomeBuilder);
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_NOISE_GROUND_PATCH);
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_NOISE_CEILING_PATCH);
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_STRAW_CEILING_PATCH);
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, GPlacedFeatures.PINK_SALT_STRAW_FLOOR_PATCH);
-        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, GPlacedFeatures.OASIS);
         Music music = Musics.createGameMusic(GSoundEvents.MUSIC_PINK_SALT_CAVES.getHolder().get());
         return biome(0.5f, 0.5f, mobBuilder, biomeBuilder, music, 4159204);
     }

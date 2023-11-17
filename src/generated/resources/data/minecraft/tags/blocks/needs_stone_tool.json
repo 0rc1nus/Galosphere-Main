@@ -13,6 +13,8 @@
     "galosphere:silver_tiles",
     "galosphere:silver_tiles_stairs",
     "galosphere:silver_tiles_slab",
-    "galosphere:silver_lattice"
+    "galosphere:silver_lattice",
+    "galosphere:shadow_frame",
+    "galosphere:silver_balance"
   ]
 }

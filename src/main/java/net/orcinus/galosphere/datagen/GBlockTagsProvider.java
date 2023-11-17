@@ -6,6 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -26,14 +27,37 @@ public class GBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(GBlocks.SILVER_ORE.get(), GBlocks.SILVER_BLOCK.get(), GBlocks.DEEPSLATE_SILVER_ORE.get(), GBlocks.AMETHYST_SLAB.get(), GBlocks.AMETHYST_STAIRS.get(), GBlocks.ALLURITE_BLOCK.get(), GBlocks.ALLURITE_SLAB.get(), GBlocks.ALLURITE_STAIRS.get(), GBlocks.LUMIERE_BLOCK.get(), GBlocks.LUMIERE_SLAB.get(), GBlocks.LUMIERE_STAIRS.get(), GBlocks.SMOOTH_AMETHYST.get(), GBlocks.SMOOTH_AMETHYST_SLAB.get(), GBlocks.SMOOTH_AMETHYST_STAIRS.get(), GBlocks.AMETHYST_BRICKS.get(), GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.AMETHYST_BRICK_STAIRS.get(), GBlocks.CHISELED_AMETHYST.get(), GBlocks.SMOOTH_ALLURITE.get(), GBlocks.SMOOTH_ALLURITE_SLAB.get(), GBlocks.SMOOTH_ALLURITE_STAIRS.get(), GBlocks.ALLURITE_BRICKS.get(), GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.CHISELED_ALLURITE.get(), GBlocks.SMOOTH_LUMIERE.get(), GBlocks.SMOOTH_LUMIERE_SLAB.get(), GBlocks.SMOOTH_LUMIERE_STAIRS.get(), GBlocks.LUMIERE_BRICKS.get(), GBlocks.LUMIERE_BRICK_SLAB.get(), GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.CHISELED_LUMIERE.get(), GBlocks.MONSTROMETER.get(), GBlocks.WARPED_ANCHOR.get(), GBlocks.ALLURITE_CLUSTER.get(), GBlocks.LUMIERE_CLUSTER.get(), GBlocks.RAW_SILVER_BLOCK.get(), GBlocks.COMBUSTION_TABLE.get(), GBlocks.CHARGED_LUMIERE_BLOCK.get(), GBlocks.AMETHYST_LAMP.get(), GBlocks.ALLURITE_LAMP.get(), GBlocks.LUMIERE_LAMP.get(), GBlocks.CHANDELIER.get(), GBlocks.SILVER_TILES.get(), GBlocks.SILVER_TILES_SLAB.get(), GBlocks.SILVER_TILES_STAIRS.get(), GBlocks.SILVER_PANEL.get(), GBlocks.SILVER_PANEL_SLAB.get(), GBlocks.SILVER_PANEL_STAIRS.get(), GBlocks.SILVER_LATTICE.get(), GBlocks.GLOW_BERRIES_SILVER_LATTICE.get(), GBlocks.GLINTED_ALLURITE_CLUSTER.get(), GBlocks.GLINTED_LUMIERE_CLUSTER.get(), GBlocks.GLINTED_AMETHYST_CLUSTER.get(), GBlocks.PINK_SALT.get(), GBlocks.ROSE_PINK_SALT.get(), GBlocks.PASTEL_PINK_SALT.get(), GBlocks.PINK_SALT_STAIRS.get(), GBlocks.ROSE_PINK_SALT_STAIRS.get(), GBlocks.PASTEL_PINK_SALT_STAIRS.get(), GBlocks.PINK_SALT_SLAB.get(), GBlocks.ROSE_PINK_SALT_SLAB.get(), GBlocks.PASTEL_PINK_SALT_SLAB.get(), GBlocks.PINK_SALT_WALL.get(), GBlocks.ROSE_PINK_SALT_WALL.get(), GBlocks.PASTEL_PINK_SALT_WALL.get(), GBlocks.SILVER_BALANCE.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(GBlocks.SILVER_ORE.get(), GBlocks.SILVER_BLOCK.get(), GBlocks.DEEPSLATE_SILVER_ORE.get(), GBlocks.AMETHYST_SLAB.get(), GBlocks.AMETHYST_STAIRS.get(), GBlocks.ALLURITE_BLOCK.get(), GBlocks.ALLURITE_SLAB.get(), GBlocks.ALLURITE_STAIRS.get(), GBlocks.LUMIERE_BLOCK.get(), GBlocks.LUMIERE_SLAB.get(), GBlocks.LUMIERE_STAIRS.get(), GBlocks.SMOOTH_AMETHYST.get(), GBlocks.SMOOTH_AMETHYST_SLAB.get(), GBlocks.SMOOTH_AMETHYST_STAIRS.get(), GBlocks.AMETHYST_BRICKS.get(), GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.AMETHYST_BRICK_STAIRS.get(), GBlocks.CHISELED_AMETHYST.get(), GBlocks.SMOOTH_ALLURITE.get(), GBlocks.SMOOTH_ALLURITE_SLAB.get(), GBlocks.SMOOTH_ALLURITE_STAIRS.get(), GBlocks.ALLURITE_BRICKS.get(), GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.CHISELED_ALLURITE.get(), GBlocks.SMOOTH_LUMIERE.get(), GBlocks.SMOOTH_LUMIERE_SLAB.get(), GBlocks.SMOOTH_LUMIERE_STAIRS.get(), GBlocks.LUMIERE_BRICKS.get(), GBlocks.LUMIERE_BRICK_SLAB.get(), GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.CHISELED_LUMIERE.get(), GBlocks.MONSTROMETER.get(), GBlocks.WARPED_ANCHOR.get(), GBlocks.ALLURITE_CLUSTER.get(), GBlocks.LUMIERE_CLUSTER.get(), GBlocks.RAW_SILVER_BLOCK.get(), GBlocks.COMBUSTION_TABLE.get(), GBlocks.CHARGED_LUMIERE_BLOCK.get(), GBlocks.AMETHYST_LAMP.get(), GBlocks.ALLURITE_LAMP.get(), GBlocks.LUMIERE_LAMP.get(), GBlocks.CHANDELIER.get(), GBlocks.SILVER_TILES.get(), GBlocks.SILVER_TILES_SLAB.get(), GBlocks.SILVER_TILES_STAIRS.get(), GBlocks.SILVER_PANEL.get(), GBlocks.SILVER_PANEL_SLAB.get(), GBlocks.SILVER_PANEL_STAIRS.get(), GBlocks.SILVER_LATTICE.get(), GBlocks.GLOW_BERRIES_SILVER_LATTICE.get(), GBlocks.GLINTED_ALLURITE_CLUSTER.get(), GBlocks.GLINTED_LUMIERE_CLUSTER.get(), GBlocks.GLINTED_AMETHYST_CLUSTER.get(), GBlocks.PINK_SALT.get(), GBlocks.ROSE_PINK_SALT.get(), GBlocks.PASTEL_PINK_SALT.get(), GBlocks.PINK_SALT_STAIRS.get(), GBlocks.ROSE_PINK_SALT_STAIRS.get(), GBlocks.PASTEL_PINK_SALT_STAIRS.get(), GBlocks.PINK_SALT_SLAB.get(), GBlocks.ROSE_PINK_SALT_SLAB.get(), GBlocks.PASTEL_PINK_SALT_SLAB.get(), GBlocks.PINK_SALT_WALL.get(), GBlocks.ROSE_PINK_SALT_WALL.get(), GBlocks.PASTEL_PINK_SALT_WALL.get(),
+                GBlocks.POLISHED_PINK_SALT.get(), GBlocks.POLISHED_ROSE_PINK_SALT.get(), GBlocks.POLISHED_PASTEL_PINK_SALT.get(), GBlocks.POLISHED_PINK_SALT_STAIRS.get(), GBlocks.POLISHED_ROSE_PINK_SALT_STAIRS.get(), GBlocks.POLISHED_PASTEL_PINK_SALT_STAIRS.get(), GBlocks.POLISHED_PINK_SALT_SLAB.get(), GBlocks.POLISHED_ROSE_PINK_SALT_SLAB.get(), GBlocks.POLISHED_PASTEL_PINK_SALT_SLAB.get(), GBlocks.POLISHED_PINK_SALT_WALL.get(), GBlocks.POLISHED_ROSE_PINK_SALT_WALL.get(), GBlocks.POLISHED_PASTEL_PINK_SALT_WALL.get(),
+                GBlocks.PINK_SALT_BRICKS.get(), GBlocks.ROSE_PINK_SALT_BRICKS.get(), GBlocks.PASTEL_PINK_SALT_BRICKS.get(), GBlocks.PINK_SALT_BRICK_STAIRS.get(), GBlocks.ROSE_PINK_SALT_BRICK_STAIRS.get(), GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get(), GBlocks.PINK_SALT_BRICK_SLAB.get(), GBlocks.ROSE_PINK_SALT_BRICK_SLAB.get(), GBlocks.PASTEL_PINK_SALT_BRICK_SLAB.get(), GBlocks.PINK_SALT_BRICK_WALL.get(), GBlocks.ROSE_PINK_SALT_BRICK_WALL.get(), GBlocks.PASTEL_PINK_SALT_BRICK_WALL.get(),
+                GBlocks.CHISELED_PINK_SALT.get(), GBlocks.CHISELED_ROSE_PINK_SALT.get(), GBlocks.CHISELED_PASTEL_PINK_SALT.get(),
+                GBlocks.PINK_SALT_CLUSTER.get(), GBlocks.PINK_SALT_STRAW.get(), GBlocks.PINK_SALT_LAMP.get(),
+                GBlocks.SILVER_BALANCE.get(), GBlocks.SHADOW_FRAME.get());
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(GBlocks.LUMIERE_COMPOSTER.get(), GBlocks.SALINE_COMPOSTER.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(GBlocks.LICHEN_MOSS.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(GBlocks.SILVER_BLOCK.get());
         this.tag(BlockTags.CRYSTAL_SOUND_BLOCKS).add(GBlocks.AMETHYST_SLAB.get(), GBlocks.AMETHYST_STAIRS.get(), GBlocks.SMOOTH_AMETHYST.get(), GBlocks.SMOOTH_AMETHYST_SLAB.get(), GBlocks.SMOOTH_AMETHYST_STAIRS.get(), GBlocks.SMOOTH_ALLURITE.get(), GBlocks.SMOOTH_ALLURITE_SLAB.get(), GBlocks.SMOOTH_ALLURITE_STAIRS.get(), GBlocks.SMOOTH_LUMIERE.get(), GBlocks.SMOOTH_LUMIERE_SLAB.get(), GBlocks.SMOOTH_LUMIERE_STAIRS.get(), GBlocks.AMETHYST_BRICKS.get(), GBlocks.AMETHYST_BRICK_SLAB.get(), GBlocks.AMETHYST_BRICK_STAIRS.get(), GBlocks.ALLURITE_BRICKS.get(), GBlocks.ALLURITE_BRICK_SLAB.get(), GBlocks.ALLURITE_BRICK_STAIRS.get(), GBlocks.LUMIERE_BRICKS.get(), GBlocks.LUMIERE_BRICK_SLAB.get(), GBlocks.LUMIERE_BRICK_STAIRS.get(), GBlocks.ALLURITE_BLOCK.get(), GBlocks.LUMIERE_BLOCK.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(GBlocks.SILVER_ORE.get(), GBlocks.DEEPSLATE_SILVER_ORE.get(), GBlocks.RAW_SILVER_BLOCK.get(), GBlocks.SILVER_BLOCK.get(), GBlocks.MONSTROMETER.get(), GBlocks.WARPED_ANCHOR.get(), GBlocks.COMBUSTION_TABLE.get(), GBlocks.SILVER_PANEL.get(), GBlocks.SILVER_PANEL_STAIRS.get(), GBlocks.SILVER_PANEL_SLAB.get(), GBlocks.SILVER_TILES.get(), GBlocks.SILVER_TILES_STAIRS.get(), GBlocks.SILVER_TILES_SLAB.get(), GBlocks.SILVER_LATTICE.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                GBlocks.SILVER_ORE.get(),
+                GBlocks.DEEPSLATE_SILVER_ORE.get(),
+                GBlocks.RAW_SILVER_BLOCK.get(),
+                GBlocks.SILVER_BLOCK.get(),
+                GBlocks.MONSTROMETER.get(),
+                GBlocks.WARPED_ANCHOR.get(),
+                GBlocks.COMBUSTION_TABLE.get(),
+                GBlocks.SILVER_PANEL.get(),
+                GBlocks.SILVER_PANEL_STAIRS.get(),
+                GBlocks.SILVER_PANEL_SLAB.get(),
+                GBlocks.SILVER_TILES.get(),
+                GBlocks.SILVER_TILES_STAIRS.get(),
+                GBlocks.SILVER_TILES_SLAB.get(),
+                GBlocks.SILVER_LATTICE.get(),
+                GBlocks.SHADOW_FRAME.get(),
+                GBlocks.SILVER_BALANCE.get()
+        );
         GBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).filter(StairBlock.class::isInstance).forEach(block -> this.tag(BlockTags.STAIRS).add(block));
         GBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).filter(SlabBlock.class::isInstance).forEach(block -> this.tag(BlockTags.SLABS).add(block));
+        GBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).filter(WallBlock.class::isInstance).forEach(block -> this.tag(BlockTags.WALLS).add(block));
         this.tag(BlockTags.DIRT).add(GBlocks.LICHEN_MOSS.get());
 
         this.tag(GBlockTags.CRYSTAL_SPIKES_BLOCKS).add(GBlocks.ALLURITE_BLOCK.get(), GBlocks.LUMIERE_BLOCK.get());
