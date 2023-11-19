@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.util.RandomSource;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.material.Fluids;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.mixin.WorldGenRegionAccessor;
@@ -53,7 +55,7 @@ public class OasisFeature  extends Feature<NoneFeatureConfiguration> {
                     BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z);
                     StructureManager structureManager = ((WorldGenRegionAccessor)featurePlaceContext.level()).getStructureManager();
                     Structure structure = structureManager.registryAccess().registryOrThrow(Registries.STRUCTURE).get(new ResourceLocation(Galosphere.MODID, "pink_salt_shrine"));
-                    if (structure == null) {
+                    if (structure != null && structureManager.getStructureWithPieceAt(pos, structure).isValid()) {
                         return false;
                     }
                     double xSquared = x * x;
