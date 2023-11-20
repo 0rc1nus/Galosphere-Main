@@ -68,7 +68,7 @@ public class GRecipeProvider extends FabricRecipeProvider {
                         .pattern("#C#")
                         .pattern(" # ")
                         .unlockedBy("has_cured_membrane_block", has(GBlocks.CURED_MEMBRANE_BLOCK)).save(consumer);
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.SHADOW_FRAME)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.SHADOW_FRAME, 8)
                 .define('S', GItems.SILVER_INGOT)
                 .define('#', GItems.CURED_MEMBRANE)
                 .pattern("S#S")
