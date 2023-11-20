@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.HoneycombItem;
@@ -31,6 +32,8 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -164,6 +167,11 @@ public class ShadowFrameBlock extends BaseEntityBlock {
     private boolean canBeFramed(Level level, BlockPlaceContext blockPlaceContext, BlockState stateForPlacement) {
         BlockPos clickedPos = blockPlaceContext.getClickedPos();
         return stateForPlacement != null && !(stateForPlacement.getBlock() instanceof EntityBlock) && Block.isShapeFullBlock(stateForPlacement.getShape(level, clickedPos));
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType type) {
+        return !state.getValue(FILLED);
     }
 
     @Override
