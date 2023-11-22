@@ -53,6 +53,7 @@ public class GConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PINK_SALT_STRAW_CEILING_PATCH = registerConfiguredFeature("pink_salt_straw_ceiling_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PINK_SALT_STRAW_FLOOR_PATCH = registerConfiguredFeature("pink_salt_straw_floor_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OASIS = registerConfiguredFeature("oasis");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DRIED_OASIS = registerConfiguredFeature("dried_oasis");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BERSERKER = registerConfiguredFeature("mobs/berserker");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext) {
@@ -77,6 +78,7 @@ public class GConfiguredFeatures {
         FeatureUtils.register(bootstapContext, PINK_SALT_STRAW_CEILING_PATCH, GFeatures.PINK_SALT_STRAW_PATCH, new PinkSaltStrawPatchConfig(UniformInt.of(2, 8), UniformInt.of(1, 4), UniformInt.of(1, 3), Direction.UP));
         FeatureUtils.register(bootstapContext, PINK_SALT_STRAW_FLOOR_PATCH, GFeatures.PINK_SALT_STRAW_PATCH, new PinkSaltStrawPatchConfig(UniformInt.of(2, 8), UniformInt.of(1, 4), UniformInt.of(1, 3), Direction.DOWN));
         FeatureUtils.register(bootstapContext, OASIS, GFeatures.OASIS, FeatureConfiguration.NONE);
+        FeatureUtils.register(bootstapContext, DRIED_OASIS, GFeatures.DRIED_OASIS, FeatureConfiguration.NONE);
         FeatureUtils.register(bootstapContext, BERSERKER, GFeatures.BERSERKER, FeatureConfiguration.NONE);
     }
 

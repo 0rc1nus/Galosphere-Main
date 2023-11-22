@@ -2,6 +2,8 @@ package net.orcinus.galosphere.entities;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.entities.ai.PreservedAi;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
@@ -35,11 +38,49 @@ import org.jetbrains.annotations.Nullable;
 public class Preserved extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Preserved>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.PRESERVED_ENTITY_SENSOR);
     protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.IS_EMERGING);
+    private boolean fromChamber;
     public AnimationState digAnimationState = new AnimationState();
     public AnimationState attackAnimationState = new AnimationState();
 
     public Preserved(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compoundTag) {
+        super.readAdditionalSaveData(compoundTag);
+        this.fromChamber = compoundTag.getBoolean("FromChamber");
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compoundTag) {
+        super.addAdditionalSaveData(compoundTag);
+        compoundTag.putBoolean("FromChamber", this.fromChamber);
+    }
+
+    @Override
+    public boolean shouldDropExperience() {
+        return !this.fromChamber;
+    }
+
+    @Override
+    public void die(DamageSource damageSource) {
+        super.die(damageSource);
+        Level level = this.level();
+        if (!level.isClientSide && this.isFromChamber()) {
+            BlockPos blockPos = this.blockPosition();
+            if (level.getBlockState(blockPos).canBeReplaced() && level.getBlockState(blockPos.below()).isFaceSturdy(level, blockPos.below(), Direction.UP)) {
+                level.setBlock(blockPos, GBlocks.PINK_SALT_CLUSTER.defaultBlockState(), 2);
+            }
+        }
+    }
+
+    public boolean isFromChamber() {
+        return this.fromChamber;
+    }
+
+    public void setFromChamber(boolean fromChamber) {
+        this.fromChamber = fromChamber;
     }
 
     @Override

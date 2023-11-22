@@ -23,6 +23,7 @@ public class GDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(GBlockLootTableProvider::new);
         pack.addProvider(GEntityLootTableProvider::new);
         pack.addProvider(GLanguageProvider::new);
+        pack.addProvider(GChestLootTableProvider::new);
     }
 
     @Override

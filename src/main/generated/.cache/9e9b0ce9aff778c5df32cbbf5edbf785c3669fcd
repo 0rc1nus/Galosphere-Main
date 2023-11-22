@@ -1,11 +1,11 @@
-// 1.20.1	2023-11-20T18:16:20.2972562	Galosphere/Tags for minecraft:item
+// 1.20.1	2023-11-22T14:31:29.902307	Galosphere/Tags for minecraft:item
 e88377bcad8e256bd9305f54f049c0b88e80a5a6 data\c\tags\items\silver_ingots.json
 d9c83f43db03a7dd51f6c6f3ea72378d3ab9761f data\galosphere\tags\items\non_sinkable_horse_armors.json
-1e6749814652bb0f3af19a19212d7f3c7f8438d7 data\c\tags\items\silver_ores.json
 168e33b21be2e860a93812aceb4081125dedd35b data\galosphere\tags\items\spectre_tempt_items.json
+1e6749814652bb0f3af19a19212d7f3c7f8438d7 data\c\tags\items\silver_ores.json
 cccc75ad74e8093c6edf4eafece8daf5fe874fae data\minecraft\tags\items\freeze_immune_wearables.json
-10cffefc7c18281390dd0a4ba317d9c95e995740 data\c\tags\items\silver_nuggets.json
 e2814ad6d2a5a9e8f23949ea93b4f1fceb7ee8d4 data\galosphere\tags\items\bomb_explosion_modifiers.json
+10cffefc7c18281390dd0a4ba317d9c95e995740 data\c\tags\items\silver_nuggets.json
 ae63090c29bc848a0d9f25201cd7ed80eb253b2c data\galosphere\tags\items\bomb_bouncy_modifiers.json
 10598a85b0b258672549eb1cff4a26bad17a80b6 data\c\tags\items\silver_blocks.json
 36e1dad2803241c11c646b9737be8af6d67ef8fe data\galosphere\tags\items\bomb_duration_modifiers.json

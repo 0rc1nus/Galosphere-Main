@@ -12,6 +12,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.levelgen.placement.NoiseBasedCountPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
+import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.orcinus.galosphere.Galosphere;
 
 import java.util.List;
@@ -51,6 +53,7 @@ public class GPlacedFeatures {
     public static final ResourceKey<PlacedFeature> PINK_SALT_STRAW_CEILING_PATCH = registerPlacedFeature("pink_salt_straw_ceiling_patch");
     public static final ResourceKey<PlacedFeature> PINK_SALT_STRAW_FLOOR_PATCH = registerPlacedFeature("pink_salt_straw_floor_patch");
     public static final ResourceKey<PlacedFeature> OASIS = registerPlacedFeature("oasis");
+    public static final ResourceKey<PlacedFeature> DRIED_OASIS = registerPlacedFeature("dried_oasis");
     public static final ResourceKey<PlacedFeature> BERSERKER = registerPlacedFeature("mobs/berserker");
 
     public static void bootstrap(BootstapContext<PlacedFeature> bootstapContext) {
@@ -74,6 +77,7 @@ public class GPlacedFeatures {
         PlacementUtils.register(bootstapContext, PINK_SALT_STRAW_CEILING_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_STRAW_CEILING_PATCH), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f, 3.0f, -10, 10), ClampedNormalInt.of(0.0f, 0.6f, -2, 2)), BiomeFilter.biome());
         PlacementUtils.register(bootstapContext, PINK_SALT_STRAW_FLOOR_PATCH, holderGetter.getOrThrow(GConfiguredFeatures.PINK_SALT_STRAW_FLOOR_PATCH), CountPlacement.of(UniformInt.of(192, 256)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f, 3.0f, -10, 10), ClampedNormalInt.of(0.0f, 0.6f, -2, 2)), BiomeFilter.biome());
         PlacementUtils.register(bootstapContext, OASIS, holderGetter.getOrThrow(GConfiguredFeatures.OASIS), CountPlacement.of(50), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(GBlockTags.OASIS_GENERATE_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12), BiomeFilter.biome());
+        PlacementUtils.register(bootstapContext, DRIED_OASIS, holderGetter.getOrThrow(GConfiguredFeatures.DRIED_OASIS), RarityFilter.onAverageOnceEvery(100), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(GBlockTags.OASIS_GENERATE_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12), BiomeFilter.biome());
         PlacementUtils.register(bootstapContext, BERSERKER, holderGetter.getOrThrow(GConfiguredFeatures.BERSERKER));
     }
 

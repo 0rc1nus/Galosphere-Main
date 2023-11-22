@@ -11,12 +11,16 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.material.Fluids;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.blocks.PinkSaltChamberBlock;
+import net.orcinus.galosphere.init.GBlockTags;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.mixin.access.WorldGenRegionAccessor;
 import net.orcinus.galosphere.world.gen.FastNoise;
 import net.orcinus.galosphere.world.gen.PinkSaltUtil;
@@ -38,10 +42,6 @@ public class OasisFeature extends Feature<NoneFeatureConfiguration> {
         FastNoise fastNoise = new FastNoise(worldSeed);
         fastNoise.SetNoiseType(FastNoise.NoiseType.Simplex);
         fastNoise.SetFrequency(0.8f);
-        FastNoise ceilingNoise = new FastNoise(worldSeed);
-        ceilingNoise.SetNoiseType(FastNoise.NoiseType.Simplex);
-        ceilingNoise.SetFrequency(0.3F);
-        ceilingNoise.SetFractalOctaves(3);
         int xRadius = this.getRandomRadius(random) / 2;
         int yRadius = UniformInt.of(15, 20).sample(random);
         int zRadius = this.getRandomRadius(random) / 2;
@@ -52,10 +52,7 @@ public class OasisFeature extends Feature<NoneFeatureConfiguration> {
                     BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z);
                     StructureManager structureManager = ((WorldGenRegionAccessor) featurePlaceContext.level()).getStructureManager();
                     Structure structure = structureManager.registryAccess().registryOrThrow(Registries.STRUCTURE).get(new ResourceLocation(Galosphere.MODID, "pink_salt_shrine"));
-                    if (structure == null) {
-                        return false;
-                    }
-                    boolean flag = structureManager.getStructureAt(blockPos, structure).isValid();
+                    boolean flag = structure != null && structureManager.getStructureAt(blockPos, structure).isValid();
                     if (flag) {
                         return false;
                     }
@@ -63,7 +60,8 @@ public class OasisFeature extends Feature<NoneFeatureConfiguration> {
                     double ySquared = y * y;
                     double zSquared = z * z;
                     double threshold = 1 + 3 * fastNoise.GetNoise(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z);
-                    if (xSquared / (xRadius * 2) + ySquared / (yRadius * 2) + zSquared / (zRadius * 2) < threshold && xSquared + ySquared + zSquared <= xRadius * zRadius && y < 0) {
+                    int yThreshold = this.isDry() ? 2 : 0;
+                    if (xSquared / (xRadius * 2) + ySquared / (yRadius * 2) + zSquared / (zRadius * 2) < threshold && xSquared + ySquared + zSquared <= xRadius * zRadius && y < yThreshold) {
                         positions.add(pos);
                     }
                 }
@@ -74,8 +72,28 @@ public class OasisFeature extends Feature<NoneFeatureConfiguration> {
         for (BlockPos position : positions) {
             BlockPos.MutableBlockPos mutable3 = mutableBlockPos.set(position.getX(), Math.min(position.getY(), waterLevel), position.getZ());
             for (int i = mutable3.getY(); i <= waterLevel; i++) {
-                this.generateMiniAquifer(world, mutable3);
+                this.generateMiniAquifer(world, mutable3, random);
                 mutable3.move(Direction.UP);
+            }
+        }
+        if (this.isDry()) {
+            for (BlockPos position : positions) {
+                BlockPos.MutableBlockPos mutable3 = mutableBlockPos.set(position.getX(), Math.min(position.getY(), waterLevel), position.getZ());
+                for (int i = mutable3.getY(); i <= waterLevel; i++) {
+                    BlockState mutableState = world.getBlockState(mutable3);
+                    boolean flag = mutableState.is(GBlockTags.PINK_SALT_BLOCKS) || mutableState.is(GBlocks.PINK_SALT_CHAMBER);
+                    boolean flag1 = flag && (world.getBlockState(mutable3.above()).isAir() || world.getBlockState(mutable3.above()).is(GBlockTags.PINK_SALT_BLOCKS));
+                    boolean flag2 = mutableState.is(Blocks.WATER);
+                    if (flag1 || flag2) {
+                        world.setBlock(mutable3, Blocks.AIR.defaultBlockState(), 2);
+                        for (Direction direction : Direction.values()) {
+                            if (world.getBlockState(mutable3.relative(direction)).is(Blocks.WATER)) {
+                                world.scheduleTick(mutable3.relative(direction), Fluids.WATER, 0);
+                            }
+                        }
+                    }
+                    mutable3.move(Direction.UP);
+                }
             }
         }
         return true;
@@ -85,7 +103,7 @@ public class OasisFeature extends Feature<NoneFeatureConfiguration> {
         return UniformInt.of(15, 21).sample(random);
     }
 
-    private void generateMiniAquifer(WorldGenLevel world, BlockPos mutable2) {
+    private void generateMiniAquifer(WorldGenLevel world, BlockPos mutable2, RandomSource randomSource) {
         if (world.getBlockState(mutable2.above()).isAir()) {
             world.setBlock(mutable2, Blocks.WATER.defaultBlockState(), 2);
             world.scheduleTick(mutable2, Fluids.WATER, 0);
@@ -96,13 +114,17 @@ public class OasisFeature extends Feature<NoneFeatureConfiguration> {
                 mutable3.setWithOffset(mutable2, value);
                 if (!world.getBlockState(mutable3).is(Blocks.WATER)) {
                     world.setBlock(mutable3, PinkSaltUtil.getBlock(world.getSeed(), mutable3).defaultBlockState(), 2);
-                    postFeature(world, mutable3);
+                    postFeature(world, mutable3, randomSource);
                 }
             }
         }
     }
 
-    public void postFeature(WorldGenLevel world, BlockPos.MutableBlockPos mutableBlockPos) {
+    public boolean isDry() {
+        return false;
+    }
+
+    public void postFeature(WorldGenLevel world, BlockPos.MutableBlockPos mutableBlockPos, RandomSource randomSource) {
     }
 
 }

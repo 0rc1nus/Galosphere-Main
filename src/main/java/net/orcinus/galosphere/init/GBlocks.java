@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.orcinus.galosphere.Galosphere;
+import net.orcinus.galosphere.blocks.PinkSaltChamberBlock;
 import net.orcinus.galosphere.blocks.PotpourriBlock;
 import net.orcinus.galosphere.blocks.SilverBalanceBlock;
 import net.orcinus.galosphere.blocks.StrandedMembraneBlock;
@@ -201,6 +202,8 @@ public class GBlocks {
     public static final Block PINK_SALT_STRAW = registerBlock("pink_salt_straw", new PinkSaltStrawBlock(BlockBehaviour.Properties.of().offsetType(BlockBehaviour.OffsetType.XZ).randomTicks().dynamicShape().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f).pushReaction(PushReaction.DESTROY)));
 
     public static final Block PINK_SALT_CLUSTER = registerBlock("pink_salt_cluster", new PinkSaltClusterBlock(BlockBehaviour.Properties.of().lightLevel(state -> 6).sound(GSoundEvents.PINK_SALT_CLUSTER).requiresCorrectToolForDrops().strength(1.0F)));
+
+    public static final Block PINK_SALT_CHAMBER = registerBlock("pink_salt_chamber", new PinkSaltChamberBlock(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).lightLevel(state -> 6).sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops()));
 
     public static final Block CURED_MEMBRANE_BLOCK = registerBlock("cured_membrane_block", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(GSoundEvents.CURED_MEMBRANE)));
     public static final Block STRANDED_MEMBRANE_BLOCK = registerBlock("stranded_membrane_block", new StrandedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(GSoundEvents.STRANDED_MEMBRANE).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));
