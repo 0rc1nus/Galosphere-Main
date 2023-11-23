@@ -28,6 +28,7 @@ public class GCreativeModeTabs {
                 .title(Component.translatable("itemGroup.galosphere.galosphere"))
                 .displayItems((itemDisplayParameters, output) -> {
                     output.accept(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE);
+                    output.accept(GItems.SALTWARD);
                     output.accept(GItems.PRESERVED_TEMPLATE);
                     output.accept(GItems.SPARKLE_SPAWN_EGG);
                     output.accept(GItems.SPECTRE_SPAWN_EGG);
@@ -161,6 +162,7 @@ public class GCreativeModeTabs {
                     output.accept(GBlocks.PINK_SALT_LAMP);
                     output.accept(GBlocks.PINK_SALT_STRAW);
                     output.accept(GBlocks.PINK_SALT_CLUSTER);
+                    output.accept(GBlocks.PINK_SALT_CHAMBER);
                     output.accept(GBlocks.CURED_MEMBRANE_BLOCK);
                     output.accept(GBlocks.STRANDED_MEMBRANE_BLOCK);
                 })

@@ -49,7 +49,7 @@ public class GBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
         this.getOrCreateTagBuilder(GBlockTags.PINK_SALT_BLOCKS).add(GBlocks.PINK_SALT, GBlocks.ROSE_PINK_SALT, GBlocks.PASTEL_PINK_SALT);
         this.getOrCreateTagBuilder(GBlockTags.PINK_SALT_HEATED_BLOCKS).add(Blocks.SOUL_FIRE, Blocks.SOUL_CAMPFIRE);
         this.getOrCreateTagBuilder(GBlockTags.OASIS_REPLACE).addOptionalTag(GBlockTags.PINK_SALT_BLOCKS).addOptionalTag(BlockTags.BASE_STONE_OVERWORLD).addOptionalTag(BlockTags.FLOWERS).addOptionalTag(BlockTags.DIRT).addOptionalTag(ConventionalBlockTags.ORES);
-        this.getOrCreateTagBuilder(GBlockTags.OMIT_ASTRAL).add(Blocks.BEDROCK);
+        this.getOrCreateTagBuilder(GBlockTags.OMIT_ASTRAL).add(Blocks.BEDROCK, Blocks.OBSIDIAN, Blocks.NETHERITE_BLOCK, Blocks.ANCIENT_DEBRIS, Blocks.REINFORCED_DEEPSLATE);
         this.getOrCreateTagBuilder(GBlockTags.OASIS_GENERATE_ON).addOptionalTag(GBlockTags.PINK_SALT_BLOCKS).addOptionalTag(BlockTags.BASE_STONE_OVERWORLD);
     }
 }
