@@ -25,7 +25,7 @@ public class GChestLootTableProvider extends SimpleFabricLootTableProvider {
     @Override
     public void generate(BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
         biConsumer.accept(GBuiltinLootTables.PINK_SALT_SHRINE_CHEST, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 7.0F))
                         .add(LootItem.lootTableItem(GBlocks.PINK_SALT_CHAMBER.asItem())
                              .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                              .setWeight(10)

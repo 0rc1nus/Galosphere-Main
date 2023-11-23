@@ -1,7 +1,9 @@
 package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.orcinus.galosphere.blocks.blockentities.PinkSaltChamberBlockEntity;
 import net.orcinus.galosphere.blocks.blockentities.PotpourriBlockEntity;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
+import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.Nullable;
 
 public class PinkSaltChamberBlock extends BaseEntityBlock {
@@ -21,7 +24,15 @@ public class PinkSaltChamberBlock extends BaseEntityBlock {
 
     public PinkSaltChamberBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(CHARGED, true));
+        this.registerDefaultState(this.stateDefinition.any().setValue(CHARGED, false));
+    }
+
+    @Override
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        if (direction == Direction.UP && blockState2.is(GBlocks.PINK_SALT_CLUSTER) && blockState2.getValue(PinkSaltClusterBlock.FACING) == Direction.UP) {
+            return blockState.setValue(CHARGED, true);
+        }
+        return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }
 
     @Override

@@ -49,6 +49,9 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, PinkSaltChamberBlockEntity blockEntity) {
+        if (!blockState.getValue(PinkSaltChamberBlock.CHARGED)) {
+            return;
+        }
         if (blockEntity.cooldown >= blockEntity.maxCooldown) {
             Optional<Player> optional = level.getEntitiesOfClass(Player.class, new AABB(blockPos).inflate(5.0D)).stream().filter(LivingEntity::isAlive).filter(player -> !player.getAbilities().instabuild).toList().stream().findAny();
             List<BlockPos> blockPosList = Lists.newArrayList();

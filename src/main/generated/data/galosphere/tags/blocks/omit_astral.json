@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "minecraft:bedrock"
+    "minecraft:bedrock",
+    "minecraft:obsidian",
+    "minecraft:netherite_block",
+    "minecraft:ancient_debris",
+    "minecraft:reinforced_deepslate"
   ]
 }
