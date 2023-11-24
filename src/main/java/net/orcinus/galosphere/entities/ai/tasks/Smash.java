@@ -1,6 +1,8 @@
 package net.orcinus.galosphere.entities.ai.tasks;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.Berserker;
+import net.orcinus.galosphere.entities.Preserved;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 
@@ -56,7 +59,14 @@ public class Smash extends Behavior<Berserker> {
         self.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
         if (self.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_COOLING_DOWN)) return;
 
-        for (LivingEntity enemy : level.getEntitiesOfClass(LivingEntity.class, self.getBoundingBox().inflate(8)).stream().filter((enemy) -> enemy.isAlive() && enemy.getUUID() != self.getUUID()).toList()) {
+        List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, self.getBoundingBox().inflate(8))
+                .stream()
+                .filter(Predicate.not(Preserved.class::isInstance))
+                .filter(LivingEntity::isAlive)
+                .filter(livingEntity -> livingEntity.getUUID() != self.getUUID())
+                .toList();
+        
+        for (LivingEntity enemy : list) {
             Vec3 selfPos = self.position().add(0, 1.6f, 0);
             Vec3 enemyPos = enemy.getEyePosition().subtract(selfPos);
             Vec3 normalizedDirection = enemyPos.normalize();
@@ -66,10 +76,13 @@ public class Smash extends Behavior<Berserker> {
 
             double distanceFromEnemy = self.distanceTo(enemy);
             boolean canDamage = true;
-            if (distanceFromEnemy > 4 && !enemy.onGround()) canDamage = false;
+            if (distanceFromEnemy > 3 && !enemy.onGround()) canDamage = false;
 
-            if (canDamage) self.doHurtTarget(enemy);
-            if (canDamage) enemy.push(normalizedDirection.x() * knockbackY, normalizedDirection.y() * knockbackX, normalizedDirection.z() * knockbackY);
+            if (canDamage) {
+                self.doHurtTarget(enemy);
+                self.heal(10.0F);
+                enemy.push(normalizedDirection.x() * knockbackY, normalizedDirection.y() * knockbackX, normalizedDirection.z() * knockbackY);
+            }
         }
 
         self.level().broadcastEntityEvent(self, (byte) 32);

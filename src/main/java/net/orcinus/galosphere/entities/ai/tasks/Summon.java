@@ -68,7 +68,7 @@ public class Summon extends Behavior<Berserker> {
             return;
         }
         brain.eraseMemory(MemoryModuleType.WALK_TARGET);
-        List<BlockPos> positions = IntStream.range(0, 5).mapToObj(i -> LandRandomPos.getPos(livingEntity, i * 2, 3)).filter(Objects::nonNull).map(BlockPos::containing).filter(blockPos -> livingEntity.level().getWorldBorder().isWithinBounds(blockPos)).map(BlockPos::below).filter(blockPos -> serverLevel.getBlockState(blockPos).isCollisionShapeFullBlock(serverLevel, blockPos)).toList();
+        List<BlockPos> positions = IntStream.range(0, 2).mapToObj(i -> LandRandomPos.getPos(livingEntity, i * 2, 3)).filter(Objects::nonNull).map(BlockPos::containing).filter(blockPos -> livingEntity.level().getWorldBorder().isWithinBounds(blockPos)).map(BlockPos::below).filter(blockPos -> serverLevel.getBlockState(blockPos).isCollisionShapeFullBlock(serverLevel, blockPos)).toList();
         BlockPos randomPos = positions.get(serverLevel.getRandom().nextInt(positions.size()));
         Preserved preserved = GEntityTypes.PRESERVED.create(serverLevel, null, null, livingEntity.blockPosition(), MobSpawnType.TRIGGERED, true, true);
         preserved.moveTo(randomPos.getX(), randomPos.getY(), randomPos.getZ(), 0.0f, 0.0f);

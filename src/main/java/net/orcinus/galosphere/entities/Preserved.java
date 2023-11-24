@@ -47,6 +47,11 @@ public class Preserved extends Monster {
     }
 
     @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
+    }
+
+    @Override
     public void readAdditionalSaveData(CompoundTag compoundTag) {
         super.readAdditionalSaveData(compoundTag);
         this.fromChamber = compoundTag.getBoolean("FromChamber");

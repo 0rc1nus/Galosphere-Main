@@ -27,6 +27,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.Brain;
@@ -181,7 +182,8 @@ public class Berserker extends Monster {
         double threshold = range - 0.6D;
         double increment = 0.2D;
         if (!this.level().isClientSide) {
-            if (this.tickCount % 250 == 0) {
+            int count = this.level().getDifficulty() == Difficulty.HARD ? 125 : 250;
+            if (this.tickCount % count == 0) {
                 this.heal(10.0f);
             }
             Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
@@ -331,7 +333,7 @@ public class Berserker extends Monster {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Berserker.createMonsterAttributes().add(Attributes.MAX_HEALTH, 155.0).add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.ATTACK_DAMAGE, 10.0D).add(Attributes.KNOCKBACK_RESISTANCE, 1.0D).add(Attributes.ATTACK_KNOCKBACK, 1.5D);
+        return Berserker.createMonsterAttributes().add(Attributes.MAX_HEALTH, 250.0D).add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.ATTACK_DAMAGE, 20.0D).add(Attributes.KNOCKBACK_RESISTANCE, 1.0D).add(Attributes.ATTACK_KNOCKBACK, 1.5D);
     }
 
     @Override
@@ -347,6 +349,11 @@ public class Berserker extends Monster {
     @Override
     public Brain<Berserker> getBrain() {
         return (Brain<Berserker>) super.getBrain();
+    }
+
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     @Override
