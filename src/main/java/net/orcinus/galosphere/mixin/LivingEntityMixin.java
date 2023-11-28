@@ -1,7 +1,6 @@
 package net.orcinus.galosphere.mixin;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -27,7 +26,7 @@ import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.items.SterlingArmorItem;
-import net.orcinus.galosphere.util.SaltLayers;
+import net.orcinus.galosphere.util.SaltLayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -85,7 +84,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         this.setBanner(ItemStack.of(tag.getCompound("BannerStack")));
         this.setGoldenAirSupply(tag.getFloat("GoldenAirSupply"));
         this.setUsingSpectreBoundedSpyglass(tag.getBoolean("UsingSpectreBoundedSpyglass"));
-        this.setSaltLayers(SaltLayers.byId(tag.getInt("SaltLayers")));
+        this.setSaltLayers(SaltLayer.byId(tag.getInt("SaltLayers")));
         this.setSaltDegradation(tag.getInt("SaltDegradation"));
         if (this.preserved) {
             this.preserved = tag.getBoolean("Preserved");
@@ -97,7 +96,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         LivingEntity $this = (LivingEntity) (Object) this;
         if (this.getSaltLayers() > 0) {
             if (this.getSaltDegradation() <= 0) {
-                SaltLayers saltLayers = SaltLayers.byId(this.getSaltLayers() - 1);
+                SaltLayer saltLayers = SaltLayer.byId(this.getSaltLayers() - 1);
                 this.setSaltLayers(saltLayers);
                 this.setSaltDegradation(saltLayers.getDurability());
                 $this.playSound(SoundEvents.SKELETON_CONVERTED_TO_STRAY, 1.0F, 1.0F);
@@ -238,7 +237,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     }
 
     @Override
-    public void setSaltLayers(SaltLayers saltLayers) {
+    public void setSaltLayers(SaltLayer saltLayers) {
         ((LivingEntity)(Object)this).getEntityData().set(SALT_LAYERS, saltLayers.getId());
     }
 

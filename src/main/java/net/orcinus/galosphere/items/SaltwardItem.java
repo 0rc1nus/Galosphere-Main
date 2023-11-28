@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.orcinus.galosphere.api.SaltBound;
-import net.orcinus.galosphere.util.SaltLayers;
+import net.orcinus.galosphere.util.SaltLayer;
 
 public class SaltwardItem extends Item {
 
@@ -20,8 +20,8 @@ public class SaltwardItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         SaltBound saltBound = (SaltBound) player;
         if (saltBound.getSaltLayers() == 0) {
-            saltBound.setSaltLayers(SaltLayers.STRONG);
-            saltBound.setSaltDegradation(SaltLayers.STRONG.getDurability());
+            saltBound.setSaltLayers(SaltLayer.STRONG);
+            saltBound.setSaltDegradation(SaltLayer.STRONG.getDurability());
             player.getCooldowns().addCooldown(this, 1000);
             player.playSound(SoundEvents.SKELETON_CONVERTED_TO_STRAY);
             return InteractionResultHolder.success(player.getItemInHand(interactionHand));

@@ -297,6 +297,7 @@ public class PinkSaltStrawBlock extends Block implements SimpleWaterloggedBlock 
             voxelShape = MIDDLE_SHAPE;
         }
         return voxelShape.move(vec3.x, 0.0, vec3.z);
+//        return super.getShape(blockState, blockGetter, blockPos, collisionContext);
     }
 
     @Override

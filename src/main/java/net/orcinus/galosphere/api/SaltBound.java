@@ -1,12 +1,12 @@
 package net.orcinus.galosphere.api;
 
-import net.orcinus.galosphere.util.SaltLayers;
+import net.orcinus.galosphere.util.SaltLayer;
 
 public interface SaltBound {
 
     int getSaltLayers();
 
-    void setSaltLayers(SaltLayers saltLayers);
+    void setSaltLayers(SaltLayer saltLayers);
 
     int getSaltDegradation();
 

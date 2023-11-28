@@ -65,7 +65,7 @@ public class Smash extends Behavior<Berserker> {
                 .filter(LivingEntity::isAlive)
                 .filter(livingEntity -> livingEntity.getUUID() != self.getUUID())
                 .toList();
-        
+
         for (LivingEntity enemy : list) {
             Vec3 selfPos = self.position().add(0, 1.6f, 0);
             Vec3 enemyPos = enemy.getEyePosition().subtract(selfPos);
