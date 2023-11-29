@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -29,10 +30,12 @@ public class BlockStateBaseMixin {
 
     @Inject(at = @At("RETURN"), method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", cancellable = true)
     private void G$getCollisionShape(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        if (collisionContext instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof LivingEntity livingEntity && ((BlockBehaviour.BlockStateBase)(Object)this).isSolid()) {
+        BlockState state = blockGetter.getBlockState(blockPos);
+        boolean invalidState = state.is(GBlockTags.OMIT_ASTRAL) || state.isAir();
+        if (collisionContext instanceof EntityCollisionContext entityCollisionContext && entityCollisionContext.getEntity() instanceof LivingEntity livingEntity && livingEntity.hasEffect(GMobEffects.ASTRAL) && !invalidState) {
             boolean above = livingEntity.getY() > blockPos.getY() + cir.getReturnValue().max(Direction.Axis.Y) - (livingEntity.onGround() ? 0.5F : 0.001F);
             boolean flag = !above || livingEntity.isShiftKeyDown();
-            if (livingEntity.hasEffect(GMobEffects.ASTRAL) && flag && !blockGetter.getBlockState(blockPos).is(GBlockTags.OMIT_ASTRAL)) {
+            if (flag) {
                 cir.setReturnValue(Shapes.empty());
             }
         }

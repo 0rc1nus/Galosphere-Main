@@ -52,34 +52,30 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
         if (!blockState.getValue(PinkSaltChamberBlock.CHARGED)) {
             return;
         }
-        if (blockEntity.cooldown >= blockEntity.maxCooldown) {
+        if (blockEntity.cooldown >= 200) {
+            List<BlockPos> poses = Lists.newArrayList();
             Optional<Player> optional = level.getEntitiesOfClass(Player.class, new AABB(blockPos).inflate(5.0D)).stream().filter(LivingEntity::isAlive).filter(player -> !player.getAbilities().instabuild).toList().stream().findAny();
-            List<BlockPos> blockPosList = Lists.newArrayList();
             optional.ifPresent(player -> {
-                int index = 0;
-                BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-                while (index < 34) {
-                    RandomSource random = level.getRandom();
-                    int range = 5;
-                    int yRange = 2;
-                    pos.set(blockPos.getX() + Mth.nextInt(random, -range, range), blockPos.getY() + Mth.nextInt(random, -yRange, yRange), blockPos.getZ() + Mth.nextInt(random, -range, range));
-                    BlockPos below = pos.below();
-                    BlockState state = level.getBlockState(pos);
-                    BlockState belowState = level.getBlockState(below);
-                    if (level instanceof ServerLevel && state.canBeReplaced() && belowState.isFaceSturdy(level, below, Direction.UP)) {
-                        blockPosList.add(pos);
+                int range = 5;
+                int yRange = 2;
+                for (int y = -yRange; y <= yRange; y++) {
+                    for (int x = -range; x <= range; x++) {
+                        for (int z = -range; z <= range; z++) {
+                            BlockPos position = new BlockPos(x, y, z);
+                            if (level.getBlockState(position.below()).isFaceSturdy(level, position.below(), Direction.UP) && level.getBlockState(position).isAir()) {
+                                poses.add(position);
+                            }
+                        }
                     }
-                    index++;
                 }
-                blockPosList.forEach(spawnPos -> {
-                    if (level instanceof ServerLevel serverLevel) {
-                        blockEntity.addParticles(blockPos, serverLevel, spawnPos);
-                        blockEntity.handleSpawning(serverLevel, spawnPos);
-                    }
-                    level.playSound(null, blockPos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    level.setBlock(blockPos, blockState.setValue(PinkSaltChamberBlock.CHARGED, false), 2);
-                    blockEntity.resetCooldown();
-                });
+            });
+            poses.forEach(position -> {
+                if (level instanceof ServerLevel serverLevel) {
+                    blockEntity.addParticles(blockPos, serverLevel, position);
+                    blockEntity.handleSpawning(serverLevel, position);
+                }
+                level.playSound(null, blockPos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+                blockEntity.resetCooldown();
             });
         } else {
             blockEntity.cooldown++;
