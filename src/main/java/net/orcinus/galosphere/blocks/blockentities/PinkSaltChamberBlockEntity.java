@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.blocks.PinkSaltChamberBlock;
@@ -52,16 +54,20 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
         if (!blockState.getValue(PinkSaltChamberBlock.CHARGED)) {
             return;
         }
-        if (blockEntity.cooldown >= 200) {
+        if (blockEntity.cooldown >= blockEntity.maxCooldown) {
             List<BlockPos> poses = Lists.newArrayList();
-            Optional<Player> optional = level.getEntitiesOfClass(Player.class, new AABB(blockPos).inflate(5.0D)).stream().filter(LivingEntity::isAlive).filter(player -> !player.getAbilities().instabuild).toList().stream().findAny();
+            int maxCount = UniformInt.of(2, 4).sample(level.getRandom());
+            if (level.getDifficulty() == Difficulty.HARD) {
+                maxCount *= UniformInt.of(2, 3).sample(level.getRandom());
+            }
+            Optional<Player> optional = level.getEntitiesOfClass(Player.class, new AABB(blockPos).inflate(6.0D)).stream().filter(LivingEntity::isAlive).filter(player -> !player.getAbilities().instabuild).toList().stream().findAny();
             optional.ifPresent(player -> {
                 int range = 5;
                 int yRange = 2;
                 for (int y = -yRange; y <= yRange; y++) {
                     for (int x = -range; x <= range; x++) {
                         for (int z = -range; z <= range; z++) {
-                            BlockPos position = new BlockPos(x, y, z);
+                            BlockPos position = blockPos.offset(x, y, z);
                             if (level.getBlockState(position.below()).isFaceSturdy(level, position.below(), Direction.UP) && level.getBlockState(position).isAir()) {
                                 poses.add(position);
                             }
@@ -69,14 +75,17 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
                     }
                 }
             });
-            poses.forEach(position -> {
-                if (level instanceof ServerLevel serverLevel) {
-                    blockEntity.addParticles(blockPos, serverLevel, position);
-                    blockEntity.handleSpawning(serverLevel, position);
+            if (!poses.isEmpty()) {
+                for (int count = 0; count < maxCount; count++) {
+                    BlockPos randomPos = poses.get(level.getRandom().nextInt(poses.size()));
+                    if (level instanceof ServerLevel serverLevel) {
+                        blockEntity.addParticles(blockPos, serverLevel, randomPos);
+                        blockEntity.handleSpawning(serverLevel, randomPos);
+                    }
                 }
-                level.playSound(null, blockPos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
                 blockEntity.resetCooldown();
-            });
+                level.playSound(null, blockPos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
         } else {
             blockEntity.cooldown++;
         }
@@ -104,7 +113,7 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
         Vec3 vec33 = vec32.normalize();
         for (int i = 1; i < Mth.floor(vec32.length()) + 7; ++i) {
             Vec3 vec34 = blockPos.getCenter().add(vec33.scale(i));
-            serverLevel.sendParticles(ParticleTypes.CRIT, vec34.x, vec34.y, vec34.z, 12, 0.0, 0.0, 0.0, 0.0);
+            serverLevel.sendParticles(ParticleTypes.CRIT, vec34.x, vec34.y, vec34.z, 30, 0.0, 0.0, 0.0, 0.0);
         }
     }
 

@@ -2,8 +2,6 @@ package net.orcinus.galosphere.entities;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +14,15 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.Unit;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -24,6 +30,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.RenderShape;
@@ -69,14 +76,10 @@ public class Preserved extends Monster {
     }
 
     @Override
-    public void die(DamageSource damageSource) {
-        super.die(damageSource);
-        Level level = this.level();
-        if (!level.isClientSide && this.isFromChamber()) {
-            BlockPos blockPos = this.blockPosition();
-            if (level.getBlockState(blockPos).canBeReplaced() && level.getBlockState(blockPos.below()).isFaceSturdy(level, blockPos.below(), Direction.UP)) {
-                level.setBlock(blockPos, GBlocks.PINK_SALT_CLUSTER.defaultBlockState(), 2);
-            }
+    protected void dropCustomDeathLoot(DamageSource damageSource, int i, boolean bl) {
+        super.dropCustomDeathLoot(damageSource, i, bl);
+        if (this.level().getRandom().nextFloat() > 0.25F && this.isFromChamber()) {
+            this.spawnAtLocation(new ItemStack(GBlocks.PINK_SALT_CLUSTER));
         }
     }
 
