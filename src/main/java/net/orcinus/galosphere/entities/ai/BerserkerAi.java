@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
 import net.minecraft.world.entity.ai.behavior.DoNothing;
@@ -19,9 +20,11 @@ import net.minecraft.world.entity.ai.behavior.StartAttacking;
 import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
 import net.minecraft.world.entity.ai.behavior.Swim;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
+import net.minecraft.world.entity.ai.behavior.warden.Roar;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.orcinus.galosphere.entities.Berserker;
+import net.orcinus.galosphere.entities.ai.tasks.BerserkerRoar;
 import net.orcinus.galosphere.entities.ai.tasks.ConditionalWalkIfTargetOutOfReach;
 import net.orcinus.galosphere.entities.ai.tasks.Smash;
 import net.orcinus.galosphere.entities.ai.tasks.Summon;
@@ -36,8 +39,8 @@ public class BerserkerAi {
     public static Brain<?> makeBrain(Berserker berserker, Brain<Berserker> brain) {
         BerserkerAi.initCoreActivity(brain);
         BerserkerAi.initIdleActivity(brain);
-        BerserkerAi.initFightActivity(berserker, brain);
         BerserkerAi.initRoarActivity(brain);
+        BerserkerAi.initFightActivity(berserker, brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
         brain.useDefaultActivity();
@@ -53,10 +56,6 @@ public class BerserkerAi {
         ));
     }
 
-    private static void initRoarActivity(Brain<Berserker> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(Activity.ROAR, 5, ImmutableList.of(), GMemoryModuleTypes.IS_ROARING);
-    }
-
     private static void initIdleActivity(Brain<Berserker> brain) {
         brain.addActivity(Activity.IDLE, 10, ImmutableList.of(
                 StartAttacking.create(BerserkerAi::findNearestValidAttackTarget),
@@ -65,8 +64,14 @@ public class BerserkerAi {
         ));
     }
 
+    private static void initRoarActivity(Brain<Berserker> brain) {
+        brain.addActivityAndRemoveMemoryWhenStopped(Activity.ROAR, 10, ImmutableList.of(
+                new BerserkerRoar()
+        ), GMemoryModuleTypes.IS_ROARING);
+    }
+
     private static void initFightActivity(Berserker berserker, Brain<Berserker> brain) {
-        Predicate<LivingEntity> predicate = livingEntity -> livingEntity instanceof Berserker blighted && blighted.getPhase() != Berserker.Phase.UNDERMINE;
+        Predicate<LivingEntity> predicate = livingEntity -> livingEntity instanceof Berserker blighted && (!blighted.hasPose(Pose.ROARING) || blighted.getPhase() != Berserker.Phase.UNDERMINE);
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
                 BehaviorBuilder.triggerIf(Berserker::shouldUseMeleeAttack, MeleeAttack.create(30)),
                 new Smash(),

@@ -20,10 +20,10 @@ public class GMemoryModuleTypes {
     public static final MemoryModuleType<Unit> POLLINATED_COOLDOWN = register("pollinated_cooldown", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Boolean> CAN_BURY = register("can_bury", Codec.BOOL);
     public static final MemoryModuleType<BlockPos> NEAREST_LICHEN_MOSS = register("nearest_lichen_moss");
-    public static final MemoryModuleType<Unit> IS_ROARING = register("roaring", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> IS_SMASHING = register("smashing", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> IS_IMPALING = register("impaling", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> IS_SUMMONING = register("summoning", Codec.unit(Unit.INSTANCE));
+    public static final MemoryModuleType<Unit> IS_ROARING = register("roaring", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> SUMMONING_COOLDOWN = register("summoning_cooldown", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> IMPALING_COOLDOWN = register("impaling_cooldown", Codec.unit(Unit.INSTANCE));
     public static final MemoryModuleType<Unit> SMASHING_COOLDOWN = register("smashing_cooldown", Codec.unit(Unit.INSTANCE));

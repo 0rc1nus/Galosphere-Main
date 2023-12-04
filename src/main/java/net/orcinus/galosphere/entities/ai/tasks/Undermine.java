@@ -32,7 +32,14 @@ public class Undermine extends Behavior<Berserker> {
     private static final int MAX_DURATION = 50;
 
     public Undermine() {
-        super(ImmutableMap.of(GMemoryModuleTypes.RAMPAGE_TICKS, MemoryStatus.VALUE_ABSENT, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, GMemoryModuleTypes.IMPALING_COOLDOWN, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.IS_SMASHING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.IS_IMPALING, MemoryStatus.REGISTERED, GMemoryModuleTypes.IS_SUMMONING, MemoryStatus.VALUE_ABSENT), MAX_DURATION);
+        super(ImmutableMap.of(
+                GMemoryModuleTypes.RAMPAGE_TICKS, MemoryStatus.VALUE_ABSENT,
+                MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT,
+                GMemoryModuleTypes.IMPALING_COOLDOWN, MemoryStatus.VALUE_ABSENT,
+                GMemoryModuleTypes.IS_SMASHING, MemoryStatus.VALUE_ABSENT,
+                GMemoryModuleTypes.IS_IMPALING, MemoryStatus.REGISTERED,
+                GMemoryModuleTypes.IS_SUMMONING, MemoryStatus.VALUE_ABSENT
+        ), MAX_DURATION);
     }
 
     @Override

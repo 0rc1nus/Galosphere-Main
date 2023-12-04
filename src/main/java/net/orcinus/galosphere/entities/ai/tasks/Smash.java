@@ -29,7 +29,16 @@ public class Smash extends Behavior<Berserker> {
     private static final int MAX_DURATION = 60;
 
     public Smash() {
-        super(ImmutableMap.of(GMemoryModuleTypes.RAMPAGE_TICKS, MemoryStatus.VALUE_ABSENT, MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT, GMemoryModuleTypes.IS_SMASHING, MemoryStatus.REGISTERED, GMemoryModuleTypes.IS_IMPALING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.IS_SUMMONING, MemoryStatus.VALUE_ABSENT, GMemoryModuleTypes.SMASHING_COOLDOWN, MemoryStatus.VALUE_ABSENT), MAX_DURATION);
+        super(ImmutableMap.of(
+                GMemoryModuleTypes.RAMPAGE_TICKS, MemoryStatus.VALUE_ABSENT,
+                MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED,
+                MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT,
+                MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT,
+                GMemoryModuleTypes.IS_SMASHING, MemoryStatus.REGISTERED,
+                GMemoryModuleTypes.IS_IMPALING, MemoryStatus.VALUE_ABSENT,
+                GMemoryModuleTypes.IS_SUMMONING, MemoryStatus.VALUE_ABSENT,
+                GMemoryModuleTypes.SMASHING_COOLDOWN, MemoryStatus.VALUE_ABSENT
+        ), MAX_DURATION);
     }
 
     @Override

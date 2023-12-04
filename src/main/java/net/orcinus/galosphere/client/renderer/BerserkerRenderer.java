@@ -35,9 +35,7 @@ public class BerserkerRenderer extends MobRenderer<Berserker, BerserkerModel<Ber
 
     @Override
     protected boolean isShaking(Berserker livingEntity) {
-        boolean flag1 = livingEntity.getStationaryTicks() > 0;
-        boolean present = livingEntity.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).isPresent();
-        return flag1 && present;
+        return livingEntity.isShedding();
     }
 
 }

@@ -58,9 +58,10 @@ import java.util.Optional;
 
 public class Berserker extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Berserker>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.BLIGHTED_ENTITY_SENSOR);
-    protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.BREED_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.AVOID_TARGET, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, GMemoryModuleTypes.IS_ROARING, GMemoryModuleTypes.IMPALING_COOLDOWN, GMemoryModuleTypes.IMPALING_COUNT, GMemoryModuleTypes.IS_SMASHING, GMemoryModuleTypes.IS_IMPALING, GMemoryModuleTypes.IS_SUMMONING, GMemoryModuleTypes.SUMMONING_COOLDOWN, GMemoryModuleTypes.SUMMON_COUNT, GMemoryModuleTypes.SMASHING_COOLDOWN, GMemoryModuleTypes.HURT_COUNT, GMemoryModuleTypes.RAMPAGE_TICKS);
+    protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.BREED_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.AVOID_TARGET, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, GMemoryModuleTypes.IMPALING_COOLDOWN, GMemoryModuleTypes.IMPALING_COUNT, GMemoryModuleTypes.IS_SMASHING, GMemoryModuleTypes.IS_IMPALING, GMemoryModuleTypes.IS_SUMMONING, GMemoryModuleTypes.SUMMONING_COOLDOWN, GMemoryModuleTypes.SUMMON_COUNT, GMemoryModuleTypes.SMASHING_COOLDOWN, GMemoryModuleTypes.HURT_COUNT, GMemoryModuleTypes.RAMPAGE_TICKS, GMemoryModuleTypes.IS_ROARING, MemoryModuleType.ROAR_SOUND_COOLDOWN, MemoryModuleType.ROAR_SOUND_DELAY);
     private static final EntityDataAccessor<String> PHASE = SynchedEntityData.defineId(Berserker.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> STATIONARY_TICKS = SynchedEntityData.defineId(Berserker.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> SHEDDING = SynchedEntityData.defineId(Berserker.class, EntityDataSerializers.BOOLEAN);
     private final List<MobEffect> selectedEffects = Util.make(Lists.newArrayList(), list -> {
         list.add(GMobEffects.BLOCK_BANE);
         list.add(MobEffects.DIG_SLOWDOWN);
@@ -94,6 +95,7 @@ public class Berserker extends Monster {
         super.defineSynchedData();
         this.entityData.define(PHASE, Phase.IDLING.name());
         this.entityData.define(STATIONARY_TICKS, 0);
+        this.entityData.define(SHEDDING, false);
     }
 
     @Override
@@ -104,6 +106,7 @@ public class Berserker extends Monster {
             this.setPhase(Phase.valueOf(phase));
         }
         this.setStationaryTicks(compoundTag.getInt("StationaryTicks"));
+        this.setShedding(compoundTag.getBoolean("Shedding"));
     }
 
     @Override
@@ -111,6 +114,7 @@ public class Berserker extends Monster {
         super.addAdditionalSaveData(compoundTag);
         compoundTag.putString("Phase", this.getPhase().name());
         compoundTag.putInt("StationaryTicks", this.getStationaryTicks());
+        compoundTag.putBoolean("Shedding", this.isShedding());
     }
 
     public boolean shouldAttack() {
@@ -128,6 +132,14 @@ public class Berserker extends Monster {
         } else {
             return 2;
         }
+    }
+
+    public void setShedding(boolean shedding) {
+        this.entityData.set(SHEDDING, shedding);
+    }
+
+    public boolean isShedding() {
+        return this.entityData.get(SHEDDING);
     }
 
     public void setStationaryTicks(int stationaryTicks) {
@@ -177,33 +189,46 @@ public class Berserker extends Monster {
     @Override
     public void aiStep() {
         super.aiStep();
-        boolean flag = this.isStationary();
         double range = 0.75D;
         double threshold = range - 0.6D;
         double increment = 0.2D;
         if (!this.level().isClientSide) {
             int count = this.level().getDifficulty() == Difficulty.HARD ? 125 : 250;
-            if (this.tickCount % count == 0) {
+            boolean stationary = this.isStationary();
+            boolean shedding = this.isShedding();
+            if (this.getHealth() < this.getMaxHealth() && this.tickCount % count == 0) {
                 this.heal(10.0f);
             }
-            Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
-            if (this.getStationaryTicks() > 0 && this.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).isPresent()) {
-                this.setStationaryTicks(this.getStationaryTicks() - 1);
-                if (this.tickCount % 20 == 0) {
-                    for (double y = 0; y <= 1.95D; y += 0.35D) {
-                        for (double x = -range; x <= range; x += increment) {
-                            for (double z = -range; z <= range; z += increment) {
-                                if (x >= -threshold && x <= threshold || z >= -threshold && z <= threshold) {
-                                    continue;
-                                }
-                                ((ServerLevel) this.level()).sendParticles(GParticleTypes.PINK_SALT_FALLING_DUST, this.getX() + x, this.getY() + y, this.getZ() + z, 1, 0.0, 0.0, 0.0, 0.0);
-                            }
-                        }
-                    }
+            if (stationary) {
+                this.getBrain().clearMemories();
+                Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
+                if (!shedding) {
+                    player.ifPresent(this::setTarget);
+                } else {
+                    this.setStationaryTicks(this.getStationaryTicks() - 1);
+                    this.addParticles(range, increment, threshold);
+                }
+            } else {
+                if (shedding) {
+                    this.getBrain().setMemory(GMemoryModuleTypes.IS_ROARING, Unit.INSTANCE);
+                    this.setShedding(false);
+                    this.setPersistenceRequired();
                 }
             }
-            if (flag) {
-                player.ifPresent(this::setTarget);
+        }
+    }
+
+    private void addParticles(double range, double increment, double threshold) {
+        if (this.tickCount % 20 == 0) {
+            for (double y = 0; y <= 1.95D; y += 0.35D) {
+                for (double x = -range; x <= range; x += increment) {
+                    for (double z = -range; z <= range; z += increment) {
+                        if (x >= -threshold && x <= threshold || z >= -threshold && z <= threshold) {
+                            continue;
+                        }
+                        ((ServerLevel) this.level()).sendParticles(GParticleTypes.PINK_SALT_FALLING_DUST, this.getX() + x, this.getY() + y, this.getZ() + z, 1, 0.0, 0.0, 0.0, 0.0);
+                    }
+                }
             }
         }
     }
@@ -214,6 +239,7 @@ public class Berserker extends Monster {
 
     private void setTarget(Player player) {
         this.getBrain().setMemory(MemoryModuleType.ATTACK_TARGET, player);
+        this.setShedding(true);
     }
 
     @Nullable
@@ -221,10 +247,6 @@ public class Berserker extends Monster {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
         if (mobSpawnType == MobSpawnType.STRUCTURE) {
             this.setStationaryTicks(200);
-        } else {
-            this.setPose(Pose.ROARING);
-            this.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.IS_ROARING, Unit.INSTANCE, 52);
-            this.playSound(GSoundEvents.BERSERKER_ROAR, 3.0f, 1.0f);
         }
         return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, compoundTag);
     }
@@ -285,10 +307,7 @@ public class Berserker extends Monster {
 
     public boolean shouldUseMeleeAttack() {
         Optional<LivingEntity> memory = this.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
-        if (memory.isEmpty()) {
-            return false;
-        }
-        return this.isWithinMeleeAttackRange(memory.get()) && this.getPhase() != Phase.SMASH && this.shouldAttack() && this.isInHardMode() && this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS).isPresent();
+        return memory.filter(livingEntity -> this.isWithinMeleeAttackRange(livingEntity) && this.getPhase() != Phase.SMASH && this.shouldAttack() && this.isInHardMode() && this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS).isPresent()).isPresent();
     }
 
     public boolean isInHardMode() {
