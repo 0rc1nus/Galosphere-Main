@@ -11,7 +11,7 @@ public class GRecipeSerializers {
     public static final RecipeSerializer<PreservedTransformRecipe> PERSEVERED_TRANSFORM = new PreservedTransformRecipe.Serializer();
 
     public static void init() {
-        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Galosphere.id("persevered_transform_recipe"), PERSEVERED_TRANSFORM);
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Galosphere.id("preserved_transform_recipe"), PERSEVERED_TRANSFORM);
     }
 
 }

@@ -65,7 +65,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "galosphere:succulent",
+          "name": "galosphere:succulent_petals",
           "weight": 15
         }
       ],

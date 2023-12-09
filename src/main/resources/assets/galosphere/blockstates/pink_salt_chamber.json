@@ -4,7 +4,7 @@
       "model": "galosphere:block/pink_salt_chamber"
     },
     "charged=true": {
-      "model": "galosphere:block/pink_salt_chamber"
+      "model": "galosphere:block/charged_pink_salt_chamber"
     }
   }
 }

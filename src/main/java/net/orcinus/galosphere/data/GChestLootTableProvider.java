@@ -13,6 +13,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GBuiltinLootTables;
+import net.orcinus.galosphere.init.GItems;
 
 import java.util.function.BiConsumer;
 
@@ -35,7 +36,7 @@ public class GChestLootTableProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.ROTTEN_FLESH)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F)))
                                 .setWeight(25))
-                        .add(LootItem.lootTableItem(GBlocks.SUCCULENT)
+                        .add(LootItem.lootTableItem(GItems.SUCCULENT_PETALS)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
                                 .setWeight(15)))
         );
