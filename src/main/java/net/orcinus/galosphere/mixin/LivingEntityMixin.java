@@ -5,28 +5,21 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.api.GoldenBreath;
-import net.orcinus.galosphere.api.SaltBound;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.items.SterlingArmorItem;
-import net.orcinus.galosphere.util.SaltLayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -38,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Optional;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass, SaltBound {
+public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass {
     @Shadow protected ItemStack useItem;
     @Unique
     private static final EntityDataAccessor<ItemStack> BANNER_STACK = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.ITEM_STACK );
@@ -47,11 +40,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     @Unique
     private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
     @Unique
-    private static final EntityDataAccessor<Integer> SALT_LAYERS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.INT);
-    @Unique
     private boolean preserved;
-    @Unique
-    private int saltDegradation;
 
     @Inject(at = @At("TAIL"), method = "canBeSeenAsEnemy", cancellable = true)
     private void G$canAttack(CallbackInfoReturnable<Boolean> cir) {
@@ -66,7 +55,6 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         data.define(BANNER_STACK, ItemStack.EMPTY);
         data.define(GOLDEN_AIR_SUPPLY, 0.0F);
         data.define(USING_SPECTRE_BOUNDED_SPYGLASS, false);
-        data.define(SALT_LAYERS, 0);
     }
 
     @Inject(at = @At("RETURN"), method = "addAdditionalSaveData")
@@ -75,8 +63,6 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         tag.putFloat("GoldenAirSupply", this.getGoldenAirSupply());
         tag.putBoolean("UsingSpectreBoundedSpyglass", this.isUsingSpectreBoundedSpyglass());
         tag.putBoolean("Preserved", this.preserved);
-        tag.putInt("SaltLayers", this.getSaltLayers());
-        tag.putInt("SaltDegradation", this.getSaltDegradation());
     }
 
     @Inject(at = @At("RETURN"), method = "readAdditionalSaveData")
@@ -84,8 +70,6 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         this.setBanner(ItemStack.of(tag.getCompound("BannerStack")));
         this.setGoldenAirSupply(tag.getFloat("GoldenAirSupply"));
         this.setUsingSpectreBoundedSpyglass(tag.getBoolean("UsingSpectreBoundedSpyglass"));
-        this.setSaltLayers(SaltLayer.byId(tag.getInt("SaltLayers")));
-        this.setSaltDegradation(tag.getInt("SaltDegradation"));
         if (this.preserved) {
             this.preserved = tag.getBoolean("Preserved");
         }
@@ -94,16 +78,6 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     @Inject(at = @At("HEAD"), method = "tick")
     private void G$tick(CallbackInfo ci) {
         LivingEntity $this = (LivingEntity) (Object) this;
-        if (this.getSaltLayers() > 0) {
-            if (this.getSaltDegradation() <= 0) {
-                SaltLayer saltLayers = SaltLayer.byId(this.getSaltLayers() - 1);
-                this.setSaltLayers(saltLayers);
-                this.setSaltDegradation(saltLayers.getDurability());
-                $this.playSound(SoundEvents.SKELETON_CONVERTED_TO_STRAY, 1.0F, 1.0F);
-            } else {
-                this.setSaltDegradation(this.getSaltDegradation() - 1);
-            }
-        }
         if (SpectreBoundSpyglass.canUseSpectreBoundSpyglass(this.useItem) && this.useItem.getTag() != null) {
             if (!$this.level().isClientSide) {
                 Entity spectreBound = ((ServerLevel)$this.level()).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
@@ -231,23 +205,4 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         ((LivingEntity)(Object)this).getEntityData().set(USING_SPECTRE_BOUNDED_SPYGLASS, usingSpectreBoundedSpyglass);
     }
 
-    @Override
-    public int getSaltLayers() {
-        return ((LivingEntity)(Object)this).getEntityData().get(SALT_LAYERS);
-    }
-
-    @Override
-    public void setSaltLayers(SaltLayer saltLayers) {
-        ((LivingEntity)(Object)this).getEntityData().set(SALT_LAYERS, saltLayers.getId());
-    }
-
-    @Override
-    public int getSaltDegradation() {
-        return this.saltDegradation;
-    }
-
-    @Override
-    public void setSaltDegradation(int saltDegradation) {
-        this.saltDegradation = saltDegradation;
-    }
 }

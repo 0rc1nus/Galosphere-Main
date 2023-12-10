@@ -1,15 +1,10 @@
 package net.orcinus.galosphere.mixin;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BannerItem;
@@ -20,16 +15,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.orcinus.galosphere.api.BannerAttachable;
-import net.orcinus.galosphere.api.SaltBound;
 import net.orcinus.galosphere.config.GalosphereConfig;
 import net.orcinus.galosphere.init.GItems;
-import net.orcinus.galosphere.init.GMobEffects;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
@@ -37,19 +29,6 @@ public class PlayerMixin {
 
     @Unique
     private final Player $this = (Player) (Object) this;
-
-    @Inject(at = @At("HEAD"), method = "actuallyHurt", cancellable = true)
-    private void G$actuallyHurt(DamageSource damageSource, float f, CallbackInfo ci) {
-        LivingEntity $this = (LivingEntity) (Object) this;
-        SaltBound saltBound = (SaltBound) $this;
-        if (saltBound.getSaltDegradation() > 0) {
-            if (!damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-                ci.cancel();
-            }
-            int saltDegradation = Math.max(1, (int) (saltBound.getSaltDegradation() - (5 * f)));
-            saltBound.setSaltDegradation(saltDegradation);
-        }
-    }
 
     @Inject(at = @At("TAIL"), method = "isScoping", cancellable = true)
     private void GE$isScoping(CallbackInfoReturnable<Boolean> cir) {
