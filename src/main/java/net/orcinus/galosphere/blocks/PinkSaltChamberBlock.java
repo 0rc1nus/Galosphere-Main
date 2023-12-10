@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.orcinus.galosphere.blocks.blockentities.PinkSaltChamberBlockEntity;
-import net.orcinus.galosphere.blocks.blockentities.PotpourriBlockEntity;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +28,8 @@ public class PinkSaltChamberBlock extends BaseEntityBlock {
 
     @Override
     public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
-        boolean flag = direction == Direction.UP && blockState2.is(GBlocks.PINK_SALT_CLUSTER) && blockState2.getValue(PinkSaltClusterBlock.FACING) == Direction.UP;
+        BlockState aboveState = levelAccessor.getBlockState(blockPos.above());
+        boolean flag = aboveState.is(GBlocks.PINK_SALT_CLUSTER) && aboveState.getValue(PinkSaltClusterBlock.FACING) == Direction.UP;
         return blockState.setValue(CHARGED, flag);
     }
 

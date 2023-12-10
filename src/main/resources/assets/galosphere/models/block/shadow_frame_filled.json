@@ -1,5 +1,6 @@
 {
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "particle": "galosphere:block/silver_block"
+    "all": "galosphere:block/shadow_frame_filled"
   }
 }

@@ -38,7 +38,11 @@ public class GChestLootTableProvider extends SimpleFabricLootTableProvider {
                                 .setWeight(25))
                         .add(LootItem.lootTableItem(GItems.SUCCULENT_PETALS)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
-                                .setWeight(15)))
+                                .setWeight(15))
+                        .add(LootItem.lootTableItem(Items.GOLDEN_APPLE)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                                .setWeight(1))
+                )
         );
     }
 }

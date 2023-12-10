@@ -159,10 +159,10 @@ public class GCreativeModeTabs {
                     output.accept(GBlocks.CHISELED_PINK_SALT);
                     output.accept(GBlocks.CHISELED_ROSE_PINK_SALT);
                     output.accept(GBlocks.CHISELED_PASTEL_PINK_SALT);
+                    output.accept(GBlocks.PINK_SALT_CHAMBER);
                     output.accept(GBlocks.PINK_SALT_LAMP);
                     output.accept(GBlocks.PINK_SALT_STRAW);
                     output.accept(GBlocks.PINK_SALT_CLUSTER);
-                    output.accept(GBlocks.PINK_SALT_CHAMBER);
                     output.accept(GBlocks.CURED_MEMBRANE_BLOCK);
                     output.accept(GBlocks.STRANDED_MEMBRANE_BLOCK);
                 })

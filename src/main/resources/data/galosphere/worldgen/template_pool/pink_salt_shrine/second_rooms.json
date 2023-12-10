@@ -7,7 +7,43 @@
         "processors": "galosphere:pink_salt_shrine/main_rooms",
         "projection": "rigid"
       },
+      "weight": 14
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/second_rooms/bedroom",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "projection": "rigid"
+      },
       "weight": 7
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/second_rooms/experiment_success",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "projection": "rigid"
+      },
+      "weight": 14
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/second_rooms/experiment_failure",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "projection": "rigid"
+      },
+      "weight": 16
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/second_rooms/experiment_break",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "projection": "rigid"
+      },
+      "weight": 16
     },
     {
       "element": {
@@ -22,7 +58,16 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "galosphere:pink_salt_shrine/second_rooms/pool_room",
-        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "processors": "galosphere:pink_salt_shrine/pool_rooms",
+        "projection": "rigid"
+      },
+      "weight": 15
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/second_rooms/pool_room_2",
+        "processors": "minecraft:empty",
         "projection": "rigid"
       },
       "weight": 15
