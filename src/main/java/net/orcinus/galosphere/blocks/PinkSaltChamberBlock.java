@@ -28,9 +28,16 @@ public class PinkSaltChamberBlock extends BaseEntityBlock {
 
     @Override
     public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
-        BlockState aboveState = levelAccessor.getBlockState(blockPos.above());
-        boolean flag = aboveState.is(GBlocks.PINK_SALT_CLUSTER) && aboveState.getValue(PinkSaltClusterBlock.FACING) == Direction.UP;
-        return blockState.setValue(CHARGED, flag);
+        boolean flag2 = false;
+        for (Direction dir : Direction.values()) {
+            BlockState relativeState = levelAccessor.getBlockState(blockPos.relative(dir));
+            boolean flag = relativeState.is(GBlocks.PINK_SALT_CLUSTER) && relativeState.getValue(PinkSaltClusterBlock.FACING) == dir;
+            if (flag) {
+                flag2 = true;
+                break;
+            }
+        }
+        return blockState.setValue(CHARGED, flag2);
     }
 
     @Override
