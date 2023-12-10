@@ -1,7 +1,5 @@
 package net.orcinus.galosphere.items;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -27,11 +25,13 @@ public class SaltwardItem extends Item {
             PinkSaltPillar pinkSaltPillar = GEntityTypes.PINK_SALT_PILLAR.create(level);
             pinkSaltPillar.setPos(result.getLocation().x, result.getLocation().y, result.getLocation().z);
             level.addFreshEntity(pinkSaltPillar);
-            HitResult endVec = player.pick(20.0F, 0.0F, false);
-            Vec3 diff = endVec.getLocation().subtract(player.position());
-            Vec3 adjusted = diff.normalize();
-            player.setDeltaMovement(-adjusted.x * 2.0F, -adjusted.y * 1.2F, -adjusted.z * 2.0F);
-            player.resetFallDistance();
+            if (player.distanceToSqr(result.getLocation()) <= 6.0D) {
+                HitResult endVec = player.pick(20.0F, 0.0F, false);
+                Vec3 diff = endVec.getLocation().subtract(player.position());
+                Vec3 adjusted = diff.normalize();
+                player.setDeltaMovement(-adjusted.x * 2.5F, -adjusted.y * 1.2F, -adjusted.z * 2.5F);
+                player.resetFallDistance();
+            }
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide);
         }
         return super.use(level, player, interactionHand);
