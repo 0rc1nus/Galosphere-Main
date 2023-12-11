@@ -159,6 +159,7 @@ public class GBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(GBlocks.GILDED_BEADS.get());
         this.dropSelf(GBlocks.SILVER_BALANCE.get());
         this.dropSelf(GBlocks.POTPOURRI.get());
+        this.dropSelf(GBlocks.PINK_SALT_CHAMBER.get());
         this.add(GBlocks.SUCCULENT_CROP.get(), block -> {
             return LootTable.lootTable();
         });

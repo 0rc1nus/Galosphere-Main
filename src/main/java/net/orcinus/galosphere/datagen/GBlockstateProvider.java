@@ -3,12 +3,7 @@ package net.orcinus.galosphere.datagen;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.AmethystClusterBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DirectionalBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -17,10 +12,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.blocks.LichenMossBlock;
-import net.orcinus.galosphere.blocks.PinkSaltStrawBlock;
-import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
-import net.orcinus.galosphere.blocks.ShadowFrameBlock;
+import net.orcinus.galosphere.blocks.*;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.NotNull;
 
@@ -142,59 +134,36 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.stairsBlock(GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get(), "pastel_pink_salt_bricks");
 
         this.simpleBlock(GBlocks.CURED_MEMBRANE_BLOCK.get());
-        this.simpleBlock(GBlocks.SHADOW_FRAME.get(), models().cubeAll("shadow_frame", new ResourceLocation(Galosphere.MODID, "block/shadow_frame")).renderType("cutout"));
+        this.getVariantBuilder(GBlocks.SHADOW_FRAME.get()).forAllStatesExcept(state -> {
+            String name = state.getValue(ShadowFrameBlock.POWERED) ? "shadow_frame_filled" : "shadow_frame";
+            return ConfiguredModel.builder().modelFile(models().cubeAll(name, new ResourceLocation(Galosphere.MODID, "block/" + name)).renderType("cutout")).build();
+        }, BlockStateProperties.WATERLOGGED, BlockStateProperties.LEVEL, ShadowFrameBlock.FILLED);
 
-        this.getVariantBuilder(GBlocks.CHISELED_PINK_SALT.get()).forAllStatesExcept(blockState -> {
+        this.getVariantBuilder(GBlocks.STRANDED_MEMBRANE_BLOCK.get()).forAllStatesExcept(blockState -> {
             int x = 0;
             int y = 0;
             Direction direction = blockState.getValue(DirectionalBlock.FACING);
             if (direction == Direction.DOWN) {
-                x = 90;
+                x = 180;
             } else if (direction == Direction.EAST) {
+                x = 90;
                 y = 90;
             } else if (direction == Direction.SOUTH) {
-                y = 180;
-            } else if (direction == Direction.UP) {
-                x = 270;
-            } else if (direction == Direction.WEST) {
-                y = 270;
-            }
-            return ConfiguredModel.builder().rotationX(x).rotationY(y).modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "chiseled_pink_salt"))).build();
-        }, BlockStateProperties.WATERLOGGED);
-        this.getVariantBuilder(GBlocks.CHISELED_ROSE_PINK_SALT.get()).forAllStatesExcept(blockState -> {
-            int x = 0;
-            int y = 0;
-            Direction direction = blockState.getValue(DirectionalBlock.FACING);
-            if (direction == Direction.DOWN) {
                 x = 90;
-            } else if (direction == Direction.EAST) {
-                y = 90;
-            } else if (direction == Direction.SOUTH) {
                 y = 180;
-            } else if (direction == Direction.UP) {
-                x = 270;
-            } else if (direction == Direction.WEST) {
-                y = 270;
-            }
-            return ConfiguredModel.builder().rotationX(x).rotationY(y).modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "chiseled_rose_pink_salt"))).build();
-        }, BlockStateProperties.WATERLOGGED);
-        this.getVariantBuilder(GBlocks.CHISELED_PASTEL_PINK_SALT.get()).forAllStatesExcept(blockState -> {
-            int x = 0;
-            int y = 0;
-            Direction direction = blockState.getValue(DirectionalBlock.FACING);
-            if (direction == Direction.DOWN) {
+            } else if (direction == Direction.NORTH) {
                 x = 90;
-            } else if (direction == Direction.EAST) {
-                y = 90;
-            } else if (direction == Direction.SOUTH) {
-                y = 180;
-            } else if (direction == Direction.UP) {
-                x = 270;
             } else if (direction == Direction.WEST) {
+                x = 90;
                 y = 270;
             }
-            return ConfiguredModel.builder().rotationX(x).rotationY(y).modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "chiseled_pastel_pink_salt"))).build();
+            return ConfiguredModel.builder().rotationX(x).rotationY(y).modelFile(models().cubeBottomTop("stranded_membrane_block", new ResourceLocation(Galosphere.MODID, "block/stranded_membrane_block_side"), new ResourceLocation(Galosphere.MODID, "block/stranded_membrane_block_bottom"), new ResourceLocation(Galosphere.MODID, "block/stranded_membrane_block_top")).renderType("translucent")).build();
         }, BlockStateProperties.WATERLOGGED);
+
+        this.getVariantBuilder(GBlocks.PINK_SALT_CHAMBER.get()).forAllStates(state -> {
+            String name = state.getValue(PinkSaltChamberBlock.CHARGED) ? "charged_pink_salt_chamber" : "pink_salt_chamber";
+            return ConfiguredModel.builder().modelFile(models().cubeAll(name, new ResourceLocation(Galosphere.MODID, "block/" + name))).build();
+        });
 
         this.wallBlock(GBlocks.PINK_SALT_WALL.get(), "pink_salt");
         this.wallBlock(GBlocks.ROSE_PINK_SALT_WALL.get(), "rose_pink_salt");
@@ -253,19 +222,6 @@ public class GBlockstateProvider extends BlockStateProvider {
             }
             return ConfiguredModel.builder().modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/pink_salt_lamp"))).rotationX(rotationX).rotationY(rotationY).build();
         }, BlockStateProperties.WATERLOGGED);
-        this.getVariantBuilder(GBlocks.STRANDED_MEMBRANE_BLOCK.get()).forAllStates(state -> {
-            Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-            int rotationX = 90;
-            int rotationY = 90;
-            if (facing == Direction.WEST) {
-                rotationY *= 3;
-            } else if (facing == Direction.NORTH) {
-                rotationY = 0;
-            } else if (facing == Direction.SOUTH) {
-                rotationY *= 2;
-            }
-            return ConfiguredModel.builder().modelFile(models().cubeBottomTop("stranded_membrane_block", modLoc("block/stranded_membrane_block_side"), modLoc("block/stranded_membrane_block_bottom"), modLoc("block/stranded_membrane_block_top")).renderType("translucent")).rotationX(rotationX).rotationY(rotationY).build();
-        });
     }
 
     private void wallBlock(Block block, String name) {

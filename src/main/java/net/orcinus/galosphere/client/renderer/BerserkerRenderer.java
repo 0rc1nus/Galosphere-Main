@@ -5,7 +5,6 @@ import net.minecraft.Util;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.galosphere.Galosphere;
@@ -35,9 +34,7 @@ public class BerserkerRenderer extends MobRenderer<Berserker, BerserkerModel<Ber
 
     @Override
     protected boolean isShaking(Berserker livingEntity) {
-        boolean flag1 = livingEntity.getStationaryTicks() > 0;
-        boolean present = livingEntity.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).isPresent();
-        return flag1 && present;
+        return livingEntity.isShedding();
     }
 
 }

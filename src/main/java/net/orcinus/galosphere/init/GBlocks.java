@@ -21,40 +21,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.blocks.ChandelierBlock;
-import net.orcinus.galosphere.blocks.CombustionTableBlock;
-import net.orcinus.galosphere.blocks.CordycepsBlock;
-import net.orcinus.galosphere.blocks.CordycepsPlantBlock;
-import net.orcinus.galosphere.blocks.CrystalSlabBlock;
-import net.orcinus.galosphere.blocks.CrystalStairsBlock;
-import net.orcinus.galosphere.blocks.GildedBeadsBlock;
-import net.orcinus.galosphere.blocks.GlintedClusterBlock;
-import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
-import net.orcinus.galosphere.blocks.LichenMossBlock;
-import net.orcinus.galosphere.blocks.LichenMushroomBlock;
-import net.orcinus.galosphere.blocks.LichenRootsBlock;
-import net.orcinus.galosphere.blocks.LumiereBlock;
-import net.orcinus.galosphere.blocks.LumiereComposterBlock;
-import net.orcinus.galosphere.blocks.MonstrometerBlock;
-import net.orcinus.galosphere.blocks.PinkSaltBlock;
-import net.orcinus.galosphere.blocks.PinkSaltClusterBlock;
-import net.orcinus.galosphere.blocks.PinkSaltLampBlock;
-import net.orcinus.galosphere.blocks.PinkSaltSlabBlock;
-import net.orcinus.galosphere.blocks.PinkSaltStairsBlock;
-import net.orcinus.galosphere.blocks.PinkSaltStrawBlock;
-import net.orcinus.galosphere.blocks.PinkSaltWallBlock;
-import net.orcinus.galosphere.blocks.PollinatedClusterBlock;
-import net.orcinus.galosphere.blocks.PotpourriBlock;
-import net.orcinus.galosphere.blocks.RotatablePinkSaltBlock;
-import net.orcinus.galosphere.blocks.ShadowFrameBlock;
-import net.orcinus.galosphere.blocks.SilverBalanceBlock;
-import net.orcinus.galosphere.blocks.SilverLatticeBlock;
-import net.orcinus.galosphere.blocks.SilverLatticeVineBlock;
-import net.orcinus.galosphere.blocks.SoilComposterBlock;
-import net.orcinus.galosphere.blocks.StrandedMembraneBlock;
-import net.orcinus.galosphere.blocks.SucculentBlock;
-import net.orcinus.galosphere.blocks.SucculentCropBlock;
-import net.orcinus.galosphere.blocks.WarpedAnchorBlock;
+import net.orcinus.galosphere.blocks.*;
 
 import java.util.function.Supplier;
 
@@ -192,15 +159,17 @@ public class GBlocks {
     public static final RegistryObject<Block> ROSE_PINK_SALT_BRICK_WALL = registerBlock("rose_pink_salt_brick_wall", () -> new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
     public static final RegistryObject<Block> PASTEL_PINK_SALT_BRICK_WALL = registerBlock("pastel_pink_salt_brick_wall", () -> new PinkSaltWallBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
-    public static final RegistryObject<Block> CHISELED_PINK_SALT = registerBlock("chiseled_pink_salt", () -> new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final RegistryObject<Block> CHISELED_ROSE_PINK_SALT = registerBlock("chiseled_rose_pink_salt", () -> new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
-    public static final RegistryObject<Block> CHISELED_PASTEL_PINK_SALT = registerBlock("chiseled_pastel_pink_salt", () -> new RotatablePinkSaltBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final RegistryObject<Block> CHISELED_PINK_SALT = registerBlock("chiseled_pink_salt", () -> new RotatableChiseledBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final RegistryObject<Block> CHISELED_ROSE_PINK_SALT = registerBlock("chiseled_rose_pink_salt", () -> new RotatableChiseledBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
+    public static final RegistryObject<Block> CHISELED_PASTEL_PINK_SALT = registerBlock("chiseled_pastel_pink_salt", () -> new RotatableChiseledBlock(BlockBehaviour.Properties.of().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
     public static final RegistryObject<Block> PINK_SALT_LAMP = registerBlock("pink_salt_lamp", () -> new PinkSaltLampBlock(BlockBehaviour.Properties.of().noOcclusion().lightLevel(state -> 11).sound(GSoundEvents.PINK_SALT_LAMP).requiresCorrectToolForDrops().strength(3.5f).pushReaction(PushReaction.DESTROY)));
 
     public static final RegistryObject<Block> PINK_SALT_STRAW = registerBlock("pink_salt_straw", () -> new PinkSaltStrawBlock(BlockBehaviour.Properties.of().offsetType(BlockBehaviour.OffsetType.XZ).randomTicks().dynamicShape().sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops().strength(0.75f)));
 
     public static final RegistryObject<Block> PINK_SALT_CLUSTER = registerBlock("pink_salt_cluster", () -> new PinkSaltClusterBlock(BlockBehaviour.Properties.of().lightLevel(state -> 6).sound(GSoundEvents.PINK_SALT_CLUSTER).requiresCorrectToolForDrops().strength(1.0F)));
+
+    public static final RegistryObject<Block> PINK_SALT_CHAMBER = registerBlock("pink_salt_chamber", () -> new PinkSaltChamberBlock(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(GSoundEvents.PINK_SALT).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> CURED_MEMBRANE_BLOCK = registerBlock("cured_membrane_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(GSoundEvents.CURED_MEMBRANE)));
     public static final RegistryObject<Block> STRANDED_MEMBRANE_BLOCK = registerBlock("stranded_membrane_block", () -> new StrandedMembraneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noOcclusion().sound(GSoundEvents.STRANDED_MEMBRANE).isSuffocating((state, world, pos) -> false).isViewBlocking((state, world, pos) -> false)));

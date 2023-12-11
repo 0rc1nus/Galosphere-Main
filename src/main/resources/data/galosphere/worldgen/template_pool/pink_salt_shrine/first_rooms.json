@@ -1,0 +1,32 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/first_rooms/crematory",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/first_rooms/coffin_room",
+        "processors": "galosphere:pink_salt_shrine/main_rooms",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "galosphere:pink_salt_shrine/first_rooms/coffin_room_2",
+        "processors": "galosphere:pink_salt_shrine/coffin_rooms",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

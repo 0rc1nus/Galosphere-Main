@@ -6,26 +6,12 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
-import net.minecraft.world.entity.ai.behavior.DoNothing;
-import net.minecraft.world.entity.ai.behavior.LookAtTargetSink;
-import net.minecraft.world.entity.ai.behavior.MeleeAttack;
-import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
-import net.minecraft.world.entity.ai.behavior.RandomStroll;
-import net.minecraft.world.entity.ai.behavior.RunOne;
-import net.minecraft.world.entity.ai.behavior.SetEntityLookTargetSometimes;
-import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromLookTarget;
-import net.minecraft.world.entity.ai.behavior.StartAttacking;
-import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
-import net.minecraft.world.entity.ai.behavior.Swim;
+import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.orcinus.galosphere.entities.Berserker;
-import net.orcinus.galosphere.entities.ai.tasks.ConditionalWalkIfTargetOutOfReach;
-import net.orcinus.galosphere.entities.ai.tasks.Smash;
-import net.orcinus.galosphere.entities.ai.tasks.Summon;
-import net.orcinus.galosphere.entities.ai.tasks.Undermine;
+import net.orcinus.galosphere.entities.ai.tasks.*;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
 import java.util.Optional;
@@ -36,8 +22,8 @@ public class BerserkerAi {
     public static Brain<?> makeBrain(Berserker berserker, Brain<Berserker> brain) {
         BerserkerAi.initCoreActivity(brain);
         BerserkerAi.initIdleActivity(brain);
+        BerserkerAi.initShakeActivity(brain);
         BerserkerAi.initFightActivity(berserker, brain);
-        BerserkerAi.initRoarActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
         brain.useDefaultActivity();
@@ -53,16 +39,18 @@ public class BerserkerAi {
         ));
     }
 
-    private static void initRoarActivity(Brain<Berserker> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(Activity.ROAR, 5, ImmutableList.of(), GMemoryModuleTypes.IS_ROARING.get());
-    }
-
     private static void initIdleActivity(Brain<Berserker> brain) {
         brain.addActivity(Activity.IDLE, 10, ImmutableList.of(
                 StartAttacking.create(BerserkerAi::findNearestValidAttackTarget),
                 SetEntityLookTargetSometimes.create(8.0f, UniformInt.of(30, 60)),
                 BerserkerAi.createIdleMovementBehaviors()
         ));
+    }
+
+    private static void initShakeActivity(Brain<Berserker> brain) {
+        brain.addActivityAndRemoveMemoryWhenStopped(Activity.EMERGE, 5, ImmutableList.of(
+                new Shake()
+        ), GMemoryModuleTypes.IS_SHAKING.get());
     }
 
     private static void initFightActivity(Berserker berserker, Brain<Berserker> brain) {
@@ -90,7 +78,7 @@ public class BerserkerAi {
     }
 
     public static void updateActivity(Berserker blighted) {
-        blighted.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.ROAR, Activity.FIGHT, Activity.IDLE));
+        blighted.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.EMERGE, Activity.FIGHT, Activity.IDLE));
     }
 
 }

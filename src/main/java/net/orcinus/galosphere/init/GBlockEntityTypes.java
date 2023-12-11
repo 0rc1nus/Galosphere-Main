@@ -6,13 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
-import net.orcinus.galosphere.blocks.GildedBeadsBlock;
-import net.orcinus.galosphere.blocks.blockentities.CordycepsBlockEntity;
-import net.orcinus.galosphere.blocks.blockentities.GildedBeadsBlockEntity;
-import net.orcinus.galosphere.blocks.blockentities.MonstrometerBlockEntity;
-import net.orcinus.galosphere.blocks.blockentities.GlowInkClumpsBlockEntity;
-import net.orcinus.galosphere.blocks.blockentities.PotpourriBlockEntity;
-import net.orcinus.galosphere.blocks.blockentities.ShadowFrameBlockEntity;
+import net.orcinus.galosphere.blocks.blockentities.*;
 
 @Mod.EventBusSubscriber(modid = Galosphere.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GBlockEntityTypes {
@@ -25,6 +19,7 @@ public class GBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<ShadowFrameBlockEntity>> SHADOW_FRAME = BLOCK_ENTITIES.register("shadow_frame", () -> BlockEntityType.Builder.of(ShadowFrameBlockEntity::new, GBlocks.SHADOW_FRAME.get()).build(null));
     public static final RegistryObject<BlockEntityType<GildedBeadsBlockEntity>> GILDED_BEADS = BLOCK_ENTITIES.register("gilded_beads", () -> BlockEntityType.Builder.of(GildedBeadsBlockEntity::new, GBlocks.GILDED_BEADS.get()).build(null));
     public static final RegistryObject<BlockEntityType<PotpourriBlockEntity>> POTPOURRI = BLOCK_ENTITIES.register("potpourri", () -> BlockEntityType.Builder.of(PotpourriBlockEntity::new, GBlocks.POTPOURRI.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PinkSaltChamberBlockEntity>> PINK_SALT_CHAMBER = BLOCK_ENTITIES.register("pink_salt_chamber", () -> BlockEntityType.Builder.of(PinkSaltChamberBlockEntity::new, GBlocks.PINK_SALT_CHAMBER.get()).build(null));
 
 }
 

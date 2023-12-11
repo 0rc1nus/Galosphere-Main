@@ -1,0 +1,57 @@
+{
+  "variants": {
+    "orientation=down_east": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "x": 90,
+      "y": 90
+    },
+    "orientation=down_north": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "x": 90
+    },
+    "orientation=down_south": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "x": 90,
+      "y": 180
+    },
+    "orientation=down_west": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "x": 90,
+      "y": 270
+    },
+    "orientation=east_up": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "y": 90
+    },
+    "orientation=north_up": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt"
+    },
+    "orientation=south_up": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "y": 180
+    },
+    "orientation=up_east": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "x": 270,
+      "y": 270
+    },
+    "orientation=up_north": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "x": 270,
+      "y": 180
+    },
+    "orientation=up_south": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "x": 270
+    },
+    "orientation=up_west": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "x": 270,
+      "y": 90
+    },
+    "orientation=west_up": {
+      "model": "galosphere:block/chiseled_pastel_pink_salt",
+      "y": 270
+    }
+  }
+}

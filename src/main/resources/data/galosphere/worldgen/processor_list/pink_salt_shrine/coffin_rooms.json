@@ -1,0 +1,10 @@
+{
+  "processors": [
+    {
+      "processor_type": "galosphere:coffin_room"
+    },
+    {
+      "processor_type": "galosphere:no_waterlogged"
+    }
+  ]
+}

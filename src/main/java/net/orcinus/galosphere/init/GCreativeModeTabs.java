@@ -151,6 +151,7 @@ public class GCreativeModeTabs {
                 output.accept(GBlocks.PINK_SALT_LAMP.get());
                 output.accept(GBlocks.PINK_SALT_STRAW.get());
                 output.accept(GBlocks.PINK_SALT_CLUSTER.get());
+                output.accept(GBlocks.PINK_SALT_CLUSTER.get());
                 output.accept(GBlocks.CURED_MEMBRANE_BLOCK.get());
                 output.accept(GBlocks.STRANDED_MEMBRANE_BLOCK.get());
             })

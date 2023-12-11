@@ -25,6 +25,7 @@ public class GMemoryModuleTypes {
     public static final RegistryObject<MemoryModuleType<Unit>> IS_SMASHING = MEMORY_MODULE_TYPES.register("smashing", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<Unit>> IS_IMPALING = MEMORY_MODULE_TYPES.register("impaling", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<Unit>> IS_SUMMONING = MEMORY_MODULE_TYPES.register("summoning", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
+    public static final RegistryObject<MemoryModuleType<Unit>> IS_SHAKING = MEMORY_MODULE_TYPES.register("shaking", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<Unit>> SUMMONING_COOLDOWN  = MEMORY_MODULE_TYPES.register("summoning_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<Unit>> IMPALING_COOLDOWN = MEMORY_MODULE_TYPES.register("impaling_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<Unit>> SMASHING_COOLDOWN = MEMORY_MODULE_TYPES.register("smashing_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));

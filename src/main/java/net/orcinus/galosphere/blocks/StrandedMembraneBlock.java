@@ -27,7 +27,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class StrandedMembraneBlock extends Block implements SimpleWaterloggedBlock {
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public StrandedMembraneBlock(Properties properties) {
@@ -43,7 +43,7 @@ public class StrandedMembraneBlock extends Block implements SimpleWaterloggedBlo
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context).setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER).setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return super.getStateForPlacement(context).setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER).setValue(FACING, context.getClickedFace());
     }
 
     @Override
@@ -65,15 +65,16 @@ public class StrandedMembraneBlock extends Block implements SimpleWaterloggedBlo
     public void entityInside(BlockState state, Level world, BlockPos blockPos, Entity entity) {
         Direction direction = state.getValue(FACING);
         boolean isAbove = entity.getY() > blockPos.getY() + 0.25D;
-        if (!isAbove) {
+        if (!isAbove && direction.getAxis() != Direction.Axis.Y) {
             entity.makeStuckInBlock(state, new Vec3(1.0D, 0.005D, 1.0D));
         }
         double resistance = 0.2D;
         Direction.Axis axis = direction.getAxis();
         int step = direction.getAxisDirection().getStep();
         double velX = axis == Direction.Axis.X ? resistance * step : 0.0D;
+        double velY = axis == Direction.Axis.Y ? resistance * step : 0.0D;
         double velZ = axis == Direction.Axis.Z ? resistance * step : 0.0D;
-        entity.setDeltaMovement(velX, 0.0D, velZ);
+        entity.setDeltaMovement(velX, velY, velZ);
         if (!world.isClientSide) {
             world.gameEvent(entity, GameEvent.BLOCK_CHANGE, blockPos);
         }

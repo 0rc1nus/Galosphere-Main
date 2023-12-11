@@ -15,12 +15,16 @@ import java.util.Set;
 public class GLootTableProvider extends LootTableProvider {
 
     public GLootTableProvider(PackOutput packoutput) {
-        super(packoutput, Set.of(), ImmutableList.of(new SubProviderEntry(GBlockLootTables::new, LootContextParamSets.BLOCK)));
+        super(packoutput, Set.of(), ImmutableList.of());
     }
 
     @Override
     public List<SubProviderEntry> getTables() {
-        return ImmutableList.of(new SubProviderEntry(GBlockLootTables::new, LootContextParamSets.BLOCK), new SubProviderEntry(GEntityLootTables::new, LootContextParamSets.ENTITY));
+        return ImmutableList.of(
+                new SubProviderEntry(GBlockLootTables::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(GEntityLootTables::new, LootContextParamSets.ENTITY),
+                new SubProviderEntry(GChestLootTables::new, LootContextParamSets.CHEST)
+        );
     }
 
     @Override

@@ -1,39 +1,27 @@
 {
   "variants": {
-    "facing=east,waterlogged=false": {
+    "facing=down": {
+      "model": "galosphere:block/stranded_membrane_block",
+      "x": 180
+    },
+    "facing=east": {
       "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 90
     },
-    "facing=east,waterlogged=true": {
-      "model": "galosphere:block/stranded_membrane_block",
-      "x": 90,
-      "y": 90
-    },
-    "facing=north,waterlogged=false": {
+    "facing=north": {
       "model": "galosphere:block/stranded_membrane_block",
       "x": 90
     },
-    "facing=north,waterlogged=true": {
-      "model": "galosphere:block/stranded_membrane_block",
-      "x": 90
-    },
-    "facing=south,waterlogged=false": {
+    "facing=south": {
       "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 180
     },
-    "facing=south,waterlogged=true": {
-      "model": "galosphere:block/stranded_membrane_block",
-      "x": 90,
-      "y": 180
+    "facing=up": {
+      "model": "galosphere:block/stranded_membrane_block"
     },
-    "facing=west,waterlogged=false": {
-      "model": "galosphere:block/stranded_membrane_block",
-      "x": 90,
-      "y": 270
-    },
-    "facing=west,waterlogged=true": {
+    "facing=west": {
       "model": "galosphere:block/stranded_membrane_block",
       "x": 90,
       "y": 270
