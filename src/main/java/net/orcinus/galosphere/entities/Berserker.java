@@ -209,12 +209,12 @@ public class Berserker extends Monster {
                     }
                 }
                 Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
-                if (this.getStationaryTicks() == 32) {
-                    this.getBrain().setMemory(GMemoryModuleTypes.IS_SHAKING, Unit.INSTANCE);
-                }
                 if (!shedding) {
                     player.ifPresent(this::setTarget);
                 } else {
+                    if (this.getStationaryTicks() == 32) {
+                        this.getBrain().setMemory(GMemoryModuleTypes.IS_SHAKING, Unit.INSTANCE);
+                    }
                     this.setStationaryTicks(this.getStationaryTicks() - 1);
                     this.addParticles(range, increment, threshold);
                 }
@@ -256,7 +256,7 @@ public class Berserker extends Monster {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
         if (mobSpawnType == MobSpawnType.STRUCTURE) {
-            this.setStationaryTicks(32);
+            this.setStationaryTicks(200);
         }
         return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, compoundTag);
     }
