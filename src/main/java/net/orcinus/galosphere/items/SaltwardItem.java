@@ -14,10 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.orcinus.galosphere.blocks.PinkSalt;
-import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.entities.PinkSaltPillar;
-import net.orcinus.galosphere.init.GEntityTypes;
 
 public class SaltwardItem extends Item {
 
