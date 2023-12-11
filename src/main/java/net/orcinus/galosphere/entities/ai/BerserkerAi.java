@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
@@ -54,7 +55,7 @@ public class BerserkerAi {
     }
 
     private static void initFightActivity(Berserker berserker, Brain<Berserker> brain) {
-        Predicate<LivingEntity> predicate = livingEntity -> livingEntity instanceof Berserker blighted && blighted.getPhase() != Berserker.Phase.UNDERMINE;
+        Predicate<LivingEntity> predicate = livingEntity -> livingEntity instanceof Berserker blighted && (!blighted.hasPose(Pose.ROARING) || blighted.getPhase() != Berserker.Phase.UNDERMINE);
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
                 BehaviorBuilder.triggerIf(Berserker::shouldUseMeleeAttack, MeleeAttack.create(30)),
                 new Smash(),

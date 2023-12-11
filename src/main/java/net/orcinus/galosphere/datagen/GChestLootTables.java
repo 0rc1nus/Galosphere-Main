@@ -25,7 +25,7 @@ public class GChestLootTables extends VanillaChestLoot {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                                 .setWeight(10)
                         ).add(LootItem.lootTableItem(Items.PHANTOM_MEMBRANE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 8.0F)))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
                                 .setWeight(30))
                         .add(LootItem.lootTableItem(Items.ROTTEN_FLESH)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F)))

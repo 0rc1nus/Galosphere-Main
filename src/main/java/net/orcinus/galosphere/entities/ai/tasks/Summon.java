@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
@@ -42,7 +44,7 @@ public class Summon extends Behavior<Berserker> {
 
     @Override
     protected boolean checkExtraStartConditions(ServerLevel serverLevel, Berserker livingEntity) {
-        return livingEntity.getHealth() <= livingEntity.getMaxHealth() / 3 && livingEntity.hasPose(Pose.STANDING) && livingEntity.shouldAttack();
+        return livingEntity.getHealth() / livingEntity.getMaxHealth() <= 0.66F && livingEntity.hasPose(Pose.STANDING) && livingEntity.shouldAttack();
     }
 
     @Override
@@ -63,7 +65,10 @@ public class Summon extends Behavior<Berserker> {
     protected void tick(ServerLevel serverLevel, Berserker livingEntity, long l) {
         Brain<Berserker> brain = livingEntity.getBrain();
         brain.setMemory(GMemoryModuleTypes.SUMMON_COUNT.get(), brain.getMemory(GMemoryModuleTypes.SUMMON_COUNT.get()).orElse(0) + 1);
-        int max = (int) (Math.max(3, (livingEntity.getMaxHealth() / livingEntity.getHealth()) / 3));
+        int max = UniformInt.of(3, 5).sample(serverLevel.getRandom());
+        if (serverLevel.getDifficulty() == Difficulty.HARD) {
+            max = UniformInt.of(4, 8).sample(serverLevel.getRandom());
+        }
         if (brain.hasMemoryValue(GMemoryModuleTypes.SUMMON_COUNT.get()) && brain.getMemory(GMemoryModuleTypes.SUMMON_COUNT.get()).get() > max) {
             return;
         }

@@ -18,6 +18,7 @@ public class GItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         blockItem(GBlocks.STRANDED_MEMBRANE_BLOCK.get());
+        blockItem(GBlocks.PINK_SALT_CHAMBER.get());
         blockItem("silver_block");
         blockItem("raw_silver_block");
         blockItem("silver_ore");

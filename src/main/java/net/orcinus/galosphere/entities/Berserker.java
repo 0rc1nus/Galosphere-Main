@@ -104,7 +104,7 @@ public class Berserker extends Monster {
     }
 
     public boolean shouldAttack() {
-        return this.getPhase() == Phase.IDLING && this.getStationaryTicks() == -53;
+        return this.getPhase() == Phase.IDLING && this.getStationaryTicks() == 0;
     }
 
     public int getStage() {
