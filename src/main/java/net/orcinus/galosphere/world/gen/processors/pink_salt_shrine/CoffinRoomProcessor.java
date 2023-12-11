@@ -28,7 +28,7 @@ public class CoffinRoomProcessor extends StructureProcessor {
             compoundTag.putInt("Cooldown", 6000);
             BlockPos relative = structureBlockInfo2.pos().relative(Direction.DOWN);
             levelReader.getChunk(structureBlockInfo2.pos()).setBlockState(structureBlockInfo2.pos(), GBlocks.PINK_SALT_CHAMBER.get().defaultBlockState(), false);
-            levelReader.getChunk(relative).setBlockState(relative, GBlocks.PINK_SALT_CLUSTER.get().defaultBlockState().setValue(PinkSaltClusterBlock.FACING, direction), false);
+            levelReader.getChunk(relative).setBlockState(relative, GBlocks.PINK_SALT_CLUSTER.get().defaultBlockState().setValue(PinkSaltClusterBlock.FACING, Direction.DOWN), false);
         }
         return structureBlockInfo2;
     }
