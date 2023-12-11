@@ -67,6 +67,17 @@
           ],
           "name": "galosphere:succulent_petals",
           "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:golden_apple"
         }
       ],
       "rolls": {

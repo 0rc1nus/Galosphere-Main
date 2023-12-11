@@ -11,7 +11,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatch
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.world.gen.features.BerserkerFeature;
 import net.orcinus.galosphere.world.gen.features.CrystalSpikeFeature;
-import net.orcinus.galosphere.world.gen.features.DriedOasisFeature;
 import net.orcinus.galosphere.world.gen.features.LichenCordycepsColumnFeature;
 import net.orcinus.galosphere.world.gen.features.LichenMushroomFeature;
 import net.orcinus.galosphere.world.gen.features.LichenPatchFeature;
@@ -35,7 +34,6 @@ public class GFeatures {
     public static final Feature<NoisePatchConfig> NOISE_PATCH = registerFeature("noise_patch", new NoisePatchFeature(NoisePatchConfig.CODEC));
     public static final Feature<PinkSaltStrawPatchConfig> PINK_SALT_STRAW_PATCH = registerFeature("pink_salt_straw_patch", new PinkSaltStrawPatchFeature(PinkSaltStrawPatchConfig.CODEC));
     public static final Feature<NoneFeatureConfiguration> OASIS = registerFeature("oasis", new OasisFeature(NoneFeatureConfiguration.CODEC));
-    public static final Feature<NoneFeatureConfiguration> DRIED_OASIS = registerFeature("dried_oasis", new DriedOasisFeature(NoneFeatureConfiguration.CODEC));
     public static final Feature<NoneFeatureConfiguration> BERSERKER = registerFeature("berserker", new BerserkerFeature(NoneFeatureConfiguration.CODEC));
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> F registerFeature(String name, F feature) {
