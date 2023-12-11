@@ -1,10 +1,14 @@
 package net.orcinus.galosphere.entities.ai.tasks;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
@@ -42,7 +46,7 @@ public class Summon extends Behavior<Berserker> {
 
     @Override
     protected boolean checkExtraStartConditions(ServerLevel serverLevel, Berserker livingEntity) {
-        return livingEntity.getHealth() < livingEntity.getMaxHealth() / 2 && livingEntity.hasPose(Pose.STANDING) && livingEntity.shouldAttack();
+        return livingEntity.getHealth() / livingEntity.getMaxHealth() <= 0.66F && livingEntity.hasPose(Pose.STANDING) && livingEntity.shouldAttack();
     }
 
     @Override
@@ -63,12 +67,27 @@ public class Summon extends Behavior<Berserker> {
     protected void tick(ServerLevel serverLevel, Berserker livingEntity, long l) {
         Brain<Berserker> brain = livingEntity.getBrain();
         brain.setMemory(GMemoryModuleTypes.SUMMON_COUNT, brain.getMemory(GMemoryModuleTypes.SUMMON_COUNT).orElse(0) + 1);
-        int max = (int) (Math.max(3, (livingEntity.getMaxHealth() / livingEntity.getHealth()) / 3));
+        int max = UniformInt.of(3, 5).sample(serverLevel.getRandom());
+        if (serverLevel.getDifficulty() == Difficulty.HARD) {
+            max = UniformInt.of(4, 8).sample(serverLevel.getRandom());
+        }
         if (brain.hasMemoryValue(GMemoryModuleTypes.SUMMON_COUNT) && brain.getMemory(GMemoryModuleTypes.SUMMON_COUNT).get() > max) {
             return;
         }
         brain.eraseMemory(MemoryModuleType.WALK_TARGET);
-        List<BlockPos> positions = IntStream.range(0, 2).mapToObj(i -> LandRandomPos.getPos(livingEntity, i * 2, 3)).filter(Objects::nonNull).map(BlockPos::containing).filter(blockPos -> livingEntity.level().getWorldBorder().isWithinBounds(blockPos)).map(BlockPos::below).filter(blockPos -> serverLevel.getBlockState(blockPos).isCollisionShapeFullBlock(serverLevel, blockPos)).toList();
+        List<BlockPos> positions = Lists.newArrayList();
+        int range = 5;
+        int yRange = 2;
+        for (int y = -yRange; y <= yRange; y++) {
+            for (int x = -range; x <= range; x++) {
+                for (int z = -range; z <= range; z++) {
+                    BlockPos position = livingEntity.blockPosition().offset(x, y, z);
+                    if (serverLevel.getBlockState(position.below()).isFaceSturdy(serverLevel, position.below(), Direction.UP) && serverLevel.getBlockState(position).isAir()) {
+                        positions.add(position);
+                    }
+                }
+            }
+        }
         BlockPos randomPos = positions.get(serverLevel.getRandom().nextInt(positions.size()));
         Preserved preserved = GEntityTypes.PRESERVED.create(serverLevel, null, null, livingEntity.blockPosition(), MobSpawnType.TRIGGERED, true, true);
         preserved.moveTo(randomPos.getX(), randomPos.getY(), randomPos.getZ(), 0.0f, 0.0f);

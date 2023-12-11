@@ -20,12 +20,11 @@ import net.minecraft.world.entity.ai.behavior.StartAttacking;
 import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
 import net.minecraft.world.entity.ai.behavior.Swim;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
-import net.minecraft.world.entity.ai.behavior.warden.Roar;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.orcinus.galosphere.entities.Berserker;
-import net.orcinus.galosphere.entities.ai.tasks.BerserkerRoar;
 import net.orcinus.galosphere.entities.ai.tasks.ConditionalWalkIfTargetOutOfReach;
+import net.orcinus.galosphere.entities.ai.tasks.Shake;
 import net.orcinus.galosphere.entities.ai.tasks.Smash;
 import net.orcinus.galosphere.entities.ai.tasks.Summon;
 import net.orcinus.galosphere.entities.ai.tasks.Undermine;
@@ -39,7 +38,7 @@ public class BerserkerAi {
     public static Brain<?> makeBrain(Berserker berserker, Brain<Berserker> brain) {
         BerserkerAi.initCoreActivity(brain);
         BerserkerAi.initIdleActivity(brain);
-        BerserkerAi.initRoarActivity(brain);
+        BerserkerAi.initShakeActivity(brain);
         BerserkerAi.initFightActivity(berserker, brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
@@ -64,10 +63,10 @@ public class BerserkerAi {
         ));
     }
 
-    private static void initRoarActivity(Brain<Berserker> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(Activity.ROAR, 10, ImmutableList.of(
-                new BerserkerRoar()
-        ), GMemoryModuleTypes.IS_ROARING);
+    private static void initShakeActivity(Brain<Berserker> brain) {
+        brain.addActivityAndRemoveMemoryWhenStopped(Activity.EMERGE, 5, ImmutableList.of(
+                new Shake()
+        ), GMemoryModuleTypes.IS_SHAKING);
     }
 
     private static void initFightActivity(Berserker berserker, Brain<Berserker> brain) {
@@ -95,7 +94,7 @@ public class BerserkerAi {
     }
 
     public static void updateActivity(Berserker blighted) {
-        blighted.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.ROAR, Activity.FIGHT, Activity.IDLE));
+        blighted.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.EMERGE, Activity.FIGHT, Activity.IDLE));
     }
 
 }

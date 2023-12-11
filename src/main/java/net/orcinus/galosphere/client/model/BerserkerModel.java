@@ -1,7 +1,4 @@
-package net.orcinus.galosphere.client.model;// Made with Blockbench 4.8.3
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
+package net.orcinus.galosphere.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -65,7 +62,7 @@ public class BerserkerModel<T extends Berserker> extends HierarchicalModel<T> {
         this.animateWalk(BerserkerAnimations.BERSERKER_WALK, limbSwing, limbSwingAmount, 3.0F, 4.5F);
         this.animate(entity.attackAnimationState, BerserkerAnimations.BERSERKER_ATTACK, ageInTicks, 1.0F);
         this.animate(entity.impalingAnimationState, BerserkerAnimations.BERSERKER_IMPALING, ageInTicks, 1.0F);
-        this.animate(entity.roarAnimationState, BerserkerAnimations.BERSERKER_ROAR, ageInTicks, 1.0F);
+        this.animate(entity.roarAnimationState, BerserkerAnimations.BERSERKER_SHAKE, ageInTicks, 1.0F);
         this.animate(entity.punchAnimationState, BerserkerAnimations.BERSERKER_PUNCH, ageInTicks, 1.0F);
         this.animate(entity.summoningAnimationState, BerserkerAnimations.BERSERKER_SPAWN_MINIONS, ageInTicks, 1.0F);
     }

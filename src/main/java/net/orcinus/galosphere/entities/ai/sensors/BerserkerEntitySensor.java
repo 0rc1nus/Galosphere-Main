@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class BlightedEntitySensor extends NearestLivingEntitySensor<Berserker> {
+public class BerserkerEntitySensor extends NearestLivingEntitySensor<Berserker> {
 
     @Override
     public Set<MemoryModuleType<?>> requires() {

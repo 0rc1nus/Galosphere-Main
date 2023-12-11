@@ -42,9 +42,9 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     @Unique
     private boolean preserved;
 
-    @Inject(at = @At("TAIL"), method = "canBeSeenAsEnemy", cancellable = true)
-    private void G$canAttack(CallbackInfoReturnable<Boolean> cir) {
-        if (((LivingEntity)(Object)this).hasEffect(GMobEffects.HARMONY)) {
+    @Inject(at = @At("TAIL"), method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", cancellable = true)
+    private void G$canAttack(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
+        if (livingEntity.hasEffect(GMobEffects.HARMONY) && ((LivingEntity)(Object)this).getLastDamageSource() == null) {
             cir.setReturnValue(false);
         }
     }

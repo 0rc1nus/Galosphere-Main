@@ -3,6 +3,7 @@ package net.orcinus.galosphere.entities;
 import java.util.List;
 import java.util.UUID;
 
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.nbt.CompoundTag;
@@ -116,7 +117,9 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
 
     private void dealDamageTo(LivingEntity livingEntity) {
         LivingEntity livingEntity2 = this.getOwner();
-        if (!livingEntity.isAlive() || livingEntity.isInvulnerable() || livingEntity == livingEntity2) {
+        if (livingEntity instanceof Player player && player.getUUID().equals(livingEntity2.getUUID())) {
+            return;
+        } else if (!livingEntity.isAlive() || livingEntity.isInvulnerable() || livingEntity == livingEntity2) {
             return;
         }
         if (livingEntity2 == null) {

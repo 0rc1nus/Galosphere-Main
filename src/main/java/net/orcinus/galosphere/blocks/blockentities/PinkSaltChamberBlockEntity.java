@@ -56,9 +56,9 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
         }
         if (blockEntity.cooldown >= blockEntity.maxCooldown) {
             List<BlockPos> poses = Lists.newArrayList();
-            int maxCount = UniformInt.of(2, 4).sample(level.getRandom());
+            int maxCount = UniformInt.of(3, 5).sample(level.getRandom());
             if (level.getDifficulty() == Difficulty.HARD) {
-                maxCount *= UniformInt.of(2, 3).sample(level.getRandom());
+                maxCount = UniformInt.of(4, 10).sample(level.getRandom());
             }
             Optional<Player> optional = level.getEntitiesOfClass(Player.class, new AABB(blockPos).inflate(6.0D)).stream().filter(LivingEntity::isAlive).filter(player -> !player.getAbilities().instabuild).toList().stream().findAny();
             optional.ifPresent(player -> {

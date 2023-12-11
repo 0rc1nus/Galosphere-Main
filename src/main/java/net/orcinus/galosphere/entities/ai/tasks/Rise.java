@@ -11,7 +11,11 @@ import net.orcinus.galosphere.entities.Preserved;
 public class Rise extends Behavior<Preserved> {
 
     public Rise(int i) {
-        super(ImmutableMap.of(MemoryModuleType.IS_EMERGING, MemoryStatus.VALUE_PRESENT, MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT, MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED), i);
+        super(ImmutableMap.of(
+                MemoryModuleType.IS_EMERGING, MemoryStatus.VALUE_PRESENT,
+                MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT,
+                MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED
+        ), i);
     }
 
     @Override

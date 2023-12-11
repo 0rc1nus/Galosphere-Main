@@ -33,9 +33,4 @@ public class BerserkerRenderer extends MobRenderer<Berserker, BerserkerModel<Ber
         return TEXTURES.get(entity.getStage());
     }
 
-    @Override
-    protected boolean isShaking(Berserker livingEntity) {
-        return livingEntity.isShedding();
-    }
-
 }
