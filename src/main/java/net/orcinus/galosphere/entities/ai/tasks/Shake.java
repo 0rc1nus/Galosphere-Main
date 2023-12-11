@@ -15,7 +15,7 @@ public class Shake extends Behavior<Berserker> {
     public Shake() {
         super(ImmutableMap.of(
                 GMemoryModuleTypes.IS_SHAKING, MemoryStatus.VALUE_PRESENT
-        ), 32);
+        ), 20);
     }
 
     @Override

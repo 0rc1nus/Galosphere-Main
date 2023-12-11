@@ -209,6 +209,9 @@ public class Berserker extends Monster {
                     }
                 }
                 Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
+                if (this.getStationaryTicks() == 32) {
+                    this.getBrain().setMemory(GMemoryModuleTypes.IS_SHAKING, Unit.INSTANCE);
+                }
                 if (!shedding) {
                     player.ifPresent(this::setTarget);
                 } else {
@@ -246,7 +249,6 @@ public class Berserker extends Monster {
     private void setTarget(Player player) {
         Brain<Berserker> brain = this.getBrain();
         brain.setMemory(MemoryModuleType.ATTACK_TARGET, player);
-        brain.setMemory(GMemoryModuleTypes.IS_SHAKING, Unit.INSTANCE);
         this.setShedding(true);
     }
 
