@@ -103,7 +103,7 @@ public class GLanguageProvider extends LanguageProvider {
         this.add("item.galosphere.smithing_template.silver_upgrade.base_slot_description", "Add Leather Armor");
         this.add("item.galosphere.smithing_template.silver_upgrade.additions_slot_description", "Add Silver Ingot");
         this.add("upgrade.galosphere.preserved_upgrade", "Preserved Upgrade");
-        this.add("item.galosphere.smithing_template.preserved_upgrade.applies_to", "Everything");
+        this.add("item.galosphere.smithing_template.preserved_upgrade.applies_to", "All items");
         this.add("item.galosphere.smithing_template.preserved_upgrade.ingredients", "Pink Salt Shard");
         this.add("item.galosphere.smithing_template.preserved_upgrade.base_slot_description", "Add an item");
         this.add("item.galosphere.smithing_template.preserved_upgrade.additions_slot_description", "Add Pink Salt Shard");

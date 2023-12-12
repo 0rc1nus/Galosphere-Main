@@ -178,7 +178,7 @@
   "item.galosphere.silver_ingot": "Silver Ingot",
   "item.galosphere.silver_nugget": "Silver Nugget",
   "item.galosphere.smithing_template.preserved_upgrade.additions_slot_description": "Add Pink Salt Shard",
-  "item.galosphere.smithing_template.preserved_upgrade.applies_to": "Everything",
+  "item.galosphere.smithing_template.preserved_upgrade.applies_to": "All items",
   "item.galosphere.smithing_template.preserved_upgrade.base_slot_description": "Add an item",
   "item.galosphere.smithing_template.preserved_upgrade.ingredients": "Pink Salt Shard",
   "item.galosphere.smithing_template.silver_upgrade.additions_slot_description": "Add Silver Ingot",
