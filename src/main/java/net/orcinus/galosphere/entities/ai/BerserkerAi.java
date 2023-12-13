@@ -7,27 +7,12 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
-import net.minecraft.world.entity.ai.behavior.DoNothing;
-import net.minecraft.world.entity.ai.behavior.LookAtTargetSink;
-import net.minecraft.world.entity.ai.behavior.MeleeAttack;
-import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
-import net.minecraft.world.entity.ai.behavior.RandomStroll;
-import net.minecraft.world.entity.ai.behavior.RunOne;
-import net.minecraft.world.entity.ai.behavior.SetEntityLookTargetSometimes;
-import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromLookTarget;
-import net.minecraft.world.entity.ai.behavior.StartAttacking;
-import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
-import net.minecraft.world.entity.ai.behavior.Swim;
+import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.orcinus.galosphere.entities.Berserker;
-import net.orcinus.galosphere.entities.ai.tasks.ConditionalWalkIfTargetOutOfReach;
-import net.orcinus.galosphere.entities.ai.tasks.Shake;
-import net.orcinus.galosphere.entities.ai.tasks.Smash;
-import net.orcinus.galosphere.entities.ai.tasks.Summon;
-import net.orcinus.galosphere.entities.ai.tasks.Undermine;
+import net.orcinus.galosphere.entities.ai.tasks.*;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 
 import java.util.Optional;
@@ -72,7 +57,7 @@ public class BerserkerAi {
     private static void initFightActivity(Berserker berserker, Brain<Berserker> brain) {
         Predicate<LivingEntity> predicate = livingEntity -> livingEntity instanceof Berserker blighted && (!blighted.hasPose(Pose.ROARING) || blighted.getPhase() != Berserker.Phase.UNDERMINE);
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
-                BehaviorBuilder.triggerIf(Berserker::shouldUseMeleeAttack, MeleeAttack.create(30)),
+                BehaviorBuilder.triggerIf(Berserker::shouldUseMeleeAttack, MeleeAttack.create(600)),
                 new Smash(),
                 BehaviorBuilder.triggerIf(predicate, ConditionalWalkIfTargetOutOfReach.create(1.2F)),
                 new Undermine(),

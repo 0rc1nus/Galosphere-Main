@@ -332,6 +332,7 @@ public class Berserker extends Monster {
         if (this.shouldUseMeleeAttack()) {
             this.level().broadcastEntityEvent(this, (byte) 5);
             this.playSound(GSoundEvents.BERSERKER_PUNCH, 1, 1);
+            entity.setDeltaMovement(entity.getDeltaMovement().multiply(5, 1, 5));
         }
         return super.doHurtTarget(entity);
     }

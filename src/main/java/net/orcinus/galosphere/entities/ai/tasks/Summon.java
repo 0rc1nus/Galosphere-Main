@@ -91,6 +91,7 @@ public class Summon extends Behavior<Berserker> {
         BlockPos randomPos = positions.get(serverLevel.getRandom().nextInt(positions.size()));
         Preserved preserved = GEntityTypes.PRESERVED.create(serverLevel, null, null, livingEntity.blockPosition(), MobSpawnType.TRIGGERED, true, true);
         preserved.moveTo(randomPos.getX(), randomPos.getY(), randomPos.getZ(), 0.0f, 0.0f);
+        preserved.setHealth(preserved.getMaxHealth() * ((float) livingEntity.getRandom().nextInt(4, 7) / 10));
         serverLevel.addFreshEntityWithPassengers(preserved);
     }
 
