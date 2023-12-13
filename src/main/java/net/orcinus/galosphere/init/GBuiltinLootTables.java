@@ -5,4 +5,5 @@ import net.orcinus.galosphere.Galosphere;
 
 public class GBuiltinLootTables {
     public static final ResourceLocation PINK_SALT_SHRINE_CHEST = new ResourceLocation(Galosphere.MODID, "chests/pink_salt_shrine");
+    public static final ResourceLocation PINK_SALT_SHRINE_LIBRARY_CHEST = new ResourceLocation(Galosphere.MODID, "chests/pink_salt_shrine_library");
 }

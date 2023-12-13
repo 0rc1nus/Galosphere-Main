@@ -148,6 +148,7 @@ public class GCreativeModeTabs {
                 output.accept(GBlocks.CHISELED_PINK_SALT.get());
                 output.accept(GBlocks.CHISELED_ROSE_PINK_SALT.get());
                 output.accept(GBlocks.CHISELED_PASTEL_PINK_SALT.get());
+                output.accept(GBlocks.PINK_SALT_CHAMBER.get());
                 output.accept(GBlocks.PINK_SALT_LAMP.get());
                 output.accept(GBlocks.PINK_SALT_STRAW.get());
                 output.accept(GBlocks.PINK_SALT_CLUSTER.get());

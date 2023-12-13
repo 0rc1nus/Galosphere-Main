@@ -32,7 +32,7 @@ public class GBlockTagsProvider extends BlockTagsProvider {
                 GBlocks.PINK_SALT_BRICKS.get(), GBlocks.ROSE_PINK_SALT_BRICKS.get(), GBlocks.PASTEL_PINK_SALT_BRICKS.get(), GBlocks.PINK_SALT_BRICK_STAIRS.get(), GBlocks.ROSE_PINK_SALT_BRICK_STAIRS.get(), GBlocks.PASTEL_PINK_SALT_BRICK_STAIRS.get(), GBlocks.PINK_SALT_BRICK_SLAB.get(), GBlocks.ROSE_PINK_SALT_BRICK_SLAB.get(), GBlocks.PASTEL_PINK_SALT_BRICK_SLAB.get(), GBlocks.PINK_SALT_BRICK_WALL.get(), GBlocks.ROSE_PINK_SALT_BRICK_WALL.get(), GBlocks.PASTEL_PINK_SALT_BRICK_WALL.get(),
                 GBlocks.CHISELED_PINK_SALT.get(), GBlocks.CHISELED_ROSE_PINK_SALT.get(), GBlocks.CHISELED_PASTEL_PINK_SALT.get(),
                 GBlocks.PINK_SALT_CLUSTER.get(), GBlocks.PINK_SALT_STRAW.get(), GBlocks.PINK_SALT_LAMP.get(),
-                GBlocks.SILVER_BALANCE.get(), GBlocks.SHADOW_FRAME.get());
+                GBlocks.SILVER_BALANCE.get(), GBlocks.SHADOW_FRAME.get(), GBlocks.PINK_SALT_CHAMBER.get());
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(GBlocks.LUMIERE_COMPOSTER.get(), GBlocks.SALINE_COMPOSTER.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(GBlocks.LICHEN_MOSS.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(GBlocks.SILVER_BLOCK.get());

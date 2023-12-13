@@ -6,6 +6,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -37,6 +38,15 @@ public class GChestLootTables extends VanillaChestLoot {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                                 .setWeight(1))
                 ));
+        consumer.accept(GBuiltinLootTables.PINK_SALT_SHRINE_LIBRARY_CHEST, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 5.0F))
+                        .add(LootItem.lootTableItem(Items.BOOK)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .setWeight(15))
+                        .add(LootItem.lootTableItem(Items.PAPER)
+                                .setWeight(10)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        ));
     }
 
 }
