@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "galosphere:pink_salt_shrine/first_rooms/crematory",
+        "location": "galosphere:pink_salt_shrine/coffin_decorations/chamber",
         "processors": "galosphere:pink_salt_shrine/main_rooms",
         "projection": "rigid"
       },
@@ -12,16 +12,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "galosphere:pink_salt_shrine/first_rooms/coffin_room",
-        "processors": "galosphere:pink_salt_shrine/main_rooms",
-        "projection": "rigid"
-      },
-      "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "galosphere:pink_salt_shrine/first_rooms/coffin_room_2",
+        "location": "galosphere:pink_salt_shrine/coffin_decorations/lamp",
         "processors": "galosphere:pink_salt_shrine/main_rooms",
         "projection": "rigid"
       },
