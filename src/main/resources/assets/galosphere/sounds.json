@@ -1391,6 +1391,21 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"entity.berserker.shake": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/shake1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/shake2",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.shake"
+	},
 	"entity.berserker.death": {
 		"sounds": [
 			{

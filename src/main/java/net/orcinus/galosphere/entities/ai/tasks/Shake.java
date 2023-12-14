@@ -31,6 +31,7 @@ public class Shake extends Behavior<Berserker> {
     @Override
     protected void start(ServerLevel serverLevel, Berserker livingEntity, long l) {
         livingEntity.setPose(Pose.EMERGING);
+        livingEntity.playSound(GSoundEvents.BERSERKER_SHAKE.get(), 1.0f, 1.0f);
     }
 
     @Override

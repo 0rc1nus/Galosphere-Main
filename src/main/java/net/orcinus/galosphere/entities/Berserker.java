@@ -303,7 +303,14 @@ public class Berserker extends Monster {
 
     public boolean shouldUseMeleeAttack() {
         Optional<LivingEntity> memory = this.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
-        return memory.filter(livingEntity -> this.isWithinMeleeAttackRange(livingEntity) && this.getPhase() != Phase.SMASH && this.shouldAttack() && this.isInHardMode() && this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS.get()).isPresent()).isPresent();
+        return memory.filter(livingEntity ->
+                this.isWithinMeleeAttackRange(livingEntity) &&
+                        this.getPhase() != Phase.SMASH &&
+                        this.shouldAttack() &&
+                        this.isInHardMode() &&
+                        this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS.get()).isPresent() &&
+                        this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS.get()).get() > 0
+        ).isPresent();
     }
 
     public boolean isInHardMode() {
@@ -314,10 +321,16 @@ public class Berserker extends Monster {
     public boolean doHurtTarget(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
-        }
-        if (this.shouldUseMeleeAttack()) {
-            this.level().broadcastEntityEvent(this, (byte) 5);
-            this.playSound(GSoundEvents.BERSERKER_PUNCH.get(), 1, 1);
+            if (this.shouldUseMeleeAttack()) {
+                Vec3 start = this.position().add(0, 1.6f, 0);
+                Vec3 diff = entity.getEyePosition().subtract(start);
+                Vec3 normalized = diff.normalize();
+                double knockbackX = 0.25 * (1 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+                double knockbackY = 1.5 * (1 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+                livingEntity.push(normalized.x() * knockbackY, normalized.y() * knockbackX, normalized.z() * knockbackY);
+                this.level().broadcastEntityEvent(this, (byte) 5);
+                this.playSound(GSoundEvents.BERSERKER_PUNCH.get(), 1, 1);
+            }
         }
         return super.doHurtTarget(entity);
     }
