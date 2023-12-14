@@ -242,7 +242,7 @@ public class Berserker extends Monster {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
         if (mobSpawnType == MobSpawnType.STRUCTURE) {
-            this.setStationaryTicks(200);
+            this.setStationaryTicks(100);
         }
         return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, compoundTag);
     }

@@ -20,7 +20,7 @@ public class Shake extends Behavior<Berserker> {
 
     @Override
     protected boolean checkExtraStartConditions(ServerLevel serverLevel, Berserker livingEntity) {
-        return livingEntity.getStationaryTicks() > 0;
+        return livingEntity.isStationary();
     }
 
     @Override
