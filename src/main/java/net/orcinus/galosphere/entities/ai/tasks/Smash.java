@@ -101,8 +101,8 @@ public class Smash extends Behavior<Berserker> {
     @Override
     protected void stop(ServerLevel serverLevel, Berserker livingEntity, long l) {
         livingEntity.setPhase(Berserker.Phase.IDLING);
-        if (livingEntity.shouldUseMeleeAttack()) {
-            livingEntity.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.SMASHING_COOLDOWN, Unit.INSTANCE, 100);
-        }
+//        if (livingEntity.shouldUseMeleeAttack()) {
+//            livingEntity.getBrain().setMemoryWithExpiry(GMemoryModuleTypes.SMASHING_COOLDOWN, Unit.INSTANCE, 10);
+//        }
     }
 }

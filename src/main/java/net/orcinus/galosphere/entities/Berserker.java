@@ -20,16 +20,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -45,12 +36,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BerserkerAi;
-import net.orcinus.galosphere.init.GEntityTypes;
-import net.orcinus.galosphere.init.GMemoryModuleTypes;
-import net.orcinus.galosphere.init.GMobEffects;
-import net.orcinus.galosphere.init.GParticleTypes;
-import net.orcinus.galosphere.init.GSensorTypes;
-import net.orcinus.galosphere.init.GSoundEvents;
+import net.orcinus.galosphere.init.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -317,7 +303,7 @@ public class Berserker extends Monster {
 
     public boolean shouldUseMeleeAttack() {
         Optional<LivingEntity> memory = this.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
-        return memory.filter(livingEntity -> this.isWithinMeleeAttackRange(livingEntity) && this.getPhase() != Phase.SMASH && this.shouldAttack() && this.isInHardMode() && this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS).isPresent()).isPresent();
+        return memory.filter(livingEntity -> this.isWithinMeleeAttackRange(livingEntity) && this.getPhase() != Phase.SMASH && this.shouldAttack() && this.isInHardMode() && this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS).isPresent() && this.getBrain().getMemory(GMemoryModuleTypes.RAMPAGE_TICKS).get() > 0).isPresent();
     }
 
     public boolean isInHardMode() {
@@ -328,11 +314,16 @@ public class Berserker extends Monster {
     public boolean doHurtTarget(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
-        }
-        if (this.shouldUseMeleeAttack()) {
-            this.level().broadcastEntityEvent(this, (byte) 5);
-            this.playSound(GSoundEvents.BERSERKER_PUNCH, 1, 1);
-            entity.setDeltaMovement(entity.getDeltaMovement().multiply(5, 1, 5));
+            if (this.shouldUseMeleeAttack()) {
+                Vec3 start = this.position().add(0, 1.6f, 0);
+                Vec3 diff = entity.getEyePosition().subtract(start);
+                Vec3 normalized = diff.normalize();
+                double knockbackX = 0.25 * (1 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+                double knockbackY = 1.5 * (1 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+                livingEntity.push(normalized.x() * knockbackY, normalized.y() * knockbackX, normalized.z() * knockbackY);
+                this.level().broadcastEntityEvent(this, (byte) 5);
+                this.playSound(GSoundEvents.BERSERKER_PUNCH, 1, 1);
+            }
         }
         return super.doHurtTarget(entity);
     }
