@@ -104,12 +104,12 @@ public class Berserker extends Monster {
     }
 
     public boolean shouldAttack() {
-        return this.getPhase() == Phase.IDLING && this.getStationaryTicks() == 0;
+        return this.getPhase() == Phase.IDLING && !this.isStationary();
     }
 
     public int getStage() {
         float health = this.getHealth() / this.getMaxHealth();
-        if (this.getStationaryTicks() > 0) {
+        if (this.isStationary()) {
             return 3;
         } else if (health > 0.66F) {
             return 0;
@@ -186,14 +186,9 @@ public class Berserker extends Monster {
                 this.heal(10.0f);
             }
             if (stationary) {
-                for (MemoryModuleType<?> memoryModuleType : this.getBrain().getMemories().keySet()) {
-                    if (
-                            memoryModuleType.equals(MemoryModuleType.WALK_TARGET) ||
-                                    memoryModuleType.equals(MemoryModuleType.LOOK_TARGET)
-                    ) {
-                        this.getBrain().eraseMemory(memoryModuleType);
-                    }
-                }
+                this.getBrain().getMemories().keySet().stream().filter(memoryModuleType -> {
+                    return memoryModuleType.equals(MemoryModuleType.WALK_TARGET) || memoryModuleType.equals(MemoryModuleType.LOOK_TARGET);
+                }).forEach(this.getBrain()::eraseMemory);
                 Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
                 if (!shedding) {
                     player.ifPresent(this::setTarget);
