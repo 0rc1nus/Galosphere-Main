@@ -20,7 +20,16 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -36,7 +45,12 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BerserkerAi;
-import net.orcinus.galosphere.init.*;
+import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GMemoryModuleTypes;
+import net.orcinus.galosphere.init.GMobEffects;
+import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.init.GSensorTypes;
+import net.orcinus.galosphere.init.GSoundEvents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -104,12 +118,12 @@ public class Berserker extends Monster {
     }
 
     public boolean shouldAttack() {
-        return this.getPhase() == Phase.IDLING && this.getStationaryTicks() == 0;
+        return this.getPhase() == Phase.IDLING && !this.isStationary();
     }
 
     public int getStage() {
         float health = this.getHealth() / this.getMaxHealth();
-        if (this.getStationaryTicks() > 0) {
+        if (this.isStationary()) {
             return 3;
         } else if (health > 0.66F) {
             return 0;
@@ -186,14 +200,9 @@ public class Berserker extends Monster {
                 this.heal(10.0f);
             }
             if (stationary) {
-                for (MemoryModuleType<?> memoryModuleType : this.getBrain().getMemories().keySet()) {
-                    if (
-                            memoryModuleType.equals(MemoryModuleType.WALK_TARGET) ||
-                            memoryModuleType.equals(MemoryModuleType.LOOK_TARGET)
-                    ) {
-                        this.getBrain().eraseMemory(memoryModuleType);
-                    }
-                }
+                this.getBrain().getMemories().keySet().stream().filter(memoryModuleType -> {
+                    return memoryModuleType.equals(MemoryModuleType.WALK_TARGET) || memoryModuleType.equals(MemoryModuleType.LOOK_TARGET);
+                }).forEach(this.getBrain()::eraseMemory);
                 Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
                 if (!shedding) {
                     player.ifPresent(this::setTarget);
