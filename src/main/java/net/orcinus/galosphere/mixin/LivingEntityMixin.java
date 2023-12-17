@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.orcinus.galosphere.api.BannerAttachable;
 import net.orcinus.galosphere.api.GoldenBreath;
+import net.orcinus.galosphere.api.SaltboundFlying;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.entities.Spectre;
 import net.orcinus.galosphere.init.GEntityTypeTags;
@@ -31,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Optional;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass {
+public class LivingEntityMixin implements BannerAttachable, GoldenBreath, SpectreBoundSpyglass, SaltboundFlying {
     @Shadow protected ItemStack useItem;
     @Unique
     private static final EntityDataAccessor<ItemStack> BANNER_STACK = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.ITEM_STACK );
@@ -41,6 +42,8 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     private static final EntityDataAccessor<Boolean> USING_SPECTRE_BOUNDED_SPYGLASS = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
     @Unique
     private boolean preserved;
+    @Unique
+    private boolean saltboundFlying;
 
     @Inject(at = @At("TAIL"), method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", cancellable = true)
     private void G$canAttack(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
@@ -63,6 +66,7 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         tag.putFloat("GoldenAirSupply", this.getGoldenAirSupply());
         tag.putBoolean("UsingSpectreBoundedSpyglass", this.isUsingSpectreBoundedSpyglass());
         tag.putBoolean("Preserved", this.preserved);
+        tag.putBoolean("SaltboundFlying", this.saltboundFlying);
     }
 
     @Inject(at = @At("RETURN"), method = "readAdditionalSaveData")
@@ -73,11 +77,15 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         if (this.preserved) {
             this.preserved = tag.getBoolean("Preserved");
         }
+        this.saltboundFlying = tag.getBoolean("SaltboundFlying");
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void G$tick(CallbackInfo ci) {
         LivingEntity $this = (LivingEntity) (Object) this;
+        if (!$this.getBlockStateOn().isAir() && this.isFlying()) {
+            this.setFlying(false);
+        }
         if (SpectreBoundSpyglass.canUseSpectreBoundSpyglass(this.useItem) && this.useItem.getTag() != null) {
             if (!$this.level().isClientSide) {
                 Entity spectreBound = ((ServerLevel)$this.level()).getEntity(this.useItem.getTag().getUUID("SpectreBoundUUID"));
@@ -205,4 +213,13 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
         ((LivingEntity)(Object)this).getEntityData().set(USING_SPECTRE_BOUNDED_SPYGLASS, usingSpectreBoundedSpyglass);
     }
 
+    @Override
+    public boolean isFlying() {
+        return this.saltboundFlying;
+    }
+
+    @Override
+    public void setFlying(boolean flying) {
+        this.saltboundFlying = flying;
+    }
 }

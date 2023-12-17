@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.orcinus.galosphere.api.SaltboundFlying;
 import net.orcinus.galosphere.entities.PinkSaltPillar;
 
 public class SaltboundTabletItem extends Item {
@@ -30,15 +31,15 @@ public class SaltboundTabletItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
-        HitResult result = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
+        HitResult result = player.pick(5.0F, 0.0F, false);
         if (result.getType() == HitResult.Type.BLOCK) {
-            HitResult endVec = player.pick(40.0F, 0.0F, false);
-            Vec3 location = endVec.getLocation();
+            Vec3 location = result.getLocation();
             int cooldown;
-            if (!player.isShiftKeyDown() && player.distanceToSqr(result.getLocation()) <= 6D) {
+            if ((!player.isShiftKeyDown() && player.distanceToSqr(result.getLocation()) <= 6D) || ((SaltboundFlying)player).isFlying()) {
                 Vec3 position = player.position();
+                ((SaltboundFlying)player).setFlying(true);
                 level.addFreshEntity(new PinkSaltPillar(player.level(), position.x, position.y, position.z, 0, 0, player));
-                Vec3 diff = location.subtract(position);
+                Vec3 diff = player.pick(20, 0, false).getLocation().subtract(position);
                 Vec3 adjusted = diff.normalize();
                 player.setDeltaMovement(-adjusted.x * 2.5F, -adjusted.y * 1.2F, -adjusted.z * 2.5F);
                 player.resetFallDistance();
@@ -66,7 +67,9 @@ public class SaltboundTabletItem extends Item {
                 }
                 cooldown = 50;
             }
-            player.getCooldowns().addCooldown(this, cooldown);
+            if (!player.getAbilities().instabuild) {
+                player.getCooldowns().addCooldown(this, cooldown);
+            }
             player.getItemInHand(interactionHand).hurtAndBreak(1, player, e -> e.broadcastBreakEvent(interactionHand));
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(interactionHand), level.isClientSide);
         }
