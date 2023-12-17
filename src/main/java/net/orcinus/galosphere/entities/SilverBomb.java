@@ -129,7 +129,6 @@ public class SilverBomb extends ThrowableItemProjectile {
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        CompatUtil compatUtil = new CompatUtil();
         if (!this.level().isClientSide()) {
             this.bombExplode();
         }

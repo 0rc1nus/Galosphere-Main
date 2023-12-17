@@ -3,7 +3,12 @@ package net.orcinus.galosphere.entities;
 import java.util.List;
 import java.util.UUID;
 
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.nbt.CompoundTag;
@@ -94,6 +99,15 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     public void tick() {
         super.tick();
         if (!level().isClientSide()) {
+            List<Arrow> arrows = this.level().getEntitiesOfClass(Arrow.class, this.getBoundingBox().inflate(1.2D));
+            for (Arrow arrow : arrows) {
+                Vec3 selfPos = this.position().add(0, 1.6f, 0);
+                Vec3 enemyPos = arrow.getEyePosition().subtract(selfPos);
+                Vec3 normalizedDirection = enemyPos.normalize();
+                double knockbackX = 0.15;
+                double knockbackY = 0.15;
+                arrow.setDeltaMovement(arrow.getDeltaMovement().add(normalizedDirection.x() * knockbackY, normalizedDirection.y() * knockbackX, normalizedDirection.z() * knockbackY));
+            }
             if (--this.warmupDelayTicks < 0) {
                 List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2, 0.0, 0.2));
                 for (LivingEntity livingEntity : list) {
@@ -130,6 +144,14 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
             }
             livingEntity.hurt(this.damageSources().indirectMagic(this, livingEntity2), 3.0F);
         }
+    }
+
+    @Override
+    public boolean hurt(DamageSource damageSource, float f) {
+        if (damageSource.getEntity() instanceof Arrow) {
+            return false;
+        }
+        return super.hurt(damageSource, f);
     }
 
     @Override
