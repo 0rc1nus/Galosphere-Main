@@ -17,6 +17,7 @@ import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCreativeModeTabs;
 import net.orcinus.galosphere.init.GCriteriaTriggers;
+import net.orcinus.galosphere.init.GEnchantments;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GEvents;
 import net.orcinus.galosphere.init.GFeatures;
@@ -56,6 +57,7 @@ public class Galosphere implements ModInitializer {
         GBlockEntityTypes.init();
         GEntityTypes.init();
         GEvents.init();
+        GEnchantments.init();
         GFeatures.init();
         GPotions.init();
         GParticleTypes.init();

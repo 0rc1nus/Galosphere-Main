@@ -49,6 +49,15 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
         this.setPos(d, e, f);
     }
 
+    public PinkSaltPillar(Level level, double d, double e, double f, float g, int i, int ticks, LivingEntity livingEntity) {
+        this(GEntityTypes.PINK_SALT_PILLAR, level);
+        this.warmupDelayTicks = i;
+        this.lifeTicks = ticks;
+        this.setOwner(livingEntity);
+        this.setYRot(g * 57.295776f);
+        this.setPos(d, e, f);
+    }
+
     @Override
     protected void defineSynchedData() {
         this.entityData.define(ACTIVE, false);
@@ -131,7 +140,7 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
 
     private void dealDamageTo(LivingEntity livingEntity) {
         LivingEntity livingEntity2 = this.getOwner();
-        if (livingEntity instanceof Player player && player.getUUID().equals(livingEntity2.getUUID())) {
+        if (livingEntity instanceof Player player && livingEntity2 != null && player.getUUID().equals(livingEntity2.getUUID())) {
             return;
         } else if (!livingEntity.isAlive() || livingEntity.isInvulnerable() || livingEntity == livingEntity2) {
             return;

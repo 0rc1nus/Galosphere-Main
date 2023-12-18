@@ -1,0 +1,37 @@
+package net.orcinus.galosphere.enchantments;
+
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+
+public class LanguishEnchantment extends Enchantment {
+
+    public LanguishEnchantment(Rarity rarity, EnchantmentCategory enchantmentCategory, EquipmentSlot[] equipmentSlots) {
+        super(rarity, enchantmentCategory, equipmentSlots);
+    }
+
+    @Override
+    public int getMinCost(int i) {
+        return i * 25;
+    }
+
+    @Override
+    public int getMaxCost(int i) {
+        return this.getMinCost(i) + 50;
+    }
+
+    @Override
+    public boolean isDiscoverable() {
+        return false;
+    }
+
+    @Override
+    public boolean isTradeable() {
+        return false;
+    }
+
+    @Override
+    public boolean isTreasureOnly() {
+        return true;
+    }
+}
