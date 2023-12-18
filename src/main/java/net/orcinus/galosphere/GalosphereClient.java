@@ -176,7 +176,7 @@ public class GalosphereClient implements ClientModInitializer {
             }
 
         });
-        ItemProperties.register(GItems.SALTBOUND_TABLET, Galosphere.id("using"), (stack, world, entity, i) -> entity.getUseItem().getItem() instanceof SaltboundTabletItem ? 1 : 0);
+        ItemProperties.register(GItems.SALTBOUND_TABLET, Galosphere.id("using"), (stack, world, entity, i) -> entity != null && entity.getUseItem().getItem() instanceof SaltboundTabletItem ? 1 : 0);
         ItemProperties.register(GItems.SALTBOUND_TABLET, Galosphere.id("cooldown"), (stack, world, entity, i) -> entity instanceof Player player && player.getCooldowns().isOnCooldown(GItems.SALTBOUND_TABLET) ? 1 : 0);
     }
 }
