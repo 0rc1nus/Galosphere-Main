@@ -1,6 +1,20 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "galosphere:item/saltbound_tablet"
-  }
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "galosphere:item/saltbound_tablet"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"galosphere:using": 1
+			},
+			"model": "galosphere:item/saltbound_tablet_using"
+		},
+		{
+			"predicate": {
+				"galosphere:cooldown": 1
+			},
+			"model": "galosphere:item/saltbound_tablet_cooldown"
+		}
+	]
 }

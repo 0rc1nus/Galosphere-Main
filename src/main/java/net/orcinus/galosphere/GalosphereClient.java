@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -53,6 +54,7 @@ import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GModelLayers;
 import net.orcinus.galosphere.init.GNetwork;
 import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.items.SaltboundTabletItem;
 import org.jetbrains.annotations.Nullable;
 
 public class GalosphereClient implements ClientModInitializer {
@@ -174,5 +176,7 @@ public class GalosphereClient implements ClientModInitializer {
             }
 
         });
+        ItemProperties.register(GItems.SALTBOUND_TABLET, Galosphere.id("using"), (stack, world, entity, i) -> entity.getUseItem().getItem() instanceof SaltboundTabletItem ? 1 : 0);
+        ItemProperties.register(GItems.SALTBOUND_TABLET, Galosphere.id("cooldown"), (stack, world, entity, i) -> entity instanceof Player player && player.getCooldowns().isOnCooldown(GItems.SALTBOUND_TABLET) ? 1 : 0);
     }
 }
