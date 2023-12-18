@@ -2,7 +2,6 @@ package net.orcinus.galosphere.items;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,16 +31,14 @@ public class SaltboundTabletItem extends Item {
         return 18;
     }
 
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BLOCK;
-    }
-
+    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        player.playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1, 1);
+        player.playSound(GSoundEvents.TABLET_PREPARE_ATTACK, 1, 1);
         player.awardStat(Stats.ITEM_USED.get(this));
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
+    @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
         return performAttack(stack, level, user);
     }
@@ -51,7 +47,7 @@ public class SaltboundTabletItem extends Item {
         if (user instanceof Player player) {
             InteractionHand hand = player.getUsedItemHand();
             player.swing(hand);
-            player.playSound(SoundEvents.EVOKER_CAST_SPELL, 1, 1);
+            player.playSound(GSoundEvents.TABLET_CAST_ATTACK, 1, 1);
             Vec3 lookAngle = player.getLookAngle();
             Vec3 adjustedAngle = lookAngle.add(player.getX(), player.getY(), player.getZ());
             double d = Math.min(adjustedAngle.y(), player.getY());
@@ -93,12 +89,13 @@ public class SaltboundTabletItem extends Item {
             }
             bl = true;
             break;
-        } while ((pos = pos.below()).getY() >= Mth.floor(f) - 1);
+        } while ((pos = pos.below()).getY() >= Mth.floor(f) - 7);
         if (bl) {
-            int ticks = 22 * (EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.SUSTAIN, stack) + 1);
-            float damage = 3;
+            int ticks = 22 * ((EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.SUSTAIN, stack) / 2) + 1);
+            boolean slowness = EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.LANGUISH, stack) > 0;
+            float damage = 12;
             int warmupDelayTicks = index;
-            level.addFreshEntity(new PinkSaltPillar(level, d, (double)pos.getY() + j, e, h, warmupDelayTicks, ticks, damage / (index + 1), player));
+            level.addFreshEntity(new PinkSaltPillar(level, d, (double)pos.getY() + j, e, h, warmupDelayTicks, ticks, damage / (index + 1), slowness, player));
         }
     }
 }

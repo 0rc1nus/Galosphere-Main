@@ -53,6 +53,13 @@ public class GSoundEvents {
     public static final SoundEvent SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
     public static final SoundEvent SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
 
+    public static final SoundEvent TABLET_PREPARE_ATTACK = register("tablet_prepare_attack");
+    public static final SoundEvent TABLET_CAST_ATTACK = register("tablet_cast_attack");
+    public static final SoundEvent TABLET_RECHARGE = register("tablet_recharge");
+
+    public static final SoundEvent CHAMBER_SUMMON = register("chamber_summon");
+    public static final SoundEvent CHAMBER_DEACTIVATE = register("chamber_deactivate");
+
     public static final SoundType ALLURITE = soundType("allurite");
     public static final SoundType ALLURITE_CLUSTER = soundType("allurite_cluster");
     public static final SoundType MONSTROMETER = soundType("monstrometer");

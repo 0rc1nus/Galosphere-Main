@@ -10,6 +10,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -31,6 +33,7 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     private UUID ownerUUID;
     private int warmupDelayTicks;
     private boolean sentSpikeEvent;
+    private boolean slowness;
     private int lifeTicks = 22;
     public static final float DEFAULT_DAMAGE = 3.0F;
     private float damage = DEFAULT_DAMAGE;
@@ -49,10 +52,12 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
         this.setPos(d, e, f);
     }
 
-    public PinkSaltPillar(Level level, double d, double e, double f, float g, int warmupDelayTicks, int ticks, float damage, LivingEntity livingEntity) {
+    public PinkSaltPillar(Level level, double d, double e, double f, float g, int warmupDelayTicks, int ticks, float damage, boolean slowness, LivingEntity livingEntity) {
         this(GEntityTypes.PINK_SALT_PILLAR, level);
         this.warmupDelayTicks = warmupDelayTicks;
         this.lifeTicks = ticks;
+        this.damage = damage;
+        this.slowness = slowness;
         this.setOwner(livingEntity);
         this.setYRot(g * 57.295776f);
         this.setPos(d, e, f);
@@ -81,6 +86,9 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     @Override
     protected void readAdditionalSaveData(CompoundTag compoundTag) {
         this.warmupDelayTicks = compoundTag.getInt("Warmup");
+        this.lifeTicks = compoundTag.getInt("LifeTicks");
+        this.damage = compoundTag.getFloat("Damage");
+        this.slowness = compoundTag.getBoolean("Slowness");
         this.setActive(compoundTag.getBoolean("Active"));
         if (compoundTag.hasUUID("Owner")) {
             this.ownerUUID = compoundTag.getUUID("Owner");
@@ -90,7 +98,10 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {
         compoundTag.putInt("Warmup", this.warmupDelayTicks);
+        compoundTag.putInt("LifeTicks", this.lifeTicks);
+        compoundTag.putFloat("Damage", this.damage);
         compoundTag.putBoolean("Active", this.isActive());
+        compoundTag.putBoolean("Slowness", this.slowness);
         if (this.ownerUUID != null) {
             compoundTag.putUUID("Owner", this.ownerUUID);
         }
@@ -152,10 +163,13 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
             return;
         }
         if (livingEntity2 == null) {
-            livingEntity.hurt(this.damageSources().magic(), damage);
+            livingEntity.hurt(this.damageSources().magic(), this.damage);
         } else {
             if (livingEntity2.isAlliedTo(livingEntity)) return;
-            livingEntity.hurt(this.damageSources().indirectMagic(this, livingEntity2), damage);
+            livingEntity.hurt(this.damageSources().indirectMagic(this, livingEntity2), this.damage);
+            if (this.slowness) {
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
+            }
         }
     }
 
