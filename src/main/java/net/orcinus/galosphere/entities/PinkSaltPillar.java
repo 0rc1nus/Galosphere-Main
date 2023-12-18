@@ -1,29 +1,27 @@
 package net.orcinus.galosphere.entities;
 
-import java.util.List;
-import java.util.UUID;
-
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
-
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TraceableEntity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.UUID;
 
 public class PinkSaltPillar extends Entity implements TraceableEntity {
     private static final EntityDataAccessor<Boolean> ACTIVE = SynchedEntityData.defineId(PinkSaltPillar.class, EntityDataSerializers.BOOLEAN);
@@ -34,6 +32,8 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     private int warmupDelayTicks;
     private boolean sentSpikeEvent;
     private int lifeTicks = 22;
+    public static final float DEFAULT_DAMAGE = 3.0F;
+    private float damage = DEFAULT_DAMAGE;
     public AnimationState emergeAnimationState = new AnimationState();
     public AnimationState retractAnimationState = new AnimationState();
 
@@ -41,17 +41,17 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
         super(entityType, level);
     }
 
-    public PinkSaltPillar(Level level, double d, double e, double f, float g, int i, LivingEntity livingEntity) {
+    public PinkSaltPillar(Level level, double d, double e, double f, float g, int warmupDelayTicks, LivingEntity livingEntity) {
         this(GEntityTypes.PINK_SALT_PILLAR, level);
-        this.warmupDelayTicks = i;
+        this.warmupDelayTicks = warmupDelayTicks;
         this.setOwner(livingEntity);
         this.setYRot(g * 57.295776f);
         this.setPos(d, e, f);
     }
 
-    public PinkSaltPillar(Level level, double d, double e, double f, float g, int i, int ticks, LivingEntity livingEntity) {
+    public PinkSaltPillar(Level level, double d, double e, double f, float g, int warmupDelayTicks, int ticks, float damage, LivingEntity livingEntity) {
         this(GEntityTypes.PINK_SALT_PILLAR, level);
-        this.warmupDelayTicks = i;
+        this.warmupDelayTicks = warmupDelayTicks;
         this.lifeTicks = ticks;
         this.setOwner(livingEntity);
         this.setYRot(g * 57.295776f);
@@ -119,8 +119,9 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
             }
             if (--this.warmupDelayTicks < 0) {
                 List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2, 0.0, 0.2));
+
                 for (LivingEntity livingEntity : list) {
-                    if (livingEntity instanceof Preserved) continue;
+                    if (getOwner() instanceof Berserker && livingEntity instanceof Preserved) continue;
                     this.dealDamageTo(livingEntity);
                 }
                 if (!this.sentSpikeEvent) {
@@ -135,6 +136,11 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
                     this.discard();
                 }
             }
+
+            if (warmupDelayTicks == 0 && level() instanceof ServerLevel server) {
+                Vec3 pos = position();
+                server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, server.getBlockState(getOnPos())), pos.x, pos.y, pos.z, 12, 0.4, 0, 0.4, 0.1);
+            }
         }
     }
 
@@ -146,20 +152,16 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
             return;
         }
         if (livingEntity2 == null) {
-            livingEntity.hurt(this.damageSources().magic(), 3.0F);
+            livingEntity.hurt(this.damageSources().magic(), damage);
         } else {
-            if (livingEntity2.isAlliedTo(livingEntity)) {
-                return;
-            }
-            livingEntity.hurt(this.damageSources().indirectMagic(this, livingEntity2), 3.0F);
+            if (livingEntity2.isAlliedTo(livingEntity)) return;
+            livingEntity.hurt(this.damageSources().indirectMagic(this, livingEntity2), damage);
         }
     }
 
     @Override
     public boolean hurt(DamageSource damageSource, float f) {
-        if (damageSource.getEntity() instanceof Arrow) {
-            return false;
-        }
+        if (damageSource.getEntity() instanceof Arrow) return false;
         return super.hurt(damageSource, f);
     }
 

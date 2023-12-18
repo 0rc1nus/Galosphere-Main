@@ -2,21 +2,26 @@ package net.orcinus.galosphere.items;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.entities.PinkSaltPillar;
 import net.orcinus.galosphere.init.GEnchantments;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 public class SaltboundTabletItem extends Item {
 
@@ -24,60 +29,76 @@ public class SaltboundTabletItem extends Item {
         super(properties);
     }
 
-    @Override
-    public int getBarColor(ItemStack itemStack) {
-        return Mth.color(0.737f, 1, 0.737f);
+    public int getUseDuration(ItemStack stack) {
+        return 18;
     }
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
-        HitResult result = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
-        if (result.getType() == HitResult.Type.BLOCK) {
-            Vec3 location = result.getLocation();
-            double d = Math.min(location.y(), player.getY());
-            double e = Math.max(location.y(), player.getY()) + 1.0;
-            float f = (float)Mth.atan2(location.z() - player.getZ(), location.x() - player.getX());
-            ItemStack itemInHand = player.getItemInHand(interactionHand);
-            if (player.isShiftKeyDown()) {
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BLOCK;
+    }
+
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        player.playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1, 1);
+        player.awardStat(Stats.ITEM_USED.get(this));
+        return ItemUtils.startUsingInstantly(level, player, hand);
+    }
+
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+        return performAttack(stack, level, user);
+    }
+
+    public ItemStack performAttack(ItemStack stack, Level level, LivingEntity user) {
+        if (user instanceof Player player) {
+            InteractionHand hand = player.getUsedItemHand();
+            player.swing(hand);
+            player.playSound(SoundEvents.EVOKER_CAST_SPELL, 1, 1);
+            Vec3 lookAngle = player.getLookAngle();
+            Vec3 adjustedAngle = lookAngle.add(player.getX(), player.getY(), player.getZ());
+            double d = Math.min(adjustedAngle.y(), player.getY());
+            double e = Math.max(adjustedAngle.y(), player.getY()) + 1.0;
+            float f = (float) Mth.atan2(adjustedAngle.z() - player.getZ(), adjustedAngle.x() - player.getX());
+            int cooldown = player.getAbilities().instabuild ? 10 : 60;
+            if (lookAngle.get(Direction.Axis.Y) <= -0.8) {
                 for (int round = 2; round < 5; round++) {
-                    for (float i = 0.0F; i < Mth.PI * 2; i += Mth.PI / 4) {
-                        this.createPillar(player, player.getX() + (Mth.sin(i)) * round, player.getZ() + (Mth.cos(i)) * round, d, e, f, (int) i + round, itemInHand);
+                    for (float i = 0; i < Mth.PI * 2; i += Mth.PI / 4) {
+                        createPillar(player, player.getX() + (Mth.sin(i)) * round, player.getZ() + (Mth.cos(i)) * round, d, e, f, (int) i * 2, stack);
+                        player.getCooldowns().addCooldown(this, cooldown);
                     }
                 }
             } else {
-                for (int i = 0; i < 16; ++i) {
-                    double h = 1.25 * (double)(i + 1);
-                    this.createPillar(player, location.x() + (double)Mth.cos(f) * h, location.z() + (double)Mth.sin(f) * h, d, e, f, i, itemInHand);
+                for (int index = 0; index < 16; ++index) {
+                    double h = 1.25 * (double) (index + 1);
+                    createPillar(player, adjustedAngle.x() + (double) Mth.cos(f) * h + ((player.getRandom().nextFloat() - 0.5F) * 0.4F), adjustedAngle.z() + (double)Mth.sin(f) * h + ((player.getRandom().nextFloat() - 0.5F) * 0.4F), d, e, f, index, stack);
+                    player.getCooldowns().addCooldown(this, cooldown);
                 }
             }
-            if (!player.getAbilities().instabuild) {
-                player.getCooldowns().addCooldown(this, 10);
-            }
-            itemInHand.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(interactionHand));
-            return InteractionResultHolder.sidedSuccess(itemInHand, level.isClientSide);
+            stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(hand));
         }
-        return super.use(level, player, interactionHand);
+
+        return stack;
     }
 
-    private void createPillar(Player player, double d, double e, double f, double g, float h, int i, ItemStack itemInHand) {
-        BlockPos blockPos = BlockPos.containing(d, g, e);
+    private void createPillar(Player player, double d, double e, double f, double g, float h, int index, ItemStack stack) {
+        BlockPos pos = BlockPos.containing(d, g, e);
         Level level = player.level();
         boolean bl = false;
-        double j = 0.0;
+        double j = 0;
         do {
             VoxelShape voxelShape;
-            BlockPos blockPos2 = blockPos.below();
-            BlockState blockState = level.getBlockState(blockPos2);
-            if (!blockState.isFaceSturdy(level, blockPos2, Direction.UP)) continue;
-            if (!level.isEmptyBlock(blockPos) && !(voxelShape = level.getBlockState(blockPos).getCollisionShape(level, blockPos)).isEmpty()) {
+            BlockPos pos2 = pos.below();
+            BlockState state = level.getBlockState(pos2);
+            if (!state.isFaceSturdy(level, pos2, Direction.UP)) continue;
+            if (!level.isEmptyBlock(pos) && !(voxelShape = level.getBlockState(pos).getCollisionShape(level, pos)).isEmpty()) {
                 j = voxelShape.max(Direction.Axis.Y);
             }
             bl = true;
             break;
-        } while ((blockPos = blockPos.below()).getY() >= Mth.floor(f) - 1);
+        } while ((pos = pos.below()).getY() >= Mth.floor(f) - 1);
         if (bl) {
-            int ticks = 22 * (EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.SUSTAIN, itemInHand) + 1);
-            level.addFreshEntity(new PinkSaltPillar(level, d, (double)blockPos.getY() + j, e, h, i, ticks, player));
+            int ticks = 22 * (EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.SUSTAIN, stack) + 1);
+            float damage = 3;
+            int warmupDelayTicks = index;
+            level.addFreshEntity(new PinkSaltPillar(level, d, (double)pos.getY() + j, e, h, warmupDelayTicks, ticks, damage / (index + 1), player));
         }
     }
 }
