@@ -1,8 +1,8 @@
-// 1.20.1	2023-12-14T15:59:37.7476238	Galosphere/Tags for minecraft:block
+// 1.20.1	2023-12-19T09:13:03.0147859	Galosphere/Tags for minecraft:block
 7c8681b31d8fa5c9fd65c944db80c8142a7bad57 data\minecraft\tags\blocks\walls.json
 f9dd4175c19ab7775a324051f554d38d08996f55 data\minecraft\tags\blocks\stairs.json
-630fd5a9ed4446c8577597a0bfc7f48d989f42f5 data\minecraft\tags\blocks\crystal_sound_blocks.json
 10598a85b0b258672549eb1cff4a26bad17a80b6 data\minecraft\tags\blocks\beacon_base_blocks.json
+630fd5a9ed4446c8577597a0bfc7f48d989f42f5 data\minecraft\tags\blocks\crystal_sound_blocks.json
 fe01cd5ff6ba0911c2bce9081ce29c02a3f64719 data\galosphere\tags\blocks\gravel_may_replace.json
 e79c2e92efdad7fe61207288a8e88436353fe6b9 data\galosphere\tags\blocks\spectres_spawn_on.json
 df9b777d83fd56ebda33467adf3600ba06f04311 data\minecraft\tags\blocks\needs_stone_tool.json

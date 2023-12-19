@@ -4,15 +4,18 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GBuiltinLootTables;
+import net.orcinus.galosphere.init.GEnchantments;
 import net.orcinus.galosphere.init.GItems;
 
 import java.util.function.BiConsumer;
@@ -42,6 +45,9 @@ public class GChestLootTableProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.GOLDEN_APPLE)
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                                 .setWeight(1))
+                        .add(LootItem.lootTableItem(Items.BOOK)
+                                .setWeight(3)
+                                .apply(new EnchantRandomlyFunction.Builder().withEnchantment(GEnchantments.SUSTAIN).withEnchantment(GEnchantments.ENFEEBLE).withEnchantment(GEnchantments.RUPTURE).withEnchantment(Enchantments.UNBREAKING)))
                 )
         );
     }

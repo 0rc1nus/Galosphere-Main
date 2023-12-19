@@ -8,6 +8,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GEnchantments;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMobEffects;
@@ -35,6 +36,9 @@ public class GLanguageProvider extends FabricLanguageProvider {
         });
         GMobEffects.MOB_EFFECTS.values().forEach(mobEffect -> {
             translationBuilder.add(mobEffect, reformat(BuiltInRegistries.MOB_EFFECT.getKey(mobEffect).getPath()));
+        });
+        GEnchantments.ENCHANTMENTS.values().forEach(enchantment -> {
+            translationBuilder.add(enchantment, reformat(BuiltInRegistries.ENCHANTMENT.getKey(enchantment).getPath()));
         });
         translationBuilder.add("item.galosphere.preserved", "Preserved");
         translationBuilder.add("item.galosphere.silver_bomb.duration", "Duration");

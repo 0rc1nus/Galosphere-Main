@@ -36,6 +36,7 @@ import net.orcinus.galosphere.client.particles.providers.PinkSaltFallingDustProv
 import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.BerserkerRenderer;
+import net.orcinus.galosphere.client.renderer.PinkSaltShardRenderer;
 import net.orcinus.galosphere.client.renderer.PreservedRenderer;
 import net.orcinus.galosphere.client.renderer.PinkSaltPillarRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
@@ -114,6 +115,7 @@ public class GalosphereClient implements ClientModInitializer {
         EntityRendererRegistry.register(GEntityTypes.BERSERKER, BerserkerRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.PINK_SALT_PILLAR, PinkSaltPillarRenderer::new);
         EntityRendererRegistry.register(GEntityTypes.PRESERVED, PreservedRenderer::new);
+        EntityRendererRegistry.register(GEntityTypes.PINK_SALT_SHARD, PinkSaltShardRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPARKLE, SparkleModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.SPECTRE, SpectreModel::createBodyLayer);

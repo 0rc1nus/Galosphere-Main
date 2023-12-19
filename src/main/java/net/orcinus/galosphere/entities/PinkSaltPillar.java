@@ -3,21 +3,25 @@ package net.orcinus.galosphere.entities;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TraceableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GEnchantments;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +30,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class PinkSaltPillar extends Entity implements TraceableEntity {
+    private static final EntityDataAccessor<ItemStack> ITEM = SynchedEntityData.defineId(PinkSaltPillar.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> ACTIVE = SynchedEntityData.defineId(PinkSaltPillar.class, EntityDataSerializers.BOOLEAN);
     @Nullable
     private LivingEntity owner;
@@ -33,7 +38,6 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
     private UUID ownerUUID;
     private int warmupDelayTicks;
     private boolean sentSpikeEvent;
-    private boolean slowness;
     private int lifeTicks = 22;
     public static final float DEFAULT_DAMAGE = 3.0F;
     private float damage = DEFAULT_DAMAGE;
@@ -52,20 +56,21 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
         this.setPos(d, e, f);
     }
 
-    public PinkSaltPillar(Level level, double d, double e, double f, float g, int warmupDelayTicks, int ticks, float damage, boolean slowness, LivingEntity livingEntity) {
+    public PinkSaltPillar(Level level, double d, double e, double f, float g, int warmupDelayTicks, float damage, LivingEntity livingEntity, ItemStack itemStack) {
         this(GEntityTypes.PINK_SALT_PILLAR, level);
         this.warmupDelayTicks = warmupDelayTicks;
-        this.lifeTicks = ticks;
         this.damage = damage;
-        this.slowness = slowness;
         this.setOwner(livingEntity);
         this.setYRot(g * 57.295776f);
         this.setPos(d, e, f);
+        this.entityData.set(ITEM, itemStack.copy());
+        this.lifeTicks = 22 * ((EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.SUSTAIN, itemStack) / 2) + 1);
     }
 
     @Override
     protected void defineSynchedData() {
         this.entityData.define(ACTIVE, false);
+        this.entityData.define(ITEM, ItemStack.EMPTY);
     }
 
     public void setOwner(@Nullable LivingEntity livingEntity) {
@@ -88,8 +93,11 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
         this.warmupDelayTicks = compoundTag.getInt("Warmup");
         this.lifeTicks = compoundTag.getInt("LifeTicks");
         this.damage = compoundTag.getFloat("Damage");
-        this.slowness = compoundTag.getBoolean("Slowness");
         this.setActive(compoundTag.getBoolean("Active"));
+        ItemStack itemStack = ItemStack.of(compoundTag.getCompound("TabletItem"));
+        if (!itemStack.isEmpty()) {
+            this.entityData.set(ITEM, itemStack);
+        }
         if (compoundTag.hasUUID("Owner")) {
             this.ownerUUID = compoundTag.getUUID("Owner");
         }
@@ -101,7 +109,10 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
         compoundTag.putInt("LifeTicks", this.lifeTicks);
         compoundTag.putFloat("Damage", this.damage);
         compoundTag.putBoolean("Active", this.isActive());
-        compoundTag.putBoolean("Slowness", this.slowness);
+        ItemStack itemStack = this.entityData.get(ITEM);
+        if (!itemStack.isEmpty()) {
+            compoundTag.put("TabletItem", itemStack.save(new CompoundTag()));
+        }
         if (this.ownerUUID != null) {
             compoundTag.putUUID("Owner", this.ownerUUID);
         }
@@ -140,15 +151,32 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
                     this.level().broadcastEntityEvent(this, (byte)4);
                     this.sentSpikeEvent = true;
                 }
-                if (this.lifeTicks == 4) {
-                    this.level().broadcastEntityEvent(this, (byte) 6);
-                }
-                if (--this.lifeTicks < 0) {
-                    this.discard();
+                ItemStack stack = this.entityData.get(ITEM);
+                int ruptureLevel = EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.RUPTURE, stack);
+                boolean fracture = ruptureLevel > 0;
+                if (!fracture) {
+                    if (this.lifeTicks == 4) {
+                        this.level().broadcastEntityEvent(this, (byte) 6);
+                    }
+                    if (--this.lifeTicks < 0) {
+                        this.discard();
+                    }
+                } else {
+                    if (--this.lifeTicks < 0) {
+                        for (int i = 0; i < ruptureLevel + 2; i++) {
+                            PinkSaltShard pinkSaltShard = new PinkSaltShard(this.getOwner(), this.level());
+                            pinkSaltShard.moveTo(Vec3.atCenterOf(this.blockPosition()));
+                            Vec3 vec3 = new Vec3(this.random.nextGaussian(), this.random.nextGaussian(), this.random.nextGaussian()).normalize();
+                            Vec3 vec31 = vec3.scale(0.75D);
+                            pinkSaltShard.setDeltaMovement(vec31);
+                            this.level().addFreshEntity(pinkSaltShard);
+                        }
+                        this.discard();
+                    }
                 }
             }
 
-            if (warmupDelayTicks == 0 && level() instanceof ServerLevel server) {
+            if (this.warmupDelayTicks == 0 && level() instanceof ServerLevel server) {
                 Vec3 pos = position();
                 server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, server.getBlockState(getOnPos())), pos.x, pos.y, pos.z, 12, 0.4, 0, 0.4, 0.1);
             }
@@ -167,7 +195,9 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
         } else {
             if (livingEntity2.isAlliedTo(livingEntity)) return;
             livingEntity.hurt(this.damageSources().indirectMagic(this, livingEntity2), this.damage);
-            if (this.slowness) {
+            ItemStack stack = this.entityData.get(ITEM);
+            boolean slowness = EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.ENFEEBLE, stack) > 0;
+            if (slowness) {
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
             }
         }

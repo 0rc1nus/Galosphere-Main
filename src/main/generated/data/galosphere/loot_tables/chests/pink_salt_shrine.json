@@ -78,6 +78,22 @@
             }
           ],
           "name": "minecraft:golden_apple"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantments": [
+                "galosphere:sustain",
+                "minecraft:unbreaking",
+                "galosphere:rupture",
+                "galosphere:enfeeble"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 3
         }
       ],
       "rolls": {

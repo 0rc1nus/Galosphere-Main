@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -24,10 +25,8 @@ public class PreservedFleshItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
-        if (this.isEdible()) {
-            return this.eat(livingEntity, level, itemStack);
-        }
-        return itemStack;
+        itemStack.hurtAndBreak(2, livingEntity, e -> e.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+        return this.eat(livingEntity, level, itemStack);
     }
 
     private ItemStack eat(LivingEntity livingEntity, Level level, ItemStack itemStack) {
@@ -42,20 +41,9 @@ public class PreservedFleshItem extends Item {
         }
         if (itemStack.isEdible()) {
             level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), livingEntity.getEatingSound(itemStack), SoundSource.NEUTRAL, 1.0f, 1.0f + (level.random.nextFloat() - level.random.nextFloat()) * 0.4f);
-            addEatEffect(itemStack, level, livingEntity);
             livingEntity.gameEvent(GameEvent.EAT);
         }
         return itemStack;
     }
 
-    private void addEatEffect(ItemStack itemStack, Level level, LivingEntity livingEntity) {
-        Item item = itemStack.getItem();
-        if (item.isEdible()) {
-            List<Pair<MobEffectInstance, Float>> list = item.getFoodProperties().getEffects();
-            for (Pair<MobEffectInstance, Float> pair : list) {
-                if (level.isClientSide || pair.getFirst() == null || !(level.random.nextFloat() < pair.getSecond().floatValue())) continue;
-                livingEntity.addEffect(new MobEffectInstance(pair.getFirst()));
-            }
-        }
-    }
 }

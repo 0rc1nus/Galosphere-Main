@@ -91,11 +91,9 @@ public class SaltboundTabletItem extends Item {
             break;
         } while ((pos = pos.below()).getY() >= Mth.floor(f) - 7);
         if (bl) {
-            int ticks = 22 * ((EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.SUSTAIN, stack) / 2) + 1);
-            boolean slowness = EnchantmentHelper.getItemEnchantmentLevel(GEnchantments.LANGUISH, stack) > 0;
             float damage = 12;
             int warmupDelayTicks = index;
-            level.addFreshEntity(new PinkSaltPillar(level, d, (double)pos.getY() + j, e, h, warmupDelayTicks, ticks, damage / (index + 1), slowness, player));
+            level.addFreshEntity(new PinkSaltPillar(level, d, (double)pos.getY() + j, e, h, warmupDelayTicks, damage / (index + 1), player, stack));
         }
     }
 }

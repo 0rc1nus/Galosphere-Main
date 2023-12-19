@@ -68,7 +68,7 @@ public class GItems {
 
     public static final Item SALTBOUND_TABLET = register("saltbound_tablet", new SaltboundTabletItem(new Item.Properties().stacksTo(1).durability(64)));
     public static final Item PRESERVED_TEMPLATE = register("preserved_template", new PreservedSmithingTemplateItem());
-    public static final Item PRESERVED_FLESH = register("preserved_flesh", new PreservedFleshItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.1f).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.8f).meat().build())));
+    public static final Item PRESERVED_FLESH = register("preserved_flesh", new PreservedFleshItem(new Item.Properties().stacksTo(1).durability(180).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.1f).meat().build())));
 
     public static Item registerBaseItem(String name) {
         return register(name, new Item(new Item.Properties()));
