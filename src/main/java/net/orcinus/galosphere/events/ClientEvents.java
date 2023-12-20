@@ -14,6 +14,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.CrossbowItem;
@@ -55,6 +56,7 @@ import net.orcinus.galosphere.client.particles.providers.SilverBombProvider;
 import net.orcinus.galosphere.client.particles.providers.WarpedProvider;
 import net.orcinus.galosphere.client.renderer.BerserkerRenderer;
 import net.orcinus.galosphere.client.renderer.PinkSaltPillarRenderer;
+import net.orcinus.galosphere.client.renderer.PinkSaltShardRenderer;
 import net.orcinus.galosphere.client.renderer.PreservedRenderer;
 import net.orcinus.galosphere.client.renderer.SparkleRenderer;
 import net.orcinus.galosphere.client.renderer.SpectatorVisionRenderer;
@@ -72,6 +74,7 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GModelLayers;
 import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.items.SaltboundTabletItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -146,6 +149,8 @@ public class ClientEvents {
                 }
 
             });
+            ItemProperties.register(GItems.SALTBOUND_TABLET.get(), Galosphere.id("using"), (stack, world, entity, i) -> entity != null && entity.getUseItem().getItem() instanceof SaltboundTabletItem ? 1 : 0);
+            ItemProperties.register(GItems.SALTBOUND_TABLET.get(), Galosphere.id("cooldown"), (stack, world, entity, i) -> entity instanceof Player player && player.getCooldowns().isOnCooldown(GItems.SALTBOUND_TABLET.get()) ? 1 : 0);
         });
 
     }
@@ -280,6 +285,7 @@ public class ClientEvents {
         event.registerEntityRenderer(GEntityTypes.BERSERKER.get(), BerserkerRenderer::new);
         event.registerEntityRenderer(GEntityTypes.PRESERVED.get(), PreservedRenderer::new);
         event.registerEntityRenderer(GEntityTypes.PINK_SALT_PILLAR.get(), PinkSaltPillarRenderer::new);
+        event.registerEntityRenderer(GEntityTypes.PINK_SALT_SHARD.get(), PinkSaltShardRenderer::new);
         event.registerBlockEntityRenderer(GBlockEntityTypes.SHADOW_FRAME.get(), ShadowFrameBlockRenderer::new);
         event.registerBlockEntityRenderer(GBlockEntityTypes.GILDED_BEADS.get(), GildedBeadsRenderer::new);
     }

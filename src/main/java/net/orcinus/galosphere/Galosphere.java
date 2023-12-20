@@ -1,5 +1,6 @@
 package net.orcinus.galosphere;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -14,6 +15,7 @@ import net.orcinus.galosphere.init.GAttributes;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GCreativeModeTabs;
+import net.orcinus.galosphere.init.GEnchantments;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GFeatures;
 import net.orcinus.galosphere.init.GItems;
@@ -51,6 +53,7 @@ public class Galosphere {
         GBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         GCreativeModeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         GEntityTypes.ENTITY_TYPES.register(modEventBus);
+        GEnchantments.ENCHANTMENTS.register(modEventBus);
         GFeatures.FEATURES.register(modEventBus);
         GItems.ITEMS.register(modEventBus);
         GMobEffects.MOB_EFFECTS.register(modEventBus);
@@ -76,6 +79,10 @@ public class Galosphere {
             GVanillaIntegration.init();
             GPotions.init();
         });
+    }
+
+    public static ResourceLocation id(String path) {
+        return new ResourceLocation(Galosphere.MODID, path);
     }
 
 }

@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.entities.PinkSaltPillar;
+import net.orcinus.galosphere.entities.PinkSaltShard;
 import net.orcinus.galosphere.entities.Preserved;
 import net.orcinus.galosphere.entities.SpectatorVision;
 import net.orcinus.galosphere.entities.Specterpillar;
@@ -34,5 +35,6 @@ public class GEntityTypes {
     public static final RegistryObject<EntityType<Berserker>> BERSERKER = ENTITY_TYPES.register("berserker", () -> EntityType.Builder.of(Berserker::new, MobCategory.MONSTER).sized(1.4F, 2.2F).clientTrackingRange(16).fireImmune().build(new ResourceLocation(Galosphere.MODID, "berserker").toString()));
     public static final RegistryObject<EntityType<Preserved>> PRESERVED = ENTITY_TYPES.register("preserved", () -> EntityType.Builder.of(Preserved::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build(new ResourceLocation(Galosphere.MODID, "preserved").toString()));
     public static final RegistryObject<EntityType<PinkSaltPillar>> PINK_SALT_PILLAR = ENTITY_TYPES.register("pink_salt_pillar", () -> EntityType.Builder.<PinkSaltPillar>of(PinkSaltPillar::new, MobCategory.MISC).sized(0.7F, 1.5F).clientTrackingRange(16).fireImmune().build(new ResourceLocation(Galosphere.MODID, "pink_salt_pillar").toString()));
+    public static final RegistryObject<EntityType<PinkSaltShard>> PINK_SALT_SHARD = ENTITY_TYPES.register("pink_salt_shard", () -> EntityType.Builder.<PinkSaltShard>of(PinkSaltShard::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(Galosphere.MODID, "pink_salt_shard").toString()));
 
 }

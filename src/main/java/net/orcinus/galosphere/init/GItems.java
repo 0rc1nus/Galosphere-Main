@@ -22,6 +22,7 @@ import net.orcinus.galosphere.items.IconItem;
 import net.orcinus.galosphere.items.LichenCordycepsItem;
 import net.orcinus.galosphere.items.PreservedFleshItem;
 import net.orcinus.galosphere.items.PreservedSmithingTemplateItem;
+import net.orcinus.galosphere.items.SaltboundTabletItem;
 import net.orcinus.galosphere.items.SilverBombItem;
 import net.orcinus.galosphere.items.SilverSmithingTemplateItem;
 import net.orcinus.galosphere.items.SpectreBottleItem;
@@ -66,8 +67,9 @@ public class GItems {
     public static final RegistryObject<Item> CHANDELIER = ITEMS.register("chandelier", () -> new ChandelierItem(GBlocks.CHANDELIER.get(), new Item.Properties()));
     public static final RegistryObject<Item> SUCCULENT_PETALS = ITEMS.register("succulent_petals", () -> new ItemNameBlockItem(GBlocks.SUCCULENT_CROP.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> SALTBOUND_TABLET = ITEMS.register("saltbound_tablet", () -> new SaltboundTabletItem(new Item.Properties().stacksTo(1).durability(432)));
     public static final RegistryObject<Item> PRESERVED_TEMPLATE = ITEMS.register("preserved_template", PreservedSmithingTemplateItem::new);
-    public static final RegistryObject<Item> PRESERVED_FLESH = ITEMS.register("preserved_flesh", () -> new PreservedFleshItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.1f).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.8f).meat().build())));
+    public static final RegistryObject<Item> PRESERVED_FLESH = ITEMS.register("preserved_flesh", () -> new PreservedFleshItem(new Item.Properties().stacksTo(1).durability(180).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.1f).meat().build())));
 
     public static RegistryObject<Item> registerBaseItem(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties()));

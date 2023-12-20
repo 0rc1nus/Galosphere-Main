@@ -27,7 +27,7 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 5.0,
+                "max": 8.0,
                 "min": 2.0
               },
               "function": "minecraft:set_count"
@@ -78,6 +78,22 @@
             }
           ],
           "name": "minecraft:golden_apple"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantments": [
+                "galosphere:sustain",
+                "galosphere:enfeeble",
+                "galosphere:rupture",
+                "minecraft:unbreaking"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 15
         }
       ],
       "rolls": {

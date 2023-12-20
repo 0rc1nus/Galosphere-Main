@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.init.GBiomes;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GEnchantments;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMobEffects;
@@ -37,6 +38,9 @@ public class GLanguageProvider extends LanguageProvider {
         });
         GMobEffects.MOB_EFFECTS.getEntries().stream().map(RegistryObject::get).forEach(mobEffect -> {
             this.add(mobEffect, reformat(ForgeRegistries.MOB_EFFECTS.getKey(mobEffect).getPath()));
+        });
+        GEnchantments.ENCHANTMENTS.getEntries().stream().map(RegistryObject::get).forEach(enchantment -> {
+            this.add(enchantment, reformat(ForgeRegistries.ENCHANTMENTS.getKey(enchantment).getPath()));
         });
         this.add("item.galosphere.preserved", "Preserved");
         this.add("item.galosphere.silver_bomb.duration", "Duration");

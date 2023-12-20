@@ -101,7 +101,7 @@ public class GItemModelProvider extends ItemModelProvider {
         blockItem(GBlocks.SILVER_BALANCE.get());
         item("pink_salt_cluster");
         itemWithBlockDirectory("pink_salt_straw", "pink_salt_straw_up_top");
-        withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", new ResourceLocation(Galosphere.MODID, "block/monstrometer_top")).texture("bottom", new ResourceLocation(Galosphere.MODID, "block/monstrometer_bottom")).texture("side", new ResourceLocation(Galosphere.MODID, "block/monstrometer_side"));
+        withExistingParent("monstrometer", new ResourceLocation("block/cube_bottom_top")).texture("top", Galosphere.id("block/monstrometer_top")).texture("bottom", Galosphere.id("block/monstrometer_bottom")).texture("side", Galosphere.id("block/monstrometer_side"));
         item("silver_ingot");
         item("allurite_shard");
         item("lumiere_shard");
@@ -142,7 +142,21 @@ public class GItemModelProvider extends ItemModelProvider {
         spawnEggItem("berserker");
         spawnEggItem("preserved");
 
-        withExistingParent("crossbow_glow_flare", new ResourceLocation("item/crossbow")).texture("layer0", new ResourceLocation(Galosphere.MODID, "item/crossbow_glow_flare"));
+        item("saltbound_tablet_cooldown");
+        item("saltbound_tablet_using");
+
+        withExistingParent("saltbound_tablet", new ResourceLocation("item/generated"))
+                .texture("layer0", Galosphere.id("item/saltbound_tablet"))
+                .override()
+                .predicate(Galosphere.id("using"), 1)
+                .model(getExistingFile(Galosphere.id("item/saltbound_tablet_using")))
+                .end()
+                .override()
+                .predicate(Galosphere.id("cooldown"), 1)
+                .model(getExistingFile(Galosphere.id("item/saltbound_tablet_cooldown")))
+                .end();
+
+        withExistingParent("crossbow_glow_flare", new ResourceLocation("item/crossbow")).texture("layer0", Galosphere.id("item/crossbow_glow_flare"));
     }
 
     private void spawnEggItem(String entityName) {
@@ -162,10 +176,10 @@ public class GItemModelProvider extends ItemModelProvider {
     }
 
     private void itemWithBlockDirectory(String parent, String direct) {
-        withExistingParent(parent, new ResourceLocation("item/generated")).texture("layer0", new ResourceLocation(Galosphere.MODID, "block/" + direct));
+        withExistingParent(parent, new ResourceLocation("item/generated")).texture("layer0", Galosphere.id("block/" + direct));
     }
 
     private void item(String parent) {
-        withExistingParent(parent, new ResourceLocation("item/generated")).texture("layer0", new ResourceLocation(Galosphere.MODID, "item/" + parent));
+        withExistingParent(parent, new ResourceLocation("item/generated")).texture("layer0", Galosphere.id("item/" + parent));
     }
 }

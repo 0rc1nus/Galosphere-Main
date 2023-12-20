@@ -35,6 +35,22 @@
           ],
           "name": "minecraft:paper",
           "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantments": [
+                "galosphere:sustain",
+                "galosphere:enfeeble",
+                "galosphere:rupture",
+                "minecraft:unbreaking"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 25
         }
       ],
       "rolls": {

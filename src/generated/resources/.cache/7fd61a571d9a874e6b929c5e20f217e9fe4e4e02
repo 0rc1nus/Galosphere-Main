@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-12T22:08:33.9030519	Item Models: galosphere
+// 1.20.1	2023-12-20T18:38:33.1219793	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -85,6 +85,9 @@ a009747e40799f32c423548aec52fd25c1e4cd13 assets/galosphere/models/item/rose_pink
 57e5e61d96b3a9df51be006cb37364393667764d assets/galosphere/models/item/rose_pink_salt_brick_stairs.json
 0ab13adf5910a03b6f84eeba625d161d87e9aa7c assets/galosphere/models/item/rose_pink_salt_slab.json
 a19f84feb8fd0d03a7088e1f55b5e430766ade23 assets/galosphere/models/item/rose_pink_salt_stairs.json
+d843b1ffc2e122f79acdb17a711f7f724b59c268 assets/galosphere/models/item/saltbound_tablet.json
+2599e35bfdfe2ecbbd8bbc0ef19646c805904d2a assets/galosphere/models/item/saltbound_tablet_cooldown.json
+b1859c77d412778a98b55fe86864037d33f4a3db assets/galosphere/models/item/saltbound_tablet_using.json
 ed1fd6dfe15ff01251d25a5839dbc85fb8980e39 assets/galosphere/models/item/salted_jerky.json
 ed915e75093ef38c69886048aeeae279644ad153 assets/galosphere/models/item/shadow_frame.json
 cc4863b908fe454cc6f2297f92ba7b354cf7bd9c assets/galosphere/models/item/silver_balance.json
