@@ -179,7 +179,7 @@ public class Berserker extends Monster {
         double threshold = range - 0.6D;
         double increment = 0.2D;
         if (!this.level().isClientSide) {
-            int count = this.level().getDifficulty() == Difficulty.HARD ? 125 : 250;
+            int count = 600;
             boolean stationary = this.isStationary();
             boolean shedding = this.isShedding();
             if (this.getHealth() < this.getMaxHealth() && this.tickCount % count == 0) {
