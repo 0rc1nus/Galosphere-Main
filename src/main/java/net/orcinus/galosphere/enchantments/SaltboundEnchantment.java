@@ -7,7 +7,7 @@ import net.orcinus.galosphere.init.GEnchantments;
 public class SaltboundEnchantment extends Enchantment {
 
     public SaltboundEnchantment() {
-        super(Rarity.VERY_RARE, GEnchantments.SALTBOUND_TABLET, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.VERY_RARE, GEnchantments.SALTBOUND_TABLET, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
