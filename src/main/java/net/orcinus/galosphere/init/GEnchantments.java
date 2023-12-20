@@ -1,10 +1,12 @@
 package net.orcinus.galosphere.init;
 
+import com.chocohead.mm.api.ClassTinkerers;
 import com.google.common.collect.Maps;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.orcinus.galosphere.Galosphere;
 import net.orcinus.galosphere.enchantments.LeveledSaltboundEnchantment;
 import net.orcinus.galosphere.enchantments.SaltboundEnchantment;
@@ -14,6 +16,8 @@ import java.util.Map;
 public class GEnchantments {
 
     public static final Map<ResourceLocation, Enchantment> ENCHANTMENTS = Maps.newLinkedHashMap();
+
+    public static final EnchantmentCategory SALTBOUND_TABLET = ClassTinkerers.getEnum(EnchantmentCategory.class, "GALOSPHERE_SALTBOUND_TABLET");
 
     public static final Enchantment ENFEEBLE = register("enfeeble", new SaltboundEnchantment());
     public static final Enchantment SUSTAIN = register("sustain", new LeveledSaltboundEnchantment());

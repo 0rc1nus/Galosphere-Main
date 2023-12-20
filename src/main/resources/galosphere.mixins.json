@@ -9,6 +9,7 @@
     "ChorusFruitItemMixin",
     "ComposterBlockMixin",
     "CrossbowItemMixin",
+    "EnchantmentCategoryMixin",
     "EntityMixin",
     "InventoryMixin",
     "ItemMixin",

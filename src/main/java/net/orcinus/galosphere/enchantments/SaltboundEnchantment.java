@@ -3,11 +3,12 @@ package net.orcinus.galosphere.enchantments;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.orcinus.galosphere.init.GEnchantments;
 
 public class SaltboundEnchantment extends Enchantment {
 
     public SaltboundEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentCategory.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.VERY_RARE, GEnchantments.SALTBOUND_TABLET, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
