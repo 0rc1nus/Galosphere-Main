@@ -1884,17 +1884,17 @@
 			{
 				"name": "galosphere:item/saltbound_tablet/prepare_attack1",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.5
 			},
 			{
 				"name": "galosphere:item/saltbound_tablet/prepare_attack2",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.5
 			},
 			{
 				"name": "galosphere:item/saltbound_tablet/prepare_attack3",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.5
 			}
 		],
 		"subtitle": "subtitles.item.saltbound_tablet.prepare_attack"
