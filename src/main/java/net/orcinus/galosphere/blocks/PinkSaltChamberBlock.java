@@ -2,6 +2,9 @@ package net.orcinus.galosphere.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -49,6 +52,14 @@ public class PinkSaltChamberBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new PinkSaltChamberBlockEntity(blockPos, blockState);
+    }
+
+    @Override
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
+        super.setPlacedBy(world, pos, state, entity, stack);
+        if (entity instanceof Player player && player.getAbilities().instabuild && world.getBlockEntity(pos) instanceof PinkSaltChamberBlockEntity pinkSaltChamberBlockEntity) {
+            pinkSaltChamberBlockEntity.setCooldown(pinkSaltChamberBlockEntity.maxCooldown);
+        }
     }
 
     @Nullable

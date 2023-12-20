@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class PinkSaltChamberBlockEntity extends BlockEntity {
-    private final int maxCooldown = 6000;
+    public final int maxCooldown = 6000;
     private int cooldown = 0;
 
     public PinkSaltChamberBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -46,6 +46,10 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
         compoundTag.putInt("Cooldown", this.cooldown);
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, PinkSaltChamberBlockEntity blockEntity) {
