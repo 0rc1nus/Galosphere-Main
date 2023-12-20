@@ -11,14 +11,31 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 3.0,
+                "max": 2.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
           "name": "galosphere:pink_salt_chamber",
-          "weight": 10
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:name_tag",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:leather",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -34,7 +51,7 @@
             }
           ],
           "name": "minecraft:phantom_membrane",
-          "weight": 30
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -50,7 +67,7 @@
             }
           ],
           "name": "minecraft:rotten_flesh",
-          "weight": 25
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -66,7 +83,7 @@
             }
           ],
           "name": "galosphere:succulent_petals",
-          "weight": 15
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -93,13 +110,13 @@
             }
           ],
           "name": "minecraft:book",
-          "weight": 15
+          "weight": 3
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 7.0,
-        "min": 3.0
+        "max": 10.0,
+        "min": 5.0
       }
     }
   ],

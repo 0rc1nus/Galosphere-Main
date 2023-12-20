@@ -26,27 +26,33 @@ public class MainRoomProcessor extends StructureProcessor {
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader, BlockPos blockPos, BlockPos blockPos2, StructureTemplate.StructureBlockInfo structureBlockInfo, StructureTemplate.StructureBlockInfo structureBlockInfo2, StructurePlaceSettings structurePlaceSettings) {
         BlockState state = structureBlockInfo2.state();
-        RandomSource randomSource = structurePlaceSettings.getRandom(structureBlockInfo2.pos());
+        BlockPos position = structureBlockInfo2.pos();
+        RandomSource randomSource = structurePlaceSettings.getRandom(position);
         if (state.getBlock() instanceof CandleBlock) {
-            return new StructureTemplate.StructureBlockInfo(structureBlockInfo2.pos(), state.setValue(CandleBlock.CANDLES, Mth.nextInt(randomSource, 1, 4)), structureBlockInfo2.nbt());
+            return new StructureTemplate.StructureBlockInfo(position, state.setValue(CandleBlock.CANDLES, Mth.nextInt(randomSource, 1, 4)), structureBlockInfo2.nbt());
         }
         if (state.is(GBlocks.PINK_SALT_STRAW.get())) {
+            System.out.println(position.toShortString());
+            BlockPos.MutableBlockPos mutableBlockPos = position.mutable();
             Direction direction = state.getValue(PinkSaltStrawBlock.TIP_DIRECTION);
             int height = UniformInt.of(2, 4).sample(randomSource);
             for (int i = 0; i <= height; i++) {
-                BlockPos pos = structureBlockInfo2.pos().relative(direction, i);
-                if (!(levelReader.getBlockState(pos).is(GBlocks.PINK_SALT_STRAW.get()) || levelReader.getBlockState(pos).isAir())) {
-                    levelReader.getChunk(pos).setBlockState(pos, GBlocks.PINK_SALT_STRAW.get().defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, PinkSaltStrawBlock.StrawShape.TOP), false);
-                    break;
+                if (levelReader.isEmptyBlock(mutableBlockPos) || levelReader.getBlockState(mutableBlockPos).is(GBlocks.PINK_SALT_STRAW.get())) {
+                    boolean emptyBlock = levelReader.isEmptyBlock(mutableBlockPos.relative(direction)) || levelReader.getBlockState(mutableBlockPos.relative(direction)).is(GBlocks.PINK_SALT_STRAW.get());
+                    if (i == height || !emptyBlock) {
+                        levelReader.getChunk(mutableBlockPos).setBlockState(mutableBlockPos, GBlocks.PINK_SALT_STRAW.get().defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, PinkSaltStrawBlock.StrawShape.TOP), false);
+                        break;
+                    }
+                    PinkSaltStrawBlock.StrawShape strawShape = i == 0 ? PinkSaltStrawBlock.StrawShape.BOTTOM : PinkSaltStrawBlock.StrawShape.MIDDLE;
+                    levelReader.getChunk(mutableBlockPos).setBlockState(mutableBlockPos, GBlocks.PINK_SALT_STRAW.get().defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, strawShape), false);
                 }
-                PinkSaltStrawBlock.StrawShape strawShape = i == 0 ? PinkSaltStrawBlock.StrawShape.BOTTOM : (i == height ? PinkSaltStrawBlock.StrawShape.TOP : PinkSaltStrawBlock.StrawShape.MIDDLE);
-                levelReader.getChunk(pos).setBlockState(pos, GBlocks.PINK_SALT_STRAW.get().defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, strawShape), false);
+                mutableBlockPos.move(direction);
             }
         }
         if (state.is(Blocks.CHAIN)) {
             int height = UniformInt.of(1, 3).sample(randomSource);
             for (int i = 1; i <= height; i++) {
-                BlockPos pos = structureBlockInfo2.pos().below(i);
+                BlockPos pos = position.below(i);
                 if (!levelReader.getBlockState(pos).isAir()) {
                     break;
                 }
