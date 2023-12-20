@@ -84,8 +84,8 @@
           "functions": [
             {
               "enchantments": [
-                "galosphere:sustain",
                 "minecraft:unbreaking",
+                "galosphere:sustain",
                 "galosphere:rupture",
                 "galosphere:enfeeble"
               ],
@@ -93,7 +93,7 @@
             }
           ],
           "name": "minecraft:book",
-          "weight": 3
+          "weight": 15
         }
       ],
       "rolls": {

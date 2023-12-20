@@ -46,7 +46,7 @@ public class GChestLootTableProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                                 .setWeight(1))
                         .add(LootItem.lootTableItem(Items.BOOK)
-                                .setWeight(3)
+                                .setWeight(15)
                                 .apply(new EnchantRandomlyFunction.Builder().withEnchantment(GEnchantments.SUSTAIN).withEnchantment(GEnchantments.ENFEEBLE).withEnchantment(GEnchantments.RUPTURE).withEnchantment(Enchantments.UNBREAKING)))
                 )
         );

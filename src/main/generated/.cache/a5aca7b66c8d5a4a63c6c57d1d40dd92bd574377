@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-19T09:13:03.0147859	Galosphere/Tags for minecraft:block
+// 1.20.1	2023-12-20T17:57:31.282172	Galosphere/Tags for minecraft:block
 7c8681b31d8fa5c9fd65c944db80c8142a7bad57 data\minecraft\tags\blocks\walls.json
 f9dd4175c19ab7775a324051f554d38d08996f55 data\minecraft\tags\blocks\stairs.json
 10598a85b0b258672549eb1cff4a26bad17a80b6 data\minecraft\tags\blocks\beacon_base_blocks.json
@@ -13,9 +13,9 @@ b9023cd1a4b4eeb616dcc588d68c1fab2eaaccc7 data\minecraft\tags\blocks\slabs.json
 7b9dc97a4749b5cb740151d60305823eba7212de data\minecraft\tags\blocks\mineable\pickaxe.json
 988a8966f8786981bbba969d356ff6867214430f data\minecraft\tags\blocks\dirt.json
 e8c2cfb63ceff1682b3a734f52f42c358e2babd6 data\galosphere\tags\blocks\omit_astral.json
+dfa5aa869383be99c94ca44e9611055116a211dc data\minecraft\tags\blocks\replaceable.json
 988a8966f8786981bbba969d356ff6867214430f data\minecraft\tags\blocks\mineable\hoe.json
 1414850141fbf7b4d097b5203c969e17007c9a26 data\minecraft\tags\blocks\mineable\axe.json
-dfa5aa869383be99c94ca44e9611055116a211dc data\minecraft\tags\blocks\replaceable.json
 eaf289bb79dfe85ade7fa5030fd555b1e0bd61f9 data\galosphere\tags\blocks\crystal_spikes_blocks.json
 c69a29b6326d29d20be8824450e8b6272955637a data\galosphere\tags\blocks\sparkles_spawn_on.json
 2140935cd3efac833ba3e008eea479779bdca748 data\galosphere\tags\blocks\obfuscates_sound_waves.json

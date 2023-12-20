@@ -1,21 +1,18 @@
 package net.orcinus.galosphere.items;
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-
-import java.util.List;
 
 public class PreservedFleshItem extends Item {
 
@@ -27,6 +24,11 @@ public class PreservedFleshItem extends Item {
     public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
         itemStack.hurtAndBreak(2, livingEntity, e -> e.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return this.eat(livingEntity, level, itemStack);
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack itemStack, ItemStack itemStack2) {
+        return itemStack2.is(Items.ROTTEN_FLESH);
     }
 
     private ItemStack eat(LivingEntity livingEntity, Level level, ItemStack itemStack) {

@@ -3,6 +3,8 @@ package net.orcinus.galosphere.entities;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,6 +41,11 @@ public class PinkSaltShard extends AbstractArrow {
         if (!flag) {
             super.onHitEntity(entityHitResult);
         }
+    }
+
+    @Override
+    protected SoundEvent getDefaultHitGroundSoundEvent() {
+        return SoundEvents.GLASS_BREAK;
     }
 
     @Override
