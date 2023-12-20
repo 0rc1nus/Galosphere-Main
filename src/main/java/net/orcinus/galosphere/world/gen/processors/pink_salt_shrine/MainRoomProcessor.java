@@ -9,6 +9,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CandleBlock;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
@@ -32,18 +33,21 @@ public class MainRoomProcessor extends StructureProcessor {
             return new StructureTemplate.StructureBlockInfo(position, state.setValue(CandleBlock.CANDLES, Mth.nextInt(randomSource, 1, 4)), structureBlockInfo2.nbt());
         }
         if (state.is(GBlocks.PINK_SALT_STRAW)) {
+            System.out.println(position.toShortString());
+            BlockPos.MutableBlockPos mutableBlockPos = position.mutable();
             Direction direction = state.getValue(PinkSaltStrawBlock.TIP_DIRECTION);
             int height = UniformInt.of(2, 4).sample(randomSource);
             for (int i = 0; i <= height; i++) {
-                if (levelReader.getChunk(position).getBlockState(position).is(GBlocks.PINK_SALT_STRAW)) {
-                    BlockPos pos = position.relative(direction, i);
-                    if (!(levelReader.getBlockState(pos).is(GBlocks.PINK_SALT_STRAW) || levelReader.getBlockState(pos).isAir())) {
-                        levelReader.getChunk(position).setBlockState(position, GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, PinkSaltStrawBlock.StrawShape.TOP), false);
+                if (levelReader.isEmptyBlock(mutableBlockPos) || levelReader.getBlockState(mutableBlockPos).is(GBlocks.PINK_SALT_STRAW)) {
+                    boolean emptyBlock = levelReader.isEmptyBlock(mutableBlockPos.relative(direction)) || levelReader.getBlockState(mutableBlockPos.relative(direction)).is(GBlocks.PINK_SALT_STRAW);
+                    if (i == height || !emptyBlock) {
+                        levelReader.getChunk(mutableBlockPos).setBlockState(mutableBlockPos, GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, PinkSaltStrawBlock.StrawShape.TOP), false);
                         break;
                     }
-                    PinkSaltStrawBlock.StrawShape strawShape = i == 0 ? PinkSaltStrawBlock.StrawShape.BOTTOM : (i == height ? PinkSaltStrawBlock.StrawShape.TOP : PinkSaltStrawBlock.StrawShape.MIDDLE);
-                    levelReader.getChunk(pos).setBlockState(pos, GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, strawShape), false);
+                    PinkSaltStrawBlock.StrawShape strawShape = i == 0 ? PinkSaltStrawBlock.StrawShape.BOTTOM : PinkSaltStrawBlock.StrawShape.MIDDLE;
+                    levelReader.getChunk(mutableBlockPos).setBlockState(mutableBlockPos, GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction).setValue(PinkSaltStrawBlock.STRAW_SHAPE, strawShape), false);
                 }
+                mutableBlockPos.move(direction);
             }
         }
         if (state.is(Blocks.CHAIN)) {

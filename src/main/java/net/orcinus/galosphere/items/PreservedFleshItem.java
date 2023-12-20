@@ -22,7 +22,7 @@ public class PreservedFleshItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
-        itemStack.hurtAndBreak(2, livingEntity, e -> e.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+        itemStack.hurtAndBreak(1, livingEntity, e -> e.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return this.eat(livingEntity, level, itemStack);
     }
 

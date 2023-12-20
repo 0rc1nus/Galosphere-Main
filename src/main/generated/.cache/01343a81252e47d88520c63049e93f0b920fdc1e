@@ -1,2 +1,3 @@
-// 1.20.1	2023-12-20T17:57:31.2701092	Galosphere/minecraft:chest Loot Table
-c19f8b37898b75d3b02a5f2689c141eee6821142 data\galosphere\loot_tables\chests\pink_salt_shrine.json
+// 1.20.1	2023-12-20T22:14:40.8210296	Galosphere/minecraft:chest Loot Table
+5a223b3c007cbc0d8017fb8c78fdac7188c8b57e data\galosphere\loot_tables\chests\pink_salt_shrine.json
+9225731d530bdf1bdc5291681231ad15196b70e2 data\galosphere\loot_tables\chests\pink_salt_shrine_library.json
