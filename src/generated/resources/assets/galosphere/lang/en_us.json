@@ -215,6 +215,7 @@
   "subtitles.entity.berserker.idle": "Berserker grunts",
   "subtitles.entity.berserker.punch": "Berserker hits",
   "subtitles.entity.berserker.roar": "Berserker roars",
+  "subtitles.entity.berserker.shake": "Berserker shakes",
   "subtitles.entity.berserker.smash": "Berserker smashes",
   "subtitles.entity.berserker.step": "Berserker steps",
   "subtitles.entity.berserker.summoning": "Berserker summons",
@@ -230,6 +231,9 @@
   "subtitles.entity.spectre.hurt": "Spectre hurts",
   "subtitles.entity.spectre.lock_to_spyglass": "Spyglass locks to Spectre",
   "subtitles.entity.spectre.receive_item": "Spectre receives Item",
+  "subtitles.item.saltbound_tablet.cast_attack": "Saltbound Tablet fires",
+  "subtitles.item.saltbound_tablet.cooldown_over": "Saltbound Tablet recharged",
+  "subtitles.item.saltbound_tablet.prepare_attack": "Saltbound Tablet charges up",
   "upgrade.galosphere.preserved_upgrade": "Preserved Upgrade",
   "upgrade.galosphere.silver_upgrade": "Silver Upgrade"
 }

@@ -21,7 +21,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -29,10 +34,13 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.orcinus.galosphere.entities.ai.PreservedAi;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Predicate;
 
 public class Preserved extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Preserved>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.PRESERVED_ENTITY_SENSOR.get());
@@ -188,16 +196,22 @@ public class Preserved extends Monster {
     }
 
     public boolean canTargetEntity(@Nullable Entity entity) {
-        if (!(entity instanceof LivingEntity livingEntity)) return false;
-        if (this.level() != entity.level()) return false;
-        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)) return false;
-        if (this.isAlliedTo(entity)) return false;
-        if (livingEntity.getType() == EntityType.ARMOR_STAND) return false;
-        if (livingEntity.getType() == GEntityTypes.BERSERKER.get()) return false;
-        if (livingEntity.getType() == GEntityTypes.PRESERVED.get()) return false;
-        if (livingEntity.isInvulnerable()) return false;
-        if (livingEntity.isDeadOrDying()) return false;
-        return this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox());
+        if (!(entity instanceof LivingEntity livingEntity)) {
+            return false;
+        }
+        Predicate<LivingEntity> predicate = e -> e.getType().is(GEntityTypeTags.PRESERVED_INVALID_TARGETS);
+        DamageSource lastSource = this.getLastDamageSource();
+        Entity e;
+        if (lastSource != null && (e = lastSource.getEntity()) instanceof LivingEntity living && e == livingEntity && !predicate.test(living)) {
+            return true;
+        }
+        if (livingEntity.isInvulnerable() || livingEntity.isDeadOrDying() || predicate.test(livingEntity)) {
+            return false;
+        }
+        if (this.level() != entity.level() || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) || this.isAlliedTo(entity) || !this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox())) {
+            return false;
+        }
+        return livingEntity instanceof Player || livingEntity instanceof AbstractVillager || livingEntity instanceof IronGolem || livingEntity instanceof Turtle;
     }
 
     public static AttributeSupplier.Builder createAttributes() {

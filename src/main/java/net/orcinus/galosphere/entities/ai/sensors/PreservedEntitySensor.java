@@ -23,14 +23,11 @@ public class PreservedEntitySensor extends NearestLivingEntitySensor<Preserved> 
     }
 
     @Override
-    protected void doTick(ServerLevel serverLevel, Preserved elemental) {
-        super.doTick(serverLevel, elemental);
-        getClosest(elemental, livingEntity -> livingEntity.getType() == EntityType.PLAYER)
-                .or(() -> getClosest(elemental, livingEntity -> {
-                    Optional<LivingEntity> memory = elemental.getBrain().getMemory(MemoryModuleType.HURT_BY_ENTITY);
-                    return memory.filter(entity -> entity == livingEntity).isPresent();
-                }))
-                .ifPresentOrElse(livingEntity -> elemental.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, livingEntity), () -> elemental.getBrain().eraseMemory(MemoryModuleType.NEAREST_ATTACKABLE));
+    protected void doTick(ServerLevel serverLevel, Preserved preserved) {
+        super.doTick(serverLevel, preserved);
+        getClosest(preserved, livingEntity -> livingEntity.getType() == EntityType.PLAYER)
+                .or(() -> getClosest(preserved, livingEntity -> livingEntity.getType() != EntityType.PLAYER))
+                .ifPresentOrElse(livingEntity -> preserved.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, livingEntity), () -> preserved.getBrain().eraseMemory(MemoryModuleType.NEAREST_ATTACKABLE));
     }
 
     private static Optional<LivingEntity> getClosest(Preserved preserved, Predicate<LivingEntity> predicate) {

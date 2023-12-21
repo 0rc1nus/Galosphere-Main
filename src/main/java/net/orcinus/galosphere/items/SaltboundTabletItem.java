@@ -30,7 +30,7 @@ public class SaltboundTabletItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        player.playSound(GSoundEvents.TABLET_PREPARE_ATTACK.get(), 1, 1);
+        player.playSound(GSoundEvents.SALTBOUND_TABLET_PREPARE_ATTACK.get(), 1, 1);
         player.awardStat(Stats.ITEM_USED.get(this));
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
@@ -44,7 +44,7 @@ public class SaltboundTabletItem extends Item {
         if (user instanceof Player player) {
             InteractionHand hand = player.getUsedItemHand();
             player.swing(hand);
-            player.playSound(GSoundEvents.TABLET_CAST_ATTACK.get(), 1, 1);
+            player.playSound(GSoundEvents.SALTBOUND_TABLET_CAST_ATTACK.get(), 1, 1);
             Vec3 lookAngle = player.getLookAngle();
             Vec3 adjustedAngle = lookAngle.add(player.getX(), player.getY(), player.getZ());
             double d = Math.min(adjustedAngle.y(), player.getY());

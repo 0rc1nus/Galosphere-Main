@@ -1391,21 +1391,6 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
-	"entity.berserker.shake": {
-		"sounds": [
-			{
-				"name": "galosphere:entity/berserker/shake1",
-				"pitch": 1,
-				"volume": 1
-			},
-			{
-				"name": "galosphere:entity/berserker/shake2",
-				"pitch": 1,
-				"volume": 1
-			}
-		],
-		"subtitle": "subtitles.entity.berserker.shake"
-	},
 	"entity.berserker.death": {
 		"sounds": [
 			{
@@ -1525,6 +1510,21 @@
 			}
 		],
 		"subtitle": "subtitles.entity.berserker.roar"
+	},
+	"entity.berserker.shake": {
+		"sounds": [
+			{
+				"name": "galosphere:entity/berserker/shake1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:entity/berserker/shake2",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.entity.berserker.shake"
 	},
 	"entity.berserker.smash": {
 		"sounds": [
@@ -1838,6 +1838,66 @@
 			}
 		],
 		"subtitle": "subtitles.entity.spectre.receive_item"
+	},
+	"item.saltbound_tablet.cast_attack": {
+		"sounds": [
+			{
+				"name": "galosphere:item/saltbound_tablet/cast_attack1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:item/saltbound_tablet/cast_attack2",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:item/saltbound_tablet/cast_attack3",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.item.saltbound_tablet.cast_attack"
+	},
+	"item.saltbound_tablet.cooldown_over": {
+		"sounds": [
+			{
+				"name": "galosphere:item/saltbound_tablet/cooldown_over1",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:item/saltbound_tablet/cooldown_over2",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name": "galosphere:item/saltbound_tablet/cooldown_over3",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.item.saltbound_tablet.cooldown_over"
+	},
+	"item.saltbound_tablet.prepare_attack": {
+		"sounds": [
+			{
+				"name": "galosphere:item/saltbound_tablet/prepare_attack1",
+				"pitch": 1,
+				"volume": 0.5
+			},
+			{
+				"name": "galosphere:item/saltbound_tablet/prepare_attack2",
+				"pitch": 1,
+				"volume": 0.5
+			},
+			{
+				"name": "galosphere:item/saltbound_tablet/prepare_attack3",
+				"pitch": 1,
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.item.saltbound_tablet.prepare_attack"
 	},
 	"music.biome.crystal_canyons": {
 		"sounds": [

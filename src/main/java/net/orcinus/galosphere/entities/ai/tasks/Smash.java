@@ -70,9 +70,8 @@ public class Smash extends Behavior<Berserker> {
 
         List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, self.getBoundingBox().inflate(8))
                 .stream()
-                .filter(Predicate.not(Preserved.class::isInstance))
-                .filter(LivingEntity::isAlive)
-                .filter(livingEntity -> livingEntity.getUUID() != self.getUUID())
+                .filter(self::canTargetEntity)
+                .filter(e -> e.getUUID() != self.getUUID())
                 .toList();
 
         for (LivingEntity enemy : list) {

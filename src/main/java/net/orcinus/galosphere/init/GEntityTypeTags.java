@@ -9,6 +9,8 @@ import net.orcinus.galosphere.Galosphere;
 public class GEntityTypeTags {
 
     public static final TagKey<EntityType<?>> STERLING_IMMUNE_ENTITY_TYPES = create("sterling_immune_entity_types");
+    public static final TagKey<EntityType<?>> BERSERKER_INVALID_TARGETS = create("berserker_invalid_targets");
+    public static final TagKey<EntityType<?>> PRESERVED_INVALID_TARGETS = create("preserved_invalid_targets");
 
     private static TagKey<EntityType<?>> create(String string) {
         return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Galosphere.MODID, string));

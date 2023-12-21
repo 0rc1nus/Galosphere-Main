@@ -20,7 +20,16 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -28,7 +37,11 @@ import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
@@ -36,11 +49,17 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BerserkerAi;
-import net.orcinus.galosphere.init.*;
+import net.orcinus.galosphere.init.GEntityTypeTags;
+import net.orcinus.galosphere.init.GMemoryModuleTypes;
+import net.orcinus.galosphere.init.GMobEffects;
+import net.orcinus.galosphere.init.GParticleTypes;
+import net.orcinus.galosphere.init.GSensorTypes;
+import net.orcinus.galosphere.init.GSoundEvents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Berserker extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Berserker>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.BLIGHTED_ENTITY_SENSOR.get());
@@ -179,7 +198,7 @@ public class Berserker extends Monster {
         double threshold = range - 0.6D;
         double increment = 0.2D;
         if (!this.level().isClientSide) {
-            int count = 600;
+            int count = 250;
             boolean stationary = this.isStationary();
             boolean shedding = this.isShedding();
             if (this.getHealth() < this.getMaxHealth() && this.tickCount % count == 0) {
@@ -268,16 +287,24 @@ public class Berserker extends Monster {
     }
 
     public boolean canTargetEntity(@Nullable Entity entity) {
-        if (!(entity instanceof LivingEntity livingEntity)) return false;
-        if (this.level() != entity.level()) return false;
-        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)) return false;
-        if (this.isAlliedTo(entity)) return false;
-        if (livingEntity.getType() == EntityType.ARMOR_STAND) return false;
-        if (livingEntity.getType() == GEntityTypes.BERSERKER.get()) return false;
-        if (livingEntity.getType() == GEntityTypes.PRESERVED.get()) return false;
-        if (livingEntity.isInvulnerable()) return false;
-        if (livingEntity.isDeadOrDying()) return false;
-        return this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox());
+        if (!(entity instanceof LivingEntity livingEntity) || entity.is(this)) {
+            return false;
+        }
+        Predicate<LivingEntity> predicate = e -> e.getType().is(GEntityTypeTags.BERSERKER_INVALID_TARGETS);
+        DamageSource lastSource = this.getLastDamageSource();
+        if (livingEntity.isInvulnerable() || livingEntity.isDeadOrDying() || predicate.test(livingEntity)) {
+            return false;
+        }
+        if (lastSource != null) {
+            Entity lastEntity = lastSource.getEntity();
+            if (lastEntity instanceof LivingEntity living && living == livingEntity && !predicate.test(living)) {
+                return true;
+            }
+        }
+        if (this.level() != entity.level() || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) || this.isAlliedTo(entity) || !this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox())) {
+            return false;
+        }
+        return livingEntity instanceof Player || livingEntity instanceof AbstractVillager || livingEntity instanceof IronGolem || livingEntity instanceof Turtle;
     }
 
     @Override
@@ -315,7 +342,10 @@ public class Berserker extends Monster {
     @Override
     public boolean doHurtTarget(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
+            if (livingEntity instanceof AbstractGolem || livingEntity instanceof TamableAnimal) {
+                double dist = Math.max(1, this.distanceTo(livingEntity));
+                livingEntity.hurt(this.level().damageSources().mobAttack(this), (float) ((livingEntity.getMaxHealth()) / (dist / 2)));
+            }
             if (this.shouldUseMeleeAttack()) {
                 Vec3 start = this.position().add(0, 1.6f, 0);
                 Vec3 diff = entity.getEyePosition().subtract(start);
@@ -325,6 +355,13 @@ public class Berserker extends Monster {
                 livingEntity.push(normalized.x() * knockbackY, normalized.y() * knockbackX, normalized.z() * knockbackY);
                 this.level().broadcastEntityEvent(this, (byte) 5);
                 this.playSound(GSoundEvents.BERSERKER_PUNCH.get(), 1, 1);
+            }
+            boolean flag = true;
+            if (livingEntity instanceof Player player && player.getAbilities().instabuild) {
+                flag = false;
+            }
+            if (flag) {
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
             }
         }
         return super.doHurtTarget(entity);

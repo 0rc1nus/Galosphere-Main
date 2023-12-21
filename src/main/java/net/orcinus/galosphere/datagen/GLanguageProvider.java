@@ -57,6 +57,7 @@ public class GLanguageProvider extends LanguageProvider {
         this.add("subtitles.entity.spectre.hurt", "Spectre hurts");
         this.add("subtitles.entity.spectre.lock_to_spyglass", "Spyglass locks to Spectre");
         this.add("subtitles.entity.spectre.receive_item", "Spectre receives Item");
+        this.add("subtitles.entity.berserker.shake", "Berserker shakes");
         this.add("subtitles.entity.berserker.roar", "Berserker roars");
         this.add("subtitles.entity.berserker.idle", "Berserker grunts");
         this.add("subtitles.entity.berserker.smash", "Berserker smashes");
@@ -70,6 +71,9 @@ public class GLanguageProvider extends LanguageProvider {
         this.add("subtitles.entity.preserved.hurt", "Preserved hurts");
         this.add("subtitles.entity.preserved.emerge", "Preserved emerges");
         this.add("subtitles.entity.pink_salt_pillar.emerge", "Pink salt pillar pierces");
+        this.add("subtitles.item.saltbound_tablet.prepare_attack", "Saltbound Tablet charges up");
+        this.add("subtitles.item.saltbound_tablet.cast_attack", "Saltbound Tablet fires");
+        this.add("subtitles.item.saltbound_tablet.cooldown_over", "Saltbound Tablet recharged");
         GBiomes.getIds().forEach(resourceLocation -> {
             this.add("biome.galosphere." + resourceLocation.getPath(), reformat(resourceLocation.getPath()));
         });

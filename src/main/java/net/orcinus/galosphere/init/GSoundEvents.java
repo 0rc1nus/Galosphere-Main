@@ -58,9 +58,9 @@ public class GSoundEvents {
     public static final RegistryObject<SoundEvent> SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
     public static final RegistryObject<SoundEvent> SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
 
-    public static final RegistryObject<SoundEvent> TABLET_PREPARE_ATTACK = register("tablet_prepare_attack");
-    public static final RegistryObject<SoundEvent> TABLET_CAST_ATTACK = register("tablet_cast_attack");
-    public static final RegistryObject<SoundEvent> TABLET_RECHARGE = register("tablet_recharge");
+    public static final RegistryObject<SoundEvent> SALTBOUND_TABLET_PREPARE_ATTACK = register("item.saltbound_tablet.prepare_attack");
+    public static final RegistryObject<SoundEvent> SALTBOUND_TABLET_CAST_ATTACK = register("item.saltbound_tablet.cast_attack");
+    public static final RegistryObject<SoundEvent> SALTBOUND_TABLET_COOLDOWN_OVER = register("item.saltbound_tablet.cooldown_over");
 
     public static final SoundType ALLURITE = soundType("allurite");
     public static final SoundType ALLURITE_CLUSTER = soundType("allurite_cluster");

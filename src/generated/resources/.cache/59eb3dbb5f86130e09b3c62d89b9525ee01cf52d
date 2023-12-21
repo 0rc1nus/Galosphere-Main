@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-20T22:42:00.4464443	Loot Tables
+// 1.20.1	2023-12-21T11:24:44.1854819	Loot Tables
 f28731c142d5b3520fc07e63422491f1ce2068d6 data/galosphere/loot_tables/blocks/allurite_block.json
 83f72ea2d96be537d239b9c8558ec4d1da3ed691 data/galosphere/loot_tables/blocks/allurite_bricks.json
 876b84fa924c591dfb30a7da892bb371566f8eee data/galosphere/loot_tables/blocks/allurite_brick_slab.json
@@ -115,8 +115,8 @@ fd8aa87444dbfa8d97c07078e69ba486267065a9 data/galosphere/loot_tables/blocks/smoo
 cad39f66a8862011430147618e35c110e8b8c419 data/galosphere/loot_tables/blocks/succulent.json
 2ecf1616cd8cf43e392f8cd1ca69eb6391edfddf data/galosphere/loot_tables/blocks/succulent_crop.json
 d71807962ac773df7a95e10e2f1cad53a0f03833 data/galosphere/loot_tables/blocks/warped_anchor.json
-fb47fc2562c8b3eccb1225cda00b3b11d40e37c5 data/galosphere/loot_tables/chests/pink_salt_shrine.json
-e6ac653f1f50ac9b80940e8593ff2ee12a915e7c data/galosphere/loot_tables/chests/pink_salt_shrine_library.json
+23ecd2f18c50db5f8aff5b9ce7904834f7257678 data/galosphere/loot_tables/chests/pink_salt_shrine.json
+1f33569bf02cb7822eb25c4f3d032353bc4bd213 data/galosphere/loot_tables/chests/pink_salt_shrine_library.json
 8058d037d576a5dd20916c721b28f759af4edb26 data/galosphere/loot_tables/entities/berserker.json
 690750ccbf6671d7ff37ed50b53b6c3207226a32 data/galosphere/loot_tables/entities/preserved.json
 2d5e9cbbf1dbaeacf30e6a413e2e2f5aa6d63866 data/galosphere/loot_tables/entities/sparkle.json

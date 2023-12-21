@@ -22,6 +22,8 @@ public class GEntityTypeTagsProvider extends EntityTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.tag(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES).add(EntityType.VEX).add(EntityType.EVOKER_FANGS).add(EntityType.RAVAGER);
+        this.tag(GEntityTypeTags.BERSERKER_INVALID_TARGETS).add(EntityType.ARMOR_STAND).add(GEntityTypes.BERSERKER.get()).add(GEntityTypes.PRESERVED.get());
+        this.tag(GEntityTypeTags.PRESERVED_INVALID_TARGETS).add(EntityType.ARMOR_STAND).add(GEntityTypes.BERSERKER.get()).add(GEntityTypes.PRESERVED.get());
         this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(GEntityTypes.SILVER_BOMB.get());
         this.tag(EntityTypeTags.FROG_FOOD).add(GEntityTypes.SPECTERPILLAR.get());
     }
