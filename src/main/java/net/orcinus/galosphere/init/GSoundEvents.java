@@ -52,6 +52,7 @@ public class GSoundEvents {
     public static final RegistryObject<SoundEvent> PRESERVED_HURT = register("entity.preserved.hurt");
     public static final RegistryObject<SoundEvent> PRESERVED_IDLE = register("entity.preserved.idle");
     public static final RegistryObject<SoundEvent> PRESERVED_EMERGE = register("entity.preserved.emerge");
+    public static final RegistryObject<SoundEvent> PRESERVED_STEP = register("entity.preserved.step");
 
     public static final RegistryObject<SoundEvent> PINK_SALT_PILLAR_EMERGE = register("entity.pink_salt_pillar.emerge");
 
@@ -61,6 +62,9 @@ public class GSoundEvents {
     public static final RegistryObject<SoundEvent> SALTBOUND_TABLET_PREPARE_ATTACK = register("item.saltbound_tablet.prepare_attack");
     public static final RegistryObject<SoundEvent> SALTBOUND_TABLET_CAST_ATTACK = register("item.saltbound_tablet.cast_attack");
     public static final RegistryObject<SoundEvent> SALTBOUND_TABLET_COOLDOWN_OVER = register("item.saltbound_tablet.cooldown_over");
+
+    public static final RegistryObject<SoundEvent> PINK_SALT_CHAMBER_SUMMON = register("block.pink_salt_chamber.summon");
+    public static final RegistryObject<SoundEvent> PINK_SALT_CHAMBER_DEACTIVATE = register("block.pink_salt_chamber.deactivate");
 
     public static final SoundType ALLURITE = soundType("allurite");
     public static final SoundType ALLURITE_CLUSTER = soundType("allurite_cluster");

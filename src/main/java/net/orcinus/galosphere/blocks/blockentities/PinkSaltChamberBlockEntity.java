@@ -24,6 +24,7 @@ import net.orcinus.galosphere.entities.Preserved;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import net.orcinus.galosphere.init.GEntityTypes;
+import net.orcinus.galosphere.init.GSoundEvents;
 
 import java.util.List;
 import java.util.Optional;
@@ -86,7 +87,7 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
                     }
                 }
                 blockEntity.resetCooldown();
-                level.playSound(null, blockPos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+                level.playSound(null, blockPos, GSoundEvents.PINK_SALT_CHAMBER_SUMMON.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
             }
         } else {
             blockEntity.cooldown++;
