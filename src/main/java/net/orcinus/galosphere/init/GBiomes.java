@@ -102,7 +102,7 @@ public class GBiomes {
     }
 
     private static ResourceKey<Biome> register(String name) {
-        ResourceLocation id = new ResourceLocation(Galosphere.MODID, name);
+        ResourceLocation id = Galosphere.id(name);
         ResourceKey<Biome> biomeResourceKey = ResourceKey.create(Registries.BIOME, id);
         VALUES.put(biomeResourceKey, id);
         return biomeResourceKey;

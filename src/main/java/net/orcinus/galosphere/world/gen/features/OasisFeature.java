@@ -54,7 +54,7 @@ public class OasisFeature  extends Feature<NoneFeatureConfiguration> {
                 for (int y = -yRadius; y <= 0; y++) {
                     BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY() + y, blockPos.getZ() + z);
                     StructureManager structureManager = ((WorldGenRegionAccessor)featurePlaceContext.level()).getStructureManager();
-                    Structure structure = structureManager.registryAccess().registryOrThrow(Registries.STRUCTURE).get(new ResourceLocation(Galosphere.MODID, "pink_salt_shrine"));
+                    Structure structure = structureManager.registryAccess().registryOrThrow(Registries.STRUCTURE).get(Galosphere.id("pink_salt_shrine"));
                     if (structure != null && structureManager.getStructureWithPieceAt(pos, structure).isValid()) {
                         return false;
                     }

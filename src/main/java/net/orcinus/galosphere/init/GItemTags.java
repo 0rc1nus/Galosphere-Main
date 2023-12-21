@@ -16,7 +16,7 @@ public class GItemTags {
     public static final TagKey<Item> BOMB_BOUNCY_MODIFIERS = bind("bomb_bouncy_modifiers");
 
     private static TagKey<Item> bind(String name) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation(Galosphere.MODID, name));
+        return TagKey.create(Registries.ITEM, Galosphere.id(name));
     }
 
 }

@@ -22,7 +22,7 @@ import java.util.function.Function;
 
 @OnlyIn(Dist.CLIENT)
 public class SpectatorVisionRenderer extends EntityRenderer<SpectatorVision> {
-    private static final Function<Integer, ResourceLocation> FUNCTION = integer -> new ResourceLocation(Galosphere.MODID, "textures/entity/spectator_vision/spectator_vision_" + integer + ".png");
+    private static final Function<Integer, ResourceLocation> FUNCTION = integer -> Galosphere.id("textures/entity/spectator_vision/spectator_vision_" + integer + ".png");
 
     public SpectatorVisionRenderer(EntityRendererProvider.Context context) {
         super(context);

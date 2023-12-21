@@ -47,11 +47,11 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(GBlocks.CHARGED_LUMIERE_BLOCK.get());
         this.getVariantBuilder(GBlocks.LICHEN_MOSS.get()).forAllStatesExcept(blockState -> {
             String name = blockState.getValue(LichenMossBlock.LIT) ? "lichen_moss_lit" : "lichen_moss";
-            ModelFile modelFile = models().cubeAll(name, new ResourceLocation(Galosphere.MODID, "block/" + name));
+            ModelFile modelFile = models().cubeAll(name, Galosphere.id("block/" + name));
             return ConfiguredModel.builder().modelFile(modelFile).build();
         });
         this.getVariantBuilder(GBlocks.POTPOURRI.get()).forAllStates(blockState -> {
-            ModelFile modelFile = models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/potpourri"));
+            ModelFile modelFile = models().getExistingFile(Galosphere.id("block/potpourri"));
             return ConfiguredModel.builder().modelFile(modelFile).build();
         });
 
@@ -80,7 +80,7 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.stairsBlock(GBlocks.LUMIERE_BRICK_STAIRS.get(), "lumiere_bricks");
 
         this.getVariantBuilder(GBlocks.COMBUSTION_TABLE.get()).forAllStates(state -> {
-            return ConfiguredModel.builder().modelFile(models().cube("combustion_table", new ResourceLocation(Galosphere.MODID, "block/combustion_table_bottom"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_top"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_side2"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_side2"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_side1"), new ResourceLocation(Galosphere.MODID, "block/combustion_table_side0")).texture("particle", new ResourceLocation(Galosphere.MODID, "block/combustion_table_side2"))).build();
+            return ConfiguredModel.builder().modelFile(models().cube("combustion_table", Galosphere.id("block/combustion_table_bottom"), Galosphere.id("block/combustion_table_top"), Galosphere.id("block/combustion_table_side2"), Galosphere.id("block/combustion_table_side2"), Galosphere.id("block/combustion_table_side1"), Galosphere.id("block/combustion_table_side0")).texture("particle", Galosphere.id("block/combustion_table_side2"))).build();
         });
 
         this.pollinatedCluster(GBlocks.ALLURITE_CLUSTER.get());
@@ -136,7 +136,7 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(GBlocks.CURED_MEMBRANE_BLOCK.get());
         this.getVariantBuilder(GBlocks.SHADOW_FRAME.get()).forAllStatesExcept(state -> {
             String name = state.getValue(ShadowFrameBlock.POWERED) ? "shadow_frame_filled" : "shadow_frame";
-            return ConfiguredModel.builder().modelFile(models().cubeAll(name, new ResourceLocation(Galosphere.MODID, "block/" + name)).renderType("cutout")).build();
+            return ConfiguredModel.builder().modelFile(models().cubeAll(name, Galosphere.id("block/" + name)).renderType("cutout")).build();
         }, BlockStateProperties.WATERLOGGED, BlockStateProperties.LEVEL, ShadowFrameBlock.FILLED);
 
         this.getVariantBuilder(GBlocks.STRANDED_MEMBRANE_BLOCK.get()).forAllStatesExcept(blockState -> {
@@ -157,12 +157,12 @@ public class GBlockstateProvider extends BlockStateProvider {
                 x = 90;
                 y = 270;
             }
-            return ConfiguredModel.builder().rotationX(x).rotationY(y).modelFile(models().cubeBottomTop("stranded_membrane_block", new ResourceLocation(Galosphere.MODID, "block/stranded_membrane_block_side"), new ResourceLocation(Galosphere.MODID, "block/stranded_membrane_block_bottom"), new ResourceLocation(Galosphere.MODID, "block/stranded_membrane_block_top")).renderType("translucent")).build();
+            return ConfiguredModel.builder().rotationX(x).rotationY(y).modelFile(models().cubeBottomTop("stranded_membrane_block", Galosphere.id("block/stranded_membrane_block_side"), Galosphere.id("block/stranded_membrane_block_bottom"), Galosphere.id("block/stranded_membrane_block_top")).renderType("translucent")).build();
         }, BlockStateProperties.WATERLOGGED);
 
         this.getVariantBuilder(GBlocks.PINK_SALT_CHAMBER.get()).forAllStates(state -> {
             String name = state.getValue(PinkSaltChamberBlock.CHARGED) ? "charged_pink_salt_chamber" : "pink_salt_chamber";
-            return ConfiguredModel.builder().modelFile(models().cubeAll(name, new ResourceLocation(Galosphere.MODID, "block/" + name))).build();
+            return ConfiguredModel.builder().modelFile(models().cubeAll(name, Galosphere.id("block/" + name))).build();
         });
 
         this.wallBlock(GBlocks.PINK_SALT_WALL.get(), "pink_salt");
@@ -178,7 +178,7 @@ public class GBlockstateProvider extends BlockStateProvider {
             return ConfiguredModel.builder().modelFile(models().sign("gilded_beads", new ResourceLocation("block/gold_block"))).build();
         }, BlockStateProperties.ROTATION_16, BlockStateProperties.WATERLOGGED, BlockStateProperties.BOTTOM);
         this.getVariantBuilder(GBlocks.SILVER_BALANCE.get()).forAllStatesExcept(state -> {
-            return ConfiguredModel.builder().modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/silver_balance"))).build();
+            return ConfiguredModel.builder().modelFile(models().getExistingFile(Galosphere.id("block/silver_balance"))).build();
         }, BlockStateProperties.WATERLOGGED);
         this.getVariantBuilder(GBlocks.PINK_SALT_STRAW.get()).forAllStatesExcept(state -> {
             String name = "pink_salt_straw_" + state.getValue(PinkSaltStrawBlock.TIP_DIRECTION).getName() + "_" + state.getValue(PinkSaltStrawBlock.STRAW_SHAPE);
@@ -201,7 +201,7 @@ public class GBlockstateProvider extends BlockStateProvider {
             } else if (facing == Direction.SOUTH) {
                 rotationY *= 2;
             }
-            return ConfiguredModel.builder().modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/pink_salt_cluster"))).rotationX(rotationX).rotationY(rotationY).build();
+            return ConfiguredModel.builder().modelFile(models().getExistingFile(Galosphere.id("block/pink_salt_cluster"))).rotationX(rotationX).rotationY(rotationY).build();
         }, BlockStateProperties.WATERLOGGED);
         this.getVariantBuilder(GBlocks.PINK_SALT_LAMP.get()).forAllStatesExcept(state -> {
             Direction facing = state.getValue(BlockStateProperties.FACING);
@@ -220,13 +220,13 @@ public class GBlockstateProvider extends BlockStateProvider {
             } else if (facing == Direction.SOUTH) {
                 rotationY *= 2;
             }
-            return ConfiguredModel.builder().modelFile(models().getExistingFile(new ResourceLocation(Galosphere.MODID, "block/pink_salt_lamp"))).rotationX(rotationX).rotationY(rotationY).build();
+            return ConfiguredModel.builder().modelFile(models().getExistingFile(Galosphere.id("block/pink_salt_lamp"))).rotationX(rotationX).rotationY(rotationY).build();
         }, BlockStateProperties.WATERLOGGED);
     }
 
     private void wallBlock(Block block, String name) {
         String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
-        this.wallBlock((WallBlock) block, new ResourceLocation(Galosphere.MODID, "block/" + name));
+        this.wallBlock((WallBlock) block, Galosphere.id("block/" + name));
         this.itemModels().getBuilder(path).parent(this.models().wallInventory(path + "_inventory", blockTexture(ForgeRegistries.BLOCKS.getValue(modLoc(name)))));
     }
 
@@ -253,7 +253,7 @@ public class GBlockstateProvider extends BlockStateProvider {
                 path = "glinted_" + path;
             }
             return ConfiguredModel.builder()
-                    .modelFile(models().cross(path, new ResourceLocation(Galosphere.MODID, "block/" + path)).renderType("cutout"))
+                    .modelFile(models().cross(path, Galosphere.id("block/" + path)).renderType("cutout"))
                     .rotationX(rotationX)
                     .rotationY(rotationY)
                     .build();
@@ -263,7 +263,7 @@ public class GBlockstateProvider extends BlockStateProvider {
     private void crossBlock(RegistryObject<Block> block) {
         this.getVariantBuilder(block.get())
                 .forAllStates(state -> ConfiguredModel.builder()
-                        .modelFile(models().cross(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block.get())).getPath(), new ResourceLocation(Galosphere.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath())).renderType("cutout")).build());
+                        .modelFile(models().cross(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block.get())).getPath(), Galosphere.id("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath())).renderType("cutout")).build());
     }
 
     private void stairsBlock(Block block, String blockMaterial) {

@@ -65,7 +65,7 @@ public class GBiomeModifiers {
 
     @NotNull
     private static ResourceKey<BiomeModifier> register(String name) {
-        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(Galosphere.MODID, name));
+        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Galosphere.id(name));
     }
 
 }

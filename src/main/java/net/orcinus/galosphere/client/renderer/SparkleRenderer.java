@@ -19,10 +19,10 @@ import java.util.Map;
 public class SparkleRenderer extends MobRenderer<Sparkle, EntityModel<Sparkle>> {
     private static final Map<Sparkle.CrystalType, ResourceLocation> TEXTURE_BY_TYPE = Util.make(Maps.newHashMap(), (map) -> {
         for (Sparkle.CrystalType type : Sparkle.CrystalType.BY_ID) {
-            map.put(type, new ResourceLocation(Galosphere.MODID, String.format("textures/entity/sparkle/%s_sparkle.png", type.getName())));
+            map.put(type, Galosphere.id(String.format("textures/entity/sparkle/%s_sparkle.png", type.getName())));
         }
     });
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/sparkle/sparkle.png");
+    private static final ResourceLocation TEXTURE = Galosphere.id("textures/entity/sparkle/sparkle.png");
 
     public SparkleRenderer(EntityRendererProvider.Context context) {
         super(context, new SparkleModel<>(context.bakeLayer(GModelLayers.SPARKLE)), 0.6F);

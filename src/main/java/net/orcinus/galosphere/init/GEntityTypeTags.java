@@ -13,7 +13,7 @@ public class GEntityTypeTags {
     public static final TagKey<EntityType<?>> PRESERVED_INVALID_TARGETS = create("preserved_invalid_targets");
 
     private static TagKey<EntityType<?>> create(String string) {
-        return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Galosphere.MODID, string));
+        return TagKey.create(Registries.ENTITY_TYPE, Galosphere.id(string));
     }
 
 }

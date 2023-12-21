@@ -8,7 +8,7 @@ import net.orcinus.galosphere.Galosphere;
 public class GHorseArmorItem extends HorseArmorItem {
 
     public GHorseArmorItem(int protection, String name) {
-        super(protection, new ResourceLocation(Galosphere.MODID, "textures/entity/horse/armor/horse_armor_" + name + ".png"), new Item.Properties().stacksTo(1));
+        super(protection, Galosphere.id("textures/entity/horse/armor/horse_armor_" + name + ".png"), new Item.Properties().stacksTo(1));
     }
 
 }

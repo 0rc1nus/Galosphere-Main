@@ -12,7 +12,7 @@ import net.orcinus.galosphere.init.GModelLayers;
 
 @OnlyIn(Dist.CLIENT)
 public class SpecterpillarRenderer extends MobRenderer<Specterpillar, SpecterpillarModel<Specterpillar>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/specterpillar/specterpillar.png");
+    private static final ResourceLocation TEXTURE = Galosphere.id("textures/entity/specterpillar/specterpillar.png");
 
     public SpecterpillarRenderer(EntityRendererProvider.Context context) {
         super(context, new SpecterpillarModel<>(context.bakeLayer(GModelLayers.SPECTERPILLAR)), 0.1F);

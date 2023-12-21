@@ -13,8 +13,8 @@ import net.orcinus.galosphere.init.GModelLayers;
 
 @OnlyIn(Dist.CLIENT)
 public class SpectreRenderer extends MobRenderer<Spectre, SpectreModel<Spectre>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/spectre/spectre.png");
-    private static final ResourceLocation LINKED_TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/spectre/spectre_linked.png");
+    private static final ResourceLocation TEXTURE = Galosphere.id("textures/entity/spectre/spectre.png");
+    private static final ResourceLocation LINKED_TEXTURE = Galosphere.id("textures/entity/spectre/spectre_linked.png");
 
     public SpectreRenderer(EntityRendererProvider.Context context) {
         super(context, new SpectreModel<>(context.bakeLayer(GModelLayers.SPECTRE)), 0.1F);

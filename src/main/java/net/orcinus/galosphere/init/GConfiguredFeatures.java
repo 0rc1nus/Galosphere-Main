@@ -85,7 +85,7 @@ public class GConfiguredFeatures {
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerConfiguredFeature(String id) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Galosphere.MODID, id));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Galosphere.id(id));
     }
 
 

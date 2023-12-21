@@ -18,7 +18,7 @@ import net.orcinus.galosphere.api.GoldenBreath;
 
 @OnlyIn(Dist.CLIENT)
 public class GoldenBreathOverlay {
-    private static final ResourceLocation GALOSPHERE_ICONS = new ResourceLocation(Galosphere.MODID, "textures/gui/galosphere_icons.png");
+    private static final ResourceLocation GALOSPHERE_ICONS = Galosphere.id("textures/gui/galosphere_icons.png");
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onPostRender(RenderGuiOverlayEvent.Post event) {

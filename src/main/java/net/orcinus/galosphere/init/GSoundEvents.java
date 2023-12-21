@@ -85,7 +85,7 @@ public class GSoundEvents {
     public static final SoundType STRANDED_MEMBRANE = soundType("stranded_membrane");
 
     private static RegistryObject<SoundEvent> register(String string) {
-        return SOUND_EVENTS.register(string, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Galosphere.MODID, string)));
+        return SOUND_EVENTS.register(string, () -> SoundEvent.createVariableRangeEvent(Galosphere.id(string)));
     }
 
     private static String block(String name, String append) {

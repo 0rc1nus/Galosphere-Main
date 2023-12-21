@@ -13,7 +13,7 @@ public class GCriterion extends SimpleCriterionTrigger<GCriterion.TriggerInstanc
     private final ResourceLocation ID;
 
     public GCriterion(String name) {
-        ID = new ResourceLocation(Galosphere.MODID, name);
+        ID = Galosphere.id(name);
     }
 
     @Override

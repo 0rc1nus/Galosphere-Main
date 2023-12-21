@@ -19,7 +19,7 @@ public class GBlockTags {
     public static final TagKey<Block> OMIT_ASTRAL = create("omit_astral");
 
     private static TagKey<Block> create(String id) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(Galosphere.MODID, id));
+        return TagKey.create(Registries.BLOCK, Galosphere.id(id));
     }
 
 }

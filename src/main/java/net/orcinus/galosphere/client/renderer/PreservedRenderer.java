@@ -12,7 +12,7 @@ import net.orcinus.galosphere.init.GModelLayers;
 
 @OnlyIn(Dist.CLIENT)
 public class PreservedRenderer extends MobRenderer<Preserved, PreservedModel<Preserved>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/preserved/preserved.png");
+    private static final ResourceLocation TEXTURE = Galosphere.id("textures/entity/preserved/preserved.png");
 
     public PreservedRenderer(EntityRendererProvider.Context context) {
         super(context, new PreservedModel<>(context.bakeLayer(GModelLayers.PRESERVED)), 0.5F);

@@ -36,7 +36,7 @@ public class LumiereReformingManager extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager resourceManagerIn, ProfilerFiller pProfiler) {
-        ResourceLocation resourceLocation = new ResourceLocation(Galosphere.MODID, "loot_tables/gameplay/lumiere_reforming_table.json");
+        ResourceLocation resourceLocation = Galosphere.id("loot_tables/gameplay/lumiere_reforming_table.json");
         try {
             for (Resource iResource : resourceManagerIn.getResourceStack(resourceLocation)) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(iResource.open(), StandardCharsets.UTF_8))) {

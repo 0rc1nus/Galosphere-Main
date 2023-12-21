@@ -16,7 +16,7 @@ import net.orcinus.galosphere.init.GModelLayers;
 
 @OnlyIn(Dist.CLIENT)
 public class PinkSaltPillarRenderer extends EntityRenderer<PinkSaltPillar> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Galosphere.MODID, "textures/entity/pink_salt_pillar/pink_salt_pillar.png");
+    private static final ResourceLocation TEXTURE = Galosphere.id("textures/entity/pink_salt_pillar/pink_salt_pillar.png");
     private final PinkSaltPillarModel<PinkSaltPillar> model;
 
     public PinkSaltPillarRenderer(EntityRendererProvider.Context context) {

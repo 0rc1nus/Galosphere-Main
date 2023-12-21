@@ -34,7 +34,6 @@ import net.orcinus.galosphere.init.GVanillaIntegration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-//TODO: Preserved nbt
 @Mod(Galosphere.MODID)
 public class Galosphere {
     

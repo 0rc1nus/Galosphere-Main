@@ -101,9 +101,9 @@ public class ClientEvents {
         eventBus.addListener((TickEvent.ClientTickEvent clientTickEvent) -> SpectatorTickHandler.tick());
 
         event.enqueueWork(() -> {
-            ItemProperties.register(Items.CROSSBOW, new ResourceLocation(Galosphere.MODID, "glow_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.GLOW_FLARE.get()) ? 1.0F : 0.0F);
-            ItemProperties.register(Items.CROSSBOW, new ResourceLocation(Galosphere.MODID, "spectre_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.SPECTRE_FLARE.get()) ? 1.0F : 0.0F);
-            ItemProperties.register(GItems.BAROMETER.get(), new ResourceLocation(Galosphere.MODID, "weather_level"), new ClampedItemPropertyFunction() {
+            ItemProperties.register(Items.CROSSBOW, Galosphere.id("glow_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.GLOW_FLARE.get()) ? 1.0F : 0.0F);
+            ItemProperties.register(Items.CROSSBOW, Galosphere.id("spectre_flare"), (stack, world, entity, p_174608_) -> entity != null && CrossbowItem.isCharged(stack) && CrossbowItem.containsChargedProjectile(stack, GItems.SPECTRE_FLARE.get()) ? 1.0F : 0.0F);
+            ItemProperties.register(GItems.BAROMETER.get(), Galosphere.id("weather_level"), new ClampedItemPropertyFunction() {
                 private double rotation;
                 private int ticksBeforeChange;
 
@@ -245,8 +245,8 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void loadEntityShader(RegisterEntitySpectatorShadersEvent event) {
-        event.register(GEntityTypes.SPECTRE.get(), new ResourceLocation(Galosphere.MODID, "shaders/post/spectre.json"));
-        event.register(GEntityTypes.SPECTATOR_VISION.get(), new ResourceLocation(Galosphere.MODID, "shaders/post/spectre.json"));
+        event.register(GEntityTypes.SPECTRE.get(), Galosphere.id("shaders/post/spectre.json"));
+        event.register(GEntityTypes.SPECTATOR_VISION.get(), Galosphere.id("shaders/post/spectre.json"));
     }
 
     @SubscribeEvent

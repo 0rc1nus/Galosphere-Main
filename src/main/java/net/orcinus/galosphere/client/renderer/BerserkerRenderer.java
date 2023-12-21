@@ -17,10 +17,10 @@ import java.util.Map;
 @OnlyIn(Dist.CLIENT)
 public class BerserkerRenderer extends MobRenderer<Berserker, BerserkerModel<Berserker>> {
     private static final Map<Integer, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), map -> {
-        map.put(0, new ResourceLocation(Galosphere.MODID, "textures/entity/berserker/berserker.png"));
-        map.put(1, new ResourceLocation(Galosphere.MODID, "textures/entity/berserker/half_damaged_berserker.png"));
-        map.put(2, new ResourceLocation(Galosphere.MODID, "textures/entity/berserker/high_damaged_berserker.png"));
-        map.put(3, new ResourceLocation(Galosphere.MODID, "textures/entity/berserker/stationary_berserker.png"));
+        map.put(0, Galosphere.id("textures/entity/berserker/berserker.png"));
+        map.put(1, Galosphere.id("textures/entity/berserker/half_damaged_berserker.png"));
+        map.put(2, Galosphere.id("textures/entity/berserker/high_damaged_berserker.png"));
+        map.put(3, Galosphere.id("textures/entity/berserker/stationary_berserker.png"));
     });
 
     public BerserkerRenderer(EntityRendererProvider.Context context) {

@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 public class GalosphereRegion extends Region {
 
     public GalosphereRegion() {
-        super(new ResourceLocation(Galosphere.MODID, "biome_provider"), RegionType.OVERWORLD, 1);
+        super(Galosphere.id("biome_provider"), RegionType.OVERWORLD, 1);
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.util.Optional;
 public class GNetworkHandler {
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.ChannelBuilder.named(
-                    new ResourceLocation(Galosphere.MODID, "network"))
+                    Galosphere.id("network"))
             .clientAcceptedVersions(PROTOCOL_VERSION::equals)
             .serverAcceptedVersions(PROTOCOL_VERSION::equals)
             .networkProtocolVersion(() -> PROTOCOL_VERSION)

@@ -78,7 +78,7 @@ public class GPlacedFeatures {
     }
 
     public static ResourceKey<PlacedFeature> registerPlacedFeature(String id) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(Galosphere.MODID, id));
+        return ResourceKey.create(Registries.PLACED_FEATURE, Galosphere.id(id));
     }
 
     private static List<PlacementModifier> orePlacement(PlacementModifier modifier, PlacementModifier modifier2) {

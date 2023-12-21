@@ -18,7 +18,7 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GRecipeSerializers;
 
 public class PreservedTransformRecipe implements SmithingRecipe {
-    private final ResourceLocation ID = new ResourceLocation(Galosphere.MODID, "preserved_transform_recipe");
+    private final ResourceLocation ID = Galosphere.id("preserved_transform_recipe");
 
     public PreservedTransformRecipe() {
     }
