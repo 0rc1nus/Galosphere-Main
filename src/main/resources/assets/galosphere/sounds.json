@@ -323,37 +323,6 @@
 		],
 		"subtitle": "subtitles.block.generic.place"
 	},
-
-	"block.pink_salt_chamber.summon": {
-		"sounds": [
-			{
-				"attenuation_distance": 32,
-				"name": "galosphere:block/pink_salt_chamber/summon1",
-				"pitch": 1,
-				"volume": 2
-			},
-			{
-				"attenuation_distance": 32,
-				"name": "galosphere:block/pink_salt_chamber/summon2",
-				"pitch": 1,
-				"volume": 2
-			},
-			{
-				"attenuation_distance": 32,
-				"name": "galosphere:block/pink_salt_chamber/summon3",
-				"pitch": 1,
-				"volume": 2
-			},
-			{
-				"attenuation_distance": 32,
-				"name": "galosphere:block/pink_salt_chamber/summon4",
-				"pitch": 1,
-				"volume": 2
-			}
-		],
-		"subtitle": "subtitles.block.pink_salt_chamber.summon"
-	},
-
 	"block.cured_membrane.step": {
 		"sounds": [
 			{
@@ -1082,6 +1051,64 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"block.pink_salt_chamber.deactivate": {
+		"sounds": [
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/deactivate",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/deactivate",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/deactivate",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/deactivate",
+				"pitch": 1,
+				"volume": 1
+			}
+		],
+		"subtitle": "subtitles.block.pink_salt_chamber.deactivate"
+	},
+	"block.pink_salt_chamber.summon": {
+		"sounds": [
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/summon1",
+				"pitch": 1,
+				"volume": 2
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/summon2",
+				"pitch": 1,
+				"volume": 2
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/summon3",
+				"pitch": 1,
+				"volume": 2
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/summon4",
+				"pitch": 1,
+				"volume": 2
+			}
+		],
+		"subtitle": "subtitles.block.pink_salt_chamber.summon"
+	},
 	"block.pink_salt_cluster.break": {
 		"sounds": [
 			{
@@ -1610,7 +1637,7 @@
 				"volume": 0.4
 			}
 		],
-		"subtitle": "subtitles.entity.berserker.step"
+		"subtitle": "subtitles.block.generic.footsteps"
 	},
 	"entity.berserker.summoning": {
 		"sounds": [
@@ -1719,6 +1746,15 @@
 			}
 		],
 		"subtitle": "subtitles.entity.preserved.idle"
+	},
+	"entity.preserved.step": {
+		"sounds": [
+			{
+				"name": "minecraft:entity.zombie.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
 	},
 	"entity.specterpillar.death": {
 		"sounds": [

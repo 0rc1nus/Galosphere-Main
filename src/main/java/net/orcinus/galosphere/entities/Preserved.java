@@ -2,6 +2,7 @@ package net.orcinus.galosphere.entities;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -155,6 +156,15 @@ public class Preserved extends Monster {
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
         return GSoundEvents.PRESERVED_HURT;
+    }
+
+    protected SoundEvent getStepSound() {
+        return GSoundEvents.PRESERVED_STEP;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos blockPos, BlockState blockState) {
+        playSound(getStepSound(), 0.15F, 1);
     }
 
     @Override

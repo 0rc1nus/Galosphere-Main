@@ -47,6 +47,7 @@ public class GSoundEvents {
     public static final SoundEvent PRESERVED_HURT = register("entity.preserved.hurt");
     public static final SoundEvent PRESERVED_IDLE = register("entity.preserved.idle");
     public static final SoundEvent PRESERVED_EMERGE = register("entity.preserved.emerge");
+    public static final SoundEvent PRESERVED_STEP = register("entity.preserved.step");
 
     public static final SoundEvent PINK_SALT_PILLAR_EMERGE = register("entity.pink_salt_pillar.emerge");
 
