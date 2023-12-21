@@ -287,19 +287,17 @@ public class Berserker extends Monster {
     }
 
     public boolean canTargetEntity(@Nullable Entity entity) {
-        if (!(entity instanceof LivingEntity livingEntity) || entity.is(this)) {
+        if (!(entity instanceof LivingEntity livingEntity)) {
             return false;
         }
         Predicate<LivingEntity> predicate = e -> e.getType().is(GEntityTypeTags.BERSERKER_INVALID_TARGETS);
-        DamageSource lastSource = this.getLastDamageSource();
         if (livingEntity.isInvulnerable() || livingEntity.isDeadOrDying() || predicate.test(livingEntity)) {
             return false;
         }
-        if (lastSource != null) {
-            Entity lastEntity = lastSource.getEntity();
-            if (lastEntity instanceof LivingEntity living && living == livingEntity && !predicate.test(living)) {
-                return true;
-            }
+        DamageSource lastSource = this.getLastDamageSource();
+        Entity e;
+        if (lastSource != null && (e = lastSource.getEntity()) instanceof LivingEntity living && e == livingEntity && !predicate.test(living)) {
+            return true;
         }
         if (this.level() != entity.level() || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) || this.isAlliedTo(entity) || !this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox())) {
             return false;

@@ -200,13 +200,13 @@ public class Preserved extends Monster {
             return false;
         }
         Predicate<LivingEntity> predicate = e -> e.getType().is(GEntityTypeTags.PRESERVED_INVALID_TARGETS);
+        if (livingEntity.isInvulnerable() || livingEntity.isDeadOrDying() || predicate.test(livingEntity)) {
+            return false;
+        }
         DamageSource lastSource = this.getLastDamageSource();
         Entity e;
         if (lastSource != null && (e = lastSource.getEntity()) instanceof LivingEntity living && e == livingEntity && !predicate.test(living)) {
             return true;
-        }
-        if (livingEntity.isInvulnerable() || livingEntity.isDeadOrDying() || predicate.test(livingEntity)) {
-            return false;
         }
         if (this.level() != entity.level() || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) || this.isAlliedTo(entity) || !this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox())) {
             return false;
