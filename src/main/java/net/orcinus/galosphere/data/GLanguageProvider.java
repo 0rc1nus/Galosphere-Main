@@ -50,11 +50,15 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("subtitles.block.lumiere.compost", "Composter filled with Lumiere Shard");
         translationBuilder.add("subtitles.entity.specterpillar.death", "Specterpillar dies");
         translationBuilder.add("subtitles.entity.specterpillar.hurt", "Specterpillar hurts");
+        translationBuilder.add("subtitles.item.saltbound_tablet.prepare_attack", "Saltbound Tablet charges up");
+        translationBuilder.add("subtitles.item.saltbound_tablet.cast_attack", "Saltbound Tablet fires");
+        translationBuilder.add("subtitles.item.saltbound_tablet.cooldown_over", "Saltbound Tablet recharged");
         translationBuilder.add("subtitles.entity.spectre.ambient", "Spectre chirps");
         translationBuilder.add("subtitles.entity.spectre.death", "Spectre dies");
         translationBuilder.add("subtitles.entity.spectre.hurt", "Spectre hurts");
         translationBuilder.add("subtitles.entity.spectre.lock_to_spyglass", "Spyglass locks to Spectre");
         translationBuilder.add("subtitles.entity.spectre.receive_item", "Spectre receives Item");
+        translationBuilder.add("subtitles.entity.berserker.shake", "Berserker shakes");
         translationBuilder.add("subtitles.entity.berserker.roar", "Berserker roars");
         translationBuilder.add("subtitles.entity.berserker.idle", "Berserker grunts");
         translationBuilder.add("subtitles.entity.berserker.smash", "Berserker smashes");

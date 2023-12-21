@@ -90,11 +90,7 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             }
           ],
@@ -105,15 +101,16 @@
           "functions": [
             {
               "enchantments": [
-                "galosphere:enfeeble",
                 "minecraft:unbreaking",
                 "galosphere:sustain",
-                "galosphere:rupture"
+                "galosphere:rupture",
+                "galosphere:enfeeble"
               ],
               "function": "minecraft:enchant_randomly"
             }
           ],
-          "name": "minecraft:book"
+          "name": "minecraft:book",
+          "weight": 3
         }
       ],
       "rolls": {

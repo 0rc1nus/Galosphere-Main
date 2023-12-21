@@ -18,6 +18,8 @@ public class GEntityTypeTagsProvider extends FabricTagProvider.EntityTypeTagProv
     @Override
     protected void addTags(HolderLookup.Provider arg) {
         this.getOrCreateTagBuilder(GEntityTypeTags.STERLING_IMMUNE_ENTITY_TYPES).add(EntityType.EVOKER_FANGS, EntityType.RAVAGER, EntityType.VEX);
+        this.getOrCreateTagBuilder(GEntityTypeTags.BERSERKER_INVALID_TARGETS).add(EntityType.ARMOR_STAND).add(GEntityTypes.BERSERKER).add(GEntityTypes.PRESERVED);
+        this.getOrCreateTagBuilder(GEntityTypeTags.PRESERVED_INVALID_TARGETS).add(EntityType.ARMOR_STAND).add(GEntityTypes.BERSERKER).add(GEntityTypes.PRESERVED);
         this.getOrCreateTagBuilder(EntityTypeTags.FROG_FOOD).add(GEntityTypes.SPECTERPILLAR);
         this.getOrCreateTagBuilder(EntityTypeTags.IMPACT_PROJECTILES).add(GEntityTypes.SIVLER_BOMB);
     }

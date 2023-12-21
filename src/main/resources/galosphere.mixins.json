@@ -18,6 +18,7 @@
     "OverworldBiomeBuilderMixin",
     "PlayerMixin",
     "PowderSnowBlockMixin",
+    "ServerItemCooldownsMixin",
     "ServerPlayerMixin",
     "ShulkerBoxBlockEntityMixin",
     "ThrownEnderpearlMixin",

@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
@@ -67,6 +68,19 @@ public class Summon extends Behavior<Berserker> {
     protected void tick(ServerLevel serverLevel, Berserker livingEntity, long l) {
         Brain<Berserker> brain = livingEntity.getBrain();
         brain.setMemory(GMemoryModuleTypes.SUMMON_COUNT, brain.getMemory(GMemoryModuleTypes.SUMMON_COUNT).orElse(0) + 1);
+        List<LivingEntity> list = serverLevel.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(4))
+                .stream()
+                .filter(livingEntity::canTargetEntity)
+                .filter(e -> e.getUUID() != livingEntity.getUUID())
+                .toList();
+        float time = livingEntity.getBrain().getTimeUntilExpiry(GMemoryModuleTypes.IS_SUMMONING);
+        if (time > 20) {
+            for (LivingEntity entity : list) {
+                if (time % 4 == 0) {
+                    entity.hurt(serverLevel.damageSources().mobAttack(livingEntity), 2.0F);
+                }
+            }
+        }
         int max = UniformInt.of(3, 5).sample(serverLevel.getRandom());
         if (serverLevel.getDifficulty() == Difficulty.HARD) {
             max = UniformInt.of(4, 8).sample(serverLevel.getRandom());

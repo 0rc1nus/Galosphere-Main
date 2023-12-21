@@ -37,7 +37,10 @@ import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
@@ -45,6 +48,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BerserkerAi;
+import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GMobEffects;
@@ -55,6 +59,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Berserker extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Berserker>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.BLIGHTED_ENTITY_SENSOR);
@@ -193,7 +198,7 @@ public class Berserker extends Monster {
         double threshold = range - 0.6D;
         double increment = 0.2D;
         if (!this.level().isClientSide) {
-            int count = 600;
+            int count = 250;
             boolean stationary = this.isStationary();
             boolean shedding = this.isShedding();
             if (this.getHealth() < this.getMaxHealth() && this.tickCount % count == 0) {
@@ -282,16 +287,24 @@ public class Berserker extends Monster {
     }
 
     public boolean canTargetEntity(@Nullable Entity entity) {
-        if (!(entity instanceof LivingEntity livingEntity)) return false;
-        if (this.level() != entity.level()) return false;
-        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)) return false;
-        if (this.isAlliedTo(entity)) return false;
-        if (livingEntity.getType() == EntityType.ARMOR_STAND) return false;
-        if (livingEntity.getType() == GEntityTypes.BERSERKER) return false;
-        if (livingEntity.getType() == GEntityTypes.PRESERVED) return false;
-        if (livingEntity.isInvulnerable()) return false;
-        if (livingEntity.isDeadOrDying()) return false;
-        return this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox());
+        if (!(entity instanceof LivingEntity livingEntity) || entity.is(this)) {
+            return false;
+        }
+        Predicate<LivingEntity> predicate = e -> e.getType().is(GEntityTypeTags.BERSERKER_INVALID_TARGETS);
+        DamageSource lastSource = this.getLastDamageSource();
+        if (livingEntity.isInvulnerable() || livingEntity.isDeadOrDying() || predicate.test(livingEntity)) {
+            return false;
+        }
+        if (lastSource != null) {
+            Entity lastEntity = lastSource.getEntity();
+            if (lastEntity instanceof LivingEntity living && living == livingEntity && !predicate.test(living)) {
+                return true;
+            }
+        }
+        if (this.level() != entity.level() || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) || this.isAlliedTo(entity) || !this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox())) {
+            return false;
+        }
+        return livingEntity instanceof Player || livingEntity instanceof AbstractVillager || livingEntity instanceof IronGolem || livingEntity instanceof Turtle;
     }
 
     @Override
