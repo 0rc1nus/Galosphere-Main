@@ -182,6 +182,7 @@ public class PinkSaltPillar extends Entity implements TraceableEntity {
             if (this.warmupDelayTicks == 0 && level() instanceof ServerLevel server) {
                 Vec3 pos = position();
                 server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, server.getBlockState(getOnPos())), pos.x, pos.y, pos.z, 12, 0.4, 0, 0.4, 0.1);
+                if (isUnderWater()) server.sendParticles(ParticleTypes.BUBBLE_COLUMN_UP, pos.x, pos.y, pos.z, 8, 0.3, 0, 0.3, 0.3);
             }
         }
     }
