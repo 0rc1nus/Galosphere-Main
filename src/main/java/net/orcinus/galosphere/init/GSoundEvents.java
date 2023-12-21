@@ -51,6 +51,8 @@ public class GSoundEvents {
 
     public static final SoundEvent PINK_SALT_PILLAR_EMERGE = register("entity.pink_salt_pillar.emerge");
 
+    public static final SoundEvent PINK_SALT_SHARD_LAND = register("entity.pink_salt_shard.land");
+
     public static final SoundEvent SPECTERPILLAR_DEATH = register("entity.specterpillar.death");
     public static final SoundEvent SPECTERPILLAR_HURT = register("entity.specterpillar.hurt");
 

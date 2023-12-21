@@ -1675,7 +1675,17 @@
 				"volume": 0.8
 			}
 		],
-		"subtitle": "subtitles.block.generic.footsteps"
+		"subtitle": "subtitles.entity.pink_salt_pillar.emerge"
+	},
+	"entity.pink_salt_shard.land": {
+		"sounds": [
+			{
+				"name": "galosphere:block.pink_salt.break",
+				"type": "event",
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.pink_salt_shard.land"
 	},
 	"entity.preserved.death": {
 		"sounds": [
