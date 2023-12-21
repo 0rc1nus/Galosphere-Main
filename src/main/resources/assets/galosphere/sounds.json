@@ -323,6 +323,37 @@
 		],
 		"subtitle": "subtitles.block.generic.place"
 	},
+
+	"block.pink_salt_chamber.summon": {
+		"sounds": [
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/summon1",
+				"pitch": 1,
+				"volume": 2
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/summon2",
+				"pitch": 1,
+				"volume": 2
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/summon3",
+				"pitch": 1,
+				"volume": 2
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/pink_salt_chamber/summon4",
+				"pitch": 1,
+				"volume": 2
+			}
+		],
+		"subtitle": "subtitles.block.pink_salt_chamber.summon"
+	},
+
 	"block.cured_membrane.step": {
 		"sounds": [
 			{
@@ -1634,22 +1665,22 @@
 			{
 				"name": "galosphere:entity/preserved/emerge1",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.3
 			},
 			{
 				"name": "galosphere:entity/preserved/emerge2",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.3
 			},
 			{
 				"name": "galosphere:entity/preserved/emerge3",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.3
 			},
 			{
 				"name": "galosphere:entity/preserved/emerge4",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.3
 			}
 		],
 		"subtitle": "subtitles.entity.preserved.emerge"

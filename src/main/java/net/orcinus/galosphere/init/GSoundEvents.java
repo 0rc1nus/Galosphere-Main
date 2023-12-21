@@ -57,8 +57,8 @@ public class GSoundEvents {
     public static final SoundEvent SALTBOUND_TABLET_CAST_ATTACK = register("item.saltbound_tablet.cast_attack");
     public static final SoundEvent SALTBOUND_TABLET_COOLDOWN_OVER = register("item.saltbound_tablet.cooldown_over");
 
-    public static final SoundEvent CHAMBER_SUMMON = register("chamber_summon");
-    public static final SoundEvent CHAMBER_DEACTIVATE = register("chamber_deactivate");
+    public static final SoundEvent PINK_SALT_CHAMBER_SUMMON = register("block.pink_salt_chamber.summon");
+    public static final SoundEvent PINK_SALT_CHAMBER_DEACTIVATE = register("block.pink_salt_chamber.deactivate");
 
     public static final SoundType ALLURITE = soundType("allurite");
     public static final SoundType ALLURITE_CLUSTER = soundType("allurite_cluster");

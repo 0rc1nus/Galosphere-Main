@@ -89,7 +89,7 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
                     }
                 }
                 blockEntity.resetCooldown();
-                level.playSound(null, blockPos, GSoundEvents.CHAMBER_SUMMON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                level.playSound(null, blockPos, GSoundEvents.PINK_SALT_CHAMBER_SUMMON, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
         } else {
             blockEntity.cooldown++;
