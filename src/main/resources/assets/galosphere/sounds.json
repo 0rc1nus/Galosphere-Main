@@ -1864,17 +1864,17 @@
 			{
 				"name": "galosphere:item/saltbound_tablet/cooldown_over1",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.4
 			},
 			{
 				"name": "galosphere:item/saltbound_tablet/cooldown_over2",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.4
 			},
 			{
 				"name": "galosphere:item/saltbound_tablet/cooldown_over3",
 				"pitch": 1,
-				"volume": 1
+				"volume": 0.4
 			}
 		],
 		"subtitle": "subtitles.item.saltbound_tablet.cooldown_over"
