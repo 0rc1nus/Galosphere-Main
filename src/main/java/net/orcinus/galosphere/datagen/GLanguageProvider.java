@@ -49,6 +49,8 @@ public class GLanguageProvider extends LanguageProvider {
         this.add("subtitles.block.monstrometer.activate", "Monstrometer activates");
         this.add("subtitles.block.monstrometer.charge", "Monstrometer is charged");
         this.add("subtitles.block.monstrometer.deactivate", "Monstrometer deactivates");
+        this.add("block.pink_salt_chamber.summon", "Pink Salt Chamber summons");
+        this.add("block.pink_salt_chamber.deactivate", "Pink Salt Chamber deactivates");
         this.add("subtitles.block.lumiere.compost", "Composter filled with Lumiere Shard");
         this.add("subtitles.entity.specterpillar.death", "Specterpillar dies");
         this.add("subtitles.entity.specterpillar.hurt", "Specterpillar hurts");
@@ -71,6 +73,7 @@ public class GLanguageProvider extends LanguageProvider {
         this.add("subtitles.entity.preserved.hurt", "Preserved hurts");
         this.add("subtitles.entity.preserved.emerge", "Preserved emerges");
         this.add("subtitles.entity.pink_salt_pillar.emerge", "Pink salt pillar pierces");
+        this.add("subtitles.entity.pink_salt_shard.land", "Pink salt shard lands");
         this.add("subtitles.item.saltbound_tablet.prepare_attack", "Saltbound Tablet charges up");
         this.add("subtitles.item.saltbound_tablet.cast_attack", "Saltbound Tablet fires");
         this.add("subtitles.item.saltbound_tablet.cooldown_over", "Saltbound Tablet recharged");
