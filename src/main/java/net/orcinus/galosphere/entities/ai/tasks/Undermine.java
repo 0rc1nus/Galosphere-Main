@@ -1,6 +1,7 @@
 package net.orcinus.galosphere.entities.ai.tasks;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.entities.PinkSaltPillar;
@@ -78,44 +80,47 @@ public class Undermine extends Behavior<Berserker> {
             double d = Math.min(target.getY(), mob.getY());
             double e = Math.max(target.getY(), mob.getY()) + 1.0;
             float f = (float)Mth.atan2(target.getZ() - mob.getZ(), target.getX() - mob.getX());
-            if (mob.distanceTo(target) < 4.0D) {
+            if (mob.distanceTo(target) < 6) {
+                mob.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(-1, -1, -1));
                 float g;
-                int i;
-                for (i = 0; i < 5; ++i) {
-                    g = f + (float)i * (float)Math.PI * 0.4f;
-                    this.createPillar(mob, mob.getX() + (double)Mth.cos(g) * 1.5, mob.getZ() + (double)Mth.sin(g) * 1.5, d, e, g, 0);
+                int index;
+                for (index = 0; index < 5; ++index) {
+                    g = f + (float)index * (float)Math.PI * 0.4f;
+                    this.createPillar(mob,0, 4, 0, mob.getX() + (double)Mth.cos(g) * 1.5, mob.getZ() + (double)Mth.sin(g) * 1.5, d, e, g);
                 }
-                for (i = 0; i < 8; ++i) {
-                    g = f + (float)i * (float)Math.PI * 2.0f / 8.0f + 1.2566371f;
-                    this.createPillar(mob, mob.getX() + (double)Mth.cos(g) * 2.5, mob.getZ() + (double)Mth.sin(g) * 2.5, d, e, g, 3);
+                for (index = 0; index < 8; ++index) {
+                    g = f + (float)index * (float)Math.PI * 2.0f / 8.0f + 1.2566371f;
+                    this.createPillar(mob,3, 4, 0, mob.getX() + (double)Mth.cos(g) * 2.5, mob.getZ() + (double)Mth.sin(g) * 2.5, d, e, g);
                 }
             } else {
-                for (int i = 0; i < 16; ++i) {
-                    double h = 1.25 * (double)(i + 1);
-                    this.createPillar(mob, mob.getX() + (double)Mth.cos(f) * h + ((mob.getRandom().nextFloat() - 0.5F) * 0.4F), mob.getZ() + (double)Mth.sin(f) * h + ((mob.getRandom().nextFloat() - 0.5F) * 0.4F), d, e, f, i);
+                mob.lookAt(EntityAnchorArgument.Anchor.EYES, target.position());
+                for (int index = 0; index < 16; ++index) {
+                    double h = 1.25 * (double)(index + 1);
+                    this.createPillar(mob, index, 6, 0.2F,mob.getX() + (double)Mth.cos(f) * h + ((mob.getRandom().nextFloat() - 0.5F) * 0.4F), mob.getZ() + (double)Mth.sin(f) * h + ((mob.getRandom().nextFloat() - 0.5F) * 0.4F), d, e, f);
                 }
             }
         }
         mob.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, MAX_DURATION- DURATION);
     }
 
-    private void createPillar(Berserker blighted, double d, double e, double f, double g, float h, int i) {
+    private void createPillar(Berserker mob, int index, float damage, float damageLowerRate, double d, double e, double f, double g, float h) {
         BlockPos blockPos = BlockPos.containing(d, g, e);
         boolean bl = false;
         double j = 0.0;
         do {
             VoxelShape voxelShape;
             BlockPos blockPos2 = blockPos.below();
-            BlockState blockState = blighted.level().getBlockState(blockPos2);
-            if (!blockState.isFaceSturdy(blighted.level(), blockPos2, Direction.UP)) continue;
-            if (!blighted.level().isEmptyBlock(blockPos) && !(voxelShape = blighted.level().getBlockState(blockPos).getCollisionShape(blighted.level(), blockPos)).isEmpty()) {
+            BlockState blockState = mob.level().getBlockState(blockPos2);
+            if (!blockState.isFaceSturdy(mob.level(), blockPos2, Direction.UP)) continue;
+            if (!mob.level().isEmptyBlock(blockPos) && !(voxelShape = mob.level().getBlockState(blockPos).getCollisionShape(mob.level(), blockPos)).isEmpty()) {
                 j = voxelShape.max(Direction.Axis.Y);
             }
             bl = true;
             break;
         } while ((blockPos = blockPos.below()).getY() >= Mth.floor(f) - 1);
         if (bl) {
-            blighted.level().addFreshEntity(new PinkSaltPillar(blighted.level(), d, (double)blockPos.getY() + j, e, h, i, blighted));
+            if (damageLowerRate > 0) damage -= index * damageLowerRate;
+            mob.level().addFreshEntity(new PinkSaltPillar(mob.level(), d, (double)blockPos.getY() + j, e, h, index, damage, mob));
         }
     }
 

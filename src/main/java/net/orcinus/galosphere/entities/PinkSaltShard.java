@@ -4,7 +4,6 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,6 +17,8 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 
 public class PinkSaltShard extends AbstractArrow {
+    private final int maxTicks = 600;
+    private int ticks = 0;
 
     public PinkSaltShard(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
@@ -26,6 +27,15 @@ public class PinkSaltShard extends AbstractArrow {
     public PinkSaltShard(LivingEntity livingEntity, Level level) {
         super(GEntityTypes.PINK_SALT_SHARD.get(), level);
         this.setOwner(livingEntity);
+    }
+
+    @Override
+    public void tick() {
+        if (this.ticks++ > this.maxTicks) {
+            this.level().broadcastEntityEvent(this, (byte) 3);
+            this.discard();
+        }
+        super.tick();
     }
 
     @Override
@@ -46,7 +56,7 @@ public class PinkSaltShard extends AbstractArrow {
 
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.GLASS_BREAK;
+        return GSoundEvents.PINK_SALT_SHARD_LAND.get();
     }
 
     @Override

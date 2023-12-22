@@ -150,7 +150,6 @@ public class GBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(GBlocks.CHISELED_PASTEL_PINK_SALT.get());
         this.dropSelf(GBlocks.SHADOW_FRAME.get());
         this.dropSelf(GBlocks.PINK_SALT_LAMP.get());
-        this.dropSelf(GBlocks.SUCCULENT.get());
         this.dropSelf(GBlocks.PINK_SALT_STRAW.get());
         this.dropSelf(GBlocks.CURED_MEMBRANE_BLOCK.get());
         this.add(GBlocks.PINK_SALT_CLUSTER.get(), (block) -> {
@@ -158,11 +157,7 @@ public class GBlockLootTables extends BlockLootSubProvider {
         });
         this.dropSelf(GBlocks.GILDED_BEADS.get());
         this.dropSelf(GBlocks.SILVER_BALANCE.get());
-        this.dropSelf(GBlocks.POTPOURRI.get());
         this.dropSelf(GBlocks.PINK_SALT_CHAMBER.get());
-        this.add(GBlocks.SUCCULENT_CROP.get(), block -> {
-            return LootTable.lootTable();
-        });
     }
 
     protected static LootTable.Builder dropAlternativeWithSilkTouch(Block block, Block alternative, LootPoolEntryContainer.Builder<?> builder) {

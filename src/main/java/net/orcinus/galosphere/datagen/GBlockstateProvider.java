@@ -3,6 +3,7 @@ package net.orcinus.galosphere.datagen;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonChargePlayerPhase;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -48,10 +49,6 @@ public class GBlockstateProvider extends BlockStateProvider {
         this.getVariantBuilder(GBlocks.LICHEN_MOSS.get()).forAllStatesExcept(blockState -> {
             String name = blockState.getValue(LichenMossBlock.LIT) ? "lichen_moss_lit" : "lichen_moss";
             ModelFile modelFile = models().cubeAll(name, Galosphere.id("block/" + name));
-            return ConfiguredModel.builder().modelFile(modelFile).build();
-        });
-        this.getVariantBuilder(GBlocks.POTPOURRI.get()).forAllStates(blockState -> {
-            ModelFile modelFile = models().getExistingFile(Galosphere.id("block/potpourri"));
             return ConfiguredModel.builder().modelFile(modelFile).build();
         });
 
@@ -161,7 +158,7 @@ public class GBlockstateProvider extends BlockStateProvider {
         }, BlockStateProperties.WATERLOGGED);
 
         this.getVariantBuilder(GBlocks.PINK_SALT_CHAMBER.get()).forAllStates(state -> {
-            String name = state.getValue(PinkSaltChamberBlock.CHARGED) ? "charged_pink_salt_chamber" : "pink_salt_chamber";
+            String name = state.getValue(PinkSaltChamberBlock.PHASE).getSerializedName() + "_pink_salt_chamber";
             return ConfiguredModel.builder().modelFile(models().cubeAll(name, Galosphere.id("block/" + name))).build();
         });
 

@@ -25,13 +25,6 @@ public class LivingEntityMixin implements BannerAttachable, GoldenBreath, Spectr
     @Unique
     private final LivingEntity $this = (LivingEntity) (Object) this;
 
-    @Inject(at = @At("TAIL"), method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", cancellable = true)
-    private void G$canAttack(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (livingEntity.hasEffect(GMobEffects.HARMONY.get()) && ((LivingEntity)(Object)this).getLastDamageSource() == null) {
-            cir.setReturnValue(false);
-        }
-    }
-
     @Inject(at = @At("HEAD"), method = "defineSynchedData")
     public void G$defineSynchedData(CallbackInfo ci) {
         SynchedEntityData data = ((LivingEntity) (Object) this).getEntityData();

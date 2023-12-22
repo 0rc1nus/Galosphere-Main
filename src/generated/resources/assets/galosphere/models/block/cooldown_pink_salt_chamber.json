@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "galosphere:block/cooldown_pink_salt_chamber"
+  }
+}

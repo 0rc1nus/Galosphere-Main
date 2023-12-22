@@ -905,20 +905,26 @@
 			{
 				"attenuation_distance": 32,
 				"name": "galosphere:block/monstrometer/deactivate1",
-				"pitch": 1.3,
-				"volume": 0.8
+				"pitch": 1,
+				"volume": 1
 			},
 			{
 				"attenuation_distance": 32,
 				"name": "galosphere:block/monstrometer/deactivate2",
-				"pitch": 1.3,
-				"volume": 0.8
+				"pitch": 1,
+				"volume": 1
 			},
 			{
 				"attenuation_distance": 32,
 				"name": "galosphere:block/monstrometer/deactivate3",
-				"pitch": 1.3,
-				"volume": 0.8
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"attenuation_distance": 32,
+				"name": "galosphere:block/monstrometer/deactivate4",
+				"pitch": 1,
+				"volume": 1
 			}
 		],
 		"subtitle": "subtitles.block.monstrometer.deactivate"
@@ -1675,7 +1681,17 @@
 				"volume": 0.8
 			}
 		],
-		"subtitle": "subtitles.block.generic.footsteps"
+		"subtitle": "subtitles.entity.pink_salt_pillar.emerge"
+	},
+	"entity.pink_salt_shard.land": {
+		"sounds": [
+			{
+				"name": "galosphere:block.pink_salt.break",
+				"type": "event",
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.entity.pink_salt_shard.land"
 	},
 	"entity.preserved.death": {
 		"sounds": [
@@ -1931,17 +1947,17 @@
 			{
 				"name": "galosphere:item/saltbound_tablet/cooldown_over1",
 				"pitch": 1,
-				"volume": 0.4
+				"volume": 0.6
 			},
 			{
 				"name": "galosphere:item/saltbound_tablet/cooldown_over2",
 				"pitch": 1,
-				"volume": 0.4
+				"volume": 0.6
 			},
 			{
 				"name": "galosphere:item/saltbound_tablet/cooldown_over3",
 				"pitch": 1,
-				"volume": 0.4
+				"volume": 0.6
 			}
 		],
 		"subtitle": "subtitles.item.saltbound_tablet.cooldown_over"

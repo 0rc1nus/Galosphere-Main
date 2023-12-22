@@ -18,7 +18,6 @@ public class GBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<CordycepsBlockEntity>> CORDYCEPS = BLOCK_ENTITIES.register("cordyceps", () -> BlockEntityType.Builder.of(CordycepsBlockEntity::new, GBlocks.LICHEN_CORDYCEPS.get()).build(null));
     public static final RegistryObject<BlockEntityType<ShadowFrameBlockEntity>> SHADOW_FRAME = BLOCK_ENTITIES.register("shadow_frame", () -> BlockEntityType.Builder.of(ShadowFrameBlockEntity::new, GBlocks.SHADOW_FRAME.get()).build(null));
     public static final RegistryObject<BlockEntityType<GildedBeadsBlockEntity>> GILDED_BEADS = BLOCK_ENTITIES.register("gilded_beads", () -> BlockEntityType.Builder.of(GildedBeadsBlockEntity::new, GBlocks.GILDED_BEADS.get()).build(null));
-    public static final RegistryObject<BlockEntityType<PotpourriBlockEntity>> POTPOURRI = BLOCK_ENTITIES.register("potpourri", () -> BlockEntityType.Builder.of(PotpourriBlockEntity::new, GBlocks.POTPOURRI.get()).build(null));
     public static final RegistryObject<BlockEntityType<PinkSaltChamberBlockEntity>> PINK_SALT_CHAMBER = BLOCK_ENTITIES.register("pink_salt_chamber", () -> BlockEntityType.Builder.of(PinkSaltChamberBlockEntity::new, GBlocks.PINK_SALT_CHAMBER.get()).build(null));
 
 }

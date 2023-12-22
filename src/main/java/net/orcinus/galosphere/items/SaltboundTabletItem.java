@@ -2,6 +2,8 @@ package net.orcinus.galosphere.items;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -11,11 +13,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.orcinus.galosphere.entities.PinkSaltPillar;
+import net.orcinus.galosphere.init.GEnchantments;
 import net.orcinus.galosphere.init.GSoundEvents;
 
 public class SaltboundTabletItem extends Item {
@@ -53,15 +57,15 @@ public class SaltboundTabletItem extends Item {
             int cooldown = player.getAbilities().instabuild ? 10 : 60;
             if (lookAngle.get(Direction.Axis.Y) <= -0.8) {
                 for (int round = 2; round < 5; round++) {
-                    for (float i = 0; i < Mth.PI * 2; i += Mth.PI / 4) {
-                        createPillar(player, player.getX() + (Mth.sin(i)) * round, player.getZ() + (Mth.cos(i)) * round, d, e, f, (int) i * 2, stack);
+                    for (float index = 0; index < Mth.PI * 2; index += Mth.PI / 4) {
+                        createPillar(player, stack, (int) (index * 2), 8, 0,player.getX() + (Mth.sin(index)) * round, player.getZ() + (Mth.cos(index)) * round, d, e, f);
                         player.getCooldowns().addCooldown(this, cooldown);
                     }
                 }
             } else {
                 for (int index = 0; index < 16; ++index) {
                     double h = 1.25 * (double) (index + 1);
-                    createPillar(player, adjustedAngle.x() + (double) Mth.cos(f) * h + ((player.getRandom().nextFloat() - 0.5F) * 0.4F), adjustedAngle.z() + (double)Mth.sin(f) * h + ((player.getRandom().nextFloat() - 0.5F) * 0.4F), d, e, f, index, stack);
+                    createPillar(player, stack, index, 12, 0.4F,adjustedAngle.x() + (double) Mth.cos(f) * h + ((player.getRandom().nextFloat() - 0.5F) * 0.4F), adjustedAngle.z() + (double)Mth.sin(f) * h + ((player.getRandom().nextFloat() - 0.5F) * 0.4F), d, e, f);
                     player.getCooldowns().addCooldown(this, cooldown);
                 }
             }
@@ -71,7 +75,7 @@ public class SaltboundTabletItem extends Item {
         return stack;
     }
 
-    private void createPillar(Player player, double d, double e, double f, double g, float h, int index, ItemStack stack) {
+    private void createPillar(Player player, ItemStack stack, int index, float damage, float damageLowerRate, double d, double e, double f, double g, float h) {
         BlockPos pos = BlockPos.containing(d, g, e);
         Level level = player.level();
         boolean bl = false;
@@ -88,9 +92,8 @@ public class SaltboundTabletItem extends Item {
             break;
         } while ((pos = pos.below()).getY() >= Mth.floor(f) - 7);
         if (bl) {
-            float damage = 12;
-            int warmupDelayTicks = index;
-            level.addFreshEntity(new PinkSaltPillar(level, d, (double)pos.getY() + j, e, h, warmupDelayTicks, damage / (index + 1), player, stack));
+            if (damageLowerRate > 0) damage -= index * damageLowerRate;
+            level.addFreshEntity(new PinkSaltPillar(level, d, (double)pos.getY() + j, e, h, index, damage, player, stack));
         }
     }
 }

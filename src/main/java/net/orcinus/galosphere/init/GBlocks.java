@@ -176,14 +176,11 @@ public class GBlocks {
     public static final RegistryObject<Block> SHADOW_FRAME = registerBlock("shadow_frame", () -> new ShadowFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).strength(3.0F, 6.0F).lightLevel(state -> state.getValue(ShadowFrameBlock.LEVEL)).noCollission().sound(GSoundEvents.SILVER)));
     public static final RegistryObject<Block> GILDED_BEADS = registerBlock("gilded_beads", () -> new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(GSoundEvents.GILDED_BEADS)));
     public static final RegistryObject<Block> SILVER_BALANCE = registerBlock("silver_balance", () -> new SilverBalanceBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.CYAN).strength(3.0F, 6.0F).noOcclusion().sound(GSoundEvents.SILVER)));
-    public static final RegistryObject<Block> SUCCULENT = registerBlock("succulent", () -> new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));
-    public static final RegistryObject<Block> POTPOURRI = registerBlock("potpourri", () -> new PotpourriBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
     public static final RegistryObject<Block> LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", () -> new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> SALINE_COMPOSTER = registerNoTabBlock("saline_composter", () -> new SoilComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final RegistryObject<Block> POTTED_BOWL_LICHEN = registerNoTabBlock("potted_bowl_lichen", () -> new FlowerPotBlock(BOWL_LICHEN.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_LICHEN_ROOTS = registerNoTabBlock("potted_lichen_roots", () -> new FlowerPotBlock(LICHEN_ROOTS.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion()));
-    public static final RegistryObject<Block> SUCCULENT_CROP = registerNoTabBlock("succulent_crop", () -> new SucculentCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier) {
         RegistryObject<B> block = BLOCKS.register(name, supplier);

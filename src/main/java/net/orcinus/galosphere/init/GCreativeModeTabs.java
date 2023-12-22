@@ -46,7 +46,6 @@ public class GCreativeModeTabs {
                 output.accept(GItems.CURED_MEMBRANE.get());
                 output.accept(GItems.GLOW_FLARE.get());
                 output.accept(GItems.SPECTRE_FLARE.get());
-                output.accept(GBlocks.POTPOURRI.get());
                 output.accept(GItems.CHANDELIER.get());
                 output.accept(GBlocks.GILDED_BEADS.get());
                 output.accept(GBlocks.MONSTROMETER.get());
@@ -107,8 +106,6 @@ public class GCreativeModeTabs {
                 output.accept(GBlocks.LICHEN_ROOTS.get());
                 output.accept(GBlocks.BOWL_LICHEN.get());
                 output.accept(GBlocks.LICHEN_SHELF.get());
-                output.accept(GBlocks.SUCCULENT.get());
-                output.accept(GItems.SUCCULENT_PETALS.get());
                 output.accept(GBlocks.GLOW_INK_CLUMPS.get());
                 output.accept(GBlocks.PINK_SALT.get());
                 output.accept(GBlocks.ROSE_PINK_SALT.get());

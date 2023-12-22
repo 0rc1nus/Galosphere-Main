@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "galosphere:block/pink_salt_chamber"
+    "all": "galosphere:block/inactive_pink_salt_chamber"
   }
 }

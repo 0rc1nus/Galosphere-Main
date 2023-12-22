@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-20T18:38:33.1219793	Item Models: galosphere
+// 1.20.1	2023-12-22T09:53:01.3547194	Item Models: galosphere
 7d96c8bb057803d7b1a457d9d8f1d10f2376b87e assets/galosphere/models/item/allurite_block.json
 8e0bfd0b500da2e38767aa4628d64d43aab461d8 assets/galosphere/models/item/allurite_bricks.json
 ef78653a02f82638a580b6acfffc36e81d9877d7 assets/galosphere/models/item/allurite_brick_slab.json
@@ -57,7 +57,7 @@ aa532004e0cd7c8b98cdb0a05a1c66ee59ccafe5 assets/galosphere/models/item/pastel_pi
 4f4d9ebbae27808b7b1dda785737ea207625f55c assets/galosphere/models/item/pink_salt_bricks.json
 719ef9b93b2c36e928dbfe34acbdf719d4a26f66 assets/galosphere/models/item/pink_salt_brick_slab.json
 a1797cba86a68644fe16dabc2e0191e071d962ce assets/galosphere/models/item/pink_salt_brick_stairs.json
-5565ea1d9edc75efafd320a19ba55279072ef439 assets/galosphere/models/item/pink_salt_chamber.json
+e1dbfabb694b94ccd94dfdf05734f83e40099272 assets/galosphere/models/item/pink_salt_chamber.json
 017475f5a2b1c27e8851bda308f1ed9038a9550a assets/galosphere/models/item/pink_salt_cluster.json
 81dc4c0394991a74889df7e8e8a4c5877128eba2 assets/galosphere/models/item/pink_salt_lamp.json
 7081a531a9aadf3c29b74cd195820eb437eb2ab0 assets/galosphere/models/item/pink_salt_shard.json
@@ -73,7 +73,6 @@ d8405c73a6b710aa7738716c857aca1874409bfe assets/galosphere/models/item/polished_
 169d7c3c6ec42718d8a026f5b6b8f540524d54b2 assets/galosphere/models/item/polished_rose_pink_salt.json
 43d71bca3e0e7c50b48168a23d06d04ff3e683fa assets/galosphere/models/item/polished_rose_pink_salt_slab.json
 655377a5b68ab387bddef33ccf8fb586942e6feb assets/galosphere/models/item/polished_rose_pink_salt_stairs.json
-f6ba6db27ba5e55824c4e98d2b547c9fc6725dfc assets/galosphere/models/item/potpourri.json
 4bb07cff300ffcba1da3384e569e621337110e25 assets/galosphere/models/item/preserved_flesh.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/galosphere/models/item/preserved_spawn_egg.json
 86f929eb388f65e5eb5e79d33863f0a23762f63e assets/galosphere/models/item/preserved_template.json
@@ -122,6 +121,4 @@ de5714b280554e334e447e90db23fc64c7e5da74 assets/galosphere/models/item/sterling_
 2e5eb349e1c35dc03a4d83cd7eb0408569f024a1 assets/galosphere/models/item/sterling_horse_armor.json
 4ed487a565bc585e97f313421289dca073ff03f8 assets/galosphere/models/item/sterling_leggings.json
 69eb8bf10cdd29c78e250e772c4e5a99cc13c9ef assets/galosphere/models/item/stranded_membrane_block.json
-77980b6f2a2eac60fefcde8bfbc0e86fdf4f52a4 assets/galosphere/models/item/succulent.json
-e581428b769bd5783b49a0f7c73d742dec12b5f3 assets/galosphere/models/item/succulent_petals.json
 cbf082f3fd171eeee5bd5cb67da28693f49b9241 assets/galosphere/models/item/warped_anchor.json

@@ -42,8 +42,8 @@
             {
               "enchantments": [
                 "galosphere:enfeeble",
-                "galosphere:sustain",
                 "galosphere:rupture",
+                "galosphere:sustain",
                 "minecraft:unbreaking"
               ],
               "function": "minecraft:enchant_randomly"

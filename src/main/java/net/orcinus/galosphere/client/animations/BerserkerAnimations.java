@@ -441,16 +441,6 @@ public class BerserkerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(2.2083435f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("head",
-                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
-                            new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
-                                    AnimationChannel.Interpolations.CATMULLROM),
-                            new Keyframe(0.8343334f, KeyframeAnimations.degreeVec(36.1f, 15.76f, 19.69f),
-                                    AnimationChannel.Interpolations.CATMULLROM),
-                            new Keyframe(1.375f, KeyframeAnimations.degreeVec(2.61f, 9.66f, 15.22f),
-                                    AnimationChannel.Interpolations.CATMULLROM),
-                            new Keyframe(2.5f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
-                                    AnimationChannel.Interpolations.CATMULLROM)))
             .addAnimation("body",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
@@ -928,7 +918,7 @@ public class BerserkerAnimations {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(2f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR)))
-            .addAnimation("all",
+            .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
@@ -1265,7 +1255,7 @@ public class BerserkerAnimations {
                             new Keyframe(0.7083434f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
     public static final AnimationDefinition BERSERKER_SPAWN_MINIONS = AnimationDefinition.Builder.withLength(3.5f)
-            .addAnimation("all",
+            .addAnimation("root",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0.3433333f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),

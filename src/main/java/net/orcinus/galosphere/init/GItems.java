@@ -65,7 +65,6 @@ public class GItems {
     public static final RegistryObject<Item> SPECTRE_FLARE = ITEMS.register("spectre_flare", () -> new SpectreFlareItem(new Item.Properties()));
     public static final RegistryObject<Item> SPECTRE_BOUND_SPYGLASS = ITEMS.register("spectre_bound_spyglass", () -> new SpectreBoundSpyglassItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> CHANDELIER = ITEMS.register("chandelier", () -> new ChandelierItem(GBlocks.CHANDELIER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> SUCCULENT_PETALS = ITEMS.register("succulent_petals", () -> new ItemNameBlockItem(GBlocks.SUCCULENT_CROP.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> SALTBOUND_TABLET = ITEMS.register("saltbound_tablet", () -> new SaltboundTabletItem(new Item.Properties().stacksTo(1).durability(432)));
     public static final RegistryObject<Item> PRESERVED_TEMPLATE = ITEMS.register("preserved_template", PreservedSmithingTemplateItem::new);
