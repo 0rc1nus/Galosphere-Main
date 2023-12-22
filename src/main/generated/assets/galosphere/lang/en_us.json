@@ -134,6 +134,8 @@
   "block.galosphere.smooth_lumiere_stairs": "Smooth Lumiere Stairs",
   "block.galosphere.stranded_membrane_block": "Stranded Membrane Block",
   "block.galosphere.warped_anchor": "Warped Anchor",
+  "block.pink_salt_chamber.deactivate": "Pink Salt Chamber deactivates",
+  "block.pink_salt_chamber.summon": "Pink Salt Chamber summons",
   "container.galosphere.combustion_table": "Combustion Table",
   "effect.galosphere.astral": "Astral",
   "effect.galosphere.block_bane": "Block Bane",
