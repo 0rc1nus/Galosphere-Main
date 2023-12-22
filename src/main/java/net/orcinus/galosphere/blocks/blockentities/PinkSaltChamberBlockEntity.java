@@ -68,7 +68,7 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
         Optional<Preserved> preserved = blockEntity.preserves.stream().filter(LivingEntity::isAlive).findAny();
         if (!blockEntity.preserves.isEmpty() && preserved.isEmpty()) {
             level.setBlock(blockPos, blockState.setValue(PinkSaltChamberBlock.PHASE, PinkSaltChamberBlock.ChamberPhase.COOLDOWN), 2);
-            level.playSound(null, blockPos, GSoundEvents.PINK_SALT_CHAMBER_DEACTIVATE, SoundSource.BLOCKS, 1, 1);
+            level.playSound(null, blockPos, GSoundEvents.PINK_SALT_CHAMBER_DEACTIVATE, SoundSource.BLOCKS, 1.0F, 1.0F);
             blockEntity.preserves.clear();
             blockEntity.resetCooldown();
         }
