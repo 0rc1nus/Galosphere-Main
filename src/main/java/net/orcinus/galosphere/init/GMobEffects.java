@@ -16,7 +16,6 @@ public class GMobEffects {
 
     public static final MobEffect ASTRAL = register("astral", new GMobEffect(MobEffectCategory.BENEFICIAL, 12891319));
     public static final MobEffect BLOCK_BANE = register("block_bane", new GMobEffect(MobEffectCategory.HARMFUL, 7612935));
-    public static final MobEffect HARMONY = register("harmony", new GMobEffect(MobEffectCategory.BENEFICIAL, 7752755));
 
     public static <M extends MobEffect> M register(String name, M effect) {
         MOB_EFFECTS.put(Galosphere.id(name), effect);
