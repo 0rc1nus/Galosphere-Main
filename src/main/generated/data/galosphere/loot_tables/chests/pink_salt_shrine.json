@@ -85,10 +85,10 @@
           "functions": [
             {
               "enchantments": [
-                "galosphere:rupture",
-                "galosphere:enfeeble",
                 "galosphere:sustain",
-                "minecraft:unbreaking"
+                "minecraft:unbreaking",
+                "galosphere:enfeeble",
+                "galosphere:rupture"
               ],
               "function": "minecraft:enchant_randomly"
             }

@@ -60,16 +60,21 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("subtitles.entity.spectre.hurt", "Spectre hurts");
         translationBuilder.add("subtitles.entity.spectre.lock_to_spyglass", "Spyglass locks to Spectre");
         translationBuilder.add("subtitles.entity.spectre.receive_item", "Spectre receives Item");
-        translationBuilder.add("subtitles.entity.berserker.shake", "Berserker shakes");
-        translationBuilder.add("subtitles.entity.berserker.roar", "Berserker roars");
+        translationBuilder.add("subtitles.entity.berserker.death", "Berserker dies");
+        translationBuilder.add("subtitles.entity.berserker.hurt", "Berserker hurts");
         translationBuilder.add("subtitles.entity.berserker.idle", "Berserker grunts");
+        translationBuilder.add("subtitles.entity.berserker.punch", "Berserker punch");
+        translationBuilder.add("subtitles.entity.berserker.roar", "Berserker roars");
+        translationBuilder.add("subtitles.entity.berserker.shake", "Berserker shakes");
         translationBuilder.add("subtitles.entity.berserker.smash", "Berserker smashes");
         translationBuilder.add("subtitles.entity.berserker.step", "Berserker steps");
-        translationBuilder.add("subtitles.entity.berserker.hurt", "Berserker hurts");
-        translationBuilder.add("subtitles.entity.berserker.death", "Berserker dies");
-        translationBuilder.add("subtitles.entity.preserved.idle", "Preserved groans");
-        translationBuilder.add("subtitles.entity.preserved.hurt", "Preserved hurts");
+        translationBuilder.add("subtitles.entity.berserker.summoning", "Berserker summons");
+        translationBuilder.add("subtitles.entity.pink_salt_pillar.emerge", "Pink salt pillar pierces");
+        translationBuilder.add("subtitles.entity.pink_salt_shard.land", "Pink salt shard lands");
         translationBuilder.add("subtitles.entity.preserved.death", "Preserved dies");
+        translationBuilder.add("subtitles.entity.preserved.emerge", "Preserved emerges");
+        translationBuilder.add("subtitles.entity.preserved.hurt", "Preserved hurts");
+        translationBuilder.add("subtitles.entity.preserved.idle", "Preserved groans");
         GBiomes.getIds().stream().map(ResourceLocation::getPath).forEach(path -> {
             translationBuilder.add("biome.galosphere." + path, reformat(path));
         });
