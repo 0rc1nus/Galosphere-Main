@@ -100,7 +100,6 @@ public class GBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.dropSlab(GBlocks.SILVER_PANEL_SLAB);
         this.dropSelf(GBlocks.SILVER_LATTICE);
         this.dropOther(GBlocks.GLOW_BERRIES_SILVER_LATTICE, GBlocks.SILVER_LATTICE);
-        this.dropSelf(GBlocks.POTPOURRI);
         this.dropSelf(GBlocks.PINK_SALT);
         this.dropSelf(GBlocks.ROSE_PINK_SALT);
         this.dropSelf(GBlocks.PASTEL_PINK_SALT);
@@ -142,7 +141,6 @@ public class GBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.dropSelf(GBlocks.CHISELED_PASTEL_PINK_SALT);
         this.dropSelf(GBlocks.SHADOW_FRAME);
         this.dropSelf(GBlocks.PINK_SALT_LAMP);
-        this.dropSelf(GBlocks.SUCCULENT);
         this.add(GBlocks.PINK_SALT_STRAW, block -> {
             return createSilkTouchDispatchTable(block, LootItem.lootTableItem(GBlocks.PINK_SALT_STRAW.asItem()).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.1f, 0.14285715f, 0.25f, 1.0f)));
         });

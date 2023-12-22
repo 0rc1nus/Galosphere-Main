@@ -64,7 +64,6 @@ public class GItems {
     public static final Item SPECTRE_FLARE = register("spectre_flare", new SpectreFlareItem(new Item.Properties()));
     public static final Item SPECTRE_BOUND_SPYGLASS = register("spectre_bound_spyglass", new SpectreBoundSpyglassItem(new Item.Properties().stacksTo(1)));
     public static final Item CHANDELIER = register("chandelier", new ChandelierItem(GBlocks.CHANDELIER, new Item.Properties()));
-    public static final Item SUCCULENT_PETALS = register("succulent_petals", new ItemNameBlockItem(GBlocks.SUCCULENT_CROP, new Item.Properties()));
 
     public static final Item SALTBOUND_TABLET = register("saltbound_tablet", new SaltboundTabletItem(new Item.Properties().stacksTo(1).durability(432)));
     public static final Item PRESERVED_TEMPLATE = register("preserved_template", new PreservedSmithingTemplateItem());

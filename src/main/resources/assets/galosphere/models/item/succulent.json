@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "galosphere:block/small_succulent_petal"
-  }
-}

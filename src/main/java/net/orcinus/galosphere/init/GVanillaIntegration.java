@@ -38,8 +38,6 @@ public class GVanillaIntegration {
             map.put(GBlocks.LICHEN_ROOTS.asItem(), 0.3F);
             map.put(GBlocks.LICHEN_SHELF.asItem(), 0.45F);
             map.put(GBlocks.LICHEN_CORDYCEPS.asItem(), 0.4F);
-            map.put(GBlocks.SUCCULENT.asItem(), 0.65F);
-            map.put(GItems.SUCCULENT_PETALS.asItem(), 0.23F);
             map.put(GItems.CURED_MEMBRANE, 0.8F);
             map.put(GItems.SALTED_JERKY, 0.8F);
         }).build().forEach(instance::add);

@@ -176,14 +176,11 @@ public class GBlocks {
     public static final Block SHADOW_FRAME = registerBlock("shadow_frame", new ShadowFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).lightLevel(state -> state.getValue(ShadowFrameBlock.LEVEL)).noCollission().sound(GSoundEvents.SILVER)));
     public static final Block GILDED_BEADS = registerBlock("gilded_beads", new GildedBeadsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).noCollission().sound(GSoundEvents.GILDED_BEADS)));
     public static final Block SILVER_BALANCE = registerBlock("silver_balance", new SilverBalanceBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.CYAN).strength(3.0F, 6.0F).noOcclusion().sound(GSoundEvents.SILVER)));
-    public static final Block SUCCULENT = registerBlock("succulent", new SucculentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().instabreak().sound(SoundType.AZALEA)));
-    public static final Block POTPOURRI = registerBlock("potpourri", new PotpourriBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
     public static final Block LUMIERE_COMPOSTER = registerNoTabBlock("lumiere_composter", new LumiereComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final Block SALINE_COMPOSTER = registerNoTabBlock("saline_composter", new SoilComposterBlock(BlockBehaviour.Properties.copy(Blocks.COMPOSTER)));
     public static final Block POTTED_BOWL_LICHEN = registerNoTabBlock("potted_bowl_lichen", new FlowerPotBlock(BOWL_LICHEN, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
     public static final Block POTTED_LICHEN_ROOTS = registerNoTabBlock("potted_lichen_roots", new FlowerPotBlock(LICHEN_ROOTS, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
-    public static final Block SUCCULENT_CROP = registerNoTabBlock("succulent_crop", new SucculentCropBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
 
     public static <B extends Block> B registerBlock(String name, B block) {
         GBlocks.BLOCK_ITEMS.put(Galosphere.id(name), new BlockItem(block, new Item.Properties()));

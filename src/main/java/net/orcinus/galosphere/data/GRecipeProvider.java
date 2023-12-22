@@ -47,8 +47,6 @@ public class GRecipeProvider extends FabricRecipeProvider {
         });
         SmithingTransformRecipeBuilder.smithing(Ingredient.of(GItems.PRESERVED_TEMPLATE), Ingredient.of(GItems.PRESERVED_FLESH), Ingredient.of(GItems.PINK_SALT_SHARD), RecipeCategory.MISC, GItems.SALTBOUND_TABLET).unlocks("has_preserved_template", has(GItems.PRESERVED_TEMPLATE)).save(consumer, new ResourceLocation(Galosphere.MODID, getItemName(GItems.SALTBOUND_TABLET) + "_smithing"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER).requires(Items.BONE_MEAL).requires(Items.COAL).requires(GItems.PINK_SALT_SHARD).unlockedBy("has_pink_salt_shard", has(GItems.PINK_SALT_SHARD)).save(consumer);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GItems.SUCCULENT_PETALS, 3).requires(GBlocks.SUCCULENT.asItem()).unlockedBy("has_succulent", has(GBlocks.SUCCULENT.asItem())).save(consumer);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, GBlocks.POTPOURRI).requires(Items.BOWL).requires(GItems.SUCCULENT_PETALS, 3).unlockedBy("has_succulent_petals", has(GItems.SUCCULENT_PETALS)).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GBlocks.PINK_SALT)
                 .define('#', GBlocks.PINK_SALT_STRAW.asItem())
                 .pattern("##")

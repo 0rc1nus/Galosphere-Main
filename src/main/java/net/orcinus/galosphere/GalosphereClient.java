@@ -84,8 +84,7 @@ public class GalosphereClient implements ClientModInitializer {
                 GBlocks.GLINTED_AMETHYST_CLUSTER,
                 GBlocks.PINK_SALT_STRAW,
                 GBlocks.PINK_SALT_CLUSTER,
-                GBlocks.SHADOW_FRAME,
-                GBlocks.SUCCULENT
+                GBlocks.SHADOW_FRAME
         );
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), GBlocks.STRANDED_MEMBRANE_BLOCK);
 
