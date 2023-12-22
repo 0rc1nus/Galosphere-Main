@@ -87,8 +87,8 @@
               "enchantments": [
                 "galosphere:rupture",
                 "galosphere:sustain",
-                "galosphere:enfeeble",
-                "minecraft:unbreaking"
+                "minecraft:unbreaking",
+                "galosphere:enfeeble"
               ],
               "function": "minecraft:enchant_randomly"
             }
