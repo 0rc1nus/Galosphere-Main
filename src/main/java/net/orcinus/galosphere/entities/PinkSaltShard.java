@@ -17,6 +17,8 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 
 public class PinkSaltShard extends AbstractArrow {
+    private final int maxTicks = 600;
+    private int ticks = 0;
 
     public PinkSaltShard(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
@@ -25,6 +27,15 @@ public class PinkSaltShard extends AbstractArrow {
     public PinkSaltShard(LivingEntity livingEntity, Level level) {
         super(GEntityTypes.PINK_SALT_SHARD, level);
         this.setOwner(livingEntity);
+    }
+
+    @Override
+    public void tick() {
+        if (this.ticks++ > this.maxTicks) {
+            this.level().broadcastEntityEvent(this, (byte) 3);
+            this.discard();
+        }
+        super.tick();
     }
 
     @Override

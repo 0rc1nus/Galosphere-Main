@@ -1,7 +1,9 @@
 package net.orcinus.galosphere.blocks;
 
+import com.sun.jna.platform.win32.WinDef;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,18 +17,22 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.SculkSensorPhase;
 import net.orcinus.galosphere.blocks.blockentities.PinkSaltChamberBlockEntity;
+import net.orcinus.galosphere.entities.Berserker;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
 import org.jetbrains.annotations.Nullable;
 
 public class PinkSaltChamberBlock extends BaseEntityBlock {
-    public static final BooleanProperty CHARGED = BooleanProperty.create("charged");
+    public static final EnumProperty<ChamberPhase> PHASE = EnumProperty.create("chamber_phase", ChamberPhase.class);
 
     public PinkSaltChamberBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(CHARGED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(PHASE, ChamberPhase.INACTIVE));
     }
 
     @Override
@@ -40,12 +46,17 @@ public class PinkSaltChamberBlock extends BaseEntityBlock {
                 break;
             }
         }
-        return blockState.setValue(CHARGED, flag2);
+        boolean flag = levelAccessor.getBlockEntity(blockPos) instanceof PinkSaltChamberBlockEntity pinkSaltChamberBlockEntity && pinkSaltChamberBlockEntity.getCooldown() < 6000;
+        if (flag) {
+            return blockState.setValue(PHASE, ChamberPhase.COOLDOWN);
+        } else {
+            return blockState.setValue(PHASE, flag2 ? ChamberPhase.CHARGED : ChamberPhase.INACTIVE);
+        }
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(CHARGED);
+        builder.add(PHASE);
     }
 
     @Nullable
@@ -72,4 +83,27 @@ public class PinkSaltChamberBlock extends BaseEntityBlock {
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
+
+    public enum ChamberPhase implements StringRepresentable {
+        INACTIVE("inactive"),
+        CHARGED("charged"),
+        COOLDOWN("cooldown");
+
+        private final String name;
+
+        ChamberPhase(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name;
+        }
+    }
+
 }

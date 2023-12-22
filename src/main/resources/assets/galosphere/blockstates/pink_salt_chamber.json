@@ -1,10 +1,13 @@
 {
   "variants": {
-    "charged=false": {
+    "chamber_phase=inactive": {
       "model": "galosphere:block/pink_salt_chamber"
     },
-    "charged=true": {
+    "chamber_phase=charged": {
       "model": "galosphere:block/charged_pink_salt_chamber"
+    },
+    "chamber_phase=cooldown": {
+      "model": "galosphere:block/cooldown_pink_salt_chamber"
     }
   }
 }

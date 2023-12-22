@@ -22,6 +22,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.blocks.PinkSaltChamberBlock;
+import net.orcinus.galosphere.blocks.PinkSaltClusterBlock;
 import net.orcinus.galosphere.entities.Preserved;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class PinkSaltChamberBlockEntity extends BlockEntity {
+    private final List<Preserved> preserves = Lists.newArrayList();
     public final int maxCooldown = 6000;
     private int cooldown = 0;
 
@@ -51,15 +53,39 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
         compoundTag.putInt("Cooldown", this.cooldown);
     }
 
+    public int getCooldown() {
+        return this.cooldown;
+    }
+
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, PinkSaltChamberBlockEntity blockEntity) {
-        if (!blockState.getValue(PinkSaltChamberBlock.CHARGED)) {
+        if (blockState.getValue(PinkSaltChamberBlock.PHASE) == PinkSaltChamberBlock.ChamberPhase.INACTIVE) {
             return;
         }
+        Optional<Preserved> preserved = blockEntity.preserves.stream().filter(LivingEntity::isAlive).findAny();
+        if (!blockEntity.preserves.isEmpty() && preserved.isEmpty()) {
+            level.setBlock(blockPos, blockState.setValue(PinkSaltChamberBlock.PHASE, PinkSaltChamberBlock.ChamberPhase.COOLDOWN), 2);
+            level.playSound(null, blockPos, GSoundEvents.PINK_SALT_CHAMBER_DEACTIVATE, SoundSource.BLOCKS, 1.5F, 1.5F);
+            blockEntity.preserves.clear();
+            blockEntity.resetCooldown();
+        }
         if (blockEntity.cooldown >= blockEntity.maxCooldown) {
+            if (blockState.getValue(PinkSaltChamberBlock.PHASE) == PinkSaltChamberBlock.ChamberPhase.COOLDOWN) {
+                boolean flag2 = false;
+                for (Direction direction : Direction.values()) {
+                    BlockState relativeState = level.getBlockState(blockPos.relative(direction));
+                    boolean flag = relativeState.is(GBlocks.PINK_SALT_CLUSTER) && relativeState.getValue(PinkSaltClusterBlock.FACING) == direction;
+                    if (flag) {
+                        flag2 = true;
+                        break;
+                    }
+                }
+                PinkSaltChamberBlock.ChamberPhase phase = flag2 ? PinkSaltChamberBlock.ChamberPhase.CHARGED : PinkSaltChamberBlock.ChamberPhase.INACTIVE;
+                level.setBlock(blockPos, blockState.setValue(PinkSaltChamberBlock.PHASE, phase), 2);
+            }
             List<BlockPos> poses = Lists.newArrayList();
             int maxCount = UniformInt.of(3, 5).sample(level.getRandom());
             if (level.getDifficulty() == Difficulty.HARD) {
@@ -88,8 +114,8 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
                         blockEntity.handleSpawning(serverLevel, randomPos);
                     }
                 }
-                blockEntity.resetCooldown();
                 level.playSound(null, blockPos, GSoundEvents.PINK_SALT_CHAMBER_SUMMON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                blockEntity.resetCooldown();
             }
         } else {
             blockEntity.cooldown++;
@@ -109,6 +135,7 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
             preserved.setPersistenceRequired();
             preserved.setFromChamber(true);
             serverLevel.addFreshEntityWithPassengers(preserved);
+            this.preserves.add(preserved);
         }
     }
 
