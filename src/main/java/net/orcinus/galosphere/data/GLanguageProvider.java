@@ -69,8 +69,8 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("subtitles.entity.berserker.smash", "Berserker smashes");
         translationBuilder.add("subtitles.entity.berserker.step", "Berserker steps");
         translationBuilder.add("subtitles.entity.berserker.summoning", "Berserker summons");
-        translationBuilder.add("subtitles.entity.pink_salt_pillar.emerge", "Pink salt pillar pierces");
-        translationBuilder.add("subtitles.entity.pink_salt_shard.land", "Pink salt shard lands");
+        translationBuilder.add("subtitles.entity.pink_salt_pillar.emerge", "Pink Salt Pillar pierces");
+        translationBuilder.add("subtitles.entity.pink_salt_shard.land", "Pink Salt Shard lands");
         translationBuilder.add("subtitles.entity.preserved.death", "Preserved dies");
         translationBuilder.add("subtitles.entity.preserved.emerge", "Preserved emerges");
         translationBuilder.add("subtitles.entity.preserved.hurt", "Preserved hurts");
@@ -81,7 +81,7 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("galosphere.midnightconfig.title", "Galosphere Config");
         translationBuilder.add("galosphere.midnightconfig.slowBuddingAmethystDestroySpeed", "Slowed Budding Amethyst Destroy Speed");
         translationBuilder.add("galosphere.midnightconfig.pillagerDropSilverIngot", "Pillager Drop Silver Ingots");
-        translationBuilder.add("galosphere.midnightconfig.spectreFlareAncientCityLoot", "Spectre Flares spawn in ancient city chest loot");
+        translationBuilder.add("galosphere.midnightconfig.spectreFlareAncientCityLoot", "Spectre Flares spawn in Ancient City chest loot");
         translationBuilder.add("advancements.galosphere.crystal_lamps.description", "Have all Crystal Lamps in your inventory");
         translationBuilder.add("advancements.galosphere.crystal_lamps.title", "Balanced, As All Things Should Be");
         translationBuilder.add("advancements.galosphere.light_spread.description", "Deploy a Glow Flare");
@@ -96,10 +96,10 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("advancements.galosphere.sterling_armor.title", "Looking Good, Partner!");
         translationBuilder.add("advancements.galosphere.use_spectre_spyglass.description", "Spectate a Spectre");
         translationBuilder.add("advancements.galosphere.use_spectre_spyglass.title", "Watchdog");
-        translationBuilder.add("advancements.galosphere.use_spectre_flare.description", "Use a spectre flare");
+        translationBuilder.add("advancements.galosphere.use_spectre_flare.description", "Use a Spectre Flare");
         translationBuilder.add("advancements.galosphere.use_spectre_flare.title", "I spy with my little eye");
         translationBuilder.add("advancements.galosphere.warped_teleport.description", "Teleport to a Warped Anchor");
-        translationBuilder.add("advancements.galosphere.warped_teleport.title", "What is this place?");
+        translationBuilder.add("advancements.galosphere.warped_teleport.title", "What is this Place?");
         translationBuilder.add("attribute.name.generic.illager_resistance", "Illager Resistance");
         translationBuilder.add("item.minecraft.potion.effect.astral", "Potion of Astral");
         translationBuilder.add("item.minecraft.splash_potion.effect.astral", "Splash Potion of Astral");
