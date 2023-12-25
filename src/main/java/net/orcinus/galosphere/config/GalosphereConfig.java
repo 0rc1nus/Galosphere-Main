@@ -10,5 +10,7 @@ public class GalosphereConfig {
     public static boolean pillagerDropSilverIngot = true;
     @MidnightConfig.Entry
     public static boolean spectreFlareAncientCityLoot = true;
+    @MidnightConfig.Entry
+    public static boolean silverUpgradeTemplatesLoot = true;
 
 }

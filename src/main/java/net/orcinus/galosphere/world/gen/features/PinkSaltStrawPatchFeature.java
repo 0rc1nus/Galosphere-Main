@@ -65,7 +65,8 @@ public class PinkSaltStrawPatchFeature extends Feature<PinkSaltStrawPatchConfig>
         for (int i = 0; i <= height; i++) {
             BlockPos pos = blockPos.relative(direction, i);
             if (!world.isStateAtPosition(pos, DripstoneUtils::isEmptyOrWater)) {
-                world.setBlock(pos.relative(direction.getOpposite()), GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction.getOpposite()).setValue(PinkSaltStrawBlock.STRAW_SHAPE, PinkSaltStrawBlock.StrawShape.BOTTOM).setValue(PinkSaltStrawBlock.WATERLOGGED, world.getBlockState(pos).is(Blocks.WATER)), 2);
+                boolean fullShape = world.getBlockState(pos).isCollisionShapeFullBlock(world, pos);
+                world.setBlock(pos.relative(direction.getOpposite()), GBlocks.PINK_SALT_STRAW.defaultBlockState().setValue(PinkSaltStrawBlock.TIP_DIRECTION, direction.getOpposite()).setValue(PinkSaltStrawBlock.STRAW_SHAPE, fullShape ? PinkSaltStrawBlock.StrawShape.BOTTOM : PinkSaltStrawBlock.StrawShape.TOP).setValue(PinkSaltStrawBlock.WATERLOGGED, world.getBlockState(pos).is(Blocks.WATER)), 2);
                 break;
             }
             PinkSaltStrawBlock.StrawShape strawShape;

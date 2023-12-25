@@ -31,6 +31,11 @@ public class PreservedFleshItem extends Item {
         return itemStack2.is(Items.ROTTEN_FLESH);
     }
 
+    @Override
+    public boolean isEnchantable(ItemStack itemStack) {
+        return false;
+    }
+
     private ItemStack eat(LivingEntity livingEntity, Level level, ItemStack itemStack) {
         if (!(livingEntity instanceof Player player)) {
             return ItemStack.EMPTY;

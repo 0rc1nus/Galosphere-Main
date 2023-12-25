@@ -82,6 +82,7 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("galosphere.midnightconfig.slowBuddingAmethystDestroySpeed", "Slowed Budding Amethyst Destroy Speed");
         translationBuilder.add("galosphere.midnightconfig.pillagerDropSilverIngot", "Pillager Drop Silver Ingots");
         translationBuilder.add("galosphere.midnightconfig.spectreFlareAncientCityLoot", "Spectre Flares spawn in Ancient City chest loot");
+        translationBuilder.add("galosphere.midnightconfig.silverUpgradeTemplatesLoot", "Silver Upgrade Templates spawn in Abandoned Mineshafts or Pillager Outposts chest loot");
         translationBuilder.add("advancements.galosphere.crystal_lamps.description", "Have all Crystal Lamps in your inventory");
         translationBuilder.add("advancements.galosphere.crystal_lamps.title", "Balanced, As All Things Should Be");
         translationBuilder.add("advancements.galosphere.light_spread.description", "Deploy a Glow Flare");
@@ -100,6 +101,12 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("advancements.galosphere.use_spectre_flare.title", "I spy with my little eye");
         translationBuilder.add("advancements.galosphere.warped_teleport.description", "Teleport to a Warped Anchor");
         translationBuilder.add("advancements.galosphere.warped_teleport.title", "What is this Place?");
+        translationBuilder.add("advancements.galosphere.activate_pink_salt_chamber.title", "Knock Knock");
+        translationBuilder.add("advancements.galosphere.activate_pink_salt_chamber.description", "Activate a Pink Salt Chamber");
+        translationBuilder.add("advancements.galosphere.find_pink_salt_shrine.title", "Peaceful Revolution");
+        translationBuilder.add("advancements.galosphere.find_pink_salt_shrine.description", "Enter a Pink Salt Shrine");
+        translationBuilder.add("advancements.galosphere.summon_berserker.title", "Reign of Terror");
+        translationBuilder.add("advancements.galosphere.summon_berserker.description", "Summon the Berserker");
         translationBuilder.add("attribute.name.generic.illager_resistance", "Illager Resistance");
         translationBuilder.add("item.minecraft.potion.effect.astral", "Potion of Astral");
         translationBuilder.add("item.minecraft.splash_potion.effect.astral", "Splash Potion of Astral");
