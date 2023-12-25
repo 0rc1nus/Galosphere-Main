@@ -1,5 +1,5 @@
-// 1.20.1	2023-12-25T09:36:49.3113505	Galosphere/Tags for minecraft:worldgen/biome
+// 1.20.1	2023-12-25T09:50:42.3677581	Galosphere/Tags for minecraft:worldgen/biome
 22cc8381cbdbdc4ac5c231a391c1d2338b479246 data\galosphere\tags\worldgen\biome\has_structure\pink_salt_shrine.json
 e893c2f6a824803ed9b70fc879fda860fd6cacf4 data\minecraft\tags\worldgen\biome\stronghold_biased_to.json
-e893c2f6a824803ed9b70fc879fda860fd6cacf4 data\minecraft\tags\worldgen\biome\has_structure\mineshaft.json
 e893c2f6a824803ed9b70fc879fda860fd6cacf4 data\minecraft\tags\worldgen\biome\has_structure\ruined_portal_standard.json
+e893c2f6a824803ed9b70fc879fda860fd6cacf4 data\minecraft\tags\worldgen\biome\has_structure\mineshaft.json

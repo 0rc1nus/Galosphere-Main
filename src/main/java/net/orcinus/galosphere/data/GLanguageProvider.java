@@ -47,8 +47,8 @@ public class GLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("subtitles.block.monstrometer.activate", "Monstrometer activates");
         translationBuilder.add("subtitles.block.monstrometer.charge", "Monstrometer is charged");
         translationBuilder.add("subtitles.block.monstrometer.deactivate", "Monstrometer deactivates");
-        translationBuilder.add("block.pink_salt_chamber.summon", "Pink Salt Chamber summons");
-        translationBuilder.add("block.pink_salt_chamber.deactivate", "Pink Salt Chamber deactivates");
+        translationBuilder.add("subtitles.block.pink_salt_chamber.summon", "Pink Salt Chamber summons");
+        translationBuilder.add("subtitles.block.pink_salt_chamber.deactivate", "Pink Salt Chamber deactivates");
         translationBuilder.add("subtitles.block.lumiere.compost", "Composter filled with Lumiere Shard");
         translationBuilder.add("subtitles.entity.specterpillar.death", "Specterpillar dies");
         translationBuilder.add("subtitles.entity.specterpillar.hurt", "Specterpillar hurts");

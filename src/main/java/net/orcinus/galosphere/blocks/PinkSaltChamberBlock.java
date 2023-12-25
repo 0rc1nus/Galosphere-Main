@@ -3,6 +3,7 @@ package net.orcinus.galosphere.blocks;
 import com.sun.jna.platform.win32.WinDef;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -46,12 +47,11 @@ public class PinkSaltChamberBlock extends BaseEntityBlock {
                 break;
             }
         }
-        boolean flag = levelAccessor.getBlockEntity(blockPos) instanceof PinkSaltChamberBlockEntity pinkSaltChamberBlockEntity && pinkSaltChamberBlockEntity.getCooldown() < 6000;
-        if (flag) {
-            return blockState.setValue(PHASE, ChamberPhase.COOLDOWN);
-        } else {
-            return blockState.setValue(PHASE, flag2 ? ChamberPhase.CHARGED : ChamberPhase.INACTIVE);
+        if (blockState.getValue(PHASE) == ChamberPhase.COOLDOWN) {
+            return blockState;
         }
+        ChamberPhase phase = flag2 ? ChamberPhase.CHARGED : ChamberPhase.INACTIVE;
+        return blockState.setValue(PHASE, phase);
     }
 
     @Override
