@@ -80,7 +80,7 @@ public class Undermine extends Behavior<Berserker> {
             double d = Math.min(target.getY(), mob.getY());
             double e = Math.max(target.getY(), mob.getY()) + 1.0;
             float f = (float)Mth.atan2(target.getZ() - mob.getZ(), target.getX() - mob.getX());
-            if (mob.distanceTo(target) < 6) {
+            if (mob.distanceTo(target) < 4) {
                 mob.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(-1, -1, -1));
                 float g;
                 int index;

@@ -93,7 +93,7 @@ public class MiscEvents {
         if (name.equals(BuiltInLootTables.ANCIENT_CITY) && GalosphereConfig.SPECTRE_FLARE_ANCIENT_CITY_LOOT.get()) {
             pools.add(LootPool.lootPool().add(LootItem.lootTableItem(GItems.SPECTRE_FLARE.get()).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))).build());
         }
-        if (name.equals(BuiltInLootTables.PILLAGER_OUTPOST) || name.equals(BuiltInLootTables.ABANDONED_MINESHAFT)) {
+        if ((name.equals(BuiltInLootTables.PILLAGER_OUTPOST) || name.equals(BuiltInLootTables.ABANDONED_MINESHAFT)) && GalosphereConfig.SILVER_UPGRADE_TEMPLATES_LOOT.get()) {
             pools.add(LootPool.lootPool().add(LootItem.lootTableItem(GItems.SILVER_UPGRADE_SMITHING_TEMPLATE.get()).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))).build());
         }
     }

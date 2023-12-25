@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -26,6 +27,7 @@ import net.orcinus.galosphere.blocks.PinkSaltClusterBlock;
 import net.orcinus.galosphere.entities.Preserved;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 
@@ -91,8 +93,9 @@ public class PinkSaltChamberBlockEntity extends BlockEntity {
             if (level.getDifficulty() == Difficulty.HARD) {
                 maxCount = UniformInt.of(4, 10).sample(level.getRandom());
             }
-            Optional<Player> optional = level.getEntitiesOfClass(Player.class, new AABB(blockPos).inflate(6.0D)).stream().filter(LivingEntity::isAlive).filter(player -> !player.getAbilities().instabuild).toList().stream().findAny();
-            optional.ifPresent(player -> {
+            List<Player> list = level.getEntitiesOfClass(Player.class, new AABB(blockPos).inflate(6.0D)).stream().filter(LivingEntity::isAlive).filter(player -> !player.getAbilities().instabuild).toList();
+            list.stream().filter(ServerPlayer.class::isInstance).map(ServerPlayer.class::cast).forEach(GCriteriaTriggers.ACTIVATE_PINK_SALT_CHAMBER::trigger);
+            list.stream().findAny().ifPresent(player -> {
                 int range = 5;
                 int yRange = 2;
                 for (int y = -yRange; y <= yRange; y++) {

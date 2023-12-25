@@ -4,12 +4,14 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.Util;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Unit;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -49,6 +51,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.orcinus.galosphere.entities.ai.BerserkerAi;
+import net.orcinus.galosphere.init.GCriteriaTriggers;
 import net.orcinus.galosphere.init.GEntityTypeTags;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GMobEffects;
@@ -60,6 +63,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class Berserker extends Monster {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Berserker>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, GSensorTypes.BLIGHTED_ENTITY_SENSOR.get());
@@ -208,10 +212,12 @@ public class Berserker extends Monster {
                 this.getBrain().getMemories().keySet().stream().filter(memoryModuleType -> {
                     return memoryModuleType.equals(MemoryModuleType.WALK_TARGET) || memoryModuleType.equals(MemoryModuleType.LOOK_TARGET);
                 }).forEach(this.getBrain()::eraseMemory);
-                Optional<Player> player = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).findAny();
+                List<Player> list = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(3.0D)).stream().filter(p -> !p.isCreative() && p.isAlive()).toList();
+                Optional<Player> player = list.stream().findAny();
                 if (!shedding) {
                     player.ifPresent(this::setTarget);
                 } else {
+                    list.stream().filter(ServerPlayer.class::isInstance).map(ServerPlayer.class::cast).forEach(serverPlayer -> CriteriaTriggers.SUMMONED_ENTITY.trigger(serverPlayer, this));
                     if (this.getStationaryTicks() == 32) {
                         this.getBrain().setMemory(GMemoryModuleTypes.IS_SHAKING.get(), Unit.INSTANCE);
                     }

@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "summoned": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "galosphere:berserker"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:summoned_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.galosphere.summon_berserker.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "galosphere:preserved_flesh"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.galosphere.summon_berserker.title"
+    }
+  },
+  "requirements": [
+    [
+      "summoned"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
