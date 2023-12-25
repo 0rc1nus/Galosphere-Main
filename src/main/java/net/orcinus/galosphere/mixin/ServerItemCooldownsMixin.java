@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ServerItemCooldowns;
+import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GNetwork;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,7 +25,9 @@ public class ServerItemCooldownsMixin {
     @Inject(at = @At("TAIL"), method = "onCooldownEnded")
     private void G$removeCooldown(Item item, CallbackInfo ci) {
         FriendlyByteBuf buf = PacketByteBufs.create();
-        ServerPlayNetworking.send(this.player, GNetwork.PLAY_COOLDOWN_SOUND, buf);
+        if (item.equals(GItems.SALTBOUND_TABLET)) {
+            ServerPlayNetworking.send(this.player, GNetwork.PLAY_COOLDOWN_SOUND, buf);
+        }
     }
 
 }

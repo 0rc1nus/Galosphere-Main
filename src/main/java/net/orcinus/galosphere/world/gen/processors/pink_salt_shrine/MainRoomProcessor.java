@@ -33,7 +33,6 @@ public class MainRoomProcessor extends StructureProcessor {
             return new StructureTemplate.StructureBlockInfo(position, state.setValue(CandleBlock.CANDLES, Mth.nextInt(randomSource, 1, 4)), structureBlockInfo2.nbt());
         }
         if (state.is(GBlocks.PINK_SALT_STRAW)) {
-            System.out.println(position.toShortString());
             BlockPos.MutableBlockPos mutableBlockPos = position.mutable();
             Direction direction = state.getValue(PinkSaltStrawBlock.TIP_DIRECTION);
             int height = UniformInt.of(2, 4).sample(randomSource);
