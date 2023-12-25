@@ -27,6 +27,7 @@ public class PinkSaltShard extends AbstractArrow {
     public PinkSaltShard(LivingEntity livingEntity, Level level) {
         super(GEntityTypes.PINK_SALT_SHARD.get(), level);
         this.setOwner(livingEntity);
+        this.setBaseDamage(4.0F);
     }
 
     @Override
