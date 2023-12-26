@@ -3,12 +3,12 @@
   "id": "galosphere",
   "version": "${version}",
   "name": "Galosphere",
-  "description": "Galosphere is a mod that aims to revamp the underground",
+  "description": "Galosphere is a mod that aims to overhaul the underground",
   "authors": [
-    "Orcinus",
-    "Ninni"
+    "Orcinus"
   ],
   "contributors": [
+    "Ninni",
     "bunten"
   ],
   "contact": {
