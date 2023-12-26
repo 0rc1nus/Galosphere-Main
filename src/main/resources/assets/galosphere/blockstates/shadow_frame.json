@@ -1,9 +1,9 @@
 {
   "variants": {
-    "filled=false": {
+    "powered=false": {
       "model": "galosphere:block/shadow_frame"
     },
-    "filled=true": {
+    "powered=true": {
       "model": "galosphere:block/shadow_frame_filled"
     }
   }
