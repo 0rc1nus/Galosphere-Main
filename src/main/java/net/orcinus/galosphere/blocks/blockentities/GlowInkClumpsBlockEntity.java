@@ -18,7 +18,7 @@ import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.orcinus.galosphere.blocks.GlowInkClumpsBlock;
 import net.orcinus.galosphere.init.GBlockEntityTypes;
 import net.orcinus.galosphere.init.GBlocks;
-import net.orcinus.galosphere.network.SendParticlesPacket;
+import net.orcinus.galosphere.network.ServerPacketTypes;
 
 public class GlowInkClumpsBlockEntity  extends BlockEntity {
     private static int delay = 0;
@@ -57,7 +57,7 @@ public class GlowInkClumpsBlockEntity  extends BlockEntity {
                                 if (delay == 0) {
                                     if (!world.isClientSide()) {
                                         for (ServerPlayer serverPlayer : PlayerLookup.tracking((ServerLevel) world, offset)) {
-                                            ServerPlayNetworking.send(serverPlayer, new SendParticlesPacket(offset));
+                                            ServerPlayNetworking.send(serverPlayer, new ServerPacketTypes.ServerSendParticlesPacket(offset));
                                         }
                                     }
                                     int age = 0;

@@ -69,7 +69,7 @@ import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GSensorTypes;
 import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.items.components.SpectreBound;
-import net.orcinus.galosphere.network.SendPerspectivePacket;
+import net.orcinus.galosphere.network.ServerPacketTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -378,7 +378,7 @@ public class Spectre extends Animal implements FlyingAnimal, BottlePickable, Spe
         if (!this.level().isClientSide()) {
             ((SpectreBoundSpyglass)player).setUsingSpectreBoundedSpyglass(true);
             this.setManipulatorUUID(player.getUUID());
-            ServerPlayNetworking.send((ServerPlayer) player, new SendPerspectivePacket(player.getUUID(), this.getId()));
+            ServerPlayNetworking.send((ServerPlayer) player, new ServerPacketTypes.ServerSendPerspectivePacket(player.getUUID(), this.getId()));
             player.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_BEGIN, getSoundSource(), 1, 1);
         }
     }

@@ -126,7 +126,7 @@ public class GalosphereClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GModelLayers.PRESERVED, PreservedModel::createBodyLayer);
 
         GEvents.clientInit();
-        GNetwork.init();
+        GNetwork.initClient();
 
         ItemProperties.register(Items.CROSSBOW, Galosphere.id("glow_flare"), (stack, world, entity, i) -> {
             ChargedProjectiles chargedProjectiles = stack.get(DataComponents.CHARGED_PROJECTILES);

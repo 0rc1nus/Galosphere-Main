@@ -14,11 +14,18 @@ import java.util.UUID;
 
 public record SendPerspectivePacket(UUID uuid, int id) implements CustomPacketPayload {
     public static final Type<SendPerspectivePacket> TYPE = new Type<>(Galosphere.id("send_perspective"));
-    public static final StreamCodec<FriendlyByteBuf, SendPerspectivePacket> STREAM_CODEC = CustomPacketPayload.codec(SendPerspectivePacket::write, SendPerspectivePacket::new);
+    public static final StreamCodec<FriendlyByteBuf, SendPerspectivePacket> STREAM_CODEC = new StreamCodec<FriendlyByteBuf, SendPerspectivePacket>() {
+        @Override
+        public SendPerspectivePacket decode(FriendlyByteBuf buf) {
+            return new SendPerspectivePacket(buf.readUUID(), buf.readInt());
+        }
 
-    private SendPerspectivePacket(FriendlyByteBuf buf) {
-        this(buf.readUUID(), buf.readInt());
-    }
+        @Override
+        public void encode(FriendlyByteBuf buf, SendPerspectivePacket packet) {
+            buf.writeUUID(packet.uuid());
+            buf.writeInt(packet.id());
+        }
+    };
 
     public void write(FriendlyByteBuf friendlyByteBuf) {
         friendlyByteBuf.writeUUID(this.uuid);
@@ -43,5 +50,14 @@ public record SendPerspectivePacket(UUID uuid, int id) implements CustomPacketPa
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
+    }
+
+    public static void register() {
+        // Register receiver for the server packet type (packet type already registered by ServerPacketTypes)
+        ClientPlayNetworking.registerGlobalReceiver(net.orcinus.galosphere.network.ServerPacketTypes.SEND_PERSPECTIVE_TYPE, (packet, context) -> {
+            // Convert server packet to client packet and handle
+            SendPerspectivePacket clientPacket = new SendPerspectivePacket(packet.uuid(), packet.id());
+            clientPacket.receive(context);
+        });
     }
 }

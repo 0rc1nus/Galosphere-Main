@@ -41,7 +41,7 @@ import net.orcinus.galosphere.api.Spectatable;
 import net.orcinus.galosphere.api.SpectreBoundSpyglass;
 import net.orcinus.galosphere.blocks.LumiereComposterBlock;
 import net.orcinus.galosphere.config.GalosphereConfig;
-import net.orcinus.galosphere.network.BarometerPacket;
+import net.orcinus.galosphere.network.ServerPacketTypes;
 import net.orcinus.galosphere.util.BannerRendererUtil;
 import net.orcinus.galosphere.util.PreservedShulkerBox;
 
@@ -73,7 +73,7 @@ public class GEvents {
             level.getPlayers((player) -> player.level() != null).forEach((player) -> {
                 ServerLevelData levelData = (ServerLevelData) level.getLevelData();
                 int rainTime = levelData.getClearWeatherTime() > 0 ? levelData.getClearWeatherTime() : levelData.getRainTime();
-                ServerPlayNetworking.send(player, new BarometerPacket(rainTime));
+                ServerPlayNetworking.send(player, new ServerPacketTypes.ServerBarometerPacket(rainTime));
             });
         });
     }

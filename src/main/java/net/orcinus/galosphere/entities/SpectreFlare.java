@@ -18,7 +18,7 @@ import net.orcinus.galosphere.init.GEntityTypes;
 import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GSoundEvents;
 import net.orcinus.galosphere.mixin.access.FireworkRocketEntityAccessor;
-import net.orcinus.galosphere.network.SendPerspectivePacket;
+import net.orcinus.galosphere.network.ServerPacketTypes;
 import org.jetbrains.annotations.Nullable;
 
 public class SpectreFlare extends ThrowableLaunchedProjectile {
@@ -75,7 +75,7 @@ public class SpectreFlare extends ThrowableLaunchedProjectile {
                 serverPlayer.playNotifySound(GSoundEvents.SPECTRE_MANIPULATE_BEGIN, getSoundSource(), 1, 1);
                 world.addFreshEntity(spectatorVision);
                 ((SpectreBoundSpyglass)serverPlayer).setUsingSpectreBoundedSpyglass(true);
-                ServerPlayNetworking.send(serverPlayer, new SendPerspectivePacket(serverPlayer.getUUID(), spectatorVision.getId()));
+                ServerPlayNetworking.send(serverPlayer, new ServerPacketTypes.ServerSendPerspectivePacket(serverPlayer.getUUID(), spectatorVision.getId()));
             }
         }
     }

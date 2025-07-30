@@ -28,6 +28,7 @@ import net.orcinus.galosphere.init.GItems;
 import net.orcinus.galosphere.init.GMemoryModuleTypes;
 import net.orcinus.galosphere.init.GMenuTypes;
 import net.orcinus.galosphere.init.GMobEffects;
+import net.orcinus.galosphere.init.GNetwork;
 import net.orcinus.galosphere.init.GParticleTypes;
 import net.orcinus.galosphere.init.GPlacedFeatures;
 import net.orcinus.galosphere.init.GPotions;
@@ -69,6 +70,7 @@ public class Galosphere implements ModInitializer {
         GRecipeSerializers.init();
         GStructureProcessorTypes.init();
         GVanillaIntegration.init();
+        GNetwork.init();
 
         SpawnPlacements.register(GEntityTypes.SPARKLE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sparkle::checkSparkleSpawnRules);
         SpawnPlacements.register(GEntityTypes.SPECTRE, SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Spectre::checkSpectreSpawnRules);
@@ -82,3 +84,4 @@ public class Galosphere implements ModInitializer {
     }
 
 }
+

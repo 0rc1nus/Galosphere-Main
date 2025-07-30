@@ -15,11 +15,17 @@ import net.orcinus.galosphere.init.GSoundEvents;
 
 public record SendParticlesPacket(BlockPos blockPos) implements CustomPacketPayload {
     public static final Type<SendParticlesPacket> TYPE = new Type<>(Galosphere.id("send_particles"));
-    public static final StreamCodec<FriendlyByteBuf, SendParticlesPacket> STREAM_CODEC = CustomPacketPayload.codec(SendParticlesPacket::write, SendParticlesPacket::new);
+    public static final StreamCodec<FriendlyByteBuf, SendParticlesPacket> STREAM_CODEC = new StreamCodec<FriendlyByteBuf, SendParticlesPacket>() {
+        @Override
+        public SendParticlesPacket decode(FriendlyByteBuf buf) {
+            return new SendParticlesPacket(buf.readBlockPos());
+        }
 
-    private SendParticlesPacket(FriendlyByteBuf friendlyByteBuf) {
-        this(friendlyByteBuf.readBlockPos());
-    }
+        @Override
+        public void encode(FriendlyByteBuf buf, SendParticlesPacket packet) {
+            buf.writeBlockPos(packet.blockPos());
+        }
+    };
 
     public void write(FriendlyByteBuf friendlyByteBuf) {
         friendlyByteBuf.writeBlockPos(this.blockPos);
@@ -49,5 +55,14 @@ public record SendParticlesPacket(BlockPos blockPos) implements CustomPacketPayl
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
+    }
+
+    public static void register() {
+        // Register receiver for the server packet type (packet type already registered by ServerPacketTypes)
+        ClientPlayNetworking.registerGlobalReceiver(net.orcinus.galosphere.network.ServerPacketTypes.SEND_PARTICLES_TYPE, (packet, context) -> {
+            // Convert server packet to client packet and handle
+            SendParticlesPacket clientPacket = new SendParticlesPacket(packet.blockPos());
+            clientPacket.receive(context);
+        });
     }
 }
