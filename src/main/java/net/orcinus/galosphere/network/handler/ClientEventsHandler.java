@@ -14,9 +14,12 @@ import net.orcinus.galosphere.network.BarometerPacket;
 import net.orcinus.galosphere.network.PlayCooldownSoundPacket;
 import net.orcinus.galosphere.network.SendParticlesPacket;
 import net.orcinus.galosphere.network.SendPerspectivePacket;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Optional;
 
+@OnlyIn(Dist.CLIENT) 
 public class ClientEventsHandler {
 
     public static void handleSendParticles(SendParticlesPacket packet, IPayloadContext ctx) {

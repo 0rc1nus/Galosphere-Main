@@ -1,5 +1,3 @@
 {
-  "values": [
-    "#forge:ores/silver"
-  ]
+  "values": ["#c:ores/silver"]
 }

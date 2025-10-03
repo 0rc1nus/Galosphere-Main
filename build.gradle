@@ -9,7 +9,8 @@ plugins {
 tasks.named('wrapper', Wrapper).configure {
     // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
     // Switching this to Wrapper.DistributionType.ALL will download the full gradle sources that comes with
-    // documentation attached on cursor hover of gradle classes and methods. However, this comes with increased
+    // documentation attached on cursor hover of gradle classes and methods.
+    // However, this comes with increased
     // file size for Gradle. If you do switch this to ALL, run the Gradle wrapper task twice afterwards.
     // (Verify by checking gradle/wrapper/gradle-wrapper.properties to see if distributionUrl now points to `-all`)
     distributionType = Wrapper.DistributionType.BIN
@@ -20,10 +21,12 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    // Add the Parchment Maven repository here
+    maven { url "https://maven.parchmentmc.org" }
 }
 
 base {
-    archivesName = mod_id
+    archivesName = "${mod_id}-${minecraft_version}"
 }
 
 // Mojang ships Java 21 to end users starting in 1.20.5, so mods should target Java 21.
@@ -48,7 +51,8 @@ neoForge {
         client {
             client()
 
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            // Comma-separated list of namespaces to load gametests from.
+            // Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 

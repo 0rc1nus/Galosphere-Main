@@ -1,5 +1,3 @@
 {
-  "values": [
-    "#forge:raw_materials/silver"
-  ]
+  "values": ["#c:raw_materials/silver"]
 }

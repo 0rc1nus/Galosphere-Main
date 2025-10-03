@@ -1,6 +1,3 @@
 {
-  "values": [
-    "#forge:storage_blocks/silver",
-    "#forge:storage_blocks/raw_silver"
-  ]
+  "values": ["#c:storage_blocks/silver", "#c:storage_blocks/raw_silver"]
 }

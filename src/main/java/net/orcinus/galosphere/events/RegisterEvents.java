@@ -28,7 +28,8 @@ import net.orcinus.galosphere.network.SendPerspectivePacket;
 import net.orcinus.galosphere.network.handler.ClientEventsHandler;
 import net.orcinus.galosphere.network.handler.ServerEventsHandler;
 
-@EventBusSubscriber(modid = Galosphere.MODID, bus = EventBusSubscriber.Bus.MOD)
+
+@EventBusSubscriber(modid = Galosphere.MODID)
 public class RegisterEvents {
 
     @SubscribeEvent
@@ -50,25 +51,26 @@ public class RegisterEvents {
     @SubscribeEvent
     public static void registerPayloadHandler(RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1");
+        
         registrar.playToClient(
                 BarometerPacket.TYPE,
                 BarometerPacket.CODEC,
-                ClientEventsHandler::sendBarometerInfo
+                ServerEventsHandler::sendBarometerInfo
         );
         registrar.playToClient(
                 PlayCooldownSoundPacket.TYPE,
                 PlayCooldownSoundPacket.CODEC,
-                ClientEventsHandler::playCooldownSound
+                ServerEventsHandler::playCooldownSound
         );
         registrar.playToClient(
                 SendParticlesPacket.TYPE,
                 SendParticlesPacket.CODEC,
-                ClientEventsHandler::handleSendParticles
+                ServerEventsHandler::handleSendParticles
         );
         registrar.playToClient(
                 SendPerspectivePacket.TYPE,
                 SendPerspectivePacket.CODEC,
-                ClientEventsHandler::sendPerspective
+                ServerEventsHandler::sendPerspective
         );
     }
 
