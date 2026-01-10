@@ -2,7 +2,7 @@ package net.orcinus.galosphere.config;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 
-public class GalosphereConfig {
+public class GalosphereConfig extends MidnightConfig {
 
     @MidnightConfig.Entry
     public static boolean slowBuddingAmethystDestroySpeed = true;
